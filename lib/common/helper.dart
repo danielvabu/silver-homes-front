@@ -117,8 +117,8 @@ class Helper {
   }
 
   static launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
     } else {
       Fluttertoast.showToast(
           msg: "Could not launch $url",
@@ -138,13 +138,13 @@ class Helper {
       } else {
         String url1 = "http://" + HomePagelink;
 
-        if (await canLaunch(url1)) {
-          await launch(url1);
+        if (await canLaunchUrl(Uri.parse(url1))) {
+          await launchUrl(Uri.parse(url1));
         } else {
           String url2 = "https://" + HomePagelink;
 
-          if (await canLaunch(url2)) {
-            await launch(url2);
+          if (await canLaunchUrl(Uri.parse(url2))) {
+            await launchUrl(Uri.parse(url2));
           } else {
             Fluttertoast.showToast(
                 msg: "Could not launch $url2",
