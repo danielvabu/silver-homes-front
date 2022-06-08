@@ -438,14 +438,16 @@ class HttpClientCall {
       'Content-Type': 'application/json',
       'ApplicationCode': Weburl.API_CODE,
       //'Access-Control-Allow-Origin': "*",
-      //'Access-Control-Allow-Credentials': "true"
+      //'Access-Control-Allow-Credentials': "true",
+      //'Cache-Control': "no-cache",
+      //'Pragma': "no-cache"
     };
 
     try {
       var response = await client.post(Uri.parse(Weburl.login_Api),
           headers: headers, body: json);
 
-      //Helper.Log("Responce",  response.body.toString());
+      //Helper.Log("Responce", response.body.toString());
       //Helper.Log("statusCode", response.statusCode.toString());
 
       if (response.statusCode == 200) {
@@ -483,14 +485,16 @@ class HttpClientCall {
       'Content-Type': 'application/json',
       'ApplicationCode': Weburl.API_CODE,
       //'Access-Control-Allow-Origin': "*",
-      //'Access-Control-Allow-Credentials': "true"
+      //'Access-Control-Allow-Credentials': "true",
+      //'Cache-Control': "no-cache",
+      //'Pragma': "no-cache"
     };
 
     try {
       var response = await client.post(Uri.parse(Weburl.login_Api),
           headers: headers, body: myjson);
 
-      //Helper.Log("Responce",  response.body.toString());
+      //Helper.Log("Responce", response.body.toString());
       //Helper.Log("statusCode", response.statusCode.toString());
 
       if (response.statusCode == 200) {

@@ -42,11 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     apiManagerCall();
-
     // Supper Admin Credential
     //_textloginEmail.text = "extensor01@gmail.com";
     //_textloginPass.text = "Admin@123";
-
     // Landlord Credential
     //_textloginEmail.text = "kk@gmail.com";
     //_textloginPass.text = "123456";
@@ -88,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 15.0),
               Text(
                 GlobleString.LogIn_title,
                 textAlign: TextAlign.center,
@@ -151,9 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   FocusScope.of(context).requestFocus(fnpass);
                 },
               ),
-              SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: 15.0),
               TextField(
                 controller: _textloginPass,
                 focusNode: fnpass,
