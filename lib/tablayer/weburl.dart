@@ -68,7 +68,7 @@ class Weburl {
   static var base_url = API_Server + "/default/"; //"/api/v1/CRUD/";
   static var base_url_Login = API_Server + "/default/";
   //static var base_url_Login = API_Server + "/api/v1/identity/";
-  static var base_url_WorkFlow = API_Server + "/api/v1/";
+  static var base_url_WorkFlow = API_Server + "/";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -81,15 +81,15 @@ class Weburl {
   static var Member_Role = "Member";
   static var Member_RoleID = "7811057A-7288-4A6A-BA91-1903E743A07C";
 
-  static var Select_Api = base_url + "Select";
-  static var Insert_Api = base_url + "Insert";
-  static var Update_Api = base_url + "Update";
-  static var Delete_Api = base_url + "Delete";
-  static var Query_Api = base_url + "Query";
+  static var Select_Api = base_url + "select";
+  static var Insert_Api = base_url + "insert";
+  static var Update_Api = base_url + "update";
+  static var Delete_Api = base_url + "delete";
+  static var Query_Api = base_url + "query";
   static var RawSQL_Api = base_url + "RawSQL?";
-  static var FileUpload_Api = base_url_WorkFlow + "File/Upload";
+  static var FileUpload_Api = base_url_WorkFlow + "upload";
   static var DSQ_Api = base_url + "DSQ";
-  static var WorkFlow_Api = base_url_WorkFlow + "WorkFlow/Execute";
+  static var WorkFlow_Api = base_url_WorkFlow + "workFlow";
 
   static var login_Api = base_url_Login + "login";
 
