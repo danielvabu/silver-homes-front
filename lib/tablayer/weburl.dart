@@ -68,7 +68,7 @@ class Weburl {
   static var base_url = API_Server + "/default/"; //"/api/v1/CRUD/";
   static var base_url_Login = API_Server + "/default/";
   //static var base_url_Login = API_Server + "/api/v1/identity/";
-  static var base_url_WorkFlow = API_Server + "/";
+  static var base_url_WorkFlow = API_Server + "/default/";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
