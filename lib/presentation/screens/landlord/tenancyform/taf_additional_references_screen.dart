@@ -813,16 +813,17 @@ class _TAFAdditionalReferencesScreenState
         ToastUtils.showCustomToast(
             context, GlobleString.taf_reference_error__validphonenumber, false);
       } else if (reference.email!.isEmpty) {
-        isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_email, false);
-        break;
+        // esto lo comente para que no sea obligatorio el email
+        //isAdd = true;
+        //ToastUtils.showCustomToast(
+        //context, GlobleString.taf_reference_error_email, false);
+        //break;
       } else if (Helper.ValidEmail(reference.email!.trim().toString()) !=
           true) {
-        isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_valid_email, false);
-        break;
+        //isAdd = true;
+        //ToastUtils.showCustomToast(
+        //context, GlobleString.taf_reference_error_valid_email, false);
+        //break;
       }
 
       if ((tfAdditionalReferenceState.referencelist.length - 1) == i &&

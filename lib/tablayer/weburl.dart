@@ -63,7 +63,8 @@ class Weburl {
 
   static var DocURL =
       API_Server + "/appdata/" + API_CODE + "/Attachments/Files/";
-  static var image_API = API_Server + "/api/v1/File/GetImage?MediaID=";
+  //static var image_API = API_Server + "/default/file?id=";
+  static var image_API = "http://www.ingeniosoft.com/r/?id=";
 
   static var base_url = API_Server + "/default/"; //"/api/v1/CRUD/";
   static var base_url_Login = API_Server + "/default/";
@@ -87,9 +88,10 @@ class Weburl {
   static var Delete_Api = base_url + "delete";
   static var Query_Api = base_url + "query";
   static var RawSQL_Api = base_url + "RawSQL?";
-  static var FileUpload_Api = base_url_WorkFlow + "upload";
+  //static var FileUpload_Api = base_url_WorkFlow + "upload";
+  static var FileUpload_Api = "http://www.ingeniosoft.com/aws/";
   static var DSQ_Api = base_url + "DSQ";
-  static var WorkFlow_Api = base_url_WorkFlow + "workFlow";
+  static var WorkFlow_Api = base_url_WorkFlow + "workFlow/";
 
   static var login_Api = base_url_Login + "login";
 
