@@ -483,11 +483,12 @@ class HttpClientCall {
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'ApplicationCode': Weburl.API_CODE,
+      'ApplicationCode': Weburl.API_CODE
       //'Access-Control-Allow-Origin': "*",
       //'Access-Control-Allow-Credentials': "true",
       //'Cache-Control': "no-cache",
-      //'Pragma': "no-cache"
+      //'Pragma': "no-cache",
+      //'Access-Control-Request-Headers': 'Content-Type'
     };
 
     try {

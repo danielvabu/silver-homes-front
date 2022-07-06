@@ -43,7 +43,9 @@ class Weburl {
 
   static var API_Server = isPROD_API
       ? "https://silverhomeappinstance.azurewebsites.net"
-      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
+      : "https://api.ren-hogar.com";
+
+//      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -64,12 +66,13 @@ class Weburl {
   static var DocURL =
       API_Server + "/appdata/" + API_CODE + "/Attachments/Files/";
   //static var image_API = API_Server + "/default/file?id=";
-  static var image_API = "http://www.ingeniosoft.com/r/?id=";
+  static var image_API = "https://www.ren-hogar.com/r/?id=";
 
-  static var base_url = API_Server + "/default/"; //"/api/v1/CRUD/";
-  static var base_url_Login = API_Server + "/default/";
+  static var base_url = API_Server + "/"; //"/api/v1/CRUD/";
+  static var base_url_Login = API_Server + "/";
+  //static var base_url_Login = API_Server + "/default/";
   //static var base_url_Login = API_Server + "/api/v1/identity/";
-  static var base_url_WorkFlow = API_Server + "/default/";
+  static var base_url_WorkFlow = API_Server + "/";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -89,7 +92,7 @@ class Weburl {
   static var Query_Api = base_url + "query";
   static var RawSQL_Api = base_url + "RawSQL?";
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
-  static var FileUpload_Api = "http://www.ingeniosoft.com/aws/";
+  static var FileUpload_Api = "https://www.ren-hogar.com/aws/";
   static var DSQ_Api = base_url + "DSQ";
   static var WorkFlow_Api = base_url_WorkFlow + "workFlow/";
 
