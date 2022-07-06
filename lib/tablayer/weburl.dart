@@ -94,7 +94,7 @@ class Weburl {
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
   static var FileUpload_Api = "https://www.ren-hogar.com/aws/";
   static var DSQ_Api = base_url + "DSQ";
-  static var WorkFlow_Api = base_url_WorkFlow + "workFlow/";
+  static var WorkFlow_Api = base_url_WorkFlow + "workflow/";
 
   static var login_Api = base_url_Login + "login";
 
