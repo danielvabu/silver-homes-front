@@ -515,7 +515,7 @@ class _EditLeadDialogBoxState extends State<EditLeadDialogBox> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 15,
+                                      height: 5,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -557,9 +557,10 @@ class _EditLeadDialogBoxState extends State<EditLeadDialogBox> {
                                                 style: MyStyles.Medium(
                                                     14, myColor.text_color),
                                                 maxLines: 4,
+                                                maxLength: 10000,
                                                 inputFormatters: [
                                                   LengthLimitingTextInputFormatter(
-                                                      450),
+                                                      10000),
                                                 ],
                                                 decoration: InputDecoration(
                                                     //border: InputBorder.none,
@@ -567,7 +568,7 @@ class _EditLeadDialogBoxState extends State<EditLeadDialogBox> {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           color: myColor.blue,
-                                                          width: 1.0),
+                                                          width: 2),
                                                     ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
@@ -596,7 +597,7 @@ class _EditLeadDialogBoxState extends State<EditLeadDialogBox> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 4,
                                     ),
                                   ],
                                 ),
@@ -605,7 +606,7 @@ class _EditLeadDialogBoxState extends State<EditLeadDialogBox> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 4,
                         ),
                         Padding(
                           padding:

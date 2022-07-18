@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:silverhome/common/globlestring.dart';
@@ -1293,6 +1294,11 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                               style: MyStyles.Medium(
                                                   14, myColor.text_color),
                                               maxLines: 4,
+                                              maxLength: 10000,
+                                              inputFormatters: [
+                                                LengthLimitingTextInputFormatter(
+                                                    10000),
+                                              ],
                                               decoration: InputDecoration(
                                                   //border: InputBorder.none,
                                                   focusedBorder:

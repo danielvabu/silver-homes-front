@@ -341,8 +341,9 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         textAlign: TextAlign.start,
                         style: MyStyles.Medium(14, myColor.text_color),
                         maxLines: 4,
+                        maxLength: 10000,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(450),
+                          LengthLimitingTextInputFormatter(10000),
                         ],
                         decoration: InputDecoration(
                             //border: InputBorder.none,

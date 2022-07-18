@@ -17,7 +17,7 @@ class Weburl {
           ? "http://161.97.104.204:8090/#/"
           : Domain_CR
               ? "http://161.97.104.204:8091/#/"
-              : "http://161.97.104.204:8181/#/";
+              : "http://www.ren-hogar.com/#/";
 
   static var Email_URL = Domain_PROD
       ? "https://app.silverhomes.ai"
@@ -99,7 +99,7 @@ class Weburl {
   static var login_Api = base_url_Login + "login";
 
   static var register_Api = base_url_Login + "register";
-  static var ChangePassword_Api = base_url_Login + "ChangePassword";
+  static var ChangePassword_Api = base_url_Login + "changepassword";
 
   static var Standard_API = "&Type=standard";
   static var Icon_API = "&Type=icon";

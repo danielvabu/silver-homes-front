@@ -535,6 +535,10 @@ class _AddNewRequestDialogBoxState extends State<AddNewRequestDialogBox> {
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Medium(12, myColor.text_color),
                                 maxLines: 4,
+                                maxLength: 10000,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(10000)
+                                ],
                                 decoration: InputDecoration(
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(

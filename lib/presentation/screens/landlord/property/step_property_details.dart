@@ -995,7 +995,10 @@ class _StepPropertyDetailsState extends State<StepPropertyDetails> {
                                       propertyState.PropertyDescription,
                                   textAlign: TextAlign.start,
                                   maxLines: 4,
-                                  maxLength: 500,
+                                  maxLength: 10000,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(450),
+                                  ],
                                   style:
                                       MyStyles.Regular(14, myColor.text_color),
                                   decoration: InputDecoration(
@@ -1549,11 +1552,12 @@ class _StepPropertyDetailsState extends State<StepPropertyDetails> {
       _store.dispatch(UpdateErrorPropertytypeOther(true));
       ToastUtils.showCustomToast(
           context, GlobleString.PS1_Property_type_value_error, false);
-    } else if (propertyState.rentalspaceValue == null) {
+      //  Se quito la validacion del campo por jcjavier
+      //    } else if (propertyState.rentalspaceValue == null) {
       //_controller.jumpTo(-1.0);
-      _store.dispatch(UpdateErrorRentalspace(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Rental_space_error, false);
+      //      _store.dispatch(UpdateErrorRentalspace(true));
+      //      ToastUtils.showCustomToast(
+      //          context, GlobleString.PS1_Rental_space_error, false);
     } else if (propertyState.PropertyName == "") {
       /* setState(() {
         FocusManager.instance.primaryFocus!.unfocus();
