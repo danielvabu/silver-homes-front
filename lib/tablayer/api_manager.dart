@@ -924,6 +924,7 @@ class ApiManager {
         contentType: new MediaType('application', 'png'), filename: filepath));
 
     await multipartRequest.send().then((result) {
+      //print('AddSingleImage');
       if (result.statusCode == 200) {
         http.Response.fromStream(result).then((response) {
           if (response.statusCode == 200) {
@@ -1941,12 +1942,13 @@ class ApiManager {
       String filepath = propertyimagelist[i].fileName!;
 
       multipartRequest.files.add(await http.MultipartFile.fromBytes(
-          'file', _selectedFile,
+          'file[' + i.toString() + ']', _selectedFile,
           contentType: new MediaType('application', 'png'),
           filename: filepath));
     }
 
     await multipartRequest.send().then((result) {
+      //print('PropertyImagesUpload');
       if (result.statusCode == 200) {
         http.Response.fromStream(result).then((response) {
           if (response.statusCode == 200) {
