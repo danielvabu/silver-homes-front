@@ -920,7 +920,7 @@ class ApiManager {
     multipartRequest.headers.addAll(headers);
 
     multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        'file', _selectedFile,
+        'file[]', _selectedFile,
         contentType: new MediaType('application', 'png'), filename: filepath));
 
     await multipartRequest.send().then((result) {
@@ -5573,6 +5573,7 @@ class ApiManager {
     });
   }
 
+  //Multifile 4 simples
   VarificationDocumentUpload(
       BuildContext context,
       String applicantid,
@@ -6921,6 +6922,7 @@ class ApiManager {
     });
   }
 
+  //Multifile
   AddLeaseDocument(BuildContext context, Uint8List data, String filename,
       CallBackQuesy CallBackQuesy) async {
     List<int> _selectedFile = data;
@@ -6944,7 +6946,7 @@ class ApiManager {
     multipartRequest.headers.addAll(headers);
 
     multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        'file', _selectedFile,
+        'file[]', _selectedFile,
         contentType: new MediaType('application', 'pdf'), filename: filepath));
 
     await multipartRequest.send().then((result) {
@@ -7047,6 +7049,7 @@ class ApiManager {
     });
   }
 
+  //Multifile
   TenantLeaseAgreementUpload(BuildContext context, Uint8List? mdata1,
       String filename1, CallBackQuesy callBackQuesy) async {
     Map<String, String> headers = {
@@ -7066,7 +7069,7 @@ class ApiManager {
         .millisecondsSinceEpoch}.pdf';*/
 
     multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        "file", _selectedFile,
+        "file[]", _selectedFile,
         contentType: new MediaType('application', "pdf"), filename: filename1));
 
     await multipartRequest.send().then((result) {
@@ -10170,7 +10173,7 @@ class ApiManager {
     Overlay.of(context)!.insert(loader);
 
     String query = Weburl.RawSQL_Api +
-        "query=EXEC DeleteMaintenanceAllData @Maintenance_ID=" +
+        "query=DeleteMaintenanceAllData&Maintenance_ID=" +
         id;
 
     HttpClientCall().RawSQLAPICall(context, query, (error, respoce) async {
@@ -11280,6 +11283,7 @@ class ApiManager {
     });
   }
 
+  //Multifile
   MaintenanceImagesUpload(BuildContext context, List<FileObject> fileobjectlist,
       CallBackListQuesy CallBackQuesy) async {
     Map<String, String> headers = {
@@ -11335,7 +11339,7 @@ class ApiManager {
         }
 
         multipartRequest.files.add(await http.MultipartFile.fromBytes(
-            'file', _selectedFile,
+            'file[]', _selectedFile,
             contentType: new MediaType('application', extenson),
             filename: filepath));
       }

@@ -361,7 +361,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     return Container(
       height: 28,
       width: width / 6,
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 2),
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(
         mode: Mode.MENU,
@@ -420,7 +420,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     return Container(
         height: 28,
         width: width / 8.5,
-        padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left: 12),
         // ignore: missing_required_param
         child: DropdownSearch<SystemEnumDetails>(
           mode: Mode.MENU,

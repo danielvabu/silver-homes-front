@@ -368,7 +368,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     return Container(
       height: 28,
       width: width / 6,
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 2),
       child: DropdownSearch<SystemEnumDetails>(
         mode: Mode.MENU,
         items: statuslist,

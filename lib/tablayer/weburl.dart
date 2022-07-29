@@ -17,7 +17,7 @@ class Weburl {
           ? "http://161.97.104.204:8090/#/"
           : Domain_CR
               ? "http://161.97.104.204:8091/#/"
-              : "http://www.ren-hogar.com/#/";
+              : "https://www.ren-hogar.com/#/";
 
   static var Email_URL = Domain_PROD
       ? "https://app.silverhomes.ai"
@@ -90,7 +90,9 @@ class Weburl {
   static var Update_Api = base_url + "update";
   static var Delete_Api = base_url + "delete";
   static var Query_Api = base_url + "query";
-  static var RawSQL_Api = base_url + "RawSQL?";
+  //static var RawSQL_Api = base_url + "RawSQL?";
+  static var RawSQL_Api = Domain_URL + "rawsql/?";
+
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
   static var FileUpload_Api = "https://www.ren-hogar.com/aws/";
   static var DSQ_Api = base_url + "DSQ";
@@ -115,11 +117,11 @@ class Weburl {
   //static var silverhomes_contact_mail_old = "mailto:contact@silverhomes.ai";
   static var silverhomes_contact_mail = "mailto:support@silverhomes.ai";
 
-  static var Sample_Properties_csv = API_Server +
-      "/appdata/silverhome/Attachments/CSV/sample_bulk_properties.csv";
+  static var Sample_Properties_csv =
+      "https://www.ren-hogar.com/sample_bulk_properties.csv";
 
-  static var Sample_property_value_file = API_Server +
-      "/appdata/silverhome/Attachments/CSV/data_entry_instructions.xlsx";
+  static var Sample_property_value_file =
+      "https://www.ren-hogar.com/data_entry_instructions.xlsx";
 
   static var PrivacyPolicy_and_TermsConditions =
       "https://www.silverhomes.ai/legal";

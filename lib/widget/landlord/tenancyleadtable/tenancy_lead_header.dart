@@ -70,8 +70,8 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
     result.add(_headerTitleEmailAddress(GlobleString.TLH_Email_Address));
     result.add(_headerTitlePhoneNumber(GlobleString.TLH_Phone_Number));
     result.add(_headerTitleDateCreate(GlobleString.TLH_Date_Created));
-    result.add(_headerTextStatus(GlobleString.ACH_Status));
-    result.add(_headerTextAction(GlobleString.ACH_Action));
+    result.add(_headerTextStatus(GlobleString.TLH_Status));
+    result.add(_headerTextAction(GlobleString.TLH_Action));
     result.add(_headerTextWithWidth("", 30));
     return result;
   }

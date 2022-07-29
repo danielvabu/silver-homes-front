@@ -418,7 +418,7 @@ class _ReferenceItemState extends State<ReferenceItem> {
     return Container(
       height: 28,
       width: width / 6,
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 2),
       alignment: Alignment.centerLeft,
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(

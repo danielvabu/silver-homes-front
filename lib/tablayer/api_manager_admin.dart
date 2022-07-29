@@ -314,7 +314,7 @@ class ApiManagerAdmin {
     Overlay.of(context)!.insert(loader);
 
     String query =
-        Weburl.RawSQL_Api + "query=EXEC DeleteUserAllData @UserID=" + userId;
+        Weburl.RawSQL_Api + "query=DeleteUserAllData&UserID=" + userId;
 
     HttpClientCall().RawSQLAPICall(context, query, (error, respoce) async {
       if (error) {
