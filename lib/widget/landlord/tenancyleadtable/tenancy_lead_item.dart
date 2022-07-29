@@ -376,7 +376,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
         defultHeight:
-            statuslist.length * 35 > 250 ? 250 : statuslist.length * 35,
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
         selectedItem:
             model.applicationStatus != null ? model.applicationStatus : null,

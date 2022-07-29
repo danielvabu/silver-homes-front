@@ -367,6 +367,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
         selectedItem:
             model.applicationStatus != null ? model.applicationStatus : null,

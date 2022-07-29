@@ -261,12 +261,12 @@ class _RequestsItemState extends State<RequestsItem> {
         textstyle: MyStyles.Medium(12, myColor.black),
         itemAsString: (SystemEnumDetails? u) => u!.displayValue,
         hint: "Select Status",
+        defultHeight: MaintenanceStatuslist.length * 33 > 250
+            ? 250
+            : MaintenanceStatuslist.length * 33,
         showSearchBox: false,
         selectedItem: model.Status != null ? model.Status! : null,
         isFilteredOnline: true,
-        defultHeight: MaintenanceStatuslist.length * 35 > 250
-            ? 250
-            : MaintenanceStatuslist.length * 35,
         onChanged: (data) {
           if (data != model.Status) {
             MainatenanceID updateid = new MainatenanceID();

@@ -495,7 +495,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
     Widget defaultItemMultiSelectionMode(T? item) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-        margin: EdgeInsets.symmetric(horizontal: 2),
+        margin: EdgeInsets.symmetric(horizontal: 2.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).primaryColorLight,
@@ -561,7 +561,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          margin: EdgeInsets.all(5),
+          margin: EdgeInsets.all(5.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(color: myColor.br_selecttag, width: 1),

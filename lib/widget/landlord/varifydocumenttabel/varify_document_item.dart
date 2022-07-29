@@ -369,6 +369,8 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
         selectedItem:
             model.applicationStatus != null ? model.applicationStatus : null,
@@ -428,6 +430,9 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
           textstyle: MyStyles.Medium(12, myColor.text_color),
           itemAsString: (SystemEnumDetails? u) => u!.displayValue,
           hint: "Action",
+          defultHeight: reviewstatuslist.length * 33 > 250
+              ? 250
+              : reviewstatuslist.length * 33,
           showSearchBox: false,
           selectedItem:
               model.docReviewStatus != null ? model.docReviewStatus : null,

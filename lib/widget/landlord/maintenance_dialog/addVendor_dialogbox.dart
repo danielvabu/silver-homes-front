@@ -295,9 +295,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -307,6 +305,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
+                                                      SizedBox(width: 8.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Category,
@@ -316,20 +315,9 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      /* SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    GlobleString.Optional,
-                                                    style: MyStyles.Medium(
-                                                        10, myColor.optional),
-                                                    textAlign: TextAlign.start,
-                                                  ),*/
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30,
                                                     // ignore: missing_required_param
@@ -357,13 +345,13 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       defultHeight: addVendorState
                                                                       .Categorylist
                                                                       .length *
-                                                                  35 >
+                                                                  33 >
                                                               250
                                                           ? 250
                                                           : addVendorState
                                                                   .Categorylist
                                                                   .length *
-                                                              35,
+                                                              33,
                                                       onChanged: (value) {
                                                         _store.dispatch(
                                                             UpdateADV_selectCategory(
@@ -377,9 +365,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -402,9 +388,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      SizedBox(width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -415,9 +399,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue: addVendorState
                                                         .cfirstname,
@@ -455,9 +437,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            SizedBox(width: 15.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -476,9 +456,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      SizedBox(width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -489,9 +467,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue: addVendorState
                                                         .clastname,
@@ -555,9 +531,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      SizedBox(width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -568,9 +542,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue:
                                                         addVendorState.cemail,
@@ -770,9 +742,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue:
                                                         addVendorState.address,
@@ -809,9 +779,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            SizedBox(width: 20.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -888,9 +856,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -969,9 +935,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -981,6 +945,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
+                                                      SizedBox(width: 8.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Country,
@@ -1079,9 +1044,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -1095,6 +1058,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
+                                                      SizedBox(width: 5.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Province_State,
@@ -1106,12 +1070,9 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   Container(
-                                                    height: 30,
-                                                    // ignore: missing_required_param
+                                                    height: 30.0,
                                                     child: DropdownSearch<
                                                         StateData>(
                                                       key: UniqueKey(),
@@ -1188,9 +1149,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -1198,15 +1157,21 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    GlobleString.LMV_AV_City,
-                                                    style: MyStyles.Medium(
-                                                        14, myColor.text_color),
-                                                    textAlign: TextAlign.start,
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(width: 8.0),
+                                                      Text(
+                                                        GlobleString
+                                                            .LMV_AV_City,
+                                                        style: MyStyles.Medium(
+                                                            14,
+                                                            myColor.text_color),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                      ),
+                                                    ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30,
                                                     // ignore: missing_required_param

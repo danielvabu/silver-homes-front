@@ -362,6 +362,8 @@ class _LeasesItemState extends State<LeasesItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
         selectedItem:
             model.applicationStatus != null ? model.applicationStatus : null,
@@ -426,6 +428,9 @@ class _LeasesItemState extends State<LeasesItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Action",
+        defultHeight: leasereviewstatuslist.length * 33 > 250
+            ? 250
+            : leasereviewstatuslist.length * 33,
         showSearchBox: false,
         selectedItem: model.leaseStatus != null ? model.leaseStatus : null,
         isFilteredOnline: true,
