@@ -253,7 +253,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 28,
       width: width / 7,
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 2),
       alignment: Alignment.centerLeft,
       child: DropdownSearch<SystemEnumDetails>(
         mode: Mode.MENU,
