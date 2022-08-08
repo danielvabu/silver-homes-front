@@ -356,7 +356,8 @@ class HttpClientCall {
     Helper.Log("RawSQL_Api  URI", url);
 
     try {
-      var response = await client.post(Uri.parse(url), headers: headers);
+      print(url);
+      var response = await client.get(Uri.parse(url), headers: headers);
 
       //Helper.Log("Responce",  response.body.toString());
       Helper.Log("statusCode", response.statusCode.toString());

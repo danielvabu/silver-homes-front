@@ -91,7 +91,7 @@ class Weburl {
   static var Delete_Api = base_url + "delete";
   static var Query_Api = base_url + "query";
   //static var RawSQL_Api = base_url + "RawSQL?";
-  static var RawSQL_Api = Domain_URL + "rawsql/?";
+  static var RawSQL_Api = "https://www.ren-hogar.com/rawsql/?";
 
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
   static var FileUpload_Api = "https://www.ren-hogar.com/aws/";

@@ -1754,7 +1754,7 @@ class GlobleString {
   static const String LMR_DateCreated = "Date Created";
   static const String LMR_CreatedBy = "Created By";
   static const String LMR_Status = "Status";
-  static const String LMR_Lock = "Lock to Edit";
+  static const String LMR_Lock = "Restrict Editing";
 
   /*Vendor*/
   static const String LMV_status_TotalVendors = "Vendors";
