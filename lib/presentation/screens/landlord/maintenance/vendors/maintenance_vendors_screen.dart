@@ -254,9 +254,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                           ],
                         ),
                       ),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    SizedBox(width: 10),
                     _addNewRequest(landlordVendorState),
                   ],
                 ),

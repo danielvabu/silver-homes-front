@@ -35,6 +35,7 @@ import 'package:silverhome/presentation/screens/landlord/maintenance/vendors/mai
 import 'package:silverhome/presentation/screens/landlord/profile/landlord_profilescreen.dart';
 import 'package:silverhome/presentation/screens/landlord/property/add_edit_property.dart';
 import 'package:silverhome/presentation/screens/landlord/property/property_screen_new.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/calendar/scheduling_calendar_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancy_application_details/tenancy_application_screen.dart';
 import 'package:silverhome/store/store.dart';
 import 'package:silverhome/store/utils.dart';
@@ -157,7 +158,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             height: header_height,
             alignment: Alignment.centerLeft,
             color: myColor.white,
-            margin: EdgeInsets.only(left: 20),
+            margin: EdgeInsets.only(left: 15),
             padding: EdgeInsets.all(5),
             child: InkWell(
               onTap: () async {},
@@ -172,56 +173,19 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  /*InkWell(
-                    onTap: () async {
-                      _store.dispatch(
-                          UpdatePortalPage(0, GlobleString.NAV_Overview));
-                    },
-                    child: Container(
-                      height: 60,
-                      color: portalState.index == 0
-                          ? myColor.drawselectcolor
-                          : myColor.white,
-                      padding: EdgeInsets.only(left: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 35,
-                            child: Image.asset(
-                              "assets/images/ic_nav_dashboard.png",
-                              width: 26,
-                              height: 26,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Text(
-                                GlobleString.NAV_Overview,
-                                style: portalState.index == 0
-                                    ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                    : MyStyles.Regular(16, myColor.Circle_main),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/
                   InkWell(
                     onTap: () {
                       _store.dispatch(UpdatePropertyStatus_UnitsHeld(0));
                       _store.dispatch(UpdatePropertyStatus_UnitsRented(0));
                       _store.dispatch(UpdatePropertyStatus_VacantUnits(0));
                       _store.dispatch(UpdateMantenaceExpand(false));
+                      _store.dispatch(UpdateSchedulingExpand(false));
                       _store.dispatch(
                           UpdatePortalPage(1, GlobleString.NAV_Properties));
                     },
                     child: Container(
                       height: 60,
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 15),
                       color: portalState.index == 1
                           ? myColor.drawselectcolor
                           : myColor.white,
@@ -239,7 +203,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Properties,
                                 style: portalState.index == 1
@@ -252,7 +216,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       ),
                     ),
                   ),
-                  /* InkWell(
+                  /*InkWell(
                     onTap: () {
                       _store.dispatch(
                           UpdatePortalPage(2, GlobleString.NAV_Finances));
@@ -262,7 +226,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 2
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -277,7 +241,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Finances,
                                 style: portalState.index == 2
@@ -300,7 +264,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 3
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -315,7 +279,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Documents,
                                 style: portalState.index == 3
@@ -337,7 +301,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 4
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -352,7 +316,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Tenants,
                                 style: portalState.index == 4
@@ -378,7 +342,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 5
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -393,7 +357,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(left: 5),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -433,19 +397,17 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                width: 20,
-                              ),
+                              Container(width: 5),
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 40),
                                   child: Column(
                                     children: [
-                                      SizedBox(
-                                        height: 10,
-                                      ),
+                                      SizedBox(height: 10),
                                       InkWell(
                                         onTap: () {
+                                          _store.dispatch(
+                                              UpdateSchedulingExpand(false));
                                           _store.dispatch(
                                               UpdateMantenaceRequest());
                                         },
@@ -467,11 +429,11 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
+                                      SizedBox(height: 10),
                                       InkWell(
                                         onTap: () {
+                                          _store.dispatch(
+                                              UpdateSchedulingExpand(false));
                                           _store.dispatch(
                                               UpdateMantenaceVendor());
                                         },
@@ -493,9 +455,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
+                                      SizedBox(height: 10),
                                     ],
                                   ),
                                 ),
@@ -504,14 +464,173 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                         )
                       : Container(),
-                  /*InkWell(
+                  InkWell(
                     onTap: () {
-                      _store.dispatch(
-                          UpdatePortalPage(6, GlobleString.NAV_Tasks));
+                      _store.dispatch(UpdateSchedulingExpand(
+                          !portalState.isSchedulingExpand));
                     },
                     child: Container(
                       height: 60,
-                      color: portalState.index == 6
+                      color: portalState.index == 8
+                          ? myColor.drawselectcolor
+                          : myColor.white,
+                      padding: EdgeInsets.only(left: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 35,
+                            child: Image.asset(
+                              "assets/images/ic_nav_scheduling.png",
+                              width: 20,
+                              height: 20,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      GlobleString.NAV_Scheduling,
+                                      style: portalState.index == 8
+                                          ? MyStyles.SemiBold(
+                                              16, myColor.Circle_main)
+                                          : MyStyles.Regular(
+                                              16, myColor.Circle_main),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      portalState.isSchedulingExpand
+                                          ? Icons.keyboard_arrow_up
+                                          : Icons.keyboard_arrow_down_sharp,
+                                      size: 25,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  portalState.isSchedulingExpand == true
+                      ? Container(
+                          height: 100,
+                          color: portalState.index == 8
+                              ? myColor.drawselectcolor2
+                              : myColor.white,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 40),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 10),
+                                      InkWell(
+                                        onTap: () {
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingCalendar());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                GlobleString
+                                                    .NAV_Scheduling_calendar,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            1
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                      InkWell(
+                                        onTap: () {
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingEventTypes());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                GlobleString
+                                                    .NAV_Scheduling_event_types,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            2
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+/*
+                                      InkWell(
+                                        onTap: () {
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingEventTypeTemplates());
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                GlobleString
+                                                    .NAV_Scheduling_event_type_templates,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            3
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+*/
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
+
+                  /*InkWell(
+                    onTap: () {
+                      _store.dispatch(UpdatePortalPage(7, GlobleString.NAV_Tasks));
+                    },
+                    child: Container(
+                      height: 60,
+                      color: portalState.index == 7
                           ? myColor.drawselectcolor
                           : myColor.white,
                       padding: EdgeInsets.only(left: 20),
@@ -532,7 +651,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
                                 GlobleString.NAV_Tasks,
-                                style: portalState.index == 6
+                                style: portalState.index == 7
                                     ? MyStyles.SemiBold(16, myColor.Circle_main)
                                     : MyStyles.Regular(16, myColor.Circle_main),
                               ),
@@ -546,25 +665,21 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
               ),
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
-          /*Container(
+          SizedBox(height: 30),
+          Container(
             width: drawer_width,
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Text(
-                    'Powered by Silver Home',
-                    style: MyStyles.Regular(14, Colors.black54),
+                    'Powered by Silver Homes',
+                    style: MyStyles.Regular(12, Colors.black12),
                   ),
                 ]),
           ),
-          SizedBox(
-            height: 10,
-          ),*/
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -600,6 +715,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateArchivePropertyItem(null));
     _store.dispatch(UpdateLLActiveTenantPropertyItem(null));
     _store.dispatch(UpdateMantenaceExpand(false));
+    _store.dispatch(UpdateSchedulingExpand(false));
     _store.dispatch(UpdatePortalPage(4, GlobleString.NAV_Tenants));
   }
 
@@ -878,6 +994,21 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
         {
           // profile
           return LandlordProfileScreen();
+        }
+      case 8:
+        {
+          // Scheduling
+          //subindex 1 = Calendar
+          //subindex 2 = Event Types
+          //subindex 3 = Event Type Templates
+
+          if (portalState.subindex == 1 && portalState.index == 5) {
+            return SchedulingCalendarScreen();
+          } else if (portalState.subindex == 2 && portalState.index == 5) {
+            return SchedulingCalendarScreen();
+          }
+
+          return SchedulingCalendarScreen();
         }
       default:
         {

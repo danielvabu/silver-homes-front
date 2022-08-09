@@ -125,12 +125,18 @@ class GlobleString {
   static const String NAV_Documents = "Documents";
   static const String NAV_Tenants = "Tenant Screening";
   static const String NAV_Maintenance = "Maintenance";
+  static const String NAV_Scheduling = "Scheduling";
   static const String NAV_Vendors = "Vendors";
   static const String NAV_Tasks = "Tasks";
   static const String NAV_Profile = "Profile";
 
   static const String NAV_Maintenance_requests = "Requests";
   static const String NAV_Maintenance_vendors = "Vendors";
+
+  static const String NAV_Scheduling_calendar = "Calendar";
+  static const String NAV_Scheduling_event_types = "Event Types";
+  static const String NAV_Scheduling_event_type_templates =
+      "Event Type Templates";
 
   /*Admin Drawer*/
   static const String NAV_admin_Overview = "Overview";
@@ -1799,6 +1805,12 @@ class GlobleString {
       "Are you sure you want to delete this vendor? If you do, all of the impacted maintenance requests will have the vendor information removed.";
   static const String LMV_DL_Vendor_btn_Cancel = "Cancel";
   static const String LMV_DL_Vendor_btn_Delete = "Delete";
+
+  /* Calendar Screen */
+  static const String CALENDAR_Search = "Search";
+  static const String CALENDAR_Create = "Create";
+  static const String CALENDAR_ListView = "List View";
+  static const String CALENDAR_FunnelView = "Funnel View";
 
   static const String Blank_export_maintenace =
       "No maintenance request data found.";

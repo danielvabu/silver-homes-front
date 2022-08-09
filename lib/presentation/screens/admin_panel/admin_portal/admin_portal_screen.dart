@@ -395,9 +395,7 @@ class _AdminPortalScreenState extends BaseState<AdminPortalScreen>
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              SizedBox(width: 20),
               InkWell(
                 onTap: () {
                   MenuPopup(portalState);
@@ -410,9 +408,7 @@ class _AdminPortalScreenState extends BaseState<AdminPortalScreen>
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              SizedBox(width: 20),
             ],
           )
         ],

@@ -16,6 +16,7 @@ abstract class PortalState with _$PortalState {
     required bool isMenuDialogshow,
     required int tenantTabIndex,
     required bool isMaintenanceExpand,
+    required bool isSchedulingExpand,
   }) = _PortalState;
 
   factory PortalState.initial() => PortalState(
@@ -27,5 +28,6 @@ abstract class PortalState with _$PortalState {
       notificationCount: 0,
       isMenuDialogshow: false,
       tenantTabIndex: 1,
-      isMaintenanceExpand: false);
+      isMaintenanceExpand: false,
+      isSchedulingExpand: false);
 }

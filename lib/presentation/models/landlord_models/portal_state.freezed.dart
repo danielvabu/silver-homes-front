@@ -16,16 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PortalStateTearOff {
   const _$PortalStateTearOff();
 
-  _PortalState call(
-      {required bool isLoading,
-      required int index,
-      required int subindex,
-      required String title,
-      required List<TenancyApplication> listdataviewlist,
-      required int notificationCount,
-      required bool isMenuDialogshow,
-      required int tenantTabIndex,
-      required bool isMaintenanceExpand}) {
+  _PortalState call({
+    required bool isLoading,
+    required int index,
+    required int subindex,
+    required String title,
+    required List<TenancyApplication> listdataviewlist,
+    required int notificationCount,
+    required bool isMenuDialogshow,
+    required int tenantTabIndex,
+    required bool isMaintenanceExpand,
+    required bool isSchedulingExpand,
+  }) {
     return _PortalState(
       isLoading: isLoading,
       index: index,
@@ -36,6 +38,7 @@ class _$PortalStateTearOff {
       isMenuDialogshow: isMenuDialogshow,
       tenantTabIndex: tenantTabIndex,
       isMaintenanceExpand: isMaintenanceExpand,
+      isSchedulingExpand: isSchedulingExpand,
     );
   }
 }
@@ -55,6 +58,7 @@ mixin _$PortalState {
   bool get isMenuDialogshow => throw _privateConstructorUsedError;
   int get tenantTabIndex => throw _privateConstructorUsedError;
   bool get isMaintenanceExpand => throw _privateConstructorUsedError;
+  bool get isSchedulingExpand => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PortalStateCopyWith<PortalState> get copyWith =>
@@ -75,7 +79,8 @@ abstract class $PortalStateCopyWith<$Res> {
       int notificationCount,
       bool isMenuDialogshow,
       int tenantTabIndex,
-      bool isMaintenanceExpand});
+      bool isMaintenanceExpand,
+      bool isSchedulingExpand});
 }
 
 /// @nodoc
@@ -97,6 +102,7 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
     Object? isMenuDialogshow = freezed,
     Object? tenantTabIndex = freezed,
     Object? isMaintenanceExpand = freezed,
+    Object? isSchedulingExpand = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed
@@ -135,6 +141,10 @@ class _$PortalStateCopyWithImpl<$Res> implements $PortalStateCopyWith<$Res> {
           ? _value.isMaintenanceExpand
           : isMaintenanceExpand // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSchedulingExpand: isSchedulingExpand == freezed
+          ? _value.isSchedulingExpand
+          : isSchedulingExpand // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -155,7 +165,8 @@ abstract class _$PortalStateCopyWith<$Res>
       int notificationCount,
       bool isMenuDialogshow,
       int tenantTabIndex,
-      bool isMaintenanceExpand});
+      bool isMaintenanceExpand,
+      bool isSchedulingExpand});
 }
 
 /// @nodoc
@@ -179,6 +190,7 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
     Object? isMenuDialogshow = freezed,
     Object? tenantTabIndex = freezed,
     Object? isMaintenanceExpand = freezed,
+    Object? isSchedulingExpand = freezed,
   }) {
     return _then(_PortalState(
       isLoading: isLoading == freezed
@@ -217,6 +229,10 @@ class __$PortalStateCopyWithImpl<$Res> extends _$PortalStateCopyWithImpl<$Res>
           ? _value.isMaintenanceExpand
           : isMaintenanceExpand // ignore: cast_nullable_to_non_nullable
               as bool,
+      isSchedulingExpand: isSchedulingExpand == freezed
+          ? _value.isSchedulingExpand
+          : isSchedulingExpand // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -233,7 +249,8 @@ class _$_PortalState implements _PortalState {
       required this.notificationCount,
       required this.isMenuDialogshow,
       required this.tenantTabIndex,
-      required this.isMaintenanceExpand});
+      required this.isMaintenanceExpand,
+      required this.isSchedulingExpand});
 
   @override
   final bool isLoading;
@@ -253,10 +270,12 @@ class _$_PortalState implements _PortalState {
   final int tenantTabIndex;
   @override
   final bool isMaintenanceExpand;
+  @override
+  final bool isSchedulingExpand;
 
   @override
   String toString() {
-    return 'PortalState(isLoading: $isLoading, index: $index, subindex: $subindex, title: $title, listdataviewlist: $listdataviewlist, notificationCount: $notificationCount, isMenuDialogshow: $isMenuDialogshow, tenantTabIndex: $tenantTabIndex, isMaintenanceExpand: $isMaintenanceExpand)';
+    return 'PortalState(isLoading: $isLoading, index: $index, subindex: $subindex, title: $title, listdataviewlist: $listdataviewlist, notificationCount: $notificationCount, isMenuDialogshow: $isMenuDialogshow, tenantTabIndex: $tenantTabIndex, isMaintenanceExpand: $isMaintenanceExpand, isSchedulingExpand: $isSchedulingExpand)';
   }
 
   @override
@@ -287,7 +306,10 @@ class _$_PortalState implements _PortalState {
                     .equals(other.tenantTabIndex, tenantTabIndex)) &&
             (identical(other.isMaintenanceExpand, isMaintenanceExpand) ||
                 const DeepCollectionEquality()
-                    .equals(other.isMaintenanceExpand, isMaintenanceExpand)));
+                    .equals(other.isMaintenanceExpand, isMaintenanceExpand)) &&
+            (identical(other.isSchedulingExpand, isSchedulingExpand) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSchedulingExpand, isSchedulingExpand)));
   }
 
   @override
@@ -301,7 +323,8 @@ class _$_PortalState implements _PortalState {
       const DeepCollectionEquality().hash(notificationCount) ^
       const DeepCollectionEquality().hash(isMenuDialogshow) ^
       const DeepCollectionEquality().hash(tenantTabIndex) ^
-      const DeepCollectionEquality().hash(isMaintenanceExpand);
+      const DeepCollectionEquality().hash(isMaintenanceExpand) ^
+      const DeepCollectionEquality().hash(isSchedulingExpand);
 
   @JsonKey(ignore: true)
   @override
@@ -319,7 +342,8 @@ abstract class _PortalState implements PortalState {
       required int notificationCount,
       required bool isMenuDialogshow,
       required int tenantTabIndex,
-      required bool isMaintenanceExpand}) = _$_PortalState;
+      required bool isMaintenanceExpand,
+      required bool isSchedulingExpand}) = _$_PortalState;
 
   @override
   bool get isLoading => throw _privateConstructorUsedError;
@@ -340,6 +364,8 @@ abstract class _PortalState implements PortalState {
   int get tenantTabIndex => throw _privateConstructorUsedError;
   @override
   bool get isMaintenanceExpand => throw _privateConstructorUsedError;
+  @override
+  bool get isSchedulingExpand => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PortalStateCopyWith<_PortalState> get copyWith =>

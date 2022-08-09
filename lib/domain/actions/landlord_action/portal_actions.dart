@@ -124,3 +124,45 @@ class UpdateMantenaceExpand implements Action {
     return appState.copyWith.portalState(isMaintenanceExpand: isExpand);
   }
 }
+
+class UpdateSchedulingCalendar implements Action {
+  UpdateSchedulingCalendar();
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.portalState(
+        index: 8, title: GlobleString.NAV_Scheduling_calendar, subindex: 1);
+  }
+}
+
+class UpdateSchedulingEventTypes implements Action {
+  UpdateSchedulingEventTypes();
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.portalState(
+        index: 8, title: GlobleString.NAV_Scheduling_event_types, subindex: 2);
+  }
+}
+
+class UpdateSchedulingEventTypeTemplates implements Action {
+  UpdateSchedulingEventTypeTemplates();
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.portalState(
+        index: 8,
+        title: GlobleString.NAV_Scheduling_event_type_templates,
+        subindex: 3);
+  }
+}
+
+class UpdateSchedulingExpand implements Action {
+  final bool isExpand;
+  UpdateSchedulingExpand(this.isExpand);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.portalState(isSchedulingExpand: isExpand);
+  }
+}
