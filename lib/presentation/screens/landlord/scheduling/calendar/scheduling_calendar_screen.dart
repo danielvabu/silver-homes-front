@@ -72,7 +72,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    height = MediaQuery.of(context).size.height - 100;
+    height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width;
 
     return Container(
@@ -86,7 +86,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             children: [
               Container(
                 width: width,
-                height: height - 90,
+                height: height - 45,
                 margin: EdgeInsets.only(top: 15),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -97,56 +97,124 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                 ),
                 child: Column(children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 260,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: myColor.TA_Border,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                initialValue: GlobleString.CALENDAR_Search,
-                                onChanged: (value) async {},
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintStyle:
-                                      MyStyles.Medium(14, myColor.hintcolor),
-                                  contentPadding: EdgeInsets.all(10),
-                                  isDense: true,
-                                  hintText: GlobleString.LL_Search,
-                                ),
-                                style: MyStyles.Medium(14, myColor.text_color),
+                      Row(
+                        children: [
+                          Container(
+                            width: 260,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: myColor.TA_Border,
+                                width: 1.0,
                               ),
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 8, right: 5),
-                              child: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                                size: 20,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextFormField(
+                                    initialValue: "",
+                                    onChanged: (value) async {},
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintStyle: MyStyles.Medium(
+                                          14, myColor.hintcolor),
+                                      contentPadding: EdgeInsets.all(10),
+                                      isDense: true,
+                                      hintText: GlobleString.CALENDAR_Search,
+                                    ),
+                                    style:
+                                        MyStyles.Medium(14, myColor.text_color),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 8, right: 5),
+                                  child: Icon(
+                                    Icons.search,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          InkWell(
+                            onTap: () {
+                              //openDialodAddVendor();
+                            },
+                            child: CustomeWidget.AddNewButton(
+                                GlobleString.CALENDAR_Create),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 10),
+                      Row(
+                        children: [
+                          _togglebutton(),
+                          SizedBox(width: 10),
+                          _actionPopup()
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text('Today'),
+                          Text('<'),
+                          Text('>'),
+                          Text('Agosto'),
+                        ],
+                      ),
+                      SizedBox(width: 10),
+                      Text('Yo creo que quitar esta row'),
+                      SizedBox(width: 10),
+                      Row(
+                        children: [
+                          Icon(Icons.settings),
+                          Text('Week'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Divider(),
+                  SizedBox(height: 5),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(height: 55),
+                            Container(
+                              width: 160,
+                              height: 160,
+                              child: SfCalendar(
+                                view: CalendarView.month,
+                                cellBorderColor: Colors.white,
+                                firstDayOfWeek: 1,
+                                headerHeight: 0,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      CustomeWidget.AddNewButton(GlobleString.CALENDAR_Create),
-                      _togglebutton()
-                    ],
-                  ),
-                  SfCalendar(
-                    view: CalendarView.week,
-                    //dataSource: MeetingDataSource(_getDataSource()),
-                    monthViewSettings: const MonthViewSettings(
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment,
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: SfCalendar(
+                            //dataSource: MeetingDataSource(_getDataSource()),
+                            view: CalendarView.week,
+                            firstDayOfWeek: 1,
+                            headerHeight: 0,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ]),
@@ -170,7 +238,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   Widget _togglebutton() {
     return Container(
-      width: 203,
+      width: 243,
       decoration: BoxDecoration(
         border: Border.all(
           color: myColor.text_color,
@@ -179,24 +247,82 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         borderRadius: BorderRadius.circular(5),
       ),
       child: ToggleSwitch(
-        minWidth: 100.0,
+        minWidth: 120.0,
         minHeight: 32.0,
         fontSize: 14.0,
         cornerRadius: 5,
-        initialLabelIndex: 0,
+        initialLabelIndex: 1,
         activeBgColor: [myColor.text_color],
         activeFgColor: Colors.white,
         inactiveBgColor: Colors.white,
         inactiveFgColor: myColor.text_color,
         labels: [
           GlobleString.CALENDAR_ListView,
-          GlobleString.CALENDAR_FunnelView
+          GlobleString.CALENDAR_CalendarView
         ],
         onToggle: (index) async {},
         totalSwitches: 2,
       ),
     );
   }
+
+  Widget _actionPopup() {
+    return Container(
+      height: 32,
+      width: 30,
+      child: PopupMenuButton(
+        onSelected: (value) {},
+        child: Container(
+          height: 40,
+          width: 20,
+          margin: EdgeInsets.only(right: 5),
+          child: Icon(Icons.more_vert),
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              value: 1,
+              child: Text(
+                GlobleString.Export,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 2,
+              child: Text(
+                "No se que mas",
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 3,
+              child: Text(
+                "nunca importar",
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ];
+        },
+      ),
+    );
+  }
+}
+
+Widget scheduleViewHeaderBuilder(
+    BuildContext buildContext, ScheduleViewMonthHeaderDetails details) {
+  final String monthName = getMonthName(details.date.month);
+  return Stack(
+    children: [
+      Text('Today'),
+      Text(
+        monthName + ' npi ' + details.date.year.toString(),
+        style: TextStyle(fontSize: 18),
+      )
+    ],
+  );
 }
 
 class MeetingDataSource extends CalendarDataSource {
@@ -247,4 +373,32 @@ class Meeting {
   DateTime to;
   Color background;
   bool isAllDay;
+}
+
+String getMonthName(int month) {
+  if (month == 01) {
+    return 'January';
+  } else if (month == 02) {
+    return 'February';
+  } else if (month == 03) {
+    return 'March';
+  } else if (month == 04) {
+    return 'April';
+  } else if (month == 05) {
+    return 'May';
+  } else if (month == 06) {
+    return 'June';
+  } else if (month == 07) {
+    return 'July';
+  } else if (month == 08) {
+    return 'August';
+  } else if (month == 09) {
+    return 'September';
+  } else if (month == 10) {
+    return 'October';
+  } else if (month == 11) {
+    return 'November';
+  } else {
+    return 'December';
+  }
 }

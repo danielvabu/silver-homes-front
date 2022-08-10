@@ -224,13 +224,9 @@ class _LandlordActiveTenantScreenState
                           ),
                         if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
                             Prefs.getBool(PrefsName.IsApplyFilterFunnel))
-                          SizedBox(
-                            width: 30,
-                          ),
+                          SizedBox(width: 30),
                         _togglebutton(activeTenantState),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        SizedBox(width: 10),
                         _actionPopup(activeTenantState)
                       ],
                     ),

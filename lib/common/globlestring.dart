@@ -1810,7 +1810,7 @@ class GlobleString {
   static const String CALENDAR_Search = "Search";
   static const String CALENDAR_Create = "Create";
   static const String CALENDAR_ListView = "List View";
-  static const String CALENDAR_FunnelView = "Funnel View";
+  static const String CALENDAR_CalendarView = "Calendar View";
 
   static const String Blank_export_maintenace =
       "No maintenance request data found.";
