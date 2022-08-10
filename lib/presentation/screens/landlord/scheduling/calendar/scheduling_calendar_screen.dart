@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -27,7 +26,8 @@ import 'package:silverhome/tablayer/weburl.dart';
 
 import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
-
+import 'package:silverhome/widget/landlord/scheduling/addEvent_dialogbox.dart';
+import 'package:silverhome/widget/toggle_switch.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class SchedulingCalendarScreen extends StatefulWidget {
@@ -143,7 +143,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                           SizedBox(width: 10),
                           InkWell(
                             onTap: () {
-                              //openDialodAddVendor();
+                              openDialogAddEvent();
                             },
                             child: CustomeWidget.AddNewButton(
                                 GlobleString.CALENDAR_Create),
@@ -307,6 +307,26 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
           ];
         },
       ),
+    );
+  }
+
+  void openDialogAddEvent() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return AddEventDialogBox(
+          onPressedSave: () async {
+            Navigator.of(context1).pop();
+            init();
+          },
+          onPressedClose: () {
+            Navigator.of(context1).pop();
+          },
+        );
+      },
     );
   }
 }
