@@ -534,7 +534,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                   padding: EdgeInsets.only(left: 40),
                                   child: Column(
                                     children: [
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
                                           _store.dispatch(
@@ -560,7 +560,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
                                           _store.dispatch(
@@ -586,8 +586,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 10),
-/*
+                                      const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
                                           _store.dispatch(
@@ -613,8 +612,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 10),
-*/
+                                      const SizedBox(height: 10.0),
                                     ],
                                   ),
                                 ),

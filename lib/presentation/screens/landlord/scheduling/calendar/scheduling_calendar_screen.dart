@@ -75,6 +75,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width;
 
+    final muestraElListado = false;
+
     return Container(
       height: height,
       width: width,
@@ -140,7 +142,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10.0),
                           InkWell(
                             onTap: () {
                               openDialogAddEvent();
@@ -150,73 +152,241 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10.0),
                       Row(
                         children: [
                           _togglebutton(),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10.0),
                           _actionPopup()
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text('Today'),
-                          Text('<'),
-                          Text('>'),
-                          Text('Agosto'),
-                        ],
-                      ),
-                      SizedBox(width: 10),
-                      Text('Yo creo que quitar esta row'),
-                      SizedBox(width: 10),
-                      Row(
-                        children: [
-                          Icon(Icons.settings),
-                          Text('Week'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Divider(),
-                  SizedBox(height: 5),
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  if (muestraElListado)
+                    // ignore: dead_code
+                    Column(
                       children: [
-                        Column(
+                        SizedBox(height: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(height: 55),
-                            Container(
-                              width: 160,
-                              height: 160,
-                              child: SfCalendar(
-                                view: CalendarView.month,
-                                cellBorderColor: Colors.white,
-                                firstDayOfWeek: 1,
-                                headerHeight: 0,
-                              ),
+                            Row(
+                              children: [
+                                Text('Today'),
+                                Text('<'),
+                                Text('>'),
+                                Text('Agosto'),
+                              ],
+                            ),
+                            SizedBox(width: 10),
+                            Text('Yo creo que quitar esta row'),
+                            SizedBox(width: 10),
+                            Row(
+                              children: [
+                                Icon(Icons.settings),
+                                Text('Week'),
+                              ],
                             ),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(height: 5),
+                        Divider(),
+                        SizedBox(height: 5),
                         Expanded(
-                          child: SfCalendar(
-                            //dataSource: MeetingDataSource(_getDataSource()),
-                            view: CalendarView.week,
-                            firstDayOfWeek: 1,
-                            headerHeight: 0,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  SizedBox(height: 55),
+                                  Container(
+                                    width: 160,
+                                    height: 160,
+                                    child: SfCalendar(
+                                      view: CalendarView.month,
+                                      cellBorderColor: Colors.white,
+                                      firstDayOfWeek: 1,
+                                      headerHeight: 0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: SfCalendar(
+                                  //dataSource: MeetingDataSource(_getDataSource()),
+                                  view: CalendarView.week,
+                                  firstDayOfWeek: 1,
+                                  headerHeight: 0,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
-                    ),
-                  ),
+                    )
+                  else
+                    Column(children: [
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Time Zone: Pacific Standar Time (PST)',
+                              style: TextStyle(
+                                  color: myColor.text_color,
+                                  fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 10),
+                          Row(
+                            children: [
+                              Text(GlobleString.CALENDAR_Expand_All,
+                                  style: TextStyle(
+                                      color: myColor.email_color,
+                                      fontWeight: FontWeight.bold)),
+                              const SizedBox(width: 15.0),
+                              Text(GlobleString.CALENDAR_Collapse_All,
+                                  style: TextStyle(
+                                      color: myColor.email_color,
+                                      fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        color: myColor.TA_table_header,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text('Wednesday - June 8, 2022',
+                                    style: TextStyle(
+                                        color: myColor.text_color,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                                const SizedBox(width: 10),
+                                Text('(3 scheduled slots)',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                            InkWell(
+                              onTap: () {
+                                //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
+                                //setState(() {});
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 15, right: 10),
+                                height: 40,
+                                width: 30,
+                                alignment: Alignment.center,
+                                child: Image.asset(
+                                  //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
+                                  "assets/images/circle_down.png",
+                                  height: 19,
+                                  //width: 20,
+                                  alignment: Alignment.center,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: myColor.drawselectcolor2,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text(GlobleString.CALENDAR_Time,
+                                style: TextStyle(
+                                    color: myColor.text_color,
+                                    fontWeight: FontWeight.bold)),
+                            Text(GlobleString.CALENDAR_Event_Name,
+                                style: TextStyle(
+                                    color: myColor.text_color,
+                                    fontWeight: FontWeight.bold)),
+                            Text(GlobleString.CALENDAR_Attendees,
+                                style: TextStyle(
+                                    color: myColor.text_color,
+                                    fontWeight: FontWeight.bold)),
+                            Text(GlobleString.CALENDAR_Location,
+                                style: TextStyle(
+                                    color: myColor.text_color,
+                                    fontWeight: FontWeight.bold)),
+                            Text(" ")
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                        color: myColor.TA_light,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.yellow,
+                            ),
+                            Text('10:00 - 10:20 AM'),
+                            Text('Showings - 867 Hamilton Street'),
+                            Text('Multiple (3)'),
+                            Text(
+                                '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada'),
+                            _actionPopup(),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                        color: myColor.TA_dark,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.yellow,
+                            ),
+                            Text('4:00 - 4:20 PM'),
+                            Text('Showings - 123 Main Street'),
+                            Text('Hillary Duff'),
+                            Text(
+                                '123 Main Street, Vancouver, BC, V3D 7K2, Canada'),
+                            _actionPopup(),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                        color: myColor.TA_light,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 22, vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.yellow,
+                            ),
+                            Text('10:00 - 10:20 AM'),
+                            Text('Showings - 867 Hamilton Street'),
+                            Text('Multiple (3)'),
+                            Text(
+                                '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada'),
+                            _actionPopup(),
+                          ],
+                        ),
+                      ),
+                    ]),
                 ]),
               ),
             ],
@@ -260,7 +430,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
           GlobleString.CALENDAR_ListView,
           GlobleString.CALENDAR_CalendarView
         ],
-        onToggle: (index) async {},
+        onToggle: (index) {},
         totalSwitches: 2,
       ),
     );
