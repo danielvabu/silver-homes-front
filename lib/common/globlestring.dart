@@ -1816,9 +1816,17 @@ class GlobleString {
   static const String CALENDAR_Expand_All = "Expand all";
   static const String CALENDAR_Collapse_All = "Collapse all";
   static const String CALENDAR_Time = "Time";
-  static const String CALENDAR_Event_Name = "Event Name";
+  static const String CALENDAR_Event_Type = "Event Type";
   static const String CALENDAR_Attendees = "Attendees";
   static const String CALENDAR_Location = "Location";
+  static const String CALENDAR_View_Event = "View Event";
+  static const String CALENDAR_View_Attendees = "View Attendees";
+  static const String CALENDAR_Edit_Event = "Edit Event";
+  static const String CALENDAR_Edit_Event_Type = "Edit Event Type";
+  static const String CALENDAR_Delete = "Delete";
+  static const String CALENDAR_Start = "Start";
+  static const String CALENDAR_End = "End";
+  static const String CALENDAR_Event_Attendees = "Attendees";
 
   static const String Blank_export_maintenace =
       "No maintenance request data found.";

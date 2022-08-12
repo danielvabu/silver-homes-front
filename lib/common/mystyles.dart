@@ -43,12 +43,11 @@ class MyStyles {
         fontSize: fontsize);
   }
 
-/* static TextStyle Light(double fontsize, Color color) {
+  static TextStyle Light(double fontsize, Color color) {
     return TextStyle(
         fontFamily: FontName.avenirnext,
         color: color,
         fontWeight: FontWeight.w300,
         fontSize: fontsize);
-  }*/
-
+  }
 }

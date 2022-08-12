@@ -191,44 +191,179 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                GlobleString.CALENDAR_Title,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.text_color),
-                                                textAlign: TextAlign.start,
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString
+                                                      .CALENDAR_Event_Type,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
                                               ),
-                                              const SizedBox(height: 5),
-                                              TextFormField(
-                                                initialValue: "",
-                                                textAlign: TextAlign.start,
-                                                autofocus: true,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.text_color),
-                                                decoration: const InputDecoration(
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: myColor
-                                                                        .blue,
-                                                                    width: 2)),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: myColor
-                                                                        .gray,
-                                                                    width:
-                                                                        1.0)),
-                                                    isDense: true,
-                                                    contentPadding:
-                                                        EdgeInsets.all(10),
-                                                    fillColor: myColor.white,
-                                                    filled: true),
-                                                onChanged: (value) {
-                                                  //_store.dispatch(UpdateADV_companyname(value));
-                                                  //_changeData();
-                                                },
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                height: 30,
+                                                width: Size.infinite.width,
+                                                // ignore: missing_required_param
+                                                child: DropdownSearch(
+                                                  mode: Mode.MENU,
+                                                  focuscolor: myColor.blue,
+                                                  focusWidth: 2,
+                                                  items: [
+                                                    "Showings - 867 Hamilton Street",
+                                                    "Showings - 123 Main Street",
+                                                    "Showings - 867 Hamilton Street"
+                                                  ],
+                                                  textstyle: MyStyles.Medium(
+                                                      12, myColor.black),
+                                                  defultHeight: 3 * 35,
+                                                  hint: GlobleString
+                                                      .Select_Status,
+                                                  showSearchBox: false,
+                                                  selectedItem:
+                                                      "Showings - 867 Hamilton Street",
+                                                  isFilteredOnline: true,
+                                                  onChanged: (value) {},
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.CALENDAR_Start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    //_store.dispatch(UpdateADV_companyname(value));
+                                                    //_changeData();
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.CALENDAR_End,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    //_store.dispatch(UpdateADV_companyname(value));
+                                                    //_changeData();
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString
+                                                      .CALENDAR_Event_Attendees,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                height: 30,
+                                                width: Size.infinite.width,
+                                                // ignore: missing_required_param
+                                                child: DropdownSearch(
+                                                  mode: Mode.MENU,
+                                                  focuscolor: myColor.blue,
+                                                  focusWidth: 2,
+                                                  items: [
+                                                    "Pepito Perez",
+                                                    "Perensejo Gutierrez",
+                                                    "Fulanito Cruz"
+                                                  ],
+                                                  textstyle: MyStyles.Medium(
+                                                      12, myColor.black),
+                                                  defultHeight: 3 * 35,
+                                                  hint: GlobleString
+                                                      .Select_Status,
+                                                  showSearchBox: false,
+                                                  selectedItem: "Pepito Perez",
+                                                  isFilteredOnline: true,
+                                                  onChanged: (value) {},
+                                                ),
                                               ),
                                             ],
                                           ),

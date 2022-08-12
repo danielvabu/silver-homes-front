@@ -36,7 +36,7 @@ class SchedulingCalendarScreen extends StatefulWidget {
 }
 
 class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
-  double height = 0, width = 0;
+  double height = 0, width = 0, ancho = 0;
   final _store = getIt<AppStore>();
 
   late OverlayEntry loader;
@@ -73,7 +73,9 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
-    width = MediaQuery.of(context).size.width;
+    width = MediaQuery.of(context).size.width - 240;
+    ancho = width / 100;
+    print(ancho);
 
     final muestraElListado = false;
 
@@ -131,7 +133,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                         MyStyles.Medium(14, myColor.text_color),
                                   ),
                                 ),
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.only(left: 8, right: 5),
                                   child: Icon(
                                     Icons.search,
@@ -166,7 +168,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                     // ignore: dead_code
                     Column(
                       children: [
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -189,16 +191,16 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
-                        Divider(),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5.0),
+                        const Divider(),
+                        const SizedBox(height: 5.0),
                         Expanded(
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Column(
                                 children: [
-                                  SizedBox(height: 55),
+                                  const SizedBox(height: 55.0),
                                   Container(
                                     width: 160,
                                     height: 160,
@@ -211,7 +213,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10.0),
                               Expanded(
                                 child: SfCalendar(
                                   //dataSource: MeetingDataSource(_getDataSource()),
@@ -235,7 +237,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                               style: TextStyle(
                                   color: myColor.text_color,
                                   fontWeight: FontWeight.bold)),
-                          const SizedBox(width: 10),
+                          const SizedBox(width: 10.0),
                           Row(
                             children: [
                               Text(GlobleString.CALENDAR_Expand_All,
@@ -299,27 +301,40 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                       Container(
                         color: myColor.drawselectcolor2,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 5),
+                            horizontal: 0, vertical: 5),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(GlobleString.CALENDAR_Time,
-                                style: TextStyle(
-                                    color: myColor.text_color,
-                                    fontWeight: FontWeight.bold)),
-                            Text(GlobleString.CALENDAR_Event_Name,
-                                style: TextStyle(
-                                    color: myColor.text_color,
-                                    fontWeight: FontWeight.bold)),
-                            Text(GlobleString.CALENDAR_Attendees,
-                                style: TextStyle(
-                                    color: myColor.text_color,
-                                    fontWeight: FontWeight.bold)),
-                            Text(GlobleString.CALENDAR_Location,
-                                style: TextStyle(
-                                    color: myColor.text_color,
-                                    fontWeight: FontWeight.bold)),
-                            Text(" ")
+                          children: [
+                            SizedBox(width: ancho * 5, child: const Text(" ")),
+                            SizedBox(
+                              width: ancho * 15,
+                              child: const Text(GlobleString.CALENDAR_Time,
+                                  style: TextStyle(
+                                      color: myColor.text_color,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(
+                              width: ancho * 26,
+                              child: const Text(
+                                  GlobleString.CALENDAR_Event_Type,
+                                  style: TextStyle(
+                                      color: myColor.text_color,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(
+                              width: ancho * 20,
+                              child: const Text(GlobleString.CALENDAR_Attendees,
+                                  style: TextStyle(
+                                      color: myColor.text_color,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(
+                              width: ancho * 27,
+                              child: const Text(GlobleString.CALENDAR_Location,
+                                  style: TextStyle(
+                                      color: myColor.text_color,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(width: ancho * 2, child: const Text(" "))
                           ],
                         ),
                       ),
@@ -327,20 +342,39 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                         //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
                         color: myColor.TA_light,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 5),
+                            horizontal: 0, vertical: 5),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.circle,
-                              color: Colors.yellow,
+                            SizedBox(
+                              width: ancho * 4,
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.yellow,
+                                size: 17.0,
+                              ),
                             ),
-                            Text('10:00 - 10:20 AM'),
-                            Text('Showings - 867 Hamilton Street'),
-                            Text('Multiple (3)'),
-                            Text(
-                                '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada'),
-                            _actionPopup(),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 14,
+                                child: Text('10:00 - 10:20 AM')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 25,
+                                child: Text('Showings - 867 Hamilton Street',
+                                    maxLines: 3)),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 19, child: Text('Multiple (3)')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                              width: ancho * 26,
+                              child: Text(
+                                  '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
+                                  maxLines: 3),
+                            ),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 2, child: _actionEventPopup()),
                           ],
                         ),
                       ),
@@ -348,20 +382,39 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                         //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
                         color: myColor.TA_dark,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 5),
+                            horizontal: 0, vertical: 5),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.circle,
-                              color: Colors.yellow,
+                            SizedBox(
+                              width: ancho * 4,
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.yellow,
+                                size: 17.0,
+                              ),
                             ),
-                            Text('4:00 - 4:20 PM'),
-                            Text('Showings - 123 Main Street'),
-                            Text('Hillary Duff'),
-                            Text(
-                                '123 Main Street, Vancouver, BC, V3D 7K2, Canada'),
-                            _actionPopup(),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 14,
+                                child: Text('4:00 - 4:20 PM')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 25,
+                                child: Text('Showings - 123 Main Street',
+                                    maxLines: 3)),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 19, child: Text('Hillary Duff')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                              width: ancho * 26,
+                              child: Text(
+                                  '123 Main Street, Vancouver, BC, V3D 7K2, Canada',
+                                  maxLines: 3),
+                            ),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 2, child: _actionEventPopup()),
                           ],
                         ),
                       ),
@@ -369,20 +422,40 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                         //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
                         color: myColor.TA_light,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 5),
+                            horizontal: 0, vertical: 5),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
-                              Icons.circle,
-                              color: Colors.yellow,
+                            SizedBox(
+                              width: ancho * 4,
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.yellow,
+                                size: 17.0,
+                              ),
                             ),
-                            Text('10:00 - 10:20 AM'),
-                            Text('Showings - 867 Hamilton Street'),
-                            Text('Multiple (3)'),
-                            Text(
-                                '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada'),
-                            _actionPopup(),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 14,
+                                child: Text('10:00 - 10:20 AM')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                              width: ancho * 25,
+                              child: Text('Showings - 867 Hamilton Street',
+                                  maxLines: 3),
+                            ),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 19, child: Text('Multiple (3)')),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                              width: ancho * 26,
+                              child: Text(
+                                  '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
+                                  maxLines: 3),
+                            ),
+                            SizedBox(width: ancho),
+                            SizedBox(
+                                width: ancho * 2, child: _actionEventPopup()),
                           ],
                         ),
                       ),
@@ -480,6 +553,71 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
+  Widget _actionEventPopup() {
+    return Container(
+      height: 32,
+      width: 30,
+      child: PopupMenuButton(
+        onSelected: (value) {},
+        child: Container(
+          height: 40,
+          width: 20,
+          margin: EdgeInsets.only(right: 5),
+          child: Icon(Icons.more_vert),
+        ),
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+              value: 1,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              child: Text(
+                GlobleString.CALENDAR_View_Event,
+                style: MyStyles.Regular(12, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 2,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              child: Text(
+                GlobleString.CALENDAR_View_Attendees,
+                style: MyStyles.Regular(12, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 3,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              child: Text(
+                GlobleString.CALENDAR_Edit_Event,
+                style: MyStyles.Regular(12, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 4,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+              child: Text(
+                GlobleString.CALENDAR_Edit_Event_Type,
+                style: MyStyles.Regular(12, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 5,
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              child: Text(
+                GlobleString.CALENDAR_Delete,
+                style: MyStyles.Regular(12, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ];
+        },
+      ),
+    );
+  }
+
   void openDialogAddEvent() {
     showDialog(
       context: context,
@@ -502,7 +640,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 }
 
 Widget scheduleViewHeaderBuilder(
-    BuildContext buildContext, ScheduleViewMonthHeaderDetails details) {
+    buildContext, ScheduleViewMonthHeaderDetails details) {
   final String monthName = getMonthName(details.date.month);
   return Stack(
     children: [

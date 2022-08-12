@@ -213,9 +213,7 @@ class _MaintenanceAddNewRequestDialogBoxState
                                 style: MyStyles.Medium(12, myColor.black),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              const SizedBox(width: 10.0),
                               Container(
                                 height: 30,
                                 width: 150,
