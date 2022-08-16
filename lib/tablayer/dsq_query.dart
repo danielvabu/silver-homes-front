@@ -158,6 +158,27 @@ class VendorListReqtokens {
       };
 }
 
+class EventTypesListReqtokens {
+  EventTypesListReqtokens({
+    this.Owner_ID,
+    this.Name,
+  });
+
+  String? Owner_ID;
+  String? Name;
+
+  factory EventTypesListReqtokens.fromJson(Map<String, dynamic> json) =>
+      EventTypesListReqtokens(
+        Owner_ID: json["Owner_ID"],
+        Name: json["Name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Owner_ID": Owner_ID,
+        "Name": Name,
+      };
+}
+
 class MaintenanceListReqtokens {
   MaintenanceListReqtokens({
     this.Owner_ID,

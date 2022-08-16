@@ -26,7 +26,7 @@ import 'package:silverhome/tablayer/weburl.dart';
 
 import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
-import 'package:silverhome/widget/landlord/scheduling/addEvent_dialogbox.dart';
+import 'package:silverhome/widget/landlord/scheduling/addEventTypes_dialogbox.dart';
 import 'package:silverhome/widget/toggle_switch.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
