@@ -24,9 +24,9 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
-import 'package:silverhome/widget/landlord/maintenance_dialog/addEventTypes_dialogbox.dart';
-import 'package:silverhome/widget/landlord/maintenance_event_types_table/event_typess_header.dart';
-import 'package:silverhome/widget/landlord/maintenance_event_types_table/event_typess_item.dart';
+import 'package:silverhome/widget/landlord/scheduling/addEventTypes_dialogbox.dart';
+import 'package:silverhome/widget/landlord/event_types_table/event_types_header.dart';
+import 'package:silverhome/widget/landlord/event_types_table/event_types_item.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class EventTypesScreen extends StatefulWidget {
@@ -49,15 +49,8 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
 
   init() async {
     await Prefs.init();
-    updatecount();
     updateState();
     apimanager("", 1, "ID", 0, 0);
-  }
-
-  void updatecount() {
-    _store.dispatch(UpdateLLEventTypes_status_TotalEventTypes(0));
-
-    ApiManager().getEventTypesCount(context, Prefs.getString(PrefsName.OwnerID));
   }
 
   updateState() async {
@@ -208,8 +201,9 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
                                       (timer) {
                                     _store.dispatch(
                                         UpdateLLEventTypes_isloding(true));
-                                    _store.dispatch(UpdateLL_event_typesdatalist(
-                                        <EventTypesData>[]));
+                                    _store.dispatch(
+                                        UpdateLL_event_typesdatalist(
+                                            <EventTypesData>[]));
                                     updateState();
                                     apimanager(value, 1, "ID", 0, 0);
                                     _timer!.cancel();
@@ -543,11 +537,14 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
                           builder: (BuildContext context1) {
                             return AlertDialogBox(
                               title: GlobleString.event_types_dupliacate_title,
-                              negativeText: GlobleString.event_types_dupliacate_NO,
-                              positiveText: GlobleString.event_types_dupliacate_yes,
+                              negativeText:
+                                  GlobleString.event_types_dupliacate_NO,
+                              positiveText:
+                                  GlobleString.event_types_dupliacate_yes,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                duplicateEventTypes(data, landlordEventTypesState);
+                                duplicateEventTypes(
+                                    data, landlordEventTypesState);
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -797,13 +794,13 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     }
   }
 
-  duplicateEventTypes(
-      EventTypesData event_typesData, landlordEventTypesState landlordEventTypesState) {
+  duplicateEventTypes(EventTypesData event_typesData,
+      landlordEventTypesState landlordEventTypesState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().duplicateEventTypesworkflow(context, event_typesData.id.toString(),
-        (error, respoce) {
+    ApiManager().duplicateEventTypesworkflow(
+        context, event_typesData.id.toString(), (error, respoce) {
       if (error) {
         init();
         ToastUtils.showCustomToast(
@@ -833,8 +830,8 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     });
   }
 
-  deleteEventTypes(
-      EventTypesData event_typesData, landlordEventTypesState landlordEventTypesState) {
+  deleteEventTypes(EventTypesData event_typesData,
+      landlordEventTypesState landlordEventTypesState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
