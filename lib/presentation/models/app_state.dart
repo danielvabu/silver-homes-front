@@ -13,6 +13,7 @@ import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_lead_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/notification_state.dart';
 import 'package:silverhome/presentation/models/vendor/add_vendor_state.dart';
+import 'package:silverhome/presentation/models/event_types/add_event_types_state.dart';
 
 import 'admin_models/admin_add_newmember_state.dart';
 import 'admin_models/admin_landlord_leads_details_state.dart';
@@ -25,6 +26,7 @@ import 'basic_tenant/tenant_maintenance_state.dart';
 import 'basic_tenant/tenant_portal_state.dart';
 import 'customer/customer_portal_state.dart';
 import 'customer/customer_property_details_state.dart';
+import 'event_types/landlord_event_types_state.dart';
 import 'landlord_models/editlead_state.dart';
 import 'landlord_models/funnelview_state.dart';
 import 'landlord_models/landlord_profile_state.dart';
@@ -60,6 +62,7 @@ import 'maintenance/edit_maintenance_state.dart';
 import 'maintenance/landlord_maintenance_state.dart';
 import 'maintenance/maintenance_details_state.dart';
 import 'vendor/landlord_vendor_state.dart';
+import 'event_types/landlord_event_types_state.dart';
 
 part 'app_state.freezed.dart';
 
@@ -103,9 +106,11 @@ abstract class AppState with _$AppState {
     required LandlordProfileState profileState,
     required LandlordMaintenanceState landlordMaintenanceState,
     required LandlordVendorState landlordVendorState,
+    required LandlordEventTypesState landlordEventTypesState,
     required MaintenanceDetailsState maintenanceDetailsState,
     required AddMaintenanceState addMaintenanceState,
     required AddVendorState addVendorState,
+    required AddEventTypesState addEventTypesState,
     required EditMaintenanceState editMaintenanceState,
 
     /*Admin*/
@@ -175,9 +180,11 @@ abstract class AppState with _$AppState {
         profileState: LandlordProfileState.initial(),
         landlordMaintenanceState: LandlordMaintenanceState.initial(),
         landlordVendorState: LandlordVendorState.initial(),
+        landlordEventTypesState: LandlordEventTypesState.initial(),
         maintenanceDetailsState: MaintenanceDetailsState.initial(),
         addMaintenanceState: AddMaintenanceState.initial(),
         addVendorState: AddVendorState.initial(),
+        addEventTypesState: AddEventTypesState.initial(),
         editMaintenanceState: EditMaintenanceState.initial(),
 
         /*Admin*/
