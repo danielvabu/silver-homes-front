@@ -1004,6 +1004,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             return SchedulingCalendarScreen();
           } else if (portalState.subindex == 2 && portalState.index == 5) {
             return SchedulingCalendarScreen();
+          } else if (portalState.subindex == 3 && portalState.index == 5) {
+            return SchedulingCalendarScreen();
           }
 
           return SchedulingCalendarScreen();
