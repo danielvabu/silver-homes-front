@@ -8,6 +8,8 @@ import 'package:silverhome/presentation/models/admin_models/admin_setting_state.
 import 'package:silverhome/presentation/models/basic_tenant/lease_details_state.dart';
 import 'package:silverhome/presentation/models/basic_tenant/tenant_personal_state.dart';
 import 'package:silverhome/presentation/models/customer/customer_propertylist_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_activetenant_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_applicant_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_lead_state.dart';
@@ -81,7 +83,9 @@ abstract class AppState with _$AppState {
     required FunnelViewState funnelViewState,
     required PropertyFormState propertyFormState,
     required PropertyState propertyState,
+    required EventTypesState eventTypesState,
     required PropertySummeryState propertySummeryState,
+    required EventTypesSummeryState eventTypesSummeryState,
     required PropertyListState propertyListState,
     required EventTypesListState eventTypesListState,
     required EditLeadState editLeadState,
@@ -152,7 +156,9 @@ abstract class AppState with _$AppState {
         funnelViewState: FunnelViewState.initial(),
         propertyFormState: PropertyFormState.initial(),
         propertyState: PropertyState.initial(),
+        eventTypesState: EventTypesState.initial(),
         propertySummeryState: PropertySummeryState.initial(),
+        eventTypesSummeryState: EventTypesSummeryState.initial(),
         propertyListState: PropertyListState.initial(),
         eventTypesListState: EventTypesListState.initial(),
         editLeadState: EditLeadState.initial(),
