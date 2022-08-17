@@ -54,7 +54,7 @@ class EventTypesItem extends StatefulWidget {
 }
 
 class _EventTypesItemState extends State<EventTypesItem> {
-  double height = 0, width = 0;
+  double height = 0, width = 0, parte = 0;
 
   final _store = getIt<AppStore>();
 
@@ -67,6 +67,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 230;
+    parte = width / 100;
 
     return Container(
       width: width,
@@ -77,7 +78,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
 
   Widget ListviewBuid(List<EventTypesDataList> listdata) {
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
+      separatorBuilder: (context, index) => const Divider(
         color: myColor.TA_table_header,
         thickness: 0,
         height: 0,
@@ -107,9 +108,6 @@ class _EventTypesItemState extends State<EventTypesItem> {
     result.add(_datavalueCountry(model));
     result.add(_datavalueEventTypesType(model));
     result.add(_datavalueVacancy(model));
-    result.add(_datavalueStatus(model));
-    result.add(_datavalueActiveInactive(model, Index));
-    result.add(_datavalueIsPublished(model, Index));
     result.add(_actionPopup(model));
 
     return result;
@@ -122,7 +120,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       },
       child: Container(
         height: 40,
-        width: width / 8,
+        width: parte * 25,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
@@ -141,7 +139,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueUnit(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 13,
+      width: parte * 20,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -156,7 +154,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueCity(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 11,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -171,7 +169,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueCountry(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 10,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -186,7 +184,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueEventTypesType(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 11,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -200,7 +198,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueVacancy(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 15,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -209,96 +207,6 @@ class _EventTypesItemState extends State<EventTypesItem> {
             : GlobleString.PH_Vacancy_Occupied, //model.province!,
         textAlign: TextAlign.center,
         style: MyStyles.Medium(12, myColor.Circle_main),
-      ),
-    );
-  }
-
-  Widget _datavalueStatus(EventTypesDataList model) {
-    return Container(
-      height: 40,
-      width: width / 14.5,
-      margin: EdgeInsets.only(left: 0),
-      alignment: Alignment.center,
-      child: model.propDrafting != 3 || !model.isAgreedTandC!
-          ? SvgPicture.asset("assets/images/pro_progress_new.svg")
-          : SvgPicture.asset("assets/images/pro_complated_new.svg"),
-    );
-  }
-
-  Widget _datavalueActiveInactive(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: width / 11,
-      margin: EdgeInsets.only(left: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlutterSwitch(
-            width: 55.0,
-            height: 25.0,
-            valueFontSize: 10.0,
-            toggleSize: 20.0,
-            value: model.isActive!,
-            borderRadius: 30.0,
-            padding: 2.0,
-            activeColor: myColor.propertyOn,
-            activeText: "ON",
-            activeTextColor: myColor.white,
-            inactiveColor: myColor.gray,
-            inactiveText: "OFF",
-            inactiveTextColor: myColor.white,
-            showOnOff: true,
-            onToggle: (val) {
-              if (val) {
-                widget._callbackActive(model, index);
-              } else {
-                widget._callbackInActive(model, index);
-              }
-            },
-          ),
-          Expanded(child: Container())
-        ],
-      ),
-    );
-  }
-
-  Widget _datavalueIsPublished(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: width / 13,
-      margin: EdgeInsets.only(left: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlutterSwitch(
-            width: 55.0,
-            height: 25.0,
-            valueFontSize: 10.0,
-            toggleSize: 20.0,
-            value: model.isPublished!,
-            borderRadius: 30.0,
-            padding: 2.0,
-            activeColor: myColor.propertyOn,
-            activeText: "ON",
-            activeTextColor: myColor.white,
-            inactiveColor: myColor.gray,
-            inactiveText: "OFF",
-            inactiveTextColor: myColor.white,
-            showOnOff: true,
-            onToggle: (val) {
-              if (val) {
-                widget._callbackIsPublish(model, index, val);
-              } else {
-                widget._callbackIsPublish(model, index, val);
-              }
-            },
-          ),
-          Expanded(child: Container())
-        ],
       ),
     );
   }

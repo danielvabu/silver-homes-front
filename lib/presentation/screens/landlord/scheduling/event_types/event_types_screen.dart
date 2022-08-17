@@ -510,10 +510,10 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     return Container(
       width: sswidth,
       height: ssheight - 167,
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
+          borderRadius: const BorderRadius.all(Radius.circular(3)),
           //color: Hexcolor("#16C395"),
           border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
