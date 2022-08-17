@@ -107,7 +107,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     result.add(_datavalueCity(model));
     result.add(_datavalueCountry(model));
     result.add(_datavalueEventTypesType(model));
-    result.add(_datavalueVacancy(model));
+    result.add(_datavalueIsPublished(model, Index));
     result.add(_actionPopup(model));
 
     return result;
@@ -195,18 +195,41 @@ class _EventTypesItemState extends State<EventTypesItem> {
     );
   }
 
-  Widget _datavalueVacancy(EventTypesDataList model) {
+  Widget _datavalueIsPublished(EventTypesDataList model, int index) {
     return Container(
       height: 40,
       width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        !model.vacancy!
-            ? GlobleString.PH_Vacancy_Vacant
-            : GlobleString.PH_Vacancy_Occupied, //model.province!,
-        textAlign: TextAlign.center,
-        style: MyStyles.Medium(12, myColor.Circle_main),
+      margin: EdgeInsets.only(left: 15),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          FlutterSwitch(
+            width: 55.0,
+            height: 25.0,
+            valueFontSize: 10.0,
+            toggleSize: 20.0,
+            value: model.isPublished!,
+            borderRadius: 30.0,
+            padding: 2.0,
+            activeColor: myColor.propertyOn,
+            activeText: "ON",
+            activeTextColor: myColor.white,
+            inactiveColor: myColor.gray,
+            inactiveText: "OFF",
+            inactiveTextColor: myColor.white,
+            showOnOff: true,
+            onToggle: (val) {
+              if (val) {
+                widget._callbackIsPublish(model, index, val);
+              } else {
+                widget._callbackIsPublish(model, index, val);
+              }
+            },
+          ),
+          Expanded(child: Container())
+        ],
       ),
     );
   }
