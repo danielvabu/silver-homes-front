@@ -26,7 +26,7 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_act
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypesform_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_form_state.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_details.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_specification_restriction.dart';
@@ -110,8 +110,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
       height: sswidth,
       child: Padding(
         padding: EdgeInsets.only(left: 15, bottom: 15, right: 15),
-        child: ConnectState<EventtypesFormState>(
-            map: (state) => state.eventtypesFormState,
+        child: ConnectState<EventTypesFormState>(
+            map: (state) => state.eventTypesFormState,
             where: notIdentical,
             builder: (eventtypesFormState) {
               return Column(
@@ -134,7 +134,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                             )
                           : Expanded(
                               child: Text(
-                                GlobleString.PS_EventTypes_Summary,
+                                'Summary',
+                                //GlobleString.PS_EventTypes_Summary,
                                 style: MyStyles.Medium(14, myColor.black),
                                 textAlign: TextAlign.start,
                               ),
@@ -144,7 +145,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                           : Container(
                               width: 100,
                               child: ConnectState<EventTypesSummeryState>(
-                                  map: (state) => state.eventtypesSummeryState,
+                                  map: (state) => state.eventTypesSummeryState,
                                   where: notIdentical,
                                   builder: (eventtypesSummeryState) {
                                     return InkWell(
@@ -152,8 +153,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                         var loader =
                                             Helper.overlayLoader(context);
                                         Overlay.of(context)!.insert(loader);
-                                        await Pdfgenerate(
-                                            eventtypesSummeryState!);
+                                        //await Pdfgenerate(eventtypesSummeryState!);
                                         loader.remove();
                                       },
                                       child: Container(
@@ -161,7 +161,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                         margin: EdgeInsets.only(right: 10),
                                         alignment: Alignment.centerRight,
                                         child: Text(
-                                          GlobleString.PS_EventTypes_Export,
+                                          'Export',
+                                          //GlobleString.PS_EventTypes_Export,
                                           style: MyStyles.Medium(
                                               14, myColor.black),
                                           textAlign: TextAlign.end,
@@ -194,7 +195,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _headerView(EventtypesFormState eventtypesFormState) {
+  Widget _headerView(EventTypesFormState eventtypesFormState) {
     return Row(
       children: [
         Container(
@@ -209,7 +210,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                     .dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
             },
             child: Text(
-              GlobleString.PS_Back_to_EventTypess,
+              'Back to Event Types',
+              //GlobleString.PS_Back_to_EventTypess,
               style: MyStyles.SemiBold(13, myColor.blue),
               textAlign: TextAlign.start,
             ),
@@ -245,7 +247,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  void showBackDialog(EventtypesFormState eventtypesFormState, bool goback,
+  void showBackDialog(EventTypesFormState eventtypesFormState, bool goback,
       {int stepper = 0}) {
     if (stepper == eventtypesFormState.selectView) return;
     showDialog(
@@ -255,9 +257,9 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return AlertDialogBox(
-          title: GlobleString.PS_Save_EventTypess_msg,
-          positiveText: GlobleString.PS_Save_EventTypess_yes,
-          negativeText: GlobleString.PS_Save_EventTypesse_NO,
+          title: 'Mensaje creo', //GlobleString.PS_Save_EventTypess_msg,
+          positiveText: 'Yes', //GlobleString.PS_Save_EventTypess_yes,
+          negativeText: 'No', //GlobleString.PS_Save_EventTypesse_NO,
           onPressedNo: () {
             Navigator.of(context1).pop();
             if (goback && stepper == 0)
@@ -287,7 +289,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                 break;
               case 4:
                 navigationNotifier.change(
-                    back: NavigationConstant.eventtypesSummary,
+                    back: NavigationConstant.eventTypesSummary,
                     goBack: goback,
                     step: stepper);
                 break;
@@ -300,7 +302,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _indicator(EventtypesFormState eventtypesFormState) {
+  Widget _indicator(EventTypesFormState eventtypesFormState) {
     return Container(
       width: 741,
       margin: EdgeInsets.only(top: 15),
@@ -333,20 +335,17 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Details,
+                  'Details',
+                  //GlobleString.PS_EventTypes_Details,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
               ],
             ),
           ),
-          SizedBox(
-            width: 35,
-          ),
+          const SizedBox(width: 35.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
@@ -373,20 +372,17 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Specifications_Restrictions,
+                  'Restricciones',
+                  //GlobleString.PS_EventTypes_Specifications_Restrictions,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
               ],
             ),
           ),
-          SizedBox(
-            width: 74,
-          ),
+          const SizedBox(width: 74.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
@@ -413,20 +409,17 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Features,
+                  'Features',
+                  //GlobleString.PS_EventTypes_Features,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
               ],
             ),
           ),
-          SizedBox(
-            width: 110,
-          ),
+          const SizedBox(width: 110.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
@@ -456,11 +449,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Summary,
+                  'Sumary',
+                  //GlobleString.PS_EventTypes_Summary,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
@@ -472,7 +464,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _centerView(int val, EventtypesFormState eventtypesFormState) {
+  Widget _centerView(int val, EventTypesFormState eventtypesFormState) {
     switch (val) {
       case 1:
         {
@@ -542,7 +534,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
   /*===============================================================================================*/
   /*======================================  PDF FILE GENERETE  ====================================*/
   /*===============================================================================================*/
-
+/*
   Future<void> Pdfgenerate(EventTypesSummeryState eventtypesState) async {
     final pdf = pw.Document(
       author: "Silver Home",
@@ -1217,8 +1209,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  pw.Widget EventTypesSpecificationRestrictionView(
-      EventTypesSummeryState eventtypesState) {
+  pw.Widget EventTypesSpecificationRestrictionView(EventTypesSummeryState eventtypesState) {
     return pw.Padding(
       padding: pw.EdgeInsets.only(left: 10, bottom: 10, right: 10),
       child: pw.Container(
@@ -1748,8 +1739,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
   //   );
   // }
 
-  pw.Widget IncludedInTheRent(
-      EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
+  pw.Widget IncludedInTheRent(EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -1928,8 +1918,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  pw.Widget AvailableNotIncludedInTheRent(
-      EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
+  pw.Widget AvailableNotIncludedInTheRent(EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -2109,8 +2098,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  pw.Widget NotAvailable(
-      EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
+  pw.Widget NotAvailable(EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -2289,8 +2277,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  double gethightofFeature(
-      EventTypesSummeryState eventtypesState, int AV, int AVR, int NAV) {
+  double gethightofFeature(EventTypesSummeryState eventtypesState, int AV, int AVR, int NAV) {
     double Fheight = 0;
     if (AV >= AVR) {
       if (AV >= NAV) {
@@ -2311,4 +2298,5 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
 
     return Fheight + 70;
   }
+*/
 }
