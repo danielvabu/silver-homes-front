@@ -25,12 +25,12 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_specificati
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypes_summery_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/eventtypesform_state.dart';
-import 'package:silverhome/presentation/screens/landlord/eventtypes/step_feature.dart';
-import 'package:silverhome/presentation/screens/landlord/eventtypes/step_eventtypes_details.dart';
-import 'package:silverhome/presentation/screens/landlord/eventtypes/step_eventtypes_specification_restriction.dart';
-import 'package:silverhome/presentation/screens/landlord/eventtypes/step_summery_disclousures.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_details.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_specification_restriction.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_summery_disclousures.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -64,7 +64,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     AddEditEventTypes.isValueUpdate = false;
     fontload();
     if (!Prefs.getBool(PrefsName.EventTypesEditMode)) {
-      fillAmenities();
+      // fillAmenities();
     }
     super.initState();
   }
@@ -76,21 +76,21 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     font_bold = await rootBundle.load("assets/fonts/avenirnext-bold.ttf");
   }
 
-  void fillAmenities() {
-    /* Amenities */
-    ApiManager().getEventTypesFeaturelist(context);
+  // void fillAmenities() {
+  //   /* Amenities */
+  //   ApiManager().getEventTypesFeaturelist(context);
 
-    List<SystemEnumDetails> restrictionlist = [];
-    restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
+  //   List<SystemEnumDetails> restrictionlist = [];
+  //   restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
-    _store.dispatch(UpdateRestrictionlist(restrictionlist));
+  //   _store.dispatch(UpdateRestrictionlist(restrictionlist));
 
-    List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-        .map((item) => new SystemEnumDetails.clone(item))
-        .toList();
+  //   List<SystemEnumDetails> secondrestrictionlist = restrictionlist
+  //       .map((item) => new SystemEnumDetails.clone(item))
+  //       .toList();
 
-    _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
-  }
+  //   _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +110,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
       height: sswidth,
       child: Padding(
         padding: EdgeInsets.only(left: 15, bottom: 15, right: 15),
-        child: ConnectState<EventTypesFormState>(
+        child: ConnectState<EventtypesFormState>(
             map: (state) => state.eventtypesFormState,
             where: notIdentical,
             builder: (eventtypesFormState) {
@@ -194,7 +194,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _headerView(EventTypesFormState eventtypesFormState) {
+  Widget _headerView(EventtypesFormState eventtypesFormState) {
     return Row(
       children: [
         Container(
@@ -245,7 +245,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  void showBackDialog(EventTypesFormState eventtypesFormState, bool goback,
+  void showBackDialog(EventtypesFormState eventtypesFormState, bool goback,
       {int stepper = 0}) {
     if (stepper == eventtypesFormState.selectView) return;
     showDialog(
@@ -300,7 +300,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _indicator(EventTypesFormState eventtypesFormState) {
+  Widget _indicator(EventtypesFormState eventtypesFormState) {
     return Container(
       width: 741,
       margin: EdgeInsets.only(top: 15),
@@ -472,7 +472,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _centerView(int val, EventTypesFormState eventtypesFormState) {
+  Widget _centerView(int val, EventtypesFormState eventtypesFormState) {
     switch (val) {
       case 1:
         {
@@ -571,7 +571,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
               // SpecificationRestrictionView view
               EventTypesSpecificationRestrictionView(eventtypesState),
 
-              EventTypesFeatureView(eventtypesState),
+              //EventTypesFeatureView(eventtypesState),
             ],
           ),
         ),
@@ -1687,66 +1687,66 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     );
   }
 
-  pw.Widget EventTypesFeatureView(EventTypesSummeryState eventtypesState) {
-    int Acount1 = 0, Acount2 = 0, Acount3 = 0;
-    for (int i = 0;
-        i < eventtypesState.Summeryeventtypesamenitieslist.length;
-        i++) {
-      EventTypesAmenitiesUtility amenitiesUtility =
-          eventtypesState.Summeryeventtypesamenitieslist[i];
+  // pw.Widget EventTypesFeatureView(EventTypesSummeryState eventtypesState) {
+  //   int Acount1 = 0, Acount2 = 0, Acount3 = 0;
+  //   for (int i = 0;
+  //       i < eventtypesState.Summeryeventtypesamenitieslist.length;
+  //       i++) {
+  //     EventTypesAmenitiesUtility amenitiesUtility =
+  //         eventtypesState.Summeryeventtypesamenitieslist[i];
 
-      if (amenitiesUtility.value == "1") {
-        Acount1++;
-      } else if (amenitiesUtility.value == "2") {
-        Acount2++;
-      } else if (amenitiesUtility.value == "3") {
-        Acount3++;
-      }
-    }
+  //     if (amenitiesUtility.value == "1") {
+  //       Acount1++;
+  //     } else if (amenitiesUtility.value == "2") {
+  //       Acount2++;
+  //     } else if (amenitiesUtility.value == "3") {
+  //       Acount3++;
+  //     }
+  //   }
 
-    int Ucount1 = 0, Ucount2 = 0, Ucount3 = 0;
-    for (int j = 0;
-        j < eventtypesState.Summeryeventtypesamenitieslist.length;
-        j++) {
-      EventTypesAmenitiesUtility amenitiesUtility =
-          eventtypesState.Summeryeventtypesamenitieslist[j];
+  //   int Ucount1 = 0, Ucount2 = 0, Ucount3 = 0;
+  //   for (int j = 0;
+  //       j < eventtypesState.Summeryeventtypesamenitieslist.length;
+  //       j++) {
+  //     EventTypesAmenitiesUtility amenitiesUtility =
+  //         eventtypesState.Summeryeventtypesamenitieslist[j];
 
-      if (amenitiesUtility.value == "1") {
-        Ucount1++;
-      } else if (amenitiesUtility.value == "2") {
-        Ucount2++;
-      } else if (amenitiesUtility.value == "3") {
-        Ucount3++;
-      }
-    }
+  //     if (amenitiesUtility.value == "1") {
+  //       Ucount1++;
+  //     } else if (amenitiesUtility.value == "2") {
+  //       Ucount2++;
+  //     } else if (amenitiesUtility.value == "3") {
+  //       Ucount3++;
+  //     }
+  //   }
 
-    //int AV = Acount1 + Ucount1;
-    //int AVR = Acount2 + Ucount2;
-    //int NAV = Acount3 + Ucount3;
+  //   //int AV = Acount1 + Ucount1;
+  //   //int AVR = Acount2 + Ucount2;
+  //   //int NAV = Acount3 + Ucount3;
 
-    return pw.Padding(
-      padding: pw.EdgeInsets.only(left: 10, bottom: 10, right: 10),
-      child: pw.Container(
-        width: sswidth,
-        height: 400, //gethightofFeature(eventtypesState, AV, AVR, NAV),
-        child: pw.Row(
-          mainAxisAlignment: pw.MainAxisAlignment.start,
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            IncludedInTheRent(eventtypesState, Acount1, Ucount1),
-            pw.SizedBox(
-              width: 10,
-            ),
-            AvailableNotIncludedInTheRent(eventtypesState, Acount2, Ucount2),
-            pw.SizedBox(
-              width: 10,
-            ),
-            NotAvailable(eventtypesState, Acount3, Ucount3)
-          ],
-        ),
-      ),
-    );
-  }
+  //   return pw.Padding(
+  //     padding: pw.EdgeInsets.only(left: 10, bottom: 10, right: 10),
+  //     child: pw.Container(
+  //       width: sswidth,
+  //       height: 400, //gethightofFeature(eventtypesState, AV, AVR, NAV),
+  //       child: pw.Row(
+  //         mainAxisAlignment: pw.MainAxisAlignment.start,
+  //         crossAxisAlignment: pw.CrossAxisAlignment.start,
+  //         children: [
+  //           IncludedInTheRent(eventtypesState, Acount1, Ucount1),
+  //           pw.SizedBox(
+  //             width: 10,
+  //           ),
+  //           AvailableNotIncludedInTheRent(eventtypesState, Acount2, Ucount2),
+  //           pw.SizedBox(
+  //             width: 10,
+  //           ),
+  //           NotAvailable(eventtypesState, Acount3, Ucount3)
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   pw.Widget IncludedInTheRent(
       EventTypesSummeryState eventtypesState, int Acount, int Ucount) {
