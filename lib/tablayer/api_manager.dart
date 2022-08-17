@@ -982,6 +982,23 @@ class ApiManager {
     });
   }
 
+  UpdateEventTypesDisclosure(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+
+        CallBackQuesy(true, Result);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   getPropertyOnboadingList(BuildContext context, String json, int ftime) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/

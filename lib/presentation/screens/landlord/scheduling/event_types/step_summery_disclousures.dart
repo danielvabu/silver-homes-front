@@ -103,7 +103,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                   eventtypesDetailsView(eventtypesSummeryState),
                   eventtypesSpecificationRestrictionView(
                       eventtypesSummeryState),
-                  eventtypesFeatureView(eventtypesSummeryState),
+                  //eventtypesFeatureView(eventtypesSummeryState),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -123,9 +123,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                           ],
                         )
                       : EventTypesDisclosureView(eventtypesSummeryState),*/
-                  SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10.0),
                   UpdateMethod(),
                 ],
               );
@@ -145,10 +143,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       firsttime = false;
     }
 
-    return SizedBox(
-      width: 0,
-      height: 0,
-    );
+    return SizedBox(width: 0, height: 0);
   }
 
   Widget bannerView(EventTypesSummeryState eventtypesSummeryState) {
@@ -192,9 +187,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10.0),
                 Text(
                   eventtypesSummeryState.eventtypestypeValue == null
                       ? ""
@@ -254,7 +247,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
 
   Widget eventtypesImages(EventTypesSummeryState eventtypesSummeryState) {
     return Padding(
-      padding: EdgeInsets.only(left: 15, top: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, right: 15),
       child: Container(
         height: 197,
         width: sswidth,
@@ -262,7 +255,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           borderRadius: BorderRadius.circular(2),
           color: myColor.white,
           border: Border.all(color: myColor.ps_boreder, width: 1),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: myColor.TA_Border,
               blurRadius: 4.0,
@@ -274,7 +267,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
             )
           ],
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,13 +277,11 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  GlobleString.PS1_EventTypes_Images1,
+                  'Images pa que', //GlobleString.PS1_EventTypes_Images1,
                   style: MyStyles.SemiBold(16, myColor.black),
                   textAlign: TextAlign.start,
                 ),
-                if (eventtypesSummeryState.SummeryeventtypesImagelist != null &&
-                    eventtypesSummeryState.SummeryeventtypesImagelist.length >
-                        0)
+                /*if (eventtypesSummeryState.SummeryeventtypesImagelist != null && eventtypesSummeryState.SummeryeventtypesImagelist.length > 0)
                   IconButton(
                     icon: Icon(
                       Icons.download_sharp,
@@ -313,15 +304,12 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                       }
                     },
                   )
-                else
-                  Container(),
+                else*/
+                Container(),
               ],
             ),
-            SizedBox(
-              height: 5,
-            ),
-            if (eventtypesSummeryState.SummeryeventtypesImagelist != null &&
-                eventtypesSummeryState.SummeryeventtypesImagelist.length > 0)
+            const SizedBox(height: 5.0),
+            /*if (eventtypesSummeryState.SummeryeventtypesImagelist != null && eventtypesSummeryState.SummeryeventtypesImagelist.length > 0)
               Container(
                 height: 130,
                 width: sswidth,
@@ -389,28 +377,28 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                   ),
                 ),
               )
-            else
-              Container(
-                height: 150,
-                width: 210,
-                /*child: Image.asset(
+            else*/
+            Container(
+              height: 150,
+              width: 210,
+              /*child: Image.asset(
                   "assets/images/noimage.png",
                 ),*/
-                alignment: Alignment.center,
-                decoration: BoxDecoration(color: myColor.fnl_shadow),
-                child: Text(
-                  "No photos\nuploaded",
-                  style: MyStyles.SemiBold(20, myColor.RQ_hint),
-                  textAlign: TextAlign.center,
-                ),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: myColor.fnl_shadow),
+              child: Text(
+                "No photos\nuploaded",
+                style: MyStyles.SemiBold(20, myColor.RQ_hint),
+                textAlign: TextAlign.center,
               ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget SingleEventTypesImage(EventTypesSummeryState eventtypesSummeryState) {
+  /*Widget SingleEventTypesImage(EventTypesSummeryState eventtypesSummeryState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -495,8 +483,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       ],
     );
   }
-
-  void PickImage() async {
+*/
+  /*void PickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: [
@@ -518,7 +506,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
             context, GlobleString.PS3_EventTypes_Image_error, false);
       }
     }
-  }
+  }*/
 
   Widget eventtypesDetailsView(EventTypesSummeryState eventtypesSummeryState) {
     String rentAmount = "";
@@ -565,7 +553,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          GlobleString.PS1_EventTypes_Details,
+                          'Details',
+                          //GlobleString.PS1_EventTypes_Details,
                           style: MyStyles.SemiBold(16, myColor.black),
                           textAlign: TextAlign.start,
                         ),
@@ -579,7 +568,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             Expanded(
                               flex: 2,
                               child: Text(
-                                GlobleString.PS1_EventTypes_type,
+                                'Types',
+                                //GlobleString.PS1_EventTypes_type,
                                 style: MyStyles.Medium(14, myColor.black),
                                 textAlign: TextAlign.start,
                               ),
@@ -657,21 +647,18 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10.0),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS1_EventTypes_description,
+                              'Description',
+                              //GlobleString.PS1_EventTypes_description,
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
+                            const SizedBox(height: 5.0),
                             Row(
                               children: [
                                 Expanded(
@@ -693,9 +680,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                const SizedBox(width: 15.0),
                 Expanded(
                   child: Container(
                     height: 296,
@@ -703,7 +688,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                       borderRadius: BorderRadius.circular(2),
                       color: myColor.white,
                       border: Border.all(color: myColor.ps_boreder, width: 1),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: myColor.TA_Border,
                           blurRadius: 4.0,
@@ -715,7 +700,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         )
                       ],
                     ),
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -725,9 +710,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                           style: MyStyles.SemiBold(16, myColor.black),
                           textAlign: TextAlign.start,
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -750,9 +733,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
+                        const SizedBox(height: 8.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -780,9 +761,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
+                        const SizedBox(height: 8.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -811,9 +790,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
+                        const SizedBox(height: 8.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -839,9 +816,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
+                        const SizedBox(height: 12.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -864,9 +839,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),*/
                           ],
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
+                        const SizedBox(height: 8.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -890,9 +863,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 4,
-                        ),
+                        const SizedBox(height: 4.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -944,13 +915,9 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             specificationView(eventtypesSummeryState),
-            SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15.0),
             restrictionView(eventtypesSummeryState),
-            SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15.0),
             featureView(eventtypesSummeryState),
           ],
         ),
@@ -976,7 +943,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           borderRadius: BorderRadius.circular(2),
           color: myColor.white,
           border: Border.all(color: myColor.ps_boreder, width: 1),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: myColor.TA_Border,
               blurRadius: 4.0,
@@ -988,7 +955,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
             )
           ],
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -998,9 +965,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
               style: MyStyles.SemiBold(16, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1015,9 +980,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         eventtypesSummeryState.EventTypesBedrooms,
                         style: MyStyles.Regular(14, myColor.black),
@@ -1026,9 +989,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1039,9 +1000,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         eventtypesSummeryState.EventTypesBathrooms,
                         style: MyStyles.Regular(14, myColor.black),
@@ -1052,9 +1011,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1069,9 +1026,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         Size,
                         style: MyStyles.Regular(14, myColor.black),
@@ -1080,9 +1035,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1093,9 +1046,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         eventtypesSummeryState.furnishingValue == null
                             ? ""
@@ -1123,7 +1074,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           borderRadius: BorderRadius.circular(2),
           color: myColor.white,
           border: Border.all(color: myColor.ps_boreder, width: 1),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: myColor.TA_Border,
               blurRadius: 4.0,
@@ -1135,7 +1086,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
             )
           ],
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1145,9 +1096,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
               style: MyStyles.SemiBold(16, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1162,9 +1111,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10.0),
                       Container(
                         alignment: Alignment.centerLeft,
                         child: ListView.builder(
@@ -1191,9 +1138,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -1204,9 +1149,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.ps_Restriction),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10.0),
                       Container(
                         alignment: Alignment.centerLeft,
                         child: ListView.builder(
@@ -1250,7 +1193,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           borderRadius: BorderRadius.circular(2),
           color: myColor.white,
           border: Border.all(color: myColor.ps_boreder, width: 1),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: myColor.TA_Border,
               blurRadius: 4.0,
@@ -1262,19 +1205,18 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
             )
           ],
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              GlobleString.PS3_EventTypes_Features,
+              'Features',
+              //GlobleString.PS3_EventTypes_Features,
               style: MyStyles.SemiBold(16, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1289,9 +1231,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         eventtypesSummeryState.Parkingstalls,
                         style: MyStyles.Regular(14, myColor.black),
@@ -1300,22 +1240,19 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        GlobleString.PS3_EventTypes_Features_StorageAvailable,
+                        'Storage no',
+                        //GlobleString.PS3_EventTypes_Features_StorageAvailable,
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Text(
                         eventtypesSummeryState.storageavailableValue == null
                             ? ""
@@ -1335,7 +1272,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
     );
   }
 
-  Widget eventtypesFeatureView(EventTypesSummeryState eventtypesSummeryState) {
+  /*Widget eventtypesFeatureView(EventTypesSummeryState eventtypesSummeryState) {
     int Acount1 = 0, Acount2 = 0, Acount3 = 0;
     for (int i = 0;
         i < eventtypesSummeryState.Summeryeventtypesamenitieslist.length;
@@ -1396,9 +1333,9 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       ),
     );
   }
+*/
 
-  Widget IncludedInTheRent(
-      EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
+/*  Widget IncludedInTheRent(EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -1443,8 +1380,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        GlobleString.PS3_EventTypes_Features_Amenities,
+                      Text('Amenities no',
+                        //GlobleString.PS3_EventTypes_Features_Amenities,
                         style: MyStyles.Medium(14, myColor.Circle_main),
                         textAlign: TextAlign.start,
                       ),
@@ -1554,9 +1491,9 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       ),
     );
   }
+*/
 
-  Widget AvailableNotIncludedInTheRent(
-      EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
+/*  Widget AvailableNotIncludedInTheRent(EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -1713,9 +1650,9 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       ),
     );
   }
+*/
 
-  Widget NotAvailable(
-      EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
+/*  Widget NotAvailable(EventTypesSummeryState eventtypesSummeryState, int Acount, int Ucount) {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -1873,11 +1810,12 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       ),
     );
   }
+*/
 
   Widget EventTypesDisclosureView(
       EventTypesSummeryState eventtypesSummeryState) {
     return Padding(
-      padding: EdgeInsets.only(left: 15, top: 15, bottom: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15, right: 15),
       child: Container(
         width: sswidth,
         alignment: Alignment.topLeft,
@@ -1886,7 +1824,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 5, bottom: 25),
+              margin: const EdgeInsets.only(left: 5, bottom: 25),
               child: Text(
                 GlobleString.PS_Disclosures,
                 style: MyStyles.SemiBold(16, myColor.black),
@@ -1894,7 +1832,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 7),
+              margin: const EdgeInsets.only(left: 7),
               child: Row(
                 children: [
                   Text(
@@ -1937,9 +1875,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -1952,9 +1888,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     _store.dispatch(UpdateSummeryAgreeTCPP(value!));
                   },
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10.0),
                 Text(
                   GlobleString.ps4_disclosure_Iagree,
                   style: MyStyles.Regular(14, myColor.text_color),
@@ -1962,14 +1896,12 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 back(),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 addsaveandfinish(eventtypesSummeryState)
               ],
             ),
@@ -2001,11 +1933,11 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
         bool prostep3 = await Prefs.getBool(PrefsName.EventTypesStep3);
 
         if (!prostep1 || !prostep2 || !prostep3) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.PS3_EventTypes_all_details, false);
+          //ToastUtils.showCustomToast(context, GlobleString.PS3_EventTypes_all_details, false);
+          ToastUtils.showCustomToast(context, 'Details', false);
         } else if (!eventtypesSummeryState.agree_TCPP) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.PS3_EventTypes_Disclosures, false);
+          //ToastUtils.showCustomToast(context, GlobleString.PS3_EventTypes_Disclosures, false);
+          ToastUtils.showCustomToast(context, 'Disclosures', false);
         } else {
           _addSaveAndFinishCall(eventtypesSummeryState);
         }
@@ -2022,8 +1954,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
         bool prostep3 = await Prefs.getBool(PrefsName.EventTypesStep3);
 
         if (!prostep1 || !prostep2 || !prostep3) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.PS3_EventTypes_all_details, false);
+          //ToastUtils.showCustomToast(context, GlobleString.PS3_EventTypes_all_details, false);
+          ToastUtils.showCustomToast(context, 'All Details', false);
         }
         /*if (eventtypesSummeryState.PropDrafting != 3) {
           ToastUtils.showCustomToast(
@@ -2066,13 +1998,13 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
 
   _updateEventTypesImageCall(
       String imagename, EventTypesSummeryState eventtypesSummeryState) {
-    EventTypesDisclosure eventtypesd = new EventTypesDisclosure();
-    eventtypesd.EventTypes_Image = imagename;
+    EventTypesDisclosure eventtypesd = EventTypesDisclosure();
+    //eventtypesd.EventTypes_Image = imagename;
     eventtypesd.IsAgreed_TandC = true;
     eventtypesd.IsActive = Prefs.getBool(PrefsName.EventTypesActive);
     eventtypesd.PropDrafting = 3;
 
-    EventTypesUpdate ceventtypesUpdate = new EventTypesUpdate();
+    EventTypesUpdate ceventtypesUpdate = EventTypesUpdate();
     ceventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
     ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
@@ -2081,8 +2013,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       if (error) {
         loader.remove();
 
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS_Save_EventTypesse, true);
+        //ToastUtils.showCustomToast(context, GlobleString.PS_Save_EventTypesse, true);
+        ToastUtils.showCustomToast(context, 'Save Evet Types', true);
 
         if (stepper == 0)
           widget._callbackSaveandNext();

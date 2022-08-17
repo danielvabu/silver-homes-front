@@ -1692,6 +1692,35 @@ class PropertyDisclosure {
       };
 }
 
+class EventTypesDisclosure {
+  String? Property_Image;
+  bool? IsAgreed_TandC;
+  bool? IsActive;
+  int? PropDrafting;
+
+  EventTypesDisclosure({
+    this.Property_Image,
+    this.IsAgreed_TandC,
+    this.IsActive,
+    this.PropDrafting,
+  });
+
+  factory EventTypesDisclosure.fromJson(Map<String, dynamic> json) =>
+      EventTypesDisclosure(
+        Property_Image: json["Property_Image"],
+        IsAgreed_TandC: json["IsAgreed_TandC"],
+        IsActive: json["IsActive"],
+        PropDrafting: json["PropDrafting"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Property_Image": Property_Image,
+        "IsAgreed_TandC": IsAgreed_TandC,
+        "IsActive": IsActive,
+        "PropDrafting": PropDrafting,
+      };
+}
+
 class PropertyListInDropDown {
   String? IsActive;
   String? Owner_ID;

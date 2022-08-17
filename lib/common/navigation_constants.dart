@@ -5,6 +5,7 @@ class NavigationConstant {
       "specificationAndRestriction";
   static const String featuresAndPhotos = "featuresAndPhotos";
   static const String propertySummary = "propertySummary";
+  static const String eventTypesSummary = "eventTypesSummary";
 
   // tenancy indicators
   static const String tenancyPersonal = "tenancyPersonal";

@@ -2053,13 +2053,13 @@ class _StepPropertySummaryState extends State<StepPropertySummary> {
 
   _updatePropertyImageCall(
       String imagename, PropertySummeryState propertySummeryState) {
-    PropertyDisclosure propertyd = new PropertyDisclosure();
+    PropertyDisclosure propertyd = PropertyDisclosure();
     propertyd.Property_Image = imagename;
     propertyd.IsAgreed_TandC = true;
     propertyd.IsActive = Prefs.getBool(PrefsName.PropertyActive);
     propertyd.PropDrafting = 3;
 
-    PropertyUpdate cpropertyUpdate = new PropertyUpdate();
+    PropertyUpdate cpropertyUpdate = PropertyUpdate();
     cpropertyUpdate.ID = Prefs.getString(PrefsName.PropertyID);
     cpropertyUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
