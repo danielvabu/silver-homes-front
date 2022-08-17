@@ -1,94 +1,91 @@
-import 'package:silverhome/domain/entities/citydata.dart';
-import 'package:silverhome/domain/entities/statedata.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 
-import 'countrydata.dart';
-
 class EventTypesData {
-  EventTypesData({
-    this.province,
-    this.country,
-    this.companyName,
-    this.rating,
-    this.address,
-    this.id,
-    this.suite,
-    this.city,
-    this.category,
-    this.PersonID,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.mobileNumber,
-    this.PostalCode,
-    this.Dial_Code,
-    this.Country_Code,
-    this.Note,
-    this.showInstruction,
-  });
-
-  StateData? province;
-  CountryData? country;
-  String? companyName;
-  double? rating;
-  String? address;
-  int? id;
-  String? suite;
-  CityData? city;
-  SystemEnumDetails? category;
-  int? PersonID;
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? mobileNumber;
-  String? PostalCode;
-  String? Dial_Code;
-  String? Country_Code;
-  String? Note;
-  bool? showInstruction;
+  String? name;
+  bool? relation;
+  bool? showing;
+  String? location;
+  String? description;
+  String? link;
+  String? color;
+  int? range;
+  int? duration;
+  int? buffer_after;
+  int? buffer_after_measure;
+  int? buffer_before;
+  int? buffer_before_measure;
+  String? confirmation_message;
+  int? time_zone;
+  int? time_scheduling;
+  int? time_scheduling_medida;
+  int? max_event_per_day;
+  String? prop_id;
+  int? owner_id;
+  EventTypesData(
+      {this.name,
+      this.relation,
+      this.showing,
+      this.location,
+      this.description,
+      this.link,
+      this.color,
+      this.range,
+      this.duration,
+      this.buffer_after,
+      this.buffer_after_measure,
+      this.buffer_before,
+      this.buffer_before_measure,
+      this.confirmation_message,
+      this.time_zone,
+      this.time_scheduling,
+      this.time_scheduling_medida,
+      this.max_event_per_day,
+      this.prop_id,
+      this.owner_id});
 
   factory EventTypesData.fromJson(Map<String, dynamic> json) => EventTypesData(
-        country: CountryData.fromJson(json["Country"]),
-        province: StateData.fromJson(json["Province"]),
-        companyName: json["CompanyName"],
-        rating: json["Rating"],
-        address: json["Address"],
-        id: json["ID"],
-        suite: json["Suite"],
-        city: CityData.fromJson(json["City"]),
-        category: SystemEnumDetails.fromJson(json["Category"]),
-        PersonID: json["PersonID"],
-        email: json["Email"],
-        firstName: json["FirstName"],
-        lastName: json["LastName"],
-        mobileNumber: json["MobileNumber"],
-        PostalCode: json["PostalCode"],
-        Dial_Code: json["Dial_Code"],
-        Country_Code: json["Country_Code"],
-        Note: json["Note"],
-        showInstruction:
-            json["showInstruction"] != null ? json["showInstruction"] : false,
+        name: json["name"],
+        relation: json["relation"],
+        showing: json["showing"],
+        location: json["location"],
+        description: json["description"],
+        link: json["link"],
+        color: json["color"],
+        range: json["range"],
+        duration: json["duration"],
+        buffer_after: json["buffer_after"],
+        buffer_after_measure: json["buffer_after_measure"],
+        buffer_before: json["buffer_before"],
+        buffer_before_measure: json["buffer_before_measure"],
+        confirmation_message: json["confirmation_message"],
+        time_zone: json["time_zone"],
+        time_scheduling: json["time_scheduling"],
+        time_scheduling_medida: json["time_scheduling_medida"],
+        max_event_per_day: json["max_event_per_day"],
+        prop_id: json["prop_id"],
+        owner_id: json["owner_id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "Country": country!.toJson(),
-        "Province": province!.toJson(),
-        "CompanyName": companyName,
-        "Rating": rating,
-        "Address": address,
-        "ID": id,
-        "Suite": suite,
-        "City": city,
-        "Category": category!.toJson(),
-        "PersonID": PersonID,
-        "Email": email,
-        "FirstName": firstName,
-        "LastName": lastName,
-        "MobileNumber": mobileNumber,
-        "PostalCode": PostalCode,
-        "Dial_Code": Dial_Code,
-        "Country_Code": Country_Code,
-        "Note": Note,
-        "showInstruction": showInstruction,
+        "name": name,
+        "relation": relation,
+        "showing": showing,
+        "location": location,
+        "description": description,
+        "link": link,
+        "color": color,
+        "range": range,
+        "duration": duration,
+        "buffer_after": buffer_after,
+        "buffer_after_measure": buffer_after_measure,
+        "buffer_before": buffer_before,
+        "buffer_before_measure": buffer_before_measure,
+        "confirmation_message": confirmation_message,
+        "time_zone": time_zone,
+        "time_scheduling": time_scheduling,
+        "time_scheduling_medida": time_scheduling_medida,
+        "max_event_per_day": max_event_per_day,
+        "prop_id": prop_id,
+        "owner_id": owner_id,
       };
 }
