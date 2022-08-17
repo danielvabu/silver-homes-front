@@ -657,7 +657,49 @@ class ApiManager {
     });
   }
 
+  InsertEventTypesDetails(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(POJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   UpdatePropertyDetails(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        loader.remove();
+        CallBackQuesy(true, Result);
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  UpdateEventTypesDetails(BuildContext context, Object CPOJO, Object UpPOJO,
       CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);

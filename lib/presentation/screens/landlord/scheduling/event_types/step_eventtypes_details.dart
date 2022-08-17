@@ -1589,37 +1589,37 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
       // _controller.jumpTo(-1.0);
       _store.dispatch(UpdateErrorEventTypesName(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_name_error, false);
+          context, "GlobleString.PS1_EventTypes_name_error", false);
     } else if (eventtypesState.EventTypesAddress == "") {
       // _controller.jumpTo(-1.0);
       _store.dispatch(UpdateErrorEventTypesAddress(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_address_error, false);
+          context, "GlobleString.PS1_EventTypes_address_error", false);
     } else if (eventtypesState.City == "") {
       // _controller.jumpTo(0.0);
       _store.dispatch(UpdateErrorCity(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_City_error, false);
+          context, "GlobleString.PS1_EventTypes_City_error", false);
     } else if (eventtypesState.Province == "") {
       // _controller.jumpTo(0.0);
       _store.dispatch(UpdateErrorProvince(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_province_error, false);
+          context, "GlobleString.PS1_EventTypes_province_error", false);
     } else if (eventtypesState.CountryName == "") {
       //_controller.jumpTo(0.0);
       _store.dispatch(UpdateErrorCountryName(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_country_error, false);
+          context, "GlobleString.PS1_EventTypes_country_error", false);
     } else if (eventtypesState.Postalcode == "") {
       //_controller.jumpTo(0.0);
       _store.dispatch(UpdateErrorPostalcode(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_postalcode_error, false);
+          context, "GlobleString.PS1_EventTypes_postalcode_error", false);
     } else if (eventtypesState.RentAmount == "") {
       // _controller.jumpTo(1.0);
       _store.dispatch(UpdateErrorRentAmount(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_rentamount_error, false);
+          context, "GlobleString.PS1_EventTypes_rentamount_error", false);
     } else if (eventtypesState.rentpaymentFrequencyValue == null) {
       // _controller.jumpTo(1.0);
       _store.dispatch(UpdateErrorRentpaymentFrequency(true));
@@ -1647,7 +1647,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
           context, GlobleString.PS1_Minimum_lease_duration_error, false);
     } else {
       EventTypesInsert eventtypesInsert = new EventTypesInsert();
-      eventtypesInsert.EventTypes_Type =
+      eventtypesInsert.Property_Type =
           eventtypesState.eventtypestypeValue!.EnumDetailID.toString();
       eventtypesInsert.Rental_Space =
           eventtypesState.rentalspaceValue!.EnumDetailID.toString();
@@ -1657,11 +1657,10 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
           eventtypesState.leasetypeValue!.EnumDetailID.toString();
       eventtypesInsert.Min_Lease_Duration =
           eventtypesState.minimumleasedurationValue!.EnumDetailID.toString();
-      eventtypesInsert.EventTypesName =
-          eventtypesState.EventTypesName.toString();
-      eventtypesInsert.EventTypes_Address =
+      eventtypesInsert.PropertyName = eventtypesState.EventTypesName.toString();
+      eventtypesInsert.Property_Address =
           eventtypesState.EventTypesAddress.toString();
-      eventtypesInsert.EventTypes_Description =
+      eventtypesInsert.Property_Description =
           eventtypesState.EventTypesDescription.toString();
       eventtypesInsert.City = eventtypesState.City.toString();
       eventtypesInsert.Province = eventtypesState.Province.toString();
@@ -1670,7 +1669,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
       eventtypesInsert.Postal_Code = eventtypesState.Postalcode.toString();
       eventtypesInsert.Suite_Unit = eventtypesState.Suiteunit.toString();
       eventtypesInsert.Building_Name = eventtypesState.Buildingname.toString();
-      eventtypesInsert.Other_EventTypes_Type =
+      eventtypesInsert.Property_Type =
           eventtypesState.eventtypestypeOtherValue.toString();
       eventtypesInsert.Min_Lease_Number =
           eventtypesState.minimumleasedurationnumber.toString();
@@ -1721,7 +1720,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                 eventtypesInsert.PropDrafting!));
 
             ToastUtils.showCustomToast(
-                context, GlobleString.PS_Save_EventTypesse, true);
+                context, "GlobleString.PS_Save_EventTypesse", true);
 
             if (!isGotoback) {
               if (stepper == 0)
@@ -1766,7 +1765,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
             //widget._callbackSaveandNext();
 
             ToastUtils.showCustomToast(
-                context, GlobleString.EventTypes_creation, true);
+                context, "GlobleString.EventTypes_creation", true);
 
             if (!isGotoback) {
               widget._callbackSaveandNext();

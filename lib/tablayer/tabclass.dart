@@ -52,6 +52,7 @@ class eSystemEnums {
   int Maintenance_Category = 3186;
   int Maintenance_Status = 3187;
   int Priority = 3188;
+  int EventTypesType = 3188;
 }
 
 enum eJoinType { LeftJoin, RightJoin }

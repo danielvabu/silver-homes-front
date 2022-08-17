@@ -1488,6 +1488,109 @@ class PropertyInsert {
       };
 }
 
+/*event type*/
+
+class EventTypesInsert {
+  String? PropertyName;
+  String? Property_Type;
+  String? Rental_Space;
+  String? Property_Description;
+  String? Property_Address;
+  String? Suite_Unit;
+  String? Building_Name;
+  String? City;
+  String? Province;
+  String? Country;
+  String? Country_Code;
+  String? Postal_Code;
+  String? Rent_Amount;
+  String? Rent_Payment_Frequency;
+  String? Lease_Type;
+  String? Date_Available;
+  String? Min_Lease_Duration;
+  String? Other_Property_Type;
+  String? Min_Lease_Number;
+  String? Owner_ID;
+  int? PropDrafting;
+  bool? Vacancy;
+
+  EventTypesInsert({
+    this.PropertyName,
+    this.Property_Type,
+    this.Rental_Space,
+    this.Property_Description,
+    this.Property_Address,
+    this.Suite_Unit,
+    this.Building_Name,
+    this.City,
+    this.Province,
+    this.Country,
+    this.Country_Code,
+    this.Postal_Code,
+    this.Rent_Amount,
+    this.Rent_Payment_Frequency,
+    this.Lease_Type,
+    this.Date_Available,
+    this.Min_Lease_Duration,
+    this.Other_Property_Type,
+    this.Min_Lease_Number,
+    this.Owner_ID,
+    this.PropDrafting,
+    this.Vacancy,
+  });
+
+  factory EventTypesInsert.fromJson(Map<String, dynamic> json) =>
+      EventTypesInsert(
+        PropertyName: json["PropertyName"],
+        Property_Type: json["Property_Type"],
+        Rental_Space: json["Rental_Space"],
+        Property_Description: json["Property_Description"],
+        Property_Address: json["Property_Address"],
+        Suite_Unit: json["Suite_Unit"],
+        Building_Name: json["Building_Name"],
+        City: json["City"],
+        Province: json["Province"],
+        Country: json["Country"],
+        Country_Code: json["Country_Code"],
+        Postal_Code: json["Postal_Code"],
+        Rent_Amount: json["Rent_Amount"],
+        Rent_Payment_Frequency: json["Rent_Payment_Frequency"],
+        Lease_Type: json["Lease_Type"],
+        Date_Available: json["Date_Available"],
+        Min_Lease_Duration: json["Min_Lease_Duration"],
+        Other_Property_Type: json["Other_Property_Type"],
+        Min_Lease_Number: json["Min_Lease_Number"],
+        Owner_ID: json["Owner_ID"],
+        PropDrafting: json["PropDrafting"],
+        Vacancy: json["Vacancy"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "PropertyName": PropertyName,
+        "Property_Type": Property_Type,
+        "Rental_Space": Rental_Space,
+        "Property_Description": Property_Description,
+        "Property_Address": Property_Address,
+        "Suite_Unit": Suite_Unit,
+        "Building_Name": Building_Name,
+        "City": City,
+        "Province": Province,
+        "Country": Country,
+        "Country_Code": Country_Code,
+        "Postal_Code": Postal_Code,
+        "Rent_Amount": Rent_Amount,
+        "Rent_Payment_Frequency": Rent_Payment_Frequency,
+        "Lease_Type": Lease_Type,
+        "Date_Available": Date_Available,
+        "Min_Lease_Duration": Min_Lease_Duration,
+        "Other_Property_Type": Other_Property_Type,
+        "Min_Lease_Number": Min_Lease_Number,
+        "Owner_ID": Owner_ID,
+        "PropDrafting": PropDrafting,
+        "Vacancy": Vacancy,
+      };
+}
+
 class PropertyUpdate {
   String? ID;
   String? Owner_ID;
