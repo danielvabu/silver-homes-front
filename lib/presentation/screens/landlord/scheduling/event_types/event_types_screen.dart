@@ -668,7 +668,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       },
                       onPresseIsPublish: (EventTypesDataList eventtypesData,
                           int pos, bool flag) {
-                        if (!eventtypesData.isActive!) {
+                        if (!eventtypesData.ispublished!) {
                           ToastUtils.showCustomToast(
                               context,
                               'Publicar creo',
