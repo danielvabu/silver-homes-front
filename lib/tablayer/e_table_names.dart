@@ -29,7 +29,6 @@ enum etableName {
   LogActivities,
   PropertyMaintenanceImages,
   Vendor,
-  events_type,
 }
 
 class TableNames {
@@ -126,9 +125,6 @@ class TableNames {
         break;
       case etableName.Vendor:
         name = "Vendor";
-        break;
-      case etableName.events_type:
-        name = "events_type";
         break;
       default:
         name = "";
