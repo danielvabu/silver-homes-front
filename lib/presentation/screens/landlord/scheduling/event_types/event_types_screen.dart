@@ -420,8 +420,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     _store.dispatch(UpdateSummeryAgreeTCPP(false));
     _store.dispatch(UpdateSummeryEventTypesDrafting(1));
     _store.dispatch(UpdateSummeryEventTypesVacancy(false));
-    _store.dispatch(
-        UpdateSummeryEventTypesImageList(<EventTypesImageMediaInfo>[]));
+    //_store.dispatch(UpdateSummeryEventTypesImageList(<EventTypesImageMediaInfo>[]));
   }
 
   Widget _actionPopup(EventTypesListState eventtypesListState) {
@@ -479,7 +478,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
           dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingList;
           dsqQuery.loadLookUpValues = true;
           dsqQuery.loadRecordInfo = true;
-          dsqQuery.eventtypesListReqtokens = reqtokens;
+          dsqQuery.eventTypesListReqtokens = reqtokens;
           dsqQuery.sort = sortinglist;
 
           String filterjson = jsonEncode(dsqQuery);
@@ -615,7 +614,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       },
                       onPresseInActive:
                           (EventTypesDataList eventtypesData, int pos) {
-                        ApiManager().TenantAvailableInEventTypes(
+                        /*ApiManager().TenantAvailableInEventTypes(
                             context,
                             Prefs.getString(PrefsName.OwnerID),
                             eventtypesData.id!, (status, responce) {
@@ -654,27 +653,26 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                             eventtypesActive_InAction_call(
                                 eventtypesListState, false, eventtypesData.id!);
                           }
-                        });
+                        });*/
                       },
                       onPresseActive:
                           (EventTypesDataList eventtypesData, int pos) {
-                        if (eventtypesData.propDrafting != 3) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_EventTypes_all_details, false);
-                        } else if (!eventtypesData.isAgreedTandC!) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_EventTypes_Disclosures, false);
-                        } else {
-                          eventtypesActive_InAction_call(
-                              eventtypesListState, true, eventtypesData.id!);
-                        }
+                        //if (eventtypesData.propDrafting != 3) {
+                        //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_all_details, false);
+                        //} else if (!eventtypesData.isAgreedTandC!) {
+                        //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_Disclosures, false);
+                        //} else {
+                        eventtypesActive_InAction_call(
+                            eventtypesListState, true, eventtypesData.id!);
+                        //}
                       },
                       onPresseIsPublish: (EventTypesDataList eventtypesData,
                           int pos, bool flag) {
                         if (!eventtypesData.isActive!) {
                           ToastUtils.showCustomToast(
                               context,
-                              GlobleString.PS3_EventTypes_Active_publish,
+                              'Publicar creo',
+                              //GlobleString.PS3_EventTypes_Active_publish,
                               false);
                         } else {
                           showDialog(
@@ -713,7 +711,8 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       margin: EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
-                        GlobleString.Blank_EventTypes,
+                        'blank npi',
+                        //GlobleString.Blank_EventTypes,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: MyStyles.Medium(18, myColor.tabel_msg),

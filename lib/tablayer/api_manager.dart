@@ -1395,6 +1395,176 @@ class ApiManager {
     });
   }
 
+  getAllEventTypesOnboadingListCSV(BuildContext context, String json) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    /* var myjson = {
+      "DSQID": Weburl.DSQ_PropertyOnBoardingList,
+      "Reqtokens": {"Owner_ID": ownerid, "Name": ""},
+      "LoadLookUpValues": true,
+      "LoadRecordInfo": true,
+      "Sort": [
+        {"FieldID": "ID", "SortSequence": 1}
+      ]
+    };
+
+    String json = jsonEncode(myjson);*/
+
+    Helper.Log("Property", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        if (data['Result'] != null && data['Result'].length > 0) {
+          String csv;
+
+          List<List<dynamic>> csvList = [];
+
+          List csvHeaderTitle = [];
+          csvHeaderTitle.add("Property Name");
+          csvHeaderTitle.add("# of Unit");
+          csvHeaderTitle.add("City");
+          csvHeaderTitle.add("Country");
+          csvHeaderTitle.add("Property Type");
+          csvHeaderTitle.add("Vacancy");
+          csvHeaderTitle.add("Active/Inactive");
+          csvHeaderTitle.add("Publish");
+
+          csvList.add(csvHeaderTitle);
+
+          List<PropertyDataList> propertylist = <PropertyDataList>[];
+
+          for (int i = 0; i < data['Result'].length; i++) {
+            var myobject = data['Result'][i];
+
+            String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+
+            String PropertyName = myobject['PropertyName'] != null
+                ? myobject['PropertyName'].toString()
+                : "";
+
+            String Other_Property_Type = myobject['Other_Property_Type'] != null
+                ? myobject['Other_Property_Type'].toString()
+                : "";
+
+            String Suite_Unit = myobject['Suite_Unit'] != null
+                ? myobject['Suite_Unit'].toString()
+                : "";
+
+            bool IsActive =
+                myobject['IsActive'] != null ? myobject['IsActive'] : false;
+
+            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+                ? myobject['IsAgreed_TandC']
+                : false;
+
+            String City =
+                myobject['City'] != null ? myobject['City'].toString() : "";
+
+            String Country = myobject['Country'] != null
+                ? myobject['Country'].toString()
+                : "";
+
+            int PropDrafting =
+                myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+
+            bool Vacancy =
+                myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+
+            bool IsPublished = myobject['IsPublished'] != null
+                ? myobject['IsPublished']
+                : false;
+
+            SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+                ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+                : null;
+
+            /*RecordInfo*/
+
+            var objRecordInfo = myobject["RecordInfo"];
+
+            String CreatedOn = objRecordInfo['CreatedOn'] != null
+                ? objRecordInfo['CreatedOn'].toString()
+                : "0";
+
+            String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+                ? objRecordInfo['UpdatedOn'].toString()
+                : "0";
+
+            PropertyDataList propertyData = new PropertyDataList();
+            propertyData.id = ID;
+            propertyData.propertyName = PropertyName;
+            propertyData.otherPropertyType = Other_Property_Type;
+            propertyData.isActive = IsActive;
+            propertyData.isAgreedTandC = IsAgreed_TandC;
+            propertyData.city = City;
+            propertyData.country = Country;
+            propertyData.suiteUnit = Suite_Unit;
+            propertyData.propertyType = Property_Type;
+            propertyData.propDrafting = PropDrafting;
+            propertyData.vacancy = Vacancy;
+            propertyData.isPublished = IsPublished;
+            propertyData.createdOn = CreatedOn;
+            propertyData.updatedOn = UpdatedOn;
+
+            List row = [];
+            row.add(PropertyName);
+            row.add(Suite_Unit);
+            row.add(City);
+            row.add(Country);
+            if (Property_Type != null) {
+              if (Property_Type.EnumDetailID == 6) {
+                row.add(Other_Property_Type);
+              } else {
+                row.add(Property_Type.displayValue);
+              }
+            } else {
+              row.add("");
+            }
+
+            row.add(Vacancy);
+            row.add(IsActive ? "Active" : "Inactive");
+            row.add(IsPublished ? "true" : "false");
+
+            csvList.add(row);
+          }
+
+          csv = const ListToCsvConverter().convert(csvList);
+
+          String filename = "property_" +
+              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+              ".csv";
+
+          // prepare
+          final bytes = utf8.encode(csv);
+          final blob = html.Blob([bytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          final anchor = html.document.createElement('a') as html.AnchorElement
+            ..href = url
+            ..style.display = 'none'
+            ..download = filename;
+
+          //property.csv
+
+          html.document.body!.children.add(anchor);
+
+          anchor.click();
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
+        }
+
+        loader.remove();
+      } else {
+        loader.remove();
+
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
   getPropertyDetails(BuildContext context, String id,
       CallBackPropertyDetails CallBackQuesy) async {
     var myjson = {
@@ -9058,8 +9228,31 @@ class ApiManager {
 /*========================  WorkFlow Execute Api  =============================*/
 /*==============================================================================*/
 
-/*Duplicat Property*/
   DuplicatPropertyGenerate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_DuplicatProperty,
+      "Reqtokens": {"ID": propertyid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        loader.remove();
+        callBackQuesy(true, respoce);
+      } else {
+        loader.remove();
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  DuplicatEventTypesGenerate(BuildContext context, String propertyid,
       CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
