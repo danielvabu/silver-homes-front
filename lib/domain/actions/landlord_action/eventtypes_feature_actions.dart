@@ -3,39 +3,31 @@ import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/presentation/models/app_state.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 
-class UpdateEventTypesAmenitiesList implements Action {
+/*class UpdateEventTypesAmenitiesList implements Action {
   final List<EventTypesAmenitiesUtility> eventtypesamenitieslist1;
-
   UpdateEventTypesAmenitiesList(this.eventtypesamenitieslist1);
-
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesState(eventtypesamenitieslist: eventtypesamenitieslist1);
+    return appState.copyWith.eventTypesState(eventtypesamenitieslist: eventtypesamenitieslist1);
   }
 }
-
 class UpdateEventTypesUtilitiesList implements Action {
   final List<EventTypesAmenitiesUtility> eventtypesutilitieslist1;
-
   UpdateEventTypesUtilitiesList(this.eventtypesutilitieslist1);
-
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(eventtypesutilitieslist: eventtypesutilitieslist1);
+        .eventTypesState(eventtypesutilitieslist: eventtypesutilitieslist1);
   }
 }
-
+*/
 class UpdateStorageAvailableList implements Action {
   final List<SystemEnumDetails> storageavailablelist;
-
   UpdateStorageAvailableList(this.storageavailablelist);
-
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(storageavailablelist: storageavailablelist);
+        .eventTypesState(storageavailablelist: storageavailablelist);
   }
 }
 
@@ -47,7 +39,7 @@ class UpdateStorageAvailableValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(storageavailableValue: storageavailableValue);
+        .eventTypesState(storageavailableValue: storageavailableValue);
   }
 }
 
@@ -58,11 +50,11 @@ class UpdateParkingstalls implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(Parkingstalls: Parkingstalls);
+    return appState.copyWith.eventTypesState(Parkingstalls: Parkingstalls);
   }
 }
 
-class UpdateEventTypesImageList implements Action {
+/*class UpdateEventTypesImageList implements Action {
   final List<EventTypesImageMediaInfo> eventtypesImagelist;
 
   UpdateEventTypesImageList(this.eventtypesImagelist);
@@ -70,6 +62,6 @@ class UpdateEventTypesImageList implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(eventtypesImagelist: eventtypesImagelist);
+        .eventTypesState(eventtypesImagelist: eventtypesImagelist);
   }
-}
+}*/

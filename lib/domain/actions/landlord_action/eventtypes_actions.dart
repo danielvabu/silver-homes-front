@@ -9,7 +9,8 @@ class UpdateProperTytypeList implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(eventtypestypelist: eventtypestypelist);
+    return appState.copyWith
+        .eventTypesState(eventtypestypelist: eventtypestypelist);
   }
 }
 
@@ -21,7 +22,7 @@ class UpdateProperTytypeValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(eventtypestypeValue: eventtypestypeValue);
+        .eventTypesState(eventtypestypeValue: eventtypestypeValue);
   }
 }
 
@@ -33,7 +34,7 @@ class UpdateEventTypesTypeOtherValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(eventtypestypeOtherValue: eventtypestypeOtherValue);
+        .eventTypesState(eventtypestypeOtherValue: eventtypestypeOtherValue);
   }
 }
 
@@ -44,7 +45,7 @@ class UpdateRentalSpaceList implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(rentalspacelist: rentalspacelist);
+    return appState.copyWith.eventTypesState(rentalspacelist: rentalspacelist);
   }
 }
 
@@ -55,7 +56,8 @@ class UpdateRentalSpaceValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(rentalspaceValue: rentalspaceValue);
+    return appState.copyWith
+        .eventTypesState(rentalspaceValue: rentalspaceValue);
   }
 }
 
@@ -67,7 +69,7 @@ class UpdateRentPaymentFrequencylist implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(rentpaymentFrequencylist: rentpaymentFrequencylist);
+        .eventTypesState(rentpaymentFrequencylist: rentpaymentFrequencylist);
   }
 }
 
@@ -79,7 +81,7 @@ class UpdateRentPaymentFrequencyValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(rentpaymentFrequencyValue: rentpaymentFrequencyValue);
+        .eventTypesState(rentpaymentFrequencyValue: rentpaymentFrequencyValue);
   }
 }
 
@@ -90,7 +92,7 @@ class UpdateLeaseTypeList implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(leasetypelist: leasetypelist);
+    return appState.copyWith.eventTypesState(leasetypelist: leasetypelist);
   }
 }
 
@@ -101,7 +103,7 @@ class UpdateLeaseTypeValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(leasetypeValue: leasetypeValue);
+    return appState.copyWith.eventTypesState(leasetypeValue: leasetypeValue);
   }
 }
 
@@ -113,7 +115,7 @@ class UpdateMinimumLeasedurationList implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(minimumleasedurationlist: minimumleasedurationlist);
+        .eventTypesState(minimumleasedurationlist: minimumleasedurationlist);
   }
 }
 
@@ -125,7 +127,7 @@ class UpdateMinimumLeasedurationValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(minimumleasedurationValue: minimumleasedurationValue);
+        .eventTypesState(minimumleasedurationValue: minimumleasedurationValue);
   }
 }
 
@@ -136,8 +138,8 @@ class UpdateMinimumleasedurationNumber implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesState(minimumleasedurationnumber: minimumleasedurationnumber);
+    return appState.copyWith.eventTypesState(
+        minimumleasedurationnumber: minimumleasedurationnumber);
   }
 }
 
@@ -148,7 +150,7 @@ class UpdateDateofavailable implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(dateofavailable: dateofavailable);
+    return appState.copyWith.eventTypesState(dateofavailable: dateofavailable);
   }
 }
 
@@ -159,7 +161,7 @@ class UpdateEventTypesName implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(EventTypesName: EventTypesName);
+    return appState.copyWith.eventTypesState(EventTypesName: EventTypesName);
   }
 }
 
@@ -170,7 +172,8 @@ class UpdateEventTypesAddress implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(EventTypesAddress: EventTypesAddress);
+    return appState.copyWith
+        .eventTypesState(EventTypesAddress: EventTypesAddress);
   }
 }
 
@@ -182,7 +185,7 @@ class UpdateEventTypesDescription implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(EventTypesDescription: EventTypesDescription);
+        .eventTypesState(EventTypesDescription: EventTypesDescription);
   }
 }
 
@@ -193,7 +196,7 @@ class UpdateSuiteunit implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(Suiteunit: Suiteunit);
+    return appState.copyWith.eventTypesState(Suiteunit: Suiteunit);
   }
 }
 
@@ -204,7 +207,7 @@ class UpdateBuildingname implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(Buildingname: Buildingname);
+    return appState.copyWith.eventTypesState(Buildingname: Buildingname);
   }
 }
 
@@ -215,7 +218,7 @@ class UpdateEventTypesCity implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(City: City);
+    return appState.copyWith.eventTypesState(City: City);
   }
 }
 
@@ -226,7 +229,7 @@ class UpdateEventTypesProvince implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(Province: Province);
+    return appState.copyWith.eventTypesState(Province: Province);
   }
 }
 
@@ -237,7 +240,7 @@ class UpdateEventTypesCountryName implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(CountryName: CountryName);
+    return appState.copyWith.eventTypesState(CountryName: CountryName);
   }
 }
 
@@ -248,7 +251,7 @@ class UpdateEventTypesCountryCode implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(CountryCode: CountryCode);
+    return appState.copyWith.eventTypesState(CountryCode: CountryCode);
   }
 }
 
@@ -259,7 +262,7 @@ class UpdateEventTypesPostalcode implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(Postalcode: Postalcode);
+    return appState.copyWith.eventTypesState(Postalcode: Postalcode);
   }
 }
 
@@ -270,7 +273,7 @@ class UpdateEventTypesRentAmount implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(RentAmount: RentAmount);
+    return appState.copyWith.eventTypesState(RentAmount: RentAmount);
   }
 }
 
@@ -281,7 +284,7 @@ class UpdateEventTypesDrafting implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(PropDrafting: PropDrafting);
+    return appState.copyWith.eventTypesState(PropDrafting: PropDrafting);
   }
 }
 
@@ -292,7 +295,7 @@ class UpdateEventTypesVacancy implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(PropVacancy: PropVacancy);
+    return appState.copyWith.eventTypesState(PropVacancy: PropVacancy);
   }
 }
 
@@ -304,7 +307,7 @@ class UpdateErrorEventTypestype implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_eventtypestype: error_eventtypestype);
+        .eventTypesState(error_eventtypestype: error_eventtypestype);
   }
 }
 
@@ -316,7 +319,7 @@ class UpdateErrorEventTypestypeOther implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_eventtypestypeOther: error_eventtypestypeOther);
+        .eventTypesState(error_eventtypestypeOther: error_eventtypestypeOther);
   }
 }
 
@@ -328,7 +331,7 @@ class UpdateErrorRentalspace implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_rentalspace: error_rentalspace);
+        .eventTypesState(error_rentalspace: error_rentalspace);
   }
 }
 
@@ -339,8 +342,8 @@ class UpdateErrorRentpaymentFrequency implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesState(error_rentpaymentFrequency: error_rentpaymentFrequency);
+    return appState.copyWith.eventTypesState(
+        error_rentpaymentFrequency: error_rentpaymentFrequency);
   }
 }
 
@@ -351,7 +354,7 @@ class UpdateErrorLeasetype implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_leasetype: error_leasetype);
+    return appState.copyWith.eventTypesState(error_leasetype: error_leasetype);
   }
 }
 
@@ -362,8 +365,8 @@ class UpdateErrorMinimumleaseduration implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesState(error_minimumleaseduration: error_minimumleaseduration);
+    return appState.copyWith.eventTypesState(
+        error_minimumleaseduration: error_minimumleaseduration);
   }
 }
 
@@ -374,7 +377,7 @@ class UpdateErrorMinimumleasedurationnumber implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(
+    return appState.copyWith.eventTypesState(
         error_minimumleasedurationnumber: error_minimumleasedurationnumber);
   }
 }
@@ -387,7 +390,7 @@ class UpdateErrorDateofavailable implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_dateofavailable: error_dateofavailable);
+        .eventTypesState(error_dateofavailable: error_dateofavailable);
   }
 }
 
@@ -399,7 +402,7 @@ class UpdateErrorEventTypesName implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_EventTypesName: error_EventTypesName);
+        .eventTypesState(error_EventTypesName: error_EventTypesName);
   }
 }
 
@@ -411,7 +414,7 @@ class UpdateErrorEventTypesAddress implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_EventTypesAddress: error_EventTypesAddress);
+        .eventTypesState(error_EventTypesAddress: error_EventTypesAddress);
   }
 }
 
@@ -422,7 +425,7 @@ class UpdateErrorCity implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_City: error_City);
+    return appState.copyWith.eventTypesState(error_City: error_City);
   }
 }
 
@@ -433,7 +436,7 @@ class UpdateErrorProvince implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_Province: error_Province);
+    return appState.copyWith.eventTypesState(error_Province: error_Province);
   }
 }
 
@@ -445,7 +448,7 @@ class UpdateErrorCountryName implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_CountryName: error_CountryName);
+        .eventTypesState(error_CountryName: error_CountryName);
   }
 }
 
@@ -456,7 +459,8 @@ class UpdateErrorPostalcode implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_Postalcode: error_Postalcode);
+    return appState.copyWith
+        .eventTypesState(error_Postalcode: error_Postalcode);
   }
 }
 
@@ -467,7 +471,8 @@ class UpdateErrorRentAmount implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_RentAmount: error_RentAmount);
+    return appState.copyWith
+        .eventTypesState(error_RentAmount: error_RentAmount);
   }
 }
 
@@ -478,7 +483,8 @@ class UpdateErrorFurnishing implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(error_furnishing: error_furnishing);
+    return appState.copyWith
+        .eventTypesState(error_furnishing: error_furnishing);
   }
 }
 
@@ -489,7 +495,7 @@ class UpdateErrorOther_Partial_Furniture implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(
+    return appState.copyWith.eventTypesState(
         error_Other_Partial_Furniture: error_Other_Partial_Furniture);
   }
 }
@@ -502,7 +508,7 @@ class UpdateErrorEventTypesBedrooms implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_EventTypesBedrooms: error_EventTypesBedrooms);
+        .eventTypesState(error_EventTypesBedrooms: error_EventTypesBedrooms);
   }
 }
 
@@ -514,7 +520,7 @@ class UpdateErrorEventTypesBathrooms implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_EventTypesBathrooms: error_EventTypesBathrooms);
+        .eventTypesState(error_EventTypesBathrooms: error_EventTypesBathrooms);
   }
 }
 
@@ -525,7 +531,7 @@ class UpdateErrorEventTypesSizeinsquarefeet implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(
+    return appState.copyWith.eventTypesState(
         error_EventTypesSizeinsquarefeet: error_EventTypesSizeinsquarefeet);
   }
 }
@@ -537,8 +543,8 @@ class UpdateErrorEventTypesMaxoccupancy implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesState(error_EventTypesMaxoccupancy: error_EventTypesMaxoccupancy);
+    return appState.copyWith.eventTypesState(
+        error_EventTypesMaxoccupancy: error_EventTypesMaxoccupancy);
   }
 }
 
@@ -550,7 +556,7 @@ class UpdateErrorStorageavailable implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_storageavailable: error_storageavailable);
+        .eventTypesState(error_storageavailable: error_storageavailable);
   }
 }
 
@@ -562,6 +568,6 @@ class UpdateErrorParkingstalls implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(error_Parkingstalls: error_Parkingstalls);
+        .eventTypesState(error_Parkingstalls: error_Parkingstalls);
   }
 }
