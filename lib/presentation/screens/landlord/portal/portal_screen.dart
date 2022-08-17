@@ -36,7 +36,7 @@ import 'package:silverhome/presentation/screens/landlord/profile/landlord_profil
 import 'package:silverhome/presentation/screens/landlord/property/add_edit_property.dart';
 import 'package:silverhome/presentation/screens/landlord/property/property_screen_new.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/calendar/scheduling_calendar_screen.dart';
-import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/scheduling_event_type_templates_screen.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/event_type_templates_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/event_types_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancy_application_details/tenancy_application_screen.dart';
 import 'package:silverhome/store/store.dart';
