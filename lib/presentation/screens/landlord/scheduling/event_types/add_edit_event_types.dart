@@ -197,7 +197,7 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
                 ),
                 padding: EdgeInsets.all(20),
                 //child: _centerView(eventtypesFormState.selectView, eventtypesFormState),
-                child: _centerView(1),
+                child: _centerView(),
               ),
             ],
           )
@@ -217,9 +217,9 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
             onTap: () {
               if (AddEditEventTypes.isValueUpdate)
                 //showBackDialog(eventtypesFormState, true);
-                showBackDialog(1, true);
+                showBackDialog(true);
               //else
-                //_store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+              //_store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
             },
             child: Text(
               'Back to Event Types',
@@ -261,7 +261,7 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
   }
 
   //void showBackDialog(EventTypesFormState eventtypesFormState, bool goback,{int stepper = 0}) {
-  void showBackDialog(eventtypesFormState, bool goback, {int stepper = 0}) {
+  void showBackDialog(bool goback, {int stepper = 0}) {
     //if (stepper == eventtypesFormState.selectView) return;
     showDialog(
       context: context,
@@ -275,12 +275,13 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
           negativeText: 'No', //GlobleString.PS_Save_EventTypese_NO,
           onPressedNo: () {
             Navigator.of(context1).pop();
-            if (goback && stepper == 0)
-              //_store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
-            else
-              //_store.dispatch(UpdateEventTypesForm(stepper));
+            //if (goback && stepper == 0)
+            //_store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+            //else
+            //_store.dispatch(UpdateEventTypesForm(stepper));
           },
           onPressedYes: () {
+/*
             switch (eventtypesFormState.selectView) {
               case 1:
                 navigationNotifier.change(
@@ -308,6 +309,7 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
                 break;
             }
             Navigator.of(context1).pop();
+*/
             //ToastUtils.showCustomToast(context, EventTypestate.EventTypesName, false);
           },
         );
@@ -315,7 +317,8 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
     );
   }
 
-  Widget _indicator(EventTypesFormState eventtypesFormState) {
+  //Widget _indicator(EventTypesFormState eventtypesFormState) {
+  Widget _indicator() {
     return Container(
       width: 741,
       margin: EdgeInsets.only(top: 15),
@@ -326,52 +329,54 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
         children: [
           InkWell(
             onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 1);
-                //else
-                  //_store.dispatch(UpdateEventTypesForm(1));
+              //if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+              //if (AddEditEventTypes.isValueUpdate)
+              //showBackDialog(eventtypesFormState, false, stepper: 1);
+              showBackDialog(false, stepper: 1);
+              //else
+              //_store.dispatch(UpdateEventTypesForm(1));
 
-                // _store.dispatch(UpdateEventTypesForm(1));
-              }
+              // _store.dispatch(UpdateEventTypesForm(1));
+              //}
             },
             child: Column(
               children: [
                 Container(
                   alignment: Alignment.topLeft,
                   child: Image.asset(
+/*
                     Prefs.getBool(PrefsName.EventTypestep1)
                         ? "assets/images/ic_circle_check.png"
                         : "assets/images/ic_circle_fill.png",
+*/
+                    "assets/images/ic_circle_fill.png",
                     width: 30,
                     height: 30,
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Details,
+                  'Details',
+                  //GlobleString.PS_EventTypes_Details,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
               ],
             ),
           ),
-          SizedBox(
-            width: 35,
-          ),
+          const SizedBox(width: 35.0),
           InkWell(
             onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 2);
-                //else
-                  //_store.dispatch(UpdateEventTypesForm(2));
+              //if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+              //if (AddEditEventTypes.isValueUpdate)
+              //showBackDialog(eventtypesFormState, false, stepper: 2);
+              showBackDialog(false, stepper: 2);
+              //else
+              //_store.dispatch(UpdateEventTypesForm(2));
 
-                // _store.dispatch(UpdateEventTypesForm(2));
-              }
+              // _store.dispatch(UpdateEventTypesForm(2));
+              //}
             },
             child: Column(
               children: [
@@ -385,16 +390,15 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png"
 */
-                            "assets/images/ic_circle_border.png",
+                    "assets/images/ic_circle_border.png",
                     width: 30,
                     height: 30,
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                const SizedBox(
-                  height: 5.0
-                ),
-                Text('Restricciones',
+                const SizedBox(height: 5.0),
+                Text(
+                  'Restricciones',
                   //GlobleString.PS_EventTypes_Specifications_Restrictions,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
@@ -402,18 +406,17 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
               ],
             ),
           ),
-          const SizedBox(
-            width: 74.0
-          ),
+          const SizedBox(width: 74.0),
           InkWell(
             onTap: () {
               //if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                //if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 3);
-               // else
-                  //_store.dispatch(UpdateEventTypesForm(3));
+              //if (AddEditEventTypes.isValueUpdate)
+              //showBackDialog(eventtypesFormState, false, stepper: 3);
+              showBackDialog(false, stepper: 3);
+              // else
+              //_store.dispatch(UpdateEventTypesForm(3));
 
-                // _store.dispatch(UpdateEventTypesForm(3));
+              // _store.dispatch(UpdateEventTypesForm(3));
               //}
             },
             child: Column(
@@ -421,46 +424,48 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
                 Container(
                   alignment: Alignment.center,
                   child: Image.asset(
+/*
                     Prefs.getBool(PrefsName.EventTypestep3)
                         ? "assets/images/ic_circle_check.png"
                         : eventtypesFormState.selectView > 3
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
+*/
+                    "assets/images/ic_circle_border.png",
                     width: 30,
                     height: 30,
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Features,
+                  'Features',
+                  //GlobleString.PS_EventTypes_Features,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
               ],
             ),
           ),
-          SizedBox(
-            width: 110,
-          ),
+          const SizedBox(width: 110.0),
           InkWell(
             onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                // _store.dispatch(UpdateEventTypesForm(4));
+              //if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+              // _store.dispatch(UpdateEventTypesForm(4));
 
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 4);
-                else
-                  _store.dispatch(UpdateEventTypesForm(4));
-              }
+              //if (AddEditEventTypes.isValueUpdate)
+              //showBackDialog(eventtypesFormState, false, stepper: 4);
+              showBackDialog(false, stepper: 4);
+              //else
+              //_store.dispatch(UpdateEventTypesForm(4));
+              //}
             },
             child: Column(
               children: [
                 Container(
                   alignment: Alignment.center,
                   child: Image.asset(
+/*
                     Prefs.getBool(PrefsName.EventTypesAgreeTC) &&
                             Prefs.getBool(PrefsName.EventTypestep1) &&
                             Prefs.getBool(PrefsName.EventTypestep2) &&
@@ -469,16 +474,17 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
                         : eventtypesFormState.selectView > 4
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
+*/
+                    "assets/images/ic_circle_border.png",
                     width: 30,
                     height: 30,
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
-                  GlobleString.PS_EventTypes_Summary,
+                  'Summary',
+                  //GlobleString.PS_EventTypes_Summary,
                   style: MyStyles.SemiBold(13, myColor.text_color),
                   textAlign: TextAlign.center,
                 )
@@ -491,7 +497,9 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
   }
 
   //Widget _centerView(int val, EventTypesFormState eventtypesFormState) {
-  Widget _centerView(int val) {
+  Widget _centerView() {
+    return Text('data');
+/*
     switch (val) {
       case 1:
         {
@@ -556,11 +564,14 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
           );
         }
     }
+*/
   }
 
   /*===============================================================================================*/
   /*======================================  PDF FILE GENERETE  ====================================*/
   /*===============================================================================================*/
+
+/*
 
   Future<void> Pdfgenerate(EventTypesummeryState EventTypestate) async {
     final pdf = pw.Document(
@@ -2329,4 +2340,5 @@ class _AddEditEventTypestate extends State<AddEditEventTypes> {
 
     return Fheight + 70;
   }
+*/
 }

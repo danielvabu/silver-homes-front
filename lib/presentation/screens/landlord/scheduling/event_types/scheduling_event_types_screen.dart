@@ -49,10 +49,11 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
 
   init() async {
     await Prefs.init();
-    updateState();
+    //updateState();
     apimanager("", 1, "ID", 0, 0);
   }
 
+/*
   updateState() async {
     _store.dispatch(UpdateLLEventTypes_SearchText(""));
     _store.dispatch(UpdateLLEventTypes_isCompanyNameSort(false));
@@ -65,6 +66,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     _store.dispatch(UpdateLLEventTypes_CategorySortAcsDes(0));
     _store.dispatch(UpdateLLEventTypes_RatingSortAcsDes(0));
   }
+*/
 
   apimanager(String search, int pageNo, String SortField, int saquence,
       int ftime) async {
@@ -81,10 +83,10 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     sortinglist.add(sort);
 
     DSQQuery dsqQuery = new DSQQuery();
-    dsqQuery.dsqid = Weburl.DSQ_landlord_EventTypesList;
+    //dsqQuery.dsqid = Weburl.DSQ_landlord_EventTypesList;
     dsqQuery.loadLookUpValues = true;
     dsqQuery.loadRecordInfo = false;
-    dsqQuery.event_typesListReqtokens = reqtokens;
+    //dsqQuery.event_typesListReqtokens = reqtokens;
     dsqQuery.pager = pager;
     dsqQuery.sort = sortinglist;
 
@@ -94,7 +96,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     _store.dispatch(UpdateLLEventTypes_isloding(true));
     _store.dispatch(UpdateLL_event_typesdatalist(<EventTypesData>[]));
     _store.dispatch(UpdateLLEventTypes_SearchText(search));
-    await ApiManager().getEventTypesList(context, filterjson, ftime);
+    //await ApiManager().getEventTypesList(context, filterjson, ftime);
   }
 
   @override
@@ -108,24 +110,29 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
       color: myColor.bg_color1,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(15),
-          child: ConnectState<landlordEventTypesState>(
+            padding: EdgeInsets.all(15),
+            child:
+                /*
+          ConnectState<landlordEventTypesState>(
             map: (state) => state.landlordEventTypesState,
             where: notIdentical,
             builder: (landlordEventTypesState) {
-              return Column(
-                children: [
-                  _centerView(landlordEventTypesState!),
-                ],
-              );
-            },
-          ),
-        ),
+              return
+              */
+                Column(
+              children: [
+                //_centerView(landlordEventTypesState!),
+                _centerView(),
+              ],
+            )
+            //;}),
+            ),
       ),
     );
   }
 
-  Widget _centerView(landlordEventTypesState landlordEventTypesState) {
+  Widget _centerView() {
+    //landlordEventTypesState
     return Container(
       width: width,
       height: height - 45,
@@ -145,6 +152,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
               children: [
                 Row(
                   children: [
+/*
                     if (landlordEventTypesState.isloding &&
                         landlordEventTypesState.SearchText == "")
                       Container(
@@ -178,80 +186,80 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
                         ),
                       )
                     else
-                      Container(
-                        width: 260,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: myColor.TA_Border,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
+*/
+                    Container(
+                      width: 260,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: myColor.TA_Border,
+                          width: 1.0,
                         ),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextFormField(
-                                initialValue:
-                                    landlordEventTypesState.SearchText,
-                                onChanged: (value) async {
-                                  if (_timer != null) {
-                                    _timer!.cancel();
-                                  }
-                                  _timer = Timer.periodic(Duration(seconds: 2),
-                                      (timer) {
-                                    _store.dispatch(
-                                        UpdateLLEventTypes_isloding(true));
-                                    _store.dispatch(
-                                        UpdateLL_event_typesdatalist(
-                                            <EventTypesData>[]));
-                                    updateState();
-                                    apimanager(value, 1, "ID", 0, 0);
-                                    _timer!.cancel();
-                                  });
-                                },
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintStyle:
-                                      MyStyles.Medium(14, myColor.hintcolor),
-                                  contentPadding: const EdgeInsets.all(10.0),
-                                  isDense: true,
-                                  hintText: GlobleString.LL_Search,
-                                ),
-                                style: MyStyles.Medium(14, myColor.text_color),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 8, right: 5),
-                              child: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ],
-                        ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextFormField(
+                              initialValue: 'Search',
+                              //landlordEventTypesState.SearchText,
+                              onChanged: (value) async {
+                                if (_timer != null) {
+                                  _timer!.cancel();
+                                }
+                                _timer = Timer.periodic(Duration(seconds: 2),
+                                    (timer) {
+                                  _store.dispatch(
+                                      UpdateLLEventTypes_isloding(true));
+                                  _store.dispatch(UpdateLL_event_typesdatalist(
+                                      <EventTypesData>[]));
+                                  //updateState();
+                                  apimanager(value, 1, "ID", 0, 0);
+                                  _timer!.cancel();
+                                });
+                              },
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintStyle:
+                                    MyStyles.Medium(14, myColor.hintcolor),
+                                contentPadding: const EdgeInsets.all(10.0),
+                                isDense: true,
+                                hintText: GlobleString.LL_Search,
+                              ),
+                              style: MyStyles.Medium(14, myColor.text_color),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8, right: 5),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(width: 10),
-                    _addNewRequest(landlordEventTypesState),
+                    //_addNewRequest(landlordEventTypesState),
+                    _addNewRequest(),
                   ],
                 ),
-                Row(
-                  children: [_actionPopup(landlordEventTypesState)],
-                ),
+                //Row(children: [_actionPopup(landlordEventTypesState)],),
               ],
             ),
           ),
-          _tableview(landlordEventTypesState)
+          //_tableview(landlordEventTypesState)
         ],
       ),
     );
   }
 
-  Widget _addNewRequest(landlordEventTypesState landlordEventTypesState) {
+  //Widget _addNewRequest(landlordEventTypesState landlordEventTypesState) {
+  Widget _addNewRequest() {
     return InkWell(
       onTap: () async {
-        await clearEventTypesStateData();
+        //await clearEventTypesStateData();
 
         ApiManager().getCountryList(context, (status, responce, errorlist) {
           if (status) {
@@ -260,10 +268,34 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
           }
         });
       },
-      child: CustomeWidget.AddNewButton(GlobleString.LMV_Add_New_EventTypes),
+      child: CustomeWidget.AddNewButton(
+          //lobleString.LMV_Add_New_EventTypes
+          'Add Event Types'),
     );
   }
 
+  openDialodAddEventTypes() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        //aca no se como mostrarlo
+        return AddEventTypesDialogBox(
+          onPressedSave: () async {
+            Navigator.of(context1).pop();
+            init();
+          },
+          onPressedClose: () {
+            Navigator.of(context1).pop();
+          },
+        );
+      },
+    );
+  }
+
+/*
   clearEventTypesStateData() {
     _store.dispatch(UpdateADV_vid(0));
     _store.dispatch(UpdateADV_personid(0));
@@ -340,26 +372,6 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
         loader.remove();
       }
     });
-  }
-
-  openDialodAddEventTypes() {
-    showDialog(
-      context: context,
-      barrierColor: Colors.black45,
-      useSafeArea: true,
-      barrierDismissible: false,
-      builder: (BuildContext context1) {
-        return AddEventTypesDialogBox(
-          onPressedSave: () async {
-            Navigator.of(context1).pop();
-            init();
-          },
-          onPressedClose: () {
-            Navigator.of(context1).pop();
-          },
-        );
-      },
-    );
   }
 
   Widget _actionPopup(landlordEventTypesState landlordEventTypesState) {
@@ -679,8 +691,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     }
   }
 
-  updateOtherSortingValue(
-      int flag, landlordEventTypesState landlordEventTypesState) {
+  updateOtherSortingValue(int flag, landlordEventTypesState landlordEventTypesState) {
     updateSortingFeild(flag);
 
     if (flag == 1) {
@@ -794,8 +805,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     }
   }
 
-  duplicateEventTypes(EventTypesData event_typesData,
-      landlordEventTypesState landlordEventTypesState) {
+  duplicateEventTypes(EventTypesData event_typesData,landlordEventTypesState landlordEventTypesState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -830,8 +840,7 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
     });
   }
 
-  deleteEventTypes(EventTypesData event_typesData,
-      landlordEventTypesState landlordEventTypesState) {
+  deleteEventTypes(EventTypesData event_typesData,landlordEventTypesState landlordEventTypesState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -850,4 +859,5 @@ class _landlordEventTypesState extends State<EventTypesScreen> {
       }
     });
   }
+*/
 }

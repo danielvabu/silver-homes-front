@@ -39,6 +39,7 @@ import 'landlord_models/preview_document_state.dart';
 import 'landlord_models/preview_lease_state.dart';
 import 'landlord_models/property_list_state.dart';
 import 'landlord_models/property_state.dart';
+import 'landlord_models/event_types_state.dart';
 import 'landlord_models/property_summery_state.dart';
 import 'landlord_models/propertyform_state.dart';
 import 'landlord_models/reference_check_dialog_state.dart';
@@ -62,7 +63,7 @@ import 'maintenance/edit_maintenance_state.dart';
 import 'maintenance/landlord_maintenance_state.dart';
 import 'maintenance/maintenance_details_state.dart';
 import 'vendor/landlord_vendor_state.dart';
-import 'event_types/landlord_event_types_state.dart';
+//import 'event_types/landlord_event_types_state.dart';
 
 part 'app_state.freezed.dart';
 
@@ -83,6 +84,7 @@ abstract class AppState with _$AppState {
     required FunnelViewState funnelViewState,
     required PropertyFormState propertyFormState,
     required PropertyState propertyState,
+    required EventTypesState eventTypesState,
     required PropertySummeryState propertySummeryState,
     required PropertyListState propertyListState,
     required EditLeadState editLeadState,
@@ -155,6 +157,7 @@ abstract class AppState with _$AppState {
         funnelViewState: FunnelViewState.initial(),
         propertyFormState: PropertyFormState.initial(),
         propertyState: PropertyState.initial(),
+        eventTypeState: EventTypeState.initial(),
         propertySummeryState: PropertySummeryState.initial(),
         propertyListState: PropertyListState.initial(),
         editLeadState: EditLeadState.initial(),

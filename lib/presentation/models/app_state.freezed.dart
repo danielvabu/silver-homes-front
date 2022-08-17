@@ -31,6 +31,7 @@ class _$AppStateTearOff {
       required FunnelViewState funnelViewState,
       required PropertyFormState propertyFormState,
       required PropertyState propertyState,
+      required EventTypesState eventTypesState,
       required PropertySummeryState propertySummeryState,
       required PropertyListState propertyListState,
       required EditLeadState editLeadState,
@@ -96,6 +97,7 @@ class _$AppStateTearOff {
       funnelViewState: funnelViewState,
       propertyFormState: propertyFormState,
       propertyState: propertyState,
+      eventTypesState: eventTypesState,
       propertySummeryState: propertySummeryState,
       propertyListState: propertyListState,
       editLeadState: editLeadState,
@@ -172,6 +174,7 @@ mixin _$AppState {
   FunnelViewState get funnelViewState => throw _privateConstructorUsedError;
   PropertyFormState get propertyFormState => throw _privateConstructorUsedError;
   PropertyState get propertyState => throw _privateConstructorUsedError;
+  EventTypesState get eventTypesState => throw _privateConstructorUsedError;
   PropertySummeryState get propertySummeryState =>
       throw _privateConstructorUsedError;
   PropertyListState get propertyListState => throw _privateConstructorUsedError;
@@ -283,6 +286,7 @@ abstract class $AppStateCopyWith<$Res> {
       FunnelViewState funnelViewState,
       PropertyFormState propertyFormState,
       PropertyState propertyState,
+      EventTypesState eventTypesState,
       PropertySummeryState propertySummeryState,
       PropertyListState propertyListState,
       EditLeadState editLeadState,
@@ -346,6 +350,7 @@ abstract class $AppStateCopyWith<$Res> {
   $FunnelViewStateCopyWith<$Res> get funnelViewState;
   $PropertyFormStateCopyWith<$Res> get propertyFormState;
   $PropertyStateCopyWith<$Res> get propertyState;
+  $EventTypesStateCopyWith<$Res> get eventTypesState;
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState;
   $PropertyListStateCopyWith<$Res> get propertyListState;
   $EditLeadStateCopyWith<$Res> get editLeadState;
@@ -425,6 +430,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? funnelViewState = freezed,
     Object? propertyFormState = freezed,
     Object? propertyState = freezed,
+    Object? eventTypesState = freezed,
     Object? propertySummeryState = freezed,
     Object? propertyListState = freezed,
     Object? editLeadState = freezed,
@@ -531,6 +537,10 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.propertyState
           : propertyState // ignore: cast_nullable_to_non_nullable
               as PropertyState,
+      eventTypesState: eventTypesState == freezed
+          ? _value.eventTypesState
+          : eventTypesState // ignore: cast_nullable_to_non_nullable
+              as EventTypesState,
       propertySummeryState: propertySummeryState == freezed
           ? _value.propertySummeryState
           : propertySummeryState // ignore: cast_nullable_to_non_nullable
@@ -828,6 +838,13 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   $PropertyStateCopyWith<$Res> get propertyState {
     return $PropertyStateCopyWith<$Res>(_value.propertyState, (value) {
       return _then(_value.copyWith(propertyState: value));
+    });
+  }
+
+  @override
+  $EventTypesStateCopyWith<$Res> get eventTypesState {
+    return $EventTypesStateCopyWith<$Res>(_value.eventTypesState, (value) {
+      return _then(_value.copyWith(eventTypesState: value));
     });
   }
 
@@ -1230,6 +1247,7 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       FunnelViewState funnelViewState,
       PropertyFormState propertyFormState,
       PropertyState propertyState,
+      EventTypesState eventTypesState,
       PropertySummeryState propertySummeryState,
       PropertyListState propertyListState,
       EditLeadState editLeadState,
@@ -1307,6 +1325,8 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   $PropertyFormStateCopyWith<$Res> get propertyFormState;
   @override
   $PropertyStateCopyWith<$Res> get propertyState;
+  @override
+  $EventTypesStateCopyWith<$Res> get eventTypesState;
   @override
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState;
   @override
@@ -1435,6 +1455,7 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
     Object? funnelViewState = freezed,
     Object? propertyFormState = freezed,
     Object? propertyState = freezed,
+    Object? eventTypesState = freezed,
     Object? propertySummeryState = freezed,
     Object? propertyListState = freezed,
     Object? editLeadState = freezed,
@@ -1541,6 +1562,10 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.propertyState
           : propertyState // ignore: cast_nullable_to_non_nullable
               as PropertyState,
+      eventTypesState: eventTypesState == freezed
+          ? _value.eventTypesState
+          : eventTypesState // ignore: cast_nullable_to_non_nullable
+              as EventTypesState,
       propertySummeryState: propertySummeryState == freezed
           ? _value.propertySummeryState
           : propertySummeryState // ignore: cast_nullable_to_non_nullable
@@ -1757,6 +1782,7 @@ class _$_AppState implements _AppState {
       required this.funnelViewState,
       required this.propertyFormState,
       required this.propertyState,
+      required this.eventTypesState,
       required this.propertySummeryState,
       required this.propertyListState,
       required this.editLeadState,
@@ -1834,6 +1860,8 @@ class _$_AppState implements _AppState {
   final PropertyFormState propertyFormState;
   @override
   final PropertyState propertyState;
+  @override
+  final EventTypesState eventTypesState;
   @override
   final PropertySummeryState propertySummeryState;
   @override
@@ -1933,7 +1961,7 @@ class _$_AppState implements _AppState {
 
   @override
   String toString() {
-    return 'AppState(portalState: $portalState, tenancyFormState: $tenancyFormState, tfPersonalState: $tfPersonalState, tfEmploymentState: $tfEmploymentState, tfCurrentTenancyState: $tfCurrentTenancyState, tfAdditionalOccupantState: $tfAdditionalOccupantState, tfAdditionalInfoState: $tfAdditionalInfoState, tfAdditionalReferenceState: $tfAdditionalReferenceState, tenantFilterState: $tenantFilterState, landLordApplicationState: $landLordApplicationState, newLeadState: $newLeadState, funnelViewState: $funnelViewState, propertyFormState: $propertyFormState, propertyState: $propertyState, propertySummeryState: $propertySummeryState, propertyListState: $propertyListState, editLeadState: $editLeadState, tenantsApplicationDetailsState: $tenantsApplicationDetailsState, tenancyVarificationDocumentState: $tenancyVarificationDocumentState, varificationDocumentState: $varificationDocumentState, referenceQuestionnaireState: $referenceQuestionnaireState, previewDocumentState: $previewDocumentState, referenceCheckState: $referenceCheckState, landLordTenancyArchiveState: $landLordTenancyArchiveState, referenceQuestionnaireDetailsState: $referenceQuestionnaireDetailsState, referenceCheckDialogState: $referenceCheckDialogState, landlordTenancyLeaseState: $landlordTenancyLeaseState, landLordActiveTenantState: $landLordActiveTenantState, previewLeaseState: $previewLeaseState, tenancyLeaseAgreementState: $tenancyLeaseAgreementState, landLordTenancyLeadState: $landLordTenancyLeadState, landLordTenancyApplicantState: $landLordTenancyApplicantState, notificationState: $notificationState, profileState: $profileState, landlordMaintenanceState: $landlordMaintenanceState, landlordVendorState: $landlordVendorState, landlordEventTypesState: $landlordEventTypesState, maintenanceDetailsState: $maintenanceDetailsState, addMaintenanceState: $addMaintenanceState, addVendorState: $addVendorState, addEventTypesState: $addEventTypesState, editMaintenanceState: $editMaintenanceState, adminPortalState: $adminPortalState, adminDashbordState: $adminDashbordState, adminLandlordDetailsState: $adminLandlordDetailsState, adminAddNewMemberState: $adminAddNewMemberState, adminLandlordState: $adminLandlordState, adminLandlordAccountState: $adminLandlordAccountState, adminLandlordPropertyState: $adminLandlordPropertyState, adminPropertyDetailsState: $adminPropertyDetailsState, adminLandlordLeadsState: $adminLandlordLeadsState, adminLandlordLeadsDetailsState: $adminLandlordLeadsDetailsState, adminTeamState: $adminTeamState, adminSettingState: $adminSettingState, customerPortalState: $customerPortalState, customerPropertylistState: $customerPropertylistState, customerPropertyDetailsState: $customerPropertyDetailsState, tenantPortalState: $tenantPortalState, tenantMaintenanceState: $tenantMaintenanceState, leaseDetailsState: $leaseDetailsState, tenantAddMaintenanceState: $tenantAddMaintenanceState, tenantPersonalState: $tenantPersonalState)';
+    return 'AppState(portalState: $portalState, tenancyFormState: $tenancyFormState, tfPersonalState: $tfPersonalState, tfEmploymentState: $tfEmploymentState, tfCurrentTenancyState: $tfCurrentTenancyState, tfAdditionalOccupantState: $tfAdditionalOccupantState, tfAdditionalInfoState: $tfAdditionalInfoState, tfAdditionalReferenceState: $tfAdditionalReferenceState, tenantFilterState: $tenantFilterState, landLordApplicationState: $landLordApplicationState, newLeadState: $newLeadState, funnelViewState: $funnelViewState, propertyFormState: $propertyFormState, propertyState: $propertyState, eventTypesState: $eventTypesState, propertySummeryState: $propertySummeryState, propertyListState: $propertyListState, editLeadState: $editLeadState, tenantsApplicationDetailsState: $tenantsApplicationDetailsState, tenancyVarificationDocumentState: $tenancyVarificationDocumentState, varificationDocumentState: $varificationDocumentState, referenceQuestionnaireState: $referenceQuestionnaireState, previewDocumentState: $previewDocumentState, referenceCheckState: $referenceCheckState, landLordTenancyArchiveState: $landLordTenancyArchiveState, referenceQuestionnaireDetailsState: $referenceQuestionnaireDetailsState, referenceCheckDialogState: $referenceCheckDialogState, landlordTenancyLeaseState: $landlordTenancyLeaseState, landLordActiveTenantState: $landLordActiveTenantState, previewLeaseState: $previewLeaseState, tenancyLeaseAgreementState: $tenancyLeaseAgreementState, landLordTenancyLeadState: $landLordTenancyLeadState, landLordTenancyApplicantState: $landLordTenancyApplicantState, notificationState: $notificationState, profileState: $profileState, landlordMaintenanceState: $landlordMaintenanceState, landlordVendorState: $landlordVendorState, landlordEventTypesState: $landlordEventTypesState, maintenanceDetailsState: $maintenanceDetailsState, addMaintenanceState: $addMaintenanceState, addVendorState: $addVendorState, addEventTypesState: $addEventTypesState, editMaintenanceState: $editMaintenanceState, adminPortalState: $adminPortalState, adminDashbordState: $adminDashbordState, adminLandlordDetailsState: $adminLandlordDetailsState, adminAddNewMemberState: $adminAddNewMemberState, adminLandlordState: $adminLandlordState, adminLandlordAccountState: $adminLandlordAccountState, adminLandlordPropertyState: $adminLandlordPropertyState, adminPropertyDetailsState: $adminPropertyDetailsState, adminLandlordLeadsState: $adminLandlordLeadsState, adminLandlordLeadsDetailsState: $adminLandlordLeadsDetailsState, adminTeamState: $adminTeamState, adminSettingState: $adminSettingState, customerPortalState: $customerPortalState, customerPropertylistState: $customerPropertylistState, customerPropertyDetailsState: $customerPropertyDetailsState, tenantPortalState: $tenantPortalState, tenantMaintenanceState: $tenantMaintenanceState, leaseDetailsState: $leaseDetailsState, tenantAddMaintenanceState: $tenantAddMaintenanceState, tenantPersonalState: $tenantPersonalState)';
   }
 
   @override
@@ -1985,6 +2013,7 @@ class _$_AppState implements _AppState {
             (identical(other.propertyState, propertyState) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyState, propertyState)) &&
+            (identical(other.eventTypesState, eventTypesState) || const DeepCollectionEquality().equals(other.eventTypesState, eventTypesState)) &&
             (identical(other.propertySummeryState, propertySummeryState) || const DeepCollectionEquality().equals(other.propertySummeryState, propertySummeryState)) &&
             (identical(other.propertyListState, propertyListState) || const DeepCollectionEquality().equals(other.propertyListState, propertyListState)) &&
             (identical(other.editLeadState, editLeadState) || const DeepCollectionEquality().equals(other.editLeadState, editLeadState)) &&
@@ -2052,6 +2081,7 @@ class _$_AppState implements _AppState {
       const DeepCollectionEquality().hash(funnelViewState) ^
       const DeepCollectionEquality().hash(propertyFormState) ^
       const DeepCollectionEquality().hash(propertyState) ^
+      const DeepCollectionEquality().hash(eventTypesState) ^
       const DeepCollectionEquality().hash(propertySummeryState) ^
       const DeepCollectionEquality().hash(propertyListState) ^
       const DeepCollectionEquality().hash(editLeadState) ^
@@ -2123,6 +2153,7 @@ abstract class _AppState implements AppState {
       required FunnelViewState funnelViewState,
       required PropertyFormState propertyFormState,
       required PropertyState propertyState,
+      required EventTypesState eventTypesState,
       required PropertySummeryState propertySummeryState,
       required PropertyListState propertyListState,
       required EditLeadState editLeadState,
@@ -2207,6 +2238,8 @@ abstract class _AppState implements AppState {
   PropertyFormState get propertyFormState => throw _privateConstructorUsedError;
   @override
   PropertyState get propertyState => throw _privateConstructorUsedError;
+  @override
+  EventTypesState get eventTypesState => throw _privateConstructorUsedError;
   @override
   PropertySummeryState get propertySummeryState =>
       throw _privateConstructorUsedError;
