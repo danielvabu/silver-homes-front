@@ -28,6 +28,7 @@ import 'basic_tenant/tenant_portal_state.dart';
 import 'customer/customer_portal_state.dart';
 import 'customer/customer_property_details_state.dart';
 import 'landlord_models/editlead_state.dart';
+import 'landlord_models/event_types_form_state.dart';
 import 'landlord_models/funnelview_state.dart';
 import 'landlord_models/landlord_profile_state.dart';
 import 'landlord_models/landlord_tenancy_lease_state.dart';
@@ -82,6 +83,7 @@ abstract class AppState with _$AppState {
     required NewLeadState newLeadState,
     required FunnelViewState funnelViewState,
     required PropertyFormState propertyFormState,
+    required EventTypesFormState eventTypesFormState,
     required PropertyState propertyState,
     required EventTypesState eventTypesState,
     required PropertySummeryState propertySummeryState,
@@ -155,6 +157,7 @@ abstract class AppState with _$AppState {
         newLeadState: NewLeadState.initial(),
         funnelViewState: FunnelViewState.initial(),
         propertyFormState: PropertyFormState.initial(),
+        eventTypesFormState: EventTypesFormState.initial(),
         propertyState: PropertyState.initial(),
         eventTypesState: EventTypesState.initial(),
         propertySummeryState: PropertySummeryState.initial(),
