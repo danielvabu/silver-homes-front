@@ -18,7 +18,7 @@ import 'package:silverhome/domain/actions/landlord_action/portal_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypes_summery_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -31,7 +31,7 @@ import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../../../models/landlord_models/eventtypes_state.dart';
+import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes.dart';
 
 class StepEventTypesDetails extends StatefulWidget {
@@ -80,9 +80,9 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
   }
 
   initilizedata() {
-    if (_store.state!.eventtypesSummeryState != null) {
+    if (_store.state!.eventTypesSummeryState != null) {
       EventTypesSummeryState eventtypesSummeryState =
-          _store.state!.eventtypesSummeryState;
+          _store.state!.eventTypesSummeryState;
 
       _store.dispatch(
           UpdateProperTytypeValue(eventtypesSummeryState.eventtypestypeValue));
@@ -93,11 +93,12 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
           UpdateDateofavailable(eventtypesSummeryState.dateofavailable));
       _store.dispatch(
           UpdateRentalSpaceValue(eventtypesSummeryState.rentalspaceValue));
-      _store.dispatch(UpdateEventTypesName(eventtypesSummeryState.EventTypesName));
+      _store.dispatch(
+          UpdateEventTypesName(eventtypesSummeryState.EventTypesName));
       _store.dispatch(
           UpdateEventTypesAddress(eventtypesSummeryState.EventTypesAddress));
-      _store.dispatch(
-          UpdateEventTypesDescription(eventtypesSummeryState.EventTypesDescription));
+      _store.dispatch(UpdateEventTypesDescription(
+          eventtypesSummeryState.EventTypesDescription));
       _store.dispatch(UpdateSuiteunit(eventtypesSummeryState.Suiteunit));
       _store.dispatch(UpdateBuildingname(eventtypesSummeryState.Buildingname));
       _store.dispatch(UpdateEventTypesCity(eventtypesSummeryState.City));
@@ -105,15 +106,16 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
           UpdateEventTypesCountryCode(eventtypesSummeryState.CountryCode));
       _store.dispatch(
           UpdateEventTypesCountryName(eventtypesSummeryState.CountryName));
-      _store.dispatch(UpdateEventTypesProvince(eventtypesSummeryState.Province));
       _store
-          .dispatch(UpdateEventTypesPostalcode(eventtypesSummeryState.Postalcode));
-      _store
-          .dispatch(UpdateEventTypesRentAmount(eventtypesSummeryState.RentAmount));
+          .dispatch(UpdateEventTypesProvince(eventtypesSummeryState.Province));
+      _store.dispatch(
+          UpdateEventTypesPostalcode(eventtypesSummeryState.Postalcode));
+      _store.dispatch(
+          UpdateEventTypesRentAmount(eventtypesSummeryState.RentAmount));
       _store.dispatch(UpdateRentPaymentFrequencyValue(
           eventtypesSummeryState.rentpaymentFrequencyValue));
-      _store
-          .dispatch(UpdateLeaseTypeValue(eventtypesSummeryState.leasetypeValue));
+      _store.dispatch(
+          UpdateLeaseTypeValue(eventtypesSummeryState.leasetypeValue));
       _store.dispatch(UpdateMinimumLeasedurationValue(
           eventtypesSummeryState.minimumleasedurationValue));
       _store.dispatch(UpdateMinimumleasedurationNumber(
@@ -128,7 +130,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         Helper.Log("navigationNotifier", "Call...");
-        apiCallAndValidation(_store.state!.eventtypesState);
+        apiCallAndValidation(_store.state!.eventTypesState);
         //navigationNotifier.dispose();
       }
     });
@@ -136,7 +138,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
 
   void filldata() {
     List<SystemEnumDetails> eventtypestypelist = [];
-    eventtypestypelist = QueryFilter().PlainValues(eSystemEnums().EventTypesType);
+    eventtypestypelist =
+        QueryFilter().PlainValues(eSystemEnums().EventTypesType);
 
     _store.dispatch(UpdateProperTytypeList(eventtypestypelist));
 
@@ -196,7 +199,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
       width: sswidth,
       height: ssheight - 186,
       child: ConnectState<EventTypesState>(
-          map: (state) => state.eventtypesState,
+          map: (state) => state.eventTypesState,
           where: notIdentical,
           builder: (eventtypesState) {
             if (eventtypesState != null &&
@@ -219,7 +222,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          GlobleString.PS1_EventTypes_Details,
+                          'Details',
+                          //GlobleString.PS1_EventTypes_Details,
                           style: MyStyles.Medium(20, myColor.Circle_main),
                           textAlign: TextAlign.center,
                         ),
@@ -236,7 +240,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  GlobleString.PS1_EventTypes_type,
+                                  'Types Type',
+                                  //GlobleString.PS1_EventTypes_type,
                                   style: MyStyles.Medium(14, myColor.black),
                                   textAlign: TextAlign.start,
                                 ),
@@ -250,28 +255,30 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     mode: Mode.MENU,
                                     key: UniqueKey(),
                                     errorcolor: myColor.errorcolor,
-                                    isError: eventtypesState!.error_eventtypestype,
+                                    isError:
+                                        eventtypesState!.error_eventtypestype,
                                     focuscolor: myColor.blue,
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
                                     items: eventtypesState.eventtypestypelist,
-                                    defultHeight:
-                                        eventtypesState.eventtypestypelist.length *
-                                                    35 >
-                                                250
-                                            ? 250
-                                            : eventtypesState
+                                    defultHeight: eventtypesState
                                                     .eventtypestypelist.length *
-                                                35,
+                                                35 >
+                                            250
+                                        ? 250
+                                        : eventtypesState
+                                                .eventtypestypelist.length *
+                                            35,
                                     textstyle:
                                         MyStyles.Medium(14, myColor.text_color),
                                     itemAsString: (SystemEnumDetails? u) =>
                                         u != null ? u.displayValue : "",
                                     hint: "Select EventTypes Type",
-                                    selectedItem:
-                                        eventtypesState.eventtypestypeValue != null
-                                            ? eventtypesState.eventtypestypeValue
-                                            : null,
+                                    selectedItem: eventtypesState
+                                                .eventtypestypeValue !=
+                                            null
+                                        ? eventtypesState.eventtypestypeValue
+                                        : null,
                                     onChanged: (value) {
                                       //FocusScope.of(context).requestFocus(new FocusNode());
                                       _changeData();
@@ -319,13 +326,14 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
                                     items: eventtypesState.rentalspacelist,
-                                    defultHeight: eventtypesState
+                                    defultHeight:
+                                        eventtypesState.rentalspacelist.length *
+                                                    35 >
+                                                250
+                                            ? 250
+                                            : eventtypesState
                                                     .rentalspacelist.length *
-                                                35 >
-                                            250
-                                        ? 250
-                                        : eventtypesState.rentalspacelist.length *
-                                            35,
+                                                35,
                                     textstyle:
                                         MyStyles.Medium(14, myColor.text_color),
                                     itemAsString: (SystemEnumDetails? u) =>
@@ -354,7 +362,9 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                         ],
                       ),
                       eventtypesState.eventtypestypeValue != null &&
-                              eventtypesState.eventtypestypeValue!.EnumDetailID == 6
+                              eventtypesState
+                                      .eventtypestypeValue!.EnumDetailID ==
+                                  6
                           ? Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Row(
@@ -445,7 +455,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  GlobleString.PS1_EventTypes_name,
+                                  'Event Types Name',
+                                  //GlobleString.PS1_EventTypes_name,
                                   style: MyStyles.Medium(14, myColor.black),
                                   textAlign: TextAlign.start,
                                 ),
@@ -468,18 +479,18 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_EventTypesName
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
+                                            color: eventtypesState
+                                                    .error_EventTypesName
+                                                ? myColor.errorcolor
+                                                : myColor.blue,
                                             width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_EventTypesName
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
+                                            color: eventtypesState
+                                                    .error_EventTypesName
+                                                ? myColor.errorcolor
+                                                : myColor.gray,
                                             width: 1.0),
                                       ),
                                       isDense: true,
@@ -489,7 +500,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                   onChanged: (value) {
                                     _changeData();
                                     AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(UpdateEventTypesName(value));
+                                    _store
+                                        .dispatch(UpdateEventTypesName(value));
                                     _store.dispatch(
                                         UpdateErrorEventTypesName(false));
                                   },
@@ -506,7 +518,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  GlobleString.PS1_EventTypes_Address,
+                                  'Address',
+                                  //GlobleString.PS1_EventTypes_Address,
                                   style: MyStyles.Medium(14, myColor.black),
                                   textAlign: TextAlign.start,
                                 ),
@@ -514,7 +527,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                   height: 5,
                                 ),
                                 TextFormField(
-                                  initialValue: eventtypesState.EventTypesAddress,
+                                  initialValue:
+                                      eventtypesState.EventTypesAddress,
                                   textAlign: TextAlign.start,
                                   style:
                                       MyStyles.Regular(14, myColor.text_color),
@@ -544,8 +558,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     _changeData();
                                     AddEditEventTypes.isValueUpdate = true;
 
-                                    _store
-                                        .dispatch(UpdateEventTypesAddress(value));
+                                    _store.dispatch(
+                                        UpdateEventTypesAddress(value));
                                     _store.dispatch(
                                         UpdateErrorEventTypesAddress(false));
                                   },
@@ -736,7 +750,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                   onChanged: (value) {
                                     _changeData();
                                     AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(UpdateEventTypesCity(value));
+                                    _store
+                                        .dispatch(UpdateEventTypesCity(value));
                                     _store.dispatch(UpdateErrorCity(false));
                                   },
                                 ),
@@ -773,16 +788,18 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: eventtypesState.error_Province
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
+                                            color:
+                                                eventtypesState.error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.blue,
                                             width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: eventtypesState.error_Province
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
+                                            color:
+                                                eventtypesState.error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.gray,
                                             width: 1.0),
                                       ),
                                       isDense: true,
@@ -830,16 +847,18 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: eventtypesState.error_Postalcode
-                                              ? myColor.errorcolor
-                                              : myColor.blue,
+                                          color:
+                                              eventtypesState.error_Postalcode
+                                                  ? myColor.errorcolor
+                                                  : myColor.blue,
                                           width: 2),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: eventtypesState.error_Postalcode
-                                              ? myColor.errorcolor
-                                              : myColor.gray,
+                                          color:
+                                              eventtypesState.error_Postalcode
+                                                  ? myColor.errorcolor
+                                                  : myColor.gray,
                                           width: 1.0),
                                     ),
                                     isDense: true,
@@ -972,7 +991,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                 Row(
                                   children: [
                                     Text(
-                                      GlobleString.PS1_EventTypes_description,
+                                      'Description',
+                                      //GlobleString.PS1_EventTypes_description,
                                       style: MyStyles.Medium(14, myColor.black),
                                       textAlign: TextAlign.start,
                                     ),
@@ -1144,8 +1164,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     focuscolor: myColor.blue,
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
-                                    items:
-                                        eventtypesState.rentpaymentFrequencylist,
+                                    items: eventtypesState
+                                        .rentpaymentFrequencylist,
                                     defultHeight: double.parse((eventtypesState
                                                 .rentpaymentFrequencylist
                                                 .length *
@@ -1267,10 +1287,10 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     height: 32,
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                        color:
-                                            eventtypesState.error_dateofavailable
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
+                                        color: eventtypesState
+                                                .error_dateofavailable
+                                            ? myColor.errorcolor
+                                            : myColor.gray,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(4.0),
@@ -1384,7 +1404,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                             filled: true),
                                         onChanged: (value) {
                                           _changeData();
-                                          AddEditEventTypes.isValueUpdate = true;
+                                          AddEditEventTypes.isValueUpdate =
+                                              true;
 
                                           _store.dispatch(
                                               UpdateMinimumleasedurationNumber(
@@ -1431,11 +1452,12 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                           popupBackgroundColor: myColor.white,
                                           items: eventtypesState
                                               .minimumleasedurationlist,
-                                          defultHeight: double.parse((eventtypesState
-                                                      .minimumleasedurationlist
-                                                      .length *
-                                                  35)
-                                              .toString()),
+                                          defultHeight: double.parse(
+                                              (eventtypesState
+                                                          .minimumleasedurationlist
+                                                          .length *
+                                                      35)
+                                                  .toString()),
                                           textstyle: MyStyles.Medium(
                                               14, myColor.text_color),
                                           itemAsString:
@@ -1544,14 +1566,14 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
     if (eventtypesState.eventtypestypeValue == null) {
       _store.dispatch(UpdateErrorEventTypestype(true));
       //_controller.jumpTo(-1.0);
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_type_error, false);
+      //ToastUtils.showCustomToast(context, GlobleString.PS1_EventTypes_type_error, false);
+      ToastUtils.showCustomToast(context, 'error', false);
     } else if (eventtypesState.eventtypestypeValue!.EnumDetailID == 6 &&
         eventtypesState.eventtypestypeOtherValue.isEmpty) {
       //_controller.jumpTo(-1.0);
       _store.dispatch(UpdateErrorEventTypestypeOther(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_EventTypes_type_value_error, false);
+      //ToastUtils.showCustomToast(context, GlobleString.PS1_EventTypes_type_value_error, false);
+      ToastUtils.showCustomToast(context, 'Error', false);
       //  Se quito la validacion del campo por jcjavier
       //    } else if (eventtypesState.rentalspaceValue == null) {
       //_controller.jumpTo(-1.0);
@@ -1635,7 +1657,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
           eventtypesState.leasetypeValue!.EnumDetailID.toString();
       eventtypesInsert.Min_Lease_Duration =
           eventtypesState.minimumleasedurationValue!.EnumDetailID.toString();
-      eventtypesInsert.EventTypesName = eventtypesState.EventTypesName.toString();
+      eventtypesInsert.EventTypesName =
+          eventtypesState.EventTypesName.toString();
       eventtypesInsert.EventTypes_Address =
           eventtypesState.EventTypesAddress.toString();
       eventtypesInsert.EventTypes_Description =
@@ -1652,7 +1675,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
       eventtypesInsert.Min_Lease_Number =
           eventtypesState.minimumleasedurationnumber.toString();
       eventtypesInsert.Rent_Amount = eventtypesState.RentAmount.toString();
-      eventtypesInsert.Date_Available = eventtypesState.dateofavailable.toString();
+      eventtypesInsert.Date_Available =
+          eventtypesState.dateofavailable.toString();
       eventtypesInsert.Owner_ID = Prefs.getString(PrefsName.OwnerID);
       eventtypesInsert.Vacancy = eventtypesState.PropVacancy;
 
@@ -1671,7 +1695,8 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
         }
 
         ApiManager().UpdateEventTypesDetails(
-            context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
+            context, ceventtypesUpdate, eventtypesInsert,
+            (error, respoce) async {
           if (error) {
             await Prefs.setBool(PrefsName.EventTypesStep1, true);
 
@@ -1690,10 +1715,10 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                 eventtypesState.CountryName;
 
             _store.dispatch(UpdateEventTypesFormAddress(address));
-            _store
-                .dispatch(UpdateEventTypesDrafting(eventtypesInsert.PropDrafting!));
             _store.dispatch(
-                UpdateSummeryEventTypesDrafting(eventtypesInsert.PropDrafting!));
+                UpdateEventTypesDrafting(eventtypesInsert.PropDrafting!));
+            _store.dispatch(UpdateSummeryEventTypesDrafting(
+                eventtypesInsert.PropDrafting!));
 
             ToastUtils.showCustomToast(
                 context, GlobleString.PS_Save_EventTypesse, true);
@@ -1761,28 +1786,32 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
         UpdateSummeryProperTytypeValue(eventtypesState.eventtypestypeValue));
     _store.dispatch(UpdateSummeryEventTypesTypeOtherValue(
         eventtypesState.eventtypestypeOtherValue));
-    _store
-        .dispatch(UpdateSummeryDateofavailable(eventtypesState.dateofavailable));
+    _store.dispatch(
+        UpdateSummeryDateofavailable(eventtypesState.dateofavailable));
     _store.dispatch(
         UpdateSummeryRentalSpaceValue(eventtypesState.rentalspaceValue));
-    _store.dispatch(UpdateSummeryEventTypesName(eventtypesState.EventTypesName));
     _store
-        .dispatch(UpdateSummeryEventTypesAddress(eventtypesState.EventTypesAddress));
+        .dispatch(UpdateSummeryEventTypesName(eventtypesState.EventTypesName));
     _store.dispatch(
-        UpdateSummeryEventTypesDescription(eventtypesState.EventTypesDescription));
+        UpdateSummeryEventTypesAddress(eventtypesState.EventTypesAddress));
+    _store.dispatch(UpdateSummeryEventTypesDescription(
+        eventtypesState.EventTypesDescription));
     _store.dispatch(UpdateSummerySuiteunit(eventtypesState.Suiteunit));
     _store.dispatch(UpdateSummeryBuildingname(eventtypesState.Buildingname));
     _store.dispatch(UpdateSummeryEventTypesCity(eventtypesState.City));
-    _store
-        .dispatch(UpdateSummeryEventTypesCountryCode(eventtypesState.CountryCode));
-    _store
-        .dispatch(UpdateSummeryEventTypesCountryName(eventtypesState.CountryName));
+    _store.dispatch(
+        UpdateSummeryEventTypesCountryCode(eventtypesState.CountryCode));
+    _store.dispatch(
+        UpdateSummeryEventTypesCountryName(eventtypesState.CountryName));
     _store.dispatch(UpdateSummeryEventTypesProvince(eventtypesState.Province));
-    _store.dispatch(UpdateSummeryEventTypesPostalcode(eventtypesState.Postalcode));
-    _store.dispatch(UpdateSummeryEventTypesRentAmount(eventtypesState.RentAmount));
+    _store.dispatch(
+        UpdateSummeryEventTypesPostalcode(eventtypesState.Postalcode));
+    _store.dispatch(
+        UpdateSummeryEventTypesRentAmount(eventtypesState.RentAmount));
     _store.dispatch(UpdateSummeryRentPaymentFrequencyValue(
         eventtypesState.rentpaymentFrequencyValue));
-    _store.dispatch(UpdateSummeryLeaseTypeValue(eventtypesState.leasetypeValue));
+    _store
+        .dispatch(UpdateSummeryLeaseTypeValue(eventtypesState.leasetypeValue));
     _store.dispatch(UpdateSummeryMinimumLeasedurationValue(
         eventtypesState.minimumleasedurationValue));
     _store.dispatch(UpdateSummeryMinimumleasedurationNumber(

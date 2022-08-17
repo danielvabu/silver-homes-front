@@ -19,8 +19,8 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_feature_act
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypes_summery_state.dart';
-import 'package:silverhome/presentation/screens/landlord/eventtypes/add_edit_eventtypes.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/add_edit_eventtypes.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -39,7 +39,7 @@ import 'package:silverhome/widget/landlord/eventtypesfeature/eventtypes_utilitie
 import 'package:silverhome/widget/landlord/eventtypesfeature/eventtypes_utilities_item.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../../../models/landlord_models/eventtypes_state.dart';
+import '../../../../models/landlord_models/event_types_state.dart';
 
 class StepEventTypesFeature extends StatefulWidget {
   final VoidCallback _callbackBack;
@@ -90,7 +90,7 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
           NavigationConstant.featuresAndPhotos) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
-        apiCallAndValidation(_store.state!.eventtypesState);
+        apiCallAndValidation(_store.state!.eventTypesState);
       }
     });
   }
@@ -105,9 +105,9 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
   void initilize() {
     AddEditEventTypes.isValueUpdate = false;
 
-    if (_store.state!.eventtypesSummeryState != null) {
+    if (_store.state!.eventTypesSummeryState != null) {
       EventTypesSummeryState eventtypesSummeryState =
-          _store.state!.eventtypesSummeryState;
+          _store.state!.eventTypesSummeryState;
 
       _store.dispatch(UpdateEventTypesImageList(
           eventtypesSummeryState.SummeryeventtypesImagelist));
@@ -122,7 +122,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
 
       _store.dispatch(UpdateEventTypesAmenitiesList(secondAmenityList));
       _store.dispatch(UpdateEventTypesUtilitiesList(secondUtilityList));
-      _store.dispatch(UpdateParkingstalls(eventtypesSummeryState.Parkingstalls));
+      _store
+          .dispatch(UpdateParkingstalls(eventtypesSummeryState.Parkingstalls));
       _store.dispatch(UpdateStorageAvailableValue(
           eventtypesSummeryState.storageavailableValue));
     }
@@ -137,7 +138,7 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
       width: sswidth,
       height: ssheight - 186,
       child: ConnectState<EventTypesState>(
-          map: (state) => state.eventtypesState,
+          map: (state) => state.eventTypesState,
           where: notIdentical,
           builder: (eventtypesState) {
             return SingleChildScrollView(
@@ -211,7 +212,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS3_EventTypes_Features_Parkingstalls,
+                              GlobleString
+                                  .PS3_EventTypes_Features_Parkingstalls,
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -229,16 +231,18 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                                   //border: InputBorder.none,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: eventtypesState.error_Parkingstalls
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
+                                        color:
+                                            eventtypesState.error_Parkingstalls
+                                                ? myColor.errorcolor
+                                                : myColor.blue,
                                         width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: eventtypesState.error_Parkingstalls
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
+                                        color:
+                                            eventtypesState.error_Parkingstalls
+                                                ? myColor.errorcolor
+                                                : myColor.gray,
                                         width: 1.0),
                                   ),
                                   isDense: true,
@@ -284,10 +288,10 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                                 isError: eventtypesState.error_storageavailable,
                                 popupBackgroundColor: myColor.white,
                                 items: eventtypesState.storageavailablelist,
-                                defultHeight: double.parse(
-                                    (eventtypesState.storageavailablelist.length *
-                                            35)
-                                        .toString()),
+                                defultHeight: double.parse((eventtypesState
+                                            .storageavailablelist.length *
+                                        35)
+                                    .toString()),
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
                                 itemAsString: (SystemEnumDetails? u) =>
@@ -295,7 +299,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                                 hint: GlobleString.storage_availability,
                                 showSearchBox: false,
                                 selectedItem:
-                                    eventtypesState.storageavailableValue != null
+                                    eventtypesState.storageavailableValue !=
+                                            null
                                         ? eventtypesState.storageavailableValue
                                         : null,
                                 isFilteredOnline: true,
@@ -334,21 +339,6 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
           }),
     );
   }
-
-  // Widget UpdateMethod() {
-  //   if (!firsttime && !AddEditEventTypes.isValueUpdate) {
-  //     AddEditEventTypes.isValueUpdate = true;
-  //     firsttime = false;
-  //   } else if (firsttime) {
-  //     AddEditEventTypes.isValueUpdate = false;
-  //     firsttime = false;
-  //   }
-
-  //   return SizedBox(
-  //     width: 0,
-  //     height: 0,
-  //   );
-  // }
 
   Widget eventtypesImages(EventTypesState eventtypesState) {
     return Container(
@@ -389,48 +379,6 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                     ),
                   ],
                 )
-
-                /*Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                      },
-                      child:  Container(
-                        height: 35,
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(color: myColor.Circle_main, width: 1.5),
-                        ),
-                        child: Text(
-                          "Delete All Image",
-                          style: MyStyles.Medium(14, myColor.Circle_main),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                      },
-                      child:  Container(
-                        height: 35,
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: myColor.Circle_main,
-                        ),
-                        child: Text(
-                          "Upload",
-                          style: MyStyles.Medium(14, myColor.white),
-                        ),
-                      ),
-                    )
-                  ],
-                )*/
               ],
             ),
             SizedBox(
@@ -499,7 +447,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                                   index);
                             },
                             pos: index,
-                            modelclass: eventtypesState.eventtypesImagelist[index],
+                            modelclass:
+                                eventtypesState.eventtypesImagelist[index],
                             callbackOnFeatured: (bool flag) {
                               if (flag) {
                                 feature_dailogShow(
@@ -548,9 +497,9 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
               loader = Helper.overlayLoader(context);
               Overlay.of(context)!.insert(loader);
 
-              ApiManager()
-                  .deleteEventTypesImage(context, eventtypesImageId, mediaInfoId,
-                      (error, responce) async {
+              ApiManager().deleteEventTypesImage(
+                  context, eventtypesImageId, mediaInfoId,
+                  (error, responce) async {
                 if (error) {
                   loader.remove();
                   List<EventTypesImageMediaInfo> EventTypesImageMediaInfolist =
@@ -603,7 +552,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
             ApiManager().setFeaturedImage(
                 context,
                 Prefs.getString(PrefsName.EventTypesID),
-                eventtypesImageMediaInfo.id.toString(), (error, responce) async {
+                eventtypesImageMediaInfo.id.toString(),
+                (error, responce) async {
               if (error) {
                 loader.remove();
                 List<EventTypesImageMediaInfo> EventTypesImageMediaInfolist =
@@ -614,8 +564,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
                 EventTypesImageMediaInfolist[pos].IsFavorite = true;
                 _store.dispatch(
                     UpdateEventTypesImageList(EventTypesImageMediaInfolist));
-                _store.dispatch(
-                    UpdateSummeryEventTypesImageList(EventTypesImageMediaInfolist));
+                _store.dispatch(UpdateSummeryEventTypesImageList(
+                    EventTypesImageMediaInfolist));
               } else {
                 loader.remove();
                 ToastUtils.showCustomToast(context, responce, false);
@@ -731,12 +681,7 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
       _store.dispatch(UpdateErrorStorageavailable(true));
       ToastUtils.showCustomToast(context,
           GlobleString.PS3_EventTypes_Features_StorageAvailable_error, false);
-    }
-    /*else if (eventtypesState.eventtypesImagelist.length == 0) {
-      ToastUtils.showCustomToast(context,
-          GlobleString.PS3_EventTypes_Features_image_error, false);
-    }*/
-    else {
+    } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
@@ -750,7 +695,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
         EventTypesAminityUtility eventtypesAminityUtility =
             new EventTypesAminityUtility();
 
-        eventtypesAminityUtility.Prop_ID = Prefs.getString(PrefsName.EventTypesID);
+        eventtypesAminityUtility.Prop_ID =
+            Prefs.getString(PrefsName.EventTypesID);
         eventtypesAminityUtility.Feature_ID = amenitiesUtility.id.toString();
         eventtypesAminityUtility.Feature_Value =
             amenitiesUtility.value.toString();
@@ -765,7 +711,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
         EventTypesAminityUtility eventtypesAminityUtility =
             new EventTypesAminityUtility();
 
-        eventtypesAminityUtility.Prop_ID = Prefs.getString(PrefsName.EventTypesID);
+        eventtypesAminityUtility.Prop_ID =
+            Prefs.getString(PrefsName.EventTypesID);
         eventtypesAminityUtility.Feature_ID = amenitiesUtility.id.toString();
         eventtypesAminityUtility.Feature_Value =
             amenitiesUtility.value.toString();
@@ -779,7 +726,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
       eventtypesFeature.StorageAvailable =
           eventtypesState.storageavailableValue!.EnumDetailID.toString().trim();
 
-      if (eventtypesState.PropDrafting >= 2 && eventtypesState.PropDrafting <= 3) {
+      if (eventtypesState.PropDrafting >= 2 &&
+          eventtypesState.PropDrafting <= 3) {
         eventtypesFeature.PropDrafting = 3;
       } else {
         eventtypesFeature.PropDrafting = eventtypesState.PropDrafting;
@@ -905,7 +853,8 @@ class _StepEventTypesFeatureState extends State<StepEventTypesFeature> {
         await Prefs.setBool(PrefsName.EventTypesStep3, true);
         loader.remove();
         UpdateSummeryData(eventtypesState);
-        _store.dispatch(UpdateEventTypesDrafting(eventtypesFeature.PropDrafting!));
+        _store.dispatch(
+            UpdateEventTypesDrafting(eventtypesFeature.PropDrafting!));
         _store.dispatch(
             UpdateSummeryEventTypesDrafting(eventtypesFeature.PropDrafting!));
 

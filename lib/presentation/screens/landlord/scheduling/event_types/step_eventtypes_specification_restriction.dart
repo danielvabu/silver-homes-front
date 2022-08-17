@@ -19,7 +19,7 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_feature_act
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_specification_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypes_summery_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -32,7 +32,7 @@ import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../../../models/landlord_models/eventtypes_state.dart';
+import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes.dart';
 
 class StepEventTypesSpecificationRestriction extends StatefulWidget {
@@ -90,7 +90,7 @@ class _StepEventTypesSpecificationRestrictionState
           NavigationConstant.specificationAndRestriction) {
         isGotoBack = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
-        apiCallAndValication(_store.state!.eventtypesState);
+        apiCallAndValication(_store.state!.eventTypesState);
       }
     });
   }
@@ -103,14 +103,14 @@ class _StepEventTypesSpecificationRestrictionState
   }
 
   void initilize() {
-    if (_store.state!.eventtypesSummeryState != null) {
+    if (_store.state!.eventTypesSummeryState != null) {
       EventTypesSummeryState eventtypesSummeryState =
-          _store.state!.eventtypesSummeryState;
+          _store.state!.eventTypesSummeryState;
 
       _store.dispatch(
           UpdateEventTypesBedrooms(eventtypesSummeryState.EventTypesBedrooms));
-      _store.dispatch(
-          UpdateEventTypesBathrooms(eventtypesSummeryState.EventTypesBathrooms));
+      _store.dispatch(UpdateEventTypesBathrooms(
+          eventtypesSummeryState.EventTypesBathrooms));
       _store.dispatch(UpdateEventTypesSizeinsquarefeet(
           eventtypesSummeryState.EventTypesSizeinsquarefeet));
       _store.dispatch(UpdateEventTypesMaxoccupancy(
@@ -120,7 +120,8 @@ class _StepEventTypesSpecificationRestrictionState
       _store.dispatch(UpdateOtherPartialFurniture(
           eventtypesSummeryState.Other_Partial_Furniture));
 
-      List<SystemEnumDetails> secondList = eventtypesSummeryState.restrictionlist
+      List<SystemEnumDetails> secondList = eventtypesSummeryState
+          .restrictionlist
           .map((item) => new SystemEnumDetails.clone(item))
           .toList();
 
@@ -137,13 +138,14 @@ class _StepEventTypesSpecificationRestrictionState
       width: sswidth,
       height: ssheight - 186,
       child: ConnectState<EventTypesState>(
-          map: (state) => state.eventtypesState,
+          map: (state) => state.eventTypesState,
           where: notIdentical,
           builder: (eventtypesState) {
             if (eventtypesState!.EventTypesSizeinsquarefeet != null &&
                 eventtypesState.EventTypesSizeinsquarefeet.isNotEmpty) {
               String valuerat = formatNumber(
-                  eventtypesState.EventTypesSizeinsquarefeet.replaceAll(',', ''));
+                  eventtypesState.EventTypesSizeinsquarefeet.replaceAll(
+                      ',', ''));
               controllerSize.value = TextEditingValue(
                 text: valuerat,
                 selection: TextSelection.collapsed(offset: valuerat.length),
@@ -194,18 +196,18 @@ class _StepEventTypesSpecificationRestrictionState
                                   //border: InputBorder.none,
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color:
-                                            eventtypesState.error_EventTypesBedrooms
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
+                                        color: eventtypesState
+                                                .error_EventTypesBedrooms
+                                            ? myColor.errorcolor
+                                            : myColor.blue,
                                         width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color:
-                                            eventtypesState.error_EventTypesBedrooms
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
+                                        color: eventtypesState
+                                                .error_EventTypesBedrooms
+                                            ? myColor.errorcolor
+                                            : myColor.gray,
                                         width: 1.0),
                                   ),
                                   isDense: true,
@@ -214,7 +216,8 @@ class _StepEventTypesSpecificationRestrictionState
                                   filled: true),
                               onChanged: (value) {
                                 _changeData();
-                                _store.dispatch(UpdateEventTypesBedrooms(value));
+                                _store
+                                    .dispatch(UpdateEventTypesBedrooms(value));
                                 _store.dispatch(
                                     UpdateErrorEventTypesBedrooms(false));
                               },
@@ -269,7 +272,8 @@ class _StepEventTypesSpecificationRestrictionState
                                   filled: true),
                               onChanged: (value) {
                                 _changeData();
-                                _store.dispatch(UpdateEventTypesBathrooms(value));
+                                _store
+                                    .dispatch(UpdateEventTypesBathrooms(value));
                                 _store.dispatch(
                                     UpdateErrorEventTypesBathrooms(false));
                               },
@@ -342,9 +346,11 @@ class _StepEventTypesSpecificationRestrictionState
                                 }
 
                                 _store.dispatch(
-                                    UpdateEventTypesSizeinsquarefeet(valuesize));
+                                    UpdateEventTypesSizeinsquarefeet(
+                                        valuesize));
                                 _store.dispatch(
-                                    UpdateErrorEventTypesSizeinsquarefeet(false));
+                                    UpdateErrorEventTypesSizeinsquarefeet(
+                                        false));
                               },
                             ),
                           ],
@@ -368,7 +374,8 @@ class _StepEventTypesSpecificationRestrictionState
                               height: 5,
                             ),
                             TextFormField(
-                              initialValue: eventtypesState.EventTypesMaxoccupancy,
+                              initialValue:
+                                  eventtypesState.EventTypesMaxoccupancy,
                               textAlign: TextAlign.start,
                               style: MyStyles.Regular(14, myColor.text_color),
                               inputFormatters: [
@@ -684,9 +691,11 @@ class _StepEventTypesSpecificationRestrictionState
 
       for (int i = 0; i < eventtypesState.restrictionlist.length; i++) {
         if (eventtypesState.restrictionlist[i].ischeck!) {
-          EventTypesRestriction eventtypesRestriction = new EventTypesRestriction();
+          EventTypesRestriction eventtypesRestriction =
+              new EventTypesRestriction();
 
-          eventtypesRestriction.Prop_ID = Prefs.getString(PrefsName.EventTypesID);
+          eventtypesRestriction.Prop_ID =
+              Prefs.getString(PrefsName.EventTypesID);
           eventtypesRestriction.Restrictions =
               eventtypesState.restrictionlist[i].EnumDetailID.toString();
 
@@ -694,7 +703,8 @@ class _StepEventTypesSpecificationRestrictionState
         }
       }
 
-      EventTypesSpecification eventtypesSpecification = new EventTypesSpecification();
+      EventTypesSpecification eventtypesSpecification =
+          new EventTypesSpecification();
       eventtypesSpecification.Bedrooms =
           eventtypesState.EventTypesBedrooms.toString().trim();
       eventtypesSpecification.Bathrooms =
@@ -714,7 +724,8 @@ class _StepEventTypesSpecificationRestrictionState
       eventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
       eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-      if (eventtypesState.PropDrafting >= 1 && eventtypesState.PropDrafting <= 2) {
+      if (eventtypesState.PropDrafting >= 1 &&
+          eventtypesState.PropDrafting <= 2) {
         eventtypesSpecification.PropDrafting = 2;
       } else {
         eventtypesSpecification.PropDrafting = eventtypesState.PropDrafting;
@@ -732,13 +743,15 @@ class _StepEventTypesSpecificationRestrictionState
           (error, respoce) async {
         if (error) {
           ApiManager().AddEventTypesSpecificatinRestriction(
-              context, restrictionlist, eventtypesUpdate, eventtypesSpecification,
-              (error, responce) async {
+              context,
+              restrictionlist,
+              eventtypesUpdate,
+              eventtypesSpecification, (error, responce) async {
             if (error) {
               await Prefs.setBool(PrefsName.EventTypesStep2, true);
               loader.remove();
-              _store.dispatch(
-                  UpdateEventTypesDrafting(eventtypesSpecification.PropDrafting!));
+              _store.dispatch(UpdateEventTypesDrafting(
+                  eventtypesSpecification.PropDrafting!));
               _store.dispatch(UpdateSummeryEventTypesDrafting(
                   eventtypesSpecification.PropDrafting!));
 
@@ -775,14 +788,14 @@ class _StepEventTypesSpecificationRestrictionState
         UpdateSummeryEventTypesBathrooms(eventtypesState.EventTypesBathrooms));
     _store.dispatch(UpdateSummeryEventTypesSizeinsquarefeet(
         eventtypesState.EventTypesSizeinsquarefeet));
+    _store.dispatch(UpdateSummeryEventTypesMaxoccupancy(
+        eventtypesState.EventTypesMaxoccupancy));
     _store.dispatch(
-        UpdateSummeryEventTypesMaxoccupancy(eventtypesState.EventTypesMaxoccupancy));
-    _store
-        .dispatch(UpdateSummeryFurnishingValue(eventtypesState.furnishingValue));
+        UpdateSummeryFurnishingValue(eventtypesState.furnishingValue));
     _store.dispatch(UpdateSummeryOtherPartialFurniture(
         eventtypesState.Other_Partial_Furniture));
-    _store
-        .dispatch(UpdateSummeryRestrictionlist(eventtypesState.restrictionlist));
+    _store.dispatch(
+        UpdateSummeryRestrictionlist(eventtypesState.restrictionlist));
   }
 
   bool RestrictionValidation(List<SystemEnumDetails> restrictionlist) {
