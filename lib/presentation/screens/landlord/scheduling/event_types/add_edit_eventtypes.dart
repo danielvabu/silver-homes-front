@@ -27,7 +27,7 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_form_state.dart';
-import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
+//import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_details.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_specification_restriction.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_summery_disclousures.dart';
@@ -490,6 +490,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       case 3:
         {
+          return Text('data');
+/*
           return StepEventTypesFeature(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(4));
@@ -501,6 +503,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                 _store.dispatch(UpdateEventTypesForm(2));
             },
           );
+*/
         }
       case 4:
         {
