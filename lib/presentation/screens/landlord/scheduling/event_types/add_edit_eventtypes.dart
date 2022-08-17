@@ -941,7 +941,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
   pw.Widget EventTypesLeaseDetails(EventTypesSummeryState eventtypesState) {
     String rentAmount = "";
 
-    if (eventtypesState.RentAmount != null && eventtypesState.RentAmount != "") {
+    if (eventtypesState.RentAmount != null &&
+        eventtypesState.RentAmount != "") {
       String amount =
           '${formatCurrency.format(int.parse(eventtypesState.RentAmount.replaceAll(",", "").toString()))}';
       rentAmount = amount.replaceAll(".00", "");
@@ -1074,7 +1075,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                   child: pw.Text(
                     eventtypesState.rentpaymentFrequencyValue == null
                         ? ""
-                        : eventtypesState.rentpaymentFrequencyValue!.displayValue,
+                        : eventtypesState
+                            .rentpaymentFrequencyValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1197,7 +1199,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                   child: pw.Text(
                     eventtypesState.minimumleasedurationValue == null
                         ? ""
-                        : eventtypesState.minimumleasedurationValue!.displayValue,
+                        : eventtypesState
+                            .minimumleasedurationValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1664,7 +1667,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                       pw.Text(
                         eventtypesState.storageavailableValue == null
                             ? ""
-                            : eventtypesState.storageavailableValue!.displayValue,
+                            : eventtypesState
+                                .storageavailableValue!.displayValue,
                         style: pw.TextStyle(
                           color: PdfColors.black,
                           font: pw.Font.ttf(font_regular),
@@ -1814,8 +1818,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesamenitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesamenitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "1"
@@ -1880,8 +1886,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesutilitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesutilitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "1"
@@ -1991,8 +1999,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesamenitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesamenitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "2"
@@ -2057,8 +2067,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesutilitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesutilitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "2"
@@ -2167,8 +2179,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesamenitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesamenitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "3"
@@ -2233,8 +2247,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                 itemCount: eventtypesState
                                     .Summeryeventtypesutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  EventTypesAmenitiesUtility data = eventtypesState
-                                      .Summeryeventtypesutilitieslist[Index];
+                                  EventTypesAmenitiesUtility data =
+                                      eventtypesState
+                                              .Summeryeventtypesutilitieslist[
+                                          Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "3"
