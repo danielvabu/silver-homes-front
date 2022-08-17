@@ -587,7 +587,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       listdata1: eventtypesListState.eventtypeslist,
                       onPresseEdit: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
-                            eventtypesData, 2, eventtypesData.propDrafting!);
+                            eventtypesData, 2, eventtypesData.slots!);
                       },
                       onPresseDuplicat: (EventTypesDataList eventtypesData) {
                         ApiManager().DuplicatEventTypesGenerate(
@@ -606,11 +606,11 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       },
                       onPressDetails: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
-                            eventtypesData, 1, eventtypesData.propDrafting!);
+                            eventtypesData, 1, eventtypesData.slots!);
                       },
                       onPressName: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
-                            eventtypesData, 1, eventtypesData.propDrafting!);
+                            eventtypesData, 1, eventtypesData.slots!);
                       },
                       onPresseInActive:
                           (EventTypesDataList eventtypesData, int pos) {

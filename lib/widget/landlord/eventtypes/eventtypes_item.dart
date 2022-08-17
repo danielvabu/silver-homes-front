@@ -106,9 +106,6 @@ class _EventTypesItemState extends State<EventTypesItem> {
     result.add(_datavalueCity(model));
     result.add(_datavalueCountry(model));
     result.add(_datavalueEventTypesType(model));
-    result.add(_datavalueVacancy(model));
-    result.add(_datavalueStatus(model));
-    result.add(_datavalueActiveInactive(model, Index));
     result.add(_datavalueIsPublished(model, Index));
     result.add(_actionPopup(model));
 
@@ -126,9 +123,9 @@ class _EventTypesItemState extends State<EventTypesItem> {
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
-          message: model.eventtypesName!,
+          message: model.name!,
           child: Text(
-            model.eventtypesName!,
+            model.name!,
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             style: MyStyles.Medium(12, myColor.blue),
@@ -145,7 +142,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.suiteUnit!,
+        model.property_name!,
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -160,7 +157,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.city!,
+        model.relationship!,
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -175,7 +172,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.country!,
+        model.duration!,
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -190,76 +187,9 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.eventtypesType != null ? model.eventtypesType!.displayValue : "",
+        model.slots.toString(),
         textAlign: TextAlign.center,
         style: MyStyles.Medium(12, myColor.Circle_main),
-      ),
-    );
-  }
-
-  Widget _datavalueVacancy(EventTypesDataList model) {
-    return Container(
-      height: 40,
-      width: width / 15,
-      margin: EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        !model.vacancy!
-            ? GlobleString.PH_Vacancy_Vacant
-            : GlobleString.PH_Vacancy_Occupied, //model.province!,
-        textAlign: TextAlign.center,
-        style: MyStyles.Medium(12, myColor.Circle_main),
-      ),
-    );
-  }
-
-  Widget _datavalueStatus(EventTypesDataList model) {
-    return Container(
-      height: 40,
-      width: width / 14.5,
-      margin: EdgeInsets.only(left: 0),
-      alignment: Alignment.center,
-      child: model.propDrafting != 3 || !model.isAgreedTandC!
-          ? SvgPicture.asset("assets/images/pro_progress_new.svg")
-          : SvgPicture.asset("assets/images/pro_complated_new.svg"),
-    );
-  }
-
-  Widget _datavalueActiveInactive(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: width / 11,
-      margin: EdgeInsets.only(left: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlutterSwitch(
-            width: 55.0,
-            height: 25.0,
-            valueFontSize: 10.0,
-            toggleSize: 20.0,
-            value: model.isActive!,
-            borderRadius: 30.0,
-            padding: 2.0,
-            activeColor: myColor.propertyOn,
-            activeText: "ON",
-            activeTextColor: myColor.white,
-            inactiveColor: myColor.gray,
-            inactiveText: "OFF",
-            inactiveTextColor: myColor.white,
-            showOnOff: true,
-            onToggle: (val) {
-              if (val) {
-                widget._callbackActive(model, index);
-              } else {
-                widget._callbackInActive(model, index);
-              }
-            },
-          ),
-          Expanded(child: Container())
-        ],
       ),
     );
   }
@@ -279,7 +209,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             height: 25.0,
             valueFontSize: 10.0,
             toggleSize: 20.0,
-            value: model.isPublished!,
+            value: model.ispublished!,
             borderRadius: 30.0,
             padding: 2.0,
             activeColor: myColor.propertyOn,
@@ -310,77 +240,49 @@ class _EventTypesItemState extends State<EventTypesItem> {
         height: 28,
         margin: EdgeInsets.only(left: 10, right: 20),
         alignment: Alignment.centerRight,
-        child: model.propDrafting != 3 || !model.isAgreedTandC!
-            ? PopupMenuButton(
-                onSelected: (value) {
-                  if (value == 1) {
-                    widget._callbackDetails(model);
-                  } else if (value == 2) {
-                    widget._callbackEdit(model);
-                  } else if (value == 3) {
-                    widget._callbackDuplicat(model);
-                  }
-                },
-                child: Container(
-                  height: 40,
-                  width: 20,
-                  margin: EdgeInsets.only(right: 5),
-                  child: Icon(Icons.more_vert),
-                ),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 2,
-                    child: Text(
-                      GlobleString.PH_ACT_Edit,
-                      style: MyStyles.Medium(14, myColor.text_color),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              )
-            : PopupMenuButton(
-                onSelected: (value) {
-                  if (value == 1) {
-                    widget._callbackDetails(model);
-                  } else if (value == 2) {
-                    widget._callbackEdit(model);
-                  } else if (value == 3) {
-                    widget._callbackDuplicat(model);
-                  }
-                },
-                child: Container(
-                  height: 40,
-                  width: 20,
-                  margin: EdgeInsets.only(right: 5),
-                  child: Icon(Icons.more_vert),
-                ),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 1,
-                    child: Text(
-                      GlobleString.PH_ACT_ViewDetails,
-                      style: MyStyles.Medium(14, myColor.text_color),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 2,
-                    child: Text(
-                      GlobleString.PH_ACT_Edit,
-                      style: MyStyles.Medium(14, myColor.text_color),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 3,
-                    child: Text(
-                      GlobleString.PH_ACT_Duplicate,
-                      style: MyStyles.Medium(14, myColor.text_color),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
+        child: PopupMenuButton(
+          onSelected: (value) {
+            if (value == 1) {
+              widget._callbackDetails(model);
+            } else if (value == 2) {
+              widget._callbackEdit(model);
+            } else if (value == 3) {
+              widget._callbackDuplicat(model);
+            }
+          },
+          child: Container(
+            height: 40,
+            width: 20,
+            margin: EdgeInsets.only(right: 5),
+            child: Icon(Icons.more_vert),
+          ),
+          itemBuilder: (context) => [
+            PopupMenuItem(
+              value: 1,
+              child: Text(
+                GlobleString.PH_ACT_ViewDetails,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
               ),
+            ),
+            PopupMenuItem(
+              value: 2,
+              child: Text(
+                GlobleString.PH_ACT_Edit,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 3,
+              child: Text(
+                GlobleString.PH_ACT_Duplicate,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
