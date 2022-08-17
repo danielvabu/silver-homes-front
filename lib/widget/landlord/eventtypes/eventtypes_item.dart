@@ -14,7 +14,8 @@ typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDetails = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallEdit = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDuplicat = void Function(EventTypesDataList eventtypesData);
-typedef VoidCallActive = void Function(EventTypesDataList eventtypesData, int pos);
+typedef VoidCallActive = void Function(
+    EventTypesDataList eventtypesData, int pos);
 typedef VoidCallInActive = void Function(
     EventTypesDataList eventtypesData, int pos);
 typedef VoidCallIsPublish = void Function(
@@ -242,7 +243,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             value: model.isActive!,
             borderRadius: 30.0,
             padding: 2.0,
-            activeColor: myColor.eventtypesOn,
+            activeColor: myColor.propertyOn,
             activeText: "ON",
             activeTextColor: myColor.white,
             inactiveColor: myColor.gray,
@@ -281,7 +282,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             value: model.isPublished!,
             borderRadius: 30.0,
             padding: 2.0,
-            activeColor: myColor.eventtypesOn,
+            activeColor: myColor.propertyOn,
             activeText: "ON",
             activeTextColor: myColor.white,
             inactiveColor: myColor.gray,

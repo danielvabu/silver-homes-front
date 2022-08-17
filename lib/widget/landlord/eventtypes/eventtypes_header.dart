@@ -60,11 +60,15 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
-    result.add(_headerEventTypesName(GlobleString.PH_EventTypes_Name));
+    result.add(_headerEventTypesName('Event Types'
+        //GlobleString.PH_Property_Name
+        ));
     result.add(_headerUnit(GlobleString.PH_Unit));
     result.add(_headerCity(GlobleString.PH_City));
     result.add(_headerCountry(GlobleString.PH_Country));
-    result.add(_headerEventTypesType(GlobleString.PH_EventTypes_Type));
+    result.add(_headerEventTypesType('Events Types Type'
+        //GlobleString.PH_EventTypes_Type
+        ));
     result.add(_headerVacancy(GlobleString.PH_Vacancy));
     result.add(_headerStatus(GlobleString.PH_Status));
     result.add(_headerActiveInactive(GlobleString.PH_Active_Inactive));
