@@ -15,7 +15,7 @@ import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
-import 'package:silverhome/presentation/models/landlord_models/eventtypes_summery_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -101,7 +101,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                   bannerView(eventtypesSummeryState!),
                   eventtypesImages(eventtypesSummeryState),
                   eventtypesDetailsView(eventtypesSummeryState),
-                  eventtypesSpecificationRestrictionView(eventtypesSummeryState),
+                  eventtypesSpecificationRestrictionView(
+                      eventtypesSummeryState),
                   eventtypesFeatureView(eventtypesSummeryState),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -197,7 +198,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                 Text(
                   eventtypesSummeryState.eventtypestypeValue == null
                       ? ""
-                      : eventtypesSummeryState.eventtypestypeValue!.EnumDetailID ==
+                      : eventtypesSummeryState
+                                  .eventtypestypeValue!.EnumDetailID ==
                               6
                           ? eventtypesSummeryState.eventtypestypeOtherValue
                           : eventtypesSummeryState
@@ -287,7 +289,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                   textAlign: TextAlign.start,
                 ),
                 if (eventtypesSummeryState.SummeryeventtypesImagelist != null &&
-                    eventtypesSummeryState.SummeryeventtypesImagelist.length > 0)
+                    eventtypesSummeryState.SummeryeventtypesImagelist.length >
+                        0)
                   IconButton(
                     icon: Icon(
                       Icons.download_sharp,
@@ -297,13 +300,16 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                     onPressed: () {
                       if (eventtypesSummeryState.SummeryeventtypesImagelist !=
                               null &&
-                          eventtypesSummeryState.SummeryeventtypesImagelist.length >
+                          eventtypesSummeryState
+                                  .SummeryeventtypesImagelist.length >
                               0) {
                         CustomeWidget.EventTypesSummaryImageZip(context,
                             eventtypesSummeryState.SummeryeventtypesImagelist);
                       } else {
-                        ToastUtils.showCustomToast(context,
-                            GlobleString.PS3_EventTypes_NoImageAvailable, false);
+                        ToastUtils.showCustomToast(
+                            context,
+                            GlobleString.PS3_EventTypes_NoImageAvailable,
+                            false);
                       }
                     },
                   )
@@ -325,12 +331,13 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                   child: ListView.builder(
                     key: UniqueKey(),
                     shrinkWrap: true,
-                    itemCount:
-                        eventtypesSummeryState.SummeryeventtypesImagelist.length,
+                    itemCount: eventtypesSummeryState
+                        .SummeryeventtypesImagelist.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       EventTypesImageMediaInfo eventtypesImageMediaInfo =
-                          eventtypesSummeryState.SummeryeventtypesImagelist[index];
+                          eventtypesSummeryState
+                              .SummeryeventtypesImagelist[index];
                       return Container(
                         height: 100.0,
                         width: 180,
@@ -425,7 +432,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                       fit: BoxFit.fill,
                       image: CustomNetworkImage(
                         Weburl.image_API +
-                            eventtypesSummeryState.eventtypesImage!.id.toString(),
+                            eventtypesSummeryState.eventtypesImage!.id
+                                .toString(),
                         scale: 1,
                         headers: {
                           'Authorization': 'bearer ' + userTokan!,
@@ -579,9 +587,11 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                eventtypesSummeryState.eventtypestypeValue == null
+                                eventtypesSummeryState.eventtypestypeValue ==
+                                        null
                                     ? ""
-                                    : eventtypesSummeryState.eventtypestypeValue!
+                                    : eventtypesSummeryState
+                                                .eventtypestypeValue!
                                                 .EnumDetailID ==
                                             6
                                         ? eventtypesSummeryState
@@ -666,7 +676,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    eventtypesSummeryState.EventTypesDescription,
+                                    eventtypesSummeryState
+                                        .EventTypesDescription,
                                     style: MyStyles.Regular(
                                         14, myColor.text_color),
                                     overflow: TextOverflow.ellipsis,
@@ -871,7 +882,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                eventtypesSummeryState.minimumleasedurationnumber,
+                                eventtypesSummeryState
+                                    .minimumleasedurationnumber,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 textAlign: TextAlign.start,
                               ),
@@ -1862,7 +1874,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
     );
   }
 
-  Widget EventTypesDisclosureView(EventTypesSummeryState eventtypesSummeryState) {
+  Widget EventTypesDisclosureView(
+      EventTypesSummeryState eventtypesSummeryState) {
     return Padding(
       padding: EdgeInsets.only(left: 15, top: 15, bottom: 15, right: 15),
       child: Container(
@@ -2063,8 +2076,8 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
     ceventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
     ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-    ApiManager().UpdateEventTypesDisclosure(context, ceventtypesUpdate, eventtypesd,
-        (error, respoce) {
+    ApiManager().UpdateEventTypesDisclosure(
+        context, ceventtypesUpdate, eventtypesd, (error, respoce) {
       if (error) {
         loader.remove();
 
