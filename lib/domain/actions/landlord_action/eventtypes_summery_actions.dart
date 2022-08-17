@@ -13,7 +13,7 @@ class UpdateSummeryProperTytypeValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(eventtypestypeValue: eventtypestypeValue);
+        .eventTypesSummeryState(eventtypestypeValue: eventtypestypeValue);
   }
 }
 
@@ -24,8 +24,8 @@ class UpdateSummeryEventTypesTypeOtherValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesSummeryState(eventtypestypeOtherValue: eventtypestypeOtherValue);
+    return appState.copyWith.eventTypesSummeryState(
+        eventtypestypeOtherValue: eventtypestypeOtherValue);
   }
 }
 
@@ -37,7 +37,7 @@ class UpdateSummeryRentalSpaceValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(rentalspaceValue: rentalspaceValue);
+        .eventTypesSummeryState(rentalspaceValue: rentalspaceValue);
   }
 }
 
@@ -48,7 +48,7 @@ class UpdateSummeryRentPaymentFrequencyValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
+    return appState.copyWith.eventTypesSummeryState(
         rentpaymentFrequencyValue: rentpaymentFrequencyValue);
   }
 }
@@ -61,7 +61,7 @@ class UpdateSummeryLeaseTypeValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(leasetypeValue: leasetypeValue);
+        .eventTypesSummeryState(leasetypeValue: leasetypeValue);
   }
 }
 
@@ -72,7 +72,7 @@ class UpdateSummeryMinimumLeasedurationValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
+    return appState.copyWith.eventTypesSummeryState(
         minimumleasedurationValue: minimumleasedurationValue);
   }
 }
@@ -84,7 +84,7 @@ class UpdateSummeryMinimumleasedurationNumber implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
+    return appState.copyWith.eventTypesSummeryState(
         minimumleasedurationnumber: minimumleasedurationnumber);
   }
 }
@@ -97,7 +97,7 @@ class UpdateSummeryDateofavailable implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(dateofavailable: dateofavailable);
+        .eventTypesSummeryState(dateofavailable: dateofavailable);
   }
 }
 
@@ -108,7 +108,8 @@ class UpdateSummeryEventTypesName implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(EventTypesName: EventTypesName);
+    return appState.copyWith
+        .eventTypesSummeryState(EventTypesName: EventTypesName);
   }
 }
 
@@ -120,7 +121,7 @@ class UpdateSummeryEventTypesAddress implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(EventTypesAddress: EventTypesAddress);
+        .eventTypesSummeryState(EventTypesAddress: EventTypesAddress);
   }
 }
 
@@ -132,7 +133,7 @@ class UpdateSummeryEventTypesDescription implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(EventTypesDescription: EventTypesDescription);
+        .eventTypesSummeryState(EventTypesDescription: EventTypesDescription);
   }
 }
 
@@ -143,7 +144,7 @@ class UpdateSummerySuiteunit implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(Suiteunit: Suiteunit);
+    return appState.copyWith.eventTypesSummeryState(Suiteunit: Suiteunit);
   }
 }
 
@@ -154,7 +155,7 @@ class UpdateSummeryBuildingname implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(Buildingname: Buildingname);
+    return appState.copyWith.eventTypesSummeryState(Buildingname: Buildingname);
   }
 }
 
@@ -165,7 +166,7 @@ class UpdateSummeryEventTypesCity implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(City: City);
+    return appState.copyWith.eventTypesSummeryState(City: City);
   }
 }
 
@@ -176,7 +177,7 @@ class UpdateSummeryEventTypesProvince implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(Province: Province);
+    return appState.copyWith.eventTypesSummeryState(Province: Province);
   }
 }
 
@@ -187,7 +188,7 @@ class UpdateSummeryEventTypesCountryName implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(CountryName: CountryName);
+    return appState.copyWith.eventTypesSummeryState(CountryName: CountryName);
   }
 }
 
@@ -198,7 +199,7 @@ class UpdateSummeryEventTypesCountryCode implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(CountryCode: CountryCode);
+    return appState.copyWith.eventTypesSummeryState(CountryCode: CountryCode);
   }
 }
 
@@ -209,7 +210,7 @@ class UpdateSummeryEventTypesPostalcode implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(Postalcode: Postalcode);
+    return appState.copyWith.eventTypesSummeryState(Postalcode: Postalcode);
   }
 }
 
@@ -220,7 +221,7 @@ class UpdateSummeryEventTypesRentAmount implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(RentAmount: RentAmount);
+    return appState.copyWith.eventTypesSummeryState(RentAmount: RentAmount);
   }
 }
 
@@ -231,7 +232,8 @@ class UpdateSummeryEventTypesImage implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(eventtypesImage: eventtypesImage);
+    return appState.copyWith
+        .eventTypesSummeryState(eventtypesImage: eventtypesImage);
   }
 }
 
@@ -242,7 +244,7 @@ class UpdateSummeryEventTypesUint8List implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(appimage: appimage);
+    return appState.copyWith.eventTypesSummeryState(appimage: appimage);
   }
 }
 
@@ -253,7 +255,7 @@ class UpdateSummeryEventTypesDrafting implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(PropDrafting: PropDrafting);
+    return appState.copyWith.eventTypesSummeryState(PropDrafting: PropDrafting);
   }
 }
 
@@ -264,7 +266,7 @@ class UpdateSummeryEventTypesVacancy implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(PropVacancy: PropVacancy);
+    return appState.copyWith.eventTypesSummeryState(PropVacancy: PropVacancy);
   }
 }
 
@@ -276,7 +278,7 @@ class UpdateSummeryFurnishingValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(furnishingValue: furnishingValue);
+        .eventTypesSummeryState(furnishingValue: furnishingValue);
   }
 }
 
@@ -288,7 +290,7 @@ class UpdateSummeryRestrictionlist implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(restrictionlist: restrictionlist);
+        .eventTypesSummeryState(restrictionlist: restrictionlist);
   }
 }
 
@@ -299,8 +301,8 @@ class UpdateSummeryOtherPartialFurniture implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesSummeryState(Other_Partial_Furniture: Other_Partial_Furniture);
+    return appState.copyWith.eventTypesSummeryState(
+        Other_Partial_Furniture: Other_Partial_Furniture);
   }
 }
 
@@ -312,7 +314,7 @@ class UpdateSummeryEventTypesBedrooms implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(EventTypesBedrooms: EventTypesBedrooms);
+        .eventTypesSummeryState(EventTypesBedrooms: EventTypesBedrooms);
   }
 }
 
@@ -324,7 +326,7 @@ class UpdateSummeryEventTypesBathrooms implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(EventTypesBathrooms: EventTypesBathrooms);
+        .eventTypesSummeryState(EventTypesBathrooms: EventTypesBathrooms);
   }
 }
 
@@ -335,7 +337,7 @@ class UpdateSummeryEventTypesSizeinsquarefeet implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
+    return appState.copyWith.eventTypesSummeryState(
         EventTypesSizeinsquarefeet: EventTypesSizeinsquarefeet);
   }
 }
@@ -348,34 +350,27 @@ class UpdateSummeryEventTypesMaxoccupancy implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(EventTypesMaxoccupancy: EventTypesMaxoccupancy);
+        .eventTypesSummeryState(EventTypesMaxoccupancy: EventTypesMaxoccupancy);
   }
 }
 
-class UpdateSummeryEventTypesAmenitiesList implements Action {
+/*class UpdateSummeryEventTypesAmenitiesList implements Action {
   List<EventTypesAmenitiesUtility> Summeryeventtypesamenitieslist;
-
   UpdateSummeryEventTypesAmenitiesList(this.Summeryeventtypesamenitieslist);
-
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
-        Summeryeventtypesamenitieslist: Summeryeventtypesamenitieslist);
+    return appState.copyWith.eventTypesSummeryState(Summeryeventtypesamenitieslist: Summeryeventtypesamenitieslist);
   }
 }
-
 class UpdateSummeryEventTypesUtilitiesList implements Action {
   List<EventTypesAmenitiesUtility> Summeryeventtypesutilitieslist;
-
   UpdateSummeryEventTypesUtilitiesList(this.Summeryeventtypesutilitieslist);
-
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(
-        Summeryeventtypesutilitieslist: Summeryeventtypesutilitieslist);
+    return appState.copyWith.eventTypesSummeryState(Summeryeventtypesutilitieslist: Summeryeventtypesutilitieslist);
   }
 }
-
+*/
 class UpdateSummeryStorageAvailableValue implements Action {
   final SystemEnumDetails? storageavailableValue;
 
@@ -384,7 +379,7 @@ class UpdateSummeryStorageAvailableValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesSummeryState(storageavailableValue: storageavailableValue);
+        .eventTypesSummeryState(storageavailableValue: storageavailableValue);
   }
 }
 
@@ -395,7 +390,8 @@ class UpdateSummeryParkingstalls implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(Parkingstalls: Parkingstalls);
+    return appState.copyWith
+        .eventTypesSummeryState(Parkingstalls: Parkingstalls);
   }
 }
 
@@ -406,18 +402,16 @@ class UpdateSummeryAgreeTCPP implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesSummeryState(agree_TCPP: agreeTCPP);
+    return appState.copyWith.eventTypesSummeryState(agree_TCPP: agreeTCPP);
   }
 }
 
-class UpdateSummeryEventTypesImageList implements Action {
+/*class UpdateSummeryEventTypesImageList implements Action {
   final List<EventTypesImageMediaInfo> eventtypesImagelist;
-
   UpdateSummeryEventTypesImageList(this.eventtypesImagelist);
-
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesSummeryState(SummeryeventtypesImagelist: eventtypesImagelist);
+    return appState.copyWith.eventTypesSummeryState(SummeryeventtypesImagelist: eventtypesImagelist);
   }
 }
+*/

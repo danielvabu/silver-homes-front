@@ -8,6 +8,6 @@ class UpdateAgreeTCPP implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(agree_TCPP: agreeTCPP);
+    return appState.copyWith.eventTypesState(agree_TCPP: agreeTCPP);
   }
 }

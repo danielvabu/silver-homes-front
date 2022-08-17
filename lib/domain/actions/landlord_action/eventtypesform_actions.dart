@@ -8,7 +8,7 @@ class UpdateEventTypesForm implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesFormState(selectView: index);
+    return appState.copyWith.eventTypesFormState(selectView: index);
   }
 }
 
@@ -19,7 +19,7 @@ class UpdateEventTypesFormAddress implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesFormState(eventtypes_address: title);
+    return appState.copyWith.eventTypesFormState(eventtypes_address: title);
   }
 }
 
@@ -30,6 +30,6 @@ class UpdateEventTypesFormisValueUpdate implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesFormState(isValueUpdate: isValueUpdate);
+    return appState.copyWith.eventTypesFormState(isValueUpdate: isValueUpdate);
   }
 }

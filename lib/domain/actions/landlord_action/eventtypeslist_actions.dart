@@ -1,4 +1,4 @@
-import 'package:silverhome/domain/entities/eventtypesdata.dart';
+import 'package:silverhome/domain/entities/event_typesdata.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
 
 import 'package:silverhome/presentation/models/app_state.dart';
@@ -11,7 +11,7 @@ class UpdateEventTypesListNameSort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isEventTypesNameSort: isSort);
+    return appState.copyWith.eventTypesListState(isEventTypesNameSort: isSort);
   }
 }
 
@@ -22,7 +22,7 @@ class UpdateEventTypesListUnitSort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isEventTypesUnitSort: isSort);
+    return appState.copyWith.eventTypesListState(isEventTypesUnitSort: isSort);
   }
 }
 
@@ -33,7 +33,7 @@ class UpdateEventTypesListCitySort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isCitySort: isSort);
+    return appState.copyWith.eventTypesListState(isCitySort: isSort);
   }
 }
 
@@ -44,7 +44,7 @@ class UpdateEventTypesListCountrySort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isCountrySort: isSort);
+    return appState.copyWith.eventTypesListState(isCountrySort: isSort);
   }
 }
 
@@ -55,7 +55,7 @@ class UpdateEventTypesListEventTypesTypeSort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isEventTypesTypeSort: isSort);
+    return appState.copyWith.eventTypesListState(isEventTypesTypeSort: isSort);
   }
 }
 
@@ -66,7 +66,7 @@ class UpdateEventTypesListVacancySort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isvacancySort: isSort);
+    return appState.copyWith.eventTypesListState(isvacancySort: isSort);
   }
 }
 
@@ -77,7 +77,7 @@ class UpdateEventTypesListActiveInactiveSort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isActiveInactiveSort: isSort);
+    return appState.copyWith.eventTypesListState(isActiveInactiveSort: isSort);
   }
 }
 
@@ -88,7 +88,7 @@ class UpdateEventTypesListisPublishedSort implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isPublishedSort: isSort);
+    return appState.copyWith.eventTypesListState(isPublishedSort: isSort);
   }
 }
 
@@ -99,7 +99,7 @@ class UpdateEventTypesList implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(eventtypeslist: plist);
+    return appState.copyWith.eventTypesListState(eventtypeslist: plist);
   }
 }
 
@@ -111,7 +111,7 @@ class UpdateEventTypesStatus_UnitsHeld implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(status_UnitsHeld: status_UnitsHeld);
+        .eventTypesListState(status_UnitsHeld: status_UnitsHeld);
   }
 }
 
@@ -123,7 +123,7 @@ class UpdateEventTypesStatus_UnitsRented implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(status_UnitsRented: status_UnitsRented);
+        .eventTypesListState(status_UnitsRented: status_UnitsRented);
   }
 }
 
@@ -135,7 +135,7 @@ class UpdateEventTypesStatus_VacantUnits implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(status_VacantUnits: status_VacantUnits);
+        .eventTypesListState(status_VacantUnits: status_VacantUnits);
   }
 }
 
@@ -146,7 +146,8 @@ class UpdateEventTypesListNameSortAcsDes implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(NameSortAcsDes: NameSortAcsDes);
+    return appState.copyWith
+        .eventTypesListState(NameSortAcsDes: NameSortAcsDes);
   }
 }
 
@@ -157,7 +158,8 @@ class UpdateEventTypesListUnitSortAcsDes implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(UnitSortAcsDes: UnitSortAcsDes);
+    return appState.copyWith
+        .eventTypesListState(UnitSortAcsDes: UnitSortAcsDes);
   }
 }
 
@@ -168,7 +170,8 @@ class UpdateEventTypesListCitySortAcsDes implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(CitySortAcsDes: CitySortAcsDes);
+    return appState.copyWith
+        .eventTypesListState(CitySortAcsDes: CitySortAcsDes);
   }
 }
 
@@ -180,7 +183,7 @@ class UpdateEventTypesListCountrySortAcsDes implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(CountrySortAcsDes: CountrySortAcsDes);
+        .eventTypesListState(CountrySortAcsDes: CountrySortAcsDes);
   }
 }
 
@@ -191,8 +194,8 @@ class UpdateEventTypesListEventTypesTypeSortAcsDes implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventtypesListState(EventTypesTypeSortAcsDes: EventTypesTypeSortAcsDes);
+    return appState.copyWith.eventTypesListState(
+        EventTypesTypeSortAcsDes: EventTypesTypeSortAcsDes);
   }
 }
 
@@ -204,7 +207,7 @@ class UpdateEventTypesListVacancySortAcsDes implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(VacancySortAcsDes: VacancySortAcsDes);
+        .eventTypesListState(VacancySortAcsDes: VacancySortAcsDes);
   }
 }
 
@@ -216,7 +219,7 @@ class UpdateEventTypesListActiveSortAcsDes implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(ActiveSortAcsDes: ActiveSortAcsDes);
+        .eventTypesListState(ActiveSortAcsDes: ActiveSortAcsDes);
   }
 }
 
@@ -228,7 +231,7 @@ class UpdateEventTypesListPublishedSortAcsDes implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(PublishedSortAcsDes: PublishedSortAcsDes);
+        .eventTypesListState(PublishedSortAcsDes: PublishedSortAcsDes);
   }
 }
 
@@ -239,7 +242,7 @@ class UpdateEventTypesListIsloding implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(isloding: isloding);
+    return appState.copyWith.eventTypesListState(isloding: isloding);
   }
 }
 
@@ -251,7 +254,7 @@ class UpdateEventTypesListEventTypesSearchText implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesListState(EventTypesSearchText: EventTypesSearchText);
+        .eventTypesListState(EventTypesSearchText: EventTypesSearchText);
   }
 }
 
@@ -262,7 +265,7 @@ class UpdateEventTypesListPageNo implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(pageNo: pageNo);
+    return appState.copyWith.eventTypesListState(pageNo: pageNo);
   }
 }
 
@@ -273,7 +276,7 @@ class UpdateEventTypesListTotalpage implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(totalpage: totalpage);
+    return appState.copyWith.eventTypesListState(totalpage: totalpage);
   }
 }
 
@@ -284,6 +287,6 @@ class UpdateEventTypesListTotalRecord implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesListState(totalRecord: totalRecord);
+    return appState.copyWith.eventTypesListState(totalRecord: totalRecord);
   }
 }

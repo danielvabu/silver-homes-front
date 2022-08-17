@@ -9,7 +9,7 @@ class UpdateFurnishinglist implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(furnishinglist: furnishinglist);
+    return appState.copyWith.eventTypesState(furnishinglist: furnishinglist);
   }
 }
 
@@ -20,7 +20,7 @@ class UpdateFurnishingValue implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(furnishingValue: furnishingValue);
+    return appState.copyWith.eventTypesState(furnishingValue: furnishingValue);
   }
 }
 
@@ -31,7 +31,7 @@ class UpdateRestrictionlist implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(restrictionlist: restrictionlist);
+    return appState.copyWith.eventTypesState(restrictionlist: restrictionlist);
   }
 }
 
@@ -43,7 +43,7 @@ class UpdateOtherPartialFurniture implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(Other_Partial_Furniture: Other_Partial_Furniture);
+        .eventTypesState(Other_Partial_Furniture: Other_Partial_Furniture);
   }
 }
 
@@ -54,7 +54,7 @@ class UpdateEventTypesBedrooms implements Action {
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventtypesState(EventTypesBedrooms: EventTypesBedrooms);
+    return appState.copyWith.eventTypesState(EventTypesBedrooms: EventTypesBedrooms);
   }
 }
 
@@ -66,7 +66,7 @@ class UpdateEventTypesBathrooms implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(EventTypesBathrooms: EventTypesBathrooms);
+        .eventTypesState(EventTypesBathrooms: EventTypesBathrooms);
   }
 }
 
@@ -78,7 +78,7 @@ class UpdateEventTypesSizeinsquarefeet implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(EventTypesSizeinsquarefeet: EventTypesSizeinsquarefeet);
+        .eventTypesState(EventTypesSizeinsquarefeet: EventTypesSizeinsquarefeet);
   }
 }
 
@@ -90,6 +90,6 @@ class UpdateEventTypesMaxoccupancy implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventtypesState(EventTypesMaxoccupancy: EventTypesMaxoccupancy);
+        .eventTypesState(EventTypesMaxoccupancy: EventTypesMaxoccupancy);
   }
 }
