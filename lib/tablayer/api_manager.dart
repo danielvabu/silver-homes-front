@@ -57,6 +57,7 @@ import 'package:silverhome/domain/entities/citydata.dart';
 import 'package:silverhome/domain/entities/countrydata.dart';
 import 'package:silverhome/domain/entities/emailcheck.dart';
 import 'package:silverhome/domain/entities/employment_details.dart';
+import 'package:silverhome/domain/entities/eventtypeslist.dart';
 import 'package:silverhome/domain/entities/fileobject.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
 import 'package:silverhome/domain/entities/lead_reference.dart';
@@ -1220,94 +1221,72 @@ class ApiManager {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
-    Helper.Log("Property", json);
+    Helper.Log("events_type", json);
 
     HttpClientCall().DSQAPICall(context, json, (error, respoce) {
       if (error) {
         //loader.remove();
         var data = jsonDecode(respoce);
 
-        List<PropertyDataList> propertylist = <PropertyDataList>[];
+        List<EventTypesDataList> eventTypelist = <EventTypesDataList>[];
 
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+          String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null
-              ? myobject['PropertyName'].toString()
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
+
+          String PropertyName = myobject['property_name'] != null
+              ? myobject['property_name'].toString()
               : "";
 
-          String Other_Property_Type = myobject['Other_Property_Type'] != null
-              ? myobject['Other_Property_Type'].toString()
+          String RelationShip = myobject['relationship'] != null
+              ? myobject['relationship'].toString()
               : "";
 
-          String Suite_Unit = myobject['Suite_Unit'] != null
-              ? myobject['Suite_Unit'].toString()
+          String Duration = myobject['duration'] != null
+              ? myobject['duration'].toString()
               : "";
 
-          bool IsActive =
-              myobject['IsActive'] != null ? myobject['IsActive'] : false;
+          int Slots =
+              myobject['slots'] != null ? myobject['slots'].toint() : "";
 
-          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
-              ? myobject['IsAgreed_TandC']
-              : false;
-
-          String City =
-              myobject['City'] != null ? myobject['City'].toString() : "";
-
-          String Country =
-              myobject['Country'] != null ? myobject['Country'].toString() : "";
-
-          int PropDrafting =
-              myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
-
-          bool Vacancy =
-              myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
-
-          bool IsPublished =
-              myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
-
-          SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
-              ? SystemEnumDetails.fromJson(myobject['Property_Type'])
-              : null;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
 
           /*RecordInfo*/
 
-          var objRecordInfo = myobject["RecordInfo"];
+          var objRecordInfo = myobject["recordinfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null
-              ? objRecordInfo['CreatedOn'].toString()
+          String CreatedOn = objRecordInfo['createdon'] != null
+              ? objRecordInfo['createdon'].toString()
               : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
-              ? objRecordInfo['UpdatedOn'].toString()
+          String UpdatedOn = objRecordInfo['updatedon'] != null
+              ? objRecordInfo['updatedon'].toString()
               : "0";
 
-          PropertyDataList propertyData = new PropertyDataList();
-          propertyData.id = ID;
-          propertyData.propertyName = PropertyName;
-          propertyData.otherPropertyType = Other_Property_Type;
-          propertyData.isActive = IsActive;
-          propertyData.isAgreedTandC = IsAgreed_TandC;
-          propertyData.city = City;
-          propertyData.country = Country;
-          propertyData.suiteUnit = Suite_Unit;
-          propertyData.propertyType = Property_Type;
-          propertyData.propDrafting = PropDrafting;
-          propertyData.vacancy = Vacancy;
-          propertyData.isPublished = IsPublished;
-          propertyData.createdOn = CreatedOn;
-          propertyData.updatedOn = UpdatedOn;
+          EventTypesDataList eventData = new EventTypesDataList();
+          eventData.id = ID;
+          eventData.property_name = PropertyName;
+          eventData.duration = Duration;
+          eventData.ispublished = ispublished;
+          eventData.name = Name;
+          eventData.relationship = RelationShip;
+          eventData.slots = Slots;
+          eventData.createdon = CreatedOn;
+          eventData.updatedon = UpdatedOn;
 
-          propertylist.add(propertyData);
+          eventTypelist.add(eventData);
         }
 
         /* propertylist.sort((a, b) =>
             b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));*/
 
         if (ftime == 0) {
-          if (propertylist.length > 0) {
+          if (eventTypelist.length > 0) {
             int TotalRecords =
                 data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
@@ -1328,7 +1307,7 @@ class ApiManager {
         }
 
         _store.dispatch(UpdatePropertyListIsloding(false));
-        _store.dispatch(UpdatePropertyList(propertylist));
+        // _store.dispatch(UpdatePropertyList(eventTypelist));
       } else {
         // loader.remove();
         _store.dispatch(UpdatePropertyListIsloding(false));

@@ -2,69 +2,49 @@ import 'package:silverhome/tablayer/tablePOJO.dart';
 
 class EventTypesDataList {
   EventTypesDataList({
-    this.eventtypesType,
-    this.isActive,
     this.id,
-    this.isPublished,
-    this.isAgreedTandC,
-    this.propDrafting,
-    this.city,
-    this.eventtypesName,
-    this.otherEventTypesType,
-    this.country,
-    this.suiteUnit,
-    this.vacancy,
-    this.createdOn,
-    this.updatedOn,
+    this.name,
+    this.ispublished,
+    this.property_name,
+    this.relationship,
+    this.duration,
+    this.slots,
+    this.createdon,
+    this.updatedon,
   });
-
-  SystemEnumDetails? eventtypesType;
-  bool? isActive;
   String? id;
-  bool? isPublished;
-  bool? isAgreedTandC;
-  int? propDrafting;
-  String? city;
-  String? eventtypesName;
-  String? otherEventTypesType;
-  String? country;
-  String? suiteUnit;
-  bool? vacancy;
-  String? createdOn;
-  String? updatedOn;
+
+  String? name;
+  bool? ispublished;
+  String? property_name;
+  String? relationship;
+  String? duration;
+  int? slots;
+  String? createdon;
+  String? updatedon;
 
   factory EventTypesDataList.fromJson(Map<String, dynamic> json) =>
       EventTypesDataList(
-        eventtypesType: SystemEnumDetails.fromJson(json["EventTypes_Type"]),
-        isActive: json["IsActive"],
-        id: json["ID"],
-        isPublished: json["IsPublished"],
-        isAgreedTandC: json["IsAgreed_TandC"],
-        propDrafting: json["PropDrafting"],
-        city: json["City"],
-        eventtypesName: json["EventTypesName"],
-        otherEventTypesType: json["otherEventTypesType"],
-        country: json["Country"],
-        suiteUnit: json["Suite_Unit"],
-        vacancy: json["Vacancy"],
-        createdOn: json["CreatedOn"],
-        updatedOn: json["UpdatedOn"],
+        id: json["id"],
+        name: json["name"],
+        property_name: json["property_name"],
+        relationship: json["relationship"],
+        ispublished: json["ispublished"],
+        duration: json["duration"],
+        slots: json["slots"],
+        createdon: json["createdon"],
+        updatedon: json["updatedon"],
       );
 
   Map<String, dynamic> toJson() => {
-        "EventTypes_Type": eventtypesType!.toJson(),
-        "IsActive": isActive,
-        "ID": id,
-        "IsPublished": isPublished,
-        "IsAgreed_TandC": isAgreedTandC,
-        "PropDrafting": propDrafting,
-        "City": city,
-        "EventTypesName": eventtypesName,
-        "otherEventTypesType": otherEventTypesType,
-        "Country": country,
-        "Suite_Unit": suiteUnit,
-        "Vacancy": vacancy,
-        "CreatedOn": createdOn,
-        "UpdatedOn": updatedOn,
+        "id": id,
+        "name": name,
+        "property_name": property_name,
+        "relationShip": relationship,
+        "isPublished": ispublished,
+        "duration": duration,
+        "slots": slots,
+        "createdon": createdon,
+        "updatedon": updatedon,
       };
 }
