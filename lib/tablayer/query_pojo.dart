@@ -1698,6 +1698,47 @@ class PropertySpecification {
       };
 }
 
+class EventTypesSpecification {
+  String? Bedrooms;
+  String? Bathrooms;
+  String? Max_Occupancy;
+  String? Size;
+  String? Furnishing;
+  String? Other_Partial_Furniture;
+  int? PropDrafting;
+
+  EventTypesSpecification({
+    this.Bedrooms,
+    this.Bathrooms,
+    this.Max_Occupancy,
+    this.Size,
+    this.Furnishing,
+    this.Other_Partial_Furniture,
+    this.PropDrafting,
+  });
+
+  factory EventTypesSpecification.fromJson(Map<String, dynamic> json) =>
+      EventTypesSpecification(
+        Bedrooms: json["Bedrooms"],
+        Bathrooms: json["Bathrooms"],
+        Max_Occupancy: json["Max_Occupancy"],
+        Size: json["Size"],
+        Furnishing: json["Furnishing"],
+        Other_Partial_Furniture: json["Other_Partial_Furniture"],
+        PropDrafting: json["PropDrafting"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Bedrooms": Bedrooms,
+        "Bathrooms": Bathrooms,
+        "Max_Occupancy": Max_Occupancy,
+        "Size": Size,
+        "Furnishing": Furnishing,
+        "Other_Partial_Furniture": Other_Partial_Furniture,
+        "PropDrafting": PropDrafting,
+      };
+}
+
 class PropertyRestriction {
   String? Prop_ID;
   String? Restrictions;
@@ -1706,6 +1747,24 @@ class PropertyRestriction {
 
   factory PropertyRestriction.fromJson(Map<String, dynamic> json) =>
       PropertyRestriction(
+        Prop_ID: json["Prop_ID"],
+        Restrictions: json["Restrictions"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Prop_ID": Prop_ID,
+        "Restrictions": Restrictions,
+      };
+}
+
+class EventTypesRestriction {
+  String? Prop_ID;
+  String? Restrictions;
+
+  EventTypesRestriction({this.Prop_ID, this.Restrictions});
+
+  factory EventTypesRestriction.fromJson(Map<String, dynamic> json) =>
+      EventTypesRestriction(
         Prop_ID: json["Prop_ID"],
         Restrictions: json["Restrictions"],
       );

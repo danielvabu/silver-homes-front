@@ -163,7 +163,7 @@ class _StepEventTypesSpecificationRestrictionState
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          GlobleString.PS2_EventTypes_Specifications,
+                          "GlobleString.PS2_EventTypes_Specifications",
                           style: MyStyles.Medium(20, myColor.Circle_main),
                           textAlign: TextAlign.center,
                         ),
@@ -178,7 +178,7 @@ class _StepEventTypesSpecificationRestrictionState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS2_EventTypes_Bedrooms,
+                              "GlobleString.PS2_EventTypes_Bedrooms",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -235,7 +235,7 @@ class _StepEventTypesSpecificationRestrictionState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS2_EventTypes_Bathrooms,
+                              "GlobleString.PS2_EventTypes_Bathrooms",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -291,7 +291,7 @@ class _StepEventTypesSpecificationRestrictionState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS2_EventTypes_Sizeinsquarefeet,
+                              "GlobleString.PS2_EventTypes_Sizeinsquarefeet",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -366,7 +366,7 @@ class _StepEventTypesSpecificationRestrictionState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS2_EventTypes_Maxoccupancy,
+                              "GlobleString.PS2_EventTypes_Maxoccupancy",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -426,7 +426,7 @@ class _StepEventTypesSpecificationRestrictionState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.PS2_EventTypes_Furnishing,
+                              "GlobleString.PS2_EventTypes_Furnishing",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -510,8 +510,8 @@ class _StepEventTypesSpecificationRestrictionState
                                           width: 1.0),
                                     ),
                                     isDense: true,
-                                    hintText: GlobleString
-                                        .PS2_EventTypes_Furnishing_partial,
+                                    hintText:
+                                        "GlobleString.PS2_EventTypes_Furnishing_partial",
                                     hintStyle:
                                         MyStyles.Regular(14, myColor.hintcolor),
                                     contentPadding: EdgeInsets.all(12),
@@ -534,7 +534,7 @@ class _StepEventTypesSpecificationRestrictionState
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          GlobleString.PS2_EventTypes_Restrictions,
+                          "GlobleString.PS2_EventTypes_Restrictions",
                           style: MyStyles.Medium(20, myColor.Circle_main),
                           textAlign: TextAlign.center,
                         ),
@@ -573,7 +573,7 @@ class _StepEventTypesSpecificationRestrictionState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            GlobleString.PS2_EventTypes_restrictions,
+            "GlobleString.PS2_EventTypes_restrictions",
             style: MyStyles.Medium(14, myColor.black),
             textAlign: TextAlign.start,
           ),
@@ -659,33 +659,33 @@ class _StepEventTypesSpecificationRestrictionState
         eventtypesState.EventTypesBedrooms == "0") {
       _store.dispatch(UpdateErrorEventTypesBedrooms(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_Bedrooms_error, false);
+          context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
     } else if (eventtypesState.EventTypesBathrooms.isEmpty ||
         eventtypesState.EventTypesBathrooms == "0") {
       _store.dispatch(UpdateErrorEventTypesBathrooms(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_Bathrooms_error, false);
+          context, "GlobleString.PS2_EventTypes_Bathrooms_error", false);
     } else if (eventtypesState.EventTypesSizeinsquarefeet == "" ||
         eventtypesState.EventTypesSizeinsquarefeet == "0") {
       _store.dispatch(UpdateErrorEventTypesSizeinsquarefeet(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_Sizeinsquarefeet_error, false);
+          context, "GlobleString.PS2_EventTypes_Sizeinsquarefeet_error", false);
     } else if (eventtypesState.EventTypesMaxoccupancy == "") {
       _store.dispatch(UpdateErrorEventTypesMaxoccupancy(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_Maxoccupancy_error, false);
+          context, "GlobleString.PS2_EventTypes_Maxoccupancy_error", false);
     } else if (eventtypesState.furnishingValue == null) {
       _store.dispatch(UpdateErrorFurnishing(true));
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_Furnishing_error, false);
+          context, "GlobleString.PS2_EventTypes_Furnishing_error", false);
     } else if (eventtypesState.furnishingValue!.EnumDetailID == 3 &&
         eventtypesState.Other_Partial_Furniture.isEmpty) {
       _store.dispatch(UpdateErrorOther_Partial_Furniture(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_partial_furniture_error, false);
+      ToastUtils.showCustomToast(context,
+          "GlobleString.PS2_EventTypes_partial_furniture_error", false);
     } else if (RestrictionValidation(eventtypesState.restrictionlist)) {
       ToastUtils.showCustomToast(
-          context, GlobleString.PS2_EventTypes_restrictions_error, false);
+          context, "GlobleString.PS2_EventTypes_restrictions_error", false);
     } else {
       List<EventTypesRestriction> restrictionlist = <EventTypesRestriction>[];
 
@@ -756,7 +756,7 @@ class _StepEventTypesSpecificationRestrictionState
                   eventtypesSpecification.PropDrafting!));
 
               ToastUtils.showCustomToast(
-                  context, GlobleString.PS_Save_EventTypesse, true);
+                  context, "GlobleString.PS_Save_EventTypesse", true);
 
               if (!isGotoBack) {
                 if (stepper == 0)

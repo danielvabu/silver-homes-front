@@ -791,6 +791,59 @@ class ApiManager {
     });
   }
 
+  AddEventTypesSpecificatinRestriction(BuildContext context, List<Object> POJO,
+      Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+    List<QueryObject> queryList = <QueryObject>[];
+
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    var querydecode = jsonDecode(query);
+    QueryObject updatequery = QueryObject.fromJson(querydecode);
+
+    for (int i = 0; i < POJO.length; i++) {
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.Property_Restriction,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
+
+      var queryinsetdecode = jsonDecode(queryinsert);
+      QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
+      queryList.add(insetquery);
+    }
+
+    queryList.add(updatequery);
+    String json = jsonEncode(queryList);
+
+    HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
+      if (error) {
+        List data = jsonDecode(respoce) as List;
+
+        bool issuccess = false;
+
+        for (int i = 0; i < data.length; i++) {
+          var myobject = data[i];
+
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
+
+          if (StatusCode.isEmpty || StatusCode != "200") {
+            issuccess = true;
+            CallBackQuesy(false, "");
+            break;
+          }
+
+          if ((data.length - 1) == i && !issuccess) {
+            CallBackQuesy(true, "");
+          }
+        }
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   getPropertyFeaturelist(BuildContext context) async {
     Object blankObject = new Object();
 
