@@ -37,12 +37,13 @@ class EventTypesHeader extends StatefulWidget {
 }
 
 class _EventTypesHeaderState extends State<EventTypesHeader> {
-  double height = 0, width = 0;
+  double height = 0, width = 0, parte = 0;
 
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 230;
+    parte = width / 100;
     return columnHeader();
   }
 
@@ -60,20 +61,13 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
-    result.add(_headerEventTypesName('Event Types Nmae'
-        //GlobleString.PH_EventTypes_Name
-        ));
-    result.add(_headerUnit(GlobleString.PH_Unit));
-    result.add(_headerCity(GlobleString.PH_City));
-    result.add(_headerCountry(GlobleString.PH_Country));
-    result.add(_headerEventTypesType('Event Types Type'
-        //GlobleString.PH_EventTypes_Type
-        ));
-    result.add(_headerVacancy(GlobleString.PH_Vacancy));
-    result.add(_headerStatus(GlobleString.PH_Status));
-    result.add(_headerActiveInactive(GlobleString.PH_Active_Inactive));
-    result.add(_headerIsPublished(GlobleString.PH_IsPublished));
-    result.add(_headerTextAction(GlobleString.ACH_Action));
+    result.add(_headerEventTypesName('Event Types Name'));
+    result.add(_headerUnit('Property Name'));
+    result.add(_headerCity('Relationship'));
+    result.add(_headerCountry('Duration'));
+    result.add(_headerEventTypesType('Scheduled Slots'));
+    result.add(_headerVacancy('Publish'));
+    result.add(_headerTextAction(' '));
     return result;
   }
 
@@ -84,8 +78,8 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 8,
-        margin: EdgeInsets.only(left: 10),
+        width: parte * 25,
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -96,9 +90,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -118,7 +110,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 13,
+        width: parte * 20,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -152,7 +144,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 11,
+        width: parte * 10,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -186,7 +178,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 10,
+        width: parte * 10,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -220,7 +212,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 11,
+        width: parte * 10,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -256,89 +248,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 15,
-        margin: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerStatus(String text) {
-    return Container(
-      height: 40,
-      width: width / 14.5,
-      margin: EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        text,
-        textAlign: TextAlign.start,
-        style: MyStyles.SemiBold(12, myColor.text_color),
-      ),
-    );
-  }
-
-  Widget _headerActiveInactive(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortActiveInactive();
-      },
-      child: Container(
-        height: 40,
-        width: width / 11,
-        margin: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerIsPublished(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortIsPublished();
-      },
-      child: Container(
-        height: 40,
-        width: width / 13,
+        width: parte * 10,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(

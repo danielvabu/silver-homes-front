@@ -54,7 +54,7 @@ class EventTypesItem extends StatefulWidget {
 }
 
 class _EventTypesItemState extends State<EventTypesItem> {
-  double height = 0, width = 0;
+  double height = 0, width = 0, parte = 0;
 
   final _store = getIt<AppStore>();
 
@@ -67,6 +67,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 230;
+    parte = width / 100;
 
     return Container(
       width: width,
@@ -77,7 +78,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
 
   Widget ListviewBuid(List<EventTypesDataList> listdata) {
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
+      separatorBuilder: (context, index) => const Divider(
         color: myColor.TA_table_header,
         thickness: 0,
         height: 0,
@@ -120,7 +121,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       },
       child: Container(
         height: 40,
-        width: width / 8,
+        width: parte * 25,
         margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
@@ -139,7 +140,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueUnit(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 13,
+      width: parte * 20,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -154,7 +155,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueCity(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 11,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -169,7 +170,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueCountry(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 10,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -184,7 +185,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueEventTypesType(EventTypesDataList model) {
     return Container(
       height: 40,
-      width: width / 11,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -198,7 +199,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueIsPublished(EventTypesDataList model, int index) {
     return Container(
       height: 40,
-      width: width / 13,
+      width: parte * 10,
       margin: EdgeInsets.only(left: 15),
       alignment: Alignment.center,
       child: Row(
