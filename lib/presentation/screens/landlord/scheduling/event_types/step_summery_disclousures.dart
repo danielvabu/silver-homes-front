@@ -74,9 +74,9 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
   initNavigationBack() {
     navigationNotifier.addListener(() {
       if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.eventtypesSummary) {
+          NavigationConstant.eventTypesSummary) {
         stepper = navigationNotifier.stepper;
-        _addSaveAndFinishCall(_store.state!.eventtypesSummeryState);
+        _addSaveAndFinishCall(_store.state!.eventTypesSummeryState);
       }
     });
   }
@@ -93,7 +93,7 @@ class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
       child: SingleChildScrollView(
         child: Container(
           child: ConnectState<EventTypesSummeryState>(
-            map: (state) => state.eventtypesSummeryState,
+            map: (state) => state.eventTypesSummeryState,
             where: notIdentical,
             builder: (eventtypesSummeryState) {
               return Column(

@@ -31,7 +31,9 @@ class _$AppStateTearOff {
       required FunnelViewState funnelViewState,
       required PropertyFormState propertyFormState,
       required PropertyState propertyState,
+      required EventTypesState eventTypesState,
       required PropertySummeryState propertySummeryState,
+      required EventTypesSummeryState eventTypesSummeryState,
       required PropertyListState propertyListState,
       required EventTypesListState eventTypesListState,
       required EditLeadState editLeadState,
@@ -95,7 +97,9 @@ class _$AppStateTearOff {
       funnelViewState: funnelViewState,
       propertyFormState: propertyFormState,
       propertyState: propertyState,
+      eventTypesState: eventTypesState,
       propertySummeryState: propertySummeryState,
+      eventTypesSummeryState: eventTypesSummeryState,
       propertyListState: propertyListState,
       eventTypesListState: eventTypesListState,
       editLeadState: editLeadState,
@@ -170,7 +174,10 @@ mixin _$AppState {
   FunnelViewState get funnelViewState => throw _privateConstructorUsedError;
   PropertyFormState get propertyFormState => throw _privateConstructorUsedError;
   PropertyState get propertyState => throw _privateConstructorUsedError;
+  EventTypesState get eventTypesState => throw _privateConstructorUsedError;
   PropertySummeryState get propertySummeryState =>
+      throw _privateConstructorUsedError;
+  EventTypesSummeryState get eventTypesSummeryState =>
       throw _privateConstructorUsedError;
   PropertyListState get propertyListState => throw _privateConstructorUsedError;
   EventTypesListState get eventTypesListState =>
@@ -279,7 +286,9 @@ abstract class $AppStateCopyWith<$Res> {
       FunnelViewState funnelViewState,
       PropertyFormState propertyFormState,
       PropertyState propertyState,
+      EventTypesState eventTypesState,
       PropertySummeryState propertySummeryState,
+      EventTypesSummeryState eventTypesSummeryState,
       PropertyListState propertyListState,
       EventTypesListState eventTypesListState,
       EditLeadState editLeadState,
@@ -341,7 +350,9 @@ abstract class $AppStateCopyWith<$Res> {
   $FunnelViewStateCopyWith<$Res> get funnelViewState;
   $PropertyFormStateCopyWith<$Res> get propertyFormState;
   $PropertyStateCopyWith<$Res> get propertyState;
+  $EventTypesStateCopyWith<$Res> get eventTypesState;
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState;
+  $EventTypesSummeryStateCopyWith<$Res> get eventTypesSummeryState;
   $PropertyListStateCopyWith<$Res> get propertyListState;
   $EventTypesListStateCopyWith<$Res> get eventTypesListState;
   $EditLeadStateCopyWith<$Res> get editLeadState;
@@ -419,7 +430,9 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
     Object? funnelViewState = freezed,
     Object? propertyFormState = freezed,
     Object? propertyState = freezed,
+    Object? eventTypesState = freezed,
     Object? propertySummeryState = freezed,
+    Object? eventTypesSummeryState = freezed,
     Object? propertyListState = freezed,
     Object? eventTypesListState = freezed,
     Object? editLeadState = freezed,
@@ -524,10 +537,18 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.propertyState
           : propertyState // ignore: cast_nullable_to_non_nullable
               as PropertyState,
+      eventTypesState: eventTypesState == freezed
+          ? _value.eventTypesState
+          : eventTypesState // ignore: cast_nullable_to_non_nullable
+              as EventTypesState,
       propertySummeryState: propertySummeryState == freezed
           ? _value.propertySummeryState
           : propertySummeryState // ignore: cast_nullable_to_non_nullable
               as PropertySummeryState,
+      eventTypesSummeryState: eventTypesSummeryState == freezed
+          ? _value.eventTypesSummeryState
+          : eventTypesSummeryState // ignore: cast_nullable_to_non_nullable
+              as EventTypesSummeryState,
       propertyListState: propertyListState == freezed
           ? _value.propertyListState
           : propertyListState // ignore: cast_nullable_to_non_nullable
@@ -821,10 +842,25 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   }
 
   @override
+  $EventTypesStateCopyWith<$Res> get eventTypesState {
+    return $EventTypesStateCopyWith<$Res>(_value.eventTypesState, (value) {
+      return _then(_value.copyWith(eventTypesState: value));
+    });
+  }
+
+  @override
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState {
     return $PropertySummeryStateCopyWith<$Res>(_value.propertySummeryState,
         (value) {
       return _then(_value.copyWith(propertySummeryState: value));
+    });
+  }
+
+  @override
+  $EventTypesSummeryStateCopyWith<$Res> get eventTypesSummeryState {
+    return $EventTypesSummeryStateCopyWith<$Res>(_value.eventTypesSummeryState,
+        (value) {
+      return _then(_value.copyWith(eventTypesSummeryState: value));
     });
   }
 
@@ -1211,7 +1247,9 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       FunnelViewState funnelViewState,
       PropertyFormState propertyFormState,
       PropertyState propertyState,
+      EventTypesState eventTypesState,
       PropertySummeryState propertySummeryState,
+      EventTypesSummeryState eventTypesSummeryState,
       PropertyListState propertyListState,
       EventTypesListState eventTypesListState,
       EditLeadState editLeadState,
@@ -1288,7 +1326,11 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $PropertyStateCopyWith<$Res> get propertyState;
   @override
+  $EventTypesStateCopyWith<$Res> get eventTypesState;
+  @override
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState;
+  @override
+  $EventTypesSummeryStateCopyWith<$Res> get eventTypesSummeryState;
   @override
   $PropertyListStateCopyWith<$Res> get propertyListState;
   @override
@@ -1413,7 +1455,9 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
     Object? funnelViewState = freezed,
     Object? propertyFormState = freezed,
     Object? propertyState = freezed,
+    Object? eventTypesState = freezed,
     Object? propertySummeryState = freezed,
+    Object? eventTypesSummeryState = freezed,
     Object? propertyListState = freezed,
     Object? eventTypesListState = freezed,
     Object? editLeadState = freezed,
@@ -1518,10 +1562,18 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.propertyState
           : propertyState // ignore: cast_nullable_to_non_nullable
               as PropertyState,
+      eventTypesState: eventTypesState == freezed
+          ? _value.eventTypesState
+          : eventTypesState // ignore: cast_nullable_to_non_nullable
+              as EventTypesState,
       propertySummeryState: propertySummeryState == freezed
           ? _value.propertySummeryState
           : propertySummeryState // ignore: cast_nullable_to_non_nullable
               as PropertySummeryState,
+      eventTypesSummeryState: eventTypesSummeryState == freezed
+          ? _value.eventTypesSummeryState
+          : eventTypesSummeryState // ignore: cast_nullable_to_non_nullable
+              as EventTypesSummeryState,
       propertyListState: propertyListState == freezed
           ? _value.propertyListState
           : propertyListState // ignore: cast_nullable_to_non_nullable
@@ -1730,7 +1782,9 @@ class _$_AppState implements _AppState {
       required this.funnelViewState,
       required this.propertyFormState,
       required this.propertyState,
+      required this.eventTypesState,
       required this.propertySummeryState,
+      required this.eventTypesSummeryState,
       required this.propertyListState,
       required this.eventTypesListState,
       required this.editLeadState,
@@ -1807,7 +1861,11 @@ class _$_AppState implements _AppState {
   @override
   final PropertyState propertyState;
   @override
+  final EventTypesState eventTypesState;
+  @override
   final PropertySummeryState propertySummeryState;
+  @override
+  final EventTypesSummeryState eventTypesSummeryState;
   @override
   final PropertyListState propertyListState;
   @override
@@ -1955,7 +2013,9 @@ class _$_AppState implements _AppState {
             (identical(other.propertyState, propertyState) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyState, propertyState)) &&
+            (identical(other.eventTypesState, eventTypesState) || const DeepCollectionEquality().equals(other.eventTypesState, eventTypesState)) &&
             (identical(other.propertySummeryState, propertySummeryState) || const DeepCollectionEquality().equals(other.propertySummeryState, propertySummeryState)) &&
+            (identical(other.eventTypesSummeryState, eventTypesSummeryState) || const DeepCollectionEquality().equals(other.eventTypesSummeryState, eventTypesSummeryState)) &&
             (identical(other.propertyListState, propertyListState) || const DeepCollectionEquality().equals(other.propertyListState, propertyListState)) &&
             (identical(other.eventTypesListState, eventTypesListState) || const DeepCollectionEquality().equals(other.eventTypesListState, eventTypesListState)) &&
             (identical(other.editLeadState, editLeadState) || const DeepCollectionEquality().equals(other.editLeadState, editLeadState)) &&
@@ -2021,7 +2081,9 @@ class _$_AppState implements _AppState {
       const DeepCollectionEquality().hash(funnelViewState) ^
       const DeepCollectionEquality().hash(propertyFormState) ^
       const DeepCollectionEquality().hash(propertyState) ^
+      const DeepCollectionEquality().hash(eventTypesState) ^
       const DeepCollectionEquality().hash(propertySummeryState) ^
+      const DeepCollectionEquality().hash(eventTypesSummeryState) ^
       const DeepCollectionEquality().hash(propertyListState) ^
       const DeepCollectionEquality().hash(eventTypesListState) ^
       const DeepCollectionEquality().hash(editLeadState) ^
@@ -2091,7 +2153,9 @@ abstract class _AppState implements AppState {
       required FunnelViewState funnelViewState,
       required PropertyFormState propertyFormState,
       required PropertyState propertyState,
+      required EventTypesState eventTypesState,
       required PropertySummeryState propertySummeryState,
+      required EventTypesSummeryState eventTypesSummeryState,
       required PropertyListState propertyListState,
       required EventTypesListState eventTypesListState,
       required EditLeadState editLeadState,
@@ -2175,7 +2239,12 @@ abstract class _AppState implements AppState {
   @override
   PropertyState get propertyState => throw _privateConstructorUsedError;
   @override
+  EventTypesState get eventTypesState => throw _privateConstructorUsedError;
+  @override
   PropertySummeryState get propertySummeryState =>
+      throw _privateConstructorUsedError;
+  @override
+  EventTypesSummeryState get eventTypesSummeryState =>
       throw _privateConstructorUsedError;
   @override
   PropertyListState get propertyListState => throw _privateConstructorUsedError;
