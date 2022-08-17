@@ -26,6 +26,16 @@ class UpdateAddEditProperty implements Action {
   }
 }
 
+class UpdateAddEditEventTypes implements Action {
+  UpdateAddEditEventTypes();
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .portalState(index: 1, title: 'Event Types', subindex: 1);
+  }
+}
+
 class UpdateDetailsProperty implements Action {
   UpdateDetailsProperty();
 

@@ -1073,10 +1073,10 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   propertyIsPublished_call(
       PropertyListState propertyListState, bool isAct, String propertyid) {
-    PropertyIsPublished proactive = new PropertyIsPublished();
+    PropertyIsPublished proactive = PropertyIsPublished();
     proactive.IsPublished = isAct;
 
-    PropertyUpdate propertyUpdate = new PropertyUpdate();
+    PropertyUpdate propertyUpdate = PropertyUpdate();
     propertyUpdate.ID = propertyid;
     propertyUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 

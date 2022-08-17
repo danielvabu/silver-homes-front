@@ -384,7 +384,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     _store.dispatch(UpdateErrorCity(false));
     _store.dispatch(UpdateErrorCountryName(false));
     _store.dispatch(UpdateErrorProvince(false));
-    _store.dispatch(UpdateEventTypesImageList(<EventTypesImageMediaInfo>[]));
+    //_store.dispatch(UpdateEventTypesImageList(<EventTypesImageMediaInfo>[]));
   }
 
   cleareventtypesSummerydetails() {
@@ -1023,11 +1023,11 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
 
   eventtypesActive_InAction_call(EventTypesListState eventtypesListState,
       bool isAct, String eventtypesid) {
-    EventTypesActive proactive = new EventTypesActive();
+    EventTypesActive proactive = EventTypesActive();
     proactive.IsActive = isAct;
     proactive.IsPublished = false;
 
-    EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
+    EventTypesUpdate eventtypesUpdate = EventTypesUpdate();
     eventtypesUpdate.ID = eventtypesid;
     eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
@@ -1038,9 +1038,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         (error, responce) async {
       if (error) {
         if (isAct) {
-          /*  await ApiManager().getEventTypesOnboadingList(
-              context, Prefs.getString(PrefsName.OwnerID));
-          loader.remove();*/
           ApiManager().ArchiveLeadRestoreInEventTypes(context, eventtypesid,
               (status, responce) async {
             if (status) {
@@ -1054,10 +1051,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
             }
           });
         } else {
-          /* await ApiManager().getEventTypesOnboadingList(
-              context, Prefs.getString(PrefsName.OwnerID));
-          loader.remove();*/
-
           ApiManager().ArchiveLeadInEventTypes(context, eventtypesid,
               (status, responce) async {
             if (status) {
@@ -1080,7 +1073,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
 
   eventtypesIsPublished_call(EventTypesListState eventtypesListState,
       bool isAct, String eventtypesid) {
-    EventTypesIsPublished proactive = new EventTypesIsPublished();
+    EventTypesIsPublished proactive = EventTypesIsPublished();
     proactive.IsPublished = isAct;
 
     EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
@@ -1132,7 +1125,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       }
     });
 
-    ApiManager().getEventTypesImagesDSQ(context, propId,
+    /*ApiManager().getEventTypesImagesDSQ(context, propId,
         (status, responce, EventTypesImageMediaInfolist) {
       if (status) {
         _store.dispatch(
@@ -1143,10 +1136,9 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         _store.dispatch(UpdateEventTypesImageList([]));
         _store.dispatch(UpdateSummeryEventTypesImageList([]));
       }
-    });
+    });*/
 
-    ApiManager().getEventTypesAmanityUtility(context, propId,
-        (status, responce, amenitieslist, utilitylist) async {
+    /*ApiManager().getEventTypesAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
@@ -1175,10 +1167,9 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         _store.dispatch(UpdateSummeryEventTypesUtilitiesList([]));
         await ApiManager().getEventTypesFeaturelist(context);
       }
-    });
+    });*/
 
-    await ApiManager().getEventTypesDetails(context, propId,
-        (status, responce, eventtypesData) async {
+    /*await ApiManager().getEventTypesDetails(context, propId,(status, responce, eventtypesData) async {
       if (status) {
         await ApiManager().bindEventTypesData(eventtypesData!);
 
@@ -1225,6 +1216,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       } else {
         loader.remove();
       }
-    });
+    }
+    );*/
   }
 }

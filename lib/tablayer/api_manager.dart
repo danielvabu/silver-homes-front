@@ -1886,6 +1886,52 @@ class ApiManager {
     });
   }
 
+  getEventTypesRestriction(BuildContext context, String Id,
+      CallBackRestriction CallBackQuesy) async {
+    var myjson = {
+      "DSQID": Weburl.DSQ_Property_Restrictions,
+      "LoadLookUpValues": true,
+      "Reqtokens": {"Prop_ID": Id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    Helper.Log("getPropertyRestriction", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        //Helper.Log("getPropertyDetails", respoce);
+
+        List<SystemEnumDetails> restrictionlist = [];
+
+        restrictionlist =
+            await QueryFilter().PlainValues(eSystemEnums().Restrictions);
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          var myobject = data['Result'][i];
+
+          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null
+              ? SystemEnumDetails.fromJson(myobject['Restrictions'])
+              : null;
+
+          for (int d = 0; d < restrictionlist.length; d++) {
+            SystemEnumDetails restric = restrictionlist[d];
+
+            if (restric.EnumDetailID == Restrictions!.EnumDetailID) {
+              restrictionlist[d].ischeck = true;
+            }
+          }
+        }
+        CallBackQuesy(true, respoce, List.from(restrictionlist));
+      } else {
+        ToastUtils.showCustomToast(context, respoce, false);
+        CallBackQuesy(false, respoce, []);
+      }
+    });
+  }
+
   getPropertyRestriction_Customer(BuildContext context, String Id,
       CallBackRestriction CallBackQuesy) async {
     var myjson = {
@@ -1994,6 +2040,22 @@ class ApiManager {
   }
 
   UpdatePropertyActive(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  UpdateEventTypesActive(BuildContext context, Object CPOJO, Object UpPOJO,
       CallBackQuesy CallBackQuesy) {
     String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
@@ -9341,8 +9403,48 @@ class ApiManager {
     });
   }
 
+/*Copiada de la de arriba*/
+  ArchiveLeadInEventTypes(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_Property_Archive,
+      "Reqtokens": {"Prop_ID": propertyid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        callBackQuesy(true, respoce);
+      } else {
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
 /*Archive lead restore in Property*/
   ArchiveLeadRestoreInProperty(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_Property_Archive_Restore,
+      "Reqtokens": {"Prop_ID": propertyid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        callBackQuesy(true, respoce);
+      } else {
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
+/*copiada de la anterior*/
+  ArchiveLeadRestoreInEventTypes(BuildContext context, String propertyid,
       CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Property_Archive_Restore,
