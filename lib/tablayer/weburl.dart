@@ -144,6 +144,10 @@ class Weburl {
   static var DSQ_Property_AM_UT = "09d001cb-9953-4ab7-ba2a-15396128cf56";
   static var DSQ_Property_Images = "18b332a0-4a49-4abb-a15d-f7a2ef64f2f9";
   static var DSQ_Property_Restrictions = "f9b47b59-860c-4438-8cce-37ce7290e53a";
+
+  static var DSQ_EventTypesOnBoardingList =
+      "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE8";
+
   static var DSQ_APPLICATIONLIST_OWNERWISE =
       "CB8345B3-BA21-4FB7-8B38-BBF7EF074AA7";
   static var DSQ_APPLICANT_DETAILS = "0FE8C355-75AA-453E-881D-E3D91D3B4D11";

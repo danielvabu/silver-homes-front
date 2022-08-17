@@ -5,29 +5,32 @@ import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 
 class EventTypesHeader extends StatefulWidget {
-  final VoidCallback _callbackSortCompanyName;
+  final VoidCallback _callbackSortEventTypes;
+  final VoidCallback _callbackSortUnit;
   final VoidCallback _callbackSortCity;
-  final VoidCallback _callbackSortContactName;
-  final VoidCallback _callbackSortEmail;
-  final VoidCallback _callbackSortPhone;
-  final VoidCallback _callbackSortCategory;
-  final VoidCallback _callbackSortRating;
+  final VoidCallback _callbackSortCountry;
+  final VoidCallback _callbackSortEventTypesType;
+  final VoidCallback _callbackSortVacancy;
+  final VoidCallback _callbackSortActiveInactive;
+  final VoidCallback _callbackSortIsPublished;
 
   EventTypesHeader({
-    required VoidCallback onPressedSortCompanyName,
+    required VoidCallback onPressedSortEventTypes,
+    required VoidCallback onPressedSortUnit,
     required VoidCallback onPressedSortCity,
-    required VoidCallback onPressedSortContactName,
-    required VoidCallback onPressedSortEmail,
-    required VoidCallback onPressedSortPhone,
-    required VoidCallback onPressedSortCategory,
-    required VoidCallback onPressedSortRating,
-  })  : _callbackSortCompanyName = onPressedSortCompanyName,
+    required VoidCallback onPressedSortCountry,
+    required VoidCallback onPressedSortEventTypesType,
+    required VoidCallback onPressedSortVacancy,
+    required VoidCallback onPressedSortActiveInactive,
+    required VoidCallback onPressedSortIsPublished,
+  })  : _callbackSortEventTypes = onPressedSortEventTypes,
+        _callbackSortUnit = onPressedSortUnit,
         _callbackSortCity = onPressedSortCity,
-        _callbackSortContactName = onPressedSortContactName,
-        _callbackSortEmail = onPressedSortEmail,
-        _callbackSortPhone = onPressedSortPhone,
-        _callbackSortCategory = onPressedSortCategory,
-        _callbackSortRating = onPressedSortRating;
+        _callbackSortCountry = onPressedSortCountry,
+        _callbackSortEventTypesType = onPressedSortEventTypesType,
+        _callbackSortVacancy = onPressedSortVacancy,
+        _callbackSortActiveInactive = onPressedSortActiveInactive,
+        _callbackSortIsPublished = onPressedSortIsPublished;
 
   @override
   _EventTypesHeaderState createState() => _EventTypesHeaderState();
@@ -57,26 +60,62 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
-    result.add(_headerCompanyName(GlobleString.LMV_CompanyName));
-    result.add(_headerCity(GlobleString.LMV_City));
-    result.add(_headerContactName(GlobleString.LMV_ContactName));
-    result.add(_headerEmail(GlobleString.LMV_Email));
-    result.add(_headerPhone(GlobleString.LMV_Phone));
-    result.add(_headerCategory(GlobleString.LMV_Category));
-    result.add(_headerRating(GlobleString.LMV_Rating));
+    result.add(_headerEventTypesName(GlobleString.PH_EventTypes_Name));
+    result.add(_headerUnit(GlobleString.PH_Unit));
+    result.add(_headerCity(GlobleString.PH_City));
+    result.add(_headerCountry(GlobleString.PH_Country));
+    result.add(_headerEventTypesType(GlobleString.PH_EventTypes_Type));
+    result.add(_headerVacancy(GlobleString.PH_Vacancy));
+    result.add(_headerStatus(GlobleString.PH_Status));
+    result.add(_headerActiveInactive(GlobleString.PH_Active_Inactive));
+    result.add(_headerIsPublished(GlobleString.PH_IsPublished));
     result.add(_headerTextAction(GlobleString.ACH_Action));
     return result;
   }
 
-  Widget _headerCompanyName(String text) {
+  Widget _headerEventTypesName(String text) {
     return InkWell(
       onTap: () {
-        widget._callbackSortCompanyName();
+        widget._callbackSortEventTypes();
       },
       child: Container(
         height: 40,
-        width: width / 7,
-        padding: EdgeInsets.only(left: 10),
+        width: width / 8,
+        margin: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _headerUnit(String text) {
+    return InkWell(
+      onTap: () {
+        widget._callbackSortUnit();
+      },
+      child: Container(
+        height: 40,
+        width: width / 13,
+        margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -109,8 +148,8 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 10,
-        padding: EdgeInsets.only(left: 10),
+        width: width / 11,
+        margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -136,78 +175,10 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     );
   }
 
-  Widget _headerContactName(String text) {
+  Widget _headerCountry(String text) {
     return InkWell(
       onTap: () {
-        widget._callbackSortContactName();
-      },
-      child: Container(
-        height: 40,
-        width: width / 8,
-        padding: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerEmail(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortEmail();
-      },
-      child: Container(
-        height: 40,
-        width: width / 5,
-        padding: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerPhone(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortPhone();
+        widget._callbackSortCountry();
       },
       child: Container(
         height: 40,
@@ -238,19 +209,55 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     );
   }
 
-  Widget _headerCategory(String text) {
+  Widget _headerEventTypesType(String text) {
     return InkWell(
       onTap: () {
-        widget._callbackSortCategory();
+        widget._callbackSortEventTypesType();
       },
       child: Container(
         height: 40,
-        width: width / 10,
-        //margin: EdgeInsets.only(left: 10),
+        width: width / 11,
+        margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.start,
+                style: MyStyles.SemiBold(12, myColor.text_color),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _headerVacancy(String text) {
+    return InkWell(
+      onTap: () {
+        widget._callbackSortVacancy();
+      },
+      child: Container(
+        height: 40,
+        width: width / 15,
+        margin: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               text,
@@ -272,15 +279,63 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     );
   }
 
-  Widget _headerRating(String text) {
+  Widget _headerStatus(String text) {
+    return Container(
+      height: 40,
+      width: width / 14.5,
+      margin: EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: MyStyles.SemiBold(12, myColor.text_color),
+      ),
+    );
+  }
+
+  Widget _headerActiveInactive(String text) {
     return InkWell(
       onTap: () {
-        widget._callbackSortRating();
+        widget._callbackSortActiveInactive();
       },
       child: Container(
         height: 40,
-        width: width / 12,
-        //margin: EdgeInsets.only(left: 10),
+        width: width / 11,
+        margin: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _headerIsPublished(String text) {
+    return InkWell(
+      onTap: () {
+        widget._callbackSortIsPublished();
+      },
+      child: Container(
+        height: 40,
+        width: width / 13,
+        margin: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

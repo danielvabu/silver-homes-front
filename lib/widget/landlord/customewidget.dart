@@ -551,6 +551,34 @@ class CustomeWidget {
     );
   }
 
+  static Widget AddEventTypes() {
+    return Container(
+      height: 32,
+      padding: EdgeInsets.only(left: 15, right: 15),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: myColor.Circle_main,
+      ),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(
+              Icons.add_circle,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+          Text(
+            'Add Event Type',
+            style: MyStyles.Regular(14, myColor.white),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget AddNewButton(String title) {
     return Container(
       height: 32,

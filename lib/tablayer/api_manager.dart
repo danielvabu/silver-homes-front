@@ -1103,6 +1103,128 @@ class ApiManager {
     });
   }
 
+  getEventTypesOnboadingList(
+      BuildContext context, String json, int ftime) async {
+    /*loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+
+    Helper.Log("Property", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        //loader.remove();
+        var data = jsonDecode(respoce);
+
+        List<PropertyDataList> propertylist = <PropertyDataList>[];
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          var myobject = data['Result'][i];
+
+          String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
+
+          String Other_Property_Type = myobject['Other_Property_Type'] != null
+              ? myobject['Other_Property_Type'].toString()
+              : "";
+
+          String Suite_Unit = myobject['Suite_Unit'] != null
+              ? myobject['Suite_Unit'].toString()
+              : "";
+
+          bool IsActive =
+              myobject['IsActive'] != null ? myobject['IsActive'] : false;
+
+          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+              ? myobject['IsAgreed_TandC']
+              : false;
+
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
+
+          String Country =
+              myobject['Country'] != null ? myobject['Country'].toString() : "";
+
+          int PropDrafting =
+              myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+
+          bool Vacancy =
+              myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+
+          bool IsPublished =
+              myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
+
+          SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+              : null;
+
+          /*RecordInfo*/
+
+          var objRecordInfo = myobject["RecordInfo"];
+
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
+
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
+
+          PropertyDataList propertyData = new PropertyDataList();
+          propertyData.id = ID;
+          propertyData.propertyName = PropertyName;
+          propertyData.otherPropertyType = Other_Property_Type;
+          propertyData.isActive = IsActive;
+          propertyData.isAgreedTandC = IsAgreed_TandC;
+          propertyData.city = City;
+          propertyData.country = Country;
+          propertyData.suiteUnit = Suite_Unit;
+          propertyData.propertyType = Property_Type;
+          propertyData.propDrafting = PropDrafting;
+          propertyData.vacancy = Vacancy;
+          propertyData.isPublished = IsPublished;
+          propertyData.createdOn = CreatedOn;
+          propertyData.updatedOn = UpdatedOn;
+
+          propertylist.add(propertyData);
+        }
+
+        /* propertylist.sort((a, b) =>
+            b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));*/
+
+        if (ftime == 0) {
+          if (propertylist.length > 0) {
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+
+            _store.dispatch(UpdatePropertyListTotalRecord(TotalRecords));
+
+            if (TotalRecords % 15 == 0) {
+              int dept_totalpage = int.parse((TotalRecords / 15).toString());
+              _store.dispatch(UpdatePropertyListTotalpage(dept_totalpage));
+            } else {
+              double page = (TotalRecords / 15);
+              int dept_totalpage = (page + 1).toInt();
+              _store.dispatch(UpdatePropertyListTotalpage(dept_totalpage));
+            }
+          } else {
+            _store.dispatch(UpdatePropertyListTotalpage(1));
+          }
+          _store.dispatch(UpdatePropertyListPageNo(1));
+        }
+
+        _store.dispatch(UpdatePropertyListIsloding(false));
+        _store.dispatch(UpdatePropertyList(propertylist));
+      } else {
+        // loader.remove();
+        _store.dispatch(UpdatePropertyListIsloding(false));
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
   getAllPropertyOnboadingListCSV(BuildContext context, String json) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);

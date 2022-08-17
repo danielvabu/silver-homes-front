@@ -87,19 +87,19 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   apimanager(String search, int pageNo, String SortField, int saquence,
       int ftime) async {
-    PropertyListReqtokens reqtokens = new PropertyListReqtokens();
+    PropertyListReqtokens reqtokens = PropertyListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
 
-    Pager pager = new Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
+    Pager pager = Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
 
     List<Sort> sortinglist = [];
-    Sort sort = new Sort();
+    Sort sort = Sort();
     sort.fieldId = SortField;
     sort.sortSequence = saquence;
     sortinglist.add(sort);
 
-    DSQQuery dsqQuery = new DSQQuery();
+    DSQQuery dsqQuery = DSQQuery();
     dsqQuery.dsqid = Weburl.DSQ_PropertyOnBoardingList;
     dsqQuery.loadLookUpValues = true;
     dsqQuery.loadRecordInfo = true;

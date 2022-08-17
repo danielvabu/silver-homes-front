@@ -6,6 +6,7 @@ class DSQQuery {
     this.tenantMaintenanceListReqtokens,
     this.landlordlistrequest,
     this.propertyListReqtokens,
+    this.eventTypesListReqtokens,
     this.leadsListReqtokens,
     this.leadsTenantListReqtokens,
     this.loadLookUpValues,
@@ -20,6 +21,7 @@ class DSQQuery {
   MaintenanceListReqtokens? maintenanceListReqtokens;
   LanloadListReqtokens? landlordlistrequest;
   PropertyListReqtokens? propertyListReqtokens;
+  EventTypesListReqtokens? eventTypesListReqtokens;
   LeadsListReqtokens? leadsListReqtokens;
   LeadsTenantListReqtokens? leadsTenantListReqtokens;
   bool? loadLookUpValues;
@@ -37,6 +39,8 @@ class DSQQuery {
         landlordlistrequest: LanloadListReqtokens.fromJson(json["Reqtokens"]),
         propertyListReqtokens:
             PropertyListReqtokens.fromJson(json["Reqtokens"]),
+        eventTypesListReqtokens:
+            EventTypesListReqtokens.fromJson(json["Reqtokens"]),
         leadsListReqtokens: LeadsListReqtokens.fromJson(json["Reqtokens"]),
         leadsTenantListReqtokens:
             LeadsTenantListReqtokens.fromJson(json["Reqtokens"]),
@@ -74,6 +78,9 @@ class DSQQuery {
     }
     if (propertyListReqtokens != null && propertyListReqtokens != "") {
       map["Reqtokens"] = propertyListReqtokens;
+    }
+    if (eventTypesListReqtokens != null && eventTypesListReqtokens != "") {
+      map["Reqtokens"] = eventTypesListReqtokens;
     }
     if (leadsListReqtokens != null && leadsListReqtokens != "") {
       map["Reqtokens"] = leadsListReqtokens;
@@ -211,6 +218,27 @@ class PropertyListReqtokens {
 
   factory PropertyListReqtokens.fromJson(Map<String, dynamic> json) =>
       PropertyListReqtokens(
+        Owner_ID: json["Owner_ID"],
+        Name: json["Name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Owner_ID": Owner_ID,
+        "Name": Name,
+      };
+}
+
+class EventTypesListReqtokens {
+  EventTypesListReqtokens({
+    this.Owner_ID,
+    this.Name,
+  });
+
+  String? Owner_ID;
+  String? Name;
+
+  factory EventTypesListReqtokens.fromJson(Map<String, dynamic> json) =>
+      EventTypesListReqtokens(
         Owner_ID: json["Owner_ID"],
         Name: json["Name"],
       );
