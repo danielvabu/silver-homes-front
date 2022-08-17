@@ -1765,7 +1765,6 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
 class _$_AppState implements _AppState {
   _$_AppState(
       {required this.portalState,
