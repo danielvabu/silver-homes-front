@@ -91,10 +91,10 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
 
-    Pager pager = new Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
+    Pager pager = Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
 
     List<Sort> sortinglist = [];
-    Sort sort = new Sort();
+    Sort sort = Sort();
     sort.fieldId = SortField;
     sort.sortSequence = saquence;
     sortinglist.add(sort);

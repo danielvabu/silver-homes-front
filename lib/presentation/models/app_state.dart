@@ -36,6 +36,7 @@ import 'landlord_models/portal_state.dart';
 import 'landlord_models/preview_document_state.dart';
 import 'landlord_models/preview_lease_state.dart';
 import 'landlord_models/property_list_state.dart';
+import 'landlord_models/eventtypes_list_state.dart';
 import 'landlord_models/property_state.dart';
 import 'landlord_models/property_summery_state.dart';
 import 'landlord_models/propertyform_state.dart';
@@ -82,6 +83,7 @@ abstract class AppState with _$AppState {
     required PropertyState propertyState,
     required PropertySummeryState propertySummeryState,
     required PropertyListState propertyListState,
+    required EventTypesListState eventTypesListState,
     required EditLeadState editLeadState,
     required TenantsApplicationDetailsState tenantsApplicationDetailsState,
     required TenancyVarificationDocumentState tenancyVarificationDocumentState,
@@ -152,6 +154,7 @@ abstract class AppState with _$AppState {
         propertyState: PropertyState.initial(),
         propertySummeryState: PropertySummeryState.initial(),
         propertyListState: PropertyListState.initial(),
+        eventTypesListState: EventTypesListState.initial(),
         editLeadState: EditLeadState.initial(),
         tenantsApplicationDetailsState:
             TenantsApplicationDetailsState.initial(),
