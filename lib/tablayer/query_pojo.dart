@@ -1330,6 +1330,62 @@ class UserData {
       };
 }
 
+/*EventTypes*/
+
+class EventTypesActive {
+  bool? IsActive;
+  bool? IsPublished;
+
+  EventTypesActive({this.IsActive, this.IsPublished});
+
+  factory EventTypesActive.fromJson(Map<String, dynamic> json) =>
+      EventTypesActive(
+        IsActive: json["IsActive"],
+        IsPublished: json["IsPublished"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "IsActive": IsActive,
+        "IsPublished": IsPublished,
+      };
+}
+
+class EventTypesUpdate {
+  String? ID;
+  String? Owner_ID;
+
+  EventTypesUpdate({
+    this.ID,
+    this.Owner_ID,
+  });
+
+  factory EventTypesUpdate.fromJson(Map<String, dynamic> json) =>
+      EventTypesUpdate(
+        ID: json["ID"],
+        Owner_ID: json["Owner_ID"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ID": ID,
+        "Owner_ID": Owner_ID,
+      };
+}
+
+class EventTypesIsPublished {
+  bool? IsPublished;
+
+  EventTypesIsPublished({this.IsPublished});
+
+  factory EventTypesIsPublished.fromJson(Map<String, dynamic> json) =>
+      EventTypesIsPublished(
+        IsPublished: json["IsPublished"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "IsPublished": IsPublished,
+      };
+}
+
 /*Property*/
 
 class PropertyInsert {

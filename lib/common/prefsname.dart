@@ -5,7 +5,8 @@ class PrefsName {
   static const String user_Email = "user_Email";
   static const String user_fname = "user_fname";
   static const String user_lname = "user_lname";
-  static const String user_CustomerFeatureListingURL = "user_CustomerFeatureListingURL";
+  static const String user_CustomerFeatureListingURL =
+      "user_CustomerFeatureListingURL";
   static const String user_CompanyName = "user_CompanyName";
 
   static const String OwnerID = "OwnerID";
@@ -18,6 +19,15 @@ class PrefsName {
   static const String PropertyStep2 = "PropertyStep2";
   static const String PropertyStep3 = "PropertyStep3";
   static const String PropertyActive = "PropertyActive";
+
+  static const String EventTypesEdit = "PropertyEdit";
+  static const String EventTypesID = "PropertyID";
+  static const String EventTypesEditMode = "PropertyEditMode";
+  static const String EventTypesAgreeTC = "PropertyAgreeTC";
+  static const String EventTypesStep1 = "PropertyStep1";
+  static const String EventTypesStep2 = "PropertyStep2";
+  static const String EventTypesStep3 = "PropertyStep3";
+  static const String EventTypesActive = "PropertyActive";
 
   static const String TCF_EditApplicant = "EditApplicant";
   static const String TCF_ApplicantID = "TCF_ApplicantID";
@@ -73,7 +83,8 @@ class PrefsName {
 /*=======================   Basic Tenant listing  ======================*/
 /*==========================================================================*/
 
-  static const String BT_CustomerFeatureListingURL = "BT_CustomerFeatureListingURL";
+  static const String BT_CustomerFeatureListingURL =
+      "BT_CustomerFeatureListingURL";
   static const String BT_CompanyName = "BT_CompanyName";
   static const String BT_CompanyLink = "BT_CompanyLink";
   static const String BT_CompanyLogoid = "BT_CompanyLogoId";
@@ -95,11 +106,9 @@ class PrefsName {
   static const String BT_PropName = "BT_PropName";
   static const String BT_PropAddress = "BT_PropAddress";
 
-  static const String BT_OwnerID= "BT_OwnerID";
-  static const String BT_Owner_name= "BT_Owner_name";
-  static const String BT_Owner_email= "BT_Owner_email";
-  static const String BT_Owner_phoneno= "BT_Owner_phoneno";
-  static const String BT_Owner_Companyname= "BT_Owner_Companyname";
-
-
+  static const String BT_OwnerID = "BT_OwnerID";
+  static const String BT_Owner_name = "BT_Owner_name";
+  static const String BT_Owner_email = "BT_Owner_email";
+  static const String BT_Owner_phoneno = "BT_Owner_phoneno";
+  static const String BT_Owner_Companyname = "BT_Owner_Companyname";
 }

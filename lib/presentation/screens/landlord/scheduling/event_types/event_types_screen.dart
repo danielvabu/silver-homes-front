@@ -384,7 +384,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     _store.dispatch(UpdateErrorCity(false));
     _store.dispatch(UpdateErrorCountryName(false));
     _store.dispatch(UpdateErrorProvince(false));
-    _store.dispatch(UpdateEventTypesImageList(<EventTypesImageMediaInfo>[]));
+    //_store.dispatch(UpdateEventTypesImageList(<EventTypesImageMediaInfo>[]));
   }
 
   cleareventtypesSummerydetails() {
@@ -420,8 +420,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     _store.dispatch(UpdateSummeryAgreeTCPP(false));
     _store.dispatch(UpdateSummeryEventTypesDrafting(1));
     _store.dispatch(UpdateSummeryEventTypesVacancy(false));
-    _store.dispatch(
-        UpdateSummeryEventTypesImageList(<EventTypesImageMediaInfo>[]));
+    //_store.dispatch(UpdateSummeryEventTypesImageList(<EventTypesImageMediaInfo>[]));
   }
 
   Widget _actionPopup(EventTypesListState eventtypesListState) {
@@ -479,7 +478,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
           dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingList;
           dsqQuery.loadLookUpValues = true;
           dsqQuery.loadRecordInfo = true;
-          dsqQuery.eventtypesListReqtokens = reqtokens;
+          dsqQuery.eventTypesListReqtokens = reqtokens;
           dsqQuery.sort = sortinglist;
 
           String filterjson = jsonEncode(dsqQuery);
@@ -615,7 +614,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       },
                       onPresseInActive:
                           (EventTypesDataList eventtypesData, int pos) {
-                        ApiManager().TenantAvailableInEventTypes(
+                        /*ApiManager().TenantAvailableInEventTypes(
                             context,
                             Prefs.getString(PrefsName.OwnerID),
                             eventtypesData.id!, (status, responce) {
@@ -654,27 +653,26 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                             eventtypesActive_InAction_call(
                                 eventtypesListState, false, eventtypesData.id!);
                           }
-                        });
+                        });*/
                       },
                       onPresseActive:
                           (EventTypesDataList eventtypesData, int pos) {
-                        if (eventtypesData.propDrafting != 3) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_EventTypes_all_details, false);
-                        } else if (!eventtypesData.isAgreedTandC!) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_EventTypes_Disclosures, false);
-                        } else {
-                          eventtypesActive_InAction_call(
-                              eventtypesListState, true, eventtypesData.id!);
-                        }
+                        //if (eventtypesData.propDrafting != 3) {
+                        //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_all_details, false);
+                        //} else if (!eventtypesData.isAgreedTandC!) {
+                        //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_Disclosures, false);
+                        //} else {
+                        eventtypesActive_InAction_call(
+                            eventtypesListState, true, eventtypesData.id!);
+                        //}
                       },
                       onPresseIsPublish: (EventTypesDataList eventtypesData,
                           int pos, bool flag) {
                         if (!eventtypesData.isActive!) {
                           ToastUtils.showCustomToast(
                               context,
-                              GlobleString.PS3_EventTypes_Active_publish,
+                              'Publicar creo',
+                              //GlobleString.PS3_EventTypes_Active_publish,
                               false);
                         } else {
                           showDialog(
@@ -713,7 +711,8 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       margin: EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
-                        GlobleString.Blank_EventTypes,
+                        'blank npi',
+                        //GlobleString.Blank_EventTypes,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: MyStyles.Medium(18, myColor.tabel_msg),
@@ -1024,11 +1023,11 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
 
   eventtypesActive_InAction_call(EventTypesListState eventtypesListState,
       bool isAct, String eventtypesid) {
-    EventTypesActive proactive = new EventTypesActive();
+    EventTypesActive proactive = EventTypesActive();
     proactive.IsActive = isAct;
     proactive.IsPublished = false;
 
-    EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
+    EventTypesUpdate eventtypesUpdate = EventTypesUpdate();
     eventtypesUpdate.ID = eventtypesid;
     eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
@@ -1039,9 +1038,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         (error, responce) async {
       if (error) {
         if (isAct) {
-          /*  await ApiManager().getEventTypesOnboadingList(
-              context, Prefs.getString(PrefsName.OwnerID));
-          loader.remove();*/
           ApiManager().ArchiveLeadRestoreInEventTypes(context, eventtypesid,
               (status, responce) async {
             if (status) {
@@ -1055,10 +1051,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
             }
           });
         } else {
-          /* await ApiManager().getEventTypesOnboadingList(
-              context, Prefs.getString(PrefsName.OwnerID));
-          loader.remove();*/
-
           ApiManager().ArchiveLeadInEventTypes(context, eventtypesid,
               (status, responce) async {
             if (status) {
@@ -1081,7 +1073,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
 
   eventtypesIsPublished_call(EventTypesListState eventtypesListState,
       bool isAct, String eventtypesid) {
-    EventTypesIsPublished proactive = new EventTypesIsPublished();
+    EventTypesIsPublished proactive = EventTypesIsPublished();
     proactive.IsPublished = isAct;
 
     EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
@@ -1133,7 +1125,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       }
     });
 
-    ApiManager().getEventTypesImagesDSQ(context, propId,
+    /*ApiManager().getEventTypesImagesDSQ(context, propId,
         (status, responce, EventTypesImageMediaInfolist) {
       if (status) {
         _store.dispatch(
@@ -1144,10 +1136,9 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         _store.dispatch(UpdateEventTypesImageList([]));
         _store.dispatch(UpdateSummeryEventTypesImageList([]));
       }
-    });
+    });*/
 
-    ApiManager().getEventTypesAmanityUtility(context, propId,
-        (status, responce, amenitieslist, utilitylist) async {
+    /*ApiManager().getEventTypesAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
@@ -1176,10 +1167,9 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         _store.dispatch(UpdateSummeryEventTypesUtilitiesList([]));
         await ApiManager().getEventTypesFeaturelist(context);
       }
-    });
+    });*/
 
-    await ApiManager().getEventTypesDetails(context, propId,
-        (status, responce, eventtypesData) async {
+    /*await ApiManager().getEventTypesDetails(context, propId,(status, responce, eventtypesData) async {
       if (status) {
         await ApiManager().bindEventTypesData(eventtypesData!);
 
@@ -1226,6 +1216,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       } else {
         loader.remove();
       }
-    });
+    }
+    );*/
   }
 }

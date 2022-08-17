@@ -1016,11 +1016,11 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   propertyActive_InAction_call(
       PropertyListState propertyListState, bool isAct, String propertyid) {
-    PropertyActive proactive = new PropertyActive();
+    PropertyActive proactive = PropertyActive();
     proactive.IsActive = isAct;
     proactive.IsPublished = false;
 
-    PropertyUpdate propertyUpdate = new PropertyUpdate();
+    PropertyUpdate propertyUpdate = PropertyUpdate();
     propertyUpdate.ID = propertyid;
     propertyUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
@@ -1073,10 +1073,10 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   propertyIsPublished_call(
       PropertyListState propertyListState, bool isAct, String propertyid) {
-    PropertyIsPublished proactive = new PropertyIsPublished();
+    PropertyIsPublished proactive = PropertyIsPublished();
     proactive.IsPublished = isAct;
 
-    PropertyUpdate propertyUpdate = new PropertyUpdate();
+    PropertyUpdate propertyUpdate = PropertyUpdate();
     propertyUpdate.ID = propertyid;
     propertyUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
