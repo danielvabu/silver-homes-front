@@ -13593,4 +13593,20 @@ class ApiManager {
       }
     });
   }
+//nuevos modulos
+
+  InsetEventType(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        CallBackQuesy(true, "");
+      } else {
+        CallBackQuesy(false, "");
+      }
+    });
+  }
 }
