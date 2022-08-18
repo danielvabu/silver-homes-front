@@ -1250,8 +1250,7 @@ class ApiManager {
               ? myobject['duration'].toString()
               : "";
 
-          int Slots =
-              myobject['slots'] != null ? myobject['slots'].toint() : "";
+          int Slots = myobject['slots'] != null ? myobject['slots'] : 0;
 
           bool ispublished =
               myobject['ispublished'] != null ? myobject['ispublished'] : false;
