@@ -76,21 +76,21 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     font_bold = await rootBundle.load("assets/fonts/avenirnext-bold.ttf");
   }
 
-  // void fillAmenities() {
-  //   /* Amenities */
-  //   ApiManager().getEventTypesFeaturelist(context);
+  /*void fillAmenities() {
+    /* Amenities */
+    ApiManager().getEventTypesFeaturelist(context);
 
-  //   List<SystemEnumDetails> restrictionlist = [];
-  //   restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
+    List<SystemEnumDetails> restrictionlist = [];
+    restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
-  //   _store.dispatch(UpdateRestrictionlist(restrictionlist));
+    _store.dispatch(UpdateRestrictionlist(restrictionlist));
 
-  //   List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-  //       .map((item) => new SystemEnumDetails.clone(item))
-  //       .toList();
+    List<SystemEnumDetails> secondrestrictionlist = restrictionlist
+        .map((item) => new SystemEnumDetails.clone(item))
+        .toList();
 
-  //   _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
-  // }
+    _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
       width: ssheight,
       height: sswidth,
       child: Padding(
-        padding: EdgeInsets.only(left: 15, bottom: 15, right: 15),
+        padding: const EdgeInsets.all(15.0),
         child: ConnectState<EventTypesFormState>(
             map: (state) => state.eventTypesFormState,
             where: notIdentical,
@@ -118,63 +118,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _headerView(eventtypesFormState!),
-                  const SizedBox(height: 20.0),
-                  Row(
-                    children: [
-                      eventtypesFormState.selectView != 4
-                          ? Expanded(
-                              child: Text(
-                                eventtypesFormState.eventtypes_address,
-                                style: MyStyles.SemiBold(14, myColor.black),
-                                textAlign: TextAlign.start,
-                              ),
-                            )
-                          : Expanded(
-                              child: Text(
-                                'Summary',
-                                //GlobleString.PS_EventTypes_Summary,
-                                style: MyStyles.Medium(14, myColor.black),
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                      eventtypesFormState.selectView != 4
-                          ? Container()
-                          : Container(
-                              width: 100,
-                              child: ConnectState<EventTypesSummeryState>(
-                                  map: (state) => state.eventTypesSummeryState,
-                                  where: notIdentical,
-                                  builder: (eventtypesSummeryState) {
-                                    return InkWell(
-                                      onTap: () async {
-                                        var loader =
-                                            Helper.overlayLoader(context);
-                                        Overlay.of(context)!.insert(loader);
-                                        //await Pdfgenerate(eventtypesSummeryState!);
-                                        loader.remove();
-                                      },
-                                      child: Container(
-                                        width: 100,
-                                        margin: EdgeInsets.only(right: 10),
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          'Export',
-                                          //GlobleString.PS_EventTypes_Export,
-                                          style: MyStyles.Medium(
-                                              14, myColor.black),
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Container(
+                    height: ssheight - 30,
                     width: sswidth,
                     decoration: BoxDecoration(
                       color: myColor.white,
@@ -183,8 +128,69 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                           color: myColor.application_boreder, width: 1),
                     ),
                     padding: EdgeInsets.all(20),
-                    child: _centerView(
-                        eventtypesFormState.selectView, eventtypesFormState),
+                    child: Column(
+                      children: [
+                        _headerView(eventtypesFormState!),
+                        const SizedBox(height: 1.0),
+                        Row(
+                          children: [
+                            eventtypesFormState.selectView != 4
+                                ? Expanded(
+                                    child: Text(
+                                      eventtypesFormState.eventtypes_address,
+                                      style:
+                                          MyStyles.SemiBold(14, myColor.black),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: Text(
+                                      'Summary',
+                                      //GlobleString.PS_EventTypes_Summary,
+                                      style: MyStyles.Medium(14, myColor.black),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                            eventtypesFormState.selectView != 4
+                                ? Container()
+                                : Container(
+                                    width: 100,
+                                    child: ConnectState<EventTypesSummeryState>(
+                                        map: (state) =>
+                                            state.eventTypesSummeryState,
+                                        where: notIdentical,
+                                        builder: (eventtypesSummeryState) {
+                                          return InkWell(
+                                            onTap: () async {
+                                              var loader =
+                                                  Helper.overlayLoader(context);
+                                              Overlay.of(context)!
+                                                  .insert(loader);
+                                              //await Pdfgenerate(eventtypesSummeryState!);
+                                              loader.remove();
+                                            },
+                                            child: Container(
+                                              width: 100,
+                                              margin:
+                                                  EdgeInsets.only(right: 10),
+                                              alignment: Alignment.centerRight,
+                                              child: Text(
+                                                'Export',
+                                                //GlobleString.PS_EventTypes_Export,
+                                                style: MyStyles.Medium(
+                                                    14, myColor.black),
+                                                textAlign: TextAlign.end,
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                          ],
+                        ),
+                        _centerView(eventtypesFormState.selectView,
+                            eventtypesFormState),
+                      ],
+                    ),
                   ),
                 ],
               );
@@ -196,45 +202,201 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
   Widget _headerView(EventTypesFormState eventtypesFormState) {
     return Row(
       children: [
-        Container(
-          width: 150,
-          alignment: Alignment.topLeft,
-          child: InkWell(
-            onTap: () {
-              if (AddEditEventTypes.isValueUpdate)
-                showBackDialog(eventtypesFormState, true);
-              else
-                _store
-                    .dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
-            },
-            child: Text(
-              'Back to Event Types',
-              //GlobleString.PS_Back_to_EventTypess,
-              style: MyStyles.SemiBold(13, myColor.blue),
-              textAlign: TextAlign.start,
-            ),
-          ),
-        ),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Row(
+                children: [
+                  Text(
+                    GlobleString.ET_New_Event_Type,
+                    style: MyStyles.Bold(25, myColor.Circle_main),
+                  ),
+                ],
+              ),
               Container(
                 alignment: Alignment.center,
-                width: 741,
-                height: 82,
-                margin: EdgeInsets.only(right: 150),
+                width: sswidth - 250,
+                height: 70,
+                //margin: const EdgeInsets.only(right: 150),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 80, right: 30, bottom: 20),
+                      margin: const EdgeInsets.only(
+                          left: 30, right: 30, bottom: 20),
                       alignment: Alignment.topCenter,
                       color: myColor.black,
                       height: 2,
                     ),
-                    _indicator(eventtypesFormState),
+                    Container(
+                      width: sswidth - 250,
+                      margin: const EdgeInsets.only(top: 10.0),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+                                if (AddEditEventTypes.isValueUpdate)
+                                  showBackDialog(eventtypesFormState, false,
+                                      stepper: 1);
+                                else
+                                  _store.dispatch(UpdateEventTypesForm(1));
+
+                                // _store.dispatch(UpdateEventTypesForm(1));
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Image.asset(
+                                    Prefs.getBool(PrefsName.EventTypesStep1)
+                                        ? "assets/images/ic_circle_check.png"
+                                        : "assets/images/ic_circle_fill.png",
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.topLeft,
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0),
+                                Text(
+                                  GlobleString.ET_Event_Setup,
+                                  style:
+                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10.0),
+                          InkWell(
+                            onTap: () {
+                              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+                                if (AddEditEventTypes.isValueUpdate)
+                                  showBackDialog(eventtypesFormState, false,
+                                      stepper: 2);
+                                else
+                                  _store.dispatch(UpdateEventTypesForm(2));
+
+                                // _store.dispatch(UpdateEventTypesForm(2));
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    Prefs.getBool(PrefsName.EventTypesStep2)
+                                        ? "assets/images/ic_circle_check.png"
+                                        : eventtypesFormState.selectView > 2
+                                            ? "assets/images/ic_circle_fill.png"
+                                            : "assets/images/ic_circle_border.png",
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.topLeft,
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0),
+                                Text(
+                                  GlobleString.ET_Availability,
+                                  style:
+                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10.0),
+                          InkWell(
+                            onTap: () {
+                              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+                                if (AddEditEventTypes.isValueUpdate)
+                                  showBackDialog(eventtypesFormState, false,
+                                      stepper: 3);
+                                else
+                                  _store.dispatch(UpdateEventTypesForm(3));
+
+                                // _store.dispatch(UpdateEventTypesForm(3));
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    Prefs.getBool(PrefsName.EventTypesStep3)
+                                        ? "assets/images/ic_circle_check.png"
+                                        : eventtypesFormState.selectView > 3
+                                            ? "assets/images/ic_circle_fill.png"
+                                            : "assets/images/ic_circle_border.png",
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.topLeft,
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0),
+                                Text(
+                                  GlobleString.ET_Invitee_Questions,
+                                  style:
+                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10.0),
+                          InkWell(
+                            onTap: () {
+                              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
+                                // _store.dispatch(UpdateEventTypesForm(4));
+
+                                if (AddEditEventTypes.isValueUpdate)
+                                  showBackDialog(eventtypesFormState, false,
+                                      stepper: 4);
+                                else
+                                  _store.dispatch(UpdateEventTypesForm(4));
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    Prefs.getBool(
+                                                PrefsName.EventTypesAgreeTC) &&
+                                            Prefs.getBool(
+                                                PrefsName.EventTypesStep1) &&
+                                            Prefs.getBool(
+                                                PrefsName.EventTypesStep2) &&
+                                            Prefs.getBool(
+                                                PrefsName.EventTypesStep3)
+                                        ? "assets/images/ic_circle_check.png"
+                                        : eventtypesFormState.selectView > 4
+                                            ? "assets/images/ic_circle_fill.png"
+                                            : "assets/images/ic_circle_border.png",
+                                    width: 30,
+                                    height: 30,
+                                    alignment: Alignment.topLeft,
+                                  ),
+                                ),
+                                const SizedBox(height: 5.0),
+                                Text(
+                                  GlobleString.ET_Notifications,
+                                  style:
+                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -297,168 +459,6 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
           },
         );
       },
-    );
-  }
-
-  Widget _indicator(EventTypesFormState eventtypesFormState) {
-    return Container(
-      width: 741,
-      margin: EdgeInsets.only(top: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 1);
-                else
-                  _store.dispatch(UpdateEventTypesForm(1));
-
-                // _store.dispatch(UpdateEventTypesForm(1));
-              }
-            },
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(
-                    Prefs.getBool(PrefsName.EventTypesStep1)
-                        ? "assets/images/ic_circle_check.png"
-                        : "assets/images/ic_circle_fill.png",
-                    width: 30,
-                    height: 30,
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  'Details',
-                  //GlobleString.PS_EventTypes_Details,
-                  style: MyStyles.SemiBold(13, myColor.text_color),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(width: 35.0),
-          InkWell(
-            onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 2);
-                else
-                  _store.dispatch(UpdateEventTypesForm(2));
-
-                // _store.dispatch(UpdateEventTypesForm(2));
-              }
-            },
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    Prefs.getBool(PrefsName.EventTypesStep2)
-                        ? "assets/images/ic_circle_check.png"
-                        : eventtypesFormState.selectView > 2
-                            ? "assets/images/ic_circle_fill.png"
-                            : "assets/images/ic_circle_border.png",
-                    width: 30,
-                    height: 30,
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  'Restricciones',
-                  //GlobleString.PS_EventTypes_Specifications_Restrictions,
-                  style: MyStyles.SemiBold(13, myColor.text_color),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(width: 74.0),
-          InkWell(
-            onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 3);
-                else
-                  _store.dispatch(UpdateEventTypesForm(3));
-
-                // _store.dispatch(UpdateEventTypesForm(3));
-              }
-            },
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    Prefs.getBool(PrefsName.EventTypesStep3)
-                        ? "assets/images/ic_circle_check.png"
-                        : eventtypesFormState.selectView > 3
-                            ? "assets/images/ic_circle_fill.png"
-                            : "assets/images/ic_circle_border.png",
-                    width: 30,
-                    height: 30,
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  'Features',
-                  //GlobleString.PS_EventTypes_Features,
-                  style: MyStyles.SemiBold(13, myColor.text_color),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(width: 110.0),
-          InkWell(
-            onTap: () {
-              if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                // _store.dispatch(UpdateEventTypesForm(4));
-
-                if (AddEditEventTypes.isValueUpdate)
-                  showBackDialog(eventtypesFormState, false, stepper: 4);
-                else
-                  _store.dispatch(UpdateEventTypesForm(4));
-              }
-            },
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    Prefs.getBool(PrefsName.EventTypesAgreeTC) &&
-                            Prefs.getBool(PrefsName.EventTypesStep1) &&
-                            Prefs.getBool(PrefsName.EventTypesStep2) &&
-                            Prefs.getBool(PrefsName.EventTypesStep3)
-                        ? "assets/images/ic_circle_check.png"
-                        : eventtypesFormState.selectView > 4
-                            ? "assets/images/ic_circle_fill.png"
-                            : "assets/images/ic_circle_border.png",
-                    width: 30,
-                    height: 30,
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  'Sumary',
-                  //GlobleString.PS_EventTypes_Summary,
-                  style: MyStyles.SemiBold(13, myColor.text_color),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 

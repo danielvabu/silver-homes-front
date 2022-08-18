@@ -119,9 +119,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _headerView(propertyFormState!),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20.0),
                   Row(
                     children: [
                       propertyFormState.selectView != 4
@@ -303,7 +301,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
   Widget _indicator(PropertyFormState propertyFormState) {
     return Container(
       width: 741,
-      margin: EdgeInsets.only(top: 15),
+      margin: const EdgeInsets.only(top: 15),
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -333,9 +331,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
                   GlobleString.PS_Property_Details,
                   style: MyStyles.SemiBold(13, myColor.text_color),
@@ -344,9 +340,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
               ],
             ),
           ),
-          SizedBox(
-            width: 35,
-          ),
+          const SizedBox(width: 35.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.PropertyEditMode)) {
@@ -384,9 +378,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
               ],
             ),
           ),
-          SizedBox(
-            width: 74,
-          ),
+          const SizedBox(width: 74.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.PropertyEditMode)) {
@@ -413,9 +405,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
                   GlobleString.PS_Property_Features,
                   style: MyStyles.SemiBold(13, myColor.text_color),
@@ -424,9 +414,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
               ],
             ),
           ),
-          SizedBox(
-            width: 110,
-          ),
+          const SizedBox(width: 110.0),
           InkWell(
             onTap: () {
               if (Prefs.getBool(PrefsName.PropertyEditMode)) {
@@ -456,9 +444,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                     alignment: Alignment.topLeft,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Text(
                   GlobleString.PS_Property_Summary,
                   style: MyStyles.SemiBold(13, myColor.text_color),

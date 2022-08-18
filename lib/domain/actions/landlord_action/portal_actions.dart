@@ -6,13 +6,14 @@ import 'package:silverhome/presentation/models/app_state.dart';
 class UpdatePortalPage implements Action {
   final int index;
   final String title;
+  final int subindex;
 
-  UpdatePortalPage(this.index, this.title);
+  UpdatePortalPage(this.index, this.title, [this.subindex = 0]);
 
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .portalState(index: index, title: title, subindex: 0);
+        .portalState(index: index, title: title, subindex: subindex);
   }
 }
 

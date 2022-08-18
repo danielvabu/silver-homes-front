@@ -124,7 +124,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                         height: 33,
                                         color: Colors.black12,
                                         alignment: Alignment.center,
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             left: 10, right: 10),
                                         child: Text(
                                           Weburl.CustomerFeaturedPage,
@@ -149,7 +149,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                             FilteringTextInputFormatter.allow(
                                                 RegExp("[a-zA-Z0-9]"))
                                           ],
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: InputBorder.none,
                                             hintText: GlobleString.LL_cfl_hint,
                                             hintStyle:
@@ -164,9 +164,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20.0),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -183,9 +181,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue:
                                                 profileState.companyname,
@@ -198,7 +194,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 //border: InputBorder.none,
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -226,9 +222,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
                                         mainAxisAlignment:
@@ -243,16 +237,14 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue:
                                                 profileState.homepagelink,
                                             textAlign: TextAlign.start,
                                             style: MyStyles.Regular(
                                                 14, myColor.text_color),
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 //border: InputBorder.none,
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -282,9 +274,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20.0),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -301,9 +291,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue:
                                                 profileState.firstname,
@@ -316,7 +304,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 //border: InputBorder.none,
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -344,9 +332,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
                                         mainAxisAlignment:
@@ -360,15 +346,13 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue: profileState.lastname,
                                             textAlign: TextAlign.start,
                                             style: MyStyles.Regular(
                                                 14, myColor.text_color),
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 //border: InputBorder.none,
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -398,9 +382,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20.0),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -417,9 +399,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue: profileState.email,
                                             textAlign: TextAlign.start,
@@ -432,7 +412,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 //border: InputBorder.none,
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -462,9 +442,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
                                         mainAxisAlignment:
@@ -481,9 +459,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                     14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
+                                              const SizedBox(width: 10.0),
                                               Text(
                                                 GlobleString.Optional,
                                                 style: MyStyles.Regular(
@@ -492,9 +468,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
+                                          const SizedBox(height: 5.0),
                                           Container(
                                             height: 32,
                                             decoration: BoxDecoration(
@@ -539,7 +513,8 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                       MaskedInputFormatter(
                                                           "(000) 000 0000")
                                                     ],
-                                                    decoration: InputDecoration(
+                                                    decoration:
+                                                        const InputDecoration(
                                                       border: InputBorder.none,
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
@@ -564,9 +539,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 30,
-                                ),
+                                const SizedBox(height: 30.0),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -578,10 +551,10 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                       child: Container(
                                         height: 35,
                                         width: 100,
-                                        padding: EdgeInsets.only(
+                                        padding: const EdgeInsets.only(
                                             left: 15, right: 15),
                                         alignment: Alignment.center,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5)),
                                           color: myColor.Circle_main,
@@ -599,9 +572,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30.0),
                         changePassword()
                       ],
                     ),
@@ -629,9 +600,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               style: MyStyles.Medium(14, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10.0),
             Listener(
               child: Text(
                 Weburl.CustomerFeaturedPage +
@@ -673,9 +642,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                 }
               },
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10.0),
             InkWell(
               onTap: () async {
                 String url = Weburl.CustomerFeaturedPage +
@@ -704,17 +671,13 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
             )
           ],
         ),
-        SizedBox(
-          height: 5,
-        ),
+        const SizedBox(height: 5.0),
         Text(
           GlobleString.LL_Copy_title,
           style: MyStyles.Regular(13, Colors.grey),
           textAlign: TextAlign.start,
         ),
-        SizedBox(
-          height: 30,
-        ),
+        const SizedBox(height: 30.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -724,9 +687,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               style: MyStyles.Medium(14, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10.0),
             Text(
               Weburl.CustomerFeaturedPage +
                   profileState.CustomerFeatureListingURL +
@@ -735,9 +696,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               style: MyStyles.Medium(14, myColor.blue),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10.0),
             InkWell(
               onTap: () async {
                 String url = Weburl.CustomerFeaturedPage +
@@ -767,9 +726,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
             )
           ],
         ),
-        SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20.0),
       ],
     );
   }

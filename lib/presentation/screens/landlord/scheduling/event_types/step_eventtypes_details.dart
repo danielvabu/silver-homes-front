@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
@@ -28,6 +29,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
+import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
@@ -192,7 +194,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
 
   @override
   Widget build(BuildContext context) {
-    ssheight = MediaQuery.of(context).size.height - 70;
+    ssheight = MediaQuery.of(context).size.height - 75;
     sswidth = MediaQuery.of(context).size.width - 230;
 
     return Container(
@@ -219,18 +221,6 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                   node: _focusScopeNode,
                   child: Column(
                     children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Details',
-                          //GlobleString.PS1_EventTypes_Details,
-                          style: MyStyles.Medium(20, myColor.Circle_main),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -239,18 +229,28 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Types Type',
-                                  //GlobleString.PS1_EventTypes_type,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 8.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        GlobleString.ET_Apply_Template,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      Text(
+                                        GlobleString.Optional,
+                                        style: MyStyles.Light(
+                                            12, myColor.TA_Border),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
+                                const SizedBox(height: 10.0),
                                 Container(
                                   height: 32,
-                                  // ignore: missing_required_param
                                   child: DropdownSearch<SystemEnumDetails>(
                                     mode: Mode.MENU,
                                     key: UniqueKey(),
@@ -273,92 +273,26 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                         MyStyles.Medium(14, myColor.text_color),
                                     itemAsString: (SystemEnumDetails? u) =>
                                         u != null ? u.displayValue : "",
-                                    hint: "Select EventTypes Type",
+                                    hint: GlobleString.ET_Select_Template,
                                     selectedItem: eventtypesState
                                                 .eventtypestypeValue !=
                                             null
                                         ? eventtypesState.eventtypestypeValue
                                         : null,
                                     onChanged: (value) {
-                                      //FocusScope.of(context).requestFocus(new FocusNode());
-                                      _changeData();
+                                      /*_changeData();
                                       AddEditEventTypes.isValueUpdate = true;
-
-                                      if (value!.EnumDetailID != 6) {
-                                        _store.dispatch(
-                                            UpdateEventTypesTypeOtherValue(""));
-                                      }
-                                      _store.dispatch(
-                                          UpdateProperTytypeValue(value));
-
-                                      _store.dispatch(
-                                          UpdateErrorEventTypestype(false));
+                                      if (value!.EnumDetailID != 6) {_store.dispatch(UpdateEventTypesTypeOtherValue(""));}
+                                      _store.dispatch(UpdateProperTytypeValue(value));
+                                      _store.dispatch(UpdateErrorEventTypestype(false));*/
                                     },
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Rental_space,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  height: 32,
-                                  child: DropdownSearch<SystemEnumDetails>(
-                                    mode: Mode.MENU,
-                                    key: UniqueKey(),
-                                    errorcolor: myColor.errorcolor,
-                                    isError: eventtypesState.error_rentalspace,
-                                    focuscolor: myColor.blue,
-                                    focusWidth: 2,
-                                    popupBackgroundColor: myColor.white,
-                                    items: eventtypesState.rentalspacelist,
-                                    defultHeight:
-                                        eventtypesState.rentalspacelist.length *
-                                                    35 >
-                                                250
-                                            ? 250
-                                            : eventtypesState
-                                                    .rentalspacelist.length *
-                                                35,
-                                    textstyle:
-                                        MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (SystemEnumDetails? u) =>
-                                        u!.displayValue,
-                                    hint: "Select Rental space",
-                                    showSearchBox: false,
-                                    selectedItem:
-                                        eventtypesState.rentalspaceValue != null
-                                            ? eventtypesState.rentalspaceValue
-                                            : null,
-                                    isFilteredOnline: true,
-                                    onChanged: (value) {
-                                      _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
-
-                                      _store.dispatch(
-                                          UpdateRentalSpaceValue(value!));
-                                      _store.dispatch(
-                                          UpdateErrorRentalspace(false));
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          const SizedBox(width: 30.0),
+                          Expanded(child: Container()),
                         ],
                       ),
                       eventtypesState.eventtypestypeValue != null &&
@@ -390,964 +324,713 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                                 RegExp("[a-z A-Z]")),
                                           ],
                                           decoration: InputDecoration(
-                                              //border: InputBorder.none,
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: eventtypesState
-                                                            .error_eventtypestypeOther
-                                                        ? myColor.errorcolor
-                                                        : myColor.blue,
-                                                    width: 2),
-                                              ),
-                                              hintText: GlobleString
-                                                  .PS1_enter_your_answer,
-                                              hintStyle: MyStyles.Regular(
-                                                  14, myColor.hintcolor),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: eventtypesState
-                                                            .error_eventtypestypeOther
-                                                        ? myColor.errorcolor
-                                                        : myColor.gray,
-                                                    width: 1.0),
-                                              ),
-                                              isDense: true,
-                                              contentPadding:
-                                                  EdgeInsets.all(12),
-                                              fillColor: myColor.white,
-                                              filled: true),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: eventtypesState
+                                                          .error_eventtypestypeOther
+                                                      ? myColor.errorcolor
+                                                      : myColor.blue,
+                                                  width: 2),
+                                            ),
+                                            hintText: GlobleString
+                                                .PS1_enter_your_answer,
+                                            hintStyle: MyStyles.Regular(
+                                                14, myColor.hintcolor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: eventtypesState
+                                                          .error_eventtypestypeOther
+                                                      ? myColor.errorcolor
+                                                      : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding:
+                                                const EdgeInsets.all(12),
+                                            fillColor: myColor.white,
+                                            filled: true,
+                                          ),
                                           onChanged: (value) {
-                                            _changeData();
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
-
-                                            _store.dispatch(
-                                                UpdateEventTypesTypeOtherValue(
-                                                    value));
-
-                                            _store.dispatch(
-                                                UpdateErrorEventTypestypeOther(
-                                                    false));
+                                            /*_changeData();
+                                            AddEditEventTypes.isValueUpdate =true;
+                                            _store.dispatch(UpdateEventTypesTypeOtherValue(value));
+                                            _store.dispatch(UpdateErrorEventTypestypeOther(false));*/
                                           },
                                         ),
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Expanded(
-                                    child: Container(),
-                                  ),
+                                  const SizedBox(width: 30.0),
+                                  Expanded(child: Container()),
                                 ],
                               ),
                             )
                           : Container(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Event Types Name',
-                                  //GlobleString.PS1_EventTypes_name,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.EventTypesName,
-                                  textAlign: TextAlign.start,
-                                  autofocus: false,
-                                  focusNode: _focus1,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(25),
-                                    /* FilteringTextInputFormatter.allow(
-                                        RegExp("[a-z A-Z]")),*/
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_EventTypesName
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
-                                            width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_EventTypesName
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store
-                                        .dispatch(UpdateEventTypesName(value));
-                                    _store.dispatch(
-                                        UpdateErrorEventTypesName(false));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Address',
-                                  //GlobleString.PS1_EventTypes_Address,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue:
-                                      eventtypesState.EventTypesAddress,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_EventTypesAddress
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
-                                            width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_EventTypesAddress
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-
-                                    _store.dispatch(
-                                        UpdateEventTypesAddress(value));
-                                    _store.dispatch(
-                                        UpdateErrorEventTypesAddress(false));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      GlobleString.PS1_Suiteunit,
-                                      style: MyStyles.Medium(14, myColor.black),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      GlobleString.Optional,
-                                      style: MyStyles.Regular(
-                                          12, myColor.optional),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.Suiteunit,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(25),
-                                    /* FilteringTextInputFormatter.allow(
-                                        RegExp("[0-9]")),*/
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: myColor.blue, width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.gray, width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(UpdateSuiteunit(value));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      GlobleString.PS1_Building_name,
-                                      style: MyStyles.Medium(14, myColor.black),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      GlobleString.Optional,
-                                      style: MyStyles.Regular(
-                                          12, myColor.optional),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.Buildingname,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(50),
-                                    /* FilteringTextInputFormatter.allow(
-                                        RegExp("[a-z A-Z]")),*/
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: myColor.blue, width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.gray, width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(UpdateBuildingname(value));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_City,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.City,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(25),
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[a-z A-Z]")),
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState.error_City
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
-                                            width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState.error_City
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store
-                                        .dispatch(UpdateEventTypesCity(value));
-                                    _store.dispatch(UpdateErrorCity(false));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Province,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.Province,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(25),
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[a-z A-Z]")),
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
-                                            width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(
-                                        UpdateEventTypesProvince(value));
-                                    _store.dispatch(UpdateErrorProvince(false));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Postal_code,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue: eventtypesState.Postalcode,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              eventtypesState.error_Postalcode
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    GlobleString.ET_Event_Types_Name,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  TextFormField(
+                                    initialValue:
+                                        eventtypesState.EventTypesName,
+                                    textAlign: TextAlign.start,
+                                    autofocus: false,
+                                    focusNode: _focus1,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(25),
+                                      /* FilteringTextInputFormatter.allow(RegExp("[a-z A-Z]")),*/
+                                    ],
+                                    decoration: InputDecoration(
+                                        //border: InputBorder.none,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: eventtypesState
+                                                      .error_EventTypesName
                                                   ? myColor.errorcolor
                                                   : myColor.blue,
-                                          width: 2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              eventtypesState.error_Postalcode
+                                              width: 2),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: eventtypesState
+                                                      .error_EventTypesName
                                                   ? myColor.errorcolor
                                                   : myColor.gray,
-                                          width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(12),
-                                    fillColor: myColor.white,
-                                    filled: true,
-                                  ),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(
-                                        UpdateEventTypesPostalcode(value));
-                                    _store
-                                        .dispatch(UpdateErrorPostalcode(false));
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Country,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Container(
-                                  height: 34,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: myColor.gray,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: CountryCodePicker(
-                                          onChanged: (value) {
-                                            _changeData();
-                                            String cname = "";
-
-                                            if (value.name.toString().contains(
-                                                "State of Palestine")) {
-                                              cname = "State of Palestine";
-                                            } else if (value.name
-                                                .toString()
-                                                .contains(
-                                                    "Russian Federation")) {
-                                              cname = "Russian Federation";
-                                            } else if (value.name
-                                                .toString()
-                                                .contains(
-                                                    "Taiwan, Province of China")) {
-                                              cname = "Taiwan";
-                                            } else if (value.name
-                                                .toString()
-                                                .contains("United Kingdom")) {
-                                              cname = "United Kingdom";
-                                            } else if (value.name
-                                                .toString()
-                                                .contains(
-                                                    "United States of America")) {
-                                              cname =
-                                                  "United States of America";
-                                            } else {
-                                              cname = value.name.toString();
-                                            }
-
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
-
-                                            _store.dispatch(
-                                                UpdateEventTypesCountryName(
-                                                    cname.toString()));
-
-                                            _store.dispatch(
-                                                UpdateEventTypesCountryCode(
-                                                    value.code.toString()));
-                                          },
-                                          initialSelection:
-                                              eventtypesState.CountryCode,
-                                          showFlag: false,
-                                          alignLeft: true,
-                                          padding: EdgeInsets.only(
-                                              left: 12, bottom: 2),
-                                          backgroundColor: myColor.white,
-                                          textStyle: MyStyles.Regular(
-                                              14, myColor.text_color),
-                                          showFlagDialog: true,
-                                          showCountryOnly: true,
-                                          showOnlyCountryWhenClosed: true,
-                                          showDropDownButton: true,
-                                          dialogTextStyle: MyStyles.Medium(
-                                              14, myColor.text_color),
+                                              width: 1.0),
                                         ),
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(12),
+                                        fillColor: myColor.white,
+                                        filled: true),
+                                    onChanged: (value) {
+                                      //_changeData();
+                                      //AddEditEventTypes.isValueUpdate = true;
+                                      //_store.dispatch(UpdateEventTypesName(value));
+                                      //_store.dispatch(UpdateErrorEventTypesName(false));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        GlobleString.ET_Relationship,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Text(
+                                        GlobleString.Optional,
+                                        style: MyStyles.Regular(
+                                            12, myColor.optional),
+                                        textAlign: TextAlign.start,
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Description',
-                                      //GlobleString.PS1_EventTypes_description,
-                                      style: MyStyles.Medium(14, myColor.black),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      GlobleString.Optional,
-                                      style: MyStyles.Regular(
-                                          12, myColor.optional),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                TextFormField(
-                                  initialValue:
-                                      eventtypesState.EventTypesDescription,
-                                  textAlign: TextAlign.start,
-                                  maxLines: 4,
-                                  maxLength: 10000,
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(450),
-                                  ],
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: myColor.blue, width: 2),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 25,
+                                        width: 25,
+                                        color: myColor.pf_incudevalue,
+                                        alignment: Alignment.center,
+                                        child: Radio(
+                                          value: "1",
+                                          //autofocus: Index == 0 ? true :false,
+                                          groupValue: 1,
+                                          activeColor: myColor.Circle_main,
+                                          onChanged: (value) {
+                                            /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                          },
+                                        ),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.gray, width: 1.0),
+                                      const SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_One_on_one),
+                                      const Text(' (' +
+                                          GlobleString.ET_One_Invitee +
+                                          ')'),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 25,
+                                        width: 25,
+                                        color: myColor.pf_incudevalue,
+                                        alignment: Alignment.center,
+                                        child: Radio(
+                                          value: "1",
+                                          //autofocus: Index == 0 ? true :false,
+                                          groupValue: 1,
+                                          activeColor: myColor.Circle_main,
+                                          onChanged: (value) {
+                                            /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                          },
+                                        ),
                                       ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (value) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-                                    _store.dispatch(
-                                        UpdateEventTypesDescription(value));
-                                  },
-                                ),
-                              ],
+                                      const SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_Group),
+                                      const Text(' (' +
+                                          GlobleString.ET_Multiple_Invitees +
+                                          ')'),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          GlobleString.PS1_Lease_Details,
-                          style: MyStyles.Medium(20, myColor.Circle_main),
-                          textAlign: TextAlign.center,
+                            const SizedBox(width: 30.0),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        GlobleString.ET_Event_Category,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Text(
+                                        GlobleString.Optional,
+                                        style: MyStyles.Regular(
+                                            12, myColor.optional),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Text(GlobleString.ET_Is_Showing),
+                                      SizedBox(width: 5.0),
+                                      FlutterSwitch(
+                                        width: 55.0,
+                                        height: 25.0,
+                                        valueFontSize: 10.0,
+                                        toggleSize: 20.0,
+                                        value: true,
+                                        borderRadius: 30.0,
+                                        padding: 2.0,
+                                        activeColor: myColor.propertyOn,
+                                        activeText: "ON",
+                                        activeTextColor: myColor.white,
+                                        inactiveColor: myColor.gray,
+                                        inactiveText: "OFF",
+                                        inactiveTextColor: myColor.white,
+                                        showOnOff: true,
+                                        onToggle: (val) {
+                                          //if (val) {widget._callbackActive(model, index);} else {widget._callbackInActive(model, index);}
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Rent_amount,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                TextField(
-                                  //initialValue: eventtypesState.RentAmount,
-                                  controller: _mycontroller,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
-                                  keyboardType: TextInputType.phone,
-                                  inputFormatters: [
-                                    //MaskedInputFormatter("0000000000")
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[0-9]")),
-                                  ],
-                                  decoration: InputDecoration(
-                                      //border: InputBorder.none,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_RentAmount
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
-                                            width: 2),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 8.0),
+                                      Text(
+                                        GlobleString.ET_Property_Name,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                                eventtypesState.error_RentAmount
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true),
-                                  onChanged: (valuerat) {
-                                    _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
-
-                                    if (valuerat.isNotEmpty) {
-                                      valuerat =
-                                          '${_formatNumber(valuerat.replaceAll(',', ''))}';
-                                      _mycontroller.value = TextEditingValue(
-                                        text: valuerat,
-                                        selection: TextSelection.collapsed(
-                                            offset: valuerat.length),
-                                      );
-                                    } else {
-                                      _mycontroller.text = "";
-                                    }
-
-                                    _store.dispatch(
-                                        UpdateEventTypesRentAmount(valuerat));
-                                    _store
-                                        .dispatch(UpdateErrorRentAmount(false));
-                                  },
-                                  onEditingComplete: () {},
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Rent_payment_frequency_New,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  height: 32,
-                                  // ignore: missing_required_param
-                                  child: DropdownSearch<SystemEnumDetails>(
-                                    key: UniqueKey(),
-                                    mode: Mode.MENU,
-                                    errorcolor: myColor.errorcolor,
-                                    isError: eventtypesState
-                                        .error_rentpaymentFrequency,
-                                    focuscolor: myColor.blue,
-                                    focusWidth: 2,
-                                    popupBackgroundColor: myColor.white,
-                                    items: eventtypesState
-                                        .rentpaymentFrequencylist,
-                                    defultHeight: double.parse((eventtypesState
-                                                .rentpaymentFrequencylist
-                                                .length *
-                                            35)
-                                        .toString()),
-                                    textstyle:
-                                        MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (SystemEnumDetails? u) =>
-                                        u != null ? u.displayValue : "",
-                                    hint: "Select Rent Payment",
-                                    showSearchBox: false,
-                                    selectedItem: eventtypesState
-                                                .rentpaymentFrequencyValue !=
-                                            null
-                                        ? eventtypesState
-                                            .rentpaymentFrequencyValue
-                                        : null,
-                                    isFilteredOnline: false,
-                                    onChanged: (value) {
-                                      _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
-
-                                      _store.dispatch(
-                                          UpdateRentPaymentFrequencyValue(
-                                              value!));
-
-                                      _store.dispatch(
-                                          UpdateErrorRentpaymentFrequency(
-                                              false));
-                                    },
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Lease_type,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  height: 32,
-                                  // ignore: missing_required_param
-                                  child: DropdownSearch<SystemEnumDetails>(
-                                    key: UniqueKey(),
-                                    mode: Mode.MENU,
-                                    errorcolor: myColor.errorcolor,
-                                    isError: eventtypesState.error_leasetype,
-                                    focuscolor: myColor.blue,
-                                    focusWidth: 2,
-                                    popupBackgroundColor: myColor.white,
-                                    items: eventtypesState.leasetypelist,
-                                    defultHeight: double.parse(
-                                        (eventtypesState.leasetypelist.length *
-                                                35)
-                                            .toString()),
-                                    textstyle:
-                                        MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (SystemEnumDetails? u) =>
-                                        u!.displayValue,
-                                    hint: "Select Lease Type",
-                                    showSearchBox: false,
-                                    selectedItem:
-                                        eventtypesState.leasetypeValue != null
-                                            ? eventtypesState.leasetypeValue
-                                            : null,
-                                    isFilteredOnline: true,
-                                    onChanged: (value) {
-                                      _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
-
-                                      _store.dispatch(
-                                          UpdateLeaseTypeValue(value!));
-
-                                      _store.dispatch(
-                                          UpdateErrorLeasetype(false));
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  GlobleString.PS1_Date_available,
-                                  style: MyStyles.Medium(14, myColor.black),
-                                  textAlign: TextAlign.start,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      _selectDate(context, eventtypesState),
-                                  child: Container(
+                                  const SizedBox(height: 5.0),
+                                  Container(
                                     height: 32,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: eventtypesState
-                                                .error_dateofavailable
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.only(left: 8),
-                                            child: Text(
-                                              eventtypesState.dateofavailable ==
-                                                      null
-                                                  ? ""
-                                                  : new DateFormat(
-                                                          "dd-MMM-yyyy")
-                                                      .format(eventtypesState
-                                                          .dateofavailable!)
-                                                      .toString(),
-                                              style: MyStyles.Regular(
-                                                  14, myColor.text_color),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 8, right: 5),
-                                          child: Icon(
-                                            Icons.calendar_today_outlined,
-                                            color: Colors.grey,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ],
+                                    child: DropdownSearch<SystemEnumDetails>(
+                                      mode: Mode.MENU,
+                                      errorcolor: myColor.errorcolor,
+                                      //isError: eventtypesState.error_minimumleaseduration,
+                                      focuscolor: myColor.blue,
+                                      focusWidth: 2,
+                                      popupBackgroundColor: myColor.white,
+                                      items: eventtypesState
+                                          .minimumleasedurationlist,
+                                      defultHeight: double.parse(
+                                          (eventtypesState
+                                                      .minimumleasedurationlist
+                                                      .length *
+                                                  35)
+                                              .toString()),
+                                      textstyle: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      itemAsString: (SystemEnumDetails? u) =>
+                                          u != null ? u.displayValue : "",
+                                      hint: GlobleString.ET_Select_Property,
+                                      showSearchBox: false,
+                                      selectedItem: eventtypesState
+                                                  .minimumleasedurationValue !=
+                                              null
+                                          ? eventtypesState
+                                              .minimumleasedurationValue
+                                          : null,
+                                      isFilteredOnline: true,
+                                      onChanged: (value) {
+                                        //_changeData();
+                                        //AddEditEventTypes.isValueUpdate =true;
+                                        //_store.dispatch(UpdateMinimumLeasedurationValue(value!));
+                                        //_store.dispatch(UpdateErrorMinimumleaseduration(false));
+                                      },
                                     ),
                                   ),
-                                )
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 30.0),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    GlobleString.ET_Location,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  TextFormField(
+                                    initialValue: eventtypesState.Province,
+                                    textAlign: TextAlign.start,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(25),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[a-z A-Z]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                        //border: InputBorder.none,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.blue,
+                                              width: 2),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.gray,
+                                              width: 1.0),
+                                        ),
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(12),
+                                        fillColor: myColor.white,
+                                        filled: true),
+                                    onChanged: (value) {
+                                      _changeData();
+                                      AddEditEventTypes.isValueUpdate = true;
+                                      _store.dispatch(
+                                          UpdateEventTypesProvince(value));
+                                      _store
+                                          .dispatch(UpdateErrorProvince(false));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        GlobleString.ET_Description,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      const SizedBox(width: 10.0),
+                                      Text(
+                                        GlobleString.Optional,
+                                        style: MyStyles.Regular(
+                                            12, myColor.optional),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  TextFormField(
+                                    initialValue:
+                                        eventtypesState.EventTypesDescription,
+                                    textAlign: TextAlign.start,
+                                    maxLines: 4,
+                                    maxLength: 10000,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(450),
+                                    ],
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    decoration: const InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: myColor.blue, width: 2),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: myColor.gray, width: 1.0),
+                                        ),
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(12),
+                                        fillColor: myColor.white,
+                                        filled: true),
+                                    onChanged: (value) {
+                                      //_changeData();
+                                      //AddEditEventTypes.isValueUpdate = true;
+                                      //_store.dispatch(UpdateEventTypesDescription(value));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            GlobleString.PS1_Minimum_lease_duration,
+                            GlobleString.ET_Event_Link,
                             style: MyStyles.Medium(14, myColor.black),
                             textAlign: TextAlign.start,
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            height: 33,
+                            width: sswidth - 80,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: myColor.gray,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 33,
+                                  color: Colors.black12,
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Text(
+                                    Weburl.CustomerFeaturedPage,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    //onChanged: (newValue) {
+                                    //_store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(newValue));
+                                    //},
+                                    initialValue:
+                                        '/', //profileState.CustomerFeatureListingURL_update,
+                                    keyboardType: TextInputType.text,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[a-zA-Z0-9]"))
+                                    ],
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: GlobleString.LL_cfl_hint,
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      contentPadding: EdgeInsets.all(12),
+                                      isDense: true,
+                                    ),
+                                    style:
+                                        MyStyles.Medium(14, myColor.text_color),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            GlobleString.ET_Event_Colour,
+                            style: MyStyles.Medium(14, myColor.black),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            height: 33,
+                            width: sswidth - 80,
+                            child: Row(
+                              children: [
+                                Text('bolitas'),
+                                Text('bolitas'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            GlobleString.ET_Date_Range,
+                            style: MyStyles.Medium(14, myColor.black),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            width: sswidth - 80,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      color: myColor.pf_incudevalue,
+                                      alignment: Alignment.center,
+                                      child: Radio(
+                                        value: "1",
+                                        //autofocus: Index == 0 ? true :false,
+                                        groupValue: 1,
+                                        activeColor: myColor.Circle_main,
+                                        onChanged: (value) {
+                                          /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5.0),
+                                    const Text(GlobleString.ET_Single_day),
+                                  ],
+                                ),
+                                const SizedBox(height: 5.0),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      color: myColor.pf_incudevalue,
+                                      alignment: Alignment.center,
+                                      child: Radio(
+                                        value: "1",
+                                        //autofocus: Index == 0 ? true :false,
+                                        groupValue: 1,
+                                        activeColor: myColor.Circle_main,
+                                        onChanged: (value) {
+                                          /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5.0),
+                                    const Text(GlobleString.ET_Date_Range),
+                                  ],
+                                ),
+                                const SizedBox(height: 5.0),
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 25,
+                                      width: 25,
+                                      color: myColor.pf_incudevalue,
+                                      alignment: Alignment.center,
+                                      child: Radio(
+                                        value: "1",
+                                        //autofocus: Index == 0 ? true :false,
+                                        groupValue: 1,
+                                        activeColor: myColor.Circle_main,
+                                        onChanged: (value) {
+                                          /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5.0),
+                                    const Text(GlobleString.ET_Indefinitely),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            GlobleString.ET_Event_Colour,
+                            style: MyStyles.Medium(14, myColor.black),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            height: 33,
+                            width: sswidth - 80,
+                            child: Row(
+                              children: [
+                                Text('bolitas'),
+                                Text('bolitas'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            GlobleString.ET_Event_Colour,
+                            style: MyStyles.Medium(14, myColor.black),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            height: 33,
+                            width: sswidth - 80,
+                            child: Row(
+                              children: [
+                                Text('bolitas'),
+                                Text('bolitas'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            GlobleString.ET_Event_Colour,
+                            style: MyStyles.Medium(14, myColor.black),
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Container(
+                            height: 33,
+                            width: sswidth - 80,
+                            child: Row(
+                              children: [
+                                Text('bolitas'),
+                                Text('bolitas'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -1418,9 +1101,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 10.0),
                                 Expanded(
                                   flex: 2,
                                   child: Column(
@@ -1434,9 +1115,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                             MyStyles.Medium(14, myColor.black),
                                         textAlign: TextAlign.start,
                                       ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
+                                      const SizedBox(height: 5.0),
                                       Container(
                                         height: 32,
                                         // ignore: missing_required_param
@@ -1503,9 +1182,7 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 30.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [saveandnext(eventtypesState)],
