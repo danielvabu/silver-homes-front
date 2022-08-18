@@ -32,7 +32,7 @@ class UpdateAddEditEventTypes implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .portalState(index: 1, title: 'Event Types', subindex: 1);
+        .portalState(index: 8, title: 'Event Types', subindex: 21);
   }
 }
 

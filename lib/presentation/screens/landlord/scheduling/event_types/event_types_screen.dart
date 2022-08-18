@@ -321,7 +321,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
 
         _store.dispatch(UpdateRestrictionlist(restrictionlist));
 
-        _store.dispatch(UpdateEventTypesForm(1));
+        _store.dispatch(UpdateEventTypesForm(8));
         _store.dispatch(UpdateEventTypesFormAddress(""));
         _store.dispatch(UpdateAddEditEventTypes());
       },

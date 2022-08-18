@@ -37,6 +37,7 @@ import 'package:silverhome/presentation/screens/landlord/property/add_edit_prope
 import 'package:silverhome/presentation/screens/landlord/property/property_screen_new.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/calendar/scheduling_calendar_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/event_type_templates_screen.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/add_edit_eventtypes.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/event_types_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancy_application_details/tenancy_application_screen.dart';
 import 'package:silverhome/store/store.dart';
@@ -138,7 +139,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
       width: drawer_width,
       height: MediaQuery.of(context).size.height,
       //color: Colors.white,
-      decoration: new BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -1000,12 +1001,15 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
           // Scheduling
           //subindex 1 = Calendar
           //subindex 2 = Event Types
+          //subindex 21 = New Event Types
           //subindex 3 = Event Type Templates
 
           if (portalState.subindex == 1 && portalState.index == 8) {
             return SchedulingCalendarScreen();
           } else if (portalState.subindex == 2 && portalState.index == 8) {
             return EventTypesScreen();
+          } else if (portalState.subindex == 21 && portalState.index == 8) {
+            return AddEditEventTypes();
           } else if (portalState.subindex == 3 && portalState.index == 8) {
             return EventTypeTemplateScreen();
           }
