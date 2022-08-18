@@ -127,7 +127,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       color: myColor.bg_color1,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: ConnectState<EventTypesListState>(
               map: (state) => state.eventTypesListState,
               where: notIdentical,
@@ -198,7 +198,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                               ),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
@@ -255,7 +255,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                                       border: InputBorder.none,
                                       hintStyle: MyStyles.Medium(
                                           14, myColor.hintcolor),
-                                      contentPadding: EdgeInsets.all(10),
+                                      contentPadding: const EdgeInsets.all(10),
                                       isDense: true,
                                       hintText: GlobleString.LL_Search,
                                     ),
@@ -429,14 +429,14 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) async {
-          EventTypesListReqtokens reqtokens = new EventTypesListReqtokens();
+          EventTypesListReqtokens reqtokens = EventTypesListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
           reqtokens.Name = eventtypesListState.EventTypesSearchText != null
               ? eventtypesListState.EventTypesSearchText
               : "";
 
           List<Sort> sortinglist = [];
-          Sort sort = new Sort();
+          Sort sort = Sort();
           if (eventtypesListState.EventTypesSearchText != null &&
               eventtypesListState.EventTypesSearchText.isNotEmpty) {
             sort.fieldId = "ID";
@@ -570,7 +570,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                 child: Container(
                   width: sswidth,
                   height: ssheight - 310,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
                   child: Text(
                     "Please wait.....",

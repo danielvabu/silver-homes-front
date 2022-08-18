@@ -119,9 +119,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _headerView(eventtypesFormState!),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20.0),
                   Row(
                     children: [
                       eventtypesFormState.selectView != 4
