@@ -522,9 +522,21 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       default:
         {
-          return StepEventTypesSetup(
+          // CARGA MANUAL
+
+          // Primera Pantalla
+          //return StepEventTypesSetup(onPressedSave: () {_store.dispatch(UpdateEventTypesForm(2));},);
+
+          // Segunda Pantalla
+          return StepEventTypesAvailability(
             onPressedSave: () {
-              _store.dispatch(UpdateEventTypesForm(2));
+              _store.dispatch(UpdateEventTypesForm(3));
+            },
+            onPressedBack: () {
+              if (AddEditEventTypes.isValueUpdate)
+                showBackDialog(eventtypesFormState, false, stepper: 1);
+              else
+                _store.dispatch(UpdateEventTypesForm(1));
             },
           );
         }

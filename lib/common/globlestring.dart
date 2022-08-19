@@ -1869,11 +1869,28 @@ class GlobleString {
   static const String Weeks = 'Weeks';
   static const String Months = 'Months';
   static const String Years = 'Years';
+  static const String Time_Zone = 'Time Zone';
   static const String ET_Buffer_Time = 'Buffer Time';
   static const String ET_Buffer_msg =
       'Give yourself some buffer time to prepare for or wrap up from booked events.';
   static const String ET_Before_event = 'Before event';
   static const String ET_After_event = 'After event';
+
+  static const String ET_Set_Availability = 'Set your availability for event:';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
+  //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';

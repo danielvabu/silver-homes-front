@@ -38,6 +38,7 @@ import 'add_edit_eventtypes.dart';
 
 class StepEventTypesSetup extends StatefulWidget {
   final VoidCallback _callbackSaveandNext;
+
   StepEventTypesSetup({
     required VoidCallback onPressedSave,
   }) : _callbackSaveandNext = onPressedSave;
@@ -55,8 +56,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       NumberFormat.decimalPattern('en').format(int.parse(s));
   final _mycontroller = TextEditingController();
 
-  ScrollController _controller = new ScrollController();
-  FocusNode _focus1 = new FocusNode();
+  ScrollController _controller = ScrollController();
+  FocusNode _focus1 = FocusNode();
   final FocusScopeNode _focusScopeNode = FocusScopeNode();
   bool isGotoback = false;
   int stepper = 0;
@@ -214,6 +215,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                 selection: TextSelection.collapsed(offset: valuerat.length),
               );
             }
+
             return SingleChildScrollView(
               controller: _controller,
               child: Container(
@@ -295,77 +297,68 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                           Expanded(child: Container()),
                         ],
                       ),
-                      eventtypesState.eventtypestypeValue != null &&
-                              eventtypesState
-                                      .eventtypestypeValue!.EnumDetailID ==
-                                  6
-                          ? Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Row(
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        TextFormField(
-                                          initialValue: eventtypesState
-                                              .eventtypestypeOtherValue,
-                                          textAlign: TextAlign.start,
-                                          style: MyStyles.Regular(
-                                              14, myColor.text_color),
-                                          inputFormatters: [
-                                            LengthLimitingTextInputFormatter(
-                                                25),
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp("[a-z A-Z]")),
-                                          ],
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_eventtypestypeOther
-                                                      ? myColor.errorcolor
-                                                      : myColor.blue,
-                                                  width: 2),
-                                            ),
-                                            hintText: GlobleString
-                                                .PS1_enter_your_answer,
-                                            hintStyle: MyStyles.Regular(
-                                                14, myColor.hintcolor),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_eventtypestypeOther
-                                                      ? myColor.errorcolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
-                                            ),
-                                            isDense: true,
-                                            contentPadding:
-                                                const EdgeInsets.all(12),
-                                            fillColor: myColor.white,
-                                            filled: true,
-                                          ),
-                                          onChanged: (value) {
-                                            /*_changeData();
+                                  TextFormField(
+                                    initialValue: eventtypesState
+                                        .eventtypestypeOtherValue,
+                                    textAlign: TextAlign.start,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(25),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[a-z A-Z]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: eventtypesState
+                                                    .error_eventtypestypeOther
+                                                ? myColor.errorcolor
+                                                : myColor.blue,
+                                            width: 2),
+                                      ),
+                                      hintText:
+                                          GlobleString.PS1_enter_your_answer,
+                                      hintStyle: MyStyles.Regular(
+                                          14, myColor.hintcolor),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: eventtypesState
+                                                    .error_eventtypestypeOther
+                                                ? myColor.errorcolor
+                                                : myColor.gray,
+                                            width: 1.0),
+                                      ),
+                                      isDense: true,
+                                      contentPadding: const EdgeInsets.all(12),
+                                      fillColor: myColor.white,
+                                      filled: true,
+                                    ),
+                                    onChanged: (value) {
+                                      /*_changeData();
                                             AddEditEventTypes.isValueUpdate =true;
                                             _store.dispatch(UpdateEventTypesTypeOtherValue(value));
                                             _store.dispatch(UpdateErrorEventTypestypeOther(false));*/
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                    },
                                   ),
-                                  const SizedBox(width: 30.0),
-                                  Expanded(child: Container()),
                                 ],
                               ),
-                            )
-                          : Container(),
+                            ),
+                            const SizedBox(width: 30.0),
+                            Expanded(child: Container()),
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 20.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -1688,10 +1681,12 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
             ", " +
             eventtypesState.CountryName;
 
-        _store.dispatch(UpdateEventTypesFormAddress(address));*/
-
+        _store.dispatch(UpdateEventTypesFormAddress(address));
         apiCallAndValidation(eventtypesState);
-        //widget._callbackSaveandNext();
+        widget._callbackSaveandNext();*/
+
+        //Paso al pantallazo automatico pa maquetarlo
+        //no se como
       },
       child: CustomeWidget.SaveAndNext(GlobleString.Save_and_next),
     );

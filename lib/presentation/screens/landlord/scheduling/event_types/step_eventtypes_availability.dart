@@ -54,11 +54,11 @@ class _StepEventTypesAvailabilityState
     extends State<StepEventTypesAvailability> {
   double ssheight = 0, sswidth = 0;
 
+  final _store = getIt<AppStore>();
+
   String formatNumber(String s) =>
       NumberFormat.decimalPattern('en').format(int.parse(s));
   final controllerSize = TextEditingController();
-
-  final _store = getIt<AppStore>();
 
   late OverlayEntry overlayEntry;
   late OverlayEntry loader;
@@ -131,7 +131,7 @@ class _StepEventTypesAvailabilityState
 
   @override
   Widget build(BuildContext context) {
-    ssheight = MediaQuery.of(context).size.height - 70;
+    ssheight = MediaQuery.of(context).size.height - 75;
     sswidth = MediaQuery.of(context).size.width - 230;
 
     return Container(
@@ -155,402 +155,94 @@ class _StepEventTypesAvailabilityState
             return SingleChildScrollView(
               child: Container(
                 child: FocusScope(
-                  node: new FocusScopeNode(),
+                  node: FocusScopeNode(),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "GlobleString.PS2_EventTypes_Specifications",
+                      Row(children: [
+                        Text(
+                          GlobleString.ET_Set_Availability,
                           style: MyStyles.Medium(20, myColor.Circle_main),
-                          textAlign: TextAlign.center,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "GlobleString.PS2_EventTypes_Bedrooms",
-                              style: MyStyles.Medium(14, myColor.black),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              initialValue: eventtypesState.EventTypesBedrooms,
-                              textAlign: TextAlign.start,
-                              autofocus: true,
-                              keyboardType: TextInputType.phone,
-                              inputFormatters: [MaskedInputFormatter("0")],
-                              style: MyStyles.Regular(14, myColor.text_color),
-                              decoration: InputDecoration(
-                                  //border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesBedrooms
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
-                                        width: 2),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesBedrooms
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0),
-                                  ),
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.all(12),
-                                  fillColor: myColor.white,
-                                  filled: true),
-                              onChanged: (value) {
-                                _changeData();
-                                _store
-                                    .dispatch(UpdateEventTypesBedrooms(value));
-                                _store.dispatch(
-                                    UpdateErrorEventTypesBedrooms(false));
-                              },
-                            ),
-                          ],
+                        const SizedBox(width: 5.0),
+                        Text(
+                          'Showing - 867 Hamilton St.', // este sale de la pantalla anterior: Event Type Name
+                          style: MyStyles.Bold(20, myColor.Circle_main),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "GlobleString.PS2_EventTypes_Bathrooms",
-                              style: MyStyles.Medium(14, myColor.black),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              initialValue: eventtypesState.EventTypesBathrooms,
-                              textAlign: TextAlign.start,
-                              keyboardType: TextInputType.phone,
-                              inputFormatters: [MaskedInputFormatter("0")],
-                              style: MyStyles.Regular(14, myColor.text_color),
-                              decoration: InputDecoration(
-                                  //border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesBathrooms
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
-                                        width: 2),
+                      ]),
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 8.0),
+                                  child: Text(
+                                    GlobleString.Time_Zone,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesBathrooms
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0),
-                                  ),
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.all(12),
-                                  fillColor: myColor.white,
-                                  filled: true),
-                              onChanged: (value) {
-                                _changeData();
-                                _store
-                                    .dispatch(UpdateEventTypesBathrooms(value));
-                                _store.dispatch(
-                                    UpdateErrorEventTypesBathrooms(false));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "GlobleString.PS2_EventTypes_Sizeinsquarefeet",
-                              style: MyStyles.Medium(14, myColor.black),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextField(
-                              //initialValue: eventtypesState.EventTypesSizeinsquarefeet,
-                              controller: controllerSize,
-                              textAlign: TextAlign.start,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                //MaskedInputFormatter("0000")
-                                FilteringTextInputFormatter.allow(
-                                    RegExp("[0-9]")),
-                              ],
-                              style: MyStyles.Regular(14, myColor.text_color),
-                              decoration: InputDecoration(
-                                  //border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesSizeinsquarefeet
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
-                                        width: 2),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesSizeinsquarefeet
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0),
-                                  ),
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.all(12),
-                                  fillColor: myColor.white,
-                                  filled: true),
-                              onChanged: (valuesize) {
-                                _changeData();
-                                if (valuesize.isNotEmpty) {
-                                  valuesize = formatNumber(
-                                      valuesize.replaceAll(',', ''));
-                                  controllerSize.value = TextEditingValue(
-                                    text: valuesize,
-                                    selection: TextSelection.collapsed(
-                                        offset: valuesize.length),
-                                  );
-                                } else {
-                                  controllerSize.text = "";
-                                }
-
-                                _store.dispatch(
-                                    UpdateEventTypesSizeinsquarefeet(
-                                        valuesize));
-                                _store.dispatch(
-                                    UpdateErrorEventTypesSizeinsquarefeet(
-                                        false));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "GlobleString.PS2_EventTypes_Maxoccupancy",
-                              style: MyStyles.Medium(14, myColor.black),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              initialValue:
-                                  eventtypesState.EventTypesMaxoccupancy,
-                              textAlign: TextAlign.start,
-                              style: MyStyles.Regular(14, myColor.text_color),
-                              inputFormatters: [
-                                //FilteringTextInputFormatter.allow(RegExp("[0-9]")),
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(25),
-                              ],
-                              decoration: InputDecoration(
-                                  //border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesMaxoccupancy
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
-                                        width: 2),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: eventtypesState
-                                                .error_EventTypesMaxoccupancy
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0),
-                                  ),
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.all(12),
-                                  fillColor: myColor.white,
-                                  filled: true),
-                              onChanged: (value) {
-                                _changeData();
-                                _store.dispatch(
-                                    UpdateEventTypesMaxoccupancy(value));
-                                _store.dispatch(
-                                    UpdateErrorEventTypesMaxoccupancy(false));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        width: 350,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "GlobleString.PS2_EventTypes_Furnishing",
-                              style: MyStyles.Medium(14, myColor.black),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              height: 32,
-                              child: DropdownSearch<SystemEnumDetails>(
-                                mode: Mode.MENU,
-                                key: UniqueKey(),
-                                focuscolor: myColor.blue,
-                                focusWidth: 2,
-                                errorcolor: myColor.errorcolor,
-                                isError: eventtypesState.error_furnishing,
-                                popupBackgroundColor: myColor.white,
-                                items: eventtypesState.furnishinglist,
-                                defultHeight: double.parse(
-                                    (eventtypesState.furnishinglist.length * 35)
-                                        .toString()),
-                                textstyle:
-                                    MyStyles.Medium(14, myColor.text_color),
-                                itemAsString: (SystemEnumDetails? u) =>
-                                    u!.displayValue,
-                                hint: "Select furnishing",
-                                showSearchBox: false,
-                                selectedItem:
-                                    eventtypesState.furnishingValue != null
-                                        ? eventtypesState.furnishingValue
+                                ),
+                                const SizedBox(height: 10.0),
+                                Container(
+                                  height: 32,
+                                  child: DropdownSearch<SystemEnumDetails>(
+                                    mode: Mode.MENU,
+                                    key: UniqueKey(),
+                                    errorcolor: myColor.errorcolor,
+                                    isError:
+                                        eventtypesState!.error_eventtypestype,
+                                    focuscolor: myColor.blue,
+                                    focusWidth: 2,
+                                    popupBackgroundColor: myColor.white,
+                                    items: eventtypesState.eventtypestypelist,
+                                    defultHeight: eventtypesState
+                                                    .eventtypestypelist.length *
+                                                35 >
+                                            250
+                                        ? 250
+                                        : eventtypesState
+                                                .eventtypestypelist.length *
+                                            35,
+                                    textstyle:
+                                        MyStyles.Medium(14, myColor.text_color),
+                                    itemAsString: (SystemEnumDetails? u) =>
+                                        u != null ? u.displayValue : "",
+                                    hint: GlobleString.ET_Select_Template,
+                                    selectedItem: eventtypesState
+                                                .eventtypestypeValue !=
+                                            null
+                                        ? eventtypesState.eventtypestypeValue
                                         : null,
-                                isFilteredOnline: true,
-                                onChanged: (value) {
-                                  _changeData();
-                                  _store
-                                      .dispatch(UpdateFurnishingValue(value!));
-                                  _store.dispatch(UpdateErrorFurnishing(false));
-
-                                  if (value.EnumDetailID != 3) {
-                                    _store.dispatch(
-                                        UpdateOtherPartialFurniture(""));
-                                  }
-                                },
-                              ),
+                                    onChanged: (value) {
+                                      /*_changeData();
+                                      AddEditEventTypes.isValueUpdate = true;
+                                      if (value!.EnumDetailID != 6) {_store.dispatch(UpdateEventTypesTypeOtherValue(""));}
+                                      _store.dispatch(UpdateProperTytypeValue(value));
+                                      _store.dispatch(UpdateErrorEventTypestype(false));*/
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 30.0),
+                          Expanded(child: Container()),
+                        ],
                       ),
-                      /* SizedBox(
-                        height: 20,
-                      ),*/
-                      eventtypesState.furnishingValue != null &&
-                              eventtypesState.furnishingValue!.EnumDetailID == 3
-                          ? Container(
-                              width: 350,
-                              margin: EdgeInsets.only(top: 20),
-                              child: TextFormField(
-                                initialValue:
-                                    eventtypesState.Other_Partial_Furniture,
-                                textAlign: TextAlign.start,
-                                autofocus: true,
-                                style: MyStyles.Regular(14, myColor.text_color),
-                                inputFormatters: [
-                                  //FilteringTextInputFormatter.allow(RegExp("[a-z A-Z , &]")),
-                                ],
-                                decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: eventtypesState
-                                                  .error_Other_Partial_Furniture
-                                              ? myColor.errorcolor
-                                              : myColor.blue,
-                                          width: 2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: eventtypesState
-                                                  .error_Other_Partial_Furniture
-                                              ? myColor.errorcolor
-                                              : myColor.gray,
-                                          width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    hintText:
-                                        "GlobleString.PS2_EventTypes_Furnishing_partial",
-                                    hintStyle:
-                                        MyStyles.Regular(14, myColor.hintcolor),
-                                    contentPadding: EdgeInsets.all(12),
-                                    fillColor: myColor.white,
-                                    filled: true),
-                                onChanged: (value) {
-                                  _changeData();
-                                  _store.dispatch(
-                                      UpdateOtherPartialFurniture(value));
-                                  _store.dispatch(
-                                      UpdateErrorOther_Partial_Furniture(
-                                          false));
-                                },
-                              ),
-                            )
-                          : Container(),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "GlobleString.PS2_EventTypes_Restrictions",
-                          style: MyStyles.Medium(20, myColor.Circle_main),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      RestrictionList(eventtypesState),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           back(),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10.0),
                           saveandnext(eventtypesState)
                         ],
                       ),
