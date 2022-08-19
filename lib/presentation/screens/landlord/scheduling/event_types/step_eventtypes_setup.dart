@@ -36,17 +36,17 @@ import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes.dart';
 
-class StepEventTypesDetails extends StatefulWidget {
+class StepEventTypesSetup extends StatefulWidget {
   final VoidCallback _callbackSaveandNext;
-  StepEventTypesDetails({
+  StepEventTypesSetup({
     required VoidCallback onPressedSave,
   }) : _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesDetailsState createState() => _StepEventTypesDetailsState();
+  _StepEventTypesSetupState createState() => _StepEventTypesSetupState();
 }
 
-class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
+class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();

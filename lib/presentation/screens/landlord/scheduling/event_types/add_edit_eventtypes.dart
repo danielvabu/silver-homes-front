@@ -27,10 +27,11 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_form_state.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_notifications.dart';
 //import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
-import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_details.dart';
-import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_specification_restriction.dart';
-import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_summery_disclousures.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_setup.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_availability.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_questions.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -466,7 +467,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     switch (val) {
       case 1:
         {
-          return StepEventTypesDetails(
+          return StepEventTypesSetup(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(2));
             },
@@ -474,7 +475,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       case 2:
         {
-          return StepEventTypesSpecificationRestriction(
+          return StepEventTypesAvailability(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(3));
             },
@@ -488,9 +489,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       case 3:
         {
-          return Text('data');
-/*
-          return StepEventTypesFeature(
+          return StepEventTypesQuestions(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(4));
             },
@@ -501,17 +500,17 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                 _store.dispatch(UpdateEventTypesForm(2));
             },
           );
-*/
         }
       case 4:
         {
-          return StepEventTypesSummary(
+          return StepEventTypesNotifications(
             onPressedSave: () async {
               await Prefs.setBool(PrefsName.EventTypesEdit, false);
               await Prefs.setBool(PrefsName.EventTypesEditMode, false);
               await Prefs.setBool(PrefsName.EventTypesAgreeTC, false);
               await Prefs.setString(PrefsName.EventTypesID, "");
-              _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+              _store.dispatch(
+                  UpdatePortalPage(8, GlobleString.NAV_Scheduling_event_types));
             },
             onPressedBack: () {
               if (AddEditEventTypes.isValueUpdate)
@@ -523,7 +522,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       default:
         {
-          return StepEventTypesDetails(
+          return StepEventTypesSetup(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(2));
             },

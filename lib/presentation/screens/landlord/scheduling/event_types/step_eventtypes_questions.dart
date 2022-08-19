@@ -36,21 +36,22 @@ typedef VoidCallbackSaveandNext = void Function();
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");
 
-class StepEventTypesSummary extends StatefulWidget {
+class StepEventTypesQuestions extends StatefulWidget {
   final VoidCallback _callbackBack;
   final VoidCallbackSaveandNext _callbackSaveandNext;
 
-  StepEventTypesSummary({
+  StepEventTypesQuestions({
     required VoidCallback onPressedBack,
     required VoidCallbackSaveandNext onPressedSave,
   })  : _callbackBack = onPressedBack,
         _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesSummaryState createState() => _StepEventTypesSummaryState();
+  _StepEventTypesQuestionsState createState() =>
+      _StepEventTypesQuestionsState();
 }
 
-class _StepEventTypesSummaryState extends State<StepEventTypesSummary> {
+class _StepEventTypesQuestionsState extends State<StepEventTypesQuestions> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();

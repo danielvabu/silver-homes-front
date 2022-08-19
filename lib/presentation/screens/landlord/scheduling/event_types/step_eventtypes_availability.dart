@@ -35,23 +35,23 @@ import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes.dart';
 
-class StepEventTypesSpecificationRestriction extends StatefulWidget {
+class StepEventTypesAvailability extends StatefulWidget {
   final VoidCallback _callbackBack;
   final VoidCallback _callbackSaveandNext;
 
-  StepEventTypesSpecificationRestriction({
+  StepEventTypesAvailability({
     required VoidCallback onPressedBack,
     required VoidCallback onPressedSave,
   })  : _callbackBack = onPressedBack,
         _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesSpecificationRestrictionState createState() =>
-      _StepEventTypesSpecificationRestrictionState();
+  _StepEventTypesAvailabilityState createState() =>
+      _StepEventTypesAvailabilityState();
 }
 
-class _StepEventTypesSpecificationRestrictionState
-    extends State<StepEventTypesSpecificationRestriction> {
+class _StepEventTypesAvailabilityState
+    extends State<StepEventTypesAvailability> {
   double ssheight = 0, sswidth = 0;
 
   String formatNumber(String s) =>
