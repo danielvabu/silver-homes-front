@@ -300,9 +300,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 style: MyStyles.Medium(13, myColor.text_color),
                                 textAlign: TextAlign.start,
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              const SizedBox(height: 10.0),
                               TextButton(
                                 onPressed: () {
                                   _selectDate(context, tfPersonalState);
@@ -336,7 +334,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
                                             EdgeInsets.only(left: 8, right: 5),
                                         child: Icon(
@@ -354,9 +352,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
+                    const SizedBox(height: 15.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

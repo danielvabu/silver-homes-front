@@ -635,6 +635,23 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                       },
                                     ),
                                   ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const Text(
+                                          GlobleString.ET_Not_Applicable),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -690,6 +707,22 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                                       _store
                                           .dispatch(UpdateErrorProvince(false));
                                     },
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const Text(GlobleString.ET_Same_Address),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -764,81 +797,94 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Event_Link,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Event_Link,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Container(
-                            height: 33,
-                            width: sswidth - 80,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: myColor.gray,
-                                width: 1.0,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 33,
+                              width: sswidth - 90,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: myColor.gray,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
-                              borderRadius: BorderRadius.circular(4.0),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 33,
-                                  color: Colors.black12,
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
-                                  child: Text(
-                                    Weburl.CustomerFeaturedPage,
-                                    style: MyStyles.Medium(14, myColor.black),
-                                    textAlign: TextAlign.start,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 33,
+                                    color: Colors.black12,
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: Text(
+                                      Weburl.CustomerFeaturedPage,
+                                      style: MyStyles.Medium(14, myColor.black),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: TextFormField(
-                                    //onChanged: (newValue) {
-                                    //_store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(newValue));
-                                    //},
-                                    initialValue:
-                                        '/', //profileState.CustomerFeatureListingURL_update,
-                                    keyboardType: TextInputType.text,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp("[a-zA-Z0-9]"))
-                                    ],
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: GlobleString.LL_cfl_hint,
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      contentPadding: EdgeInsets.all(12),
-                                      isDense: true,
+                                  Expanded(
+                                    child: TextFormField(
+                                      //onChanged: (newValue) {
+                                      //_store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(newValue));
+                                      //},
+                                      initialValue:
+                                          '/', //profileState.CustomerFeatureListingURL_update,
+                                      keyboardType: TextInputType.text,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[a-zA-Z0-9]"))
+                                      ],
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: GlobleString.LL_cfl_hint,
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        contentPadding: EdgeInsets.all(12),
+                                        isDense: true,
+                                      ),
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
                                     ),
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Event_Colour,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Event_Colour,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 10.0),
                       Row(
@@ -848,104 +894,94 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                             width: sswidth - 80,
                             child: Row(
                               children: [
-                                Text('bolitas'),
-                                Text('bolitas'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Date_Range,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Container(
-                            width: sswidth - 80,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 25,
-                                      width: 25,
-                                      color: myColor.pf_incudevalue,
-                                      alignment: Alignment.center,
-                                      child: Radio(
-                                        value: "1",
-                                        //autofocus: Index == 0 ? true :false,
-                                        groupValue: 1,
-                                        activeColor: myColor.Circle_main,
-                                        onChanged: (value) {
-                                          /*AddEditProperty.isValueUpdate = true;
-                                            widget._callbackradio(Index, value.toString());
-                                            widget.listdata[Index].value = value.toString();
-                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
-                                        },
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5.0),
-                                    const Text(GlobleString.ET_Single_day),
-                                  ],
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.grey),
                                 ),
-                                const SizedBox(height: 5.0),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 25,
-                                      width: 25,
-                                      color: myColor.pf_incudevalue,
-                                      alignment: Alignment.center,
-                                      child: Radio(
-                                        value: "1",
-                                        //autofocus: Index == 0 ? true :false,
-                                        groupValue: 1,
-                                        activeColor: myColor.Circle_main,
-                                        onChanged: (value) {
-                                          /*AddEditProperty.isValueUpdate = true;
-                                            widget._callbackradio(Index, value.toString());
-                                            widget.listdata[Index].value = value.toString();
-                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
-                                        },
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5.0),
-                                    const Text(GlobleString.ET_Date_Range),
-                                  ],
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.red),
                                 ),
-                                const SizedBox(height: 5.0),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 25,
-                                      width: 25,
-                                      color: myColor.pf_incudevalue,
-                                      alignment: Alignment.center,
-                                      child: Radio(
-                                        value: "1",
-                                        //autofocus: Index == 0 ? true :false,
-                                        groupValue: 1,
-                                        activeColor: myColor.Circle_main,
-                                        onChanged: (value) {
-                                          /*AddEditProperty.isValueUpdate = true;
-                                            widget._callbackradio(Index, value.toString());
-                                            widget.listdata[Index].value = value.toString();
-                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
-                                        },
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5.0),
-                                    const Text(GlobleString.ET_Indefinitely),
-                                  ],
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.orange),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.yellow),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.green),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.cyan),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.blue),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.deepPurple),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.purple),
+                                ),
+                                const SizedBox(width: 1.0),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(), //Icon(Icons.check),
+                                  style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(18),
+                                      primary: Colors.pink),
                                 ),
                               ],
                             ),
@@ -953,236 +989,658 @@ class _StepEventTypesDetailsState extends State<StepEventTypesDetails> {
                         ],
                       ),
                       const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Event_Colour,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Date_Range,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Container(
-                            height: 33,
-                            width: sswidth - 80,
-                            child: Row(
-                              children: [
-                                Text('bolitas'),
-                                Text('bolitas'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Event_Colour,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Container(
-                            height: 33,
-                            width: sswidth - 80,
-                            child: Row(
-                              children: [
-                                Text('bolitas'),
-                                Text('bolitas'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobleString.ET_Event_Colour,
-                            style: MyStyles.Medium(14, myColor.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10.0),
-                      Row(
-                        children: [
-                          Container(
-                            height: 33,
-                            width: sswidth - 80,
-                            child: Row(
-                              children: [
-                                Text('bolitas'),
-                                Text('bolitas'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: sswidth - 90,
+                              child: Column(
+                                children: [
+                                  Row(
                                     children: [
-                                      Text(
-                                        GlobleString.PS1_Minimum_lease_Number,
-                                        style:
-                                            MyStyles.Medium(14, myColor.black),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      TextFormField(
-                                        initialValue: eventtypesState
-                                            .minimumleasedurationnumber,
-                                        textAlign: TextAlign.start,
-                                        style: MyStyles.Regular(
-                                            14, myColor.text_color),
-                                        keyboardType: TextInputType.phone,
-                                        inputFormatters: [
-                                          MaskedInputFormatter("0000000000")
-                                        ],
-                                        decoration: InputDecoration(
-                                            //border: InputBorder.none,
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_minimumleasedurationnumber
-                                                      ? myColor.errorcolor
-                                                      : myColor.blue,
-                                                  width: 2),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_minimumleasedurationnumber
-                                                      ? myColor.errorcolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
-                                            ),
-                                            isDense: true,
-                                            contentPadding: EdgeInsets.all(12),
-                                            fillColor: myColor.white,
-                                            filled: true),
-                                        onChanged: (value) {
-                                          _changeData();
-                                          AddEditEventTypes.isValueUpdate =
-                                              true;
-
-                                          _store.dispatch(
-                                              UpdateMinimumleasedurationNumber(
-                                                  value));
-                                          _store.dispatch(
-                                              UpdateErrorMinimumleasedurationnumber(
-                                                  false));
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 10.0),
-                                Expanded(
-                                  flex: 2,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        GlobleString.PS1_Minimum_lease_Period,
-                                        style:
-                                            MyStyles.Medium(14, myColor.black),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      const SizedBox(height: 5.0),
                                       Container(
-                                        height: 32,
-                                        // ignore: missing_required_param
-                                        child:
-                                            DropdownSearch<SystemEnumDetails>(
-                                          key: UniqueKey(),
-                                          mode: Mode.MENU,
-                                          errorcolor: myColor.errorcolor,
-                                          isError: eventtypesState
-                                              .error_minimumleaseduration,
-                                          focuscolor: myColor.blue,
-                                          focusWidth: 2,
-                                          popupBackgroundColor: myColor.white,
-                                          items: eventtypesState
-                                              .minimumleasedurationlist,
-                                          defultHeight: double.parse(
-                                              (eventtypesState
-                                                          .minimumleasedurationlist
-                                                          .length *
-                                                      35)
-                                                  .toString()),
-                                          textstyle: MyStyles.Medium(
-                                              14, myColor.text_color),
-                                          itemAsString:
-                                              (SystemEnumDetails? u) =>
-                                                  u != null
-                                                      ? u.displayValue
-                                                      : "",
-                                          hint: "Select Period",
-                                          showSearchBox: false,
-                                          selectedItem: eventtypesState
-                                                      .minimumleasedurationValue !=
-                                                  null
-                                              ? eventtypesState
-                                                  .minimumleasedurationValue
-                                              : null,
-                                          isFilteredOnline: true,
+                                        height: 25,
+                                        width: 25,
+                                        color: myColor.pf_incudevalue,
+                                        alignment: Alignment.center,
+                                        child: Radio(
+                                          value: "1",
+                                          //autofocus: Index == 0 ? true :false,
+                                          groupValue: 1,
+                                          activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            _changeData();
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
-
-                                            _store.dispatch(
-                                                UpdateMinimumLeasedurationValue(
-                                                    value!));
-
-                                            _store.dispatch(
-                                                UpdateErrorMinimumleaseduration(
-                                                    false));
+                                            /*AddEditProperty.isValueUpdate = true;
+                                              widget._callbackradio(Index, value.toString());
+                                              widget.listdata[Index].value = value.toString();
+                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
                                           },
                                         ),
                                       ),
+                                      const SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_Single_day),
                                     ],
                                   ),
-                                )
-                              ],
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 25,
+                                        width: 25,
+                                        color: myColor.pf_incudevalue,
+                                        alignment: Alignment.center,
+                                        child: Radio(
+                                          value: "1",
+                                          //autofocus: Index == 0 ? true :false,
+                                          groupValue: 1,
+                                          activeColor: myColor.Circle_main,
+                                          onChanged: (value) {
+                                            /*AddEditProperty.isValueUpdate = true;
+                                              widget._callbackradio(Index, value.toString());
+                                              widget.listdata[Index].value = value.toString();
+                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_Date_Range),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 22.0),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: const [
+                                              SizedBox(width: 8.0),
+                                              Text(GlobleString.ET_From_Date),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 5.0),
+                                          Container(
+                                            child: TextButton(
+                                              onPressed: () {
+                                                //_selectDate(context, tfPersonalState);
+                                              },
+                                              child: Container(
+                                                width: 220,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: myColor
+                                                        .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8),
+                                                        child: Text(
+                                                          'Aca',
+                                                          //tfPersonalState.dateofbirth == null ? "" : new DateFormat("dd-MMM-yyyy").format(tfPersonalState.dateofbirth!).toString(),
+                                                          style: MyStyles.Medium(
+                                                              13,
+                                                              myColor
+                                                                  .text_color),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 8, right: 5),
+                                                      child: Icon(
+                                                        Icons
+                                                            .calendar_today_outlined,
+                                                        color: Colors.grey,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: const [
+                                              SizedBox(width: 8.0),
+                                              Text(GlobleString.ET_To_Date),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 5.0),
+                                          Container(
+                                            child: TextButton(
+                                              onPressed: () {
+                                                //_selectDate(context, tfPersonalState);
+                                              },
+                                              child: Container(
+                                                width: 220,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: myColor
+                                                        .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                ),
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8),
+                                                        child: Text(
+                                                          'Aca',
+                                                          //tfPersonalState.dateofbirth == null ? "" : new DateFormat("dd-MMM-yyyy").format(tfPersonalState.dateofbirth!).toString(),
+                                                          style: MyStyles.Medium(
+                                                              13,
+                                                              myColor
+                                                                  .text_color),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 8, right: 5),
+                                                      child: Icon(
+                                                        Icons
+                                                            .calendar_today_outlined,
+                                                        color: Colors.grey,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 25,
+                                        width: 25,
+                                        color: myColor.pf_incudevalue,
+                                        alignment: Alignment.center,
+                                        child: Radio(
+                                          value: "1",
+                                          //autofocus: Index == 0 ? true :false,
+                                          groupValue: 1,
+                                          activeColor: myColor.Circle_main,
+                                          onChanged: (value) {
+                                            /*AddEditProperty.isValueUpdate = true;
+                                              widget._callbackradio(Index, value.toString());
+                                              widget.listdata[Index].value = value.toString();
+                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_Indefinitely),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 30.0),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Event_Duration,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 32,
+                              child: TextFormField(
+                                initialValue:
+                                    eventtypesState.minimumleasedurationnumber,
+                                textAlign: TextAlign.start,
+                                style: MyStyles.Regular(14, myColor.text_color),
+                                keyboardType: TextInputType.phone,
+                                inputFormatters: [
+                                  MaskedInputFormatter("0000000000")
+                                ],
+                                decoration: InputDecoration(
+                                    //border: InputBorder.none,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.blue,
+                                          width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.gray,
+                                          width: 1.0),
+                                    ),
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.all(12),
+                                    fillColor: myColor.white,
+                                    filled: true),
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumleasedurationNumber(value));
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleasedurationnumber(
+                                          false));
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 5.0),
+                            Container(
+                              width: 150,
+                              height: 32,
+                              // ignore: missing_required_param
+                              child: DropdownSearch<SystemEnumDetails>(
+                                key: UniqueKey(),
+                                mode: Mode.MENU,
+                                errorcolor: myColor.errorcolor,
+                                isError:
+                                    eventtypesState.error_minimumleaseduration,
+                                focuscolor: myColor.blue,
+                                focusWidth: 2,
+                                popupBackgroundColor: myColor.white,
+                                items: eventtypesState.minimumleasedurationlist,
+                                defultHeight: double.parse((eventtypesState
+                                            .minimumleasedurationlist.length *
+                                        35)
+                                    .toString()),
+                                textstyle:
+                                    MyStyles.Medium(14, myColor.text_color),
+                                itemAsString: (SystemEnumDetails? u) =>
+                                    u != null ? u.displayValue : "",
+                                hint: "Select Period",
+                                showSearchBox: false,
+                                selectedItem: eventtypesState
+                                            .minimumleasedurationValue !=
+                                        null
+                                    ? eventtypesState.minimumleasedurationValue
+                                    : null,
+                                isFilteredOnline: true,
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumLeasedurationValue(value!));
+
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleaseduration(false));
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Buffer_Time,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Buffer_msg,
+                              style:
+                                  MyStyles.Medium(14, myColor.CM_Lead_border),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                                width: 105,
+                                height: 32,
+                                child: Text(GlobleString.ET_Before_event)),
+                            Container(
+                              width: 100,
+                              height: 32,
+                              child: TextFormField(
+                                initialValue:
+                                    eventtypesState.minimumleasedurationnumber,
+                                textAlign: TextAlign.start,
+                                style: MyStyles.Regular(14, myColor.text_color),
+                                keyboardType: TextInputType.phone,
+                                inputFormatters: [
+                                  MaskedInputFormatter("0000000000")
+                                ],
+                                decoration: InputDecoration(
+                                    //border: InputBorder.none,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.blue,
+                                          width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.gray,
+                                          width: 1.0),
+                                    ),
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.all(12),
+                                    fillColor: myColor.white,
+                                    filled: true),
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumleasedurationNumber(value));
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleasedurationnumber(
+                                          false));
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 5.0),
+                            Container(
+                              width: 150,
+                              height: 32,
+                              // ignore: missing_required_param
+                              child: DropdownSearch<SystemEnumDetails>(
+                                key: UniqueKey(),
+                                mode: Mode.MENU,
+                                errorcolor: myColor.errorcolor,
+                                isError:
+                                    eventtypesState.error_minimumleaseduration,
+                                focuscolor: myColor.blue,
+                                focusWidth: 2,
+                                popupBackgroundColor: myColor.white,
+                                items: eventtypesState.minimumleasedurationlist,
+                                defultHeight: double.parse((eventtypesState
+                                            .minimumleasedurationlist.length *
+                                        35)
+                                    .toString()),
+                                textstyle:
+                                    MyStyles.Medium(14, myColor.text_color),
+                                itemAsString: (SystemEnumDetails? u) =>
+                                    u != null ? u.displayValue : "",
+                                hint: "Select Period",
+                                showSearchBox: false,
+                                selectedItem: eventtypesState
+                                            .minimumleasedurationValue !=
+                                        null
+                                    ? eventtypesState.minimumleasedurationValue
+                                    : null,
+                                isFilteredOnline: true,
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumLeasedurationValue(value!));
+
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleaseduration(false));
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                                width: 105,
+                                height: 32,
+                                child: Text(GlobleString.ET_After_event)),
+                            Container(
+                              width: 100,
+                              height: 32,
+                              child: TextFormField(
+                                initialValue:
+                                    eventtypesState.minimumleasedurationnumber,
+                                textAlign: TextAlign.start,
+                                style: MyStyles.Regular(14, myColor.text_color),
+                                keyboardType: TextInputType.phone,
+                                inputFormatters: [
+                                  MaskedInputFormatter("0000000000")
+                                ],
+                                decoration: InputDecoration(
+                                    //border: InputBorder.none,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.blue,
+                                          width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: eventtypesState
+                                                  .error_minimumleasedurationnumber
+                                              ? myColor.errorcolor
+                                              : myColor.gray,
+                                          width: 1.0),
+                                    ),
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.all(12),
+                                    fillColor: myColor.white,
+                                    filled: true),
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumleasedurationNumber(value));
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleasedurationnumber(
+                                          false));
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 5.0),
+                            Container(
+                              width: 150,
+                              height: 32,
+                              // ignore: missing_required_param
+                              child: DropdownSearch<SystemEnumDetails>(
+                                key: UniqueKey(),
+                                mode: Mode.MENU,
+                                errorcolor: myColor.errorcolor,
+                                isError:
+                                    eventtypesState.error_minimumleaseduration,
+                                focuscolor: myColor.blue,
+                                focusWidth: 2,
+                                popupBackgroundColor: myColor.white,
+                                items: eventtypesState.minimumleasedurationlist,
+                                defultHeight: double.parse((eventtypesState
+                                            .minimumleasedurationlist.length *
+                                        35)
+                                    .toString()),
+                                textstyle:
+                                    MyStyles.Medium(14, myColor.text_color),
+                                itemAsString: (SystemEnumDetails? u) =>
+                                    u != null ? u.displayValue : "",
+                                hint: "Select Period",
+                                showSearchBox: false,
+                                selectedItem: eventtypesState
+                                            .minimumleasedurationValue !=
+                                        null
+                                    ? eventtypesState.minimumleasedurationValue
+                                    : null,
+                                isFilteredOnline: true,
+                                onChanged: (value) {
+                                  _changeData();
+                                  AddEditEventTypes.isValueUpdate = true;
+
+                                  _store.dispatch(
+                                      UpdateMinimumLeasedurationValue(value!));
+
+                                  _store.dispatch(
+                                      UpdateErrorMinimumleaseduration(false));
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Buffer_Time,
+                              style: MyStyles.Medium(14, myColor.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobleString.ET_Buffer_msg,
+                              style:
+                                  MyStyles.Medium(14, myColor.CM_Lead_border),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 0),
+                        child: TextFormField(
+                          initialValue: eventtypesState.EventTypesDescription,
+                          textAlign: TextAlign.start,
+                          maxLines: 4,
+                          maxLength: 10000,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(450),
+                          ],
+                          style: MyStyles.Regular(14, myColor.text_color),
+                          decoration: const InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: myColor.blue, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: myColor.gray, width: 1.0),
+                              ),
+                              isDense: true,
+                              contentPadding: EdgeInsets.all(12),
+                              fillColor: myColor.white,
+                              filled: true),
+                          onChanged: (value) {
+                            //_changeData();
+                            //AddEditEventTypes.isValueUpdate = true;
+                            //_store.dispatch(UpdateEventTypesDescription(value));
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [saveandnext(eventtypesState)],
