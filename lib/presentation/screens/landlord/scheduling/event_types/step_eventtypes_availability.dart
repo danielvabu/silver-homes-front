@@ -174,6 +174,7 @@ class _StepEventTypesAvailabilityState
                       const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Column(
@@ -181,11 +182,10 @@ class _StepEventTypesAvailabilityState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 0, horizontal: 8.0),
+                                  padding: const EdgeInsets.only(left: 8.0),
                                   child: Text(
                                     GlobleString.Time_Zone,
-                                    style: MyStyles.Medium(14, myColor.black),
+                                    style: MyStyles.Medium(16, myColor.black),
                                     textAlign: TextAlign.start,
                                   ),
                                 ),
@@ -233,10 +233,1421 @@ class _StepEventTypesAvailabilityState
                             ),
                           ),
                           const SizedBox(width: 30.0),
-                          Expanded(child: Container()),
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                GlobleString.ET_Time_Zone_Display,
+                                style: MyStyles.Medium(16, myColor.black),
+                                textAlign: TextAlign.start,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 25,
+                                    width: 25,
+                                    color: myColor.pf_incudevalue,
+                                    alignment: Alignment.center,
+                                    child: Radio(
+                                      value: "1",
+                                      //autofocus: Index == 0 ? true :false,
+                                      groupValue: 1,
+                                      activeColor: myColor.Circle_main,
+                                      onChanged: (value) {
+                                        /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5.0),
+                                  const Text(GlobleString.ET_TZ_Auto),
+                                ],
+                              ),
+                              const SizedBox(height: 5.0),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 25,
+                                    width: 25,
+                                    color: myColor.pf_incudevalue,
+                                    alignment: Alignment.center,
+                                    child: Radio(
+                                      value: "1",
+                                      //autofocus: Index == 0 ? true :false,
+                                      groupValue: 1,
+                                      activeColor: myColor.Circle_main,
+                                      onChanged: (value) {
+                                        /*AddEditProperty.isValueUpdate = true;
+                                            widget._callbackradio(Index, value.toString());
+                                            widget.listdata[Index].value = value.toString();
+                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5.0),
+                                  const Text(GlobleString.ET_TZ_Lock),
+                                ],
+                              ),
+                            ],
+                          )),
                         ],
                       ),
+                      const SizedBox(height: 10.0),
+                      const Divider(),
+                      IntrinsicHeight(
+                        child: Row(
+                          children: [
+                            Container(
+                              width: sswidth * 0.6,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10.0),
+                                  Text(GlobleString.ET_Your_Weekly,
+                                      style: MyStyles.Bold(
+                                          18, myColor.Circle_main)),
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.SUN,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                        padding:
+                                            const EdgeInsets.only(top: 7.0),
+                                        child: Text(GlobleString.Unavailable,
+                                            style: MyStyles.Light(
+                                                16, myColor.TA_Border)),
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.MON,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.TUE,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.WED,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.THU,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.FRI,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  const Divider(),
+                                  const SizedBox(height: 10.0),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: myColor.Circle_main,
+                                        checkColor: myColor.white,
+                                        value:
+                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        onChanged: (value) {
+                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
+                                          //_changeData();
+                                        },
+                                      ),
+                                      const SizedBox(width: 5.0),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(top: 7.0),
+                                          width: 50.0,
+                                          child: Text(GlobleString.SAT,
+                                              style: MyStyles.Bold(
+                                                  16, myColor.Circle_main))),
+                                      const SizedBox(width: 5.0),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 5.0),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 4.0),
+                                              Icon(Icons.remove),
+                                              const SizedBox(width: 4.0),
+                                              Container(
+                                                width: 100,
+                                                height: 32,
+                                                child: TextFormField(
+                                                  initialValue: eventtypesState
+                                                      .minimumleasedurationnumber,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Regular(
+                                                      14, myColor.text_color),
+                                                  keyboardType:
+                                                      TextInputType.phone,
+                                                  inputFormatters: [
+                                                    MaskedInputFormatter(
+                                                        "0000000000")
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                      //border: InputBorder.none,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.blue,
+                                                            width: 2),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: eventtypesState
+                                                                    .error_minimumleasedurationnumber
+                                                                ? myColor
+                                                                    .errorcolor
+                                                                : myColor.gray,
+                                                            width: 1.0),
+                                                      ),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(12),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    _changeData();
+                                                    AddEditEventTypes
+                                                        .isValueUpdate = true;
+
+                                                    _store.dispatch(
+                                                        UpdateMinimumleasedurationNumber(
+                                                            value));
+                                                    _store.dispatch(
+                                                        UpdateErrorMinimumleasedurationnumber(
+                                                            false));
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10.0),
+                                              Icon(Icons.delete_outline),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(child: Container()),
+                                      Icon(Icons.add),
+                                      const SizedBox(width: 10.0),
+                                      Icon(Icons.copy),
+                                      const SizedBox(width: 15.0),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                ],
+                              ),
+                            ),
+                            const VerticalDivider(),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 10.0),
+                                    Text(GlobleString.ET_Overrides,
+                                        style: MyStyles.Bold(
+                                            18, myColor.Circle_main)),
+                                    const SizedBox(height: 10.0),
+                                    Text(GlobleString.ET_Overrides_Txt),
+                                    const SizedBox(height: 10.0),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: CustomeWidget.AddETOverride(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Divider(),
                       const SizedBox(height: 20.0),
+                      Text(
+                        GlobleString.ET_Scheduling_Conditions,
+                        style: MyStyles.Medium(14, myColor.black),
+                        textAlign: TextAlign.start,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  GlobleString.ET_SC_Cant,
+                                  style: MyStyles.Medium(
+                                      14, myColor.CM_Lead_border),
+                                  textAlign: TextAlign.start,
+                                ),
+                                const SizedBox(height: 10.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 100,
+                                      height: 32,
+                                      child: TextFormField(
+                                        initialValue: eventtypesState
+                                            .minimumleasedurationnumber,
+                                        textAlign: TextAlign.start,
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
+                                        keyboardType: TextInputType.phone,
+                                        inputFormatters: [
+                                          MaskedInputFormatter("0000000000")
+                                        ],
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: eventtypesState
+                                                          .error_minimumleasedurationnumber
+                                                      ? myColor.errorcolor
+                                                      : myColor.blue,
+                                                  width: 2),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: eventtypesState
+                                                          .error_minimumleasedurationnumber
+                                                      ? myColor.errorcolor
+                                                      : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(12),
+                                            fillColor: myColor.white,
+                                            filled: true),
+                                        onChanged: (value) {
+                                          _changeData();
+                                          AddEditEventTypes.isValueUpdate =
+                                              true;
+
+                                          _store.dispatch(
+                                              UpdateMinimumleasedurationNumber(
+                                                  value));
+                                          _store.dispatch(
+                                              UpdateErrorMinimumleasedurationnumber(
+                                                  false));
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5.0),
+                                    Container(
+                                      width: 150,
+                                      height: 32,
+                                      // ignore: missing_required_param
+                                      child: DropdownSearch<SystemEnumDetails>(
+                                        key: UniqueKey(),
+                                        mode: Mode.MENU,
+                                        errorcolor: myColor.errorcolor,
+                                        isError: eventtypesState
+                                            .error_minimumleaseduration,
+                                        focuscolor: myColor.blue,
+                                        focusWidth: 2,
+                                        popupBackgroundColor: myColor.white,
+                                        items: eventtypesState
+                                            .minimumleasedurationlist,
+                                        defultHeight: double.parse(
+                                            (eventtypesState
+                                                        .minimumleasedurationlist
+                                                        .length *
+                                                    35)
+                                                .toString()),
+                                        textstyle: MyStyles.Medium(
+                                            14, myColor.text_color),
+                                        itemAsString: (SystemEnumDetails? u) =>
+                                            u != null ? u.displayValue : "",
+                                        hint: "Select Period",
+                                        showSearchBox: false,
+                                        selectedItem: eventtypesState
+                                                    .minimumleasedurationValue !=
+                                                null
+                                            ? eventtypesState
+                                                .minimumleasedurationValue
+                                            : null,
+                                        isFilteredOnline: true,
+                                        onChanged: (value) {
+                                          _changeData();
+                                          AddEditEventTypes.isValueUpdate =
+                                              true;
+
+                                          _store.dispatch(
+                                              UpdateMinimumLeasedurationValue(
+                                                  value!));
+
+                                          _store.dispatch(
+                                              UpdateErrorMinimumleaseduration(
+                                                  false));
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5.0),
+                                    Container(
+                                        width: 180,
+                                        height: 32,
+                                        child: Text(
+                                            GlobleString.ET_SC_Of_Start_Time)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10.0),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                GlobleString.ET_SC_Max_Allowed,
+                                style:
+                                    MyStyles.Medium(14, myColor.CM_Lead_border),
+                                textAlign: TextAlign.start,
+                              ),
+                              const SizedBox(height: 10.0),
+                              Container(
+                                width: 100,
+                                height: 32,
+                                child: TextFormField(
+                                  initialValue: eventtypesState
+                                      .minimumleasedurationnumber,
+                                  textAlign: TextAlign.start,
+                                  style:
+                                      MyStyles.Regular(14, myColor.text_color),
+                                  keyboardType: TextInputType.phone,
+                                  inputFormatters: [
+                                    MaskedInputFormatter("0000000000")
+                                  ],
+                                  decoration: InputDecoration(
+                                      //border: InputBorder.none,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: eventtypesState
+                                                    .error_minimumleasedurationnumber
+                                                ? myColor.errorcolor
+                                                : myColor.blue,
+                                            width: 2),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: eventtypesState
+                                                    .error_minimumleasedurationnumber
+                                                ? myColor.errorcolor
+                                                : myColor.gray,
+                                            width: 1.0),
+                                      ),
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.all(12),
+                                      fillColor: myColor.white,
+                                      filled: true),
+                                  onChanged: (value) {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+
+                                    _store.dispatch(
+                                        UpdateMinimumleasedurationNumber(
+                                            value));
+                                    _store.dispatch(
+                                        UpdateErrorMinimumleasedurationnumber(
+                                            false));
+                                  },
+                                ),
+                              ),
+                            ],
+                          ))
+                        ],
+                      ),
                       const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,

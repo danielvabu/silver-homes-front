@@ -1870,6 +1870,14 @@ class GlobleString {
   static const String Months = 'Months';
   static const String Years = 'Years';
   static const String Time_Zone = 'Time Zone';
+  static const String Unavailable = 'Unavailable';
+  static const String SUN = 'SUN';
+  static const String MON = 'MON';
+  static const String TUE = 'TUE';
+  static const String WED = 'WED';
+  static const String THU = 'THU';
+  static const String FRI = 'FRI';
+  static const String SAT = 'SAT';
   static const String ET_Buffer_Time = 'Buffer Time';
   static const String ET_Buffer_msg =
       'Give yourself some buffer time to prepare for or wrap up from booked events.';
@@ -1877,24 +1885,20 @@ class GlobleString {
   static const String ET_After_event = 'After event';
 
   static const String ET_Set_Availability = 'Set your availability for event:';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
+  static const String ET_Time_Zone_Display = 'Time Zone Display';
+  static const String ET_TZ_Auto =
+      'Automatically detect and show the times in my invitee\'s time zone.';
+  static const String ET_TZ_Lock =
+      'Lock the time zone (best for in-person events)';
+  static const String ET_Your_Weekly = 'Set Your Weekly Availability';
+  static const String ET_Overrides = 'Add Date Overrides';
+  static const String ET_Overrides_Txt =
+      'Add dates when your availability changes from your weekly hours.';
+  static const String ET_Scheduling_Conditions = 'Scheduling Conditions';
+  static const String ET_SC_Cant = 'Invitees can\'t schedule within...';
+  static const String ET_SC_Of_Start_Time = 'of an event start time.';
+  static const String ET_SC_Max_Allowed =
+      'Maximun allowed events per day for this type of event';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
