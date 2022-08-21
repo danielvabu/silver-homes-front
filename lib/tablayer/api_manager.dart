@@ -22,6 +22,7 @@ import 'package:silverhome/domain/actions/customer/customer_portal_action.dart';
 import 'package:silverhome/domain/actions/customer/customer_property_details_actions.dart';
 import 'package:silverhome/domain/actions/customer/customer_propertylist_action.dart';
 import 'package:silverhome/domain/actions/landlord_action/editlead_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/eventtypeslist_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/funnelview_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/landlord_profile_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/landlord_tenancy_activetenant_actions.dart';
@@ -1289,27 +1290,27 @@ class ApiManager {
             int TotalRecords =
                 data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
-            _store.dispatch(UpdatePropertyListTotalRecord(TotalRecords));
+            _store.dispatch(UpdateEventTypesListTotalRecord(TotalRecords));
 
             if (TotalRecords % 15 == 0) {
               int dept_totalpage = int.parse((TotalRecords / 15).toString());
-              _store.dispatch(UpdatePropertyListTotalpage(dept_totalpage));
+              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
             } else {
               double page = (TotalRecords / 15);
               int dept_totalpage = (page + 1).toInt();
-              _store.dispatch(UpdatePropertyListTotalpage(dept_totalpage));
+              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
             }
           } else {
-            _store.dispatch(UpdatePropertyListTotalpage(1));
+            _store.dispatch(UpdateEventTypesListTotalpage(1));
           }
-          _store.dispatch(UpdatePropertyListPageNo(1));
+          _store.dispatch(UpdateEventTypesListPageNo(1));
         }
 
-        _store.dispatch(UpdatePropertyListIsloding(false));
+        _store.dispatch(UpdateEventTypesListIsloding(false));
         // _store.dispatch(UpdatePropertyList(eventTypelist));
       } else {
         // loader.remove();
-        _store.dispatch(UpdatePropertyListIsloding(false));
+        _store.dispatch(UpdateEventTypesListIsloding(false));
         ToastUtils.showCustomToast(context, respoce, false);
       }
     });
