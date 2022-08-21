@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:silverhome/domain/entities/property_drop_data.dart';
 //import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 
@@ -18,6 +19,8 @@ abstract class EventTypesState with _$EventTypesState {
     SystemEnumDetails? leasetypeValue,
     required List<SystemEnumDetails> minimumleasedurationlist,
     SystemEnumDetails? minimumleasedurationValue,
+    required List<PropertyDropData> PropertyDropDatalist,
+    PropertyDropData? selectproperty,
     required String minimumleasedurationnumber,
     DateTime? dateofavailable,
     required String EventTypesName,
@@ -91,6 +94,8 @@ abstract class EventTypesState with _$EventTypesState {
         leasetypeValue: null,
         minimumleasedurationlist: List.empty(),
         minimumleasedurationValue: null,
+        PropertyDropDatalist: List.empty(),
+        selectproperty: null,
         minimumleasedurationnumber: "",
         dateofavailable: null,
         EventTypesName: "",

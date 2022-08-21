@@ -28,6 +28,8 @@ class _$EventTypesStateTearOff {
       SystemEnumDetails? leasetypeValue,
       required List<SystemEnumDetails> minimumleasedurationlist,
       SystemEnumDetails? minimumleasedurationValue,
+      required List<PropertyDropData> PropertyDropDatalist,
+      PropertyDropData? selectproperty,
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
       required String EventTypesName,
@@ -93,6 +95,8 @@ class _$EventTypesStateTearOff {
       leasetypeValue: leasetypeValue,
       minimumleasedurationlist: minimumleasedurationlist,
       minimumleasedurationValue: minimumleasedurationValue,
+      PropertyDropDatalist: PropertyDropDatalist,
+      selectproperty: selectproperty,
       minimumleasedurationnumber: minimumleasedurationnumber,
       dateofavailable: dateofavailable,
       EventTypesName: EventTypesName,
@@ -174,6 +178,9 @@ mixin _$EventTypesState {
       throw _privateConstructorUsedError;
   SystemEnumDetails? get minimumleasedurationValue =>
       throw _privateConstructorUsedError;
+  List<PropertyDropData> get PropertyDropDatalist =>
+      throw _privateConstructorUsedError;
+  PropertyDropData? get selectproperty => throw _privateConstructorUsedError;
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
   DateTime? get dateofavailable => throw _privateConstructorUsedError;
   String get EventTypesName => throw _privateConstructorUsedError;
@@ -258,6 +265,8 @@ abstract class $EventTypesStateCopyWith<$Res> {
       SystemEnumDetails? leasetypeValue,
       List<SystemEnumDetails> minimumleasedurationlist,
       SystemEnumDetails? minimumleasedurationValue,
+      List<PropertyDropData> PropertyDropDatalist,
+      PropertyDropData? selectproperty,
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
       String EventTypesName,
@@ -335,6 +344,8 @@ class _$EventTypesStateCopyWithImpl<$Res>
     Object? leasetypeValue = freezed,
     Object? minimumleasedurationlist = freezed,
     Object? minimumleasedurationValue = freezed,
+    Object? PropertyDropDatalist = freezed,
+    Object? selectproperty = freezed,
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
     Object? EventTypesName = freezed,
@@ -434,6 +445,14 @@ class _$EventTypesStateCopyWithImpl<$Res>
           ? _value.minimumleasedurationValue
           : minimumleasedurationValue // ignore: cast_nullable_to_non_nullable
               as SystemEnumDetails?,
+      PropertyDropDatalist: PropertyDropDatalist == freezed
+          ? _value.PropertyDropDatalist
+          : PropertyDropDatalist // ignore: cast_nullable_to_non_nullable
+              as List<PropertyDropData>,
+      selectproperty: selectproperty == freezed
+          ? _value.selectproperty
+          : selectproperty // ignore: cast_nullable_to_non_nullable
+              as PropertyDropData?,
       minimumleasedurationnumber: minimumleasedurationnumber == freezed
           ? _value.minimumleasedurationnumber
           : minimumleasedurationnumber // ignore: cast_nullable_to_non_nullable
@@ -671,6 +690,8 @@ abstract class _$EventTypesStateCopyWith<$Res>
       SystemEnumDetails? leasetypeValue,
       List<SystemEnumDetails> minimumleasedurationlist,
       SystemEnumDetails? minimumleasedurationValue,
+      List<PropertyDropData> PropertyDropDatalist,
+      PropertyDropData? selectproperty,
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
       String EventTypesName,
@@ -750,6 +771,8 @@ class __$EventTypesStateCopyWithImpl<$Res>
     Object? leasetypeValue = freezed,
     Object? minimumleasedurationlist = freezed,
     Object? minimumleasedurationValue = freezed,
+    Object? PropertyDropDatalist = freezed,
+    Object? selectproperty = freezed,
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
     Object? EventTypesName = freezed,
@@ -849,6 +872,14 @@ class __$EventTypesStateCopyWithImpl<$Res>
           ? _value.minimumleasedurationValue
           : minimumleasedurationValue // ignore: cast_nullable_to_non_nullable
               as SystemEnumDetails?,
+      PropertyDropDatalist: PropertyDropDatalist == freezed
+          ? _value.PropertyDropDatalist
+          : PropertyDropDatalist // ignore: cast_nullable_to_non_nullable
+              as List<PropertyDropData>,
+      selectproperty: selectproperty == freezed
+          ? _value.selectproperty
+          : selectproperty // ignore: cast_nullable_to_non_nullable
+              as PropertyDropData?,
       minimumleasedurationnumber: minimumleasedurationnumber == freezed
           ? _value.minimumleasedurationnumber
           : minimumleasedurationnumber // ignore: cast_nullable_to_non_nullable
@@ -1082,6 +1113,8 @@ class _$_EventTypesState implements _EventTypesState {
       this.leasetypeValue,
       required this.minimumleasedurationlist,
       this.minimumleasedurationValue,
+      required this.PropertyDropDatalist,
+      this.selectproperty,
       required this.minimumleasedurationnumber,
       this.dateofavailable,
       required this.EventTypesName,
@@ -1158,6 +1191,10 @@ class _$_EventTypesState implements _EventTypesState {
   final List<SystemEnumDetails> minimumleasedurationlist;
   @override
   final SystemEnumDetails? minimumleasedurationValue;
+  @override
+  final List<PropertyDropData> PropertyDropDatalist;
+  @override
+  final PropertyDropData? selectproperty;
   @override
   final String minimumleasedurationnumber;
   @override
@@ -1313,9 +1350,11 @@ class _$_EventTypesState implements _EventTypesState {
                 const DeepCollectionEquality().equals(
                     other.minimumleasedurationValue,
                     minimumleasedurationValue)) &&
-            (identical(other.minimumleasedurationnumber, minimumleasedurationnumber) ||
+            (identical(other.PropertyDropDatalist, PropertyDropDatalist) ||
                 const DeepCollectionEquality()
-                    .equals(other.minimumleasedurationnumber, minimumleasedurationnumber)) &&
+                    .equals(other.PropertyDropDatalist, PropertyDropDatalist)) &&
+            (identical(other.selectproperty, selectproperty) || const DeepCollectionEquality().equals(other.selectproperty, selectproperty)) &&
+            (identical(other.minimumleasedurationnumber, minimumleasedurationnumber) || const DeepCollectionEquality().equals(other.minimumleasedurationnumber, minimumleasedurationnumber)) &&
             (identical(other.dateofavailable, dateofavailable) || const DeepCollectionEquality().equals(other.dateofavailable, dateofavailable)) &&
             (identical(other.EventTypesName, EventTypesName) || const DeepCollectionEquality().equals(other.EventTypesName, EventTypesName)) &&
             (identical(other.EventTypesAddress, EventTypesAddress) || const DeepCollectionEquality().equals(other.EventTypesAddress, EventTypesAddress)) &&
@@ -1384,6 +1423,8 @@ class _$_EventTypesState implements _EventTypesState {
       const DeepCollectionEquality().hash(leasetypeValue) ^
       const DeepCollectionEquality().hash(minimumleasedurationlist) ^
       const DeepCollectionEquality().hash(minimumleasedurationValue) ^
+       const DeepCollectionEquality().hash(PropertyDropDatalist) ^
+      const DeepCollectionEquality().hash(selectproperty) ^
       const DeepCollectionEquality().hash(minimumleasedurationnumber) ^
       const DeepCollectionEquality().hash(dateofavailable) ^
       const DeepCollectionEquality().hash(EventTypesName) ^
@@ -1457,6 +1498,8 @@ abstract class _EventTypesState implements EventTypesState {
       SystemEnumDetails? leasetypeValue,
       required List<SystemEnumDetails> minimumleasedurationlist,
       SystemEnumDetails? minimumleasedurationValue,
+      required List<PropertyDropData> PropertyDropDatalist,
+       PropertyDropData? selectproperty,
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
       required String EventTypesName,
@@ -1541,6 +1584,11 @@ abstract class _EventTypesState implements EventTypesState {
   @override
   SystemEnumDetails? get minimumleasedurationValue =>
       throw _privateConstructorUsedError;
+  @override
+  List<PropertyDropData> get PropertyDropDatalist =>
+      throw _privateConstructorUsedError;
+       @override
+  PropertyDropData? get selectproperty => throw _privateConstructorUsedError;
   @override
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
   @override

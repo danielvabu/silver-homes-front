@@ -1,4 +1,5 @@
 import 'package:silverhome/domain/actions/action.dart';
+import 'package:silverhome/domain/entities/property_drop_data.dart';
 import 'package:silverhome/presentation/models/app_state.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 
@@ -104,6 +105,42 @@ class UpdateLeaseTypeValue implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith.eventTypesState(leasetypeValue: leasetypeValue);
+  }
+}
+
+class UpdateMER_PropertyDropDatalist implements Action {
+  final List<PropertyDropData> PropertyDropDatalist;
+
+  UpdateMER_PropertyDropDatalist(this.PropertyDropDatalist);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .editMaintenanceState(PropertyDropDatalist: PropertyDropDatalist);
+  }
+}
+
+class UpdateMER_selectproperty implements Action {
+  final PropertyDropData? selectproperty;
+
+  UpdateMER_selectproperty(this.selectproperty);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .editMaintenanceState(selectproperty: selectproperty);
+  }
+}
+
+class UpdateMAR_PropertyDropDatalist implements Action {
+  final List<PropertyDropData> PropertyDropDatalist;
+
+  UpdateMAR_PropertyDropDatalist(this.PropertyDropDatalist);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(PropertyDropDatalist: PropertyDropDatalist);
   }
 }
 

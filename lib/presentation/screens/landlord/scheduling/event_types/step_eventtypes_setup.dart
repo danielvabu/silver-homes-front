@@ -19,6 +19,7 @@ import 'package:silverhome/domain/actions/landlord_action/portal_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
+import 'package:silverhome/domain/entities/property_drop_data.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
@@ -68,6 +69,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   @override
   void initState() {
     Prefs.init();
+    traerpropiedades();
     initilizedata();
     filldata();
     initNavigationBack();
@@ -80,6 +82,19 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       AddEditEventTypes.isValueUpdate = true;
       change = true;
     }
+  }
+
+  traerpropiedades() async {
+    _store.dispatch(UpdateMER_PropertyDropDatalist([]));
+    await ApiManager()
+        .getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID),
+            (status, responce, errorlist) {
+      if (status) {
+        _store.dispatch(UpdateMAR_PropertyDropDatalist(errorlist));
+      } else {
+        _store.dispatch(UpdateMER_PropertyDropDatalist([]));
+      }
+    });
   }
 
   initilizedata() {
@@ -592,39 +607,37 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   const SizedBox(height: 5.0),
                                   Container(
                                     height: 32,
-                                    child: DropdownSearch<SystemEnumDetails>(
+                                    child: DropdownSearch<PropertyDropData>(
                                       mode: Mode.MENU,
-                                      errorcolor: myColor.errorcolor,
-                                      //isError: eventtypesState.error_minimumleaseduration,
+                                      items:
+                                          eventtypesState.PropertyDropDatalist,
+                                      textstyle:
+                                          MyStyles.Medium(12, myColor.black),
+                                      itemAsString: (PropertyDropData? u) =>
+                                          u!.propertyName!,
+                                      hint: GlobleString.Select_Property,
+                                      showSearchBox: true,
+                                      defultHeight: eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35 >
+                                              300
+                                          ? 300
+                                          : (eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35) +
+                                              50,
+                                      showClearButton: false,
+                                      selectedItem:
+                                          eventtypesState.selectproperty,
                                       focuscolor: myColor.blue,
                                       focusWidth: 2,
-                                      popupBackgroundColor: myColor.white,
-                                      items: eventtypesState
-                                          .minimumleasedurationlist,
-                                      defultHeight: double.parse(
-                                          (eventtypesState
-                                                      .minimumleasedurationlist
-                                                      .length *
-                                                  35)
-                                              .toString()),
-                                      textstyle: MyStyles.Medium(
-                                          14, myColor.text_color),
-                                      itemAsString: (SystemEnumDetails? u) =>
-                                          u != null ? u.displayValue : "",
-                                      hint: GlobleString.ET_Select_Property,
-                                      showSearchBox: false,
-                                      selectedItem: eventtypesState
-                                                  .minimumleasedurationValue !=
-                                              null
-                                          ? eventtypesState
-                                              .minimumleasedurationValue
-                                          : null,
                                       isFilteredOnline: true,
                                       onChanged: (value) {
-                                        //_changeData();
-                                        //AddEditEventTypes.isValueUpdate =true;
-                                        //_store.dispatch(UpdateMinimumLeasedurationValue(value!));
-                                        //_store.dispatch(UpdateErrorMinimumleaseduration(false));
+                                        // _store.dispatch(
+                                        //     UpdateMER_selectproperty(value));
+                                        _changeData();
                                       },
                                     ),
                                   ),
