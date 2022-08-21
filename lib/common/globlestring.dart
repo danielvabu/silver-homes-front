@@ -403,7 +403,10 @@ class GlobleString {
       "Are you sure you want to publish this property on your listings page?";
   static const String Prop_UnPublish =
       "Are you sure you want to unpublish this property from your listings page?";
-
+  static const String Event_Publish =
+      "Are you sure you want to publish this Event Type on your listings page?";
+  static const String Event_UnPublish =
+      "Are you sure you want to unpublish this Event Type from your listings page?";
   static const String Prop_Image_Delete =
       "Are you sure that you want to remove this photo?";
   static const String Prop_Image_btn_No = "No";
@@ -420,7 +423,10 @@ class GlobleString {
       "The property has been published on your listings page.";
   static const String Prop_unpublished_success =
       "The property has been unpublished from your listings page.";
-
+  static const String Event_published_success =
+      "The Event type has been published on your listings page.";
+  static const String Event_unpublished_success =
+      "The Event type has been unpublished from your listings page.";
   /*Landlord View*/
   static const String LL_status_Leads = "Leads";
   static const String LL_status_Applications = "Applications";

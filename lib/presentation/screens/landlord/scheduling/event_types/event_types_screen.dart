@@ -668,39 +668,29 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       },
                       onPresseIsPublish: (EventTypesDataList eventtypesData,
                           int pos, bool flag) {
-                        if (!eventtypesData.ispublished!) {
-                          ToastUtils.showCustomToast(
-                              context,
-                              'Publicar creo',
-                              //GlobleString.PS3_EventTypes_Active_publish,
-                              false);
-                        } else {
-                          showDialog(
-                            context: context,
-                            barrierColor: Colors.black45,
-                            useSafeArea: true,
-                            barrierDismissible: false,
-                            builder: (BuildContext context1) {
-                              return AlertDialogBox(
-                                title: flag
-                                    ? GlobleString.Prop_Publish
-                                    : GlobleString.Prop_UnPublish,
-                                positiveText: GlobleString.Prop_btn_yes,
-                                negativeText: GlobleString.Prop_btn_cancel,
-                                onPressedYes: () {
-                                  Navigator.of(context1).pop();
-                                  eventtypesIsPublished_call(
-                                      eventtypesListState,
-                                      flag,
-                                      eventtypesData.id!);
-                                },
-                                onPressedNo: () {
-                                  Navigator.of(context1).pop();
-                                },
-                              );
-                            },
-                          );
-                        }
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black45,
+                          useSafeArea: true,
+                          barrierDismissible: false,
+                          builder: (BuildContext context1) {
+                            return AlertDialogBox(
+                              title: flag
+                                  ? GlobleString.Event_Publish
+                                  : GlobleString.Event_UnPublish,
+                              positiveText: GlobleString.Prop_btn_yes,
+                              negativeText: GlobleString.Prop_btn_cancel,
+                              onPressedYes: () {
+                                Navigator.of(context1).pop();
+                                eventtypesIsPublished_call(eventtypesListState,
+                                    flag, eventtypesData.id!);
+                              },
+                              onPressedNo: () {
+                                Navigator.of(context1).pop();
+                              },
+                            );
+                          },
+                        );
                       },
                     ),
                   )
@@ -1088,10 +1078,10 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       if (error) {
         if (isAct) {
           ToastUtils.showCustomToast(
-              context, GlobleString.Prop_published_success, true);
+              context, GlobleString.Event_published_success, true);
         } else {
           ToastUtils.showCustomToast(
-              context, GlobleString.Prop_unpublished_success, true);
+              context, GlobleString.Event_unpublished_success, true);
         }
         paginationCall(eventtypesListState, eventtypesListState.pageNo);
         loader.remove();

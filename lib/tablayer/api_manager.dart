@@ -2148,8 +2148,12 @@ class ApiManager {
 
   UpdateEventTypesActive(BuildContext context, Object CPOJO, Object UpPOJO,
       CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
-        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
