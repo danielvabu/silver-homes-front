@@ -1307,7 +1307,7 @@ class ApiManager {
         }
 
         _store.dispatch(UpdateEventTypesListIsloding(false));
-        // _store.dispatch(UpdatePropertyList(eventTypelist));
+        _store.dispatch(UpdateEventTypesList(eventTypelist));
       } else {
         // loader.remove();
         _store.dispatch(UpdateEventTypesListIsloding(false));
