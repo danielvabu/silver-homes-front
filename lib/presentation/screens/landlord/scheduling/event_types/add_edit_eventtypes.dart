@@ -528,17 +528,12 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
           //return StepEventTypesSetup(onPressedSave: () {_store.dispatch(UpdateEventTypesForm(2));},);
 
           // Segunda Pantalla
-          return StepEventTypesAvailability(
+          return StepEventTypesSetup(
             onPressedSave: () {
-              _store.dispatch(UpdateEventTypesForm(3));
-            },
-            onPressedBack: () {
-              if (AddEditEventTypes.isValueUpdate)
-                showBackDialog(eventtypesFormState, false, stepper: 1);
-              else
-                _store.dispatch(UpdateEventTypesForm(1));
+              _store.dispatch(UpdateEventTypesForm(2));
             },
           );
+          ;
         }
     }
   }

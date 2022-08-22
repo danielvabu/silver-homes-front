@@ -33,6 +33,7 @@ class _$EventTypesStateTearOff {
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
       required String EventTypesName,
+      required bool EventTypesRelation,
       required String EventTypesAddress,
       required String EventTypesDescription,
       required String Suiteunit,
@@ -100,6 +101,7 @@ class _$EventTypesStateTearOff {
       minimumleasedurationnumber: minimumleasedurationnumber,
       dateofavailable: dateofavailable,
       EventTypesName: EventTypesName,
+      EventTypesRelation: EventTypesRelation,
       EventTypesAddress: EventTypesAddress,
       EventTypesDescription: EventTypesDescription,
       Suiteunit: Suiteunit,
@@ -184,6 +186,7 @@ mixin _$EventTypesState {
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
   DateTime? get dateofavailable => throw _privateConstructorUsedError;
   String get EventTypesName => throw _privateConstructorUsedError;
+  bool get EventTypesRelation => throw _privateConstructorUsedError;
   String get EventTypesAddress => throw _privateConstructorUsedError;
   String get EventTypesDescription => throw _privateConstructorUsedError;
   String get Suiteunit => throw _privateConstructorUsedError;
@@ -270,6 +273,7 @@ abstract class $EventTypesStateCopyWith<$Res> {
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
       String EventTypesName,
+      bool EventTypesRelation,
       String EventTypesAddress,
       String EventTypesDescription,
       String Suiteunit,
@@ -349,6 +353,7 @@ class _$EventTypesStateCopyWithImpl<$Res>
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
     Object? EventTypesName = freezed,
+    Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
     Object? EventTypesDescription = freezed,
     Object? Suiteunit = freezed,
@@ -465,6 +470,10 @@ class _$EventTypesStateCopyWithImpl<$Res>
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
               as String,
+      EventTypesRelation: EventTypesRelation == freezed
+          ? _value.EventTypesRelation
+          : EventTypesRelation // ignore: cast_nullable_to_non_nullable
+              as bool,
       EventTypesAddress: EventTypesAddress == freezed
           ? _value.EventTypesAddress
           : EventTypesAddress // ignore: cast_nullable_to_non_nullable
@@ -695,6 +704,7 @@ abstract class _$EventTypesStateCopyWith<$Res>
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
       String EventTypesName,
+      bool EventTypesRelation,
       String EventTypesAddress,
       String EventTypesDescription,
       String Suiteunit,
@@ -776,6 +786,7 @@ class __$EventTypesStateCopyWithImpl<$Res>
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
     Object? EventTypesName = freezed,
+    Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
     Object? EventTypesDescription = freezed,
     Object? Suiteunit = freezed,
@@ -892,6 +903,10 @@ class __$EventTypesStateCopyWithImpl<$Res>
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
               as String,
+      EventTypesRelation: EventTypesRelation == freezed
+          ? _value.EventTypesRelation
+          : EventTypesRelation // ignore: cast_nullable_to_non_nullable
+              as bool,
       EventTypesAddress: EventTypesAddress == freezed
           ? _value.EventTypesAddress
           : EventTypesAddress // ignore: cast_nullable_to_non_nullable
@@ -1118,6 +1133,7 @@ class _$_EventTypesState implements _EventTypesState {
       required this.minimumleasedurationnumber,
       this.dateofavailable,
       required this.EventTypesName,
+      required this.EventTypesRelation,
       required this.EventTypesAddress,
       required this.EventTypesDescription,
       required this.Suiteunit,
@@ -1201,6 +1217,8 @@ class _$_EventTypesState implements _EventTypesState {
   final DateTime? dateofavailable;
   @override
   final String EventTypesName;
+  @override
+  final bool EventTypesRelation;
   @override
   final String EventTypesAddress;
   @override
@@ -1304,7 +1322,7 @@ class _$_EventTypesState implements _EventTypesState {
 
   @override
   String toString() {
-    return 'EventTypesState(eventtypestypelist: $eventtypestypelist, eventtypestypeValue: $eventtypestypeValue, eventtypestypeOtherValue: $eventtypestypeOtherValue, rentalspacelist: $rentalspacelist, rentalspaceValue: $rentalspaceValue, rentpaymentFrequencylist: $rentpaymentFrequencylist, rentpaymentFrequencyValue: $rentpaymentFrequencyValue, leasetypelist: $leasetypelist, leasetypeValue: $leasetypeValue, minimumleasedurationlist: $minimumleasedurationlist, minimumleasedurationValue: $minimumleasedurationValue, minimumleasedurationnumber: $minimumleasedurationnumber, dateofavailable: $dateofavailable, EventTypesName: $EventTypesName, EventTypesAddress: $EventTypesAddress, EventTypesDescription: $EventTypesDescription, Suiteunit: $Suiteunit, Buildingname: $Buildingname, City: $City, Province: $Province, CountryName: $CountryName, CountryCode: $CountryCode, Postalcode: $Postalcode, RentAmount: $RentAmount, furnishinglist: $furnishinglist, furnishingValue: $furnishingValue, restrictionlist: $restrictionlist, Other_Partial_Furniture: $Other_Partial_Furniture, EventTypesBedrooms: $EventTypesBedrooms, EventTypesBathrooms: $EventTypesBathrooms, EventTypesSizeinsquarefeet: $EventTypesSizeinsquarefeet, EventTypesMaxoccupancy: $EventTypesMaxoccupancy, storageavailablelist: $storageavailablelist, storageavailableValue: $storageavailableValue, Parkingstalls: $Parkingstalls, agree_TCPP: $agree_TCPP, PropDrafting: $PropDrafting, PropVacancy: $PropVacancy, error_eventtypestype: $error_eventtypestype, error_eventtypestypeOther: $error_eventtypestypeOther, error_rentalspace: $error_rentalspace, error_rentpaymentFrequency: $error_rentpaymentFrequency, error_leasetype: $error_leasetype, error_minimumleaseduration: $error_minimumleaseduration, error_minimumleasedurationnumber: $error_minimumleasedurationnumber, error_dateofavailable: $error_dateofavailable, error_EventTypesName: $error_EventTypesName, error_EventTypesAddress: $error_EventTypesAddress, error_City: $error_City, error_Province: $error_Province, error_CountryName: $error_CountryName, error_Postalcode: $error_Postalcode, error_RentAmount: $error_RentAmount, error_furnishing: $error_furnishing, error_Other_Partial_Furniture: $error_Other_Partial_Furniture, error_EventTypesBedrooms: $error_EventTypesBedrooms, error_EventTypesBathrooms: $error_EventTypesBathrooms, error_EventTypesSizeinsquarefeet: $error_EventTypesSizeinsquarefeet, error_EventTypesMaxoccupancy: $error_EventTypesMaxoccupancy, error_storageavailable: $error_storageavailable, error_Parkingstalls: $error_Parkingstalls)';
+    return 'EventTypesState(eventtypestypelist: $eventtypestypelist, eventtypestypeValue: $eventtypestypeValue, eventtypestypeOtherValue: $eventtypestypeOtherValue, rentalspacelist: $rentalspacelist, rentalspaceValue: $rentalspaceValue, rentpaymentFrequencylist: $rentpaymentFrequencylist, rentpaymentFrequencyValue: $rentpaymentFrequencyValue, leasetypelist: $leasetypelist, leasetypeValue: $leasetypeValue, minimumleasedurationlist: $minimumleasedurationlist, minimumleasedurationValue: $minimumleasedurationValue, minimumleasedurationnumber: $minimumleasedurationnumber, dateofavailable: $dateofavailable, EventTypesName: $EventTypesName,EventTypesRelation: $EventTypesRelation,  EventTypesAddress: $EventTypesAddress, EventTypesDescription: $EventTypesDescription, Suiteunit: $Suiteunit, Buildingname: $Buildingname, City: $City, Province: $Province, CountryName: $CountryName, CountryCode: $CountryCode, Postalcode: $Postalcode, RentAmount: $RentAmount, furnishinglist: $furnishinglist, furnishingValue: $furnishingValue, restrictionlist: $restrictionlist, Other_Partial_Furniture: $Other_Partial_Furniture, EventTypesBedrooms: $EventTypesBedrooms, EventTypesBathrooms: $EventTypesBathrooms, EventTypesSizeinsquarefeet: $EventTypesSizeinsquarefeet, EventTypesMaxoccupancy: $EventTypesMaxoccupancy, storageavailablelist: $storageavailablelist, storageavailableValue: $storageavailableValue, Parkingstalls: $Parkingstalls, agree_TCPP: $agree_TCPP, PropDrafting: $PropDrafting, PropVacancy: $PropVacancy, error_eventtypestype: $error_eventtypestype, error_eventtypestypeOther: $error_eventtypestypeOther, error_rentalspace: $error_rentalspace, error_rentpaymentFrequency: $error_rentpaymentFrequency, error_leasetype: $error_leasetype, error_minimumleaseduration: $error_minimumleaseduration, error_minimumleasedurationnumber: $error_minimumleasedurationnumber, error_dateofavailable: $error_dateofavailable, error_EventTypesName: $error_EventTypesName, error_EventTypesAddress: $error_EventTypesAddress, error_City: $error_City, error_Province: $error_Province, error_CountryName: $error_CountryName, error_Postalcode: $error_Postalcode, error_RentAmount: $error_RentAmount, error_furnishing: $error_furnishing, error_Other_Partial_Furniture: $error_Other_Partial_Furniture, error_EventTypesBedrooms: $error_EventTypesBedrooms, error_EventTypesBathrooms: $error_EventTypesBathrooms, error_EventTypesSizeinsquarefeet: $error_EventTypesSizeinsquarefeet, error_EventTypesMaxoccupancy: $error_EventTypesMaxoccupancy, error_storageavailable: $error_storageavailable, error_Parkingstalls: $error_Parkingstalls)';
 /* eventtypesamenitieslist: $eventtypesamenitieslist, eventtypesutilitieslist: $eventtypesutilitieslist, eventtypesImagelist: $eventtypesImagelist,*/
   }
 
@@ -1357,6 +1375,7 @@ class _$_EventTypesState implements _EventTypesState {
             (identical(other.minimumleasedurationnumber, minimumleasedurationnumber) || const DeepCollectionEquality().equals(other.minimumleasedurationnumber, minimumleasedurationnumber)) &&
             (identical(other.dateofavailable, dateofavailable) || const DeepCollectionEquality().equals(other.dateofavailable, dateofavailable)) &&
             (identical(other.EventTypesName, EventTypesName) || const DeepCollectionEquality().equals(other.EventTypesName, EventTypesName)) &&
+            (identical(other.EventTypesRelation, EventTypesRelation) || const DeepCollectionEquality().equals(other.EventTypesRelation, EventTypesRelation)) &&
             (identical(other.EventTypesAddress, EventTypesAddress) || const DeepCollectionEquality().equals(other.EventTypesAddress, EventTypesAddress)) &&
             (identical(other.EventTypesDescription, EventTypesDescription) || const DeepCollectionEquality().equals(other.EventTypesDescription, EventTypesDescription)) &&
             (identical(other.Suiteunit, Suiteunit) || const DeepCollectionEquality().equals(other.Suiteunit, Suiteunit)) &&
@@ -1423,11 +1442,12 @@ class _$_EventTypesState implements _EventTypesState {
       const DeepCollectionEquality().hash(leasetypeValue) ^
       const DeepCollectionEquality().hash(minimumleasedurationlist) ^
       const DeepCollectionEquality().hash(minimumleasedurationValue) ^
-       const DeepCollectionEquality().hash(PropertyDropDatalist) ^
+      const DeepCollectionEquality().hash(PropertyDropDatalist) ^
       const DeepCollectionEquality().hash(selectproperty) ^
       const DeepCollectionEquality().hash(minimumleasedurationnumber) ^
       const DeepCollectionEquality().hash(dateofavailable) ^
       const DeepCollectionEquality().hash(EventTypesName) ^
+      const DeepCollectionEquality().hash(EventTypesRelation) ^
       const DeepCollectionEquality().hash(EventTypesAddress) ^
       const DeepCollectionEquality().hash(EventTypesDescription) ^
       const DeepCollectionEquality().hash(Suiteunit) ^
@@ -1499,10 +1519,11 @@ abstract class _EventTypesState implements EventTypesState {
       required List<SystemEnumDetails> minimumleasedurationlist,
       SystemEnumDetails? minimumleasedurationValue,
       required List<PropertyDropData> PropertyDropDatalist,
-       PropertyDropData? selectproperty,
+      PropertyDropData? selectproperty,
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
       required String EventTypesName,
+      required bool EventTypesRelation,
       required String EventTypesAddress,
       required String EventTypesDescription,
       required String Suiteunit,
@@ -1587,7 +1608,7 @@ abstract class _EventTypesState implements EventTypesState {
   @override
   List<PropertyDropData> get PropertyDropDatalist =>
       throw _privateConstructorUsedError;
-       @override
+  @override
   PropertyDropData? get selectproperty => throw _privateConstructorUsedError;
   @override
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
@@ -1595,6 +1616,8 @@ abstract class _EventTypesState implements EventTypesState {
   DateTime? get dateofavailable => throw _privateConstructorUsedError;
   @override
   String get EventTypesName => throw _privateConstructorUsedError;
+  @override
+  bool get EventTypesRelation => throw _privateConstructorUsedError;
   @override
   String get EventTypesAddress => throw _privateConstructorUsedError;
   @override
@@ -1672,6 +1695,7 @@ abstract class _EventTypesState implements EventTypesState {
   bool get error_dateofavailable => throw _privateConstructorUsedError;
   @override
   bool get error_EventTypesName => throw _privateConstructorUsedError;
+
   @override
   bool get error_EventTypesAddress => throw _privateConstructorUsedError;
   @override

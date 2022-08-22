@@ -269,6 +269,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 Container(
                                   height: 32,
                                   child: DropdownSearch<SystemEnumDetails>(
+                                    enabled: false,
                                     mode: Mode.MENU,
                                     key: UniqueKey(),
                                     errorcolor: myColor.errorcolor,
@@ -296,13 +297,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                             null
                                         ? eventtypesState.eventtypestypeValue
                                         : null,
-                                    onChanged: (value) {
-                                      /*_changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
-                                      if (value!.EnumDetailID != 6) {_store.dispatch(UpdateEventTypesTypeOtherValue(""));}
-                                      _store.dispatch(UpdateProperTytypeValue(value));
-                                      _store.dispatch(UpdateErrorEventTypestype(false));*/
-                                    },
+                                    onChanged: (value) {},
                                   ),
                                 ),
                               ],
@@ -311,68 +306,6 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                           const SizedBox(width: 30.0),
                           Expanded(child: Container()),
                         ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFormField(
-                                    initialValue: eventtypesState
-                                        .eventtypestypeOtherValue,
-                                    textAlign: TextAlign.start,
-                                    style: MyStyles.Regular(
-                                        14, myColor.text_color),
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(25),
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp("[a-z A-Z]")),
-                                    ],
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_eventtypestypeOther
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
-                                            width: 2),
-                                      ),
-                                      hintText:
-                                          GlobleString.PS1_enter_your_answer,
-                                      hintStyle: MyStyles.Regular(
-                                          14, myColor.hintcolor),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_eventtypestypeOther
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
-                                            width: 1.0),
-                                      ),
-                                      isDense: true,
-                                      contentPadding: const EdgeInsets.all(12),
-                                      fillColor: myColor.white,
-                                      filled: true,
-                                    ),
-                                    onChanged: (value) {
-                                      /*_changeData();
-                                            AddEditEventTypes.isValueUpdate =true;
-                                            _store.dispatch(UpdateEventTypesTypeOtherValue(value));
-                                            _store.dispatch(UpdateErrorEventTypestypeOther(false));*/
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 30.0),
-                            Expanded(child: Container()),
-                          ],
-                        ),
                       ),
                       const SizedBox(height: 20.0),
                       Padding(
@@ -427,9 +360,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         fillColor: myColor.white,
                                         filled: true),
                                     onChanged: (value) {
-                                      //_changeData();
-                                      //AddEditEventTypes.isValueUpdate = true;
-                                      //_store.dispatch(UpdateEventTypesName(value));
+                                      _changeData();
+                                      AddEditEventTypes.isValueUpdate = true;
+                                      _store.dispatch(
+                                          UpdateEventTypesName(value));
                                       //_store.dispatch(UpdateErrorEventTypesName(false));
                                     },
                                   ),
@@ -477,15 +411,18 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         color: myColor.pf_incudevalue,
                                         alignment: Alignment.center,
                                         child: Radio(
-                                          value: "1",
+                                          value: true,
                                           //autofocus: Index == 0 ? true :false,
-                                          groupValue: 1,
+                                          groupValue: eventtypesState
+                                              .EventTypesRelation,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            /*AddEditProperty.isValueUpdate = true;
-                                            widget._callbackradio(Index, value.toString());
-                                            widget.listdata[Index].value = value.toString();
-                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                            AddEditEventTypes.isValueUpdate =
+                                                false;
+
+                                            _store.dispatch(
+                                                UpdateEventTypesRelations(
+                                                    true));
                                           },
                                         ),
                                       ),
@@ -505,15 +442,18 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         color: myColor.pf_incudevalue,
                                         alignment: Alignment.center,
                                         child: Radio(
-                                          value: "1",
+                                          value: false,
                                           //autofocus: Index == 0 ? true :false,
-                                          groupValue: 1,
+                                          groupValue: eventtypesState
+                                              .EventTypesRelation,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            /*AddEditProperty.isValueUpdate = true;
-                                            widget._callbackradio(Index, value.toString());
-                                            widget.listdata[Index].value = value.toString();
-                                            _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                            AddEditEventTypes.isValueUpdate =
+                                                false;
+
+                                            _store.dispatch(
+                                                UpdateEventTypesRelations(
+                                                    false));
                                           },
                                         ),
                                       ),

@@ -202,6 +202,18 @@ class UpdateEventTypesName implements Action {
   }
 }
 
+class UpdateEventTypesRelations implements Action {
+  final bool EventTypesRelations;
+
+  UpdateEventTypesRelations(this.EventTypesRelations);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesRelation: EventTypesRelations);
+  }
+}
+
 class UpdateEventTypesAddress implements Action {
   final String EventTypesAddress;
 

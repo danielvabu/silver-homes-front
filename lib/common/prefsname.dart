@@ -22,12 +22,12 @@ class PrefsName {
 
   static const String EventTypesEdit = "PropertyEdit";
   static const String EventTypesID = "PropertyID";
-  static const String EventTypesEditMode = "PropertyEditMode";
-  static const String EventTypesAgreeTC = "PropertyAgreeTC";
-  static const String EventTypesStep1 = "PropertyStep1";
-  static const String EventTypesStep2 = "PropertyStep2";
-  static const String EventTypesStep3 = "PropertyStep3";
-  static const String EventTypesActive = "PropertyActive";
+  static const String EventTypesEditMode = "EventTypesEditMode";
+  static const String EventTypesAgreeTC = "EventTypesAgreeTC";
+  static const String EventTypesStep1 = "EventTypesStep1";
+  static const String EventTypesStep2 = "EventTypesStep2";
+  static const String EventTypesStep3 = "EventTypesStep3";
+  static const String EventTypesActive = "EventTypesActive";
 
   static const String TCF_EditApplicant = "EditApplicant";
   static const String TCF_ApplicantID = "TCF_ApplicantID";
