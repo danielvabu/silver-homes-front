@@ -41,7 +41,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   late OverlayEntry loader;
   late Timer? _timer = null;
-
+  int muestraElListado = 0;
   @override
   void initState() {
     init();
@@ -76,8 +76,6 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     width = MediaQuery.of(context).size.width - 240;
     ancho = width / 100;
     print(ancho);
-
-    final muestraElListado = true;
 
     return Container(
       height: height,
@@ -167,7 +165,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                       ],
                     ),
                   ),
-                  if (muestraElListado)
+                  if (muestraElListado == 0)
                     Container(
                       width: double.infinity,
                       height: height - 103,
@@ -510,16 +508,20 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         minHeight: 32.0,
         fontSize: 14.0,
         cornerRadius: 5,
-        initialLabelIndex: 1,
+        initialLabelIndex: 0,
         activeBgColor: [myColor.text_color],
         activeFgColor: Colors.white,
         inactiveBgColor: Colors.white,
         inactiveFgColor: myColor.text_color,
         labels: [
-          GlobleString.CALENDAR_ListView,
-          GlobleString.CALENDAR_CalendarView
+          GlobleString.CALENDAR_CalendarView,
+          GlobleString.CALENDAR_ListView
         ],
-        onToggle: (index) {},
+        onToggle: (index) {
+          setState(() {
+            muestraElListado = index;
+          });
+        },
         totalSwitches: 2,
       ),
     );
