@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:silverhome/domain/actions/action.dart';
 import 'package:silverhome/domain/entities/property_drop_data.dart';
 import 'package:silverhome/presentation/models/app_state.dart';
@@ -127,8 +129,65 @@ class UpdateMER_selectproperty implements Action {
 
   @override
   AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(selectproperty: selectproperty);
+  }
+}
+
+class UpdateNotAplicable implements Action {
+  final bool EventTypesNA;
+
+  UpdateNotAplicable(this.EventTypesNA);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesNA: EventTypesNA);
+  }
+}
+
+class UpdateLocation implements Action {
+  final String EventTypesLocation;
+
+  UpdateLocation(this.EventTypesLocation);
+
+  @override
+  AppState updateState(AppState appState) {
     return appState.copyWith
-        .editMaintenanceState(selectproperty: selectproperty);
+        .eventTypesState(EventTypesLocation: EventTypesLocation);
+  }
+}
+
+class UpdateSPA implements Action {
+  final bool EventTypesSPA;
+
+  UpdateSPA(this.EventTypesSPA);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesSPA: EventTypesSPA);
+  }
+}
+
+class UpdateDuration implements Action {
+  final int EventTypesDuration;
+
+  UpdateDuration(this.EventTypesDuration);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesDuration: EventTypesDuration);
+  }
+}
+
+class UpdateBefore implements Action {
+  final int EventTypesBefore;
+
+  UpdateBefore(this.EventTypesBefore);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesBefore: EventTypesBefore);
   }
 }
 
@@ -214,6 +273,18 @@ class UpdateEventTypesRelations implements Action {
   }
 }
 
+class UpdateEventTypesShowing implements Action {
+  final bool EventTypesShowing;
+
+  UpdateEventTypesShowing(this.EventTypesShowing);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesShowing: EventTypesShowing);
+  }
+}
+
 class UpdateEventTypesAddress implements Action {
   final String EventTypesAddress;
 
@@ -235,6 +306,51 @@ class UpdateEventTypesDescription implements Action {
   AppState updateState(AppState appState) {
     return appState.copyWith
         .eventTypesState(EventTypesDescription: EventTypesDescription);
+  }
+}
+
+class UpdateEventTypesConfirmation implements Action {
+  final String EventTypesConfirmation;
+
+  UpdateEventTypesConfirmation(this.EventTypesConfirmation);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesConfirmation: EventTypesConfirmation);
+  }
+}
+
+class UpdateURL implements Action {
+  final String EventTypesLink;
+
+  UpdateURL(this.EventTypesLink);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesLink: EventTypesLink);
+  }
+}
+
+class UpdateEventTypesColor implements Action {
+  final String EventTypesColor;
+
+  UpdateEventTypesColor(this.EventTypesColor);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesColor: EventTypesColor);
+  }
+}
+
+class UpdateEventTypesRanges implements Action {
+  final int EventTypesRange;
+
+  UpdateEventTypesRanges(this.EventTypesRange);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesRange: EventTypesRange);
   }
 }
 

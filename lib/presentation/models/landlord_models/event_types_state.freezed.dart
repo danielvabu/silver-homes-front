@@ -36,6 +36,21 @@ class _$EventTypesStateTearOff {
       required bool EventTypesRelation,
       required String EventTypesAddress,
       required String EventTypesDescription,
+      required bool EventTypesShowing,
+      required String EventTypesLocation,
+      required bool EventTypesNA,
+      required bool EventTypesSPA,
+      required String EventTypesLink,
+      required String EventTypesColor,
+      required int EventTypesRange,
+      required String EventTypesFrom,
+      required String EventTypesTo,
+      required int EventTypesDuration,
+      required int EventTypesDurationPeriod,
+      required int EventTypesBefore,
+      required int EventTypesBeforePeriod,
+      required int EventTypesAfterPeriod,
+      required String EventTypesConfirmation,
       required String Suiteunit,
       required String Buildingname,
       required String City,
@@ -104,6 +119,21 @@ class _$EventTypesStateTearOff {
       EventTypesRelation: EventTypesRelation,
       EventTypesAddress: EventTypesAddress,
       EventTypesDescription: EventTypesDescription,
+      EventTypesShowing: EventTypesShowing,
+      EventTypesLocation: EventTypesLocation,
+      EventTypesNA: EventTypesNA,
+      EventTypesSPA: EventTypesSPA,
+      EventTypesLink: EventTypesLink,
+      EventTypesColor: EventTypesColor,
+      EventTypesRange: EventTypesRange,
+      EventTypesFrom: EventTypesFrom,
+      EventTypesTo: EventTypesTo,
+      EventTypesDuration: EventTypesDuration,
+      EventTypesDurationPeriod: EventTypesDurationPeriod,
+      EventTypesBefore: EventTypesBefore,
+      EventTypesBeforePeriod: EventTypesBeforePeriod,
+      EventTypesAfterPeriod: EventTypesAfterPeriod,
+      EventTypesConfirmation: EventTypesConfirmation,
       Suiteunit: Suiteunit,
       Buildingname: Buildingname,
       City: City,
@@ -189,6 +219,21 @@ mixin _$EventTypesState {
   bool get EventTypesRelation => throw _privateConstructorUsedError;
   String get EventTypesAddress => throw _privateConstructorUsedError;
   String get EventTypesDescription => throw _privateConstructorUsedError;
+  bool get EventTypesShowing => throw _privateConstructorUsedError;
+  String get EventTypesLocation => throw _privateConstructorUsedError;
+  bool get EventTypesNA => throw _privateConstructorUsedError;
+  bool get EventTypesSPA => throw _privateConstructorUsedError;
+  String get EventTypesLink => throw _privateConstructorUsedError;
+  String get EventTypesColor => throw _privateConstructorUsedError;
+  int get EventTypesRange => throw _privateConstructorUsedError;
+  String get EventTypesFrom => throw _privateConstructorUsedError;
+  String get EventTypesTo => throw _privateConstructorUsedError;
+  int get EventTypesDuration => throw _privateConstructorUsedError;
+  int get EventTypesDurationPeriod => throw _privateConstructorUsedError;
+  int get EventTypesBefore => throw _privateConstructorUsedError;
+  int get EventTypesBeforePeriod => throw _privateConstructorUsedError;
+  int get EventTypesAfterPeriod => throw _privateConstructorUsedError;
+  String get EventTypesConfirmation => throw _privateConstructorUsedError;
   String get Suiteunit => throw _privateConstructorUsedError;
   String get Buildingname => throw _privateConstructorUsedError;
   String get City => throw _privateConstructorUsedError;
@@ -276,6 +321,21 @@ abstract class $EventTypesStateCopyWith<$Res> {
       bool EventTypesRelation,
       String EventTypesAddress,
       String EventTypesDescription,
+      bool EventTypesShowing,
+      String EventTypesLocation,
+      bool EventTypesNA,
+      bool EventTypesSPA,
+      String EventTypesLink,
+      String EventTypesColor,
+      int EventTypesRange,
+      String EventTypesFrom,
+      String EventTypesTo,
+      int EventTypesDuration,
+      int EventTypesDurationPeriod,
+      int EventTypesBefore,
+      int EventTypesBeforePeriod,
+      int EventTypesAfterPeriod,
+      String EventTypesConfirmation,
       String Suiteunit,
       String Buildingname,
       String City,
@@ -356,6 +416,21 @@ class _$EventTypesStateCopyWithImpl<$Res>
     Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
     Object? EventTypesDescription = freezed,
+    Object? EventTypesShowing = freezed,
+    Object? EventTypesLocation = freezed,
+    Object? EventTypesNA = freezed,
+    Object? EventTypesSPA = freezed,
+    Object? EventTypesLink = freezed,
+    Object? EventTypesColor = freezed,
+    Object? EventTypesRange = freezed,
+    Object? EventTypesFrom = freezed,
+    Object? EventTypesTo = freezed,
+    Object? EventTypesDuration = freezed,
+    Object? EventTypesDurationPeriod = freezed,
+    Object? EventTypesBefore = freezed,
+    Object? EventTypesBeforePeriod = freezed,
+    Object? EventTypesAfterPeriod = freezed,
+    Object? EventTypesConfirmation = freezed,
     Object? Suiteunit = freezed,
     Object? Buildingname = freezed,
     Object? City = freezed,
@@ -481,6 +556,66 @@ class _$EventTypesStateCopyWithImpl<$Res>
       EventTypesDescription: EventTypesDescription == freezed
           ? _value.EventTypesDescription
           : EventTypesDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesShowing: EventTypesShowing == freezed
+          ? _value.EventTypesShowing
+          : EventTypesShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesLocation: EventTypesLocation == freezed
+          ? _value.EventTypesLocation
+          : EventTypesLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesNA: EventTypesNA == freezed
+          ? _value.EventTypesNA
+          : EventTypesNA // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesSPA: EventTypesSPA == freezed
+          ? _value.EventTypesSPA
+          : EventTypesSPA // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesLink: EventTypesLink == freezed
+          ? _value.EventTypesLink
+          : EventTypesLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesColor: EventTypesColor == freezed
+          ? _value.EventTypesColor
+          : EventTypesColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesRange: EventTypesRange == freezed
+          ? _value.EventTypesRange
+          : EventTypesRange // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesFrom: EventTypesFrom == freezed
+          ? _value.EventTypesFrom
+          : EventTypesFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesTo: EventTypesTo == freezed
+          ? _value.EventTypesTo
+          : EventTypesTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesDuration: EventTypesDuration == freezed
+          ? _value.EventTypesDuration
+          : EventTypesDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesDurationPeriod: EventTypesDurationPeriod == freezed
+          ? _value.EventTypesDurationPeriod
+          : EventTypesDurationPeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesBefore: EventTypesBefore == freezed
+          ? _value.EventTypesBefore
+          : EventTypesBefore // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesBeforePeriod: EventTypesBeforePeriod == freezed
+          ? _value.EventTypesBeforePeriod
+          : EventTypesBeforePeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesAfterPeriod: EventTypesAfterPeriod == freezed
+          ? _value.EventTypesAfterPeriod
+          : EventTypesAfterPeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesConfirmation: EventTypesConfirmation == freezed
+          ? _value.EventTypesConfirmation
+          : EventTypesConfirmation // ignore: cast_nullable_to_non_nullable
               as String,
       Suiteunit: Suiteunit == freezed
           ? _value.Suiteunit
@@ -707,6 +842,21 @@ abstract class _$EventTypesStateCopyWith<$Res>
       bool EventTypesRelation,
       String EventTypesAddress,
       String EventTypesDescription,
+      bool EventTypesShowing,
+      String EventTypesLocation,
+      bool EventTypesNA,
+      bool EventTypesSPA,
+      String EventTypesLink,
+      String EventTypesColor,
+      int EventTypesRange,
+      String EventTypesFrom,
+      String EventTypesTo,
+      int EventTypesDuration,
+      int EventTypesDurationPeriod,
+      int EventTypesBefore,
+      int EventTypesBeforePeriod,
+      int EventTypesAfterPeriod,
+      String EventTypesConfirmation,
       String Suiteunit,
       String Buildingname,
       String City,
@@ -789,6 +939,21 @@ class __$EventTypesStateCopyWithImpl<$Res>
     Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
     Object? EventTypesDescription = freezed,
+    Object? EventTypesShowing = freezed,
+    Object? EventTypesLocation = freezed,
+    Object? EventTypesNA = freezed,
+    Object? EventTypesSPA = freezed,
+    Object? EventTypesLink = freezed,
+    Object? EventTypesColor = freezed,
+    Object? EventTypesRange = freezed,
+    Object? EventTypesFrom = freezed,
+    Object? EventTypesTo = freezed,
+    Object? EventTypesDuration = freezed,
+    Object? EventTypesDurationPeriod = freezed,
+    Object? EventTypesBefore = freezed,
+    Object? EventTypesBeforePeriod = freezed,
+    Object? EventTypesAfterPeriod = freezed,
+    Object? EventTypesConfirmation = freezed,
     Object? Suiteunit = freezed,
     Object? Buildingname = freezed,
     Object? City = freezed,
@@ -914,6 +1079,66 @@ class __$EventTypesStateCopyWithImpl<$Res>
       EventTypesDescription: EventTypesDescription == freezed
           ? _value.EventTypesDescription
           : EventTypesDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesShowing: EventTypesShowing == freezed
+          ? _value.EventTypesShowing
+          : EventTypesShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesLocation: EventTypesLocation == freezed
+          ? _value.EventTypesLocation
+          : EventTypesLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesNA: EventTypesNA == freezed
+          ? _value.EventTypesNA
+          : EventTypesNA // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesSPA: EventTypesSPA == freezed
+          ? _value.EventTypesSPA
+          : EventTypesSPA // ignore: cast_nullable_to_non_nullable
+              as bool,
+      EventTypesLink: EventTypesLink == freezed
+          ? _value.EventTypesLink
+          : EventTypesLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesColor: EventTypesColor == freezed
+          ? _value.EventTypesColor
+          : EventTypesColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesRange: EventTypesRange == freezed
+          ? _value.EventTypesRange
+          : EventTypesRange // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesFrom: EventTypesFrom == freezed
+          ? _value.EventTypesFrom
+          : EventTypesFrom // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesTo: EventTypesTo == freezed
+          ? _value.EventTypesTo
+          : EventTypesTo // ignore: cast_nullable_to_non_nullable
+              as String,
+      EventTypesDuration: EventTypesDuration == freezed
+          ? _value.EventTypesDuration
+          : EventTypesDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesDurationPeriod: EventTypesDurationPeriod == freezed
+          ? _value.EventTypesDurationPeriod
+          : EventTypesDurationPeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesBefore: EventTypesBefore == freezed
+          ? _value.EventTypesBefore
+          : EventTypesBefore // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesBeforePeriod: EventTypesBeforePeriod == freezed
+          ? _value.EventTypesBeforePeriod
+          : EventTypesBeforePeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesAfterPeriod: EventTypesAfterPeriod == freezed
+          ? _value.EventTypesAfterPeriod
+          : EventTypesAfterPeriod // ignore: cast_nullable_to_non_nullable
+              as int,
+      EventTypesConfirmation: EventTypesConfirmation == freezed
+          ? _value.EventTypesConfirmation
+          : EventTypesConfirmation // ignore: cast_nullable_to_non_nullable
               as String,
       Suiteunit: Suiteunit == freezed
           ? _value.Suiteunit
@@ -1136,6 +1361,21 @@ class _$_EventTypesState implements _EventTypesState {
       required this.EventTypesRelation,
       required this.EventTypesAddress,
       required this.EventTypesDescription,
+      required this.EventTypesShowing,
+      required this.EventTypesLocation,
+      required this.EventTypesNA,
+      required this.EventTypesSPA,
+      required this.EventTypesLink,
+      required this.EventTypesColor,
+      required this.EventTypesRange,
+      required this.EventTypesFrom,
+      required this.EventTypesTo,
+      required this.EventTypesDuration,
+      required this.EventTypesDurationPeriod,
+      required this.EventTypesBefore,
+      required this.EventTypesBeforePeriod,
+      required this.EventTypesAfterPeriod,
+      required this.EventTypesConfirmation,
       required this.Suiteunit,
       required this.Buildingname,
       required this.City,
@@ -1223,6 +1463,37 @@ class _$_EventTypesState implements _EventTypesState {
   final String EventTypesAddress;
   @override
   final String EventTypesDescription;
+  @override
+  final bool EventTypesShowing;
+  @override
+  final String EventTypesLocation;
+  @override
+  final bool EventTypesNA;
+  @override
+  final bool EventTypesSPA;
+  @override
+  final String EventTypesLink;
+  @override
+  final String EventTypesColor;
+  @override
+  final int EventTypesRange;
+  @override
+  final String EventTypesFrom;
+  @override
+  final String EventTypesTo;
+  @override
+  final int EventTypesDuration;
+  @override
+  final int EventTypesDurationPeriod;
+  @override
+  final int EventTypesBefore;
+  @override
+  final int EventTypesBeforePeriod;
+  @override
+  final int EventTypesAfterPeriod;
+  @override
+  final String EventTypesConfirmation;
+
   @override
   final String Suiteunit;
   @override
@@ -1378,6 +1649,7 @@ class _$_EventTypesState implements _EventTypesState {
             (identical(other.EventTypesRelation, EventTypesRelation) || const DeepCollectionEquality().equals(other.EventTypesRelation, EventTypesRelation)) &&
             (identical(other.EventTypesAddress, EventTypesAddress) || const DeepCollectionEquality().equals(other.EventTypesAddress, EventTypesAddress)) &&
             (identical(other.EventTypesDescription, EventTypesDescription) || const DeepCollectionEquality().equals(other.EventTypesDescription, EventTypesDescription)) &&
+            (identical(other.EventTypesShowing, EventTypesShowing) || const DeepCollectionEquality().equals(other.EventTypesShowing, EventTypesShowing)) &&
             (identical(other.Suiteunit, Suiteunit) || const DeepCollectionEquality().equals(other.Suiteunit, Suiteunit)) &&
             (identical(other.Buildingname, Buildingname) || const DeepCollectionEquality().equals(other.Buildingname, Buildingname)) &&
             (identical(other.City, City) || const DeepCollectionEquality().equals(other.City, City)) &&
@@ -1450,6 +1722,21 @@ class _$_EventTypesState implements _EventTypesState {
       const DeepCollectionEquality().hash(EventTypesRelation) ^
       const DeepCollectionEquality().hash(EventTypesAddress) ^
       const DeepCollectionEquality().hash(EventTypesDescription) ^
+      const DeepCollectionEquality().hash(EventTypesShowing) ^
+      const DeepCollectionEquality().hash(EventTypesLocation) ^
+      const DeepCollectionEquality().hash(EventTypesNA) ^
+      const DeepCollectionEquality().hash(EventTypesSPA) ^
+      const DeepCollectionEquality().hash(EventTypesLink) ^
+      const DeepCollectionEquality().hash(EventTypesColor) ^
+      const DeepCollectionEquality().hash(EventTypesRange) ^
+      const DeepCollectionEquality().hash(EventTypesFrom) ^
+      const DeepCollectionEquality().hash(EventTypesTo) ^
+      const DeepCollectionEquality().hash(EventTypesDuration) ^
+      const DeepCollectionEquality().hash(EventTypesDurationPeriod) ^
+      const DeepCollectionEquality().hash(EventTypesBefore) ^
+      const DeepCollectionEquality().hash(EventTypesBeforePeriod) ^
+      const DeepCollectionEquality().hash(EventTypesAfterPeriod) ^
+      const DeepCollectionEquality().hash(EventTypesConfirmation) ^
       const DeepCollectionEquality().hash(Suiteunit) ^
       const DeepCollectionEquality().hash(Buildingname) ^
       const DeepCollectionEquality().hash(City) ^
@@ -1526,6 +1813,21 @@ abstract class _EventTypesState implements EventTypesState {
       required bool EventTypesRelation,
       required String EventTypesAddress,
       required String EventTypesDescription,
+      required bool EventTypesShowing,
+      required String EventTypesLocation,
+      required bool EventTypesNA,
+      required bool EventTypesSPA,
+      required String EventTypesLink,
+      required String EventTypesColor,
+      required int EventTypesRange,
+      required String EventTypesFrom,
+      required String EventTypesTo,
+      required int EventTypesDuration,
+      required int EventTypesDurationPeriod,
+      required int EventTypesBefore,
+      required int EventTypesBeforePeriod,
+      required int EventTypesAfterPeriod,
+      required String EventTypesConfirmation,
       required String Suiteunit,
       required String Buildingname,
       required String City,

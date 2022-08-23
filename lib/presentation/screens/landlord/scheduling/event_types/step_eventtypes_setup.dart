@@ -62,6 +62,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   final FocusScopeNode _focusScopeNode = FocusScopeNode();
   bool isGotoback = false;
   int stepper = 0;
+  String color = "";
   //FocusNode _focusNode = new FocusNode();
   // bool firsttime = true;
   bool change = false;
@@ -179,7 +180,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
 
     List<SystemEnumDetails> minimumleasedurationlist = [];
     minimumleasedurationlist =
-        QueryFilter().PlainValues(eSystemEnums().MinLeaseDuration);
+        QueryFilter().PlainValues(eSystemEnums().MinLeaseTime);
 
     _store.dispatch(UpdateMinimumLeasedurationList(minimumleasedurationlist));
   }
@@ -500,7 +501,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         height: 25.0,
                                         valueFontSize: 10.0,
                                         toggleSize: 20.0,
-                                        value: true,
+                                        value:
+                                            eventtypesState.EventTypesShowing,
                                         borderRadius: 30.0,
                                         padding: 2.0,
                                         activeColor: myColor.propertyOn,
@@ -511,6 +513,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         inactiveTextColor: myColor.white,
                                         showOnOff: true,
                                         onToggle: (val) {
+                                          AddEditEventTypes.isValueUpdate =
+                                              false;
+
+                                          _store.dispatch(
+                                              UpdateEventTypesShowing(val));
                                           //if (val) {widget._callbackActive(model, index);} else {widget._callbackInActive(model, index);}
                                         },
                                       ),
@@ -575,8 +582,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       focusWidth: 2,
                                       isFilteredOnline: true,
                                       onChanged: (value) {
-                                        // _store.dispatch(
-                                        //     UpdateMER_selectproperty(value));
+                                        _store.dispatch(
+                                            UpdateMER_selectproperty(value));
                                         _changeData();
                                       },
                                     ),
@@ -587,11 +594,12 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .EventTypesNA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(
+                                              UpdateNotAplicable(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const Text(
@@ -614,7 +622,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   ),
                                   const SizedBox(height: 5.0),
                                   TextFormField(
-                                    initialValue: eventtypesState.Province,
+                                    initialValue:
+                                        eventtypesState.EventTypesLocation,
                                     textAlign: TextAlign.start,
                                     style: MyStyles.Regular(
                                         14, myColor.text_color),
@@ -648,10 +657,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     onChanged: (value) {
                                       _changeData();
                                       AddEditEventTypes.isValueUpdate = true;
-                                      _store.dispatch(
-                                          UpdateEventTypesProvince(value));
-                                      _store
-                                          .dispatch(UpdateErrorProvince(false));
+                                      _store.dispatch(UpdateLocation(value));
+                                      // _store
+                                      //     .dispatch(UpdateErrorProvince(false));
                                     },
                                   ),
                                   const SizedBox(height: 5.0),
@@ -660,11 +668,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .EventTypesSPA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(UpdateSPA(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const Text(GlobleString.ET_Same_Address),
@@ -731,9 +739,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         fillColor: myColor.white,
                                         filled: true),
                                     onChanged: (value) {
-                                      //_changeData();
-                                      //AddEditEventTypes.isValueUpdate = true;
-                                      //_store.dispatch(UpdateEventTypesDescription(value));
+                                      _changeData();
+                                      AddEditEventTypes.isValueUpdate = true;
+                                      _store.dispatch(
+                                          UpdateEventTypesDescription(value));
                                     },
                                   ),
                                 ],
@@ -789,11 +798,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   ),
                                   Expanded(
                                     child: TextFormField(
-                                      //onChanged: (newValue) {
-                                      //_store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(newValue));
-                                      //},
+                                      onChanged: (newValue) {
+                                        _store.dispatch(UpdateURL(newValue));
+                                      },
                                       initialValue:
-                                          '/', //profileState.CustomerFeatureListingURL_update,
+                                          eventtypesState.EventTypesLink,
                                       keyboardType: TextInputType.text,
                                       inputFormatters: [
                                         FilteringTextInputFormatter.allow(
@@ -841,92 +850,172 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                             child: Row(
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('grey'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'grey')
+                                      ? Icon(Icons.check)
+                                      : Container(), //Icon(Icons.check),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.grey),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store
+                                        .dispatch(UpdateEventTypesColor('red'));
+                                  },
+                                  child:
+                                      (eventtypesState.EventTypesColor == 'red')
+                                          ? Icon(Icons.check)
+                                          : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.red),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('orange'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'orange')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.orange),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('yellow'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'yellow')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.yellow),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('green'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'green')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.green),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('cyan'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'cyan')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.cyan),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('blue'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'blue')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.blue),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('deepPurple'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'deepPurple')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.deepPurple),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('purple'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'purple')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.purple),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
-                                  onPressed: () {},
-                                  child: Container(), //Icon(Icons.check),
+                                  onPressed: () {
+                                    _changeData();
+                                    AddEditEventTypes.isValueUpdate = true;
+                                    _store.dispatch(
+                                        UpdateEventTypesColor('pink'));
+                                  },
+                                  child: (eventtypesState.EventTypesColor ==
+                                          'pink')
+                                      ? Icon(Icons.check)
+                                      : Container(),
                                   style: ElevatedButton.styleFrom(
                                       shape: CircleBorder(),
-                                      padding: EdgeInsets.all(18),
+                                      padding: EdgeInsets.all(15),
                                       primary: Colors.pink),
                                 ),
                               ],
@@ -967,15 +1056,16 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         color: myColor.pf_incudevalue,
                                         alignment: Alignment.center,
                                         child: Radio(
-                                          value: "1",
+                                          value: 1,
                                           //autofocus: Index == 0 ? true :false,
-                                          groupValue: 1,
+                                          groupValue:
+                                              eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            /*AddEditProperty.isValueUpdate = true;
-                                              widget._callbackradio(Index, value.toString());
-                                              widget.listdata[Index].value = value.toString();
-                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                            AddEditEventTypes.isValueUpdate =
+                                                true;
+                                            _store.dispatch(
+                                                UpdateEventTypesRanges(1));
                                           },
                                         ),
                                       ),
@@ -992,15 +1082,16 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         color: myColor.pf_incudevalue,
                                         alignment: Alignment.center,
                                         child: Radio(
-                                          value: "1",
+                                          value: 2,
                                           //autofocus: Index == 0 ? true :false,
-                                          groupValue: 1,
+                                          groupValue:
+                                              eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            /*AddEditProperty.isValueUpdate = true;
-                                              widget._callbackradio(Index, value.toString());
-                                              widget.listdata[Index].value = value.toString();
-                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                            AddEditEventTypes.isValueUpdate =
+                                                true;
+                                            _store.dispatch(
+                                                UpdateEventTypesRanges(2));
                                           },
                                         ),
                                       ),
@@ -1149,15 +1240,16 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         color: myColor.pf_incudevalue,
                                         alignment: Alignment.center,
                                         child: Radio(
-                                          value: "1",
+                                          value: 3,
                                           //autofocus: Index == 0 ? true :false,
-                                          groupValue: 1,
+                                          groupValue:
+                                              eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            /*AddEditProperty.isValueUpdate = true;
-                                              widget._callbackradio(Index, value.toString());
-                                              widget.listdata[Index].value = value.toString();
-                                              _store.dispatch(UpdatePropertyAmenitiesList(widget.listdata));*/
+                                            AddEditEventTypes.isValueUpdate =
+                                                true;
+                                            _store.dispatch(
+                                                UpdateEventTypesRanges(3));
                                           },
                                         ),
                                       ),
@@ -1197,8 +1289,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               width: 100,
                               height: 32,
                               child: TextFormField(
-                                initialValue:
-                                    eventtypesState.minimumleasedurationnumber,
+                                initialValue: eventtypesState.EventTypesDuration
+                                    .toString(),
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 keyboardType: TextInputType.phone,
@@ -1232,10 +1324,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   AddEditEventTypes.isValueUpdate = true;
 
                                   _store.dispatch(
-                                      UpdateMinimumleasedurationNumber(value));
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleasedurationnumber(
-                                          false));
+                                      UpdateDuration(int.parse(value)));
                                 },
                               ),
                             ),
@@ -1262,7 +1351,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     MyStyles.Medium(14, myColor.text_color),
                                 itemAsString: (SystemEnumDetails? u) =>
                                     u != null ? u.displayValue : "",
-                                hint: "Select Period",
+                                hint: "minutes",
                                 showSearchBox: false,
                                 selectedItem: eventtypesState
                                             .minimumleasedurationValue !=
@@ -1332,7 +1421,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               height: 32,
                               child: TextFormField(
                                 initialValue:
-                                    eventtypesState.minimumleasedurationnumber,
+                                    eventtypesState.EventTypesBefore.toString(),
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 keyboardType: TextInputType.phone,
@@ -1365,11 +1454,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  _store.dispatch(
-                                      UpdateMinimumleasedurationNumber(value));
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleasedurationnumber(
-                                          false));
+                                  // _store
+                                  //     .dispatch(UpdateBefore(int.parse(value)));
                                 },
                               ),
                             ),
@@ -1396,7 +1482,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     MyStyles.Medium(14, myColor.text_color),
                                 itemAsString: (SystemEnumDetails? u) =>
                                     u != null ? u.displayValue : "",
-                                hint: "Select Period",
+                                hint: "minutes",
                                 showSearchBox: false,
                                 selectedItem: eventtypesState
                                             .minimumleasedurationValue !=
@@ -1499,7 +1585,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     MyStyles.Medium(14, myColor.text_color),
                                 itemAsString: (SystemEnumDetails? u) =>
                                     u != null ? u.displayValue : "",
-                                hint: "Select Period",
+                                hint: "minutes",
                                 showSearchBox: false,
                                 selectedItem: eventtypesState
                                             .minimumleasedurationValue !=
@@ -1530,7 +1616,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.ET_Buffer_Time,
+                              "Confirmation Message",
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -1545,7 +1631,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString.ET_Buffer_msg,
+                              "This message will be displayed after the invitee has Sheduled an event.",
                               style:
                                   MyStyles.Medium(14, myColor.CM_Lead_border),
                               textAlign: TextAlign.start,
@@ -1558,7 +1644,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 0),
                         child: TextFormField(
-                          initialValue: eventtypesState.EventTypesDescription,
+                          initialValue: eventtypesState.EventTypesConfirmation,
                           textAlign: TextAlign.start,
                           maxLines: 4,
                           maxLength: 10000,
@@ -1580,9 +1666,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               fillColor: myColor.white,
                               filled: true),
                           onChanged: (value) {
-                            //_changeData();
-                            //AddEditEventTypes.isValueUpdate = true;
-                            //_store.dispatch(UpdateEventTypesDescription(value));
+                            _changeData();
+                            AddEditEventTypes.isValueUpdate = true;
+                            _store
+                                .dispatch(UpdateEventTypesConfirmation(value));
                           },
                         ),
                       ),
@@ -1637,7 +1724,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
         _store.dispatch(UpdateEventTypesFormAddress(address));
         apiCallAndValidation(eventtypesState);
         widget._callbackSaveandNext();*/
-
+        widget._callbackSaveandNext();
         //Paso al pantallazo automatico pa maquetarlo
         //no se como
       },

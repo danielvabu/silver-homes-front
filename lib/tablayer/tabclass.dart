@@ -43,6 +43,7 @@ class eSystemEnums {
   int RentPaymentFrequency = 1187;
   int LeaseType = 1188;
   int MinLeaseDuration = 1189;
+  int MinLeaseTime = 3191;
   int Furnishing = 1190;
   int Restrictions = 1191;
   int Storage = 2184;
