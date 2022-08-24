@@ -816,7 +816,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10),
                                     child: Text(
-                                      Weburl.CustomerFeaturedPage,
+                                      "https://www.ren-hogar.com/events/" +
+                                          Prefs.getString(
+                                              PrefsName.user_CompanyName) +
+                                          "/",
                                       style: MyStyles.Medium(14, myColor.black),
                                       textAlign: TextAlign.start,
                                     ),

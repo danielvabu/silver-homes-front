@@ -2138,9 +2138,12 @@ class _StepEventTypesAvailabilityState
                                       width: 100,
                                       height: 32,
                                       child: TextFormField(
-                                        initialValue: eventtypesState
-                                            .timescheduling
-                                            .toString(),
+                                        initialValue:
+                                            (eventtypesState.timescheduling ==
+                                                    0)
+                                                ? ''
+                                                : eventtypesState.timescheduling
+                                                    .toString(),
                                         textAlign: TextAlign.start,
                                         style: MyStyles.Regular(
                                             14, myColor.text_color),
@@ -2243,8 +2246,9 @@ class _StepEventTypesAvailabilityState
                                 width: 100,
                                 height: 32,
                                 child: TextFormField(
-                                  initialValue:
-                                      eventtypesState.maximum.toString(),
+                                  initialValue: (eventtypesState.maximum == 0)
+                                      ? ''
+                                      : eventtypesState.maximum.toString(),
                                   textAlign: TextAlign.start,
                                   style:
                                       MyStyles.Regular(14, myColor.text_color),
