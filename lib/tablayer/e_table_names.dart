@@ -30,6 +30,8 @@ enum etableName {
   PropertyMaintenanceImages,
   Vendor,
   Events_type,
+  Availability,
+  AvailabilityTime
 }
 
 class TableNames {
@@ -129,6 +131,12 @@ class TableNames {
         break;
       case etableName.Events_type:
         name = "Events_type";
+        break;
+      case etableName.Availability:
+        name = "availability";
+        break;
+      case etableName.AvailabilityTime:
+        name = "availability_time";
         break;
       default:
         name = "";

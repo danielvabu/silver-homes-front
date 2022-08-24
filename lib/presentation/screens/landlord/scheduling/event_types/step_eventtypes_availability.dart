@@ -2401,129 +2401,129 @@ class _StepEventTypesAvailabilityState
   }
 
   void apiCallAndValication(EventTypesState eventtypesState) {
-    if (eventtypesState.EventTypesBedrooms.isEmpty ||
-        eventtypesState.EventTypesBedrooms == "0") {
+    if (1 == 2) {
       _store.dispatch(UpdateErrorEventTypesBedrooms(true));
       ToastUtils.showCustomToast(
           context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
-    } else if (eventtypesState.EventTypesBathrooms.isEmpty ||
-        eventtypesState.EventTypesBathrooms == "0") {
-      _store.dispatch(UpdateErrorEventTypesBathrooms(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_Bathrooms_error", false);
-    } else if (eventtypesState.EventTypesSizeinsquarefeet == "" ||
-        eventtypesState.EventTypesSizeinsquarefeet == "0") {
-      _store.dispatch(UpdateErrorEventTypesSizeinsquarefeet(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_Sizeinsquarefeet_error", false);
-    } else if (eventtypesState.EventTypesMaxoccupancy == "") {
-      _store.dispatch(UpdateErrorEventTypesMaxoccupancy(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_Maxoccupancy_error", false);
-    } else if (eventtypesState.furnishingValue == null) {
-      _store.dispatch(UpdateErrorFurnishing(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_Furnishing_error", false);
-    } else if (eventtypesState.furnishingValue!.EnumDetailID == 3 &&
-        eventtypesState.Other_Partial_Furniture.isEmpty) {
-      _store.dispatch(UpdateErrorOther_Partial_Furniture(true));
-      ToastUtils.showCustomToast(context,
-          "GlobleString.PS2_EventTypes_partial_furniture_error", false);
-    } else if (RestrictionValidation(eventtypesState.restrictionlist)) {
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_restrictions_error", false);
     } else {
-      List<EventTypesRestriction> restrictionlist = <EventTypesRestriction>[];
-
-      for (int i = 0; i < eventtypesState.restrictionlist.length; i++) {
-        if (eventtypesState.restrictionlist[i].ischeck!) {
-          EventTypesRestriction eventtypesRestriction =
-              new EventTypesRestriction();
-
-          eventtypesRestriction.Prop_ID =
-              Prefs.getString(PrefsName.EventTypesID);
-          eventtypesRestriction.Restrictions =
-              eventtypesState.restrictionlist[i].EnumDetailID.toString();
-
-          restrictionlist.add(eventtypesRestriction);
-        }
-      }
-
-      EventTypesSpecification eventtypesSpecification =
-          new EventTypesSpecification();
-      eventtypesSpecification.Bedrooms =
-          eventtypesState.EventTypesBedrooms.toString().trim();
-      eventtypesSpecification.Bathrooms =
-          eventtypesState.EventTypesBathrooms.toString().trim();
-      eventtypesSpecification.Max_Occupancy =
-          eventtypesState.EventTypesMaxoccupancy.toString().trim();
-      eventtypesSpecification.Furnishing =
-          eventtypesState.furnishingValue!.EnumDetailID.toString().trim();
-      eventtypesSpecification.Size =
-          eventtypesState.EventTypesSizeinsquarefeet.replaceAll(",", "")
-              .toString()
-              .trim();
-      eventtypesSpecification.Other_Partial_Furniture =
-          eventtypesState.Other_Partial_Furniture.toString().trim();
-
-      EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
-      eventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
-      eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-
-      if (eventtypesState.PropDrafting >= 1 &&
-          eventtypesState.PropDrafting <= 2) {
-        eventtypesSpecification.PropDrafting = 2;
-      } else {
-        eventtypesSpecification.PropDrafting = eventtypesState.PropDrafting;
-      }
-
-      UpdateSummeryData(eventtypesState);
-
-      loader = Helper.overlayLoader(context);
-      Overlay.of(context)!.insert(loader);
-
-      PropID propID =
-          new PropID(Prop_ID: Prefs.getString(PrefsName.EventTypesID));
-
-      ApiManager().deleteAllRestriction(context, propID,
-          (error, respoce) async {
+      EventTypesAvailability eventtypesAvailability =
+          new EventTypesAvailability();
+      eventtypesAvailability.event_type_id =
+          int.parse(Prefs.getString(PrefsName.EventTypesID));
+      eventtypesAvailability.weekday = 1;
+      ApiManager().AddEventTypesAvailability(context, eventtypesAvailability,
+          (error, responce) async {
         if (error) {
-          ApiManager().AddEventTypesSpecificatinRestriction(
-              context,
-              restrictionlist,
-              eventtypesUpdate,
-              eventtypesSpecification, (error, responce) async {
-            if (error) {
-              await Prefs.setBool(PrefsName.EventTypesStep2, true);
-              loader.remove();
-              _store.dispatch(UpdateEventTypesDrafting(
-                  eventtypesSpecification.PropDrafting!));
-              _store.dispatch(UpdateSummeryEventTypesDrafting(
-                  eventtypesSpecification.PropDrafting!));
-
-              ToastUtils.showCustomToast(
-                  context, "GlobleString.PS_Save_EventTypesse", true);
-
-              if (!isGotoBack) {
-                if (stepper == 0)
-                  widget._callbackSaveandNext();
-                else
-                  _store.dispatch(UpdateEventTypesForm(stepper));
+          for (int i = 0; i < eventtypesState.sunh1.length; i++) {
+            EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                new EventTypesAvailabilityTime();
+            eventtypesAvailabilitytime.availability_id = int.parse(responce);
+            eventtypesAvailabilitytime.start_time = eventtypesState.sunh1[i];
+            eventtypesAvailabilitytime.end_time = eventtypesState.sunh2[i];
+            ApiManager().AddEventTypesAvailabilityTime(
+                context, eventtypesAvailabilitytime, (error, responce) async {
+              if (error) {
               } else {
-                _store
-                    .dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+                // loader.remove();
+                ToastUtils.showCustomToast(context, responce, false);
               }
-            } else {
-              loader.remove();
-              ToastUtils.showCustomToast(context, responce, false);
-            }
-          });
+            });
+          }
         } else {
-          loader.remove();
-          ToastUtils.showCustomToast(context, respoce, false);
-          Helper.Log("respoce", respoce);
+          // loader.remove();
+          ToastUtils.showCustomToast(context, responce, false);
         }
       });
+
+      // for (int i = 0; i < eventtypesState.restrictionlist.length; i++) {
+      //   if (eventtypesState.restrictionlist[i].ischeck!) {
+      //     EventTypesRestriction eventtypesRestriction =
+      //         new EventTypesRestriction();
+
+      //     eventtypesRestriction.Prop_ID =
+      //         Prefs.getString(PrefsName.EventTypesID);
+      //     eventtypesRestriction.Restrictions =
+      //         eventtypesState.restrictionlist[i].EnumDetailID.toString();
+
+      //     availabilitylist.add(eventtypesRestriction);
+      //   }
+      // }
+
+      // EventTypesSpecification eventtypesSpecification =
+      //     new EventTypesSpecification();
+      // eventtypesSpecification.Bedrooms =
+      //     eventtypesState.EventTypesBedrooms.toString().trim();
+      // eventtypesSpecification.Bathrooms =
+      //     eventtypesState.EventTypesBathrooms.toString().trim();
+      // eventtypesSpecification.Max_Occupancy =
+      //     eventtypesState.EventTypesMaxoccupancy.toString().trim();
+      // eventtypesSpecification.Furnishing =
+      //     eventtypesState.furnishingValue!.EnumDetailID.toString().trim();
+      // eventtypesSpecification.Size =
+      //     eventtypesState.EventTypesSizeinsquarefeet.replaceAll(",", "")
+      //         .toString()
+      //         .trim();
+      // eventtypesSpecification.Other_Partial_Furniture =
+      //     eventtypesState.Other_Partial_Furniture.toString().trim();
+
+      // EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
+      // eventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
+      // eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+
+      // if (eventtypesState.PropDrafting >= 1 &&
+      //     eventtypesState.PropDrafting <= 2) {
+      //   eventtypesSpecification.PropDrafting = 2;
+      // } else {
+      //   eventtypesSpecification.PropDrafting = eventtypesState.PropDrafting;
+      // }
+
+      // UpdateSummeryData(eventtypesState);
+
+      // loader = Helper.overlayLoader(context);
+      // Overlay.of(context)!.insert(loader);
+
+      // PropID propID =
+      //     new PropID(Prop_ID: Prefs.getString(PrefsName.EventTypesID));
+
+      // ApiManager().deleteAllRestriction(context, propID,
+      //     (error, respoce) async {
+      //   if (error) {
+      //     ApiManager().AddEventTypesSpecificatinRestriction(
+      //         context,
+      //         restrictionlist,
+      //         eventtypesUpdate,
+      //         eventtypesSpecification, (error, responce) async {
+      //       if (error) {
+      //         await Prefs.setBool(PrefsName.EventTypesStep2, true);
+      //         loader.remove();
+      //         _store.dispatch(UpdateEventTypesDrafting(
+      //             eventtypesSpecification.PropDrafting!));
+      //         _store.dispatch(UpdateSummeryEventTypesDrafting(
+      //             eventtypesSpecification.PropDrafting!));
+
+      //         ToastUtils.showCustomToast(
+      //             context, "GlobleString.PS_Save_EventTypesse", true);
+
+      //         if (!isGotoBack) {
+      //           if (stepper == 0)
+      //             widget._callbackSaveandNext();
+      //           else
+      //             _store.dispatch(UpdateEventTypesForm(stepper));
+      //         } else {
+      //           _store
+      //               .dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+      //         }
+      //       } else {
+      //         loader.remove();
+      //         ToastUtils.showCustomToast(context, responce, false);
+      //       }
+      //     });
+      //   } else {
+      //     loader.remove();
+      //     ToastUtils.showCustomToast(context, respoce, false);
+      //     Helper.Log("respoce", respoce);
+      //   }
+      // });
     }
   }
 

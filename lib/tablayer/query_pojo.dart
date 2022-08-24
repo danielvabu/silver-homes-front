@@ -1776,6 +1776,45 @@ class EventTypesRestriction {
       };
 }
 
+class EventTypesAvailability {
+  int? event_type_id;
+  int? weekday;
+
+  EventTypesAvailability({this.event_type_id, this.weekday});
+
+  factory EventTypesAvailability.fromJson(Map<String, dynamic> json) =>
+      EventTypesAvailability(
+        event_type_id: json["event_type_id"],
+        weekday: json["weekday"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_id": event_type_id,
+        "weekday": weekday,
+      };
+}
+
+class EventTypesAvailabilityTime {
+  int? availability_id;
+  String? start_time;
+  String? end_time;
+
+  EventTypesAvailabilityTime(
+      {this.availability_id, this.start_time, this.end_time});
+
+  factory EventTypesAvailabilityTime.fromJson(Map<String, dynamic> json) =>
+      EventTypesAvailabilityTime(
+          availability_id: json["event_type_id"],
+          start_time: json["weekday"],
+          end_time: json["end_time"]);
+
+  Map<String, dynamic> toJson() => {
+        "availability_id": availability_id,
+        "start_time": start_time,
+        "end_time": end_time
+      };
+}
+
 class PropertyFeature {
   String? StorageAvailable;
   String? Parking_Stalls;
