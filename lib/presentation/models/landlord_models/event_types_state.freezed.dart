@@ -32,6 +32,35 @@ class _$EventTypesStateTearOff {
       PropertyDropData? selectproperty,
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
+      DateTime? dateto,
+      DateTime? datefrom,
+      required String timezone,
+      required int displaytz,
+      required bool sun,
+      required bool mon,
+      required bool tue,
+      required bool wed,
+      required bool thu,
+      required bool fri,
+      required bool sat,
+      required List<String> sunh1,
+      required List<String> sunh2,
+      required List<String> monh1,
+      required List<String> monh2,
+      required List<String> tueh1,
+      required List<String> tueh2,
+      required List<String> wedh1,
+      required List<String> wedh2,
+      required List<String> thuh1,
+      required List<String> thuh2,
+      required List<String> frih1,
+      required List<String> frih2,
+      required List<String> sath1,
+      required List<String> sath2,
+      required int timescheduling,
+      required String timeschedulingmed,
+      required int maximum,
+      required List<String> overrrides,
       required String EventTypesName,
       required bool EventTypesRelation,
       required String EventTypesAddress,
@@ -46,10 +75,11 @@ class _$EventTypesStateTearOff {
       required String EventTypesFrom,
       required String EventTypesTo,
       required int EventTypesDuration,
-      required int EventTypesDurationPeriod,
+      required String EventTypesDurationPeriod,
       required int EventTypesBefore,
-      required int EventTypesBeforePeriod,
-      required int EventTypesAfterPeriod,
+      required int EventTypesAfter,
+      required String EventTypesBeforePeriod,
+      required String EventTypesAfterPeriod,
       required String EventTypesConfirmation,
       required String Suiteunit,
       required String Buildingname,
@@ -115,6 +145,35 @@ class _$EventTypesStateTearOff {
       selectproperty: selectproperty,
       minimumleasedurationnumber: minimumleasedurationnumber,
       dateofavailable: dateofavailable,
+      datefrom: datefrom,
+      dateto: dateto,
+      timezone: timezone,
+      displaytz: displaytz,
+      sun: sun,
+      mon: mon,
+      tue: tue,
+      wed: wed,
+      thu: thu,
+      fri: fri,
+      sat: sat,
+      sunh1: sunh1,
+      sunh2: sunh2,
+      monh1: monh1,
+      monh2: monh2,
+      tueh1: tueh1,
+      tueh2: tueh2,
+      wedh1: wedh1,
+      wedh2: wedh2,
+      thuh1: thuh1,
+      thuh2: thuh2,
+      frih1: frih1,
+      frih2: frih2,
+      sath1: sath1,
+      sath2: sath2,
+      timescheduling: timescheduling,
+      timeschedulingmed: timeschedulingmed,
+      maximum: maximum,
+      overrrides: overrrides,
       EventTypesName: EventTypesName,
       EventTypesRelation: EventTypesRelation,
       EventTypesAddress: EventTypesAddress,
@@ -131,6 +190,7 @@ class _$EventTypesStateTearOff {
       EventTypesDuration: EventTypesDuration,
       EventTypesDurationPeriod: EventTypesDurationPeriod,
       EventTypesBefore: EventTypesBefore,
+      EventTypesAfter: EventTypesAfter,
       EventTypesBeforePeriod: EventTypesBeforePeriod,
       EventTypesAfterPeriod: EventTypesAfterPeriod,
       EventTypesConfirmation: EventTypesConfirmation,
@@ -215,6 +275,35 @@ mixin _$EventTypesState {
   PropertyDropData? get selectproperty => throw _privateConstructorUsedError;
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
   DateTime? get dateofavailable => throw _privateConstructorUsedError;
+  DateTime? get datefrom => throw _privateConstructorUsedError;
+  DateTime? get dateto => throw _privateConstructorUsedError;
+  String get timezone => throw _privateConstructorUsedError;
+  int get displaytz => throw _privateConstructorUsedError;
+  bool get sun => throw _privateConstructorUsedError;
+  bool get mon => throw _privateConstructorUsedError;
+  bool get tue => throw _privateConstructorUsedError;
+  bool get wed => throw _privateConstructorUsedError;
+  bool get thu => throw _privateConstructorUsedError;
+  bool get fri => throw _privateConstructorUsedError;
+  bool get sat => throw _privateConstructorUsedError;
+  List<String> get sunh1 => throw _privateConstructorUsedError;
+  List<String> get sunh2 => throw _privateConstructorUsedError;
+  List<String> get monh1 => throw _privateConstructorUsedError;
+  List<String> get monh2 => throw _privateConstructorUsedError;
+  List<String> get tueh1 => throw _privateConstructorUsedError;
+  List<String> get tueh2 => throw _privateConstructorUsedError;
+  List<String> get wedh1 => throw _privateConstructorUsedError;
+  List<String> get wedh2 => throw _privateConstructorUsedError;
+  List<String> get thuh1 => throw _privateConstructorUsedError;
+  List<String> get thuh2 => throw _privateConstructorUsedError;
+  List<String> get frih1 => throw _privateConstructorUsedError;
+  List<String> get frih2 => throw _privateConstructorUsedError;
+  List<String> get sath1 => throw _privateConstructorUsedError;
+  List<String> get sath2 => throw _privateConstructorUsedError;
+  int get timescheduling => throw _privateConstructorUsedError;
+  String get timeschedulingmed => throw _privateConstructorUsedError;
+  int get maximum => throw _privateConstructorUsedError;
+  List<String> get overrrides => throw _privateConstructorUsedError;
   String get EventTypesName => throw _privateConstructorUsedError;
   bool get EventTypesRelation => throw _privateConstructorUsedError;
   String get EventTypesAddress => throw _privateConstructorUsedError;
@@ -229,10 +318,11 @@ mixin _$EventTypesState {
   String get EventTypesFrom => throw _privateConstructorUsedError;
   String get EventTypesTo => throw _privateConstructorUsedError;
   int get EventTypesDuration => throw _privateConstructorUsedError;
-  int get EventTypesDurationPeriod => throw _privateConstructorUsedError;
+  String get EventTypesDurationPeriod => throw _privateConstructorUsedError;
   int get EventTypesBefore => throw _privateConstructorUsedError;
-  int get EventTypesBeforePeriod => throw _privateConstructorUsedError;
-  int get EventTypesAfterPeriod => throw _privateConstructorUsedError;
+  int get EventTypesAfter => throw _privateConstructorUsedError;
+  String get EventTypesBeforePeriod => throw _privateConstructorUsedError;
+  String get EventTypesAfterPeriod => throw _privateConstructorUsedError;
   String get EventTypesConfirmation => throw _privateConstructorUsedError;
   String get Suiteunit => throw _privateConstructorUsedError;
   String get Buildingname => throw _privateConstructorUsedError;
@@ -317,6 +407,35 @@ abstract class $EventTypesStateCopyWith<$Res> {
       PropertyDropData? selectproperty,
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
+      DateTime? dateto,
+      DateTime? datefrom,
+      String timezone,
+      int displaytz,
+      bool sun,
+      bool mon,
+      bool tue,
+      bool wed,
+      bool thu,
+      bool fri,
+      bool sat,
+      List<String> sunh1,
+      List<String> sunh2,
+      List<String> monh1,
+      List<String> monh2,
+      List<String> tueh1,
+      List<String> tueh2,
+      List<String> wedh1,
+      List<String> wedh2,
+      List<String> thuh1,
+      List<String> thuh2,
+      List<String> frih1,
+      List<String> frih2,
+      List<String> sath1,
+      List<String> sath2,
+      int timescheduling,
+      String timeschedulingmed,
+      int maximum,
+      List<String> overrrides,
       String EventTypesName,
       bool EventTypesRelation,
       String EventTypesAddress,
@@ -331,10 +450,11 @@ abstract class $EventTypesStateCopyWith<$Res> {
       String EventTypesFrom,
       String EventTypesTo,
       int EventTypesDuration,
-      int EventTypesDurationPeriod,
+      String EventTypesDurationPeriod,
       int EventTypesBefore,
-      int EventTypesBeforePeriod,
-      int EventTypesAfterPeriod,
+      int EventTypesAfter,
+      String EventTypesBeforePeriod,
+      String EventTypesAfterPeriod,
       String EventTypesConfirmation,
       String Suiteunit,
       String Buildingname,
@@ -412,6 +532,35 @@ class _$EventTypesStateCopyWithImpl<$Res>
     Object? selectproperty = freezed,
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
+    Object? dateto = freezed,
+    Object? datefrom = freezed,
+    Object? timezone = freezed,
+    Object? displaytz = freezed,
+    Object? sun = freezed,
+    Object? mon = freezed,
+    Object? tue = freezed,
+    Object? wed = freezed,
+    Object? thu = freezed,
+    Object? fri = freezed,
+    Object? sat = freezed,
+    Object? sunh1 = freezed,
+    Object? sunh2 = freezed,
+    Object? monh1 = freezed,
+    Object? monh2 = freezed,
+    Object? tueh1 = freezed,
+    Object? tueh2 = freezed,
+    Object? wedh1 = freezed,
+    Object? wedh2 = freezed,
+    Object? thuh1 = freezed,
+    Object? thuh2 = freezed,
+    Object? frih1 = freezed,
+    Object? frih2 = freezed,
+    Object? sath1 = freezed,
+    Object? sath2 = freezed,
+    Object? timescheduling = freezed,
+    Object? timeschedulingmed = freezed,
+    Object? maximum = freezed,
+    Object? overrrides = freezed,
     Object? EventTypesName = freezed,
     Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
@@ -428,6 +577,7 @@ class _$EventTypesStateCopyWithImpl<$Res>
     Object? EventTypesDuration = freezed,
     Object? EventTypesDurationPeriod = freezed,
     Object? EventTypesBefore = freezed,
+    Object? EventTypesAfter = freezed,
     Object? EventTypesBeforePeriod = freezed,
     Object? EventTypesAfterPeriod = freezed,
     Object? EventTypesConfirmation = freezed,
@@ -541,6 +691,122 @@ class _$EventTypesStateCopyWithImpl<$Res>
           ? _value.dateofavailable
           : dateofavailable // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      dateto: dateto == freezed
+          ? _value.dateto
+          : dateto // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      datefrom: datefrom == freezed
+          ? _value.datefrom
+          : datefrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      timezone: timezone == freezed
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as String,
+      displaytz: displaytz == freezed
+          ? _value.displaytz
+          : displaytz // ignore: cast_nullable_to_non_nullable
+              as int,
+      sun: sun == freezed
+          ? _value.sun
+          : sun // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mon: mon == freezed
+          ? _value.mon
+          : mon // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tue: tue == freezed
+          ? _value.tue
+          : tue // ignore: cast_nullable_to_non_nullable
+              as bool,
+      wed: wed == freezed
+          ? _value.wed
+          : wed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      thu: thu == freezed
+          ? _value.thu
+          : thu // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fri: fri == freezed
+          ? _value.fri
+          : fri // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sat: sat == freezed
+          ? _value.sat
+          : sat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sunh1: sunh1 == freezed
+          ? _value.sunh1
+          : sunh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sunh2: sunh2 == freezed
+          ? _value.sunh2
+          : sunh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      monh1: monh1 == freezed
+          ? _value.monh1
+          : monh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      monh2: monh2 == freezed
+          ? _value.monh2
+          : monh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tueh1: tueh1 == freezed
+          ? _value.tueh1
+          : tueh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tueh2: tueh2 == freezed
+          ? _value.tueh2
+          : tueh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      wedh1: wedh1 == freezed
+          ? _value.wedh1
+          : wedh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      wedh2: wedh2 == freezed
+          ? _value.wedh2
+          : wedh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      thuh1: thuh1 == freezed
+          ? _value.thuh1
+          : thuh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      thuh2: thuh2 == freezed
+          ? _value.thuh2
+          : thuh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      frih1: frih1 == freezed
+          ? _value.frih1
+          : frih1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      frih2: frih2 == freezed
+          ? _value.frih2
+          : frih2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sath1: sath1 == freezed
+          ? _value.sath1
+          : sath1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sath2: sath2 == freezed
+          ? _value.sath2
+          : sath2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timescheduling: timescheduling == freezed
+          ? _value.timescheduling
+          : timescheduling // ignore: cast_nullable_to_non_nullable
+              as int,
+      timeschedulingmed: timeschedulingmed == freezed
+          ? _value.timeschedulingmed
+          : timeschedulingmed // ignore: cast_nullable_to_non_nullable
+              as String,
+      maximum: maximum == freezed
+          ? _value.maximum
+          : maximum // ignore: cast_nullable_to_non_nullable
+              as int,
+      overrrides: overrrides == freezed
+          ? _value.overrrides
+          : overrrides // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       EventTypesName: EventTypesName == freezed
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
@@ -600,19 +866,23 @@ class _$EventTypesStateCopyWithImpl<$Res>
       EventTypesDurationPeriod: EventTypesDurationPeriod == freezed
           ? _value.EventTypesDurationPeriod
           : EventTypesDurationPeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesBefore: EventTypesBefore == freezed
           ? _value.EventTypesBefore
           : EventTypesBefore // ignore: cast_nullable_to_non_nullable
               as int,
+      EventTypesAfter: EventTypesAfter == freezed
+          ? _value.EventTypesAfter
+          : EventTypesAfter // ignore: cast_nullable_to_non_nullable
+              as int,
       EventTypesBeforePeriod: EventTypesBeforePeriod == freezed
           ? _value.EventTypesBeforePeriod
           : EventTypesBeforePeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesAfterPeriod: EventTypesAfterPeriod == freezed
           ? _value.EventTypesAfterPeriod
           : EventTypesAfterPeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesConfirmation: EventTypesConfirmation == freezed
           ? _value.EventTypesConfirmation
           : EventTypesConfirmation // ignore: cast_nullable_to_non_nullable
@@ -838,6 +1108,35 @@ abstract class _$EventTypesStateCopyWith<$Res>
       PropertyDropData? selectproperty,
       String minimumleasedurationnumber,
       DateTime? dateofavailable,
+      DateTime? dateto,
+      DateTime? datefrom,
+      String timezone,
+      int displaytz,
+      bool sun,
+      bool mon,
+      bool tue,
+      bool wed,
+      bool thu,
+      bool fri,
+      bool sat,
+      List<String> sunh1,
+      List<String> sunh2,
+      List<String> monh1,
+      List<String> monh2,
+      List<String> tueh1,
+      List<String> tueh2,
+      List<String> wedh1,
+      List<String> wedh2,
+      List<String> thuh1,
+      List<String> thuh2,
+      List<String> frih1,
+      List<String> frih2,
+      List<String> sath1,
+      List<String> sath2,
+      int timescheduling,
+      String timeschedulingmed,
+      int maximum,
+      List<String> overrrides,
       String EventTypesName,
       bool EventTypesRelation,
       String EventTypesAddress,
@@ -852,10 +1151,11 @@ abstract class _$EventTypesStateCopyWith<$Res>
       String EventTypesFrom,
       String EventTypesTo,
       int EventTypesDuration,
-      int EventTypesDurationPeriod,
+      String EventTypesDurationPeriod,
       int EventTypesBefore,
-      int EventTypesBeforePeriod,
-      int EventTypesAfterPeriod,
+      int EventTypesAfter,
+      String EventTypesBeforePeriod,
+      String EventTypesAfterPeriod,
       String EventTypesConfirmation,
       String Suiteunit,
       String Buildingname,
@@ -935,6 +1235,35 @@ class __$EventTypesStateCopyWithImpl<$Res>
     Object? selectproperty = freezed,
     Object? minimumleasedurationnumber = freezed,
     Object? dateofavailable = freezed,
+    Object? dateto = freezed,
+    Object? datefrom = freezed,
+    Object? timezone = freezed,
+    Object? displaytz = freezed,
+    Object? sun = freezed,
+    Object? mon = freezed,
+    Object? tue = freezed,
+    Object? wed = freezed,
+    Object? thu = freezed,
+    Object? fri = freezed,
+    Object? sat = freezed,
+    Object? sunh1 = freezed,
+    Object? sunh2 = freezed,
+    Object? monh1 = freezed,
+    Object? monh2 = freezed,
+    Object? tueh1 = freezed,
+    Object? tueh2 = freezed,
+    Object? wedh1 = freezed,
+    Object? wedh2 = freezed,
+    Object? thuh1 = freezed,
+    Object? thuh2 = freezed,
+    Object? frih1 = freezed,
+    Object? frih2 = freezed,
+    Object? sath1 = freezed,
+    Object? sath2 = freezed,
+    Object? timescheduling = freezed,
+    Object? timeschedulingmed = freezed,
+    Object? maximum = freezed,
+    Object? overrrides = freezed,
     Object? EventTypesName = freezed,
     Object? EventTypesRelation = freezed,
     Object? EventTypesAddress = freezed,
@@ -951,6 +1280,7 @@ class __$EventTypesStateCopyWithImpl<$Res>
     Object? EventTypesDuration = freezed,
     Object? EventTypesDurationPeriod = freezed,
     Object? EventTypesBefore = freezed,
+    Object? EventTypesAfter = freezed,
     Object? EventTypesBeforePeriod = freezed,
     Object? EventTypesAfterPeriod = freezed,
     Object? EventTypesConfirmation = freezed,
@@ -1064,6 +1394,122 @@ class __$EventTypesStateCopyWithImpl<$Res>
           ? _value.dateofavailable
           : dateofavailable // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      dateto: dateto == freezed
+          ? _value.dateto
+          : dateto // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      datefrom: datefrom == freezed
+          ? _value.datefrom
+          : datefrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      timezone: timezone == freezed
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as String,
+      displaytz: displaytz == freezed
+          ? _value.displaytz
+          : displaytz // ignore: cast_nullable_to_non_nullable
+              as int,
+      sun: sun == freezed
+          ? _value.sun
+          : sun // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mon: mon == freezed
+          ? _value.mon
+          : mon // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tue: tue == freezed
+          ? _value.tue
+          : tue // ignore: cast_nullable_to_non_nullable
+              as bool,
+      wed: wed == freezed
+          ? _value.wed
+          : wed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      thu: thu == freezed
+          ? _value.thu
+          : thu // ignore: cast_nullable_to_non_nullable
+              as bool,
+      fri: fri == freezed
+          ? _value.fri
+          : fri // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sat: sat == freezed
+          ? _value.sat
+          : sat // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sunh1: sunh1 == freezed
+          ? _value.sunh1
+          : sunh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sunh2: sunh2 == freezed
+          ? _value.sunh2
+          : sunh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      monh1: monh1 == freezed
+          ? _value.monh1
+          : monh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      monh2: monh2 == freezed
+          ? _value.monh2
+          : monh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tueh1: tueh1 == freezed
+          ? _value.tueh1
+          : tueh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tueh2: tueh2 == freezed
+          ? _value.tueh2
+          : tueh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      wedh1: wedh1 == freezed
+          ? _value.wedh1
+          : wedh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      wedh2: wedh2 == freezed
+          ? _value.wedh2
+          : wedh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      thuh1: thuh1 == freezed
+          ? _value.thuh1
+          : thuh1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      thuh2: thuh2 == freezed
+          ? _value.thuh2
+          : thuh2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      frih1: frih1 == freezed
+          ? _value.frih1
+          : frih1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      frih2: frih2 == freezed
+          ? _value.frih2
+          : frih2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sath1: sath1 == freezed
+          ? _value.sath1
+          : sath1 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      sath2: sath2 == freezed
+          ? _value.sath2
+          : sath2 // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timescheduling: timescheduling == freezed
+          ? _value.timescheduling
+          : timescheduling // ignore: cast_nullable_to_non_nullable
+              as int,
+      timeschedulingmed: timeschedulingmed == freezed
+          ? _value.timeschedulingmed
+          : timeschedulingmed // ignore: cast_nullable_to_non_nullable
+              as String,
+      maximum: maximum == freezed
+          ? _value.maximum
+          : maximum // ignore: cast_nullable_to_non_nullable
+              as int,
+      overrrides: overrrides == freezed
+          ? _value.overrrides
+          : overrrides // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       EventTypesName: EventTypesName == freezed
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
@@ -1123,19 +1569,23 @@ class __$EventTypesStateCopyWithImpl<$Res>
       EventTypesDurationPeriod: EventTypesDurationPeriod == freezed
           ? _value.EventTypesDurationPeriod
           : EventTypesDurationPeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesBefore: EventTypesBefore == freezed
           ? _value.EventTypesBefore
           : EventTypesBefore // ignore: cast_nullable_to_non_nullable
               as int,
+      EventTypesAfter: EventTypesAfter == freezed
+          ? _value.EventTypesAfter
+          : EventTypesAfter // ignore: cast_nullable_to_non_nullable
+              as int,
       EventTypesBeforePeriod: EventTypesBeforePeriod == freezed
           ? _value.EventTypesBeforePeriod
           : EventTypesBeforePeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesAfterPeriod: EventTypesAfterPeriod == freezed
           ? _value.EventTypesAfterPeriod
           : EventTypesAfterPeriod // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       EventTypesConfirmation: EventTypesConfirmation == freezed
           ? _value.EventTypesConfirmation
           : EventTypesConfirmation // ignore: cast_nullable_to_non_nullable
@@ -1357,6 +1807,35 @@ class _$_EventTypesState implements _EventTypesState {
       this.selectproperty,
       required this.minimumleasedurationnumber,
       this.dateofavailable,
+      this.dateto,
+      this.datefrom,
+      required this.timezone,
+      required this.displaytz,
+      required this.sun,
+      required this.mon,
+      required this.tue,
+      required this.wed,
+      required this.thu,
+      required this.fri,
+      required this.sat,
+      required this.sunh1,
+      required this.sunh2,
+      required this.monh1,
+      required this.monh2,
+      required this.tueh1,
+      required this.tueh2,
+      required this.wedh1,
+      required this.wedh2,
+      required this.thuh1,
+      required this.thuh2,
+      required this.frih1,
+      required this.frih2,
+      required this.sath1,
+      required this.sath2,
+      required this.timescheduling,
+      required this.timeschedulingmed,
+      required this.maximum,
+      required this.overrrides,
       required this.EventTypesName,
       required this.EventTypesRelation,
       required this.EventTypesAddress,
@@ -1373,6 +1852,7 @@ class _$_EventTypesState implements _EventTypesState {
       required this.EventTypesDuration,
       required this.EventTypesDurationPeriod,
       required this.EventTypesBefore,
+      required this.EventTypesAfter,
       required this.EventTypesBeforePeriod,
       required this.EventTypesAfterPeriod,
       required this.EventTypesConfirmation,
@@ -1456,6 +1936,64 @@ class _$_EventTypesState implements _EventTypesState {
   @override
   final DateTime? dateofavailable;
   @override
+  final DateTime? dateto;
+  @override
+  final DateTime? datefrom;
+  @override
+  final String timezone;
+  @override
+  final int displaytz;
+  @override
+  final bool sun;
+  @override
+  final bool mon;
+  @override
+  final bool tue;
+  @override
+  final bool wed;
+  @override
+  final bool thu;
+  @override
+  final bool fri;
+  @override
+  final bool sat;
+  @override
+  final List<String> sunh1;
+  @override
+  final List<String> sunh2;
+  @override
+  final List<String> monh1;
+  @override
+  final List<String> monh2;
+  @override
+  final List<String> tueh1;
+  @override
+  final List<String> tueh2;
+  @override
+  final List<String> wedh1;
+  @override
+  final List<String> wedh2;
+  @override
+  final List<String> thuh1;
+  @override
+  final List<String> thuh2;
+  @override
+  final List<String> frih1;
+  @override
+  final List<String> frih2;
+  @override
+  final List<String> sath1;
+  @override
+  final List<String> sath2;
+  @override
+  final int timescheduling;
+  @override
+  final String timeschedulingmed;
+  @override
+  final int maximum;
+  @override
+  final List<String> overrrides;
+  @override
   final String EventTypesName;
   @override
   final bool EventTypesRelation;
@@ -1484,13 +2022,15 @@ class _$_EventTypesState implements _EventTypesState {
   @override
   final int EventTypesDuration;
   @override
-  final int EventTypesDurationPeriod;
+  final String EventTypesDurationPeriod;
   @override
   final int EventTypesBefore;
   @override
-  final int EventTypesBeforePeriod;
+  final int EventTypesAfter;
   @override
-  final int EventTypesAfterPeriod;
+  final String EventTypesBeforePeriod;
+  @override
+  final String EventTypesAfterPeriod;
   @override
   final String EventTypesConfirmation;
 
@@ -1809,6 +2349,35 @@ abstract class _EventTypesState implements EventTypesState {
       PropertyDropData? selectproperty,
       required String minimumleasedurationnumber,
       DateTime? dateofavailable,
+      DateTime? dateto,
+      DateTime? datefrom,
+      required String timezone,
+      required int displaytz,
+      required bool sun,
+      required bool mon,
+      required bool tue,
+      required bool wed,
+      required bool thu,
+      required bool fri,
+      required bool sat,
+      required List<String> sunh1,
+      required List<String> sunh2,
+      required List<String> monh1,
+      required List<String> monh2,
+      required List<String> tueh1,
+      required List<String> tueh2,
+      required List<String> wedh1,
+      required List<String> wedh2,
+      required List<String> thuh1,
+      required List<String> thuh2,
+      required List<String> frih1,
+      required List<String> frih2,
+      required List<String> sath1,
+      required List<String> sath2,
+      required int timescheduling,
+      required String timeschedulingmed,
+      required int maximum,
+      required List<String> overrrides,
       required String EventTypesName,
       required bool EventTypesRelation,
       required String EventTypesAddress,
@@ -1823,10 +2392,11 @@ abstract class _EventTypesState implements EventTypesState {
       required String EventTypesFrom,
       required String EventTypesTo,
       required int EventTypesDuration,
-      required int EventTypesDurationPeriod,
+      required String EventTypesDurationPeriod,
       required int EventTypesBefore,
-      required int EventTypesBeforePeriod,
-      required int EventTypesAfterPeriod,
+      required int EventTypesAfter,
+      required String EventTypesBeforePeriod,
+      required String EventTypesAfterPeriod,
       required String EventTypesConfirmation,
       required String Suiteunit,
       required String Buildingname,
@@ -1916,6 +2486,64 @@ abstract class _EventTypesState implements EventTypesState {
   String get minimumleasedurationnumber => throw _privateConstructorUsedError;
   @override
   DateTime? get dateofavailable => throw _privateConstructorUsedError;
+  @override
+  DateTime? get dateto => throw _privateConstructorUsedError;
+  @override
+  DateTime? get datefrom => throw _privateConstructorUsedError;
+  @override
+  String get timezone => throw _privateConstructorUsedError;
+  @override
+  int get displaytz => throw _privateConstructorUsedError;
+  @override
+  bool get sun => throw _privateConstructorUsedError;
+  @override
+  bool get mon => throw _privateConstructorUsedError;
+  @override
+  bool get tue => throw _privateConstructorUsedError;
+  @override
+  bool get wed => throw _privateConstructorUsedError;
+  @override
+  bool get thu => throw _privateConstructorUsedError;
+  @override
+  bool get fri => throw _privateConstructorUsedError;
+  @override
+  bool get sat => throw _privateConstructorUsedError;
+  @override
+  List<String> get sunh1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get sunh2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get monh1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get monh2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get tueh1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get tueh2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get wedh1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get wedh2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get thuh1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get thuh2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get frih1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get frih2 => throw _privateConstructorUsedError;
+  @override
+  List<String> get sath1 => throw _privateConstructorUsedError;
+  @override
+  List<String> get sath2 => throw _privateConstructorUsedError;
+  @override
+  int get timescheduling => throw _privateConstructorUsedError;
+  @override
+  String get timeschedulingmed => throw _privateConstructorUsedError;
+  @override
+  int get maximum => throw _privateConstructorUsedError;
+  @override
+  List<String> get overrrides => throw _privateConstructorUsedError;
   @override
   String get EventTypesName => throw _privateConstructorUsedError;
   @override

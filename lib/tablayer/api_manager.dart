@@ -664,7 +664,7 @@ class ApiManager {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.Property,
+    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {

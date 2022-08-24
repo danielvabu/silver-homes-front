@@ -1491,103 +1491,104 @@ class PropertyInsert {
 /*event type*/
 
 class EventTypesInsert {
-  String? PropertyName;
-  String? Property_Type;
-  String? Rental_Space;
-  String? Property_Description;
-  String? Property_Address;
-  String? Suite_Unit;
-  String? Building_Name;
-  String? City;
-  String? Province;
-  String? Country;
-  String? Country_Code;
-  String? Postal_Code;
-  String? Rent_Amount;
-  String? Rent_Payment_Frequency;
-  String? Lease_Type;
-  String? Date_Available;
-  String? Min_Lease_Duration;
-  String? Other_Property_Type;
-  String? Min_Lease_Number;
-  String? Owner_ID;
-  int? PropDrafting;
-  bool? Vacancy;
-
-  EventTypesInsert({
-    this.PropertyName,
-    this.Property_Type,
-    this.Rental_Space,
-    this.Property_Description,
-    this.Property_Address,
-    this.Suite_Unit,
-    this.Building_Name,
-    this.City,
-    this.Province,
-    this.Country,
-    this.Country_Code,
-    this.Postal_Code,
-    this.Rent_Amount,
-    this.Rent_Payment_Frequency,
-    this.Lease_Type,
-    this.Date_Available,
-    this.Min_Lease_Duration,
-    this.Other_Property_Type,
-    this.Min_Lease_Number,
-    this.Owner_ID,
-    this.PropDrafting,
-    this.Vacancy,
-  });
+  String? name;
+  bool? relation;
+  bool? showing;
+  String? location;
+  String? description;
+  String? link;
+  String? color;
+  int? range;
+  int? duration;
+  int? buffer_after;
+  int? buffer_before;
+  String? confirmation_message;
+  int? time_zone;
+  int? time_scheduling;
+  int? time_scheduling_medida;
+  int? max_event_per_day;
+  String? prop_id;
+  int? owner_id;
+  String? datefrom;
+  String? dateto;
+  String? durationmed;
+  String? aftermed;
+  String? beforemed;
+  EventTypesInsert(
+      {this.name,
+      this.relation,
+      this.showing,
+      this.location,
+      this.description,
+      this.link,
+      this.color,
+      this.range,
+      this.duration,
+      this.buffer_after,
+      this.buffer_before,
+      this.confirmation_message,
+      this.time_zone,
+      this.time_scheduling,
+      this.time_scheduling_medida,
+      this.max_event_per_day,
+      this.prop_id,
+      this.owner_id,
+      this.datefrom,
+      this.dateto,
+      this.durationmed,
+      this.aftermed,
+      this.beforemed});
 
   factory EventTypesInsert.fromJson(Map<String, dynamic> json) =>
       EventTypesInsert(
-        PropertyName: json["PropertyName"],
-        Property_Type: json["Property_Type"],
-        Rental_Space: json["Rental_Space"],
-        Property_Description: json["Property_Description"],
-        Property_Address: json["Property_Address"],
-        Suite_Unit: json["Suite_Unit"],
-        Building_Name: json["Building_Name"],
-        City: json["City"],
-        Province: json["Province"],
-        Country: json["Country"],
-        Country_Code: json["Country_Code"],
-        Postal_Code: json["Postal_Code"],
-        Rent_Amount: json["Rent_Amount"],
-        Rent_Payment_Frequency: json["Rent_Payment_Frequency"],
-        Lease_Type: json["Lease_Type"],
-        Date_Available: json["Date_Available"],
-        Min_Lease_Duration: json["Min_Lease_Duration"],
-        Other_Property_Type: json["Other_Property_Type"],
-        Min_Lease_Number: json["Min_Lease_Number"],
-        Owner_ID: json["Owner_ID"],
-        PropDrafting: json["PropDrafting"],
-        Vacancy: json["Vacancy"],
-      );
+          name: json["name"],
+          relation: json["relation"],
+          showing: json["showing"],
+          location: json["location"],
+          description: json["description"],
+          link: json["link"],
+          color: json["color"],
+          range: json["range"],
+          duration: json["duration"],
+          buffer_after: json["buffer_after"],
+          buffer_before: json["buffer_before"],
+          confirmation_message: json["confirmation_message"],
+          time_zone: json["time_zone"],
+          time_scheduling: json["time_scheduling"],
+          time_scheduling_medida: json["time_scheduling_medida"],
+          max_event_per_day: json["max_event_per_day"],
+          prop_id: json["prop_id"],
+          owner_id: json["owner_id"],
+          datefrom: json["datefrom"],
+          dateto: json["dateto"],
+          durationmed: json["durationmed"],
+          aftermed: json["aftermed"],
+          beforemed: json["beforemed"]);
 
   Map<String, dynamic> toJson() => {
-        "PropertyName": PropertyName,
-        "Property_Type": Property_Type,
-        "Rental_Space": Rental_Space,
-        "Property_Description": Property_Description,
-        "Property_Address": Property_Address,
-        "Suite_Unit": Suite_Unit,
-        "Building_Name": Building_Name,
-        "City": City,
-        "Province": Province,
-        "Country": Country,
-        "Country_Code": Country_Code,
-        "Postal_Code": Postal_Code,
-        "Rent_Amount": Rent_Amount,
-        "Rent_Payment_Frequency": Rent_Payment_Frequency,
-        "Lease_Type": Lease_Type,
-        "Date_Available": Date_Available,
-        "Min_Lease_Duration": Min_Lease_Duration,
-        "Other_Property_Type": Other_Property_Type,
-        "Min_Lease_Number": Min_Lease_Number,
-        "Owner_ID": Owner_ID,
-        "PropDrafting": PropDrafting,
-        "Vacancy": Vacancy,
+        "name": name,
+        "relation": relation,
+        "showing": showing,
+        "location": location,
+        "description": description,
+        "link": link,
+        "color": color,
+        "range": range,
+        "duration": duration,
+        "buffer_after": buffer_after,
+        "buffer_before": buffer_before,
+        "confirmation_message": confirmation_message,
+        "time_zone": time_zone,
+        "time_scheduling": time_scheduling,
+        "time_scheduling_medida": time_scheduling_medida,
+        "max_event_per_day": max_event_per_day,
+        "prop_id": prop_id,
+        "owner_id": owner_id,
+        "datefrom": datefrom,
+        "dateto": dateto,
+        "durationmed": durationmed,
+        "aftermed": aftermed,
+        "beforemed": beforemed
       };
 }
 

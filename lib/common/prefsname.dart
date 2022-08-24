@@ -20,8 +20,8 @@ class PrefsName {
   static const String PropertyStep3 = "PropertyStep3";
   static const String PropertyActive = "PropertyActive";
 
-  static const String EventTypesEdit = "PropertyEdit";
-  static const String EventTypesID = "PropertyID";
+  static const String EventTypesEdit = "EventTypeEdit";
+  static const String EventTypesID = "EventTypeID";
   static const String EventTypesEditMode = "EventTypesEditMode";
   static const String EventTypesAgreeTC = "EventTypesAgreeTC";
   static const String EventTypesStep1 = "EventTypesStep1";

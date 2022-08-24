@@ -215,15 +215,336 @@ class UpdateMinimumLeasedurationList implements Action {
   }
 }
 
-class UpdateMinimumLeasedurationValue implements Action {
-  final SystemEnumDetails? minimumleasedurationValue;
+class Updatsunh1 implements Action {
+  final List<String> sunh1List;
 
-  UpdateMinimumLeasedurationValue(this.minimumleasedurationValue);
+  Updatsunh1(this.sunh1List);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sunh1: sunh1List);
+  }
+}
+
+class Updatsunh2 implements Action {
+  final List<String> sunh2List;
+
+  Updatsunh2(this.sunh2List);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sunh2: sunh2List);
+  }
+}
+
+class Updatmonh1 implements Action {
+  final List<String> monh1List;
+
+  Updatmonh1(this.monh1List);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(monh1: monh1List);
+  }
+}
+
+class Updatmonh2 implements Action {
+  final List<String> monh2List;
+
+  Updatmonh2(this.monh2List);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(monh2: monh2List);
+  }
+}
+
+class Updattueh1 implements Action {
+  final List<String> val;
+
+  Updattueh1(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(tueh1: val);
+  }
+}
+
+class Updattueh2 implements Action {
+  final List<String> val;
+
+  Updattueh2(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(tueh2: val);
+  }
+}
+
+class Updatwedh1 implements Action {
+  final List<String> val;
+
+  Updatwedh1(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(wedh1: val);
+  }
+}
+
+class Updatwedh2 implements Action {
+  final List<String> val;
+
+  Updatwedh2(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(wedh2: val);
+  }
+}
+
+class Updatthuh1 implements Action {
+  final List<String> val;
+
+  Updatthuh1(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(thuh1: val);
+  }
+}
+
+class Updatthuh2 implements Action {
+  final List<String> val;
+
+  Updatthuh2(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(thuh2: val);
+  }
+}
+
+class Updatfrih1 implements Action {
+  final List<String> val;
+
+  Updatfrih1(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(frih1: val);
+  }
+}
+
+class Updatfrih2 implements Action {
+  final List<String> val;
+
+  Updatfrih2(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(frih2: val);
+  }
+}
+
+class Updatsath1 implements Action {
+  final List<String> val;
+
+  Updatsath1(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sath1: val);
+  }
+}
+
+class Updatsath2 implements Action {
+  final List<String> val;
+
+  Updatsath2(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sath2: val);
+  }
+}
+
+class UpdateDurationp implements Action {
+  final String durationmed;
+
+  UpdateDurationp(this.durationmed);
 
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith
-        .eventTypesState(minimumleasedurationValue: minimumleasedurationValue);
+        .eventTypesState(EventTypesDurationPeriod: durationmed);
+  }
+}
+
+class UpdateTimezon implements Action {
+  final String timez;
+
+  UpdateTimezon(this.timez);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(timezone: timez);
+  }
+}
+
+class UpdateSun implements Action {
+  final bool upsun;
+
+  UpdateSun(this.upsun);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sun: upsun);
+  }
+}
+
+class UpdateMon implements Action {
+  final bool val;
+
+  UpdateMon(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(mon: val);
+  }
+}
+
+class Updatetue implements Action {
+  final bool val;
+
+  Updatetue(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(tue: val);
+  }
+}
+
+class Updatewed implements Action {
+  final bool val;
+
+  Updatewed(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(wed: val);
+  }
+}
+
+class Updatethu implements Action {
+  final bool val;
+
+  Updatethu(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(thu: val);
+  }
+}
+
+class Updatefri implements Action {
+  final bool val;
+
+  Updatefri(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(fri: val);
+  }
+}
+
+class Updatesat implements Action {
+  final bool val;
+
+  Updatesat(this.val);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(sat: val);
+  }
+}
+
+class UpdateBeforep implements Action {
+  final String durationmed;
+
+  UpdateBeforep(this.durationmed);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesBeforePeriod: durationmed);
+  }
+}
+
+class UpdateDisplaytz implements Action {
+  final int displayyt;
+
+  UpdateDisplaytz(this.displayyt);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(displaytz: displayyt);
+  }
+}
+
+class UpdateAfterp implements Action {
+  final String durationmed;
+
+  UpdateAfterp(this.durationmed);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(EventTypesAfterPeriod: durationmed);
+  }
+}
+
+class UpdateAfter implements Action {
+  final int durationmed;
+
+  UpdateAfter(this.durationmed);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(EventTypesAfter: durationmed);
+  }
+}
+
+class Updatetimescheduling implements Action {
+  final int time;
+
+  Updatetimescheduling(this.time);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(timescheduling: time);
+  }
+}
+
+class Updatetimeschedulingmed implements Action {
+  final String time;
+
+  Updatetimeschedulingmed(this.time);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(timeschedulingmed: time);
+  }
+}
+
+class Updatemaximum implements Action {
+  final int max;
+
+  Updatemaximum(this.max);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(maximum: max);
   }
 }
 
@@ -247,6 +568,28 @@ class UpdateDateofavailable implements Action {
   @override
   AppState updateState(AppState appState) {
     return appState.copyWith.eventTypesState(dateofavailable: dateofavailable);
+  }
+}
+
+class UpdateDateto implements Action {
+  final DateTime? dateofavailable;
+
+  UpdateDateto(this.dateofavailable);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(dateto: dateofavailable);
+  }
+}
+
+class UpdateDatefrom implements Action {
+  final DateTime? dateofavailable;
+
+  UpdateDatefrom(this.dateofavailable);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.eventTypesState(datefrom: dateofavailable);
   }
 }
 

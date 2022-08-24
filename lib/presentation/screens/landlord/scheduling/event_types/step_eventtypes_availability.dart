@@ -19,7 +19,6 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_feature_act
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_specification_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
-import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -67,7 +66,6 @@ class _StepEventTypesAvailabilityState
   // bool firsttime = true;
   bool change = false;
 
-  @override
   void initState() {
     Prefs.init();
     filldata();
@@ -104,28 +102,27 @@ class _StepEventTypesAvailabilityState
 
   void initilize() {
     if (_store.state!.eventTypesSummeryState != null) {
-      EventTypesSummeryState eventtypesSummeryState =
-          _store.state!.eventTypesSummeryState;
+      EventTypesState eventTypesState = _store.state!.eventTypesState;
 
-      _store.dispatch(
-          UpdateEventTypesBedrooms(eventtypesSummeryState.EventTypesBedrooms));
-      _store.dispatch(UpdateEventTypesBathrooms(
-          eventtypesSummeryState.EventTypesBathrooms));
-      _store.dispatch(UpdateEventTypesSizeinsquarefeet(
-          eventtypesSummeryState.EventTypesSizeinsquarefeet));
-      _store.dispatch(UpdateEventTypesMaxoccupancy(
-          eventtypesSummeryState.EventTypesMaxoccupancy));
-      _store.dispatch(
-          UpdateFurnishingValue(eventtypesSummeryState.furnishingValue));
-      _store.dispatch(UpdateOtherPartialFurniture(
-          eventtypesSummeryState.Other_Partial_Furniture));
+      // _store.dispatch(
+      //     UpdateEventTypesBedrooms(eventtypesSummeryState.EventTypesBedrooms));
+      // _store.dispatch(UpdateEventTypesBathrooms(
+      //     eventtypesSummeryState.EventTypesBathrooms));
+      // _store.dispatch(UpdateEventTypesSizeinsquarefeet(
+      //     eventtypesSummeryState.EventTypesSizeinsquarefeet));
+      // _store.dispatch(UpdateEventTypesMaxoccupancy(
+      //     eventtypesSummeryState.EventTypesMaxoccupancy));
+      // _store.dispatch(
+      //     UpdateFurnishingValue(eventtypesSummeryState.furnishingValue));
+      // _store.dispatch(UpdateOtherPartialFurniture(
+      //     eventtypesSummeryState.Other_Partial_Furniture));
 
-      List<SystemEnumDetails> secondList = eventtypesSummeryState
-          .restrictionlist
-          .map((item) => new SystemEnumDetails.clone(item))
-          .toList();
+      // List<SystemEnumDetails> secondList = eventtypesSummeryState
+      //     .restrictionlist
+      //     .map((item) => new SystemEnumDetails.clone(item))
+      //     .toList();
 
-      _store.dispatch(UpdateRestrictionlist(secondList));
+      // _store.dispatch(UpdateRestrictionlist(secondList));
     }
   }
 
@@ -141,17 +138,6 @@ class _StepEventTypesAvailabilityState
           map: (state) => state.eventTypesState,
           where: notIdentical,
           builder: (eventtypesState) {
-            if (eventtypesState!.EventTypesSizeinsquarefeet != null &&
-                eventtypesState.EventTypesSizeinsquarefeet.isNotEmpty) {
-              String valuerat = formatNumber(
-                  eventtypesState.EventTypesSizeinsquarefeet.replaceAll(
-                      ',', ''));
-              controllerSize.value = TextEditingValue(
-                text: valuerat,
-                selection: TextSelection.collapsed(offset: valuerat.length),
-              );
-            }
-
             return SingleChildScrollView(
               child: Container(
                 child: FocusScope(
@@ -167,7 +153,8 @@ class _StepEventTypesAvailabilityState
                         ),
                         const SizedBox(width: 5.0),
                         Text(
-                          'Showing - 867 Hamilton St.', // este sale de la pantalla anterior: Event Type Name
+                          eventtypesState!
+                              .EventTypesName, // este sale de la pantalla anterior: Event Type Name
                           style: MyStyles.Bold(20, myColor.Circle_main),
                         ),
                       ]),
@@ -192,40 +179,36 @@ class _StepEventTypesAvailabilityState
                                 const SizedBox(height: 10.0),
                                 Container(
                                   height: 32,
-                                  child: DropdownSearch<SystemEnumDetails>(
-                                    mode: Mode.MENU,
+                                  child: DropdownSearch<String>(
                                     key: UniqueKey(),
+                                    mode: Mode.MENU,
                                     errorcolor: myColor.errorcolor,
-                                    isError:
-                                        eventtypesState!.error_eventtypestype,
+                                    isError: eventtypesState
+                                        .error_minimumleaseduration,
                                     focuscolor: myColor.blue,
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
-                                    items: eventtypesState.eventtypestypelist,
-                                    defultHeight: eventtypesState
-                                                    .eventtypestypelist.length *
-                                                35 >
-                                            250
-                                        ? 250
-                                        : eventtypesState
-                                                .eventtypestypelist.length *
-                                            35,
+                                    items: [
+                                      "Pacific Time",
+                                      "Mountain Time",
+                                      "Eastern Time",
+                                      "Central Time"
+                                    ],
+                                    defultHeight: 80,
                                     textstyle:
                                         MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (SystemEnumDetails? u) =>
-                                        u != null ? u.displayValue : "",
-                                    hint: GlobleString.ET_Select_Template,
-                                    selectedItem: eventtypesState
-                                                .eventtypestypeValue !=
-                                            null
-                                        ? eventtypesState.eventtypestypeValue
-                                        : null,
+                                    hint: "Select",
+                                    showSearchBox: false,
+                                    selectedItem: eventtypesState.timezone,
+                                    isFilteredOnline: true,
                                     onChanged: (value) {
-                                      /*_changeData();
+                                      _changeData();
                                       AddEditEventTypes.isValueUpdate = true;
-                                      if (value!.EnumDetailID != 6) {_store.dispatch(UpdateEventTypesTypeOtherValue(""));}
-                                      _store.dispatch(UpdateProperTytypeValue(value));
-                                      _store.dispatch(UpdateErrorEventTypestype(false));*/
+
+                                      _store.dispatch(UpdateTimezon(value!));
+
+                                      // _store.dispatch(
+                                      //     UpdateErrorMinimumleaseduration(false));
                                     },
                                   ),
                                 ),
@@ -251,11 +234,12 @@ class _StepEventTypesAvailabilityState
                                     color: myColor.pf_incudevalue,
                                     alignment: Alignment.center,
                                     child: Radio(
-                                      value: "1",
+                                      value: 0,
                                       //autofocus: Index == 0 ? true :false,
-                                      groupValue: 1,
+                                      groupValue: eventtypesState.displaytz,
                                       activeColor: myColor.Circle_main,
                                       onChanged: (value) {
+                                        _store.dispatch(UpdateDisplaytz(0));
                                         /*AddEditProperty.isValueUpdate = true;
                                             widget._callbackradio(Index, value.toString());
                                             widget.listdata[Index].value = value.toString();
@@ -276,11 +260,12 @@ class _StepEventTypesAvailabilityState
                                     color: myColor.pf_incudevalue,
                                     alignment: Alignment.center,
                                     child: Radio(
-                                      value: "1",
+                                      value: 1,
                                       //autofocus: Index == 0 ? true :false,
-                                      groupValue: 1,
+                                      groupValue: eventtypesState.displaytz,
                                       activeColor: myColor.Circle_main,
                                       onChanged: (value) {
+                                        _store.dispatch(UpdateDisplaytz(1));
                                         /*AddEditProperty.isValueUpdate = true;
                                             widget._callbackradio(Index, value.toString());
                                             widget.listdata[Index].value = value.toString();
@@ -319,11 +304,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .sun, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(UpdateSun(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -335,15 +320,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Container(
-                                        padding:
-                                            const EdgeInsets.only(top: 7.0),
-                                        child: Text(GlobleString.Unavailable,
-                                            style: MyStyles.Light(
-                                                16, myColor.TA_Border)),
-                                      ),
+                                      (eventtypesState.sun)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .sunh1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .sunh1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .sunh1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatsunh1(
+                                                                        eventtypesState
+                                                                            .sunh1));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .sunh2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .sunh2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatsunh2(
+                                                                        eventtypesState
+                                                                            .sunh2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .sunh1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .sunh1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .sunh2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatsunh1(
+                                                                        eventtypesState
+                                                                            .sunh1));
+                                                                _store.dispatch(
+                                                                    Updatsunh2(
+                                                                        eventtypesState
+                                                                            .sunh2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.sunh1.add("");
+                                            eventtypesState.sunh2.add("");
+                                            _store.dispatch(Updatsunh1(
+                                                eventtypesState.sunh1));
+                                            _store.dispatch(Updatsunh2(
+                                                eventtypesState.sunh2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -359,11 +559,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .mon, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(UpdateMon(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -375,133 +575,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.mon)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .monh1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .monh1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .monh1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatmonh1(
+                                                                        eventtypesState
+                                                                            .monh1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .monh2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .monh2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatmonh2(
+                                                                        eventtypesState
+                                                                            .monh2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .monh1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .monh1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .monh2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatmonh1(
+                                                                        eventtypesState
+                                                                            .monh1));
+                                                                _store.dispatch(
+                                                                    Updatmonh2(
+                                                                        eventtypesState
+                                                                            .monh2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.monh1.add("");
+                                            eventtypesState.monh2.add("");
+                                            _store.dispatch(Updatmonh1(
+                                                eventtypesState.monh1));
+                                            _store.dispatch(Updatmonh2(
+                                                eventtypesState.monh2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -517,11 +814,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .tue, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(Updatetue(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -533,133 +830,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.tue)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .tueh1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .tueh1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .tueh1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updattueh1(
+                                                                        eventtypesState
+                                                                            .tueh1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .tueh2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .tueh2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updattueh2(
+                                                                        eventtypesState
+                                                                            .tueh2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .tueh1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .tueh1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .tueh2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updattueh1(
+                                                                        eventtypesState
+                                                                            .tueh1));
+                                                                _store.dispatch(
+                                                                    Updattueh2(
+                                                                        eventtypesState
+                                                                            .tueh2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.tueh1.add("");
+                                            eventtypesState.tueh2.add("");
+                                            _store.dispatch(Updattueh1(
+                                                eventtypesState.tueh1));
+                                            _store.dispatch(Updattueh2(
+                                                eventtypesState.tueh2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -675,11 +1069,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .wed, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(Updatewed(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -691,133 +1085,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.wed)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .wedh1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .wedh1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .wedh1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatwedh1(
+                                                                        eventtypesState
+                                                                            .wedh1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .wedh2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .wedh2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatwedh2(
+                                                                        eventtypesState
+                                                                            .wedh2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .wedh1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .wedh1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .wedh2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatwedh1(
+                                                                        eventtypesState
+                                                                            .wedh1));
+                                                                _store.dispatch(
+                                                                    Updatwedh2(
+                                                                        eventtypesState
+                                                                            .wedh2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.wedh1.add("");
+                                            eventtypesState.wedh2.add("");
+                                            _store.dispatch(Updatwedh1(
+                                                eventtypesState.wedh1));
+                                            _store.dispatch(Updatwedh2(
+                                                eventtypesState.wedh2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -833,11 +1324,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .thu, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(Updatethu(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -849,133 +1340,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.thu)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .thuh1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .thuh1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .thuh1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatthuh1(
+                                                                        eventtypesState
+                                                                            .thuh1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .thuh2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .thuh2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatthuh2(
+                                                                        eventtypesState
+                                                                            .thuh2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .thuh1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .thuh1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .thuh2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatthuh1(
+                                                                        eventtypesState
+                                                                            .thuh1));
+                                                                _store.dispatch(
+                                                                    Updatthuh2(
+                                                                        eventtypesState
+                                                                            .thuh2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.thuh1.add("");
+                                            eventtypesState.thuh2.add("");
+                                            _store.dispatch(Updatthuh1(
+                                                eventtypesState.thuh1));
+                                            _store.dispatch(Updatthuh2(
+                                                eventtypesState.thuh2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -991,11 +1579,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .fri, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(Updatefri(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -1007,133 +1595,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.fri)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .frih1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .frih1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .frih1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatfrih1(
+                                                                        eventtypesState
+                                                                            .frih1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .frih2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .frih2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
+
+                                                                _store.dispatch(
+                                                                    Updatfrih2(
+                                                                        eventtypesState
+                                                                            .frih2));
+
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .frih1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .frih1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .frih2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatfrih1(
+                                                                        eventtypesState
+                                                                            .frih1));
+                                                                _store.dispatch(
+                                                                    Updatfrih2(
+                                                                        eventtypesState
+                                                                            .frih2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.frih1.add("");
+                                            eventtypesState.frih2.add("");
+                                            _store.dispatch(Updatfrih1(
+                                                eventtypesState.frih1));
+                                            _store.dispatch(Updatfrih2(
+                                                eventtypesState.frih2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -1149,11 +1834,11 @@ class _StepEventTypesAvailabilityState
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value:
-                                            false, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState
+                                            .sat, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          //_store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
-                                          //_changeData();
+                                          _store.dispatch(Updatesat(value!));
+                                          _changeData();
                                         },
                                       ),
                                       const SizedBox(width: 5.0),
@@ -1165,255 +1850,230 @@ class _StepEventTypesAvailabilityState
                                               style: MyStyles.Bold(
                                                   16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                      (eventtypesState.sat)
+                                          ? Column(
+                                              children: [
+                                                for (int i = 0;
+                                                    i <
+                                                        eventtypesState
+                                                            .sath1.length;
+                                                    i++)
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .sath1[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .sath1[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatsath1(
+                                                                        eventtypesState
+                                                                            .sath1));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 5.0),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Icon(Icons.remove),
+                                                          const SizedBox(
+                                                              width: 4.0),
+                                                          Container(
+                                                            width: 130,
+                                                            height: 34,
+                                                            child:
+                                                                DropdownSearch<
+                                                                    String>(
+                                                              key: UniqueKey(),
+                                                              mode: Mode.MENU,
+                                                              errorcolor: myColor
+                                                                  .errorcolor,
+                                                              isError:
+                                                                  eventtypesState
+                                                                      .error_minimumleaseduration,
+                                                              focuscolor:
+                                                                  myColor.blue,
+                                                              focusWidth: 2,
+                                                              popupBackgroundColor:
+                                                                  myColor.white,
+                                                              items: [
+                                                                "01:00:00",
+                                                                "02:00:00",
+                                                                "03:00:00",
+                                                                "04:00:00",
+                                                                "05:00:00",
+                                                                "06:00:00",
+                                                                "07:00:00",
+                                                                "08:00:00",
+                                                                "09:00:00",
+                                                                "10:00:00",
+                                                                "11:00:00",
+                                                                "12:00:00",
+                                                                "13:00:00",
+                                                                "14:00:00",
+                                                                "15:00:00",
+                                                                "16:00:00",
+                                                                "17:00:00",
+                                                                "18:00:00",
+                                                                "19:00:00",
+                                                                "20:00:00",
+                                                                "21:00:00",
+                                                                "22:00:00",
+                                                                "23:00:00"
+                                                              ],
+                                                              textstyle: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              hint: "Select",
+                                                              showSearchBox:
+                                                                  false,
+                                                              selectedItem:
+                                                                  eventtypesState
+                                                                      .sath2[i],
+                                                              isFilteredOnline:
+                                                                  true,
+                                                              onChanged:
+                                                                  (value) {
+                                                                eventtypesState
+                                                                        .sath2[
+                                                                    i] = value!;
+                                                                _changeData();
+                                                                AddEditEventTypes
+                                                                        .isValueUpdate =
+                                                                    true;
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 4.0),
-                                              Icon(Icons.remove),
-                                              const SizedBox(width: 4.0),
-                                              Container(
-                                                width: 100,
-                                                height: 32,
-                                                child: TextFormField(
-                                                  initialValue: eventtypesState
-                                                      .minimumleasedurationnumber,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Regular(
-                                                      14, myColor.text_color),
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  inputFormatters: [
-                                                    MaskedInputFormatter(
-                                                        "0000000000")
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                      //border: InputBorder.none,
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.blue,
-                                                            width: 2),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: eventtypesState
-                                                                    .error_minimumleasedurationnumber
-                                                                ? myColor
-                                                                    .errorcolor
-                                                                : myColor.gray,
-                                                            width: 1.0),
-                                                      ),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(12),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  onChanged: (value) {
-                                                    _changeData();
-                                                    AddEditEventTypes
-                                                        .isValueUpdate = true;
+                                                                _store.dispatch(
+                                                                    Updatsath2(
+                                                                        eventtypesState
+                                                                            .sath2));
 
-                                                    _store.dispatch(
-                                                        UpdateMinimumleasedurationNumber(
-                                                            value));
-                                                    _store.dispatch(
-                                                        UpdateErrorMinimumleasedurationnumber(
-                                                            false));
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10.0),
-                                              Icon(Icons.delete_outline),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                                                // _store.dispatch(
+                                                                //     UpdateErrorMinimumleaseduration(false));
+                                                              },
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 10.0),
+                                                          if (eventtypesState
+                                                                  .sath1
+                                                                  .length >
+                                                              1)
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                eventtypesState
+                                                                    .sath1
+                                                                    .removeAt(
+                                                                        i);
+                                                                eventtypesState
+                                                                    .sath2
+                                                                    .removeAt(
+                                                                        i);
+                                                                _store.dispatch(
+                                                                    Updatsath1(
+                                                                        eventtypesState
+                                                                            .sath1));
+                                                                _store.dispatch(
+                                                                    Updatsath2(
+                                                                        eventtypesState
+                                                                            .sath2));
+                                                              },
+                                                              child: Icon(Icons
+                                                                  .delete_outline),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 5.0),
+                                                    ],
+                                                  ),
+                                              ],
+                                            )
+                                          : Container(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7.0),
+                                              child: Text(
+                                                  GlobleString.Unavailable,
+                                                  style: MyStyles.Light(
+                                                      16, myColor.TA_Border)),
+                                            ),
                                       Expanded(child: Container()),
-                                      Icon(Icons.add),
+                                      GestureDetector(
+                                          child: Icon(Icons.add),
+                                          onTap: () {
+                                            eventtypesState.sath1.add("");
+                                            eventtypesState.sath2.add("");
+                                            _store.dispatch(Updatsath1(
+                                                eventtypesState.sath1));
+                                            _store.dispatch(Updatsath2(
+                                                eventtypesState.sath2));
+                                          }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
                                       const SizedBox(width: 15.0),
@@ -1479,7 +2139,8 @@ class _StepEventTypesAvailabilityState
                                       height: 32,
                                       child: TextFormField(
                                         initialValue: eventtypesState
-                                            .minimumleasedurationnumber,
+                                            .timescheduling
+                                            .toString(),
                                         textAlign: TextAlign.start,
                                         style: MyStyles.Regular(
                                             14, myColor.text_color),
@@ -1514,12 +2175,8 @@ class _StepEventTypesAvailabilityState
                                           AddEditEventTypes.isValueUpdate =
                                               true;
 
-                                          _store.dispatch(
-                                              UpdateMinimumleasedurationNumber(
-                                                  value));
-                                          _store.dispatch(
-                                              UpdateErrorMinimumleasedurationnumber(
-                                                  false));
+                                          _store.dispatch(Updatetimescheduling(
+                                              int.parse(value)));
                                         },
                                       ),
                                     ),
@@ -1528,7 +2185,7 @@ class _StepEventTypesAvailabilityState
                                       width: 150,
                                       height: 32,
                                       // ignore: missing_required_param
-                                      child: DropdownSearch<SystemEnumDetails>(
+                                      child: DropdownSearch<String>(
                                         key: UniqueKey(),
                                         mode: Mode.MENU,
                                         errorcolor: myColor.errorcolor,
@@ -1537,26 +2194,14 @@ class _StepEventTypesAvailabilityState
                                         focuscolor: myColor.blue,
                                         focusWidth: 2,
                                         popupBackgroundColor: myColor.white,
-                                        items: eventtypesState
-                                            .minimumleasedurationlist,
-                                        defultHeight: double.parse(
-                                            (eventtypesState
-                                                        .minimumleasedurationlist
-                                                        .length *
-                                                    35)
-                                                .toString()),
+                                        items: ["minutes", "hours"],
+                                        defultHeight: 80,
                                         textstyle: MyStyles.Medium(
                                             14, myColor.text_color),
-                                        itemAsString: (SystemEnumDetails? u) =>
-                                            u != null ? u.displayValue : "",
-                                        hint: "Select Period",
+                                        hint: "Select",
                                         showSearchBox: false,
-                                        selectedItem: eventtypesState
-                                                    .minimumleasedurationValue !=
-                                                null
-                                            ? eventtypesState
-                                                .minimumleasedurationValue
-                                            : null,
+                                        selectedItem:
+                                            eventtypesState.timeschedulingmed,
                                         isFilteredOnline: true,
                                         onChanged: (value) {
                                           _changeData();
@@ -1564,12 +2209,10 @@ class _StepEventTypesAvailabilityState
                                               true;
 
                                           _store.dispatch(
-                                              UpdateMinimumLeasedurationValue(
-                                                  value!));
+                                              Updatetimeschedulingmed(value!));
 
-                                          _store.dispatch(
-                                              UpdateErrorMinimumleaseduration(
-                                                  false));
+                                          // _store.dispatch(
+                                          //     UpdateErrorMinimumleaseduration(false));
                                         },
                                       ),
                                     ),
@@ -1600,8 +2243,8 @@ class _StepEventTypesAvailabilityState
                                 width: 100,
                                 height: 32,
                                 child: TextFormField(
-                                  initialValue: eventtypesState
-                                      .minimumleasedurationnumber,
+                                  initialValue:
+                                      eventtypesState.maximum.toString(),
                                   textAlign: TextAlign.start,
                                   style:
                                       MyStyles.Regular(14, myColor.text_color),
@@ -1636,11 +2279,7 @@ class _StepEventTypesAvailabilityState
                                     AddEditEventTypes.isValueUpdate = true;
 
                                     _store.dispatch(
-                                        UpdateMinimumleasedurationNumber(
-                                            value));
-                                    _store.dispatch(
-                                        UpdateErrorMinimumleasedurationnumber(
-                                            false));
+                                        Updatemaximum(int.parse(value)));
                                   },
                                 ),
                               ),

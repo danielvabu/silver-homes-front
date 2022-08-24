@@ -347,7 +347,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     _store.dispatch(UpdateEventTypesRentAmount(""));
     _store.dispatch(UpdateRentPaymentFrequencyValue(null));
     _store.dispatch(UpdateLeaseTypeValue(null));
-    _store.dispatch(UpdateMinimumLeasedurationValue(null));
+    // _store.dispatch(UpdateMinimumLeasedurationValue(null));
     _store.dispatch(UpdateMinimumleasedurationNumber(""));
 
     _store.dispatch(UpdateEventTypesBedrooms(""));

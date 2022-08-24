@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -103,42 +104,42 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       EventTypesSummeryState eventtypesSummeryState =
           _store.state!.eventTypesSummeryState;
 
-      _store.dispatch(
-          UpdateProperTytypeValue(eventtypesSummeryState.eventtypestypeValue));
-      _store.dispatch(UpdateEventTypesTypeOtherValue(
-          eventtypesSummeryState.eventtypestypeOtherValue));
+      // _store.dispatch(
+      //     UpdateProperTytypeValue(eventtypesSummeryState.eventtypestypeValue));
+      // _store.dispatch(UpdateEventTypesTypeOtherValue(
+      //     eventtypesSummeryState.eventtypestypeOtherValue));
 
-      _store.dispatch(
-          UpdateDateofavailable(eventtypesSummeryState.dateofavailable));
-      _store.dispatch(
-          UpdateRentalSpaceValue(eventtypesSummeryState.rentalspaceValue));
-      _store.dispatch(
-          UpdateEventTypesName(eventtypesSummeryState.EventTypesName));
-      _store.dispatch(
-          UpdateEventTypesAddress(eventtypesSummeryState.EventTypesAddress));
-      _store.dispatch(UpdateEventTypesDescription(
-          eventtypesSummeryState.EventTypesDescription));
-      _store.dispatch(UpdateSuiteunit(eventtypesSummeryState.Suiteunit));
-      _store.dispatch(UpdateBuildingname(eventtypesSummeryState.Buildingname));
-      _store.dispatch(UpdateEventTypesCity(eventtypesSummeryState.City));
-      _store.dispatch(
-          UpdateEventTypesCountryCode(eventtypesSummeryState.CountryCode));
-      _store.dispatch(
-          UpdateEventTypesCountryName(eventtypesSummeryState.CountryName));
-      _store
-          .dispatch(UpdateEventTypesProvince(eventtypesSummeryState.Province));
-      _store.dispatch(
-          UpdateEventTypesPostalcode(eventtypesSummeryState.Postalcode));
-      _store.dispatch(
-          UpdateEventTypesRentAmount(eventtypesSummeryState.RentAmount));
-      _store.dispatch(UpdateRentPaymentFrequencyValue(
-          eventtypesSummeryState.rentpaymentFrequencyValue));
-      _store.dispatch(
-          UpdateLeaseTypeValue(eventtypesSummeryState.leasetypeValue));
-      _store.dispatch(UpdateMinimumLeasedurationValue(
-          eventtypesSummeryState.minimumleasedurationValue));
-      _store.dispatch(UpdateMinimumleasedurationNumber(
-          eventtypesSummeryState.minimumleasedurationnumber));
+      // _store.dispatch(
+      //     UpdateDateofavailable(eventtypesSummeryState.dateofavailable));
+      // _store.dispatch(
+      //     UpdateRentalSpaceValue(eventtypesSummeryState.rentalspaceValue));
+      // _store.dispatch(
+      //     UpdateEventTypesName(eventtypesSummeryState.EventTypesName));
+      // _store.dispatch(
+      //     UpdateEventTypesAddress(eventtypesSummeryState.EventTypesAddress));
+      // _store.dispatch(UpdateEventTypesDescription(
+      //     eventtypesSummeryState.EventTypesDescription));
+      // _store.dispatch(UpdateSuiteunit(eventtypesSummeryState.Suiteunit));
+      // _store.dispatch(UpdateBuildingname(eventtypesSummeryState.Buildingname));
+      // _store.dispatch(UpdateEventTypesCity(eventtypesSummeryState.City));
+      // _store.dispatch(
+      //     UpdateEventTypesCountryCode(eventtypesSummeryState.CountryCode));
+      // _store.dispatch(
+      //     UpdateEventTypesCountryName(eventtypesSummeryState.CountryName));
+      // _store
+      //     .dispatch(UpdateEventTypesProvince(eventtypesSummeryState.Province));
+      // _store.dispatch(
+      //     UpdateEventTypesPostalcode(eventtypesSummeryState.Postalcode));
+      // _store.dispatch(
+      //     UpdateEventTypesRentAmount(eventtypesSummeryState.RentAmount));
+      // _store.dispatch(UpdateRentPaymentFrequencyValue(
+      //     eventtypesSummeryState.rentpaymentFrequencyValue));
+      // _store.dispatch(
+      //     UpdateLeaseTypeValue(eventtypesSummeryState.leasetypeValue));
+      // _store.dispatch(UpdateMinimumLeasedurationValue(
+      //     eventtypesSummeryState.minimumleasedurationValue));
+      // _store.dispatch(UpdateMinimumleasedurationNumber(
+      //     eventtypesSummeryState.minimumleasedurationnumber));
     }
   }
 
@@ -185,7 +186,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     _store.dispatch(UpdateMinimumLeasedurationList(minimumleasedurationlist));
   }
 
-  Future<void> _selectDate(BuildContext context, eventtypesState) async {
+  Future<void> _selectDate1(BuildContext context, eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -202,9 +203,33 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       },
     );
 
-    if (pickedDate != null && pickedDate != eventtypesState.dateofavailable) {
+    if (pickedDate != null && pickedDate != eventtypesState.dateto) {
       AddEditEventTypes.isValueUpdate = true;
-      _store.dispatch(UpdateDateofavailable(pickedDate));
+      _store.dispatch(UpdateDateto(pickedDate));
+      _store.dispatch(UpdateErrorDateofavailable(false));
+    }
+  }
+
+  Future<void> _selectDate2(BuildContext context, eventtypesState) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2200),
+      builder: (BuildContext? context, Widget? child) {
+        return Theme(
+          data: new ThemeData(
+            primarySwatch: MaterialColor(0xFF010B32, Helper.color),
+            accentColor: myColor.Circle_main,
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (pickedDate != null && pickedDate != eventtypesState.datefrom) {
+      AddEditEventTypes.isValueUpdate = true;
+      _store.dispatch(UpdateDatefrom(pickedDate));
       _store.dispatch(UpdateErrorDateofavailable(false));
     }
   }
@@ -1117,7 +1142,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           Container(
                                             child: TextButton(
                                               onPressed: () {
-                                                //_selectDate(context, tfPersonalState);
+                                                _selectDate1(
+                                                    context, eventtypesState);
                                               },
                                               child: Container(
                                                 width: 220,
@@ -1140,8 +1166,16 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                             EdgeInsets.only(
                                                                 left: 8),
                                                         child: Text(
-                                                          'Aca',
-                                                          //tfPersonalState.dateofbirth == null ? "" : new DateFormat("dd-MMM-yyyy").format(tfPersonalState.dateofbirth!).toString(),
+                                                          eventtypesState
+                                                                      .dateto ==
+                                                                  null
+                                                              ? ""
+                                                              : new DateFormat(
+                                                                      "dd-MMM-yyyy")
+                                                                  .format(
+                                                                      eventtypesState
+                                                                          .dateto!)
+                                                                  .toString(),
                                                           style: MyStyles.Medium(
                                                               13,
                                                               myColor
@@ -1180,7 +1214,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           Container(
                                             child: TextButton(
                                               onPressed: () {
-                                                //_selectDate(context, tfPersonalState);
+                                                _selectDate2(
+                                                    context, eventtypesState);
                                               },
                                               child: Container(
                                                 width: 220,
@@ -1203,8 +1238,15 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                             EdgeInsets.only(
                                                                 left: 8),
                                                         child: Text(
-                                                          'Aca',
-                                                          //tfPersonalState.dateofbirth == null ? "" : new DateFormat("dd-MMM-yyyy").format(tfPersonalState.dateofbirth!).toString(),
+                                                          eventtypesState
+                                                                      .datefrom ==
+                                                                  null
+                                                              ? ""
+                                                              : new DateFormat(
+                                                                      "dd-MMM-yyyy")
+                                                                  .format(eventtypesState
+                                                                      .datefrom!)
+                                                                  .toString(),
                                                           style: MyStyles.Medium(
                                                               13,
                                                               myColor
@@ -1289,8 +1331,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               width: 100,
                               height: 32,
                               child: TextFormField(
-                                initialValue: eventtypesState.EventTypesDuration
-                                    .toString(),
+                                initialValue:
+                                    (eventtypesState.EventTypesDuration == 0)
+                                        ? ""
+                                        : eventtypesState.EventTypesDuration
+                                            .toString(),
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 keyboardType: TextInputType.phone,
@@ -1333,7 +1378,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               width: 150,
                               height: 32,
                               // ignore: missing_required_param
-                              child: DropdownSearch<SystemEnumDetails>(
+                              child: DropdownSearch<String>(
                                 key: UniqueKey(),
                                 mode: Mode.MENU,
                                 errorcolor: myColor.errorcolor,
@@ -1342,32 +1387,23 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 focuscolor: myColor.blue,
                                 focusWidth: 2,
                                 popupBackgroundColor: myColor.white,
-                                items: eventtypesState.minimumleasedurationlist,
-                                defultHeight: double.parse((eventtypesState
-                                            .minimumleasedurationlist.length *
-                                        35)
-                                    .toString()),
+                                items: ["minutes", "hours"],
+                                defultHeight: 80,
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
-                                itemAsString: (SystemEnumDetails? u) =>
-                                    u != null ? u.displayValue : "",
-                                hint: "minutes",
+                                hint: "Select",
                                 showSearchBox: false,
-                                selectedItem: eventtypesState
-                                            .minimumleasedurationValue !=
-                                        null
-                                    ? eventtypesState.minimumleasedurationValue
-                                    : null,
+                                selectedItem:
+                                    eventtypesState.EventTypesDurationPeriod,
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  _store.dispatch(
-                                      UpdateMinimumLeasedurationValue(value!));
+                                  _store.dispatch(UpdateDurationp(value!));
 
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleaseduration(false));
+                                  // _store.dispatch(
+                                  //     UpdateErrorMinimumleaseduration(false));
                                 },
                               ),
                             ),
@@ -1421,7 +1457,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               height: 32,
                               child: TextFormField(
                                 initialValue:
-                                    eventtypesState.EventTypesBefore.toString(),
+                                    (eventtypesState.EventTypesBefore == 0)
+                                        ? ""
+                                        : eventtypesState.EventTypesBefore
+                                            .toString(),
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 keyboardType: TextInputType.phone,
@@ -1454,8 +1493,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  // _store
-                                  //     .dispatch(UpdateBefore(int.parse(value)));
+                                  _store
+                                      .dispatch(UpdateBefore(int.parse(value)));
                                 },
                               ),
                             ),
@@ -1464,7 +1503,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               width: 150,
                               height: 32,
                               // ignore: missing_required_param
-                              child: DropdownSearch<SystemEnumDetails>(
+                              child: DropdownSearch<String>(
                                 key: UniqueKey(),
                                 mode: Mode.MENU,
                                 errorcolor: myColor.errorcolor,
@@ -1473,32 +1512,20 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 focuscolor: myColor.blue,
                                 focusWidth: 2,
                                 popupBackgroundColor: myColor.white,
-                                items: eventtypesState.minimumleasedurationlist,
-                                defultHeight: double.parse((eventtypesState
-                                            .minimumleasedurationlist.length *
-                                        35)
-                                    .toString()),
+                                items: const ["minutes", "hours"],
+                                defultHeight: 80,
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
-                                itemAsString: (SystemEnumDetails? u) =>
-                                    u != null ? u.displayValue : "",
-                                hint: "minutes",
+                                hint: "Select",
                                 showSearchBox: false,
-                                selectedItem: eventtypesState
-                                            .minimumleasedurationValue !=
-                                        null
-                                    ? eventtypesState.minimumleasedurationValue
-                                    : null,
+                                selectedItem:
+                                    eventtypesState.EventTypesBeforePeriod,
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  _store.dispatch(
-                                      UpdateMinimumLeasedurationValue(value!));
-
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleaseduration(false));
+                                  _store.dispatch(UpdateBeforep(value!));
                                 },
                               ),
                             ),
@@ -1521,7 +1548,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               height: 32,
                               child: TextFormField(
                                 initialValue:
-                                    eventtypesState.minimumleasedurationnumber,
+                                    (eventtypesState.EventTypesAfter == 0)
+                                        ? ""
+                                        : eventtypesState.EventTypesAfter
+                                            .toString(),
                                 textAlign: TextAlign.start,
                                 style: MyStyles.Regular(14, myColor.text_color),
                                 keyboardType: TextInputType.phone,
@@ -1554,11 +1584,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  _store.dispatch(
-                                      UpdateMinimumleasedurationNumber(value));
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleasedurationnumber(
-                                          false));
+                                  _store
+                                      .dispatch(UpdateAfter(int.parse(value)));
                                 },
                               ),
                             ),
@@ -1567,7 +1594,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               width: 150,
                               height: 32,
                               // ignore: missing_required_param
-                              child: DropdownSearch<SystemEnumDetails>(
+                              child: DropdownSearch<String>(
                                 key: UniqueKey(),
                                 mode: Mode.MENU,
                                 errorcolor: myColor.errorcolor,
@@ -1576,32 +1603,20 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 focuscolor: myColor.blue,
                                 focusWidth: 2,
                                 popupBackgroundColor: myColor.white,
-                                items: eventtypesState.minimumleasedurationlist,
-                                defultHeight: double.parse((eventtypesState
-                                            .minimumleasedurationlist.length *
-                                        35)
-                                    .toString()),
+                                items: ["minutes", "hours"],
+                                defultHeight: 80,
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
-                                itemAsString: (SystemEnumDetails? u) =>
-                                    u != null ? u.displayValue : "",
-                                hint: "minutes",
+                                hint: "Select",
                                 showSearchBox: false,
-                                selectedItem: eventtypesState
-                                            .minimumleasedurationValue !=
-                                        null
-                                    ? eventtypesState.minimumleasedurationValue
-                                    : null,
+                                selectedItem:
+                                    eventtypesState.EventTypesAfterPeriod,
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
                                   AddEditEventTypes.isValueUpdate = true;
 
-                                  _store.dispatch(
-                                      UpdateMinimumLeasedurationValue(value!));
-
-                                  _store.dispatch(
-                                      UpdateErrorMinimumleaseduration(false));
+                                  _store.dispatch(UpdateAfterp(value!));
                                 },
                               ),
                             ),
@@ -1724,6 +1739,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
         _store.dispatch(UpdateEventTypesFormAddress(address));
         apiCallAndValidation(eventtypesState);
         widget._callbackSaveandNext();*/
+        apiCallAndValidation(eventtypesState);
         widget._callbackSaveandNext();
         //Paso al pantallazo automatico pa maquetarlo
         //no se como
@@ -1733,24 +1749,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   }
 
   void apiCallAndValidation(EventTypesState eventtypesState) {
-    if (eventtypesState.eventtypestypeValue == null) {
-      _store.dispatch(UpdateErrorEventTypestype(true));
-      //_controller.jumpTo(-1.0);
-      //ToastUtils.showCustomToast(context, GlobleString.PS1_EventTypes_type_error, false);
-      ToastUtils.showCustomToast(context, 'error', false);
-    } else if (eventtypesState.eventtypestypeValue!.EnumDetailID == 6 &&
-        eventtypesState.eventtypestypeOtherValue.isEmpty) {
-      //_controller.jumpTo(-1.0);
-      _store.dispatch(UpdateErrorEventTypestypeOther(true));
-      //ToastUtils.showCustomToast(context, GlobleString.PS1_EventTypes_type_value_error, false);
-      ToastUtils.showCustomToast(context, 'Error', false);
-      //  Se quito la validacion del campo por jcjavier
-      //    } else if (eventtypesState.rentalspaceValue == null) {
-      //_controller.jumpTo(-1.0);
-      //      _store.dispatch(UpdateErrorRentalspace(true));
-      //      ToastUtils.showCustomToast(
-      //          context, GlobleString.PS1_Rental_space_error, false);
-    } else if (eventtypesState.EventTypesName == "") {
+    if (eventtypesState.EventTypesName == "") {
       /* setState(() {
         FocusManager.instance.primaryFocus!.unfocus();
         FocusScope.of(context).requestFocus(_focus1);
@@ -1760,108 +1759,45 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       _store.dispatch(UpdateErrorEventTypesName(true));
       ToastUtils.showCustomToast(
           context, "GlobleString.PS1_EventTypes_name_error", false);
-    } else if (eventtypesState.EventTypesAddress == "") {
-      // _controller.jumpTo(-1.0);
-      _store.dispatch(UpdateErrorEventTypesAddress(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_address_error", false);
-    } else if (eventtypesState.City == "") {
-      // _controller.jumpTo(0.0);
-      _store.dispatch(UpdateErrorCity(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_City_error", false);
-    } else if (eventtypesState.Province == "") {
-      // _controller.jumpTo(0.0);
-      _store.dispatch(UpdateErrorProvince(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_province_error", false);
-    } else if (eventtypesState.CountryName == "") {
-      //_controller.jumpTo(0.0);
-      _store.dispatch(UpdateErrorCountryName(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_country_error", false);
-    } else if (eventtypesState.Postalcode == "") {
-      //_controller.jumpTo(0.0);
-      _store.dispatch(UpdateErrorPostalcode(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_postalcode_error", false);
-    } else if (eventtypesState.RentAmount == "") {
-      // _controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorRentAmount(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_rentamount_error", false);
-    } else if (eventtypesState.rentpaymentFrequencyValue == null) {
-      // _controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorRentpaymentFrequency(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Rent_payment_frequency_error, false);
-    } else if (eventtypesState.leasetypeValue == null) {
-      //_controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorLeasetype(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Lease_type_error, false);
-    } else if (eventtypesState.dateofavailable == null) {
-      //_controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorDateofavailable(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Date_available_error, false);
-    } else if (eventtypesState.minimumleasedurationnumber == "") {
-      // _controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorMinimumleasedurationnumber(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Minimum_lease_duration_value_error, false);
-    } else if (eventtypesState.minimumleasedurationValue == null) {
-      //_controller.jumpTo(1.0);
-      _store.dispatch(UpdateErrorMinimumleaseduration(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.PS1_Minimum_lease_duration_error, false);
     } else {
       EventTypesInsert eventtypesInsert = new EventTypesInsert();
-      eventtypesInsert.Property_Type =
-          eventtypesState.eventtypestypeValue!.EnumDetailID.toString();
-      eventtypesInsert.Rental_Space =
-          eventtypesState.rentalspaceValue!.EnumDetailID.toString();
-      eventtypesInsert.Rent_Payment_Frequency =
-          eventtypesState.rentpaymentFrequencyValue!.EnumDetailID.toString();
-      eventtypesInsert.Lease_Type =
-          eventtypesState.leasetypeValue!.EnumDetailID.toString();
-      eventtypesInsert.Min_Lease_Duration =
-          eventtypesState.minimumleasedurationValue!.EnumDetailID.toString();
-      eventtypesInsert.PropertyName = eventtypesState.EventTypesName.toString();
-      eventtypesInsert.Property_Address =
-          eventtypesState.EventTypesAddress.toString();
-      eventtypesInsert.Property_Description =
-          eventtypesState.EventTypesDescription.toString();
-      eventtypesInsert.City = eventtypesState.City.toString();
-      eventtypesInsert.Province = eventtypesState.Province.toString();
-      eventtypesInsert.Country = eventtypesState.CountryName.toString();
-      eventtypesInsert.Country_Code = eventtypesState.CountryCode.toString();
-      eventtypesInsert.Postal_Code = eventtypesState.Postalcode.toString();
-      eventtypesInsert.Suite_Unit = eventtypesState.Suiteunit.toString();
-      eventtypesInsert.Building_Name = eventtypesState.Buildingname.toString();
-      eventtypesInsert.Property_Type =
-          eventtypesState.eventtypestypeOtherValue.toString();
-      eventtypesInsert.Min_Lease_Number =
-          eventtypesState.minimumleasedurationnumber.toString();
-      eventtypesInsert.Rent_Amount = eventtypesState.RentAmount.toString();
-      eventtypesInsert.Date_Available =
-          eventtypesState.dateofavailable.toString();
-      eventtypesInsert.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-      eventtypesInsert.Vacancy = eventtypesState.PropVacancy;
+      eventtypesInsert.name = eventtypesState.EventTypesName;
+      eventtypesInsert.relation = eventtypesState.EventTypesRelation;
+      eventtypesInsert.showing = eventtypesState.EventTypesShowing;
+      eventtypesInsert.location = eventtypesState.EventTypesLocation;
+      eventtypesInsert.description = eventtypesState.EventTypesDescription;
+      eventtypesInsert.link = eventtypesState.EventTypesLink;
+      eventtypesInsert.color = eventtypesState.EventTypesColor;
+      eventtypesInsert.range = eventtypesState.EventTypesRange;
+      eventtypesInsert.duration = eventtypesState.EventTypesDuration;
+      eventtypesInsert.buffer_after = eventtypesState.EventTypesAfter;
+      eventtypesInsert.buffer_before = eventtypesState.EventTypesBefore;
+      eventtypesInsert.confirmation_message =
+          eventtypesState.EventTypesConfirmation;
+      eventtypesInsert.time_zone = 0;
+      eventtypesInsert.time_scheduling = 0;
+      eventtypesInsert.time_scheduling_medida = 0;
+      eventtypesInsert.max_event_per_day = 0;
+      eventtypesInsert.prop_id = (eventtypesState.selectproperty == null)
+          ? "dddddddd-dddd-dddd-dddd-dddddddddddd"
+          : eventtypesState.selectproperty!.id;
+      eventtypesInsert.owner_id = int.parse(Prefs.getString(PrefsName.OwnerID));
+      eventtypesInsert.datefrom = (eventtypesState.datefrom == null)
+          ? "2000-12-01 00:00:00"
+          : eventtypesState.datefrom.toString();
+      eventtypesInsert.dateto = (eventtypesState.dateto == null)
+          ? "2000-12-01 00:00:00"
+          : eventtypesState.dateto.toString();
+      eventtypesInsert.durationmed = eventtypesState.EventTypesDurationPeriod;
+      eventtypesInsert.aftermed = eventtypesState.EventTypesAfterPeriod;
+      eventtypesInsert.beforemed = eventtypesState.EventTypesBeforePeriod;
 
-      updateSummeryData(eventtypesState);
+      //updateSummeryData(eventtypesState);
 
       if (Prefs.getBool(PrefsName.EventTypesEdit)) {
         EventTypesUpdate ceventtypesUpdate = new EventTypesUpdate();
         ceventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
         ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-
-        if (eventtypesState.PropDrafting == 1 ||
-            eventtypesState.PropDrafting == 0) {
-          eventtypesInsert.PropDrafting = 1;
-        } else {
-          eventtypesInsert.PropDrafting = eventtypesState.PropDrafting;
-        }
 
         ApiManager().UpdateEventTypesDetails(
             context, ceventtypesUpdate, eventtypesInsert,
@@ -1869,25 +1805,25 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
           if (error) {
             await Prefs.setBool(PrefsName.EventTypesStep1, true);
 
-            String address = eventtypesState.EventTypesName +
-                ": " +
-                eventtypesState.Suiteunit +
-                " - " +
-                eventtypesState.EventTypesAddress +
-                ", " +
-                eventtypesState.City +
-                ", " +
-                eventtypesState.Province +
-                ", " +
-                eventtypesState.Postalcode +
-                ", " +
-                eventtypesState.CountryName;
+            // String address = eventtypesState.EventTypesName +
+            //     ": " +
+            //     eventtypesState.Suiteunit +
+            //     " - " +
+            //     eventtypesState.EventTypesAddress +
+            //     ", " +
+            //     eventtypesState.City +
+            //     ", " +
+            //     eventtypesState.Province +
+            //     ", " +
+            //     eventtypesState.Postalcode +
+            //     ", " +
+            //     eventtypesState.CountryName;
 
-            _store.dispatch(UpdateEventTypesFormAddress(address));
-            _store.dispatch(
-                UpdateEventTypesDrafting(eventtypesInsert.PropDrafting!));
-            _store.dispatch(UpdateSummeryEventTypesDrafting(
-                eventtypesInsert.PropDrafting!));
+            // _store.dispatch(UpdateEventTypesFormAddress(address));
+            // _store.dispatch(
+            //     UpdateEventTypesDrafting(eventtypesInsert.PropDrafting!));
+            // _store.dispatch(UpdateSummeryEventTypesDrafting(
+            //     eventtypesInsert.PropDrafting!));
 
             ToastUtils.showCustomToast(
                 context, "GlobleString.PS_Save_EventTypesse", true);
@@ -1905,8 +1841,6 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
           }
         });
       } else {
-        eventtypesInsert.PropDrafting = eventtypesState.PropDrafting;
-
         ApiManager().InsertEventTypesDetails(context, eventtypesInsert,
             (error, respoce) async {
           if (error) {
@@ -1914,23 +1848,23 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
             await Prefs.setBool(PrefsName.EventTypesStep1, true);
             await Prefs.setString(PrefsName.EventTypesID, respoce.toString());
 
-            String address = eventtypesState.EventTypesName +
-                ": " +
-                eventtypesState.Suiteunit +
-                " - " +
-                eventtypesState.EventTypesAddress +
-                ", " +
-                eventtypesState.City +
-                ", " +
-                eventtypesState.Province +
-                ", " +
-                eventtypesState.Postalcode +
-                ", " +
-                eventtypesState.CountryName;
+            // String address = eventtypesState.EventTypesName +
+            //     ": " +
+            //     eventtypesState.Suiteunit +
+            //     " - " +
+            //     eventtypesState.EventTypesAddress +
+            //     ", " +
+            //     eventtypesState.City +
+            //     ", " +
+            //     eventtypesState.Province +
+            //     ", " +
+            //     eventtypesState.Postalcode +
+            //     ", " +
+            //     eventtypesState.CountryName;
 
-            _store.dispatch(UpdateEventTypesFormAddress(address));
-            _store.dispatch(UpdateEventTypesDrafting(1));
-            _store.dispatch(UpdateSummeryEventTypesDrafting(1));
+            // _store.dispatch(UpdateEventTypesFormAddress(address));
+            // _store.dispatch(UpdateEventTypesDrafting(1));
+            // _store.dispatch(UpdateSummeryEventTypesDrafting(1));
 
             //widget._callbackSaveandNext();
 
@@ -1940,7 +1874,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
             if (!isGotoback) {
               widget._callbackSaveandNext();
             } else {
-              _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+              _store.dispatch(
+                  UpdatePortalPage(1, GlobleString.NAV_Scheduling_event_types));
             }
           } else {
             ToastUtils.showCustomToast(context, respoce, false);
