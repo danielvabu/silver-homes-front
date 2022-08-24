@@ -2406,34 +2406,228 @@ class _StepEventTypesAvailabilityState
       ToastUtils.showCustomToast(
           context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
     } else {
-      EventTypesAvailability eventtypesAvailability =
-          new EventTypesAvailability();
-      eventtypesAvailability.event_type_id =
-          int.parse(Prefs.getString(PrefsName.EventTypesID));
-      eventtypesAvailability.weekday = 1;
-      ApiManager().AddEventTypesAvailability(context, eventtypesAvailability,
-          (error, responce) async {
-        if (error) {
-          for (int i = 0; i < eventtypesState.sunh1.length; i++) {
-            EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                new EventTypesAvailabilityTime();
-            eventtypesAvailabilitytime.availability_id = int.parse(responce);
-            eventtypesAvailabilitytime.start_time = eventtypesState.sunh1[i];
-            eventtypesAvailabilitytime.end_time = eventtypesState.sunh2[i];
-            ApiManager().AddEventTypesAvailabilityTime(
-                context, eventtypesAvailabilitytime, (error, responce) async {
-              if (error) {
-              } else {
-                // loader.remove();
-                ToastUtils.showCustomToast(context, responce, false);
-              }
-            });
+      //sunday
+      if (eventtypesState.sun) {
+        EventTypesAvailability eventtypesAvailability =
+            new EventTypesAvailability();
+        eventtypesAvailability.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability.weekday = 1;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.sunh1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.sunh1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.sunh2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
           }
-        } else {
-          // loader.remove();
-          ToastUtils.showCustomToast(context, responce, false);
-        }
-      });
+        });
+      }
+      //monday
+      if (eventtypesState.mon) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 2;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.monh1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.monh1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.monh2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+
+      //tuesday
+      if (eventtypesState.tue) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 3;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.tueh1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.tueh1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.tueh2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+
+//wetday
+      if (eventtypesState.wed) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 4;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.wedh1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.wedh1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.wedh2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+
+      //thuday
+      if (eventtypesState.thu) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 5;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.thuh1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.thuh1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.thuh2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+
+      //friday
+      if (eventtypesState.fri) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 6;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.frih1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.frih1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.frih2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+
+      //saturday
+      if (eventtypesState.sat) {
+        EventTypesAvailability eventtypesAvailability2 =
+            new EventTypesAvailability();
+        eventtypesAvailability2.event_type_id =
+            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        eventtypesAvailability2.weekday = 7;
+        ApiManager().AddEventTypesAvailability(context, eventtypesAvailability2,
+            (error, responce) async {
+          if (error) {
+            for (int i = 0; i < eventtypesState.sath1.length; i++) {
+              EventTypesAvailabilityTime eventtypesAvailabilitytime =
+                  new EventTypesAvailabilityTime();
+              eventtypesAvailabilitytime.availability_id = int.parse(responce);
+              eventtypesAvailabilitytime.start_time = eventtypesState.sath1[i];
+              eventtypesAvailabilitytime.end_time = eventtypesState.sath2[i];
+              ApiManager().AddEventTypesAvailabilityTime(
+                  context, eventtypesAvailabilitytime, (error, responce) async {
+                if (error) {
+                } else {
+                  // loader.remove();
+                  ToastUtils.showCustomToast(context, responce, false);
+                }
+              });
+            }
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
 
       // for (int i = 0; i < eventtypesState.restrictionlist.length; i++) {
       //   if (eventtypesState.restrictionlist[i].ischeck!) {
