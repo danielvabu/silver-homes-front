@@ -87,14 +87,14 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   }
 
   traerpropiedades() async {
-    _store.dispatch(UpdateMER_PropertyDropDatalist([]));
+    _store.dispatch(UpdateMER_PropertyDropDatalist1([]));
     await ApiManager()
         .getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID),
             (status, responce, errorlist) {
       if (status) {
         _store.dispatch(UpdateMAR_PropertyDropDatalist(errorlist));
       } else {
-        _store.dispatch(UpdateMER_PropertyDropDatalist([]));
+        _store.dispatch(UpdateMER_PropertyDropDatalist1([]));
       }
     });
   }
@@ -206,7 +206,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     if (pickedDate != null && pickedDate != eventtypesState.dateto) {
       AddEditEventTypes.isValueUpdate = true;
       _store.dispatch(UpdateDateto(pickedDate));
-      _store.dispatch(UpdateErrorDateofavailable(false));
+      // _store.dispatch(UpdateErrorDateofavailable(false));
     }
   }
 
@@ -230,7 +230,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     if (pickedDate != null && pickedDate != eventtypesState.datefrom) {
       AddEditEventTypes.isValueUpdate = true;
       _store.dispatch(UpdateDatefrom(pickedDate));
-      _store.dispatch(UpdateErrorDateofavailable(false));
+      //_store.dispatch(UpdateErrorDateofavailable(false));
     }
   }
 
@@ -608,7 +608,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       isFilteredOnline: true,
                                       onChanged: (value) {
                                         _store.dispatch(
-                                            UpdateMER_selectproperty(value));
+                                            UpdateMER_selectproperty1(value));
                                         _changeData();
                                       },
                                     ),

@@ -306,9 +306,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         await Prefs.setBool(PrefsName.EventTypesStep2, false);
         await Prefs.setBool(PrefsName.EventTypesStep3, false);
 
-        await clearaddeventtypesdetails();
-        await cleareventtypesSummerydetails();
-
         List<SystemEnumDetails> restrictionlist = [];
         restrictionlist =
             QueryFilter().PlainValues(eSystemEnums().Restrictions);
@@ -327,100 +324,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       },
       child: CustomeWidget.AddEventTypes(),
     );
-  }
-
-  clearaddeventtypesdetails() {
-    _store.dispatch(UpdateProperTytypeValue(null));
-    _store.dispatch(UpdateEventTypesTypeOtherValue(""));
-    _store.dispatch(UpdateDateofavailable(null));
-    _store.dispatch(UpdateRentalSpaceValue(null));
-    _store.dispatch(UpdateEventTypesName(""));
-    _store.dispatch(UpdateEventTypesAddress(""));
-    _store.dispatch(UpdateEventTypesDescription(""));
-    _store.dispatch(UpdateSuiteunit(""));
-    _store.dispatch(UpdateBuildingname(""));
-    _store.dispatch(UpdateEventTypesCity(""));
-    _store.dispatch(UpdateEventTypesCountryCode("CA"));
-    _store.dispatch(UpdateEventTypesCountryName("Canada"));
-    _store.dispatch(UpdateEventTypesProvince(""));
-    _store.dispatch(UpdateEventTypesPostalcode(""));
-    _store.dispatch(UpdateEventTypesRentAmount(""));
-    _store.dispatch(UpdateRentPaymentFrequencyValue(null));
-    _store.dispatch(UpdateLeaseTypeValue(null));
-    // _store.dispatch(UpdateMinimumLeasedurationValue(null));
-    _store.dispatch(UpdateMinimumleasedurationNumber(""));
-
-    _store.dispatch(UpdateEventTypesBedrooms(""));
-    _store.dispatch(UpdateEventTypesBathrooms(""));
-    _store.dispatch(UpdateEventTypesSizeinsquarefeet(""));
-    _store.dispatch(UpdateEventTypesMaxoccupancy(""));
-    _store.dispatch(UpdateFurnishingValue(null));
-    _store.dispatch(UpdateParkingstalls(""));
-    _store.dispatch(UpdateStorageAvailableValue(null));
-    _store.dispatch(UpdateAgreeTCPP(false));
-    _store.dispatch(UpdateEventTypesDrafting(1));
-    _store.dispatch(UpdateEventTypesVacancy(false));
-
-    _store.dispatch(UpdateErrorParkingstalls(false));
-    _store.dispatch(UpdateErrorStorageavailable(false));
-    _store.dispatch(UpdateErrorOther_Partial_Furniture(false));
-    _store.dispatch(UpdateErrorFurnishing(false));
-    _store.dispatch(UpdateErrorEventTypesMaxoccupancy(false));
-    _store.dispatch(UpdateErrorEventTypesBathrooms(false));
-    _store.dispatch(UpdateErrorEventTypesBedrooms(false));
-    _store.dispatch(UpdateErrorEventTypesSizeinsquarefeet(false));
-    _store.dispatch(UpdateErrorEventTypestype(false));
-    _store.dispatch(UpdateErrorEventTypestypeOther(false));
-    _store.dispatch(UpdateErrorEventTypesName(false));
-    _store.dispatch(UpdateErrorEventTypesAddress(false));
-    _store.dispatch(UpdateErrorRentpaymentFrequency(false));
-    _store.dispatch(UpdateErrorRentAmount(false));
-    _store.dispatch(UpdateErrorRentalspace(false));
-    _store.dispatch(UpdateErrorDateofavailable(false));
-    _store.dispatch(UpdateErrorMinimumleaseduration(false));
-    _store.dispatch(UpdateErrorMinimumleasedurationnumber(false));
-    _store.dispatch(UpdateErrorLeasetype(false));
-    _store.dispatch(UpdateErrorPostalcode(false));
-    _store.dispatch(UpdateErrorCity(false));
-    _store.dispatch(UpdateErrorCountryName(false));
-    _store.dispatch(UpdateErrorProvince(false));
-    //_store.dispatch(UpdateEventTypesImageList(<EventTypesImageMediaInfo>[]));
-  }
-
-  cleareventtypesSummerydetails() {
-    _store.dispatch(UpdateSummeryProperTytypeValue(null));
-    _store.dispatch(UpdateSummeryEventTypesTypeOtherValue(""));
-    _store.dispatch(UpdateSummeryDateofavailable(null));
-    _store.dispatch(UpdateSummeryRentalSpaceValue(null));
-    _store.dispatch(UpdateSummeryEventTypesName(""));
-    _store.dispatch(UpdateSummeryEventTypesAddress(""));
-    _store.dispatch(UpdateSummeryEventTypesDescription(""));
-    _store.dispatch(UpdateSummerySuiteunit(""));
-    _store.dispatch(UpdateSummeryBuildingname(""));
-    _store.dispatch(UpdateSummeryEventTypesCity(""));
-    _store.dispatch(UpdateSummeryEventTypesCountryCode("CA"));
-    _store.dispatch(UpdateSummeryEventTypesCountryName("Canada"));
-    _store.dispatch(UpdateSummeryEventTypesProvince(""));
-    _store.dispatch(UpdateSummeryEventTypesPostalcode(""));
-    _store.dispatch(UpdateSummeryEventTypesRentAmount(""));
-    _store.dispatch(UpdateSummeryRentPaymentFrequencyValue(null));
-    _store.dispatch(UpdateSummeryLeaseTypeValue(null));
-    _store.dispatch(UpdateSummeryMinimumLeasedurationValue(null));
-    _store.dispatch(UpdateSummeryMinimumleasedurationNumber(""));
-    _store.dispatch(UpdateSummeryEventTypesImage(null));
-    _store.dispatch(UpdateSummeryEventTypesUint8List(null));
-    _store.dispatch(UpdateSummeryEventTypesBedrooms(""));
-    _store.dispatch(UpdateSummeryEventTypesBathrooms(""));
-    _store.dispatch(UpdateSummeryEventTypesSizeinsquarefeet(""));
-    _store.dispatch(UpdateSummeryEventTypesMaxoccupancy(""));
-    _store.dispatch(UpdateSummeryFurnishingValue(null));
-    _store.dispatch(UpdateSummeryOtherPartialFurniture(""));
-    _store.dispatch(UpdateSummeryParkingstalls(""));
-    _store.dispatch(UpdateSummeryStorageAvailableValue(null));
-    _store.dispatch(UpdateSummeryAgreeTCPP(false));
-    _store.dispatch(UpdateSummeryEventTypesDrafting(1));
-    _store.dispatch(UpdateSummeryEventTypesVacancy(false));
-    //_store.dispatch(UpdateSummeryEventTypesImageList(<EventTypesImageMediaInfo>[]));
   }
 
   Widget _actionPopup(EventTypesListState eventtypesListState) {
@@ -611,6 +514,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       onPressName: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
                             eventtypesData, 1, eventtypesData.slots!);
+                        print("asdasd");
                       },
                       onPresseInActive:
                           (EventTypesDataList eventtypesData, int pos) {
@@ -1097,21 +1001,31 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String propId = eventtypesData1.id.toString();
+    String EventTypeId = eventtypesData1.id.toString();
 
-    ApiManager().getEventTypesRestriction(context, propId,
-        (status, responce, restrictionlist) {
+    await ApiManager().getEventTypesDetails(context, EventTypeId,
+        (status, responce, eventtypesData) async {
       if (status) {
-        _store.dispatch(UpdateRestrictionlist(List.from(restrictionlist)));
+        await ApiManager().bindEventTypeData(eventtypesData!);
 
-        List<SystemEnumDetails> secondList = restrictionlist
-            .map((item) => new SystemEnumDetails.clone(item))
-            .toList();
+        AddEditEventTypes.isValueUpdate = false;
 
-        _store.dispatch(UpdateSummeryRestrictionlist(secondList));
+        await Prefs.setBool(PrefsName.EventTypesEdit, true);
+        await Prefs.setBool(PrefsName.EventTypesEditMode, true);
+        await Prefs.setString(PrefsName.EventTypesID, eventtypesData.id!);
+
+        // await Prefs.setBool(PrefsName.EventTypesAgreeTC, true);
+        await Prefs.setBool(PrefsName.EventTypesStep1, true);
+        await Prefs.setBool(PrefsName.EventTypesStep2, true);
+        await Prefs.setBool(PrefsName.EventTypesStep3, false);
+
+        _store.dispatch(UpdateEventTypesForm(8));
+        _store.dispatch(UpdateEventTypesFormAddress(""));
+        _store.dispatch(UpdateAddEditEventTypes());
+
+        loader.remove();
       } else {
-        _store.dispatch(UpdateRestrictionlist([]));
-        _store.dispatch(UpdateSummeryRestrictionlist([]));
+        loader.remove();
       }
     });
 

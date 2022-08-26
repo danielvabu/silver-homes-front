@@ -43,24 +43,24 @@ class _$EventTypesStateTearOff {
       required bool thu,
       required bool fri,
       required bool sat,
-      required List<String> sunh1,
-      required List<String> sunh2,
-      required List<String> monh1,
-      required List<String> monh2,
-      required List<String> tueh1,
-      required List<String> tueh2,
-      required List<String> wedh1,
-      required List<String> wedh2,
-      required List<String> thuh1,
-      required List<String> thuh2,
-      required List<String> frih1,
-      required List<String> frih2,
-      required List<String> sath1,
-      required List<String> sath2,
+      required List sunh1,
+      required List sunh2,
+      required List monh1,
+      required List monh2,
+      required List tueh1,
+      required List tueh2,
+      required List wedh1,
+      required List wedh2,
+      required List thuh1,
+      required List thuh2,
+      required List frih1,
+      required List frih2,
+      required List sath1,
+      required List sath2,
       required int timescheduling,
       required String timeschedulingmed,
       required int maximum,
-      required List<String> overrrides,
+      required List overrrides,
       required String EventTypesName,
       required bool EventTypesRelation,
       required String EventTypesAddress,
@@ -286,24 +286,24 @@ mixin _$EventTypesState {
   bool get thu => throw _privateConstructorUsedError;
   bool get fri => throw _privateConstructorUsedError;
   bool get sat => throw _privateConstructorUsedError;
-  List<String> get sunh1 => throw _privateConstructorUsedError;
-  List<String> get sunh2 => throw _privateConstructorUsedError;
-  List<String> get monh1 => throw _privateConstructorUsedError;
-  List<String> get monh2 => throw _privateConstructorUsedError;
-  List<String> get tueh1 => throw _privateConstructorUsedError;
-  List<String> get tueh2 => throw _privateConstructorUsedError;
-  List<String> get wedh1 => throw _privateConstructorUsedError;
-  List<String> get wedh2 => throw _privateConstructorUsedError;
-  List<String> get thuh1 => throw _privateConstructorUsedError;
-  List<String> get thuh2 => throw _privateConstructorUsedError;
-  List<String> get frih1 => throw _privateConstructorUsedError;
-  List<String> get frih2 => throw _privateConstructorUsedError;
-  List<String> get sath1 => throw _privateConstructorUsedError;
-  List<String> get sath2 => throw _privateConstructorUsedError;
+  List get sunh1 => throw _privateConstructorUsedError;
+  List get sunh2 => throw _privateConstructorUsedError;
+  List get monh1 => throw _privateConstructorUsedError;
+  List get monh2 => throw _privateConstructorUsedError;
+  List get tueh1 => throw _privateConstructorUsedError;
+  List get tueh2 => throw _privateConstructorUsedError;
+  List get wedh1 => throw _privateConstructorUsedError;
+  List get wedh2 => throw _privateConstructorUsedError;
+  List get thuh1 => throw _privateConstructorUsedError;
+  List get thuh2 => throw _privateConstructorUsedError;
+  List get frih1 => throw _privateConstructorUsedError;
+  List get frih2 => throw _privateConstructorUsedError;
+  List get sath1 => throw _privateConstructorUsedError;
+  List get sath2 => throw _privateConstructorUsedError;
   int get timescheduling => throw _privateConstructorUsedError;
   String get timeschedulingmed => throw _privateConstructorUsedError;
   int get maximum => throw _privateConstructorUsedError;
-  List<String> get overrrides => throw _privateConstructorUsedError;
+  List get overrrides => throw _privateConstructorUsedError;
   String get EventTypesName => throw _privateConstructorUsedError;
   bool get EventTypesRelation => throw _privateConstructorUsedError;
   String get EventTypesAddress => throw _privateConstructorUsedError;
@@ -418,24 +418,24 @@ abstract class $EventTypesStateCopyWith<$Res> {
       bool thu,
       bool fri,
       bool sat,
-      List<String> sunh1,
-      List<String> sunh2,
-      List<String> monh1,
-      List<String> monh2,
-      List<String> tueh1,
-      List<String> tueh2,
-      List<String> wedh1,
-      List<String> wedh2,
-      List<String> thuh1,
-      List<String> thuh2,
-      List<String> frih1,
-      List<String> frih2,
-      List<String> sath1,
-      List<String> sath2,
+      List sunh1,
+      List sunh2,
+      List monh1,
+      List monh2,
+      List tueh1,
+      List tueh2,
+      List wedh1,
+      List wedh2,
+      List thuh1,
+      List thuh2,
+      List frih1,
+      List frih2,
+      List sath1,
+      List sath2,
       int timescheduling,
       String timeschedulingmed,
       int maximum,
-      List<String> overrrides,
+      List overrrides,
       String EventTypesName,
       bool EventTypesRelation,
       String EventTypesAddress,
@@ -738,59 +738,59 @@ class _$EventTypesStateCopyWithImpl<$Res>
       sunh1: sunh1 == freezed
           ? _value.sunh1
           : sunh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sunh2: sunh2 == freezed
           ? _value.sunh2
           : sunh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       monh1: monh1 == freezed
           ? _value.monh1
           : monh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       monh2: monh2 == freezed
           ? _value.monh2
           : monh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       tueh1: tueh1 == freezed
           ? _value.tueh1
           : tueh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       tueh2: tueh2 == freezed
           ? _value.tueh2
           : tueh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       wedh1: wedh1 == freezed
           ? _value.wedh1
           : wedh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       wedh2: wedh2 == freezed
           ? _value.wedh2
           : wedh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       thuh1: thuh1 == freezed
           ? _value.thuh1
           : thuh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       thuh2: thuh2 == freezed
           ? _value.thuh2
           : thuh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       frih1: frih1 == freezed
           ? _value.frih1
           : frih1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       frih2: frih2 == freezed
           ? _value.frih2
           : frih2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sath1: sath1 == freezed
           ? _value.sath1
           : sath1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sath2: sath2 == freezed
           ? _value.sath2
           : sath2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       timescheduling: timescheduling == freezed
           ? _value.timescheduling
           : timescheduling // ignore: cast_nullable_to_non_nullable
@@ -806,7 +806,7 @@ class _$EventTypesStateCopyWithImpl<$Res>
       overrrides: overrrides == freezed
           ? _value.overrrides
           : overrrides // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       EventTypesName: EventTypesName == freezed
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
@@ -1119,24 +1119,24 @@ abstract class _$EventTypesStateCopyWith<$Res>
       bool thu,
       bool fri,
       bool sat,
-      List<String> sunh1,
-      List<String> sunh2,
-      List<String> monh1,
-      List<String> monh2,
-      List<String> tueh1,
-      List<String> tueh2,
-      List<String> wedh1,
-      List<String> wedh2,
-      List<String> thuh1,
-      List<String> thuh2,
-      List<String> frih1,
-      List<String> frih2,
-      List<String> sath1,
-      List<String> sath2,
+      List sunh1,
+      List sunh2,
+      List monh1,
+      List monh2,
+      List tueh1,
+      List tueh2,
+      List wedh1,
+      List wedh2,
+      List thuh1,
+      List thuh2,
+      List frih1,
+      List frih2,
+      List sath1,
+      List sath2,
       int timescheduling,
       String timeschedulingmed,
       int maximum,
-      List<String> overrrides,
+      List overrrides,
       String EventTypesName,
       bool EventTypesRelation,
       String EventTypesAddress,
@@ -1441,59 +1441,59 @@ class __$EventTypesStateCopyWithImpl<$Res>
       sunh1: sunh1 == freezed
           ? _value.sunh1
           : sunh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sunh2: sunh2 == freezed
           ? _value.sunh2
           : sunh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       monh1: monh1 == freezed
           ? _value.monh1
           : monh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       monh2: monh2 == freezed
           ? _value.monh2
           : monh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       tueh1: tueh1 == freezed
           ? _value.tueh1
           : tueh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       tueh2: tueh2 == freezed
           ? _value.tueh2
           : tueh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       wedh1: wedh1 == freezed
           ? _value.wedh1
           : wedh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       wedh2: wedh2 == freezed
           ? _value.wedh2
           : wedh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       thuh1: thuh1 == freezed
           ? _value.thuh1
           : thuh1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       thuh2: thuh2 == freezed
           ? _value.thuh2
           : thuh2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       frih1: frih1 == freezed
           ? _value.frih1
           : frih1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       frih2: frih2 == freezed
           ? _value.frih2
           : frih2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sath1: sath1 == freezed
           ? _value.sath1
           : sath1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       sath2: sath2 == freezed
           ? _value.sath2
           : sath2 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       timescheduling: timescheduling == freezed
           ? _value.timescheduling
           : timescheduling // ignore: cast_nullable_to_non_nullable
@@ -1509,7 +1509,7 @@ class __$EventTypesStateCopyWithImpl<$Res>
       overrrides: overrrides == freezed
           ? _value.overrrides
           : overrrides // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List,
       EventTypesName: EventTypesName == freezed
           ? _value.EventTypesName
           : EventTypesName // ignore: cast_nullable_to_non_nullable
@@ -1958,33 +1958,33 @@ class _$_EventTypesState implements _EventTypesState {
   @override
   final bool sat;
   @override
-  final List<String> sunh1;
+  final List sunh1;
   @override
-  final List<String> sunh2;
+  final List sunh2;
   @override
-  final List<String> monh1;
+  final List monh1;
   @override
-  final List<String> monh2;
+  final List monh2;
   @override
-  final List<String> tueh1;
+  final List tueh1;
   @override
-  final List<String> tueh2;
+  final List tueh2;
   @override
-  final List<String> wedh1;
+  final List wedh1;
   @override
-  final List<String> wedh2;
+  final List wedh2;
   @override
-  final List<String> thuh1;
+  final List thuh1;
   @override
-  final List<String> thuh2;
+  final List thuh2;
   @override
-  final List<String> frih1;
+  final List frih1;
   @override
-  final List<String> frih2;
+  final List frih2;
   @override
-  final List<String> sath1;
+  final List sath1;
   @override
-  final List<String> sath2;
+  final List sath2;
   @override
   final int timescheduling;
   @override
@@ -1992,7 +1992,7 @@ class _$_EventTypesState implements _EventTypesState {
   @override
   final int maximum;
   @override
-  final List<String> overrrides;
+  final List overrrides;
   @override
   final String EventTypesName;
   @override
@@ -2360,24 +2360,24 @@ abstract class _EventTypesState implements EventTypesState {
       required bool thu,
       required bool fri,
       required bool sat,
-      required List<String> sunh1,
-      required List<String> sunh2,
-      required List<String> monh1,
-      required List<String> monh2,
-      required List<String> tueh1,
-      required List<String> tueh2,
-      required List<String> wedh1,
-      required List<String> wedh2,
-      required List<String> thuh1,
-      required List<String> thuh2,
-      required List<String> frih1,
-      required List<String> frih2,
-      required List<String> sath1,
-      required List<String> sath2,
+      required List sunh1,
+      required List sunh2,
+      required List monh1,
+      required List monh2,
+      required List tueh1,
+      required List tueh2,
+      required List wedh1,
+      required List wedh2,
+      required List thuh1,
+      required List thuh2,
+      required List frih1,
+      required List frih2,
+      required List sath1,
+      required List sath2,
       required int timescheduling,
       required String timeschedulingmed,
       required int maximum,
-      required List<String> overrrides,
+      required List overrrides,
       required String EventTypesName,
       required bool EventTypesRelation,
       required String EventTypesAddress,
@@ -2509,33 +2509,33 @@ abstract class _EventTypesState implements EventTypesState {
   @override
   bool get sat => throw _privateConstructorUsedError;
   @override
-  List<String> get sunh1 => throw _privateConstructorUsedError;
+  List get sunh1 => throw _privateConstructorUsedError;
   @override
-  List<String> get sunh2 => throw _privateConstructorUsedError;
+  List get sunh2 => throw _privateConstructorUsedError;
   @override
-  List<String> get monh1 => throw _privateConstructorUsedError;
+  List get monh1 => throw _privateConstructorUsedError;
   @override
-  List<String> get monh2 => throw _privateConstructorUsedError;
+  List get monh2 => throw _privateConstructorUsedError;
   @override
-  List<String> get tueh1 => throw _privateConstructorUsedError;
+  List get tueh1 => throw _privateConstructorUsedError;
   @override
-  List<String> get tueh2 => throw _privateConstructorUsedError;
+  List get tueh2 => throw _privateConstructorUsedError;
   @override
-  List<String> get wedh1 => throw _privateConstructorUsedError;
+  List get wedh1 => throw _privateConstructorUsedError;
   @override
-  List<String> get wedh2 => throw _privateConstructorUsedError;
+  List get wedh2 => throw _privateConstructorUsedError;
   @override
-  List<String> get thuh1 => throw _privateConstructorUsedError;
+  List get thuh1 => throw _privateConstructorUsedError;
   @override
-  List<String> get thuh2 => throw _privateConstructorUsedError;
+  List get thuh2 => throw _privateConstructorUsedError;
   @override
-  List<String> get frih1 => throw _privateConstructorUsedError;
+  List get frih1 => throw _privateConstructorUsedError;
   @override
-  List<String> get frih2 => throw _privateConstructorUsedError;
+  List get frih2 => throw _privateConstructorUsedError;
   @override
-  List<String> get sath1 => throw _privateConstructorUsedError;
+  List get sath1 => throw _privateConstructorUsedError;
   @override
-  List<String> get sath2 => throw _privateConstructorUsedError;
+  List get sath2 => throw _privateConstructorUsedError;
   @override
   int get timescheduling => throw _privateConstructorUsedError;
   @override
@@ -2543,7 +2543,7 @@ abstract class _EventTypesState implements EventTypesState {
   @override
   int get maximum => throw _privateConstructorUsedError;
   @override
-  List<String> get overrrides => throw _privateConstructorUsedError;
+  List get overrrides => throw _privateConstructorUsedError;
   @override
   String get EventTypesName => throw _privateConstructorUsedError;
   @override

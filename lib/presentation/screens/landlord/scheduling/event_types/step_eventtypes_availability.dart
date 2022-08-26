@@ -2402,7 +2402,7 @@ class _StepEventTypesAvailabilityState
 
   void apiCallAndValication(EventTypesState eventtypesState) {
     if (1 == 2) {
-      _store.dispatch(UpdateErrorEventTypesBedrooms(true));
+      // _store.dispatch(UpdateErrorEventTypesBedrooms(true));
       ToastUtils.showCustomToast(
           context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
     } else {

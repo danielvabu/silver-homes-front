@@ -17,10 +17,10 @@ class UpdateProperTytypeList implements Action {
   }
 }
 
-class UpdateProperTytypeValue implements Action {
+class UpdateProperTytypeValue1 implements Action {
   final SystemEnumDetails? eventtypestypeValue;
 
-  UpdateProperTytypeValue(this.eventtypestypeValue);
+  UpdateProperTytypeValue1(this.eventtypestypeValue);
 
   @override
   AppState updateState(AppState appState) {
@@ -52,10 +52,10 @@ class UpdateRentalSpaceList implements Action {
   }
 }
 
-class UpdateRentalSpaceValue implements Action {
+class UpdateRentalSpaceValue1 implements Action {
   final SystemEnumDetails? rentalspaceValue;
 
-  UpdateRentalSpaceValue(this.rentalspaceValue);
+  UpdateRentalSpaceValue1(this.rentalspaceValue);
 
   @override
   AppState updateState(AppState appState) {
@@ -76,10 +76,10 @@ class UpdateRentPaymentFrequencylist implements Action {
   }
 }
 
-class UpdateRentPaymentFrequencyValue implements Action {
+class UpdateRentPaymentFrequencyValue1 implements Action {
   final SystemEnumDetails? rentpaymentFrequencyValue;
 
-  UpdateRentPaymentFrequencyValue(this.rentpaymentFrequencyValue);
+  UpdateRentPaymentFrequencyValue1(this.rentpaymentFrequencyValue);
 
   @override
   AppState updateState(AppState appState) {
@@ -99,10 +99,10 @@ class UpdateLeaseTypeList implements Action {
   }
 }
 
-class UpdateLeaseTypeValue implements Action {
+class UpdateLeaseTypeValue1 implements Action {
   final SystemEnumDetails? leasetypeValue;
 
-  UpdateLeaseTypeValue(this.leasetypeValue);
+  UpdateLeaseTypeValue1(this.leasetypeValue);
 
   @override
   AppState updateState(AppState appState) {
@@ -110,10 +110,10 @@ class UpdateLeaseTypeValue implements Action {
   }
 }
 
-class UpdateMER_PropertyDropDatalist implements Action {
+class UpdateMER_PropertyDropDatalist1 implements Action {
   final List<PropertyDropData> PropertyDropDatalist;
 
-  UpdateMER_PropertyDropDatalist(this.PropertyDropDatalist);
+  UpdateMER_PropertyDropDatalist1(this.PropertyDropDatalist);
 
   @override
   AppState updateState(AppState appState) {
@@ -122,10 +122,10 @@ class UpdateMER_PropertyDropDatalist implements Action {
   }
 }
 
-class UpdateMER_selectproperty implements Action {
+class UpdateMER_selectproperty1 implements Action {
   final PropertyDropData? selectproperty;
 
-  UpdateMER_selectproperty(this.selectproperty);
+  UpdateMER_selectproperty1(this.selectproperty);
 
   @override
   AppState updateState(AppState appState) {
@@ -216,7 +216,7 @@ class UpdateMinimumLeasedurationList implements Action {
 }
 
 class Updatsunh1 implements Action {
-  final List<String> sunh1List;
+  final List sunh1List;
 
   Updatsunh1(this.sunh1List);
 
@@ -227,7 +227,7 @@ class Updatsunh1 implements Action {
 }
 
 class Updatsunh2 implements Action {
-  final List<String> sunh2List;
+  final List sunh2List;
 
   Updatsunh2(this.sunh2List);
 
@@ -238,7 +238,7 @@ class Updatsunh2 implements Action {
 }
 
 class Updatmonh1 implements Action {
-  final List<String> monh1List;
+  final List monh1List;
 
   Updatmonh1(this.monh1List);
 
@@ -249,7 +249,7 @@ class Updatmonh1 implements Action {
 }
 
 class Updatmonh2 implements Action {
-  final List<String> monh2List;
+  final List monh2List;
 
   Updatmonh2(this.monh2List);
 
@@ -260,7 +260,7 @@ class Updatmonh2 implements Action {
 }
 
 class Updattueh1 implements Action {
-  final List<String> val;
+  final List val;
 
   Updattueh1(this.val);
 
@@ -271,7 +271,7 @@ class Updattueh1 implements Action {
 }
 
 class Updattueh2 implements Action {
-  final List<String> val;
+  final List val;
 
   Updattueh2(this.val);
 
@@ -282,7 +282,7 @@ class Updattueh2 implements Action {
 }
 
 class Updatwedh1 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatwedh1(this.val);
 
@@ -293,7 +293,7 @@ class Updatwedh1 implements Action {
 }
 
 class Updatwedh2 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatwedh2(this.val);
 
@@ -304,7 +304,7 @@ class Updatwedh2 implements Action {
 }
 
 class Updatthuh1 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatthuh1(this.val);
 
@@ -315,7 +315,7 @@ class Updatthuh1 implements Action {
 }
 
 class Updatthuh2 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatthuh2(this.val);
 
@@ -326,7 +326,7 @@ class Updatthuh2 implements Action {
 }
 
 class Updatfrih1 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatfrih1(this.val);
 
@@ -337,7 +337,7 @@ class Updatfrih1 implements Action {
 }
 
 class Updatfrih2 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatfrih2(this.val);
 
@@ -348,7 +348,7 @@ class Updatfrih2 implements Action {
 }
 
 class Updatsath1 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatsath1(this.val);
 
@@ -359,7 +359,7 @@ class Updatsath1 implements Action {
 }
 
 class Updatsath2 implements Action {
-  final List<String> val;
+  final List val;
 
   Updatsath2(this.val);
 
@@ -548,10 +548,10 @@ class Updatemaximum implements Action {
   }
 }
 
-class UpdateMinimumleasedurationNumber implements Action {
+class UpdateMinimumleasedurationNumber1 implements Action {
   final String minimumleasedurationnumber;
 
-  UpdateMinimumleasedurationNumber(this.minimumleasedurationnumber);
+  UpdateMinimumleasedurationNumber1(this.minimumleasedurationnumber);
 
   @override
   AppState updateState(AppState appState) {
@@ -560,10 +560,10 @@ class UpdateMinimumleasedurationNumber implements Action {
   }
 }
 
-class UpdateDateofavailable implements Action {
+class UpdateDateofavailable1 implements Action {
   final DateTime? dateofavailable;
 
-  UpdateDateofavailable(this.dateofavailable);
+  UpdateDateofavailable1(this.dateofavailable);
 
   @override
   AppState updateState(AppState appState) {
@@ -697,10 +697,10 @@ class UpdateEventTypesRanges implements Action {
   }
 }
 
-class UpdateSuiteunit implements Action {
+class UpdateSuiteunit1 implements Action {
   final String Suiteunit;
 
-  UpdateSuiteunit(this.Suiteunit);
+  UpdateSuiteunit1(this.Suiteunit);
 
   @override
   AppState updateState(AppState appState) {
@@ -708,10 +708,10 @@ class UpdateSuiteunit implements Action {
   }
 }
 
-class UpdateBuildingname implements Action {
+class UpdateBuildingname1 implements Action {
   final String Buildingname;
 
-  UpdateBuildingname(this.Buildingname);
+  UpdateBuildingname1(this.Buildingname);
 
   @override
   AppState updateState(AppState appState) {
@@ -831,77 +831,6 @@ class UpdateErrorEventTypestypeOther implements Action {
   }
 }
 
-class UpdateErrorRentalspace implements Action {
-  final bool error_rentalspace;
-
-  UpdateErrorRentalspace(this.error_rentalspace);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_rentalspace: error_rentalspace);
-  }
-}
-
-class UpdateErrorRentpaymentFrequency implements Action {
-  final bool error_rentpaymentFrequency;
-
-  UpdateErrorRentpaymentFrequency(this.error_rentpaymentFrequency);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_rentpaymentFrequency: error_rentpaymentFrequency);
-  }
-}
-
-class UpdateErrorLeasetype implements Action {
-  final bool error_leasetype;
-
-  UpdateErrorLeasetype(this.error_leasetype);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(error_leasetype: error_leasetype);
-  }
-}
-
-class UpdateErrorMinimumleaseduration implements Action {
-  final bool error_minimumleaseduration;
-
-  UpdateErrorMinimumleaseduration(this.error_minimumleaseduration);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_minimumleaseduration: error_minimumleaseduration);
-  }
-}
-
-class UpdateErrorMinimumleasedurationnumber implements Action {
-  final bool error_minimumleasedurationnumber;
-
-  UpdateErrorMinimumleasedurationnumber(this.error_minimumleasedurationnumber);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_minimumleasedurationnumber: error_minimumleasedurationnumber);
-  }
-}
-
-class UpdateErrorDateofavailable implements Action {
-  final bool error_dateofavailable;
-
-  UpdateErrorDateofavailable(this.error_dateofavailable);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_dateofavailable: error_dateofavailable);
-  }
-}
-
 class UpdateErrorEventTypesName implements Action {
   final bool error_EventTypesName;
 
@@ -923,159 +852,5 @@ class UpdateErrorEventTypesAddress implements Action {
   AppState updateState(AppState appState) {
     return appState.copyWith
         .eventTypesState(error_EventTypesAddress: error_EventTypesAddress);
-  }
-}
-
-class UpdateErrorCity implements Action {
-  final bool error_City;
-
-  UpdateErrorCity(this.error_City);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(error_City: error_City);
-  }
-}
-
-class UpdateErrorProvince implements Action {
-  final bool error_Province;
-
-  UpdateErrorProvince(this.error_Province);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(error_Province: error_Province);
-  }
-}
-
-class UpdateErrorCountryName implements Action {
-  final bool error_CountryName;
-
-  UpdateErrorCountryName(this.error_CountryName);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_CountryName: error_CountryName);
-  }
-}
-
-class UpdateErrorPostalcode implements Action {
-  final bool error_Postalcode;
-
-  UpdateErrorPostalcode(this.error_Postalcode);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_Postalcode: error_Postalcode);
-  }
-}
-
-class UpdateErrorRentAmount implements Action {
-  final bool error_RentAmount;
-
-  UpdateErrorRentAmount(this.error_RentAmount);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_RentAmount: error_RentAmount);
-  }
-}
-
-class UpdateErrorFurnishing implements Action {
-  final bool error_furnishing;
-
-  UpdateErrorFurnishing(this.error_furnishing);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_furnishing: error_furnishing);
-  }
-}
-
-class UpdateErrorOther_Partial_Furniture implements Action {
-  final bool error_Other_Partial_Furniture;
-
-  UpdateErrorOther_Partial_Furniture(this.error_Other_Partial_Furniture);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_Other_Partial_Furniture: error_Other_Partial_Furniture);
-  }
-}
-
-class UpdateErrorEventTypesBedrooms implements Action {
-  final bool error_EventTypesBedrooms;
-
-  UpdateErrorEventTypesBedrooms(this.error_EventTypesBedrooms);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_EventTypesBedrooms: error_EventTypesBedrooms);
-  }
-}
-
-class UpdateErrorEventTypesBathrooms implements Action {
-  final bool error_EventTypesBathrooms;
-
-  UpdateErrorEventTypesBathrooms(this.error_EventTypesBathrooms);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_EventTypesBathrooms: error_EventTypesBathrooms);
-  }
-}
-
-class UpdateErrorEventTypesSizeinsquarefeet implements Action {
-  final bool error_EventTypesSizeinsquarefeet;
-
-  UpdateErrorEventTypesSizeinsquarefeet(this.error_EventTypesSizeinsquarefeet);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_EventTypesSizeinsquarefeet: error_EventTypesSizeinsquarefeet);
-  }
-}
-
-class UpdateErrorEventTypesMaxoccupancy implements Action {
-  final bool error_EventTypesMaxoccupancy;
-
-  UpdateErrorEventTypesMaxoccupancy(this.error_EventTypesMaxoccupancy);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(
-        error_EventTypesMaxoccupancy: error_EventTypesMaxoccupancy);
-  }
-}
-
-class UpdateErrorStorageavailable implements Action {
-  final bool error_storageavailable;
-
-  UpdateErrorStorageavailable(this.error_storageavailable);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_storageavailable: error_storageavailable);
-  }
-}
-
-class UpdateErrorParkingstalls implements Action {
-  final bool error_Parkingstalls;
-
-  UpdateErrorParkingstalls(this.error_Parkingstalls);
-
-  @override
-  AppState updateState(AppState appState) {
-    return appState.copyWith
-        .eventTypesState(error_Parkingstalls: error_Parkingstalls);
   }
 }

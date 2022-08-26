@@ -141,6 +141,7 @@ class Weburl {
   static var DSQ_PropertyOnBoardingList =
       "A31C1BFE-C78D-425F-B9F6-F7D2A6B70BE7";
   static var DSQ_PropertyDetails = "4602BD62-35B7-42FD-81E4-D14AA7D13ED5";
+  static var DSQ_EventTypeDetails = "43534533-ASDD-EVENY-TYPR-SDF5";
   static var DSQ_Property_AM_UT = "09d001cb-9953-4ab7-ba2a-15396128cf56";
   static var DSQ_Property_Images = "18b332a0-4a49-4abb-a15d-f7a2ef64f2f9";
   static var DSQ_Property_Restrictions = "f9b47b59-860c-4438-8cce-37ce7290e53a";

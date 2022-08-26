@@ -15,6 +15,7 @@ import 'package:silverhome/domain/entities/citydata.dart';
 import 'package:silverhome/domain/entities/countrydata.dart';
 import 'package:silverhome/domain/entities/emailcheck.dart';
 import 'package:silverhome/domain/entities/employment_details.dart';
+import 'package:silverhome/domain/entities/event_typesdata.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
 import 'package:silverhome/domain/entities/lead_reference.dart';
 import 'package:silverhome/domain/entities/maintenance_details.dart';
@@ -89,6 +90,9 @@ typedef CallBackMaintenanceDetails = void Function(
 
 typedef CallBackPropertyDetails = void Function(
     bool status, String responce, PropertyData? propertyData);
+
+typedef CallBackEventTypesDetails = void Function(
+    bool status, String responce, EventTypesData? eventtypesData);
 typedef CallBackAmntUtltlist = void Function(
     bool status,
     String responce,

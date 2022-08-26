@@ -33,6 +33,7 @@ import 'package:silverhome/domain/actions/landlord_action/landlordtenancyarchive
 import 'package:silverhome/domain/actions/landlord_action/preview_document_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/preview_lease_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/property_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/eventtypes_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/property_disclosure_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/property_feature_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/property_specification_actions.dart';
@@ -58,6 +59,7 @@ import 'package:silverhome/domain/entities/citydata.dart';
 import 'package:silverhome/domain/entities/countrydata.dart';
 import 'package:silverhome/domain/entities/emailcheck.dart';
 import 'package:silverhome/domain/entities/employment_details.dart';
+import 'package:silverhome/domain/entities/event_typesdata.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
 import 'package:silverhome/domain/entities/fileobject.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
@@ -1893,6 +1895,164 @@ class ApiManager {
     });
   }
 
+  getEventTypesDetails(BuildContext context, String id,
+      CallBackEventTypesDetails CallBackQuesy) async {
+    var myjson = {
+      "DSQID": Weburl.DSQ_EventTypeDetails,
+      "LoadLookUpValues": true,
+      "Reqtokens": {"ID": id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    Helper.Log("getEventTypeDetails", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        //Helper.Log("getPropertyDetails", respoce);
+
+        EventTypesData eventTypesData = new EventTypesData();
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          var myobject = data['Result'][i];
+          String ID = myobject['id'] != null ? myobject['id'].toString() : "";
+
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
+
+          bool RelationShip =
+              myobject['relation'] != null ? myobject['relation'] : false;
+
+          int Duration =
+              myobject['duration'] != null ? myobject['duration'] : 0;
+
+          myobject['ispublished'] != null ? myobject['ispublished'] : false;
+
+          bool showing =
+              myobject['showing'] != null ? myobject['showing'] : false;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
+          String location = myobject['location'] != null
+              ? myobject['location'].toString()
+              : "";
+          String description = myobject['description'] != null
+              ? myobject['description'].toString()
+              : "";
+          String link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
+
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
+          int range = myobject['range'] != null ? myobject['range'] : 0;
+
+          int buffer_after =
+              myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
+
+          String buffer_after_measure =
+              myobject['aftermed'] != null ? myobject['aftermed'] : "";
+          int buffer_before =
+              myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
+          String buffer_before_measure =
+              myobject['beforemed'] != null ? myobject['beforemed'] : "";
+          String durationmed =
+              myobject['durationmed'] != null ? myobject['durationmed'] : "";
+          String confirmation_message = myobject['confirmation_message'] != null
+              ? myobject['confirmation_message'].toString()
+              : "";
+          int time_zone =
+              myobject['time_zone'] != null ? myobject['time_zone'] : 0;
+          int time_scheduling = myobject['time_scheduling'] != null
+              ? myobject['time_scheduling']
+              : 0;
+          int time_scheduling_medida =
+              myobject['time_scheduling_medida'] != null
+                  ? myobject['time_scheduling_medida']
+                  : 0;
+          int max_event_per_day = myobject['max_event_per_day'] != null
+              ? myobject['max_event_per_day']
+              : 0;
+          String prop_id =
+              myobject['prop_id'] != null ? myobject['prop_id'] : 0;
+          int owner_id =
+              myobject['owner_id'] != null ? myobject['owner_id'] : 0;
+          bool sun = myobject['sun'] != null ? myobject['sun'] : false;
+          bool mon = myobject['mon'] != null ? myobject['mon'] : false;
+
+          bool tue = myobject['tue'] != null ? myobject['tue'] : false;
+          bool wed = myobject['wed'] != null ? myobject['wed'] : false;
+          bool thu = myobject['thu'] != null ? myobject['thu'] : false;
+          bool fri = myobject['fri'] != null ? myobject['fri'] : false;
+          bool sat = myobject['sat'] != null ? myobject['sat'] : false;
+          List sunlist = myobject['sunlist'];
+          List sunlist2 = myobject['sunlist2'];
+          List monlist = myobject['monlist'];
+          List monlist2 = myobject['monlist2'];
+          List tuelist = myobject['tuelist'];
+          List tuelist2 = myobject['tuelist2'];
+          List wedlist = myobject['wedlist'];
+          List wedlist2 = myobject['wedlist2'];
+          List thulist = myobject['thulist'];
+          List thulist2 = myobject['thulist2'];
+          List frilist = myobject['frilist'];
+          List frilist2 = myobject['frilist2'];
+          List satlist = myobject['satlist'];
+          List satlist2 = myobject['satlist2'];
+          eventTypesData.id = ID;
+
+          eventTypesData.duration = Duration;
+          eventTypesData.durationmed = durationmed;
+          eventTypesData.ispublished = ispublished;
+          eventTypesData.name = Name;
+          eventTypesData.relation = RelationShip;
+          eventTypesData.showing = showing;
+          eventTypesData.location = location;
+          eventTypesData.description = description;
+          eventTypesData.link = link;
+          eventTypesData.color = color;
+          eventTypesData.range = range;
+          eventTypesData.buffer_after = buffer_after;
+          eventTypesData.buffer_after_measure = buffer_after_measure;
+          eventTypesData.buffer_before = buffer_before;
+          eventTypesData.buffer_before_measure = buffer_before_measure;
+          eventTypesData.confirmation_message = confirmation_message;
+          eventTypesData.time_zone = time_zone;
+          eventTypesData.time_scheduling = time_scheduling;
+          eventTypesData.time_scheduling_medida = time_scheduling_medida;
+          eventTypesData.max_event_per_day = max_event_per_day;
+          eventTypesData.prop_id = prop_id;
+          eventTypesData.owner_id = owner_id;
+          eventTypesData.sun = sun;
+          eventTypesData.mon = mon;
+          eventTypesData.tue = tue;
+          eventTypesData.wed = wed;
+          eventTypesData.thu = thu;
+          eventTypesData.fri = fri;
+          eventTypesData.sat = sat;
+          eventTypesData.sunh1 = sunlist;
+          eventTypesData.sunh2 = sunlist2;
+          eventTypesData.monh1 = monlist;
+          eventTypesData.monh2 = monlist2;
+          eventTypesData.tueh1 = tuelist;
+          eventTypesData.tueh2 = tuelist2;
+          eventTypesData.wedh1 = wedlist;
+          eventTypesData.wedh2 = wedlist2;
+          eventTypesData.thuh1 = thulist;
+          eventTypesData.thuh2 = thulist2;
+          eventTypesData.frih1 = frilist;
+          eventTypesData.frih2 = frilist2;
+          eventTypesData.sath1 = satlist;
+          eventTypesData.sath2 = satlist2;
+        }
+        CallBackQuesy(true, respoce, eventTypesData);
+      } else {
+        ToastUtils.showCustomToast(context, respoce, false);
+        CallBackQuesy(false, respoce, null);
+      }
+    });
+  }
+
   getPropertyAmanityUtility(BuildContext context, String Id,
       CallBackAmntUtltlist CallBackQuesy) async {
     var myjson = {
@@ -2363,6 +2523,55 @@ class ApiManager {
     _store.dispatch(UpdateSummeryAgreeTCPP(propertyData.isAgreedTandC!));
     _store.dispatch(UpdateSummeryPropertyDrafting(propertyData.PropDrafting!));
     _store.dispatch(UpdateSummeryPropertyVacancy(propertyData.Vacancy!));
+  }
+
+  bindEventTypeData(EventTypesData eventTypesData) {
+    _store.dispatch(UpdateEventTypesName(eventTypesData.name!));
+    _store.dispatch(UpdateEventTypesRelations(eventTypesData.relation!));
+    _store.dispatch(UpdateEventTypesShowing(eventTypesData.showing!));
+    _store.dispatch(UpdateLocation(eventTypesData.location!));
+    _store.dispatch(UpdateEventTypesDescription(eventTypesData.description!));
+    _store.dispatch(UpdateURL(eventTypesData.link!));
+    _store.dispatch(UpdateEventTypesColor(eventTypesData.color!));
+    _store.dispatch(UpdateEventTypesRanges(eventTypesData.range!));
+    //_store.dispatch(UpdateDateto(eventTypesData.dateto!));
+    //_store.dispatch(UpdateDateto(eventTypesData.datefrom!));
+    _store.dispatch(UpdateDuration(eventTypesData.duration!));
+    _store.dispatch(UpdateDurationp(eventTypesData.durationmed!));
+    _store.dispatch(UpdateBefore(eventTypesData.buffer_before!));
+    _store.dispatch(UpdateAfter(eventTypesData.buffer_after!));
+    _store.dispatch(UpdateBeforep(eventTypesData.buffer_before_measure!));
+    _store.dispatch(
+        UpdateEventTypesConfirmation(eventTypesData.confirmation_message!));
+    // _store.dispatch(UpdateTimezon(eventTypesData.time_zone!)); es entero pero debe ser string
+    //_store.dispatch(UpdateDisplaytz(eventTypesData!));
+    _store.dispatch(UpdateSun(eventTypesData.sun!));
+    _store.dispatch(UpdateMon(eventTypesData.mon!));
+    _store.dispatch(Updatetue(eventTypesData.tue!));
+    _store.dispatch(Updatewed(eventTypesData.wed!));
+    _store.dispatch(Updatethu(eventTypesData.thu!));
+    _store.dispatch(Updatefri(eventTypesData.fri!));
+    _store.dispatch(Updatesat(eventTypesData.sat!));
+    _store.dispatch(Updatsunh1(eventTypesData.sunh1!));
+    _store.dispatch(Updatsunh2(eventTypesData.sunh2!));
+    _store.dispatch(Updatmonh1(eventTypesData.monh1!));
+    _store.dispatch(Updatmonh2(eventTypesData.monh2!));
+    _store.dispatch(Updattueh1(eventTypesData.tueh1!));
+    _store.dispatch(Updattueh2(eventTypesData.tueh2!));
+    _store.dispatch(Updatwedh1(eventTypesData.wedh1!));
+    _store.dispatch(Updatwedh2(eventTypesData.wedh2!));
+    _store.dispatch(Updatthuh1(eventTypesData.thuh1!));
+    _store.dispatch(Updatthuh2(eventTypesData.thuh2!));
+    _store.dispatch(Updatfrih1(eventTypesData.frih1!));
+    _store.dispatch(Updatfrih2(eventTypesData.frih2!));
+    _store.dispatch(Updatsath1(eventTypesData.sath1!));
+    _store.dispatch(Updatsath2(eventTypesData.sath2!));
+    //  _store.dispatch(Updatetimescheduling(eventTypesData.time_scheduling!));
+    //_store.dispatch(Updatemaximum(eventTypesData.maximum!));
+
+    // deberia ser str _store.dispatch(Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
+
+    /*Summery*/
   }
 
   deletePropertyImage(BuildContext context, Object PIMPOJO, Object MIPoJO,
