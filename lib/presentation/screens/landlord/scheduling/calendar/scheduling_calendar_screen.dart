@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:silverhome/widget/landlord/scheduling/list_of_attendees.dart';
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -439,7 +441,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                             children: [
                               SizedBox(
                                 width: ancho * 4,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.circle,
                                   color: Colors.yellow,
                                   size: 17.0,
@@ -576,18 +578,23 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       height: 32,
       width: 30,
       child: PopupMenuButton(
-        onSelected: (value) {},
+        onSelected: (value) {
+          if (value == 1) {
+            openDialogListAttendees();
+          }
+        },
         child: Container(
           height: 40,
           width: 20,
-          margin: EdgeInsets.only(right: 5),
-          child: Icon(Icons.more_vert),
+          margin: const EdgeInsets.only(right: 5),
+          child: const Icon(Icons.more_vert),
         ),
         itemBuilder: (context) {
           return [
             PopupMenuItem(
               value: 1,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
               child: Text(
                 GlobleString.CALENDAR_View_Event,
                 style: MyStyles.Regular(12, myColor.text_color),
@@ -596,7 +603,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             ),
             PopupMenuItem(
               value: 2,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
               child: Text(
                 GlobleString.CALENDAR_View_Attendees,
                 style: MyStyles.Regular(12, myColor.text_color),
@@ -605,7 +613,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             ),
             PopupMenuItem(
               value: 3,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
               child: Text(
                 GlobleString.CALENDAR_Edit_Event,
                 style: MyStyles.Regular(12, myColor.text_color),
@@ -614,7 +623,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             ),
             PopupMenuItem(
               value: 4,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
               child: Text(
                 GlobleString.CALENDAR_Edit_Event_Type,
                 style: MyStyles.Regular(12, myColor.text_color),
@@ -623,7 +633,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             ),
             PopupMenuItem(
               value: 5,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
               child: Text(
                 GlobleString.CALENDAR_Delete,
                 style: MyStyles.Regular(12, myColor.text_color),
@@ -652,6 +663,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             Navigator.of(context1).pop();
           },
         );
+      },
+    );
+  }
+
+  void openDialogListAttendees() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ListOfAttendees();
       },
     );
   }

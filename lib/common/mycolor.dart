@@ -37,7 +37,6 @@ class myColor {
   static const disablecolor = Color(0xffA7A7A7);
   static const transparent = Color(0x00000000);
 
-  /*New */
   static const navy_blue = Color(0xFF000080);
   static const main_light = Color(0xCC010B32);
   static const Circle_main = Color(0xFF010B32);
@@ -142,4 +141,7 @@ class myColor {
   static const br_selecttag = Color(0x334b74ff);
   static const bg_selecttag = Color(0x1A4B74FF);
   static const link_copy = Color(0xFF25AFBF);
+
+  static const CAL_green = Color.fromRGBO(32, 177, 192, 1);
+  static const CAL_orange = Color.fromRGBO(255, 156, 25, 1);
 }

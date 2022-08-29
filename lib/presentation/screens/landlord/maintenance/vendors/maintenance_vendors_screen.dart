@@ -181,7 +181,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        padding: EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -190,7 +190,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                                 style: MyStyles.Medium(14, myColor.hintcolor),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left: 8, right: 5),
                               child: Icon(
                                 Icons.search,
@@ -213,15 +213,15 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                         ),
                         child: Row(
                           children: <Widget>[
-                            new Expanded(
+                            Expanded(
                               child: TextFormField(
                                 initialValue: landlordVendorState.SearchText,
                                 onChanged: (value) async {
                                   if (_timer != null) {
                                     _timer!.cancel();
                                   }
-                                  _timer = new Timer.periodic(
-                                      Duration(seconds: 2), (timer) {
+                                  _timer = Timer.periodic(Duration(seconds: 2),
+                                      (timer) {
                                     _store.dispatch(
                                         UpdateLLVendor_isloding(true));
                                     _store.dispatch(UpdateLL_vendordatalist(
@@ -236,14 +236,14 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                                   border: InputBorder.none,
                                   hintStyle:
                                       MyStyles.Medium(14, myColor.hintcolor),
-                                  contentPadding: EdgeInsets.all(10),
+                                  contentPadding: const EdgeInsets.all(10),
                                   isDense: true,
                                   hintText: GlobleString.LL_Search,
                                 ),
                                 style: MyStyles.Medium(14, myColor.text_color),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left: 8, right: 5),
                               child: Icon(
                                 Icons.search,
@@ -254,7 +254,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                           ],
                         ),
                       ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     _addNewRequest(landlordVendorState),
                   ],
                 ),
@@ -274,7 +274,6 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     return InkWell(
       onTap: () async {
         await clearVendorStateData();
-
         ApiManager().getCountryList(context, (status, responce, errorlist) {
           if (status) {
             _store.dispatch(UpdateADV_countrydatalist(errorlist));
@@ -390,7 +389,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) async {
-          VendorListReqtokens reqtokens = new VendorListReqtokens();
+          VendorListReqtokens reqtokens = VendorListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
           reqtokens.Name = landlordVendorState.SearchText != null
               ? landlordVendorState.SearchText
@@ -467,11 +466,10 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     return Container(
       width: width,
       height: height - 167,
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
-          //color: Hexcolor("#16C395"),
+          borderRadius: const BorderRadius.all(Radius.circular(3)),
           border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
         children: [
@@ -527,7 +525,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                 child: Container(
                   width: width,
                   height: height - 229,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
                   child: Text(
                     "Please wait.....",
@@ -603,7 +601,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                     child: Container(
                       width: width,
                       height: height - 229,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
                         GlobleString.vendor_data_not_found,
@@ -635,7 +633,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
           Container(
             height: 30,
             width: 80,
-            margin: EdgeInsets.only(left: 10, right: 20),
+            margin: const EdgeInsets.only(left: 10, right: 20),
             alignment: Alignment.center,
             child: DropdownSearch<String>(
               mode: Mode.MENU,
