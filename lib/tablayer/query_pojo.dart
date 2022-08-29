@@ -1504,8 +1504,9 @@ class EventTypesInsert {
   int? buffer_before;
   String? confirmation_message;
   String? time_zone;
+  int? timezondisplay;
   int? time_scheduling;
-  int? time_scheduling_medida;
+  String? time_scheduling_medida;
   int? max_event_per_day;
   String? prop_id;
   int? owner_id;
@@ -1530,6 +1531,7 @@ class EventTypesInsert {
       this.buffer_before,
       this.confirmation_message,
       this.time_zone,
+      this.timezondisplay,
       this.time_scheduling,
       this.time_scheduling_medida,
       this.max_event_per_day,
@@ -1558,6 +1560,7 @@ class EventTypesInsert {
           buffer_before: json["buffer_before"],
           confirmation_message: json["confirmation_message"],
           time_zone: json["time_zone"],
+          timezondisplay: json["timezondisplay"],
           time_scheduling: json["time_scheduling"],
           time_scheduling_medida: json["time_scheduling_medida"],
           max_event_per_day: json["max_event_per_day"],
@@ -1585,6 +1588,7 @@ class EventTypesInsert {
         "buffer_before": buffer_before,
         "confirmation_message": confirmation_message,
         "time_zone": time_zone,
+        "timezondisplay": timezondisplay,
         "time_scheduling": time_scheduling,
         "time_scheduling_medida": time_scheduling_medida,
         "max_event_per_day": max_event_per_day,
@@ -1597,6 +1601,39 @@ class EventTypesInsert {
         "durationmed": durationmed,
         "aftermed": aftermed,
         "beforemed": beforemed
+      };
+}
+
+class EventTypesUpdate1 {
+  String? time_zone;
+  int? timezondisplay;
+  int? time_scheduling;
+  String? time_scheduling_medida;
+  int? max_event_per_day;
+
+  EventTypesUpdate1({
+    this.time_zone,
+    this.timezondisplay,
+    this.time_scheduling,
+    this.time_scheduling_medida,
+    this.max_event_per_day,
+  });
+
+  factory EventTypesUpdate1.fromJson(Map<String, dynamic> json) =>
+      EventTypesUpdate1(
+        time_zone: json["time_zone"],
+        timezondisplay: json["timezondisplay"],
+        time_scheduling: json["time_scheduling"],
+        time_scheduling_medida: json["time_scheduling_medida"],
+        max_event_per_day: json["max_event_per_day"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "time_zone": time_zone,
+        "timezondisplay": timezondisplay,
+        "time_scheduling": time_scheduling,
+        "time_scheduling_medida": time_scheduling_medida,
+        "max_event_per_day": max_event_per_day,
       };
 }
 
@@ -1806,20 +1843,22 @@ class EventTypesAvailabilityTime {
   int? availability_id;
   String? start_time;
   String? end_time;
-
+  int? eventtype;
   EventTypesAvailabilityTime(
-      {this.availability_id, this.start_time, this.end_time});
+      {this.availability_id, this.start_time, this.end_time, this.eventtype});
 
   factory EventTypesAvailabilityTime.fromJson(Map<String, dynamic> json) =>
       EventTypesAvailabilityTime(
           availability_id: json["event_type_id"],
           start_time: json["weekday"],
-          end_time: json["end_time"]);
+          end_time: json["end_time"],
+          eventtype: json["eventtype"]);
 
   Map<String, dynamic> toJson() => {
         "availability_id": availability_id,
         "start_time": start_time,
-        "end_time": end_time
+        "end_time": end_time,
+        "eventtype": eventtype
       };
 }
 
@@ -2204,6 +2243,39 @@ class CheckReferenceExit {
 
   Map<String, dynamic> toJson() => {
         "ReferenceID": ReferenceID,
+      };
+}
+
+class Aviabilitydel {
+  int? event_type_id;
+
+  Aviabilitydel({
+    this.event_type_id,
+  });
+
+  factory Aviabilitydel.fromJson(Map<String, dynamic> json) => Aviabilitydel(
+        event_type_id: json["event_type_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_id": event_type_id,
+      };
+}
+
+class AviabilityTimedel {
+  int? eventtype;
+
+  AviabilityTimedel({
+    this.eventtype,
+  });
+
+  factory AviabilityTimedel.fromJson(Map<String, dynamic> json) =>
+      AviabilityTimedel(
+        eventtype: json["eventtype"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "eventtype": eventtype,
       };
 }
 

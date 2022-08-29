@@ -605,7 +605,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                       margin: EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
-                        'blank npi',
+                        'no data',
                         //GlobleString.Blank_EventTypes,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,

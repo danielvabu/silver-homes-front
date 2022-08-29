@@ -64,10 +64,12 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   bool isGotoback = false;
   int stepper = 0;
   String color = "";
+  TextEditingController locationcontroler = new TextEditingController();
+
   //FocusNode _focusNode = new FocusNode();
   // bool firsttime = true;
   bool change = false;
-
+  String textprop = "";
   @override
   void initState() {
     Prefs.init();
@@ -99,49 +101,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     });
   }
 
-  initilizedata() {
-    if (_store.state!.eventTypesSummeryState != null) {
-      EventTypesSummeryState eventtypesSummeryState =
-          _store.state!.eventTypesSummeryState;
-
-      // _store.dispatch(
-      //     UpdateProperTytypeValue(eventtypesSummeryState.eventtypestypeValue));
-      // _store.dispatch(UpdateEventTypesTypeOtherValue(
-      //     eventtypesSummeryState.eventtypestypeOtherValue));
-
-      // _store.dispatch(
-      //     UpdateDateofavailable(eventtypesSummeryState.dateofavailable));
-      // _store.dispatch(
-      //     UpdateRentalSpaceValue(eventtypesSummeryState.rentalspaceValue));
-      // _store.dispatch(
-      //     UpdateEventTypesName(eventtypesSummeryState.EventTypesName));
-      // _store.dispatch(
-      //     UpdateEventTypesAddress(eventtypesSummeryState.EventTypesAddress));
-      // _store.dispatch(UpdateEventTypesDescription(
-      //     eventtypesSummeryState.EventTypesDescription));
-      // _store.dispatch(UpdateSuiteunit(eventtypesSummeryState.Suiteunit));
-      // _store.dispatch(UpdateBuildingname(eventtypesSummeryState.Buildingname));
-      // _store.dispatch(UpdateEventTypesCity(eventtypesSummeryState.City));
-      // _store.dispatch(
-      //     UpdateEventTypesCountryCode(eventtypesSummeryState.CountryCode));
-      // _store.dispatch(
-      //     UpdateEventTypesCountryName(eventtypesSummeryState.CountryName));
-      // _store
-      //     .dispatch(UpdateEventTypesProvince(eventtypesSummeryState.Province));
-      // _store.dispatch(
-      //     UpdateEventTypesPostalcode(eventtypesSummeryState.Postalcode));
-      // _store.dispatch(
-      //     UpdateEventTypesRentAmount(eventtypesSummeryState.RentAmount));
-      // _store.dispatch(UpdateRentPaymentFrequencyValue(
-      //     eventtypesSummeryState.rentpaymentFrequencyValue));
-      // _store.dispatch(
-      //     UpdateLeaseTypeValue(eventtypesSummeryState.leasetypeValue));
-      // _store.dispatch(UpdateMinimumLeasedurationValue(
-      //     eventtypesSummeryState.minimumleasedurationValue));
-      // _store.dispatch(UpdateMinimumleasedurationNumber(
-      //     eventtypesSummeryState.minimumleasedurationnumber));
-    }
-  }
+  initilizedata() {}
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
@@ -246,6 +206,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
           map: (state) => state.eventTypesState,
           where: notIdentical,
           builder: (eventtypesState) {
+            locationcontroler.text = eventtypesState!.EventTypesLocation;
             if (eventtypesState != null &&
                 eventtypesState.RentAmount != null &&
                 eventtypesState.RentAmount.isNotEmpty) {
@@ -580,6 +541,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   Container(
                                     height: 32,
                                     child: DropdownSearch<PropertyDropData>(
+                                      enabled: (eventtypesState.EventTypesNA)
+                                          ? false
+                                          : true,
                                       mode: Mode.MENU,
                                       items:
                                           eventtypesState.PropertyDropDatalist,
@@ -610,6 +574,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         _store.dispatch(
                                             UpdateMER_selectproperty1(value));
                                         _changeData();
+                                        textprop = value!.propertyName!;
                                       },
                                     ),
                                   ),
@@ -622,6 +587,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         value: eventtypesState
                                             .EventTypesNA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
+                                          if (value == true) {
+                                            _store.dispatch(
+                                                UpdateMER_selectproperty1(
+                                                    null));
+                                          }
                                           _store.dispatch(
                                               UpdateNotAplicable(value!));
                                           _changeData();
@@ -647,8 +617,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   ),
                                   const SizedBox(height: 5.0),
                                   TextFormField(
-                                    initialValue:
-                                        eventtypesState.EventTypesLocation,
+                                    controller: locationcontroler,
                                     textAlign: TextAlign.start,
                                     style: MyStyles.Regular(
                                         14, myColor.text_color),
@@ -697,6 +666,18 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                             .EventTypesSPA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(UpdateSPA(value!));
+
+                                          if (value == true) {
+                                            AddEditEventTypes.isValueUpdate =
+                                                true;
+                                            _store.dispatch(
+                                                UpdateLocation(textprop));
+
+                                            setState(() {
+                                              locationcontroler.text = textprop;
+                                            });
+                                          }
+
                                           _changeData();
                                         },
                                       ),
