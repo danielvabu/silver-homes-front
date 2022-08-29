@@ -665,6 +665,22 @@ class CustomeWidget {
     );
   }
 
+  static Widget AddSimpleButton(String title) {
+    return Container(
+      height: 32,
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: myColor.Circle_main,
+      ),
+      child: Text(
+        title,
+        style: MyStyles.Regular(14, myColor.white),
+      ),
+    );
+  }
+
   /*Funnel Status*/
   static Widget FNL_TenancyApplicationStatus() {
     return Row(

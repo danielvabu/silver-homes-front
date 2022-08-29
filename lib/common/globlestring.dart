@@ -1891,6 +1891,7 @@ class GlobleString {
   static const String THU = 'THU';
   static const String FRI = 'FRI';
   static const String SAT = 'SAT';
+  static const String SAVE = 'Save';
   static const String ET_Buffer_Time = 'Buffer Time';
   static const String ET_Buffer_msg =
       'Give yourself some buffer time to prepare for or wrap up from booked events.';
