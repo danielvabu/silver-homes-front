@@ -5,6 +5,7 @@ import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendees.dart';
+import 'package:silverhome/widget/landlord/scheduling/share_link.dart';
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -580,6 +581,9 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       child: PopupMenuButton(
         onSelected: (value) {
           if (value == 1) {
+            openDialogShareLink();
+          }
+          if (value == 2) {
             openDialogListAttendees();
           }
         },
@@ -675,6 +679,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return ListOfAttendees();
+      },
+    );
+  }
+
+  void openDialogShareLink() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ShareLink();
       },
     );
   }

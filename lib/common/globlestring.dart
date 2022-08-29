@@ -1840,6 +1840,8 @@ class GlobleString {
   static const String CAL_Property_Name = "Property Name:";
   static const String CAL_Location = "Location:";
   static const String CAL_Time_Zone = "Time Zone:";
+  static const String Share_Link = "Share Link";
+  static const String Copy_Link = "Copy Link";
 
   /*EventTypes*/
   static const String Description = 'Description';
