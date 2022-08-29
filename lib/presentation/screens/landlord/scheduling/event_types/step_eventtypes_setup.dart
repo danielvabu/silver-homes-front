@@ -1147,14 +1147,14 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                left: 8),
+                                                            const EdgeInsets
+                                                                .only(left: 8),
                                                         child: Text(
                                                           eventtypesState
                                                                       .dateto ==
                                                                   null
                                                               ? ""
-                                                              : new DateFormat(
+                                                              : DateFormat(
                                                                       "dd-MMM-yyyy")
                                                                   .format(
                                                                       eventtypesState
@@ -1219,14 +1219,14 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsets.only(
-                                                                left: 8),
+                                                            const EdgeInsets
+                                                                .only(left: 8),
                                                         child: Text(
                                                           eventtypesState
                                                                       .datefrom ==
                                                                   null
                                                               ? ""
-                                                              : new DateFormat(
+                                                              : DateFormat(
                                                                       "dd-MMM-yyyy")
                                                                   .format(eventtypesState
                                                                       .datefrom!)

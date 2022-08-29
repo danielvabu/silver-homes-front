@@ -77,19 +77,19 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment(0, 0),
+      alignment: const Alignment(0, 0),
       child: Material(
         color: Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
                 minWidth: 700, maxWidth: 700, minHeight: 620, maxHeight: 620),
             child: Container(
               height: 620,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white, width: 1.0),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10.0),
                 ),
                 color: Colors.white,
@@ -101,7 +101,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                   return Stack(
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -136,22 +136,22 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                   },
                                 );
                               },
-                              child: Icon(Icons.clear, size: 25),
+                              child: const Icon(Icons.clear, size: 25),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20, bottom: 20),
+                        padding: const EdgeInsets.only(top: 20, bottom: 20),
                         child: SingleChildScrollView(
                           child: Container(
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 10, left: 20, right: 20),
                                   child: Row(
                                     mainAxisAlignment:
@@ -181,16 +181,14 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             style: MyStyles.Medium(
                                                 14, myColor.text_color),
                                           ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
+                                          const SizedBox(width: 10.0),
                                           RatingBar.builder(
                                             initialRating:
                                                 addVendorState.rating,
                                             allowHalfRating: false,
                                             glow: false,
                                             itemBuilder: (context, index) =>
-                                                Icon(
+                                                const Icon(
                                               Icons.star,
                                               color: myColor.blue,
                                             ),
@@ -209,11 +207,10 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 25,
-                                ),
+                                const SizedBox(height: 25.0),
                                 Container(
-                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 20),
                                   child: Text(
                                     GlobleString.LMV_AV_ContactInformation,
                                     style:
@@ -221,18 +218,15 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                     textAlign: TextAlign.start,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
+                                const SizedBox(height: 5.0),
                                 Container(
-                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 20),
                                   child: FocusScope(
                                     node: _focusScopeNode,
                                     child: Column(
                                       children: [
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -251,9 +245,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         14, myColor.text_color),
                                                     textAlign: TextAlign.start,
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue: addVendorState
                                                         .companyname,
@@ -261,30 +253,33 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                     autofocus: true,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
-                                                        //border: InputBorder.none,
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .blue,
-                                                                  width: 2),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .gray,
-                                                                  width: 1.0),
-                                                        ),
-                                                        isDense: true,
-                                                        contentPadding:
-                                                            EdgeInsets.all(10),
-                                                        fillColor:
-                                                            myColor.white,
-                                                        filled: true),
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            //border: InputBorder.none,
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .blue,
+                                                                      width: 2),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0),
+                                                            ),
+                                                            isDense: true,
+                                                            contentPadding:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            fillColor:
+                                                                myColor.white,
+                                                            filled: true),
                                                     onChanged: (value) {
                                                       _store.dispatch(
                                                           UpdateADV_companyname(
@@ -295,7 +290,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 7.0),
+                                            const SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -305,7 +300,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      SizedBox(width: 8.0),
+                                                      const SizedBox(
+                                                          width: 8.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Category,
@@ -317,7 +313,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30,
                                                     // ignore: missing_required_param
@@ -365,7 +361,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 15.0),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -388,7 +384,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(width: 10.0),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -407,7 +404,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
+                                                    decoration:
+                                                        const InputDecoration(
                                                       //border: InputBorder.none,
                                                       focusedBorder:
                                                           OutlineInputBorder(
@@ -437,7 +435,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 15.0),
+                                            const SizedBox(width: 15.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -456,7 +454,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(width: 10.0),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -467,14 +466,15 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue: addVendorState
                                                         .clastname,
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
+                                                    decoration:
+                                                        const InputDecoration(
                                                       //border: InputBorder.none,
                                                       focusedBorder:
                                                           OutlineInputBorder(
@@ -506,9 +506,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -531,7 +529,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(width: 10.0),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -542,15 +541,15 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue:
                                                         addVendorState.cemail,
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
-                                                      //border: InputBorder.none,
+                                                    decoration:
+                                                        const InputDecoration(
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -579,9 +578,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
+                                            const SizedBox(width: 15.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -596,9 +593,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         14, myColor.text_color),
                                                     textAlign: TextAlign.start,
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  const SizedBox(height: 5.0),
                                                   Container(
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
@@ -660,7 +655,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                                   "(000) 000 0000")
                                                             ],
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                               border:
                                                                   InputBorder
                                                                       .none,
@@ -692,9 +687,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
+                                        const SizedBox(height: 20.0),
                                         Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
@@ -704,9 +697,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             textAlign: TextAlign.start,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -729,9 +720,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -742,15 +732,15 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue:
                                                         addVendorState.address,
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
-                                                      //border: InputBorder.none,
+                                                    decoration:
+                                                        const InputDecoration(
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -779,7 +769,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 20.0),
+                                            const SizedBox(width: 20.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -798,9 +788,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -811,39 +800,41 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue:
                                                         addVendorState.suit,
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
-                                                        //border: InputBorder.none,
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .blue,
-                                                                  width: 2.0),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .gray,
-                                                                  width: 1.0),
-                                                        ),
-                                                        isDense: true,
-                                                        contentPadding:
-                                                            EdgeInsets.all(10),
-                                                        fillColor:
-                                                            myColor.white,
-                                                        filled: true),
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            //border: InputBorder.none,
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .blue,
+                                                                      width:
+                                                                          2.0),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0),
+                                                            ),
+                                                            isDense: true,
+                                                            contentPadding:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            fillColor:
+                                                                myColor.white,
+                                                            filled: true),
                                                     onChanged: (value) {
                                                       _store.dispatch(
                                                           UpdateADV_suit(
@@ -856,7 +847,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(height: 15.0),
+                                        const SizedBox(height: 15.0),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -879,9 +870,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         textAlign:
                                                             TextAlign.start,
                                                       ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
+                                                      const SizedBox(
+                                                          width: 10.0),
                                                       Text(
                                                         GlobleString.Optional,
                                                         style: MyStyles.Medium(
@@ -892,39 +882,40 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  const SizedBox(height: 5.0),
                                                   TextFormField(
                                                     initialValue: addVendorState
                                                         .postalcode,
                                                     textAlign: TextAlign.start,
                                                     style: MyStyles.Medium(
                                                         14, myColor.text_color),
-                                                    decoration: InputDecoration(
-                                                        //border: InputBorder.none,
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .blue,
-                                                                  width: 2.0),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                                  color: myColor
-                                                                      .gray,
-                                                                  width: 1.0),
-                                                        ),
-                                                        isDense: true,
-                                                        contentPadding:
-                                                            EdgeInsets.all(10),
-                                                        fillColor:
-                                                            myColor.white,
-                                                        filled: true),
+                                                    decoration:
+                                                        const InputDecoration(
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .blue,
+                                                                      width:
+                                                                          2.0),
+                                                            ),
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0),
+                                                            ),
+                                                            isDense: true,
+                                                            contentPadding:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            fillColor:
+                                                                myColor.white,
+                                                            filled: true),
                                                     onChanged: (value) {
                                                       _store.dispatch(
                                                           UpdateADV_postalcode(
@@ -935,7 +926,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 7.0),
+                                            const SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -945,7 +936,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      SizedBox(width: 8.0),
+                                                      const SizedBox(
+                                                          width: 8.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Country,
@@ -957,9 +949,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
+                                                  const SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30,
                                                     // ignore: missing_required_param
@@ -1058,7 +1048,8 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      SizedBox(width: 5.0),
+                                                      const SizedBox(
+                                                          width: 5.0),
                                                       Text(
                                                         GlobleString
                                                             .LMV_AV_Province_State,
@@ -1070,7 +1061,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30.0,
                                                     child: DropdownSearch<
@@ -1149,7 +1140,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 7.0),
+                                            const SizedBox(width: 7.0),
                                             Expanded(
                                               child: Column(
                                                 mainAxisAlignment:
@@ -1171,7 +1162,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 5.0),
+                                                  const SizedBox(height: 5.0),
                                                   Container(
                                                     height: 30,
                                                     // ignore: missing_required_param
@@ -1222,9 +1213,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
+                                        const SizedBox(height: 15.0),
                                         Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -1239,9 +1228,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                       14, myColor.text_color),
                                                   textAlign: TextAlign.start,
                                                 ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
+                                                const SizedBox(width: 10.0),
                                                 Text(
                                                   GlobleString.Optional,
                                                   style: MyStyles.Medium(
@@ -1250,9 +1237,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
+                                            const SizedBox(height: 5.0),
                                             TextFormField(
                                               initialValue: addVendorState.Note,
                                               textAlign: TextAlign.start,
@@ -1264,8 +1249,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                 LengthLimitingTextInputFormatter(
                                                     10000),
                                               ],
-                                              decoration: InputDecoration(
-                                                  //border: InputBorder.none,
+                                              decoration: const InputDecoration(
                                                   focusedBorder:
                                                       OutlineInputBorder(
                                                     borderSide: BorderSide(
@@ -1279,10 +1263,6 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                                         width: 1.0),
                                                   ),
                                                   isDense: true,
-                                                  /* hintText: GlobleString
-                                                .NL_hint_Enter_email,
-                                            hintStyle: MyStyles.Regular(
-                                                12, myColor.hintcolor),*/
                                                   contentPadding:
                                                       EdgeInsets.all(10),
                                                   fillColor: myColor.white,
@@ -1300,7 +1280,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 15, left: 20, right: 20),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -1339,12 +1319,13 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                         },
                                         child: Container(
                                           height: 35,
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 25, right: 25),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(5)),
                                               color: myColor.white,
                                               border: Border.all(
                                                   color: myColor.Circle_main,
@@ -1356,9 +1337,7 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
+                                      const SizedBox(width: 10.0),
                                       InkWell(
                                         onTap: () {
                                           checkValidation(
@@ -1367,10 +1346,10 @@ class _AddVendorDialogBoxState extends State<AddVendorDialogBox> {
                                         },
                                         child: Container(
                                           height: 35,
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 25, right: 25),
                                           alignment: Alignment.center,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(5)),
                                             color: myColor.Circle_main,
