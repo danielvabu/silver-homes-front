@@ -24,7 +24,7 @@ class EventTypesData {
   String? confirmation_message;
   String? time_zone;
   int? time_scheduling;
-  int? time_scheduling_medida;
+  String? time_scheduling_medida;
   int? max_event_per_day;
   String? prop_id;
   int? owner_id;
@@ -49,8 +49,7 @@ class EventTypesData {
   List? frih2;
   List? sath1;
   List? sath2;
-  int? timescheduling;
-  String? timeschedulingmed;
+
   int? maximum;
   List? overrrides;
   EventTypesData(
@@ -102,8 +101,6 @@ class EventTypesData {
       this.frih2,
       this.sath1,
       this.sath2,
-      this.timescheduling,
-      this.timeschedulingmed,
       this.maximum,
       this.overrrides});
 

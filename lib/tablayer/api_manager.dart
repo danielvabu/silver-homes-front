@@ -708,8 +708,12 @@ class ApiManager {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
-        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -1972,10 +1976,10 @@ class ApiManager {
           int time_scheduling = myobject['time_scheduling'] != null
               ? myobject['time_scheduling']
               : 0;
-          int time_scheduling_medida =
+          String time_scheduling_medida =
               myobject['time_scheduling_medida'] != null
                   ? myobject['time_scheduling_medida']
-                  : 0;
+                  : "";
           int max_event_per_day = myobject['max_event_per_day'] != null
               ? myobject['max_event_per_day']
               : 0;
@@ -2578,10 +2582,10 @@ class ApiManager {
     _store.dispatch(Updatfrih2(eventTypesData.frih2!));
     _store.dispatch(Updatsath1(eventTypesData.sath1!));
     _store.dispatch(Updatsath2(eventTypesData.sath2!));
-    //  _store.dispatch(Updatetimescheduling(eventTypesData.time_scheduling!));
-    //_store.dispatch(Updatemaximum(eventTypesData.maximum!));
-
-    // deberia ser str _store.dispatch(Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
+    _store.dispatch(Updatetimescheduling(eventTypesData.time_scheduling!));
+    _store.dispatch(Updatemaximum(eventTypesData.max_event_per_day!));
+    _store.dispatch(
+        Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
 
     /*Summery*/
   }
@@ -9479,6 +9483,36 @@ class ApiManager {
         etableName.AdditionalReferences,
         eConjuctionClause().AND,
         eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+  Deleteavailability(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Availability,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+  DeleteavailabilityTime(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTime,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
