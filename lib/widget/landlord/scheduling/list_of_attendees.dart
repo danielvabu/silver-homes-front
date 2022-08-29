@@ -324,10 +324,17 @@ class ListOfAttendees extends StatelessWidget {
                                           },
                                         ),
                                         const SizedBox(height: 10.0),
-                                        InkWell(
-                                          onTap: () {},
-                                          child: CustomeWidget.AddSimpleButton(
-                                              GlobleString.SAVE),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child:
+                                                  CustomeWidget.AddSimpleButton(
+                                                      GlobleString.SAVE),
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(height: 15.0),
                                       ],
