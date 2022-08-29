@@ -1503,7 +1503,7 @@ class EventTypesInsert {
   int? buffer_after;
   int? buffer_before;
   String? confirmation_message;
-  int? time_zone;
+  String? time_zone;
   int? time_scheduling;
   int? time_scheduling_medida;
   int? max_event_per_day;
@@ -1511,6 +1511,8 @@ class EventTypesInsert {
   int? owner_id;
   String? datefrom;
   String? dateto;
+  bool? spa;
+  bool? notap;
   String? durationmed;
   String? aftermed;
   String? beforemed;
@@ -1535,6 +1537,8 @@ class EventTypesInsert {
       this.owner_id,
       this.datefrom,
       this.dateto,
+      this.spa,
+      this.notap,
       this.durationmed,
       this.aftermed,
       this.beforemed});
@@ -1561,6 +1565,8 @@ class EventTypesInsert {
           owner_id: json["owner_id"],
           datefrom: json["datefrom"],
           dateto: json["dateto"],
+          spa: json["spa"],
+          notap: json["notap"],
           durationmed: json["durationmed"],
           aftermed: json["aftermed"],
           beforemed: json["beforemed"]);
@@ -1586,6 +1592,8 @@ class EventTypesInsert {
         "owner_id": owner_id,
         "datefrom": datefrom,
         "dateto": dateto,
+        "spa": spa,
+        "notap": notap,
         "durationmed": durationmed,
         "aftermed": aftermed,
         "beforemed": beforemed

@@ -205,7 +205,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
 
     if (pickedDate != null && pickedDate != eventtypesState.dateto) {
       AddEditEventTypes.isValueUpdate = true;
-      _store.dispatch(UpdateDateto(pickedDate));
+      _store.dispatch(UpdateDateto2(pickedDate));
       // _store.dispatch(UpdateErrorDateofavailable(false));
     }
   }
@@ -229,7 +229,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
 
     if (pickedDate != null && pickedDate != eventtypesState.datefrom) {
       AddEditEventTypes.isValueUpdate = true;
-      _store.dispatch(UpdateDatefrom(pickedDate));
+      _store.dispatch(UpdateDatefrom2(pickedDate));
       //_store.dispatch(UpdateErrorDateofavailable(false));
     }
   }
@@ -1777,10 +1777,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       eventtypesInsert.buffer_before = eventtypesState.EventTypesBefore;
       eventtypesInsert.confirmation_message =
           eventtypesState.EventTypesConfirmation;
-      eventtypesInsert.time_zone = 0;
-      eventtypesInsert.time_scheduling = 0;
-      eventtypesInsert.time_scheduling_medida = 0;
-      eventtypesInsert.max_event_per_day = 0;
+
       eventtypesInsert.prop_id = (eventtypesState.selectproperty == null)
           ? "dddddddd-dddd-dddd-dddd-dddddddddddd"
           : eventtypesState.selectproperty!.id;
@@ -1794,7 +1791,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       eventtypesInsert.durationmed = eventtypesState.EventTypesDurationPeriod;
       eventtypesInsert.aftermed = eventtypesState.EventTypesAfterPeriod;
       eventtypesInsert.beforemed = eventtypesState.EventTypesBeforePeriod;
-
+      eventtypesInsert.spa = eventtypesState.EventTypesSPA;
+      eventtypesInsert.notap = eventtypesState.EventTypesNA;
       //updateSummeryData(eventtypesState);
 
       if (Prefs.getBool(PrefsName.EventTypesEdit)) {

@@ -4,6 +4,10 @@ class EventTypesData {
   String? id;
   String? name;
   bool? ispublished;
+  String? datefrom;
+  String? dateto;
+  bool? spa;
+  bool? notap;
   bool? relation;
   bool? showing;
   String? location;
@@ -18,7 +22,7 @@ class EventTypesData {
   int? buffer_before;
   String? buffer_before_measure;
   String? confirmation_message;
-  int? time_zone;
+  String? time_zone;
   int? time_scheduling;
   int? time_scheduling_medida;
   int? max_event_per_day;
@@ -53,6 +57,10 @@ class EventTypesData {
       {this.id,
       this.name,
       this.ispublished,
+      this.datefrom,
+      this.dateto,
+      this.spa,
+      this.notap,
       this.relation,
       this.showing,
       this.location,
@@ -103,6 +111,10 @@ class EventTypesData {
       id: json["id"],
       name: json["name"],
       ispublished: json["ispublished"],
+      datefrom: json["datefrom"],
+      dateto: json["dateto"],
+      spa: json["spa"],
+      notap: json["notap"],
       relation: json["relation"],
       showing: json["showing"],
       location: json["location"],
@@ -150,6 +162,8 @@ class EventTypesData {
         "id": id,
         "name": name,
         "ispublished": ispublished,
+        "datefrom": datefrom,
+        "dateto": dateto,
         "relation": relation,
         "showing": showing,
         "location": location,

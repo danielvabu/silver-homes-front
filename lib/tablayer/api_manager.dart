@@ -1928,12 +1928,18 @@ class ApiManager {
           int Duration =
               myobject['duration'] != null ? myobject['duration'] : 0;
 
-          myobject['ispublished'] != null ? myobject['ispublished'] : false;
-
           bool showing =
               myobject['showing'] != null ? myobject['showing'] : false;
           bool ispublished =
               myobject['ispublished'] != null ? myobject['ispublished'] : false;
+
+          bool spa = myobject['spa'] != null ? myobject['spa'] : false;
+          bool notap = myobject['notap'] != null ? myobject['notap'] : false;
+          String datefrom = myobject['datefrom'] != null
+              ? myobject['datefrom'].toString()
+              : "";
+          String dateto =
+              myobject['dateto'] != null ? myobject['dateto'].toString() : "";
           String location = myobject['location'] != null
               ? myobject['location'].toString()
               : "";
@@ -1961,8 +1967,8 @@ class ApiManager {
           String confirmation_message = myobject['confirmation_message'] != null
               ? myobject['confirmation_message'].toString()
               : "";
-          int time_zone =
-              myobject['time_zone'] != null ? myobject['time_zone'] : 0;
+          String time_zone =
+              myobject['time_zone'] != null ? myobject['time_zone'] : "";
           int time_scheduling = myobject['time_scheduling'] != null
               ? myobject['time_scheduling']
               : 0;
@@ -2004,6 +2010,10 @@ class ApiManager {
           eventTypesData.duration = Duration;
           eventTypesData.durationmed = durationmed;
           eventTypesData.ispublished = ispublished;
+          eventTypesData.spa = spa;
+          eventTypesData.notap = notap;
+          eventTypesData.datefrom = datefrom;
+          eventTypesData.dateto = dateto;
           eventTypesData.name = Name;
           eventTypesData.relation = RelationShip;
           eventTypesData.showing = showing;
@@ -2534,8 +2544,10 @@ class ApiManager {
     _store.dispatch(UpdateURL(eventTypesData.link!));
     _store.dispatch(UpdateEventTypesColor(eventTypesData.color!));
     _store.dispatch(UpdateEventTypesRanges(eventTypesData.range!));
-    //_store.dispatch(UpdateDateto(eventTypesData.dateto!));
-    //_store.dispatch(UpdateDateto(eventTypesData.datefrom!));
+    _store.dispatch(UpdateDateto(eventTypesData.dateto!));
+    _store.dispatch(UpdateDatefrom(eventTypesData.datefrom!));
+    _store.dispatch(UpdateNotAplicable(eventTypesData.notap!));
+    _store.dispatch(UpdateSPA(eventTypesData.spa!));
     _store.dispatch(UpdateDuration(eventTypesData.duration!));
     _store.dispatch(UpdateDurationp(eventTypesData.durationmed!));
     _store.dispatch(UpdateBefore(eventTypesData.buffer_before!));
@@ -2543,7 +2555,7 @@ class ApiManager {
     _store.dispatch(UpdateBeforep(eventTypesData.buffer_before_measure!));
     _store.dispatch(
         UpdateEventTypesConfirmation(eventTypesData.confirmation_message!));
-    // _store.dispatch(UpdateTimezon(eventTypesData.time_zone!)); es entero pero debe ser string
+    _store.dispatch(UpdateTimezon(eventTypesData.time_zone!));
     //_store.dispatch(UpdateDisplaytz(eventTypesData!));
     _store.dispatch(UpdateSun(eventTypesData.sun!));
     _store.dispatch(UpdateMon(eventTypesData.mon!));

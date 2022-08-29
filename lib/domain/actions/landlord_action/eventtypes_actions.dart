@@ -572,9 +572,21 @@ class UpdateDateofavailable1 implements Action {
 }
 
 class UpdateDateto implements Action {
-  final DateTime? dateofavailable;
+  final String? dateofavailable;
 
   UpdateDateto(this.dateofavailable);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(dateto: DateTime.parse(dateofavailable!));
+  }
+}
+
+class UpdateDateto2 implements Action {
+  final DateTime? dateofavailable;
+
+  UpdateDateto2(this.dateofavailable);
 
   @override
   AppState updateState(AppState appState) {
@@ -583,9 +595,21 @@ class UpdateDateto implements Action {
 }
 
 class UpdateDatefrom implements Action {
-  final DateTime? dateofavailable;
+  final String? dateofavailable;
 
   UpdateDatefrom(this.dateofavailable);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .eventTypesState(datefrom: DateTime.parse(dateofavailable!));
+  }
+}
+
+class UpdateDatefrom2 implements Action {
+  final DateTime? dateofavailable;
+
+  UpdateDatefrom2(this.dateofavailable);
 
   @override
   AppState updateState(AppState appState) {
