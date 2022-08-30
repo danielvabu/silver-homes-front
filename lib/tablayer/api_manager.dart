@@ -1298,7 +1298,8 @@ class ApiManager {
           String Duration = myobject['duration'] != null
               ? myobject['duration'].toString()
               : "";
-
+          String Link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
           int Slots = myobject['slots'] != null ? myobject['slots'] : 0;
 
           bool ispublished =
@@ -1323,6 +1324,7 @@ class ApiManager {
           eventData.ispublished = ispublished;
           eventData.name = Name;
           eventData.relationship = RelationShip;
+          eventData.url = Link;
           eventData.slots = Slots;
           eventData.createdon = CreatedOn;
           eventData.updatedon = UpdatedOn;

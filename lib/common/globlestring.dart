@@ -2102,4 +2102,5 @@ class GlobleString {
   static const String User_delete = "The user has been deleted.";
   static const String File_deleted = "File deleted.";
   static const String Activity_Log_deleted = "Activity log deleted.";
+  static const String Share = "Share";
 }

@@ -36,7 +36,7 @@ import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_header.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_item.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
-
+import 'package:silverhome/widget/landlord/scheduling/share_link.dart';
 import '../../../../models/landlord_models/eventtypes_list_state.dart';
 import 'add_edit_eventtypes.dart';
 
@@ -489,8 +489,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                     child: EventTypesItem(
                       listdata1: eventtypesListState.eventtypeslist,
                       onPresseEdit: (EventTypesDataList eventtypesData) {
-                        getEventTypesDetails(
-                            eventtypesData, 2, eventtypesData.slots!);
+                        openDialogShareLink(eventtypesData);
                       },
                       onPresseDuplicat: (EventTypesDataList eventtypesData) {
                         ApiManager().DuplicatEventTypesGenerate(
@@ -1122,5 +1121,17 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       }
     }
     );*/
+  }
+
+  void openDialogShareLink(EventTypesDataList eventtypesData) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ShareLink(eventtypesData.url);
+      },
+    );
   }
 }

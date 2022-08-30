@@ -270,7 +270,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             PopupMenuItem(
               value: 2,
               child: Text(
-                GlobleString.PH_ACT_Edit,
+                GlobleString.Share,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),

@@ -690,7 +690,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ShareLink();
+        return Container();
       },
     );
   }

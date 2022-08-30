@@ -15,8 +15,10 @@ import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
 class ShareLink extends StatefulWidget {
+  final String? url;
   @override
   State<ShareLink> createState() => _ShareLinkState();
+  ShareLink(this.url);
 }
 
 class _ShareLinkState extends State<ShareLink> {
@@ -84,7 +86,11 @@ class _ShareLinkState extends State<ShareLink> {
                                         width: 530,
                                         child: TextFormField(
                                           initialValue:
-                                              "https://www.ren-hogar.com/link/",
+                                              "https://www.ren-hogar.com/events/" +
+                                                  Prefs.getString(PrefsName
+                                                      .user_CompanyName) +
+                                                  "/" +
+                                                  widget.url!,
                                           style: MyStyles.Medium(
                                               14, myColor.text_color),
                                           decoration: const InputDecoration(
@@ -105,7 +111,16 @@ class _ShareLinkState extends State<ShareLink> {
                                       ),
                                       const SizedBox(width: 10.0),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          String url =
+                                              "https://www.ren-hogar.com/events/" +
+                                                  Prefs.getString(PrefsName
+                                                      .user_CompanyName) +
+                                                  "/" +
+                                                  widget.url!;
+                                          Helper.copyToClipboardHack(
+                                              context, url);
+                                        },
                                         child: CustomeWidget.AddSimpleButton(
                                             GlobleString.Copy_Link),
                                       ),

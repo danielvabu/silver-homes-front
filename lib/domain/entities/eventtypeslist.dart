@@ -9,17 +9,18 @@ class EventTypesDataList {
     this.relationship,
     this.duration,
     this.slots,
+    this.url,
     this.createdon,
     this.updatedon,
   });
   String? id;
-
   String? name;
   bool? ispublished;
   String? property_name;
   String? relationship;
   String? duration;
   int? slots;
+  String? url;
   String? createdon;
   String? updatedon;
 
@@ -32,6 +33,7 @@ class EventTypesDataList {
         ispublished: json["ispublished"],
         duration: json["duration"],
         slots: json["slots"],
+        url: json["url"],
         createdon: json["createdon"],
         updatedon: json["updatedon"],
       );
@@ -44,6 +46,7 @@ class EventTypesDataList {
         "isPublished": ispublished,
         "duration": duration,
         "slots": slots,
+        "url": url,
         "createdon": createdon,
         "updatedon": updatedon,
       };
