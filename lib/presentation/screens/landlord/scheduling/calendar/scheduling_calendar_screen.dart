@@ -246,6 +246,14 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                         const SizedBox(width: 10.0),
                                         Expanded(
                                           child: SfCalendar(
+                                            onTap:
+                                                (CalendarTapDetails details) {
+                                              dynamic appointment =
+                                                  details.appointments;
+                                              DateTime date = details.date!;
+                                              CalendarElement element =
+                                                  details.targetElement;
+                                            },
                                             dataSource: MeetingDataSource(
                                                 _getDataSource(slotsListState!
                                                     .eventtypeslist)),
@@ -292,52 +300,61 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 20),
-                                Container(
-                                  color: myColor.TA_table_header,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 15),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text('Wednesday - June 8, 2022',
-                                              style: TextStyle(
-                                                  color: myColor.text_color,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold)),
-                                          const SizedBox(width: 10),
-                                          Text('(3 scheduled slots)',
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
-                                          //setState(() {});
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: 15, right: 10),
-                                          height: 40,
-                                          width: 30,
-                                          alignment: Alignment.center,
-                                          child: Image.asset(
-                                            //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
-                                            "assets/images/circle_down.png",
-                                            height: 19,
-                                            //width: 20,
-                                            alignment: Alignment.center,
-                                          ),
+                                for (int i = 0;
+                                    i < slotsListState!.eventtypeslist.length;
+                                    i++)
+                                  Container(
+                                    color: myColor.TA_table_header,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                                slotsListState!
+                                                    .eventtypeslist[i]
+                                                    .date_start!
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: myColor.text_color,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            const SizedBox(width: 10),
+                                            Text('(3 scheduled slots)',
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
                                         ),
-                                      )
-                                    ],
+                                        InkWell(
+                                          onTap: () {
+                                            //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
+                                            //setState(() {});
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: 15, right: 10),
+                                            height: 40,
+                                            width: 30,
+                                            alignment: Alignment.center,
+                                            child: Image.asset(
+                                              //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
+                                              "assets/images/circle_down.png",
+                                              height: 19,
+                                              //width: 20,
+                                              alignment: Alignment.center,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
                                 Container(
                                   color: myColor.drawselectcolor2,
                                   padding: const EdgeInsets.symmetric(
@@ -530,6 +547,9 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     final List<Meeting> meetings = <Meeting>[];
     for (int i = 0; i < listado.length; i++) {
       Color color = Colors.white;
+      String nombreevento = listado[i].eventTypesData!.name! +
+          " " +
+          listado[i].eventTypesData!.location!;
       if (listado[i].eventTypesData!.color == "grey") {
         color = Colors.grey;
       }
@@ -561,7 +581,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         color = Colors.pink;
       }
       meetings.add(Meeting(
-          listado[i].eventTypesData!.name ?? "",
+          nombreevento,
           DateTime.parse(listado[i].date_start ?? ""),
           DateTime.parse(listado[i].date_end ?? ""),
           color,
