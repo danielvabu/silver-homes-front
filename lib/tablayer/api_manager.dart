@@ -43,6 +43,7 @@ import 'package:silverhome/domain/actions/landlord_action/propertylist_actions.d
 import 'package:silverhome/domain/actions/landlord_action/reference_check_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/reference_questionnaire_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/reference_questionnaire_details_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/slots_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancy_lease_agreement_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancy_varification_doc_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/varification_document_actions.dart';
@@ -75,6 +76,7 @@ import 'package:silverhome/domain/entities/property_drop_data.dart';
 import 'package:silverhome/domain/entities/property_maintenance_images.dart';
 import 'package:silverhome/domain/entities/propertydata.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/domain/entities/statedata.dart';
 import 'package:silverhome/domain/entities/tenancy_additional_info.dart';
 import 'package:silverhome/domain/entities/tenancy_additional_reference.dart';
@@ -1358,6 +1360,89 @@ class ApiManager {
 
         _store.dispatch(UpdateEventTypesListIsloding(false));
         _store.dispatch(UpdateEventTypesList(eventTypelist));
+      } else {
+        // loader.remove();
+        _store.dispatch(UpdateEventTypesListIsloding(false));
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
+  getEventTypesSlots(BuildContext context, String json, int ftime) async {
+    /*loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+    List<Slots> slotslist = <Slots>[];
+
+    Helper.Log("slots", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        //loader.remove();
+        var data = jsonDecode(respoce);
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          var myobject = data['Result'][i];
+          EventTypesData? eventTypesData = myobject['Event_Type'] != null
+              ? EventTypesData.fromJson(myobject['Event_Type'])
+              : null;
+
+          int eventid = myobject['eventTypesDataId'] != null
+              ? myobject['eventTypesDataId']
+              : 0;
+
+          String datestart = myobject['date_start'] != null
+              ? myobject['date_start'].toString()
+              : "";
+
+          String dateend = myobject['date_end'] != null
+              ? myobject['date_end'].toString()
+              : "";
+
+          String name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
+
+          String email =
+              myobject['email'] != null ? myobject['email'].toString() : "";
+          int state = myobject['state'] != null ? myobject['state'] : 0;
+
+          Slots eventData = new Slots();
+
+          eventData.eventTypesData = eventTypesData;
+          eventData.eventTypesDataId = eventid;
+          eventData.date_start = datestart;
+          eventData.date_end = dateend;
+          eventData.name = name;
+          eventData.email = email;
+          eventData.state = state;
+          slotslist.add(eventData);
+        }
+
+        /* propertylist.sort((a, b) =>
+            b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));*/
+/*
+        if (ftime == 0) {
+          if (slotslist.length > 0) {
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+
+            _store.dispatch(UpdateEventTypesListTotalRecord(TotalRecords));
+
+            if (TotalRecords % 15 == 0) {
+              int dept_totalpage = int.parse((TotalRecords / 15).toString());
+              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
+            } else {
+              double page = (TotalRecords / 15);
+              int dept_totalpage = (page + 1).toInt();
+              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
+            }
+          } else {
+            _store.dispatch(UpdateEventTypesListTotalpage(1));
+          }
+          _store.dispatch(UpdateEventTypesListPageNo(1));
+        }
+*/
+        _store.dispatch(UpdateEventTypesListIsloding(false));
+        _store.dispatch(UpdateSlots(slotslist));
       } else {
         // loader.remove();
         _store.dispatch(UpdateEventTypesListIsloding(false));

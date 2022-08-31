@@ -14,6 +14,8 @@ import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_applicant_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_lead_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/notification_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
+import 'package:silverhome/presentation/models/landlord_models/slots_state.dart';
 import 'package:silverhome/presentation/models/vendor/add_vendor_state.dart';
 
 import 'admin_models/admin_add_newmember_state.dart';
@@ -91,6 +93,8 @@ abstract class AppState with _$AppState {
     required PropertyListState propertyListState,
     required EventTypesListState eventTypesListState,
     required EditLeadState editLeadState,
+    required SlotsState slotsState,
+    required SlotsListState slotsListState,
     required TenantsApplicationDetailsState tenantsApplicationDetailsState,
     required TenancyVarificationDocumentState tenancyVarificationDocumentState,
     required VarificationDocumentState varificationDocumentState,
@@ -165,6 +169,8 @@ abstract class AppState with _$AppState {
         propertyListState: PropertyListState.initial(),
         eventTypesListState: EventTypesListState.initial(),
         editLeadState: EditLeadState.initial(),
+        slotsState: SlotsState.initial(),
+        slotsListState: SlotsListState.initial(),
         tenantsApplicationDetailsState:
             TenantsApplicationDetailsState.initial(),
         tenancyVarificationDocumentState:
