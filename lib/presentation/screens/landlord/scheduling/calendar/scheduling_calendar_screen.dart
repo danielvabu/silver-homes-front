@@ -9,6 +9,7 @@ import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendees.dart';
 import 'package:silverhome/widget/landlord/scheduling/share_link.dart';
+import 'package:silverhome/widget/landlord/scheduling/view_event.dart';
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -93,7 +94,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 240;
-    ancho = width / 100;
+    ancho = (width / 100) - 0.1;
     print(ancho);
 
     return Container(
@@ -253,6 +254,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               DateTime date = details.date!;
                                               CalendarElement element =
                                                   details.targetElement;
+                                              openDialogViewEvent();
                                             },
                                             dataSource: MeetingDataSource(
                                                 _getDataSource(slotsListState!
@@ -272,267 +274,318 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                             Container(
                               width: double.infinity,
                               height: height - 103,
-                              child: Column(children: [
-                                const SizedBox(height: 20.0),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        'Time Zone: Pacific Standar Time (PST)',
-                                        style: TextStyle(
-                                            color: myColor.text_color,
-                                            fontWeight: FontWeight.bold)),
-                                    const SizedBox(width: 10.0),
-                                    Row(
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4.0, vertical: 4.0),
+                                child: Column(children: [
+                                  const SizedBox(height: 20.0),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                          'Time Zone: Pacific Standar Time (PST)',
+                                          style: TextStyle(
+                                              color: myColor.text_color,
+                                              fontWeight: FontWeight.bold)),
+                                      const SizedBox(width: 10.0),
+                                      Row(
+                                        children: [
+                                          Text(GlobleString.CALENDAR_Expand_All,
+                                              style: TextStyle(
+                                                  color: myColor.email_color,
+                                                  fontWeight: FontWeight.bold)),
+                                          const SizedBox(width: 15.0),
+                                          Text(
+                                              GlobleString
+                                                  .CALENDAR_Collapse_All,
+                                              style: TextStyle(
+                                                  color: myColor.email_color,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  for (int i = 0;
+                                      i < slotsListState!.eventtypeslist.length;
+                                      i++)
+                                    Column(
                                       children: [
-                                        Text(GlobleString.CALENDAR_Expand_All,
-                                            style: TextStyle(
-                                                color: myColor.email_color,
-                                                fontWeight: FontWeight.bold)),
-                                        const SizedBox(width: 15.0),
-                                        Text(GlobleString.CALENDAR_Collapse_All,
-                                            style: TextStyle(
-                                                color: myColor.email_color,
-                                                fontWeight: FontWeight.bold))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                                for (int i = 0;
-                                    i < slotsListState!.eventtypeslist.length;
-                                    i++)
-                                  Container(
-                                    color: myColor.TA_table_header,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 15),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                                slotsListState!
-                                                    .eventtypeslist[i]
-                                                    .date_start!
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    color: myColor.text_color,
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            const SizedBox(width: 10),
-                                            Text('(3 scheduled slots)',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
-                                            //setState(() {});
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 15, right: 10),
-                                            height: 40,
-                                            width: 30,
-                                            alignment: Alignment.center,
-                                            child: Image.asset(
-                                              //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
-                                              "assets/images/circle_down.png",
-                                              height: 19,
-                                              //width: 20,
-                                              alignment: Alignment.center,
-                                            ),
+                                        Container(
+                                          color: myColor.TA_table_header,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                      slotsListState!
+                                                          .eventtypeslist[i]
+                                                          .date_start!
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                          color: myColor
+                                                              .text_color,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  const SizedBox(width: 10),
+                                                  Text('(3 scheduled slots)',
+                                                      style: const TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ],
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
+                                                  //setState(() {});
+                                                },
+                                                child: Container(
+                                                  margin: const EdgeInsets.only(
+                                                      left: 15, right: 10),
+                                                  height: 40,
+                                                  width: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Image.asset(
+                                                    //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
+                                                    "assets/images/circle_down.png",
+                                                    height: 19,
+                                                    //width: 20,
+                                                    alignment: Alignment.center,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        )
+                                        ),
+// Este container es el que se debe desplegar o esconder
+                                        Container(
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                color: myColor.drawselectcolor2,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0,
+                                                        vertical: 5),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                        width: ancho * 5,
+                                                        child: const Text(" ")),
+                                                    SizedBox(
+                                                      width: ancho * 15,
+                                                      child: const Text(
+                                                          GlobleString
+                                                              .CALENDAR_Time,
+                                                          style: TextStyle(
+                                                              color: myColor
+                                                                  .text_color,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    SizedBox(
+                                                      width: ancho * 26,
+                                                      child: const Text(
+                                                          GlobleString
+                                                              .CALENDAR_Event_Type,
+                                                          style: TextStyle(
+                                                              color: myColor
+                                                                  .text_color,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    SizedBox(
+                                                      width: ancho * 20,
+                                                      child: const Text(
+                                                          GlobleString
+                                                              .CALENDAR_Attendees,
+                                                          style: TextStyle(
+                                                              color: myColor
+                                                                  .text_color,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    SizedBox(
+                                                      width: ancho * 27,
+                                                      child: const Text(
+                                                          GlobleString
+                                                              .CALENDAR_Location,
+                                                          style: TextStyle(
+                                                              color: myColor
+                                                                  .text_color,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    SizedBox(
+                                                        width: ancho * 2,
+                                                        child: const Text(" "))
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                                                color: myColor.TA_light,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0,
+                                                        vertical: 5),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: ancho * 4,
+                                                      child: Icon(
+                                                        Icons.circle,
+                                                        color: Colors.yellow,
+                                                        size: 17.0,
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 14,
+                                                        child: Text(
+                                                            '10:00 - 10:20 AM')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 25,
+                                                        child: Text(
+                                                            'Showings - 867 Hamilton Street',
+                                                            maxLines: 3)),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 19,
+                                                        child: Text(
+                                                            'Multiple (3)')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                      width: ancho * 26,
+                                                      child: Text(
+                                                          '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
+                                                          maxLines: 3),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 2,
+                                                        child:
+                                                            _actionEventPopup()),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                                                color: myColor.TA_dark,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0,
+                                                        vertical: 5),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: ancho * 4,
+                                                      child: Icon(
+                                                        Icons.circle,
+                                                        color: Colors.yellow,
+                                                        size: 17.0,
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 14,
+                                                        child: Text(
+                                                            '4:00 - 4:20 PM')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 25,
+                                                        child: Text(
+                                                            'Showings - 123 Main Street',
+                                                            maxLines: 3)),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 19,
+                                                        child: Text(
+                                                            'Hillary Duff')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                      width: ancho * 26,
+                                                      child: Text(
+                                                          '123 Main Street, Vancouver, BC, V3D 7K2, Canada',
+                                                          maxLines: 3),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 2,
+                                                        child:
+                                                            _actionEventPopup()),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
+                                                color: myColor.TA_light,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0,
+                                                        vertical: 5),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: ancho * 4,
+                                                      child: const Icon(
+                                                        Icons.circle,
+                                                        color: Colors.yellow,
+                                                        size: 17.0,
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 14,
+                                                        child: Text(
+                                                            '10:00 - 10:20 AM')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                      width: ancho * 25,
+                                                      child: Text(
+                                                          'Showings - 867 Hamilton Street',
+                                                          maxLines: 3),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 19,
+                                                        child: Text(
+                                                            'Multiple (3)')),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                      width: ancho * 26,
+                                                      child: Text(
+                                                          '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
+                                                          maxLines: 3),
+                                                    ),
+                                                    SizedBox(width: ancho),
+                                                    SizedBox(
+                                                        width: ancho * 2,
+                                                        child:
+                                                            _actionEventPopup()),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                Container(
-                                  color: myColor.drawselectcolor2,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                          width: ancho * 5,
-                                          child: const Text(" ")),
-                                      SizedBox(
-                                        width: ancho * 15,
-                                        child: const Text(
-                                            GlobleString.CALENDAR_Time,
-                                            style: TextStyle(
-                                                color: myColor.text_color,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      SizedBox(
-                                        width: ancho * 26,
-                                        child: const Text(
-                                            GlobleString.CALENDAR_Event_Type,
-                                            style: TextStyle(
-                                                color: myColor.text_color,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      SizedBox(
-                                        width: ancho * 20,
-                                        child: const Text(
-                                            GlobleString.CALENDAR_Attendees,
-                                            style: TextStyle(
-                                                color: myColor.text_color,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      SizedBox(
-                                        width: ancho * 27,
-                                        child: const Text(
-                                            GlobleString.CALENDAR_Location,
-                                            style: TextStyle(
-                                                color: myColor.text_color,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                      SizedBox(
-                                          width: ancho * 2,
-                                          child: const Text(" "))
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                  color: myColor.TA_light,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: ancho * 4,
-                                        child: Icon(
-                                          Icons.circle,
-                                          color: Colors.yellow,
-                                          size: 17.0,
-                                        ),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 14,
-                                          child: Text('10:00 - 10:20 AM')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 25,
-                                          child: Text(
-                                              'Showings - 867 Hamilton Street',
-                                              maxLines: 3)),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 19,
-                                          child: Text('Multiple (3)')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                        width: ancho * 26,
-                                        child: Text(
-                                            '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
-                                            maxLines: 3),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 2,
-                                          child: _actionEventPopup()),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                  color: myColor.TA_dark,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: ancho * 4,
-                                        child: Icon(
-                                          Icons.circle,
-                                          color: Colors.yellow,
-                                          size: 17.0,
-                                        ),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 14,
-                                          child: Text('4:00 - 4:20 PM')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 25,
-                                          child: Text(
-                                              'Showings - 123 Main Street',
-                                              maxLines: 3)),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 19,
-                                          child: Text('Hillary Duff')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                        width: ancho * 26,
-                                        child: Text(
-                                            '123 Main Street, Vancouver, BC, V3D 7K2, Canada',
-                                            maxLines: 3),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 2,
-                                          child: _actionEventPopup()),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                  color: myColor.TA_light,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        width: ancho * 4,
-                                        child: const Icon(
-                                          Icons.circle,
-                                          color: Colors.yellow,
-                                          size: 17.0,
-                                        ),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 14,
-                                          child: Text('10:00 - 10:20 AM')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                        width: ancho * 25,
-                                        child: Text(
-                                            'Showings - 867 Hamilton Street',
-                                            maxLines: 3),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 19,
-                                          child: Text('Multiple (3)')),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                        width: ancho * 26,
-                                        child: Text(
-                                            '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
-                                            maxLines: 3),
-                                      ),
-                                      SizedBox(width: ancho),
-                                      SizedBox(
-                                          width: ancho * 2,
-                                          child: _actionEventPopup()),
-                                    ],
-                                  ),
-                                ),
-                              ]),
+                                ]),
+                              ),
                             ),
                         ]),
                       ),
@@ -789,6 +842,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return Container();
+      },
+    );
+  }
+
+  void openDialogViewEvent() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ViewEvent();
       },
     );
   }
