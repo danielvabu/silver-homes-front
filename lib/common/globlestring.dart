@@ -1840,11 +1840,29 @@ class GlobleString {
   static const String CAL_Property_Name = "Property Name:";
   static const String CAL_Location = "Location:";
   static const String CAL_Time_Zone = "Time Zone:";
+
   static const String Share_Link = "Share Link";
   static const String Copy_Link = "Copy Link";
+  static const String Guests = "Guests";
+  static const String Minutes = 'minutes';
+  static const String Hours = 'Hours';
+  static const String Days = 'Days';
+  static const String Weeks = 'Weeks';
+  static const String Months = 'Months';
+  static const String Years = 'Years';
+  static const String Time_Zone = 'Time Zone';
+  static const String Unavailable = 'Unavailable';
+  static const String SUN = 'SUN';
+  static const String MON = 'MON';
+  static const String TUE = 'TUE';
+  static const String WED = 'WED';
+  static const String THU = 'THU';
+  static const String FRI = 'FRI';
+  static const String SAT = 'SAT';
+  static const String SAVE = 'Save';
+  static const String Description = 'Description';
 
   /*EventTypes*/
-  static const String Description = 'Description';
   static const String ET_New_Event_Type = "New Event Type";
   static const String ET_Event_Setup = 'Event Setup';
   static const String ET_Availability = 'Availability';
@@ -1878,28 +1896,11 @@ class GlobleString {
   static const String ET_Single_day = 'Single day';
   static const String ET_Indefinitely = 'Indefinitely into the future';
   static const String ET_Event_Duration = 'Event Duration';
-  static const String Minutes = 'minutes';
-  static const String Hours = 'Hours';
-  static const String Days = 'Days';
-  static const String Weeks = 'Weeks';
-  static const String Months = 'Months';
-  static const String Years = 'Years';
-  static const String Time_Zone = 'Time Zone';
-  static const String Unavailable = 'Unavailable';
-  static const String SUN = 'SUN';
-  static const String MON = 'MON';
-  static const String TUE = 'TUE';
-  static const String WED = 'WED';
-  static const String THU = 'THU';
-  static const String FRI = 'FRI';
-  static const String SAT = 'SAT';
-  static const String SAVE = 'Save';
   static const String ET_Buffer_Time = 'Buffer Time';
   static const String ET_Buffer_msg =
       'Give yourself some buffer time to prepare for or wrap up from booked events.';
   static const String ET_Before_event = 'Before event';
   static const String ET_After_event = 'After event';
-
   static const String ET_Set_Availability = 'Set your availability for event:';
   static const String ET_Time_Zone_Display = 'Time Zone Display';
   static const String ET_TZ_Auto =
