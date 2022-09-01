@@ -540,6 +540,9 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                             child: Text(attendens(
                                                                 slots[dias[i]]
                                                                         [j]
+                                                                    .eventTypesDataId,
+                                                                slots[dias[i]]
+                                                                        [j]
                                                                     .date_start,
                                                                 slotsListState!
                                                                     .eventtypeslist))),
@@ -582,24 +585,31 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     List<Slots> unico = [];
 
     for (int i = 0; i < listado.length; i++) {
-      int count = 0;
-      for (var element in listado) {
-        if (element.date_start == listado[i].date_start &&
-            element.eventTypesDataId == listado[i].eventTypesDataId) {
-          count++;
-        }
-      }
+      // int count = 0;
+      // for (var element in listado) {
+      //   if (element.date_start == listado[i].date_start &&
+      //       element.eventTypesDataId == listado[i].eventTypesDataId) {
+      //     count++;
+      //   }
+      // }
+      List<Slots> filteredList = unico
+          .where((e) =>
+              e.date_start == listado[i].date_start &&
+              e.eventTypesDataId == listado[i].eventTypesDataId)
+          .toList();
+      if (filteredList.length > 0) {
+      } else {
+        Slots ns = Slots(
+            eventTypesData: listado[i].eventTypesData,
+            eventTypesDataId: listado[i].eventTypesDataId,
+            date_start: listado[i].date_start,
+            date_end: listado[i].date_end,
+            name: "",
+            email: "",
+            state: listado[i].state);
 
-      Slots ns = Slots(
-          eventTypesData: listado[i].eventTypesData,
-          eventTypesDataId: listado[i].eventTypesDataId,
-          date_start: listado[i].date_start,
-          date_end: listado[i].date_end,
-          name: "",
-          email: "",
-          state: listado[i].state);
-      unico.add(ns);
-      if (count > 1) {}
+        unico.add(ns);
+      }
     }
 
     for (int i = 0; i < unico.length; i++) {
@@ -987,10 +997,12 @@ String ponerfecha(String date) {
   //  date.year.toString();
 }
 
-String attendens(String date, List<Slots> listado) {
+String attendens(int id, String date, List<Slots> listado) {
   String atten = "";
-  List<Slots> verl =
-      listado.where((element) => element.date_start! == date).toList();
+  List<Slots> verl = listado
+      .where((element) =>
+          element.date_start! == date && element.eventTypesDataId == id)
+      .toList();
   if (verl.length > 1) {
     atten = "Multiple(" + verl.length.toString() + ")";
   } else {
