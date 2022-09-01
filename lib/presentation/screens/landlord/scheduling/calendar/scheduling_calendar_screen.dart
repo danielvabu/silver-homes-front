@@ -50,6 +50,20 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   late Timer? _timer = null;
   int muestraElListado = 0;
   late List dias = [];
+  late List<bool> press = [];
+  late Map slots = {};
+  Map color1 = {
+    "grey": Colors.grey,
+    "red": Colors.red,
+    "orange": Colors.orange,
+    "yellow": Colors.yellow,
+    "green": Colors.green,
+    "cyan": Colors.cyan,
+    "blue": Colors.blue,
+    "deepPurple": Colors.deepPurple,
+    "purple": Colors.purple,
+    "pink": Colors.pink
+  };
   @override
   void initState() {
     init();
@@ -291,25 +305,49 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                       const SizedBox(width: 10.0),
                                       Row(
                                         children: [
-                                          Text(GlobleString.CALENDAR_Expand_All,
-                                              style: TextStyle(
-                                                  color: myColor.email_color,
-                                                  fontWeight: FontWeight.bold)),
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                for (int i = 0;
+                                                    i < dias.length;
+                                                    i++) {
+                                                  press[i] = true;
+                                                }
+                                              });
+                                            },
+                                            child: Text(
+                                                GlobleString
+                                                    .CALENDAR_Expand_All,
+                                                style: TextStyle(
+                                                    color: myColor.email_color,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ),
                                           const SizedBox(width: 15.0),
-                                          Text(
-                                              GlobleString
-                                                  .CALENDAR_Collapse_All,
-                                              style: TextStyle(
-                                                  color: myColor.email_color,
-                                                  fontWeight: FontWeight.bold))
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                for (int i = 0;
+                                                    i < dias.length;
+                                                    i++) {
+                                                  press[i] = false;
+                                                }
+                                              });
+                                            },
+                                            child: Text(
+                                                GlobleString
+                                                    .CALENDAR_Collapse_All,
+                                                style: TextStyle(
+                                                    color: myColor.email_color,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          )
                                         ],
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 20),
-                                  for (int i = 0;
-                                      i < slotsListState!.eventtypeslist.length;
-                                      i++)
+                                  for (int i = 0; i < dias.length; i++)
                                     Column(
                                       children: [
                                         Container(
@@ -323,10 +361,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                      slotsListState!
-                                                          .eventtypeslist[i]
-                                                          .date_start!
-                                                          .toString(),
+                                                      ponerfecha(
+                                                          dias[i].toString()),
                                                       style: const TextStyle(
                                                           color: myColor
                                                               .text_color,
@@ -334,7 +370,12 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   const SizedBox(width: 10),
-                                                  Text('(3 scheduled slots)',
+                                                  Text(
+                                                      '(' +
+                                                          slots[dias[i]]
+                                                              .length
+                                                              .toString() +
+                                                          ' scheduled slots)',
                                                       style: const TextStyle(
                                                           color: Colors.grey,
                                                           fontSize: 18,
@@ -345,7 +386,13 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               InkWell(
                                                 onTap: () {
                                                   //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
-                                                  //setState(() {});
+                                                  setState(() {
+                                                    if (press[i]) {
+                                                      press[i] = false;
+                                                    } else {
+                                                      press[i] = true;
+                                                    }
+                                                  });
                                                 },
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
@@ -354,8 +401,10 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                   width: 30,
                                                   alignment: Alignment.center,
                                                   child: Image.asset(
-                                                    //isexpand!? "assets/images/circle_up.png" : "assets/images/circle_down.png",
-                                                    "assets/images/circle_down.png",
+                                                    press[i]
+                                                        ? "assets/images/circle_up.png"
+                                                        : "assets/images/circle_down.png",
+
                                                     height: 19,
                                                     //width: 20,
                                                     alignment: Alignment.center,
@@ -366,222 +415,151 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                           ),
                                         ),
 // Este container es el que se debe desplegar o esconder
-                                        Container(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                color: myColor.drawselectcolor2,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 5),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                        width: ancho * 5,
-                                                        child: const Text(" ")),
-                                                    SizedBox(
-                                                      width: ancho * 15,
-                                                      child: const Text(
-                                                          GlobleString
-                                                              .CALENDAR_Time,
-                                                          style: TextStyle(
-                                                              color: myColor
-                                                                  .text_color,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    ),
-                                                    SizedBox(
-                                                      width: ancho * 26,
-                                                      child: const Text(
-                                                          GlobleString
-                                                              .CALENDAR_Event_Type,
-                                                          style: TextStyle(
-                                                              color: myColor
-                                                                  .text_color,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    ),
-                                                    SizedBox(
-                                                      width: ancho * 20,
-                                                      child: const Text(
-                                                          GlobleString
-                                                              .CALENDAR_Attendees,
-                                                          style: TextStyle(
-                                                              color: myColor
-                                                                  .text_color,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    ),
-                                                    SizedBox(
-                                                      width: ancho * 27,
-                                                      child: const Text(
-                                                          GlobleString
-                                                              .CALENDAR_Location,
-                                                          style: TextStyle(
-                                                              color: myColor
-                                                                  .text_color,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                    ),
-                                                    SizedBox(
-                                                        width: ancho * 2,
-                                                        child: const Text(" "))
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                                color: myColor.TA_light,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 5),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: ancho * 4,
-                                                      child: Icon(
-                                                        Icons.circle,
-                                                        color: Colors.yellow,
-                                                        size: 17.0,
+                                        if (press[i] == true)
+                                          Container(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  color:
+                                                      myColor.drawselectcolor2,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 0,
+                                                      vertical: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      SizedBox(
+                                                          width: ancho * 5,
+                                                          child:
+                                                              const Text(" ")),
+                                                      SizedBox(
+                                                        width: ancho * 15,
+                                                        child: const Text(
+                                                            GlobleString
+                                                                .CALENDAR_Time,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
                                                       ),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 14,
-                                                        child: Text(
-                                                            '10:00 - 10:20 AM')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 25,
-                                                        child: Text(
-                                                            'Showings - 867 Hamilton Street',
-                                                            maxLines: 3)),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 19,
-                                                        child: Text(
-                                                            'Multiple (3)')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                      width: ancho * 26,
-                                                      child: Text(
-                                                          '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
-                                                          maxLines: 3),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 2,
-                                                        child:
-                                                            _actionEventPopup()),
-                                                  ],
+                                                      SizedBox(
+                                                        width: ancho * 26,
+                                                        child: const Text(
+                                                            GlobleString
+                                                                .CALENDAR_Event_Type,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ),
+                                                      SizedBox(
+                                                        width: ancho * 20,
+                                                        child: const Text(
+                                                            GlobleString
+                                                                .CALENDAR_Attendees,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ),
+                                                      SizedBox(
+                                                        width: ancho * 27,
+                                                        child: const Text(
+                                                            GlobleString
+                                                                .CALENDAR_Location,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ),
+                                                      SizedBox(
+                                                          width: ancho * 2,
+                                                          child:
+                                                              const Text(" "))
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Container(
-                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                                color: myColor.TA_dark,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
+                                                for (int j = 0;
+                                                    j < slots[dias[i]].length;
+                                                    j++)
+                                                  Container(
+                                                    color: j % 2 == 0
+                                                        ? myColor.TA_dark
+                                                        : myColor.TA_light,
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
                                                         horizontal: 0,
                                                         vertical: 5),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: ancho * 4,
-                                                      child: Icon(
-                                                        Icons.circle,
-                                                        color: Colors.yellow,
-                                                        size: 17.0,
-                                                      ),
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: ancho * 4,
+                                                          child: Icon(
+                                                            Icons.circle,
+                                                            color: color1[slots[
+                                                                    dias[i]][j]
+                                                                .eventTypesData
+                                                                .color],
+                                                            size: 17.0,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: ancho),
+                                                        SizedBox(
+                                                            width: ancho * 14,
+                                                            child: Text(DateFormat
+                                                                        .jm()
+                                                                    .format(DateTime.parse(
+                                                                        slots[dias[i]][j]
+                                                                            .date_start)) +
+                                                                " - " +
+                                                                DateFormat.jm().format(
+                                                                    DateTime.parse(
+                                                                        slots[dias[i]][j]
+                                                                            .date_end)))),
+                                                        SizedBox(width: ancho),
+                                                        SizedBox(
+                                                            width: ancho * 25,
+                                                            child: Text(
+                                                                slots[dias[i]]
+                                                                        [j]
+                                                                    .eventTypesData
+                                                                    .name,
+                                                                maxLines: 3)),
+                                                        SizedBox(width: ancho),
+                                                        SizedBox(
+                                                            width: ancho * 19,
+                                                            child: Text(
+                                                                slots[dias[i]]
+                                                                        [j]
+                                                                    .name)),
+                                                        SizedBox(width: ancho),
+                                                        SizedBox(
+                                                          width: ancho * 26,
+                                                          child: Text(
+                                                              slots[dias[i]][j]
+                                                                  .eventTypesData
+                                                                  .location,
+                                                              maxLines: 3),
+                                                        ),
+                                                        SizedBox(width: ancho),
+                                                        SizedBox(
+                                                            width: ancho * 2,
+                                                            child:
+                                                                _actionEventPopup()),
+                                                      ],
                                                     ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 14,
-                                                        child: Text(
-                                                            '4:00 - 4:20 PM')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 25,
-                                                        child: Text(
-                                                            'Showings - 123 Main Street',
-                                                            maxLines: 3)),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 19,
-                                                        child: Text(
-                                                            'Hillary Duff')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                      width: ancho * 26,
-                                                      child: Text(
-                                                          '123 Main Street, Vancouver, BC, V3D 7K2, Canada',
-                                                          maxLines: 3),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 2,
-                                                        child:
-                                                            _actionEventPopup()),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                //color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
-                                                color: myColor.TA_light,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 5),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: ancho * 4,
-                                                      child: const Icon(
-                                                        Icons.circle,
-                                                        color: Colors.yellow,
-                                                        size: 17.0,
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 14,
-                                                        child: Text(
-                                                            '10:00 - 10:20 AM')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                      width: ancho * 25,
-                                                      child: Text(
-                                                          'Showings - 867 Hamilton Street',
-                                                          maxLines: 3),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 19,
-                                                        child: Text(
-                                                            'Multiple (3)')),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                      width: ancho * 26,
-                                                      child: Text(
-                                                          '867 Hamilton Street, Vancouver, BC, V6B 7H8, Canada',
-                                                          maxLines: 3),
-                                                    ),
-                                                    SizedBox(width: ancho),
-                                                    SizedBox(
-                                                        width: ancho * 2,
-                                                        child:
-                                                            _actionEventPopup()),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                                  ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                 ]),
@@ -634,6 +612,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         color = Colors.pink;
       }
       meetings.add(Meeting(
+          i,
           nombreevento,
           DateTime.parse(listado[i].date_start ?? ""),
           DateTime.parse(listado[i].date_end ?? ""),
@@ -643,7 +622,17 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
           .format(DateTime.parse(listado[i].date_start ?? ""));
       dias.add(fecha);
     }
-
+    dias = dias.toSet().toList();
+    for (int i = 0; i < dias.length; i++) {
+      slots[dias[i]] = listado
+          .where((element) =>
+              DateFormat("yyyy-MM-dd")
+                  .format(DateTime.parse(element.date_start!))
+                  .toString() ==
+              dias[i])
+          .toList();
+      press.add(false);
+    }
     return meetings;
   }
 
@@ -915,7 +904,9 @@ class MeetingDataSource extends CalendarDataSource {
 }
 
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.id, this.eventName, this.from, this.to, this.background,
+      this.isAllDay);
+  int id;
   String eventName;
   DateTime from;
   DateTime to;
@@ -949,4 +940,22 @@ String getMonthName(int month) {
   } else {
     return 'December';
   }
+}
+
+String ponerfecha(String date) {
+  DateTime fecha = DateFormat("yyyy-MM-dd").parse(date);
+  dynamic dayData =
+      '{ "1" : "Monday", "2" : "Tuesday", "3" : "Wednesday", "4" : "Thursday ", "5" : "Friday", "6" : "Saturday ", "7" : "Sunday" }';
+
+  dynamic monthData =
+      '{ "1" : "Jan", "2" : "Feb", "3" : "Mar", "4" : "Apr", "5" : "May", "6" : "Jun", "7" : "Jul", "8" : "Aug", "9" : "Sep", "10" : "Oct", "11" : "Nov", "12" : "Dec" }';
+
+  return json.decode(dayData)['${fecha.weekday}'] +
+      " - " +
+      json.decode(monthData)['${fecha.month}'] +
+      " " +
+      fecha.day.toString() +
+      ", " +
+      fecha.year.toString();
+  //  date.year.toString();
 }
