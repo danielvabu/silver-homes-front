@@ -109,6 +109,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     result.add(_datavalueEventTypesType(model));
 
     result.add(_datavalueIsPublished(model, Index));
+    result.add(_datavalueAttendees(model, Index));
     result.add(_actionPopup(model));
 
     return result;
@@ -232,6 +233,20 @@ class _EventTypesItemState extends State<EventTypesItem> {
           Expanded(child: Container())
         ],
       ),
+    );
+  }
+
+  Widget _datavalueAttendees(EventTypesDataList model, int index) {
+    return Container(
+      height: 40,
+      width: 20,
+      margin: const EdgeInsets.only(left: 5, right: 10.0),
+      alignment: Alignment.center,
+      child: GestureDetector(
+          onTap: () {
+            print('muestra los attendees');
+          },
+          child: Icon(Icons.groups)),
     );
   }
 

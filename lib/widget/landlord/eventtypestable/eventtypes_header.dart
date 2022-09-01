@@ -68,6 +68,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     result.add(_headerEventTypesType('Scheduled Slots'));
     result.add(_headerVacancy('Publish'));
     result.add(_headerTextAction(' '));
+    result.add(_headerTextAction(' '));
     return result;
   }
 
@@ -279,14 +280,10 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     return Expanded(
       flex: 1,
       child: Container(
-        height: 40,
+        height: 20,
         margin: EdgeInsets.only(left: 10, right: 20),
         alignment: Alignment.centerRight,
-        child: Text(
-          "",
-          textAlign: TextAlign.end,
-          style: MyStyles.SemiBold(12, myColor.text_color),
-        ),
+        child: const Text(""),
       ),
     );
   }
