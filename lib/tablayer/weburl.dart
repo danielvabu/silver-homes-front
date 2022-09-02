@@ -3,10 +3,10 @@ class Weburl {
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static bool Domain_PROD = false;
+  static bool Domain_PROD = true;
   static bool Domain_UAT = false; //User Acceptance Testing
   static bool Domain_CR = false; //Quality Assurance or Change request
-  static bool Domain_Dev = true;
+  static bool Domain_Dev = false;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
