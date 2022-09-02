@@ -24,11 +24,14 @@ class ListOfAttendeesEvent extends StatefulWidget {
   final Slots slot1;
   final List<Slots> listado;
   late List<Slots> s1 = [];
+
   ListOfAttendeesEvent(this.slot1, this.listado);
 }
 
 class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
   late List<bool> press = [];
+  late List dias = [];
+  late Map slots = {};
   Map color1 = {
     "grey": Colors.grey,
     "red": Colors.red,
@@ -44,13 +47,52 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
   @override
   void initState() {
     init();
-    widget.s1 = widget.listado
-        .where((e) =>
-            e.date_start == widget.slot1.date_start &&
-            e.eventTypesDataId == widget.slot1.eventTypesDataId)
-        .toList();
 
-    for (int i = 0; i < widget.s1.length; i++) {
+    List<Slots> unico = [];
+
+    for (int i = 0; i < widget.listado.length; i++) {
+      // int count = 0;
+      // for (var element in listado) {
+      //   if (element.date_start == listado[i].date_start &&
+      //       element.eventTypesDataId == listado[i].eventTypesDataId) {
+      //     count++;
+      //   }
+      // }
+      List<Slots> filteredList = unico
+          .where((e) =>
+              e.date_start == widget.listado[i].date_start &&
+              e.eventTypesDataId == widget.listado[i].eventTypesDataId)
+          .toList();
+      if (filteredList.length > 0) {
+      } else {
+        Slots ns = Slots(
+            eventTypesData: widget.listado[i].eventTypesData,
+            eventTypesDataId: widget.listado[i].eventTypesDataId,
+            date_start: widget.listado[i].date_start,
+            date_end: widget.listado[i].date_end,
+            name: "",
+            email: "",
+            state: widget.listado[i].state);
+
+        unico.add(ns);
+      }
+    }
+
+    for (int i = 0; i < unico.length; i++) {
+      String fecha = DateFormat("yyyy-MM-dd")
+          .format(DateTime.parse(unico[i].date_start ?? ""));
+      dias.add(fecha);
+    }
+    dias = dias.toSet().toList();
+    for (int i = 0; i < dias.length; i++) {
+      slots[dias[i]] = unico
+          .where((element) =>
+              DateFormat("yyyy-MM-dd")
+                  .format(DateTime.parse(element.date_start!))
+                  .toString() ==
+              dias[i])
+          .toList();
+
       press.add(false);
     }
     super.initState();

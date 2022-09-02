@@ -20,6 +20,7 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions
 import 'package:silverhome/domain/actions/landlord_action/eventtypeslist_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
+import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -35,6 +36,7 @@ import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_header.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_item.dart';
+import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import 'package:silverhome/widget/landlord/scheduling/share_link.dart';
 import '../../../../models/landlord_models/eventtypes_list_state.dart';
@@ -1131,6 +1133,18 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return ShareLink(eventtypesData.url);
+      },
+    );
+  }
+
+  void openDialogListAttendees(Slots slot, List<Slots> lista) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ListOfAttendeesEvent(slot, lista);
       },
     );
   }
