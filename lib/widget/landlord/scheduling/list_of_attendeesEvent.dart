@@ -18,16 +18,16 @@ import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
-class ListOfAttendees extends StatefulWidget {
+class ListOfAttendeesEvent extends StatefulWidget {
   @override
-  State<ListOfAttendees> createState() => _ListOfAttendeesState();
+  State<ListOfAttendeesEvent> createState() => _ListOfAttendeesEventState();
   final Slots slot1;
   final List<Slots> listado;
   late List<Slots> s1 = [];
-  ListOfAttendees(this.slot1, this.listado);
+  ListOfAttendeesEvent(this.slot1, this.listado);
 }
 
-class _ListOfAttendeesState extends State<ListOfAttendees> {
+class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
   late List<bool> press = [];
   Map color1 = {
     "grey": Colors.grey,

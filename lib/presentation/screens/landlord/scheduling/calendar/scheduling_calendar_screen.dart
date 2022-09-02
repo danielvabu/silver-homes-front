@@ -269,7 +269,13 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               DateTime date = details.date!;
                                               CalendarElement element =
                                                   details.targetElement;
-                                              openDialogViewEvent();
+
+                                              openDialogViewEvent(
+                                                  details.appointments![0].id,
+                                                  details
+                                                      .appointments![0].froms,
+                                                  slotsListState!
+                                                      .eventtypeslist);
                                             },
                                             dataSource: MeetingDataSource(
                                                 _getDataSource(slotsListState!
@@ -558,8 +564,11 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                             width: ancho * 2,
-                                                            child:
-                                                                _actionEventPopup()),
+                                                            child: _actionEventPopup(
+                                                                slots[dias[i]]
+                                                                    [j],
+                                                                slotsListState!
+                                                                    .eventtypeslist)),
                                                       ],
                                                     ),
                                                   ),
@@ -648,10 +657,11 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         color = Colors.pink;
       }
       meetings.add(Meeting(
-          i,
+          unico[i].eventTypesDataId ?? 0,
           nombreevento,
           DateTime.parse(unico[i].date_start ?? ""),
           DateTime.parse(unico[i].date_end ?? ""),
+          unico[i].date_start!,
           color,
           false));
       String fecha = DateFormat("yyyy-MM-dd")
@@ -688,7 +698,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         minHeight: 32.0,
         fontSize: 14.0,
         cornerRadius: 5,
-        initialLabelIndex: 0,
+        initialLabelIndex: muestraElListado,
         activeBgColor: [myColor.text_color],
         activeFgColor: Colors.white,
         inactiveBgColor: Colors.white,
@@ -751,17 +761,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  Widget _actionEventPopup() {
+  Widget _actionEventPopup(Slots slot, List<Slots> lista) {
     return Container(
       height: 32,
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) {
           if (value == 1) {
-            openDialogShareLink();
+            openDialogViewEvent(
+                slot.eventTypesDataId!, slot.date_start!, lista);
           }
           if (value == 2) {
-            openDialogListAttendees();
+            openDialogListAttendees(slot, lista);
           }
         },
         child: Container(
@@ -848,14 +859,14 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  void openDialogListAttendees() {
+  void openDialogListAttendees(Slots slot, List<Slots> lista) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ListOfAttendees();
+        return ListOfAttendees(slot, lista);
       },
     );
   }
@@ -872,14 +883,14 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  void openDialogViewEvent() {
+  void openDialogViewEvent(int id, String from, List<Slots> listado) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ViewEvent();
+        return ViewEvent(id, from, listado);
       },
     );
   }
@@ -941,12 +952,13 @@ class MeetingDataSource extends CalendarDataSource {
 }
 
 class Meeting {
-  Meeting(this.id, this.eventName, this.from, this.to, this.background,
-      this.isAllDay);
+  Meeting(this.id, this.eventName, this.from, this.to, this.froms,
+      this.background, this.isAllDay);
   int id;
   String eventName;
   DateTime from;
   DateTime to;
+  String froms;
   Color background;
   bool isAllDay;
 }
