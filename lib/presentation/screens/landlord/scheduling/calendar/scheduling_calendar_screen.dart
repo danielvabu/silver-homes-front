@@ -575,6 +575,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               ],
                                             ),
                                           ),
+                                        const SizedBox(height: 20.0),
                                       ],
                                     ),
                                 ]),
