@@ -52,6 +52,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   late List dias = [];
   late List<bool> press = [];
   late Map slots = {};
+  late List<Map> unique = [];
   Map color1 = {
     "grey": Colors.grey,
     "red": Colors.red,
@@ -268,7 +269,13 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                               DateTime date = details.date!;
                                               CalendarElement element =
                                                   details.targetElement;
-                                              openDialogViewEvent();
+
+                                              openDialogViewEvent(
+                                                  details.appointments![0].id,
+                                                  details
+                                                      .appointments![0].froms,
+                                                  slotsListState!
+                                                      .eventtypeslist);
                                             },
                                             dataSource: MeetingDataSource(
                                                 _getDataSource(slotsListState!
@@ -536,10 +543,15 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                             width: ancho * 19,
-                                                            child: Text(
+                                                            child: Text(attendens(
                                                                 slots[dias[i]]
                                                                         [j]
-                                                                    .name)),
+                                                                    .eventTypesDataId,
+                                                                slots[dias[i]]
+                                                                        [j]
+                                                                    .date_start,
+                                                                slotsListState!
+                                                                    .eventtypeslist))),
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                           width: ancho * 26,
@@ -552,8 +564,11 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                             width: ancho * 2,
-                                                            child:
-                                                                _actionEventPopup()),
+                                                            child: _actionEventPopup(
+                                                                slots[dias[i]]
+                                                                    [j],
+                                                                slotsListState!
+                                                                    .eventtypeslist)),
                                                       ],
                                                     ),
                                                   ),
@@ -576,61 +591,93 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   List<Meeting> _getDataSource(List<Slots> listado) {
     final List<Meeting> meetings = <Meeting>[];
+    List<Slots> unico = [];
+
     for (int i = 0; i < listado.length; i++) {
+      // int count = 0;
+      // for (var element in listado) {
+      //   if (element.date_start == listado[i].date_start &&
+      //       element.eventTypesDataId == listado[i].eventTypesDataId) {
+      //     count++;
+      //   }
+      // }
+      List<Slots> filteredList = unico
+          .where((e) =>
+              e.date_start == listado[i].date_start &&
+              e.eventTypesDataId == listado[i].eventTypesDataId)
+          .toList();
+      if (filteredList.length > 0) {
+      } else {
+        Slots ns = Slots(
+            eventTypesData: listado[i].eventTypesData,
+            eventTypesDataId: listado[i].eventTypesDataId,
+            date_start: listado[i].date_start,
+            date_end: listado[i].date_end,
+            name: "",
+            email: "",
+            state: listado[i].state);
+
+        unico.add(ns);
+      }
+    }
+
+    for (int i = 0; i < unico.length; i++) {
       Color color = Colors.white;
-      String nombreevento = listado[i].eventTypesData!.name! +
+      String nombreevento = unico[i].eventTypesData!.name! +
           " " +
-          listado[i].eventTypesData!.location!;
-      if (listado[i].eventTypesData!.color == "grey") {
+          unico[i].eventTypesData!.location!;
+      if (unico[i].eventTypesData!.color == "grey") {
         color = Colors.grey;
       }
-      if (listado[i].eventTypesData!.color == "red") {
+      if (unico[i].eventTypesData!.color == "red") {
         color = Colors.red;
       }
-      if (listado[i].eventTypesData!.color == "orange") {
+      if (unico[i].eventTypesData!.color == "orange") {
         color = Colors.orange;
       }
-      if (listado[i].eventTypesData!.color == "yellow") {
+      if (unico[i].eventTypesData!.color == "yellow") {
         color = Colors.yellow;
       }
-      if (listado[i].eventTypesData!.color == "green") {
+      if (unico[i].eventTypesData!.color == "green") {
         color = Colors.green;
       }
-      if (listado[i].eventTypesData!.color == "cyan") {
+      if (unico[i].eventTypesData!.color == "cyan") {
         color = Colors.cyan;
       }
-      if (listado[i].eventTypesData!.color == "blue") {
+      if (unico[i].eventTypesData!.color == "blue") {
         color = Colors.blue;
       }
-      if (listado[i].eventTypesData!.color == "deepPurple") {
+      if (unico[i].eventTypesData!.color == "deepPurple") {
         color = Colors.deepPurple;
       }
-      if (listado[i].eventTypesData!.color == "purple") {
+      if (unico[i].eventTypesData!.color == "purple") {
         color = Colors.purple;
       }
-      if (listado[i].eventTypesData!.color == "pink") {
+      if (unico[i].eventTypesData!.color == "pink") {
         color = Colors.pink;
       }
       meetings.add(Meeting(
-          i,
+          unico[i].eventTypesDataId ?? 0,
           nombreevento,
-          DateTime.parse(listado[i].date_start ?? ""),
-          DateTime.parse(listado[i].date_end ?? ""),
+          DateTime.parse(unico[i].date_start ?? ""),
+          DateTime.parse(unico[i].date_end ?? ""),
+          unico[i].date_start!,
           color,
           false));
       String fecha = DateFormat("yyyy-MM-dd")
-          .format(DateTime.parse(listado[i].date_start ?? ""));
+          .format(DateTime.parse(unico[i].date_start ?? ""));
       dias.add(fecha);
     }
     dias = dias.toSet().toList();
     for (int i = 0; i < dias.length; i++) {
-      slots[dias[i]] = listado
+      slots[dias[i]] = unico
           .where((element) =>
               DateFormat("yyyy-MM-dd")
                   .format(DateTime.parse(element.date_start!))
                   .toString() ==
               dias[i])
           .toList();
+
       press.add(false);
     }
     return meetings;
@@ -651,7 +698,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         minHeight: 32.0,
         fontSize: 14.0,
         cornerRadius: 5,
-        initialLabelIndex: 0,
+        initialLabelIndex: muestraElListado,
         activeBgColor: [myColor.text_color],
         activeFgColor: Colors.white,
         inactiveBgColor: Colors.white,
@@ -714,17 +761,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  Widget _actionEventPopup() {
+  Widget _actionEventPopup(Slots slot, List<Slots> lista) {
     return Container(
       height: 32,
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) {
           if (value == 1) {
-            openDialogShareLink();
+            openDialogViewEvent(
+                slot.eventTypesDataId!, slot.date_start!, lista);
           }
           if (value == 2) {
-            openDialogListAttendees();
+            openDialogListAttendees(slot, lista);
           }
         },
         child: Container(
@@ -811,14 +859,14 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  void openDialogListAttendees() {
+  void openDialogListAttendees(Slots slot, List<Slots> lista) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ListOfAttendees();
+        return ListOfAttendees(slot, lista);
       },
     );
   }
@@ -835,14 +883,14 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  void openDialogViewEvent() {
+  void openDialogViewEvent(int id, String from, List<Slots> listado) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ViewEvent();
+        return ViewEvent(id, from, listado);
       },
     );
   }
@@ -904,12 +952,13 @@ class MeetingDataSource extends CalendarDataSource {
 }
 
 class Meeting {
-  Meeting(this.id, this.eventName, this.from, this.to, this.background,
-      this.isAllDay);
+  Meeting(this.id, this.eventName, this.from, this.to, this.froms,
+      this.background, this.isAllDay);
   int id;
   String eventName;
   DateTime from;
   DateTime to;
+  String froms;
   Color background;
   bool isAllDay;
 }
@@ -958,4 +1007,18 @@ String ponerfecha(String date) {
       ", " +
       fecha.year.toString();
   //  date.year.toString();
+}
+
+String attendens(int id, String date, List<Slots> listado) {
+  String atten = "";
+  List<Slots> verl = listado
+      .where((element) =>
+          element.date_start! == date && element.eventTypesDataId == id)
+      .toList();
+  if (verl.length > 1) {
+    atten = "Multiple(" + verl.length.toString() + ")";
+  } else {
+    atten = verl[0].name!;
+  }
+  return atten;
 }

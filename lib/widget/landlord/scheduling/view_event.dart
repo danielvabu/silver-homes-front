@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
@@ -11,17 +14,48 @@ import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
+import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
 class ViewEvent extends StatefulWidget {
-  const ViewEvent({Key? key}) : super(key: key);
-
+  final int id;
+  final String from;
+  final List<Slots> listado;
+  late List<Slots> s1 = [];
+  ViewEvent(this.id, this.from, this.listado);
   @override
   State<ViewEvent> createState() => _ViewEventState();
 }
 
 class _ViewEventState extends State<ViewEvent> {
+  @override
+  void initState() {
+    init();
+    widget.s1 = widget.listado
+        .where((e) =>
+            e.date_start == widget.from && e.eventTypesDataId == widget.id)
+        .toList();
+
+    super.initState();
+  }
+
+  void init() async {
+    await Prefs.init();
+  }
+
+  Map color1 = {
+    "grey": Colors.grey,
+    "red": Colors.red,
+    "orange": Colors.orange,
+    "yellow": Colors.yellow,
+    "green": Colors.green,
+    "cyan": Colors.cyan,
+    "blue": Colors.blue,
+    "deepPurple": Colors.deepPurple,
+    "purple": Colors.purple,
+    "pink": Colors.pink
+  };
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -80,14 +114,16 @@ class _ViewEventState extends State<ViewEvent> {
                                           style: ElevatedButton.styleFrom(
                                               shape: CircleBorder(),
                                               padding: EdgeInsets.all(12),
-                                              primary: Colors.yellow),
+                                              primary: color1[widget.s1[0]
+                                                  .eventTypesData!.color]),
                                         ),
                                       ),
                                       const SizedBox(width: 30.0),
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          "Showing - 123 Main Street",
+                                          widget.s1[0].eventTypesData!.name ??
+                                              "",
                                           style: MyStyles.Bold(
                                               22, myColor.text_color),
                                           textAlign: TextAlign.start,
@@ -101,8 +137,8 @@ class _ViewEventState extends State<ViewEvent> {
                                       const SizedBox(width: 45.0),
                                       Container(
                                         width: 530,
-                                        child: Text(
-                                            'Wednesday, June 8 - 4:00 - 4:20pm'),
+                                        child: Text(ponerfecha(
+                                            widget.s1[0].date_start ?? "")),
                                       ),
                                     ],
                                   ),
@@ -112,7 +148,11 @@ class _ViewEventState extends State<ViewEvent> {
                                       const SizedBox(width: 45.0),
                                       Container(
                                         width: 530,
-                                        child: Text(GlobleString.ET_One_on_one),
+                                        child: (widget.s1[0].eventTypesData!
+                                                    .relation ??
+                                                false)
+                                            ? Text(GlobleString.ET_One_on_one)
+                                            : Text(GlobleString.ET_Group),
                                       ),
                                     ],
                                   ),
@@ -126,8 +166,9 @@ class _ViewEventState extends State<ViewEvent> {
                                       const SizedBox(width: 30.0),
                                       Container(
                                         width: 530,
-                                        child: Text(
-                                            "123 Main St, Vancouver, BC V6A 2S5, Canada"),
+                                        child: Text(widget.s1[0].eventTypesData!
+                                                .location ??
+                                            ""),
                                       ),
                                     ],
                                   ),
@@ -142,66 +183,51 @@ class _ViewEventState extends State<ViewEvent> {
                                       Container(
                                         width: 530,
                                         child: Text(
-                                            "2" + " " + GlobleString.Guests),
+                                            widget.s1.length.toString() +
+                                                " " +
+                                                GlobleString.Guests),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(height: 20.0),
-                                  Row(
-                                    children: [
-                                      const SizedBox(width: 45.0),
-                                      SizedBox(
-                                          width: 30.0,
-                                          child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('D',
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white)),
-                                            style: ElevatedButton.styleFrom(
-                                                shape: CircleBorder(),
-                                                padding: EdgeInsets.all(12),
-                                                primary: Colors.grey),
-                                          )),
-                                      const SizedBox(width: 10.0),
-                                      Container(
-                                        child: Text(
-                                          "danivabu2015@gmail.com",
-                                          maxLines: 3,
+                                  for (int i = 0; i < widget.s1.length; i++)
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const SizedBox(width: 45.0),
+                                            SizedBox(
+                                                width: 30.0,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                      widget.s1[i].email![0]
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white)),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                          shape: CircleBorder(),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  12),
+                                                          primary: Colors.grey),
+                                                )),
+                                            const SizedBox(width: 10.0),
+                                            Container(
+                                              child: Text(
+                                                widget.s1[i].email.toString(),
+                                                maxLines: 3,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 10.0),
-                                  Row(
-                                    children: [
-                                      const SizedBox(width: 45.0),
-                                      SizedBox(
-                                          width: 30.0,
-                                          child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('J',
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white)),
-                                            style: ElevatedButton.styleFrom(
-                                                shape: CircleBorder(),
-                                                padding: EdgeInsets.all(12),
-                                                primary: Color.fromARGB(
-                                                    255, 15, 87, 77)),
-                                          )),
-                                      const SizedBox(width: 10.0),
-                                      Container(
-                                        child: Text(
-                                          "jcjavier1978@gmail.com",
-                                          maxLines: 3,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
+                                        const SizedBox(height: 10.0),
+                                      ],
+                                    ),
                                   Row(
                                     children: [
                                       const SizedBox(
@@ -210,21 +236,23 @@ class _ViewEventState extends State<ViewEvent> {
                                               Icon(Icons.notifications_none)),
                                       const SizedBox(width: 30.0),
                                       Container(
-                                        child: Text("30 minutes before"),
+                                        child: Text("60 minutes before"),
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                          width: 15.0,
-                                          child: Icon(Icons.calendar_today)),
-                                      const SizedBox(width: 30.0),
-                                      Container(
-                                        child: Text("Briana Liau Chinchanchu"),
-                                      ),
-                                    ],
-                                  ),
+                                  const SizedBox(height: 10.0),
+                                  for (int i = 0; i < widget.s1.length; i++)
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                            width: 15.0,
+                                            child: Icon(Icons.calendar_today)),
+                                        const SizedBox(width: 30.0),
+                                        Container(
+                                          child: Text(widget.s1[i].name!),
+                                        ),
+                                      ],
+                                    ),
                                 ],
                               ),
                             ),
@@ -242,5 +270,23 @@ class _ViewEventState extends State<ViewEvent> {
         ),
       ),
     );
+  }
+
+  String ponerfecha(String date) {
+    DateTime fecha = DateFormat("yyyy-MM-dd").parse(date);
+    dynamic dayData =
+        '{ "1" : "Monday", "2" : "Tuesday", "3" : "Wednesday", "4" : "Thursday ", "5" : "Friday", "6" : "Saturday ", "7" : "Sunday" }';
+
+    dynamic monthData =
+        '{ "1" : "Jan", "2" : "Feb", "3" : "Mar", "4" : "Apr", "5" : "May", "6" : "Jun", "7" : "Jul", "8" : "Aug", "9" : "Sep", "10" : "Oct", "11" : "Nov", "12" : "Dec" }';
+
+    return json.decode(dayData)['${fecha.weekday}'] +
+        " - " +
+        json.decode(monthData)['${fecha.month}'] +
+        " " +
+        fecha.day.toString() +
+        ", " +
+        fecha.year.toString();
+    //  date.year.toString();
   }
 }

@@ -1873,6 +1873,7 @@ class GlobleString {
   static const String ET_Event_Types_Name = 'Event Types Name';
   static const String ET_Relationship = 'Relationship';
   static const String ET_One_on_one = 'One-on-one';
+  static const String ET_multiple = 'Group';
   static const String ET_One_Invitee = 'meet with one invitee at a time';
   static const String ET_Group = 'Group';
   static const String ET_Multiple_Invitees =
