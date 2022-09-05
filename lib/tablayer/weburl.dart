@@ -3,10 +3,18 @@ class Weburl {
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static bool Domain_PROD = true;
+  static bool Domain_PROD = false;
   static bool Domain_UAT = false; //User Acceptance Testing
   static bool Domain_CR = false; //Quality Assurance or Change request
-  static bool Domain_Dev = false;
+  static bool Domain_Dev = true;
+
+  static bool isPROD_API = false;
+
+  static bool IS_PROD = false;
+  static bool IS_UAT = false;
+  static String DBCODE_PROD = "SilverHome";
+  static String DBCODE_UAT = "SilverHome_UAT";
+  static String DBCODE_DEV = "SilverHome_DEV";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -20,7 +28,7 @@ class Weburl {
               : "https://www.ren-hogar.com/#/";
 
   static var Email_URL = Domain_PROD
-      ? "https://app.silverhomes.ai"
+      ? "https://app.silverhomes.ai/"
       : Domain_UAT
           ? "http://161.97.104.204:8090"
           : Domain_CR
@@ -30,8 +38,6 @@ class Weburl {
   static var CustomerFeaturedPage = Domain_URL;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
-
-  static bool isPROD_API = false;
 
   static var API_Server =
       isPROD_API ? "https://api.silverhomes.ai" : "https://api.ren-hogar.com";
@@ -48,12 +54,6 @@ class Weburl {
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static bool IS_PROD = false;
-  static bool IS_UAT = false;
-  static String DBCODE_PROD = "SilverHome";
-  static String DBCODE_UAT = "SilverHome_UAT";
-  static String DBCODE_DEV = "SilverHome_DEV";
-
   static var API_CODE = IS_PROD
       ? DBCODE_PROD
       : IS_UAT
@@ -65,7 +65,7 @@ class Weburl {
   static var DocURL =
       API_Server + "/appdata/" + API_CODE + "/Attachments/Files/";
   //static var image_API = API_Server + "/default/file?id=";
-  static var image_API = "https://www.ren-hogar.com/r/?id=";
+  static var image_API = Email_URL + "r/?id=";
 
   static var base_url = API_Server + "/"; //"/api/v1/CRUD/";
   static var base_url_Login = API_Server + "/";
@@ -90,10 +90,10 @@ class Weburl {
   static var Delete_Api = base_url + "delete";
   static var Query_Api = base_url + "query";
   //static var RawSQL_Api = base_url + "RawSQL?";
-  static var RawSQL_Api = "https://www.ren-hogar.com/rawsql/?";
+  static var RawSQL_Api = Email_URL + "rawsql/?";
 
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
-  static var FileUpload_Api = "https://www.ren-hogar.com/aws/";
+  static var FileUpload_Api = Email_URL + "aws/";
   static var DSQ_Api = base_url + "DSQ";
   static var WorkFlow_Api = base_url_WorkFlow + "workflow/";
 
@@ -116,11 +116,10 @@ class Weburl {
   //static var silverhomes_contact_mail_old = "mailto:contact@silverhomes.ai";
   static var silverhomes_contact_mail = "mailto:support@silverhomes.ai";
 
-  static var Sample_Properties_csv =
-      "https://www.ren-hogar.com/sample_bulk_properties.csv";
+  static var Sample_Properties_csv = Email_URL + "sample_bulk_properties.csv";
 
   static var Sample_property_value_file =
-      "https://www.ren-hogar.com/data_entry_instructions.xlsx";
+      Email_URL + "data_entry_instructions.xlsx";
 
   static var PrivacyPolicy_and_TermsConditions =
       "https://www.silverhomes.ai/legal";
