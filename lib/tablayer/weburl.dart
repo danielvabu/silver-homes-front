@@ -3,10 +3,10 @@ class Weburl {
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static bool Domain_PROD = false;
+  static bool Domain_PROD = true;
   static bool Domain_UAT = false; //User Acceptance Testing
   static bool Domain_CR = false; //Quality Assurance or Change request
-  static bool Domain_Dev = true;
+  static bool Domain_Dev = false;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -25,9 +25,18 @@ class Weburl {
           ? "http://161.97.104.204:8090"
           : Domain_CR
               ? "http://161.97.104.204:8091"
-              : "http://161.97.104.204:8181";
+              : "https://www.ren-hogar.com/";
 
   static var CustomerFeaturedPage = Domain_URL;
+
+  /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
+
+  static bool isPROD_API = false;
+
+  static var API_Server =
+      isPROD_API ? "https://api.silverhomes.ai" : "https://api.ren-hogar.com";
+
+//      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
@@ -36,16 +45,6 @@ class Weburl {
       : isUAT_API
           ? "http://161.97.104.204:4049"
           : "http://161.97.104.204:8013";*/
-
-  /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
-
-  static bool isPROD_API = false;
-
-  static var API_Server = isPROD_API
-      ? "https://silverhomeappinstance.azurewebsites.net"
-      : "https://api.ren-hogar.com";
-
-//      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 

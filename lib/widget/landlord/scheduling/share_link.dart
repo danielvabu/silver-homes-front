@@ -12,6 +12,7 @@ import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/store/app_store.dart';
+import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
 class ShareLink extends StatefulWidget {
@@ -85,12 +86,12 @@ class _ShareLinkState extends State<ShareLink> {
                                       Container(
                                         width: 530,
                                         child: TextFormField(
-                                          initialValue:
-                                              "https://www.ren-hogar.com/events/" +
-                                                  Prefs.getString(PrefsName
-                                                      .user_CompanyName) +
-                                                  "/" +
-                                                  widget.url!,
+                                          initialValue: Weburl.Email_URL +
+                                              "events/" +
+                                              Prefs.getString(
+                                                  PrefsName.user_CompanyName) +
+                                              "/" +
+                                              widget.url!,
                                           style: MyStyles.Medium(
                                               14, myColor.text_color),
                                           decoration: const InputDecoration(
@@ -112,12 +113,12 @@ class _ShareLinkState extends State<ShareLink> {
                                       const SizedBox(width: 10.0),
                                       InkWell(
                                         onTap: () {
-                                          String url =
-                                              "https://www.ren-hogar.com/events/" +
-                                                  Prefs.getString(PrefsName
-                                                      .user_CompanyName) +
-                                                  "/" +
-                                                  widget.url!;
+                                          String url = Weburl.Email_URL +
+                                              "events/" +
+                                              Prefs.getString(
+                                                  PrefsName.user_CompanyName) +
+                                              "/" +
+                                              widget.url!;
                                           Helper.copyToClipboardHack(
                                               context, url);
                                         },
