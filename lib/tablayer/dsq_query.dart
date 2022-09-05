@@ -22,6 +22,7 @@ class DSQQuery {
   LanloadListReqtokens? landlordlistrequest;
   PropertyListReqtokens? propertyListReqtokens;
   EventTypesListReqtokens? eventTypesListReqtokens;
+  EventTypesListReqtokens2? eventTypesListReqtokens2;
   LeadsListReqtokens? leadsListReqtokens;
   LeadsTenantListReqtokens? leadsTenantListReqtokens;
   bool? loadLookUpValues;
@@ -246,6 +247,23 @@ class EventTypesListReqtokens {
   Map<String, dynamic> toJson() => {
         "Owner_ID": Owner_ID,
         "Name": Name,
+      };
+}
+
+class EventTypesListReqtokens2 {
+  EventTypesListReqtokens2({
+    this.id,
+  });
+
+  String? id;
+
+  factory EventTypesListReqtokens2.fromJson(Map<String, dynamic> json) =>
+      EventTypesListReqtokens2(
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
       };
 }
 

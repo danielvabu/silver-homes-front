@@ -15,20 +15,26 @@ import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/entities/slots.dart';
+import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
 import 'package:silverhome/store/app_store.dart';
+import 'package:silverhome/store/connect_state.dart';
+import 'package:silverhome/store/store.dart';
+import 'package:silverhome/tablayer/api_manager.dart';
+import 'package:silverhome/tablayer/dsq_query.dart';
+import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
 class ListOfAttendeesEvent extends StatefulWidget {
   @override
   State<ListOfAttendeesEvent> createState() => _ListOfAttendeesEventState();
-  final Slots slot1;
-  final List<Slots> listado;
-  late List<Slots> s1 = [];
+  final id;
+  //late List<Slots> s1 = [];
 
-  ListOfAttendeesEvent(this.slot1, this.listado);
+  ListOfAttendeesEvent(this.id);
 }
 
 class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
+  double height = 0, width = 0, ancho = 0;
   late List<bool> press = [];
   late List dias = [];
   late Map slots = {};
@@ -44,38 +50,55 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
     "purple": Colors.purple,
     "pink": Colors.pink
   };
+  apimanager(String search, int pageNo, String SortField, int saquence,
+      int ftime) async {
+    EventTypesListReqtokens reqtokens = EventTypesListReqtokens();
+    reqtokens.Name = widget.id;
+    Pager pager = Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
+
+    List<Sort> sortinglist = [];
+    Sort sort = Sort();
+    sort.fieldId = SortField;
+    sort.sortSequence = saquence;
+    sortinglist.add(sort);
+
+    DSQQuery dsqQuery = DSQQuery();
+    dsqQuery.dsqid = Weburl.DSQ_EventTypesSlots1;
+    dsqQuery.loadLookUpValues = true;
+    dsqQuery.loadRecordInfo = true;
+    dsqQuery.eventTypesListReqtokens = reqtokens;
+    dsqQuery.pager = pager;
+    dsqQuery.sort = sortinglist;
+
+    String filterjson = jsonEncode(dsqQuery);
+
+    Helper.Log("EventTypesSlots", filterjson);
+
+    await ApiManager().getEventTypesSlots(context, filterjson, ftime);
+  }
+
   @override
   void initState() {
     init();
+    apimanager("", 1, "ID", 0, 0);
 
+    super.initState();
+  }
+
+  void data1(List<Slots> listado) {
     List<Slots> unico = [];
 
-    for (int i = 0; i < widget.listado.length; i++) {
-      // int count = 0;
-      // for (var element in listado) {
-      //   if (element.date_start == listado[i].date_start &&
-      //       element.eventTypesDataId == listado[i].eventTypesDataId) {
-      //     count++;
-      //   }
-      // }
-      List<Slots> filteredList = unico
-          .where((e) =>
-              e.date_start == widget.listado[i].date_start &&
-              e.eventTypesDataId == widget.listado[i].eventTypesDataId)
-          .toList();
-      if (filteredList.length > 0) {
-      } else {
-        Slots ns = Slots(
-            eventTypesData: widget.listado[i].eventTypesData,
-            eventTypesDataId: widget.listado[i].eventTypesDataId,
-            date_start: widget.listado[i].date_start,
-            date_end: widget.listado[i].date_end,
-            name: "",
-            email: "",
-            state: widget.listado[i].state);
+    for (int i = 0; i < listado.length; i++) {
+      Slots ns = Slots(
+          eventTypesData: listado[i].eventTypesData,
+          eventTypesDataId: listado[i].eventTypesDataId,
+          date_start: listado[i].date_start,
+          date_end: listado[i].date_end,
+          name: listado[i].name,
+          email: listado[i].email,
+          state: listado[i].state);
 
-        unico.add(ns);
-      }
+      unico.add(ns);
     }
 
     for (int i = 0; i < unico.length; i++) {
@@ -95,7 +118,6 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
 
       press.add(false);
     }
-    super.initState();
   }
 
   void init() async {
@@ -104,402 +126,368 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height - 70;
+    width = MediaQuery.of(context).size.width - 240;
+    ancho = (width / 100) - 0.1;
     return Align(
       alignment: const Alignment(0, 0),
       child: Material(
         color: Colors.transparent,
         child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-                minWidth: 800, maxWidth: 800, minHeight: 500, maxHeight: 500),
-            child: Container(
-              height: 500,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 1.0),
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                color: myColor.CM_Lead_fill,
-              ),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Icon(Icons.clear, size: 25),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 20),
-                    child: SingleChildScrollView(
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, left: 20, right: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      width: 60.0,
-                                      child: Image.network(
-                                          'https://silverhome1.s3.amazonaws.com/files/20220824150755237_1661353675069.png')),
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      GlobleString.CAL_List_of_Attendees,
-                                      style:
-                                          MyStyles.Bold(22, myColor.text_color),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    child: Container(),
-                                    style: ElevatedButton.styleFrom(
-                                        shape: CircleBorder(),
-                                        padding: EdgeInsets.all(15),
-                                        primary: color1[widget
-                                            .slot1.eventTypesData!.color]),
-                                  ),
-                                ],
-                              ),
+            padding: const EdgeInsets.all(30),
+            child: ConnectState<SlotsListState>(
+                map: (state) => state.slotsListState,
+                where: notIdentical,
+                builder: (slotsListState) {
+                  data1(slotsListState!.eventtypeslist);
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(
+                        minWidth: 800,
+                        maxWidth: 800,
+                        minHeight: 500,
+                        maxHeight: 500),
+                    child: Container(
+                      height: 500,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 1.0),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10.0)),
+                        color: myColor.CM_Lead_fill,
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Icon(Icons.clear, size: 25),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 20.0),
-                            Container(
-                              color: Colors.white,
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(30.0),
-                              child: Column(
-                                children: [
-                                  Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0, vertical: 20.0),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black12, width: 2.0),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(5.0)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, bottom: 20),
+                            child: SingleChildScrollView(
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, left: 20, right: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                              width: 60.0,
+                                              child: Image.network(
+                                                  'https://silverhome1.s3.amazonaws.com/files/20220824150755237_1661353675069.png')),
+                                          Container(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              GlobleString
+                                                  .CAL_List_of_Attendees,
+                                              style: MyStyles.Bold(
+                                                  22, myColor.text_color),
+                                              textAlign: TextAlign.start,
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {},
+                                            child: Container(),
+                                            style: ElevatedButton.styleFrom(
+                                                shape: CircleBorder(),
+                                                padding: EdgeInsets.all(15),
+                                                primary: color1[slotsListState!
+                                                    .eventtypeslist[0]
+                                                    .eventTypesData!
+                                                    .color]),
+                                          ),
+                                        ],
                                       ),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    Container(
+                                      color: Colors.white,
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(30.0),
                                       child: Column(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                GlobleString.CAL_Event_Details,
-                                                style: MyStyles.Bold(
-                                                    20, myColor.text_color),
+                                          Container(
+                                              width: double.infinity,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 30.0,
+                                                      vertical: 20.0),
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.black12,
+                                                    width: 2.0),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(5.0)),
                                               ),
-                                            ],
-                                          ),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        GlobleString
+                                                            .CAL_Event_Details,
+                                                        style: MyStyles.Bold(20,
+                                                            myColor.text_color),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 20.0),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        GlobleString
+                                                            .CAL_Event_Type_Name,
+                                                        style: MyStyles.Bold(16,
+                                                            myColor.text_color),
+                                                      ),
+                                                      const SizedBox(
+                                                          width: 8.0),
+                                                      Text(slotsListState!
+                                                              .eventtypeslist[0]
+                                                              .eventTypesData!
+                                                              .name ??
+                                                          ""),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 10.0),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        GlobleString
+                                                            .CAL_Event_Description,
+                                                        style: MyStyles.Bold(16,
+                                                            myColor.text_color),
+                                                      ),
+                                                      const SizedBox(
+                                                          width: 8.0),
+                                                      Text(slotsListState!
+                                                              .eventtypeslist[0]
+                                                              .eventTypesData!
+                                                              .description ??
+                                                          ""),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 10.0),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        GlobleString
+                                                            .CAL_Property_Name,
+                                                        style: MyStyles.Bold(16,
+                                                            myColor.text_color),
+                                                      ),
+                                                      const SizedBox(
+                                                          width: 8.0),
+                                                      Text(slotsListState!
+                                                              .eventtypeslist[0]
+                                                              .eventTypesData!
+                                                              .location ??
+                                                          ""),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 10.0),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        GlobleString
+                                                            .CAL_Location,
+                                                        style: MyStyles.Bold(16,
+                                                            myColor.text_color),
+                                                      ),
+                                                      const SizedBox(
+                                                          width: 8.0),
+                                                      Text(slotsListState!
+                                                              .eventtypeslist[0]
+                                                              .eventTypesData!
+                                                              .location ??
+                                                          ""),
+                                                    ],
+                                                  ),
+                                                ],
+                                              )),
                                           const SizedBox(height: 20.0),
                                           Row(
                                             children: [
                                               Text(
-                                                GlobleString
-                                                    .CAL_Event_Type_Name,
+                                                GlobleString.CAL_Time_Zone,
                                                 style: MyStyles.Bold(
-                                                    16, myColor.text_color),
+                                                    15, myColor.text_color),
                                               ),
-                                              const SizedBox(width: 8.0),
-                                              Text(widget.slot1.eventTypesData!
-                                                      .name ??
-                                                  ""),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 10.0),
-                                          Row(
-                                            children: [
+                                              const SizedBox(width: 5.0),
                                               Text(
-                                                GlobleString
-                                                    .CAL_Event_Description,
+                                                "Pacific Standard Time (PST)",
                                                 style: MyStyles.Bold(
-                                                    16, myColor.text_color),
+                                                    15, myColor.text_color),
                                               ),
-                                              const SizedBox(width: 8.0),
-                                              Text(widget.slot1.eventTypesData!
-                                                      .description ??
-                                                  ""),
                                             ],
                                           ),
-                                          const SizedBox(height: 10.0),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                GlobleString.CAL_Property_Name,
-                                                style: MyStyles.Bold(
-                                                    16, myColor.text_color),
-                                              ),
-                                              const SizedBox(width: 8.0),
-                                              Text(widget.slot1.eventTypesData!
-                                                      .location ??
-                                                  ""),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 10.0),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                GlobleString.CAL_Location,
-                                                style: MyStyles.Bold(
-                                                    16, myColor.text_color),
-                                              ),
-                                              const SizedBox(width: 8.0),
-                                              Text(widget.slot1.eventTypesData!
-                                                      .location ??
-                                                  ""),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        GlobleString.CAL_Time_Zone,
-                                        style: MyStyles.Bold(
-                                            15, myColor.text_color),
-                                      ),
-                                      const SizedBox(width: 5.0),
-                                      Text(
-                                        "Pacific Standard Time (PST)",
-                                        style: MyStyles.Bold(
-                                            15, myColor.text_color),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Container(
-                                    width: double.infinity,
-                                    alignment: Alignment.centerLeft,
-                                    color: myColor.TA_table_header,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 15),
-                                    child: Text(
-                                        ponerfecha(
-                                            widget.slot1.date_start.toString()),
-                                        style: TextStyle(
-                                            color: myColor.text_color,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
-                                  ),
-                                  for (int i = 0; i < widget.s1.length; i++)
-                                    Column(
-                                      children: [
-                                        Container(
-                                          color: i % 2 == 0
-                                              ? myColor.TA_dark
-                                              : myColor.TA_light,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 0, vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const SizedBox(width: 10),
-                                              SizedBox(
-                                                  width: 8 * 20,
-                                                  child: Text(DateFormat.jm()
-                                                          .format(DateTime
-                                                              .parse(widget
-                                                                      .s1[i]
-                                                                      .date_start ??
-                                                                  "")) +
-                                                      " - " +
-                                                      DateFormat.jm().format(
-                                                          DateTime.parse(widget
-                                                                  .s1[i]
-                                                                  .date_end ??
-                                                              "")))),
-                                              const SizedBox(width: 8),
-                                              SizedBox(
-                                                  width: 8 * 30,
-                                                  child: Text(
-                                                      widget.s1[i].name ?? "",
-                                                      maxLines: 3)),
-                                              const SizedBox(width: 8),
-                                              SizedBox(
-                                                width: 8 * 25,
-                                                child: Text('Confirmed',
-                                                    style: TextStyle(
-                                                        color:
-                                                            myColor.CAL_green)),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (press[i]) {
-                                                      press[i] = false;
-                                                    } else {
-                                                      press[i] = true;
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 15, right: 10),
-                                                  height: 40,
-                                                  width: 30,
-                                                  alignment: Alignment.center,
-                                                  child: Image.asset(
-                                                    press[i]
-                                                        ? "assets/images/circle_up.png"
-                                                        : "assets/images/circle_down.png",
-
-                                                    height: 19,
-                                                    //width: 20,
-                                                    alignment: Alignment.center,
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        if (press[i])
-                                          Container(
-                                            color: i % 2 == 0
-                                                ? myColor.TA_dark
-                                                : myColor.TA_light,
-                                            width: double.infinity,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 15, vertical: 0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                          const SizedBox(height: 20.0),
+                                          for (int i = 0; i < dias.length; i++)
+                                            Column(
                                               children: [
-                                                Divider(),
-                                                Text(
-                                                  GlobleString.LMV_AV_Rating,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                ),
-                                                const SizedBox(height: 5.0),
-                                                RatingBar.builder(
-                                                  initialRating: 4,
-                                                  allowHalfRating: false,
-                                                  glow: false,
-                                                  itemBuilder:
-                                                      (context, index) =>
-                                                          const Icon(
-                                                    Icons.star,
-                                                    color: myColor.blue,
+                                                Container(
+                                                  color:
+                                                      myColor.TA_table_header,
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 15),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(
+                                                              ponerfecha(dias[i]
+                                                                  .toString()),
+                                                              style: const TextStyle(
+                                                                  color: myColor
+                                                                      .text_color,
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          const SizedBox(
+                                                              width: 10),
+                                                        ],
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
+                                                          setState(() {
+                                                            if (press[i]) {
+                                                              press[i] = false;
+                                                            } else {
+                                                              press[i] = true;
+                                                            }
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 15,
+                                                                  right: 10),
+                                                          height: 40,
+                                                          width: 30,
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Image.asset(
+                                                            press[i]
+                                                                ? "assets/images/circle_up.png"
+                                                                : "assets/images/circle_down.png",
+
+                                                            height: 19,
+                                                            //width: 20,
+                                                            alignment: Alignment
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  onRatingUpdate: (rating) {
-                                                    //_store.dispatch(UpdateADV_rating(rating));
-                                                    //_changeData();
-                                                  },
-                                                  itemCount: 5,
-                                                  itemSize: 25.0,
-                                                  unratedColor:
-                                                      myColor.TA_Border,
-                                                  direction: Axis.horizontal,
                                                 ),
-                                                const SizedBox(height: 10.0),
-                                                Text(
-                                                  GlobleString.LMV_AV_Note,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                                const SizedBox(height: 5.0),
-                                                TextFormField(
-                                                  //initialValue: addVendorState.Note,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  maxLines: 4,
-                                                  maxLength: 10000,
-                                                  inputFormatters: [
-                                                    LengthLimitingTextInputFormatter(
-                                                        10000),
-                                                  ],
-                                                  decoration:
-                                                      const InputDecoration(
-                                                          focusedBorder:
-                                                              OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: myColor
-                                                                        .blue,
-                                                                    width: 2.0),
+// Este container es el que se debe desplegar o esconder
+                                                if (press[i] == true)
+                                                  Container(
+                                                    child: Column(
+                                                      children: [
+                                                        for (int j = 0;
+                                                            j <
+                                                                slots[dias[i]]
+                                                                    .length;
+                                                            j++)
+                                                          Container(
+                                                            color: j % 2 == 0
+                                                                ? myColor
+                                                                    .TA_dark
+                                                                : myColor
+                                                                    .TA_light,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        0,
+                                                                    vertical:
+                                                                        5),
+                                                            child: Row(
+                                                              children: [
+                                                                SizedBox(
+                                                                    width:
+                                                                        ancho),
+                                                                SizedBox(
+                                                                    width:
+                                                                        ancho *
+                                                                            14,
+                                                                    child: Text(DateFormat.jm().format(DateTime.parse(slots[dias[i]][j]
+                                                                            .date_start)) +
+                                                                        " - " +
+                                                                        DateFormat.jm()
+                                                                            .format(DateTime.parse(slots[dias[i]][j].date_end)))),
+                                                                SizedBox(
+                                                                    width:
+                                                                        ancho),
+                                                                SizedBox(
+                                                                    width:
+                                                                        ancho *
+                                                                            19,
+                                                                    child: Text(
+                                                                        slots[dias[i]][j]
+                                                                            .name)),
+                                                                SizedBox(
+                                                                    width:
+                                                                        ancho),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          enabledBorder:
-                                                              OutlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                                    color: myColor
-                                                                        .gray,
-                                                                    width: 1.0),
-                                                          ),
-                                                          isDense: true,
-                                                          contentPadding:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          fillColor:
-                                                              myColor.white,
-                                                          filled: true),
-                                                  onChanged: (value) {
-                                                    //_store.dispatch(UpdateADV_Note(value));
-                                                    //_changeData();
-                                                  },
-                                                ),
-                                                const SizedBox(height: 10.0),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {},
-                                                      child: CustomeWidget
-                                                          .AddSimpleButton(
-                                                              GlobleString
-                                                                  .SAVE),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 15.0),
+                                                  ),
+                                                const SizedBox(height: 20.0),
                                               ],
                                             ),
-                                          )
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                ],
+                                    Container(
+                                      color: Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 15, left: 20, right: 20),
+                                        child: Container(),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                            Container(
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 15, left: 20, right: 20),
-                                child: Container(),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
+                      //},
                     ),
-                  )
-                ],
-              ),
-              //},
-            ),
-          ),
-        ),
+                  );
+                })),
       ),
     );
   }

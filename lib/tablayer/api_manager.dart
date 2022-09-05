@@ -1417,30 +1417,6 @@ class ApiManager {
           slotslist.add(eventData);
         }
 
-        /* propertylist.sort((a, b) =>
-            b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));*/
-/*
-        if (ftime == 0) {
-          if (slotslist.length > 0) {
-            int TotalRecords =
-                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
-
-            _store.dispatch(UpdateEventTypesListTotalRecord(TotalRecords));
-
-            if (TotalRecords % 15 == 0) {
-              int dept_totalpage = int.parse((TotalRecords / 15).toString());
-              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
-            } else {
-              double page = (TotalRecords / 15);
-              int dept_totalpage = (page + 1).toInt();
-              _store.dispatch(UpdateEventTypesListTotalpage(dept_totalpage));
-            }
-          } else {
-            _store.dispatch(UpdateEventTypesListTotalpage(1));
-          }
-          _store.dispatch(UpdateEventTypesListPageNo(1));
-        }
-*/
         _store.dispatch(UpdateEventTypesListIsloding(false));
         _store.dispatch(UpdateSlots(slotslist));
       } else {

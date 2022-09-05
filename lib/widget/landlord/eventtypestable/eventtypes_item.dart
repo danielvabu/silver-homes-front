@@ -9,6 +9,7 @@ import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
+import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dart';
 
 typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDetails = void Function(EventTypesDataList eventtypesData);
@@ -244,7 +245,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       alignment: Alignment.center,
       child: GestureDetector(
           onTap: () {
-            print('muestra los attendees');
+            openDialogListAttendees(model.id!);
           },
           child: Icon(Icons.groups)),
     );
@@ -301,6 +302,18 @@ class _EventTypesItemState extends State<EventTypesItem> {
           ],
         ),
       ),
+    );
+  }
+
+  void openDialogListAttendees(String id) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return ListOfAttendeesEvent(id);
+      },
     );
   }
 }

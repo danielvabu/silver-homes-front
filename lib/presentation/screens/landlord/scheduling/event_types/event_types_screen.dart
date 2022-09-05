@@ -1136,16 +1136,4 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       },
     );
   }
-
-  void openDialogListAttendees(Slots slot, List<Slots> lista) {
-    showDialog(
-      context: context,
-      barrierColor: Colors.black45,
-      useSafeArea: true,
-      barrierDismissible: false,
-      builder: (BuildContext context1) {
-        return ListOfAttendeesEvent(slot, lista);
-      },
-    );
-  }
 }
