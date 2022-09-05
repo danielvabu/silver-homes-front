@@ -74,7 +74,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   void initState() {
     Prefs.init();
     traerpropiedades();
-    initilizedata();
+
     filldata();
     initNavigationBack();
     AddEditEventTypes.isValueUpdate = false;
@@ -100,8 +100,6 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       }
     });
   }
-
-  initilizedata() {}
 
   initNavigationBack() {
     navigationNotifier.addListener(() {

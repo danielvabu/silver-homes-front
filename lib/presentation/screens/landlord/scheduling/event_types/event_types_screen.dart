@@ -20,7 +20,6 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions
 import 'package:silverhome/domain/actions/landlord_action/eventtypeslist_actions.dart';
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
-import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
