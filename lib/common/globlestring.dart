@@ -1837,6 +1837,10 @@ class GlobleString {
   static const String EVENT_Event = "Event";
   static const String EVENT_Task = "Task";
   static const String EVENT_Reminder = "Reminder";
+  static const String EVENT_Date = "Date";
+  static const String EVENT_Time = "Time";
+  static const String EVENT_Description = "Description";
+  static const String EVENT_Event_Type = "Event Type";
   static const String CAL_List_of_Attendees = "List of Attendees";
   static const String CAL_Event_Details = "Event Details";
   static const String CAL_Event_Type_Name = "Event Type Name:";

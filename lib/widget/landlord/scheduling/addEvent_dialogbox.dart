@@ -74,6 +74,57 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
     //_store.dispatch(UpdateADV_Categorylist(Categorylist));
   }
 
+  TextEditingController dateCtl = TextEditingController();
+  TextEditingController timeCtl = TextEditingController();
+
+  TimeOfDay time = TimeOfDay(hour: 10, minute: 30);
+
+  String eventTitle = "";
+  String eventType = GlobleString.EVENT_Event;
+  String eventDate = "";
+  String eventTime = "";
+  String eventDescription = "";
+
+  Future<void> _selectDate1(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2200),
+      builder: (BuildContext? context, Widget? child) {
+        return Theme(
+          data:
+              ThemeData(primarySwatch: MaterialColor(0xFF010B32, Helper.color)),
+          child: child!,
+        );
+      },
+    );
+    if (pickedDate != null) {
+      final fini = pickedDate.toLocal().toString().split(" ");
+      dateCtl.text = eventDate = fini[0];
+    }
+  }
+
+  Future<void> _selectTime1(BuildContext context) async {
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: time,
+      builder: (BuildContext? context, Widget? child) {
+        return Theme(
+          data:
+              ThemeData(primarySwatch: MaterialColor(0xFF010B32, Helper.color)),
+          child: child!,
+        );
+      },
+    );
+    if (pickedTime != null) {
+      final hini = pickedTime.hour.toString().padLeft(2, '0') +
+          ":" +
+          pickedTime.minute.toString().padLeft(2, '0');
+      timeCtl.text = eventTime = hini;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -92,12 +143,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 color: Colors.white,
               ),
-              child:
-                  //ConnectState<AddEventState>(
-                  //map: (state) => state.addEventState,
-                  //where: notIdentical,
-                  //builder: (addEventState) {return
-                  Stack(
+              child: Stack(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5),
@@ -232,8 +278,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                       fillColor: myColor.white,
                                                       filled: true),
                                                   onChanged: (value) {
-                                                    //_store.dispatch(UpdateADV_companyname(value));
-                                                    //_changeData();
+                                                    eventTitle = value;
                                                   },
                                                 ),
                                               ),
@@ -268,71 +313,24 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                       12, myColor.black),
                                                   defultHeight: 3 * 35,
                                                   hint: GlobleString
-                                                      .Select_Status,
+                                                      .EVENT_Event_Type,
                                                   showSearchBox: false,
                                                   selectedItem:
                                                       GlobleString.EVENT_Event,
                                                   isFilteredOnline: true,
-                                                  onChanged: (value) {},
-                                                ),
-                                              ),
-                                              const SizedBox(height: 10.0),
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
-                                                child: Text(
-                                                  GlobleString.CALENDAR_Start,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
-                                                child: TextFormField(
-                                                  initialValue: "",
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  decoration: const InputDecoration(
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  color:
-                                                                      myColor
-                                                                          .blue,
-                                                                  width: 2)),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                      color: myColor
-                                                                          .gray,
-                                                                      width:
-                                                                          1.0)),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
                                                   onChanged: (value) {
-                                                    //_store.dispatch(UpdateADV_companyname(value));
-                                                    //_changeData();
+                                                    eventType =
+                                                        value.toString();
                                                   },
                                                 ),
                                               ),
                                               const SizedBox(height: 10.0),
                                               Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0,
-                                                        vertical: 0.0),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0,
+                                                    vertical: 0.0),
                                                 child: Text(
-                                                  GlobleString.CALENDAR_End,
+                                                  GlobleString.EVENT_Date,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
                                                   textAlign: TextAlign.start,
@@ -345,11 +343,12 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                         horizontal: 8.0,
                                                         vertical: 0.0),
                                                 child: TextFormField(
-                                                  initialValue: "",
+                                                  controller: dateCtl,
                                                   textAlign: TextAlign.start,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
                                                   decoration: const InputDecoration(
+                                                      hintText: "yyyy-mm-dd",
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                               borderSide: BorderSide(
@@ -370,9 +369,62 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                           EdgeInsets.all(10),
                                                       fillColor: myColor.white,
                                                       filled: true),
-                                                  onChanged: (value) {
-                                                    //_store.dispatch(UpdateADV_companyname(value));
-                                                    //_changeData();
+                                                  onTap: () {
+                                                    _selectDate1(context);
+                                                  },
+                                                  readOnly: true,
+                                                  //onChanged: (value) {eventDate = value;},
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.EVENT_Time,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: TextFormField(
+                                                  controller: timeCtl,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      hintText: "hh:mm",
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  readOnly: true,
+                                                  onTap: () {
+                                                    _selectTime1(context);
                                                   },
                                                 ),
                                               ),
@@ -383,7 +435,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     vertical: 0.0),
                                                 child: Text(
                                                   GlobleString
-                                                      .CALENDAR_Event_Attendees,
+                                                      .EVENT_Description,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
                                                   textAlign: TextAlign.start,
@@ -391,27 +443,39 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               ),
                                               const SizedBox(height: 5.0),
                                               Container(
-                                                height: 30,
-                                                width: Size.infinite.width,
-                                                // ignore: missing_required_param
-                                                child: DropdownSearch(
-                                                  mode: Mode.MENU,
-                                                  focuscolor: myColor.blue,
-                                                  focusWidth: 2,
-                                                  items: [
-                                                    "Pepito Perez",
-                                                    "Perensejo Gutierrez",
-                                                    "Fulanito Cruz"
-                                                  ],
-                                                  textstyle: MyStyles.Medium(
-                                                      12, myColor.black),
-                                                  defultHeight: 3 * 35,
-                                                  hint: GlobleString
-                                                      .Select_Status,
-                                                  showSearchBox: false,
-                                                  selectedItem: "Pepito Perez",
-                                                  isFilteredOnline: true,
-                                                  onChanged: (value) {},
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    eventDescription = value;
+                                                  },
                                                 ),
                                               ),
                                             ],
@@ -483,7 +547,16 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                   InkWell(
                                     onTap: () {
                                       //checkValidation(context, addEventState);
-                                      // widget._callbackSave();
+                                      widget._callbackSave();
+                                      print(eventTitle +
+                                          " - " +
+                                          eventType +
+                                          " - " +
+                                          eventDate +
+                                          " - " +
+                                          eventTime +
+                                          " - " +
+                                          eventDescription);
                                     },
                                     child: Container(
                                       height: 35,
@@ -512,7 +585,6 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                   )
                 ],
               ),
-              //},
             ),
           ),
         ),
