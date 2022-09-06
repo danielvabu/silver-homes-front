@@ -1833,6 +1833,10 @@ class GlobleString {
   static const String CALENDAR_Start = "Start";
   static const String CALENDAR_End = "End";
   static const String CALENDAR_Event_Attendees = "Attendees";
+  static const String EVENT_Title = "Event Title";
+  static const String EVENT_Event = "Event";
+  static const String EVENT_Task = "Task";
+  static const String EVENT_Reminder = "Reminder";
   static const String CAL_List_of_Attendees = "List of Attendees";
   static const String CAL_Event_Details = "Event Details";
   static const String CAL_Event_Type_Name = "Event Type Name:";

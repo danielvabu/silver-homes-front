@@ -89,9 +89,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
               height: 400,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.white, width: 1.0),
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(10.0),
-                ),
+                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 color: Colors.white,
               ),
               child:
@@ -169,9 +167,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                            const SizedBox(height: 20),
                             Container(
                               padding:
                                   const EdgeInsets.only(left: 20, right: 20),
@@ -192,9 +188,61 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.EVENT_Title,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    //_store.dispatch(UpdateADV_companyname(value));
+                                                    //_changeData();
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
                                                 child: Text(
                                                   GlobleString
                                                       .CALENDAR_Event_Type,
@@ -207,15 +255,14 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               Container(
                                                 height: 30,
                                                 width: Size.infinite.width,
-                                                // ignore: missing_required_param
                                                 child: DropdownSearch(
                                                   mode: Mode.MENU,
                                                   focuscolor: myColor.blue,
                                                   focusWidth: 2,
-                                                  items: [
-                                                    "Showings - 867 Hamilton Street",
-                                                    "Showings - 123 Main Street",
-                                                    "Showings - 867 Hamilton Street"
+                                                  items: const [
+                                                    GlobleString.EVENT_Event,
+                                                    GlobleString.EVENT_Task,
+                                                    GlobleString.EVENT_Reminder
                                                   ],
                                                   textstyle: MyStyles.Medium(
                                                       12, myColor.black),
@@ -224,7 +271,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                       .Select_Status,
                                                   showSearchBox: false,
                                                   selectedItem:
-                                                      "Showings - 867 Hamilton Street",
+                                                      GlobleString.EVENT_Event,
                                                   isFilteredOnline: true,
                                                   onChanged: (value) {},
                                                 ),
@@ -280,9 +327,10 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               ),
                                               const SizedBox(height: 10.0),
                                               Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
                                                 child: Text(
                                                   GlobleString.CALENDAR_End,
                                                   style: MyStyles.Medium(
@@ -292,9 +340,10 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               ),
                                               const SizedBox(height: 5.0),
                                               Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
                                                 child: TextFormField(
                                                   initialValue: "",
                                                   textAlign: TextAlign.start,
