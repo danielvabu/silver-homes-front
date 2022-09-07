@@ -14359,42 +14359,42 @@ class ApiManager {
       }
     });
   }
-}
 
 /*==============================================================================*/
 /*==============================  CALENDAR  ================================*/
 /*==============================================================================*/
 
-InsetNewEventAPI(
-    BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-  String query = QueryFilter().InsertQueryArray(POJO, etableName.Application,
-      eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetNewEventAPI(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQueryArray(POJO, etableName.Application,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
-  HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
-    if (error) {
-      List data = jsonDecode(respoce) as List;
+    HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
+      if (error) {
+        List data = jsonDecode(respoce) as List;
 
-      bool issuccess = false;
-      for (int i = 0; i < data.length; i++) {
-        var myobject = data[i];
+        bool issuccess = false;
+        for (int i = 0; i < data.length; i++) {
+          var myobject = data[i];
 
-        String StatusCode = myobject['StatusCode'] != null
-            ? myobject['StatusCode'].toString()
-            : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
-        if (StatusCode.isEmpty || StatusCode != "200") {
-          //loader.remove();
-          issuccess = true;
-          CallBackQuesy(false, "");
-          break;
+          if (StatusCode.isEmpty || StatusCode != "200") {
+            //loader.remove();
+            issuccess = true;
+            CallBackQuesy(false, "");
+            break;
+          }
+
+          if ((data.length - 1) == i && !issuccess) {
+            CallBackQuesy(true, "");
+          }
         }
-
-        if ((data.length - 1) == i && !issuccess) {
-          CallBackQuesy(true, "");
-        }
+      } else {
+        CallBackQuesy(false, "");
       }
-    } else {
-      CallBackQuesy(false, "");
-    }
-  });
+    });
+  }
 }

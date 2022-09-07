@@ -601,17 +601,17 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
       List<MyEvent> eventolist = [];
       eventolist.add(personid);
       eventCall(eventolist);
-      widget._callbackSave();
-      loader.remove();
+      //widget._callbackSave();
+      //loader.remove();
     }
   }
 
   eventCall(eventolist) {
     ApiManager().InsetNewEventAPI(context, eventolist, (error, respoce) {
       if (error) {
-        ToastUtils.showCustomToast(context, GlobleString.NL_Lead_Success, true);
+        ToastUtils.showCustomToast(
+            context, GlobleString.EVENT_Event_Success, true);
         loader.remove();
-        _store.dispatch(UpdateNewLeadProperty(null));
         widget._callbackSave();
       } else {
         loader.remove();
