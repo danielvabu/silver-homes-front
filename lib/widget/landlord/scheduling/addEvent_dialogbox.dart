@@ -546,17 +546,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                   const SizedBox(width: 10),
                                   InkWell(
                                     onTap: () {
-                                      //checkValidation(context, addEventState);
-                                      widget._callbackSave();
-                                      print(eventTitle +
-                                          " - " +
-                                          eventType +
-                                          " - " +
-                                          eventDate +
-                                          " - " +
-                                          eventTime +
-                                          " - " +
-                                          eventDescription);
+                                      checkValidation(context);
                                     },
                                     child: Container(
                                       height: 35,
@@ -592,35 +582,42 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
     );
   }
 
-/*
-  void checkValidation(BuildContext context, AddEventState addEventState) {
-    if (addEventState.companyname == null ||
-        addEventState.companyname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADV_error_companyname, false);
+  void checkValidation(BuildContext context) {
+    if (eventTitle == null || eventTitle.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Title, false);
+    } else if (eventDate == null || eventDate.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Date, false);
+    } else if (eventTime == null || eventTime.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Time, false);
     } else {
-      if (addEventState.vid != 0) {
-        editEvent(addEventState);
-      } else {
-        addEvent(addEventState);
-      }
+      loader = Helper.overlayLoader(context);
+      Overlay.of(context)!.insert(loader);
+      MyEvent personid = MyEvent();
+      personid.eventTitle = eventTitle;
+      personid.eventType = eventType;
+      personid.eventDate = eventDate;
+      personid.eventTime = eventTime;
+      personid.eventDesc = eventDescription;
+      List<MyEvent> eventolist = [];
+      eventolist.add(personid);
+      eventCall(eventolist);
+      widget._callbackSave();
+      loader.remove();
     }
   }
 
-  void editEvent(AddEventState addEventState) {
-    EventDataQuery EventData = new EventDataQuery();
-    EventData.CompanyName = addEventState.companyname;
-    EventData.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-    loader = Helper.overlayLoader(context);
-    Overlay.of(context)!.insert(loader);
+  eventCall(eventolist) {
+    ApiManager().InsetNewEventAPI(context, eventolist, (error, respoce) {
+      if (error) {
+        ToastUtils.showCustomToast(context, GlobleString.NL_Lead_Success, true);
+        loader.remove();
+        _store.dispatch(UpdateNewLeadProperty(null));
+        widget._callbackSave();
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.NL_error_insertcall, false);
+      }
+    });
   }
-
-  void addEvent(AddEventState addEventState) {
-    EventDataQuery EventData = new EventDataQuery();
-    EventData.CompanyName = addEventState.companyname;
-    loader = Helper.overlayLoader(context);
-    Overlay.of(context)!.insert(loader);
-  }
-*/
-
 }

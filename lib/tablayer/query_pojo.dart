@@ -1330,6 +1330,39 @@ class UserData {
       };
 }
 
+/*Calendar*/
+class MyEvent {
+  MyEvent({
+    this.eventTitle,
+    this.eventType,
+    this.eventDate,
+    this.eventTime,
+    this.eventDesc,
+  });
+
+  String? eventTitle;
+  String? eventType;
+  String? eventDate;
+  String? eventTime;
+  String? eventDesc;
+
+  factory MyEvent.fromJson(Map<String, dynamic> json) => MyEvent(
+        eventTitle: json["EventTitle"],
+        eventType: json["EventType"],
+        eventDate: json["EventDate"],
+        eventTime: json["EventTime"],
+        eventDesc: json["EventDesc"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "EventTitle": eventTitle,
+        "EventType": eventType,
+        "EventDate": eventDate,
+        "EventTime": eventTime,
+        "EventDesc": eventDesc,
+      };
+}
+
 /*EventTypes*/
 
 class EventTypesActive {
