@@ -201,7 +201,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                   children: [
                                     _togglebutton(),
                                     const SizedBox(width: 10.0),
-                                    _actionPopup()
+                                    // _actionPopup()
                                   ],
                                 ),
                               ],
@@ -794,16 +794,17 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                 textAlign: TextAlign.start,
               ),
             ),
-            PopupMenuItem(
-              value: 2,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
-              child: Text(
-                GlobleString.CALENDAR_View_Attendees,
-                style: MyStyles.Regular(12, myColor.text_color),
-                textAlign: TextAlign.start,
+            if (slot.eventTypesData!.range != 0)
+              PopupMenuItem(
+                value: 2,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+                child: Text(
+                  GlobleString.CALENDAR_View_Attendees,
+                  style: MyStyles.Regular(12, myColor.text_color),
+                  textAlign: TextAlign.start,
+                ),
               ),
-            ),
             PopupMenuItem(
               value: 3,
               padding:
@@ -814,16 +815,17 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                 textAlign: TextAlign.start,
               ),
             ),
-            PopupMenuItem(
-              value: 4,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-              child: Text(
-                GlobleString.CALENDAR_Edit_Event_Type,
-                style: MyStyles.Regular(12, myColor.text_color),
-                textAlign: TextAlign.start,
+            if (slot.eventTypesData!.range != 0)
+              PopupMenuItem(
+                value: 4,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+                child: Text(
+                  GlobleString.CALENDAR_Edit_Event_Type,
+                  style: MyStyles.Regular(12, myColor.text_color),
+                  textAlign: TextAlign.start,
+                ),
               ),
-            ),
             PopupMenuItem(
               value: 5,
               padding:
