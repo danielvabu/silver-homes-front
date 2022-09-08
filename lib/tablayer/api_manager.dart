@@ -14366,7 +14366,7 @@ class ApiManager {
 
   InsetNewEventAPI(
       BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQueryArray(POJO, etableName.Application,
+    String query = QueryFilter().InsertQueryArray(POJO, etableName.Slots,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, query, (error, respoce) async {

@@ -1333,33 +1333,45 @@ class UserData {
 /*Calendar*/
 class MyEvent {
   MyEvent({
-    this.eventTitle,
-    this.eventType,
-    this.eventDate,
-    this.eventTime,
-    this.eventDesc,
+    this.event_type_id,
+    this.person_id,
+    this.event_title,
+    this.event_kat,
+    this.date_start,
+    this.date_end,
+    this.event_desc,
+    this.event_color,
   });
 
-  String? eventTitle;
-  String? eventType;
-  String? eventDate;
-  String? eventTime;
-  String? eventDesc;
+  int? event_type_id;
+  int? person_id;
+  String? event_title;
+  String? event_kat;
+  String? date_start;
+  String? date_end;
+  String? event_desc;
+  String? event_color;
 
   factory MyEvent.fromJson(Map<String, dynamic> json) => MyEvent(
-        eventTitle: json["EventTitle"],
-        eventType: json["EventType"],
-        eventDate: json["EventDate"],
-        eventTime: json["EventTime"],
-        eventDesc: json["EventDesc"],
+        event_type_id: json["event_type_id"],
+        person_id: json["person_id"],
+        event_title: json["event_title"],
+        event_kat: json["event_kat"],
+        date_start: json["date_start"],
+        date_end: json["date_end"],
+        event_desc: json["event_desc"],
+        event_color: json["event_color"],
       );
 
   Map<String, dynamic> toJson() => {
-        "EventTitle": eventTitle,
-        "EventType": eventType,
-        "EventDate": eventDate,
-        "EventTime": eventTime,
-        "EventDesc": eventDesc,
+        "event_type_id": event_type_id,
+        "person_id": person_id,
+        "event_title": event_title,
+        "event_kat": event_kat,
+        "date_start": date_start,
+        "date_end": date_end,
+        "event_desc": event_desc,
+        "event_color": event_color,
       };
 }
 

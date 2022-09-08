@@ -76,6 +76,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
 
   TextEditingController dateCtl = TextEditingController();
   TextEditingController timeCtl = TextEditingController();
+  TextEditingController timeECtl = TextEditingController();
 
   TimeOfDay time = TimeOfDay(hour: 10, minute: 30);
 
@@ -83,6 +84,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
   String eventType = GlobleString.EVENT_Event;
   String eventDate = "";
   String eventTime = "";
+  String eventEndTime = "";
   String eventDescription = "";
 
   Future<void> _selectDate1(BuildContext context) async {
@@ -122,6 +124,26 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
           ":" +
           pickedTime.minute.toString().padLeft(2, '0');
       timeCtl.text = eventTime = hini;
+    }
+  }
+
+  Future<void> _selectTime2(BuildContext context) async {
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: time,
+      builder: (BuildContext? context, Widget? child) {
+        return Theme(
+          data:
+              ThemeData(primarySwatch: MaterialColor(0xFF010B32, Helper.color)),
+          child: child!,
+        );
+      },
+    );
+    if (pickedTime != null) {
+      final hini = pickedTime.hour.toString().padLeft(2, '0') +
+          ":" +
+          pickedTime.minute.toString().padLeft(2, '0');
+      timeECtl.text = eventEndTime = hini;
     }
   }
 
@@ -383,7 +405,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                         horizontal: 8.0,
                                                         vertical: 0.0),
                                                 child: Text(
-                                                  GlobleString.EVENT_Time,
+                                                  GlobleString.EVENT_Start_Time,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
                                                   textAlign: TextAlign.start,
@@ -425,6 +447,58 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                   readOnly: true,
                                                   onTap: () {
                                                     _selectTime1(context);
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.EVENT_End_Time,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: TextFormField(
+                                                  controller: timeCtl,
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      hintText: "hh:mm",
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  readOnly: true,
+                                                  onTap: () {
+                                                    _selectTime2(context);
                                                   },
                                                 ),
                                               ),
@@ -589,17 +663,21 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Date, false);
     } else if (eventTime == null || eventTime.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Time, false);
+    } else if (eventEndTime == null || eventEndTime.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.EVENT_No_EndTime, false);
     } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
-      MyEvent personid = MyEvent();
-      personid.eventTitle = eventTitle;
-      personid.eventType = eventType;
-      personid.eventDate = eventDate;
-      personid.eventTime = eventTime;
-      personid.eventDesc = eventDescription;
+      MyEvent entraid = MyEvent();
+      entraid.event_type_id = 0;
+      //entraid.person_id = Prefs.getString(PrefsName.OwnerID);
+      entraid.event_title = eventTitle;
+      entraid.event_kat = eventType;
+      entraid.date_start = eventDate + ' ' + eventTime;
+      entraid.date_end = eventDate + ' ' + eventEndTime;
+      entraid.event_desc = eventDescription;
       List<MyEvent> eventolist = [];
-      eventolist.add(personid);
+      eventolist.add(entraid);
       eventCall(eventolist);
       //widget._callbackSave();
       //loader.remove();
