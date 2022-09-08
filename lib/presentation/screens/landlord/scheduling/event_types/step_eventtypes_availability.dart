@@ -2531,7 +2531,7 @@ class _StepEventTypesAvailabilityState
             });
           }
 
-//wetday
+          //wetday
           if (eventtypesState.wed) {
             EventTypesAvailability eventtypesAvailability2 =
                 new EventTypesAvailability();
