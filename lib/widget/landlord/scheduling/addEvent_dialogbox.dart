@@ -86,6 +86,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
   String eventDate = "";
   String eventTime = "";
   String eventEndTime = "";
+  String eventLocation = "";
   String eventDescription = "";
   String eventColor = "";
 
@@ -151,6 +152,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
 
   @override
   Widget build(BuildContext context) {
+    var edgeInsets = const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0);
     return Align(
       alignment: const Alignment(0, 0),
       child: Material(
@@ -718,9 +720,57 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               ),
                                               const SizedBox(height: 10.0),
                                               Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
+                                                padding: edgeInsets,
+                                                child: Text(
+                                                  GlobleString.EVENT_Location,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  textAlign: TextAlign.start,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  decoration: const InputDecoration(
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide: BorderSide(
+                                                                  color:
+                                                                      myColor
+                                                                          .blue,
+                                                                  width: 2)),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                      color: myColor
+                                                                          .gray,
+                                                                      width:
+                                                                          1.0)),
+                                                      isDense: true,
+                                                      contentPadding:
+                                                          EdgeInsets.all(10),
+                                                      fillColor: myColor.white,
+                                                      filled: true),
+                                                  onChanged: (value) {
+                                                    eventLocation = value;
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
                                                 child: Text(
                                                   GlobleString
                                                       .EVENT_Description,
@@ -886,6 +936,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
       EventTypesInsert entra1 = EventTypesInsert();
       entra1.name = eventTitle;
       entra1.showing = false;
+      entra1.location = eventLocation;
       entra1.description = eventDescription;
       entra1.color = eventColor;
       entra1.link = eventType;
