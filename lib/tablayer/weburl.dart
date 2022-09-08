@@ -184,6 +184,8 @@ class Weburl {
       "D1397E39-98B0-4C24-BF25-9B9FFC9A22AC";
   static var Leasesent_workflow = "149A3CF8-4A1B-4E72-8EE9-5B7104249F32";
   static var WorkFlow_DuplicatProperty = "1DF5CC24-A44B-45DE-B9E4-289D65EAC2DD";
+  static var WorkFlow_DuplicateEventype =
+      "1DF5CC24-A44B-45DE-B9E4-289D65EAC222";
   static var WorkFlow_Featured_image = "17D6D091-6A4D-49E9-84AD-8A0C675DDC8B";
   static var WorkFlow_Image_zip = "629DFE4B-BE8E-4E6F-8E7A-574B725EA8EA";
   static var WorkFlow_ResetPassWordMain =
