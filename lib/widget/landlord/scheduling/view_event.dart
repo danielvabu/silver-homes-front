@@ -143,19 +143,24 @@ class _ViewEventState extends State<ViewEvent> {
                                     ],
                                   ),
                                   const SizedBox(height: 10.0),
-                                  Row(
-                                    children: [
-                                      const SizedBox(width: 45.0),
-                                      Container(
-                                        width: 530,
-                                        child: (widget.s1[0].eventTypesData!
-                                                    .relation ??
-                                                false)
-                                            ? Text(GlobleString.ET_One_on_one)
-                                            : Text(GlobleString.ET_Group),
-                                      ),
-                                    ],
-                                  ),
+                                  Text(widget
+                                          .s1[0].eventTypesData!.description ??
+                                      ""),
+                                  const SizedBox(height: 10.0),
+                                  if (widget.s1[0].eventTypesData!.range != 0)
+                                    Row(
+                                      children: [
+                                        const SizedBox(width: 45.0),
+                                        Container(
+                                          width: 530,
+                                          child: (widget.s1[0].eventTypesData!
+                                                      .relation ??
+                                                  false)
+                                              ? Text(GlobleString.ET_One_on_one)
+                                              : Text(GlobleString.ET_Group),
+                                        ),
+                                      ],
+                                    ),
                                   const SizedBox(height: 20.0),
                                   Row(
                                     children: [
@@ -173,61 +178,66 @@ class _ViewEventState extends State<ViewEvent> {
                                     ],
                                   ),
                                   const SizedBox(height: 15.0),
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                          width: 15.0,
-                                          child: Icon(Icons
-                                              .supervisor_account_outlined)),
-                                      const SizedBox(width: 30.0),
-                                      Container(
-                                        width: 530,
-                                        child: Text(
-                                            widget.s1.length.toString() +
-                                                " " +
-                                                GlobleString.Guests),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  for (int i = 0; i < widget.s1.length; i++)
-                                    Column(
+                                  if (widget.s1[0].eventTypesData!.range != 0)
+                                    Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            const SizedBox(width: 45.0),
-                                            SizedBox(
-                                                width: 30.0,
-                                                child: ElevatedButton(
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                      widget.s1[i].email![0]
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white)),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          shape: CircleBorder(),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  12),
-                                                          primary: Colors.grey),
-                                                )),
-                                            const SizedBox(width: 10.0),
-                                            Container(
-                                              child: Text(
-                                                widget.s1[i].email.toString(),
-                                                maxLines: 3,
-                                              ),
-                                            ),
-                                          ],
+                                        const SizedBox(
+                                            width: 15.0,
+                                            child: Icon(Icons
+                                                .supervisor_account_outlined)),
+                                        const SizedBox(width: 30.0),
+                                        Container(
+                                          width: 530,
+                                          child: Text(
+                                              widget.s1.length.toString() +
+                                                  " " +
+                                                  GlobleString.Guests),
                                         ),
-                                        const SizedBox(height: 10.0),
                                       ],
                                     ),
+                                  const SizedBox(height: 20.0),
+                                  if (widget.s1[0].eventTypesData!.range != 0)
+                                    for (int i = 0; i < widget.s1.length; i++)
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const SizedBox(width: 45.0),
+                                              SizedBox(
+                                                  width: 30.0,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                        widget.s1[i].email![0]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.white)),
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            shape:
+                                                                CircleBorder(),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    12),
+                                                            primary:
+                                                                Colors.grey),
+                                                  )),
+                                              const SizedBox(width: 10.0),
+                                              Container(
+                                                child: Text(
+                                                  widget.s1[i].email.toString(),
+                                                  maxLines: 3,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 10.0),
+                                        ],
+                                      ),
                                   Row(
                                     children: [
                                       const SizedBox(
@@ -241,18 +251,20 @@ class _ViewEventState extends State<ViewEvent> {
                                     ],
                                   ),
                                   const SizedBox(height: 10.0),
-                                  for (int i = 0; i < widget.s1.length; i++)
-                                    Row(
-                                      children: [
-                                        const SizedBox(
-                                            width: 15.0,
-                                            child: Icon(Icons.calendar_today)),
-                                        const SizedBox(width: 30.0),
-                                        Container(
-                                          child: Text(widget.s1[i].name!),
-                                        ),
-                                      ],
-                                    ),
+                                  if (widget.s1[0].eventTypesData!.range != 0)
+                                    for (int i = 0; i < widget.s1.length; i++)
+                                      Row(
+                                        children: [
+                                          const SizedBox(
+                                              width: 15.0,
+                                              child:
+                                                  Icon(Icons.calendar_today)),
+                                          const SizedBox(width: 30.0),
+                                          Container(
+                                            child: Text(widget.s1[i].name!),
+                                          ),
+                                        ],
+                                      ),
                                 ],
                               ),
                             ),
