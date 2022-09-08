@@ -31,7 +31,8 @@ enum etableName {
   Vendor,
   Events_type,
   Availability,
-  AvailabilityTime
+  AvailabilityTime,
+  Slots
 }
 
 class TableNames {
@@ -137,6 +138,9 @@ class TableNames {
         break;
       case etableName.AvailabilityTime:
         name = "availability_time";
+        break;
+      case etableName.Slots:
+        name = "slots";
         break;
       default:
         name = "";

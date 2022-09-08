@@ -1331,35 +1331,35 @@ class UserData {
 }
 
 /*Calendar*/
-class MyEvent {
-  MyEvent({
-    this.eventTitle,
-    this.eventType,
-    this.eventDate,
-    this.eventTime,
-    this.eventDesc,
+class MySlot {
+  MySlot({
+    this.event_type_id,
+    this.date_start,
+    this.date_end,
+    this.person_id,
+    this.state,
   });
 
-  String? eventTitle;
-  String? eventType;
-  String? eventDate;
-  String? eventTime;
-  String? eventDesc;
+  int? event_type_id;
+  String? date_start;
+  String? date_end;
+  int? person_id;
+  int? state;
 
-  factory MyEvent.fromJson(Map<String, dynamic> json) => MyEvent(
-        eventTitle: json["EventTitle"],
-        eventType: json["EventType"],
-        eventDate: json["EventDate"],
-        eventTime: json["EventTime"],
-        eventDesc: json["EventDesc"],
+  factory MySlot.fromJson(Map<String, dynamic> json) => MySlot(
+        event_type_id: json["event_type_id"],
+        date_start: json["date_start"],
+        date_end: json["date_end"],
+        person_id: json["person_id"],
+        state: json["state"],
       );
 
   Map<String, dynamic> toJson() => {
-        "EventTitle": eventTitle,
-        "EventType": eventType,
-        "EventDate": eventDate,
-        "EventTime": eventTime,
-        "EventDesc": eventDesc,
+        "event_type_id": event_type_id,
+        "date_start": date_start,
+        "date_end": date_end,
+        "person_id": person_id,
+        "state": state,
       };
 }
 
