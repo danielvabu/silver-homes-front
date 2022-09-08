@@ -1841,6 +1841,7 @@ class GlobleString {
   static const String EVENT_Start_Time = "Start Time";
   static const String EVENT_End_Time = "End Time";
   static const String EVENT_Color = "Event Color";
+  static const String EVENT_Location = "Location";
   static const String EVENT_Description = "Description";
   static const String EVENT_Event_Type = "Event Type";
   static const String EVENT_No_Title = "Please enter the event title";
