@@ -80,12 +80,14 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
 
   TimeOfDay time = TimeOfDay(hour: 10, minute: 30);
 
+  int eventTypeId = 0;
   String eventTitle = "";
   String eventType = GlobleString.EVENT_Event;
   String eventDate = "";
   String eventTime = "";
   String eventEndTime = "";
   String eventDescription = "";
+  String eventColor = "";
 
   Future<void> _selectDate1(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -157,7 +159,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
           padding: const EdgeInsets.all(30),
           child: ConstrainedBox(
             constraints: const BoxConstraints(
-                minWidth: 500, maxWidth: 500, minHeight: 400, maxHeight: 400),
+                minWidth: 650, maxWidth: 650, minHeight: 400, maxHeight: 400),
             child: Container(
               height: 400,
               decoration: BoxDecoration(
@@ -319,7 +321,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                 ),
                                               ),
                                               const SizedBox(height: 5.0),
-                                              Container(
+                                              SizedBox(
                                                 height: 30,
                                                 width: Size.infinite.width,
                                                 child: DropdownSearch(
@@ -344,6 +346,218 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     eventType =
                                                         value.toString();
                                                   },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10.0),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
+                                                child: Text(
+                                                  GlobleString.EVENT_Color,
+                                                  style: MyStyles.Medium(
+                                                      14, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5.0),
+                                              SizedBox(
+                                                height: 30,
+                                                width: Size.infinite.width,
+                                                child: Row(
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "grey";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.grey,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child:
+                                                          (eventColor == 'grey')
+                                                              ? const Icon(
+                                                                  Icons.check)
+                                                              : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "red";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child:
+                                                          (eventColor == 'red')
+                                                              ? const Icon(
+                                                                  Icons.check)
+                                                              : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "orange";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.orange,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child: (eventColor ==
+                                                              'orange')
+                                                          ? const Icon(
+                                                              Icons.check)
+                                                          : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "yellow";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.yellow,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child: (eventColor ==
+                                                              'yellow')
+                                                          ? const Icon(
+                                                              Icons.check)
+                                                          : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "green";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.green,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child: (eventColor ==
+                                                              'green')
+                                                          ? const Icon(
+                                                              Icons.check)
+                                                          : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "cyan";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.cyan,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child:
+                                                          (eventColor == 'cyan')
+                                                              ? const Icon(
+                                                                  Icons.check)
+                                                              : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "blue";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.blue,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child:
+                                                          (eventColor == 'blue')
+                                                              ? const Icon(
+                                                                  Icons.check)
+                                                              : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor =
+                                                            "deepPurple";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.deepPurple,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child: (eventColor ==
+                                                              'deepPurple')
+                                                          ? const Icon(
+                                                              Icons.check)
+                                                          : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "purple";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.purple,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child: (eventColor ==
+                                                              'purple')
+                                                          ? const Icon(
+                                                              Icons.check)
+                                                          : Container(),
+                                                    ),
+                                                    const SizedBox(width: 1.0),
+                                                    ElevatedButton(
+                                                      onPressed: () {
+                                                        eventColor = "pink";
+                                                      },
+                                                      style: ElevatedButton.styleFrom(
+                                                          shape:
+                                                              const CircleBorder(),
+                                                          backgroundColor:
+                                                              Colors.pink,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(15)),
+                                                      child:
+                                                          (eventColor == 'pink')
+                                                              ? const Icon(
+                                                                  Icons.check)
+                                                              : Container(),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               const SizedBox(height: 10.0),
@@ -470,7 +684,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                         horizontal: 8.0,
                                                         vertical: 0.0),
                                                 child: TextFormField(
-                                                  controller: timeCtl,
+                                                  controller: timeECtl,
                                                   textAlign: TextAlign.start,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
@@ -564,7 +778,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  top: 15, left: 20, right: 20),
+                                  top: 15, left: 20, right: 30),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -657,31 +871,53 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
   }
 
   void checkValidation(BuildContext context) {
-    if (eventTitle == null || eventTitle.isEmpty) {
+    if (eventTitle.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Title, false);
-    } else if (eventDate == null || eventDate.isEmpty) {
+    } else if (eventDate.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Date, false);
-    } else if (eventTime == null || eventTime.isEmpty) {
+    } else if (eventTime.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_Time, false);
-    } else if (eventEndTime == null || eventEndTime.isEmpty) {
+    } else if (eventEndTime.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.EVENT_No_EndTime, false);
     } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
-      MyEvent entraid = MyEvent();
-      entraid.event_type_id = 0;
-      //entraid.person_id = Prefs.getString(PrefsName.OwnerID);
-      entraid.event_title = eventTitle;
-      entraid.event_kat = eventType;
-      entraid.date_start = eventDate + ' ' + eventTime;
-      entraid.date_end = eventDate + ' ' + eventEndTime;
-      entraid.event_desc = eventDescription;
-      List<MyEvent> eventolist = [];
-      eventolist.add(entraid);
-      eventCall(eventolist);
-      //widget._callbackSave();
-      //loader.remove();
+      // meto el evento en el events_type
+      EventTypesInsert entra1 = EventTypesInsert();
+      entra1.name = eventTitle;
+      entra1.showing = false;
+      entra1.description = eventDescription;
+      entra1.color = eventColor;
+      entra1.link = eventType;
+      entra1.range = 0;
+      entra1.owner_id = int.parse(Prefs.getString(PrefsName.OwnerID));
+      entra1.datefrom = "2000-12-01 00:00:00";
+      entra1.dateto = "2000-12-01 00:00:00";
+      eventTypeCall(entra1);
     }
+  }
+
+  eventTypeCall(eventtlist) {
+    ApiManager().InsertEventTypesDetails(context, eventtlist,
+        (error, respoce) async {
+      if (error) {
+        eventTypeId = int.parse(respoce);
+        // meto el evento en el slot
+        MySlot entra2 = MySlot();
+        entra2.event_type_id = eventTypeId;
+        entra2.date_start = eventDate + ' ' + eventTime; //slots.date_start
+        entra2.date_end = eventDate + ' ' + eventEndTime; //slots.date_end
+        entra2.person_id = 0;
+        entra2.state = 1;
+        List<MySlot> eventolist = [];
+        eventolist.add(entra2);
+        eventCall(eventolist);
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.NL_error_insertcall, false);
+      }
+    });
   }
 
   eventCall(eventolist) {
