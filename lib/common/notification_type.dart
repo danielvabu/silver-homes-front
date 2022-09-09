@@ -9,6 +9,7 @@ enum NotificationName {
   Tenant_Maintenance_Requests,
   Tenant_Maintenance_Change_Status,
   Tenant_Maintenance_Change_Priority,
+  Attendance_Confirmed
 }
 
 class NotificationType {
@@ -16,6 +17,9 @@ class NotificationType {
   getNotificationType(value) {
     int name;
     switch (value) {
+      case NotificationName.Attendance_Confirmed:
+        name = 11;
+        break;
       case NotificationName.Tenant_Maintenance_Change_Priority:
         name = 10;
         break;

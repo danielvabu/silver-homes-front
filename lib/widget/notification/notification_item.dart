@@ -36,7 +36,7 @@ class _NotificationItemState extends State<NotificationItem> {
       child: Container(
         height: 55,
         //width: 260,
-        margin: EdgeInsets.only(top: 5),
+        margin: const EdgeInsets.only(top: 5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,6 +51,17 @@ class _NotificationItemState extends State<NotificationItem> {
                       : myColor.fnl_status),
             ),
             const SizedBox(width: 15.0),
+            if (widget.notification.typeOfNotification ==
+                NotificationType()
+                    .getNotificationType(NotificationName.Attendance_Confirmed))
+              Container(
+                child: Image.asset(
+                  "assets/images/ic_nav_scheduling.png",
+                  height: 22,
+                  width: 25,
+                  fit: BoxFit.contain,
+                ),
+              ),
             if (widget.notification.typeOfNotification ==
                 NotificationType()
                     .getNotificationType(NotificationName.Lease_Received))
@@ -119,6 +130,13 @@ class _NotificationItemState extends State<NotificationItem> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (widget.notification.typeOfNotification ==
+                      NotificationType().getNotificationType(
+                          NotificationName.Attendance_Confirmed))
+                    Text(
+                      GlobleString.EVENT_Attendance_Confirmed,
+                      style: MyStyles.Medium(15, myColor.text_color),
+                    ),
                   if (widget.notification.typeOfNotification ==
                       NotificationType().getNotificationType(
                           NotificationName.Owner_Maintenance_Change_Priority))
