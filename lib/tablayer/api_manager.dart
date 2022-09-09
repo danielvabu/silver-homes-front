@@ -9775,7 +9775,7 @@ class ApiManager {
     Overlay.of(context)!.insert(loader);
 
     var myjson = {
-      "WorkFlowID": Weburl.WorkFlow_DuplicatProperty,
+      "WorkFlowID": Weburl.WorkFlow_DuplicateEventype,
       "Reqtokens": {"ID": propertyid}
     };
 
