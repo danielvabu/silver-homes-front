@@ -45,14 +45,12 @@ class _NotificationItemState extends State<NotificationItem> {
               height: 50,
               width: 4,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
                   color: widget.notification.isRead!
                       ? myColor.TA_header
                       : myColor.fnl_status),
             ),
-            SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15.0),
             if (widget.notification.typeOfNotification ==
                 NotificationType()
                     .getNotificationType(NotificationName.Lease_Received))
@@ -114,9 +112,7 @@ class _NotificationItemState extends State<NotificationItem> {
                   fit: BoxFit.contain,
                 ),
               ),
-            SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15.0),
             Container(
               width: 180,
               child: Column(
@@ -172,9 +168,7 @@ class _NotificationItemState extends State<NotificationItem> {
                       GlobleString.NT_status_Application_Received,
                       style: MyStyles.Medium(15, myColor.text_color),
                     ),
-                  SizedBox(
-                    height: 4,
-                  ),
+                  const SizedBox(height: 4.0),
                   Row(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
