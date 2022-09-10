@@ -62,12 +62,10 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
-    result.add(_headerEventTypesName('Event Types Name'));
-    result.add(_headerUnit('Property Name'));
+    result.add(_headerEventTypesName('Template Name'));
+
     result.add(_headerCity('Relationship'));
     result.add(_headerCountry('Duration'));
-    result.add(_headerEventTypesType('Scheduled Slots'));
-    result.add(_headerVacancy('Publish'));
     result.add(_headerTextAction(' '));
     result.add(_headerTextAction(' '));
     return result;

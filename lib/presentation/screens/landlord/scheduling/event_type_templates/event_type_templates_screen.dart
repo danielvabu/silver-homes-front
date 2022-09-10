@@ -33,6 +33,8 @@ import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
+import 'package:silverhome/widget/landlord/eventtypestable/eventtypesTemplate_header.dart';
+import 'package:silverhome/widget/landlord/eventtypestable/eventtypesTemplate_item.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_header.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypes_item.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dart';
@@ -423,7 +425,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
           border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
         children: [
-          EventTypesHeader(
+          EventTypesTemplateHeader(
             onPressedSortEventTypes: () async {
               _store.dispatch(UpdateEventTypesListNameSort(true));
               updateOtherSortingValue(1, eventtypesListState);
@@ -488,7 +490,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
             : eventtypesListState.eventtypeslist != null &&
                     eventtypesListState.eventtypeslist.length > 0
                 ? Expanded(
-                    child: EventTypesItem(
+                    child: EventTypesTemplateItem(
                       listdata1: eventtypesListState.eventtypeslist,
                       onPresseEdit: (EventTypesDataList eventtypesData) {
                         openDialogShareLink(eventtypesData);
