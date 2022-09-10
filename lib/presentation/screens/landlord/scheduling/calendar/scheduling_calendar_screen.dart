@@ -4,6 +4,7 @@ import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
@@ -97,20 +98,19 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     dsqQuery.eventTypesListReqtokens = reqtokens;
     dsqQuery.pager = pager;
     dsqQuery.sort = sortinglist;
-
     String filterjson = jsonEncode(dsqQuery);
-
     Helper.Log("EventTypesSlots", filterjson);
-
     await ApiManager().getEventTypesSlots(context, filterjson, ftime);
   }
+
+  CalendarController _calendarController1 = CalendarController();
+  CalendarController _calendarController2 = CalendarController();
 
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 240;
     ancho = (width / 100) - 0.1;
-    print(ancho);
 
     return Container(
       height: height,
@@ -248,13 +248,23 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                           children: [
                                             const SizedBox(height: 55.0),
                                             Container(
-                                              width: 160,
-                                              height: 160,
+                                              width: 170,
+                                              height: 200,
                                               child: SfCalendar(
                                                 view: CalendarView.month,
+                                                controller:
+                                                    _calendarController1,
                                                 cellBorderColor: Colors.white,
                                                 firstDayOfWeek: 1,
-                                                headerHeight: 0,
+                                                headerHeight: 40,
+                                                monthViewSettings:
+                                                    const MonthViewSettings(
+                                                  navigationDirection:
+                                                      MonthNavigationDirection
+                                                          .horizontal,
+                                                ),
+                                                onViewChanged:
+                                                    calendar1ViewChanged,
                                               ),
                                             ),
                                           ],
@@ -262,6 +272,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                         const SizedBox(width: 10.0),
                                         Expanded(
                                           child: SfCalendar(
+                                            controller: _calendarController2,
                                             onTap:
                                                 (CalendarTapDetails details) {
                                               dynamic appointment =
@@ -282,7 +293,13 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                     .eventtypeslist)),
                                             view: CalendarView.week,
                                             firstDayOfWeek: 1,
-                                            headerHeight: 0,
+                                            headerHeight: 40,
+                                            monthViewSettings:
+                                                const MonthViewSettings(
+                                                    navigationDirection:
+                                                        MonthNavigationDirection
+                                                            .horizontal),
+                                            onViewChanged: calendar2ViewChanged,
                                           ),
                                         ),
                                       ],
@@ -588,6 +605,24 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                 })),
       ),
     );
+  }
+
+  void calendar1ViewChanged(ViewChangedDetails viewChangedDetails) {
+    SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+      _calendarController2.displayDate = DateTime(
+          _calendarController1.displayDate!.year,
+          _calendarController1.displayDate!.month,
+          _calendarController1.displayDate!.day);
+    });
+  }
+
+  void calendar2ViewChanged(ViewChangedDetails viewChangedDetails) {
+    SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+      _calendarController1.displayDate = DateTime(
+          _calendarController2.displayDate!.year,
+          _calendarController2.displayDate!.month,
+          _calendarController2.displayDate!.day);
+    });
   }
 
   List<Meeting> _getDataSource(List<Slots> listado) {
