@@ -10066,7 +10066,7 @@ class ApiManager {
       "DSQID": Weburl.DSQ_Notification,
       "LoadLookUpValues": true,
       "Pager": {"PageNo": pageno, "NoOfRecords": 10},
-      "Reqtokens": {"Owner_ID": id, "TypeOfNotification": "1,2,3,4,5,7,8"},
+      "Reqtokens": {"Owner_ID": id, "TypeOfNotification": "1,2,3,4,5,7,8,11"},
       /*"Sort": [
         {"FieldID": "IsRead", "SortSequence": 1}
       ]*/
@@ -10143,7 +10143,7 @@ class ApiManager {
       "DSQID": Weburl.DSQ_Notification,
       "LoadLookUpValues": true,
       "Reqtokens": {
-        "TypeOfNotification": "1,2,3,4,5,7,8",
+        "TypeOfNotification": "1,2,3,4,5,7,8,11",
         "Owner_ID": Prefs.getString(PrefsName.OwnerID),
         "IsRead": false
       },
