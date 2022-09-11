@@ -9793,6 +9793,30 @@ class ApiManager {
     });
   }
 
+  SaveAsTemplate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_CreateTemplateEventype,
+      "Reqtokens": {"ID": propertyid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        loader.remove();
+        callBackQuesy(true, respoce);
+      } else {
+        loader.remove();
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
   Emailworkflow(
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
     loader = Helper.overlayLoader(context);

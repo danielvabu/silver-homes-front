@@ -146,6 +146,8 @@ class Weburl {
 
   static var DSQ_EventTypesOnBoardingList =
       "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE8";
+  static var DSQ_EventTypesOnBoardingListTemp =
+      "A31C1BFE-C78D-425F-B9F5-F7D2A6B60999";
   static var DSQ_EventTypesSlots = "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE2";
   static var DSQ_EventTypesSlots1 = "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE1";
   static var DSQ_APPLICATIONLIST_OWNERWISE =
@@ -186,6 +188,8 @@ class Weburl {
   static var WorkFlow_DuplicatProperty = "1DF5CC24-A44B-45DE-B9E4-289D65EAC2DD";
   static var WorkFlow_DuplicateEventype =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC222";
+  static var WorkFlow_CreateTemplateEventype =
+      "1DF5CC24-A44B-45DE-B9E4-289D65EAC333";
   static var WorkFlow_Featured_image = "17D6D091-6A4D-49E9-84AD-8A0C675DDC8B";
   static var WorkFlow_Image_zip = "629DFE4B-BE8E-4E6F-8E7A-574B725EA8EA";
   static var WorkFlow_ResetPassWordMain =

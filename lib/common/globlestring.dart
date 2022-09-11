@@ -194,7 +194,7 @@ class GlobleString {
   static const String PH_ACT_ViewDetails = "View";
   static const String PH_ACT_Edit = "Edit";
   static const String PH_ACT_Duplicate = "Duplicate";
-
+  static const String PH_ACT_SaveTemplate = "Save as Template";
   static const String PS_Back_to_Propertys_msg =
       "Do you want to save your changes? If yes, click 'Save and Next' in each step";
   static const String PS_Back_to_Propertys_yes = "I Understand";

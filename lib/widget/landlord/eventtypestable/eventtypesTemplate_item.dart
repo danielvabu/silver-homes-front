@@ -107,6 +107,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
     // result.add(_datavalueUnit(model));
     result.add(_datavalueCity(model));
     result.add(_datavalueCountry(model));
+
     //  result.add(_datavalueEventTypesType(model));
 
     // result.add(_datavalueIsPublished(model, Index));
@@ -176,7 +177,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.duration!,
+        model.duration! + " Minutes",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),

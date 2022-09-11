@@ -507,6 +507,20 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                           }
                         });
                       },
+                      onPresseSaveTemp: (EventTypesDataList eventtypesData) {
+                        ApiManager().SaveAsTemplate(context, eventtypesData.id!,
+                            (status, responce) async {
+                          if (status) {
+                            _store.dispatch(UpdateEventTypesListIsloding(true));
+                            _store.dispatch(
+                                UpdateEventTypesList(<EventTypesDataList>[]));
+                            apimanager("", 1, "EventTypesName", 1, 0);
+                          } else {
+                            ToastUtils.showCustomToast(
+                                context, GlobleString.Error1, false);
+                          }
+                        });
+                      },
                       onPressDetails: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
                             eventtypesData, 1, eventtypesData.slots!);

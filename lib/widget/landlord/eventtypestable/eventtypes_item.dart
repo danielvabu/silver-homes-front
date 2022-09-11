@@ -15,6 +15,7 @@ typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDetails = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallEdit = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDuplicat = void Function(EventTypesDataList eventtypesData);
+typedef VoidCallSaveTemp = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallActive = void Function(
     EventTypesDataList eventtypesData, int pos);
 typedef VoidCallInActive = void Function(
@@ -27,6 +28,7 @@ class EventTypesItem extends StatefulWidget {
   final VoidCallDetails _callbackDetails;
   final VoidCallEdit _callbackEdit;
   final VoidCallDuplicat _callbackDuplicat;
+  final VoidCallSaveTemp _callbackSaveTemp;
   final VoidCallActive _callbackActive;
   final VoidCallInActive _callbackInActive;
   final VoidCallIsPublish _callbackIsPublish;
@@ -38,6 +40,7 @@ class EventTypesItem extends StatefulWidget {
     required VoidCallDetails onPressDetails,
     required VoidCallEdit onPresseEdit,
     required VoidCallDuplicat onPresseDuplicat,
+    required VoidCallSaveTemp onPresseSaveTemp,
     required VoidCallActive onPresseActive,
     required VoidCallInActive onPresseInActive,
     required VoidCallIsPublish onPresseIsPublish,
@@ -46,6 +49,7 @@ class EventTypesItem extends StatefulWidget {
         _callbackDetails = onPressDetails,
         _callbackEdit = onPresseEdit,
         _callbackDuplicat = onPresseDuplicat,
+        _callbackSaveTemp = onPresseSaveTemp,
         _callbackActive = onPresseActive,
         _callbackInActive = onPresseInActive,
         _callbackIsPublish = onPresseIsPublish;
@@ -266,6 +270,8 @@ class _EventTypesItemState extends State<EventTypesItem> {
               widget._callbackEdit(model);
             } else if (value == 3) {
               widget._callbackDuplicat(model);
+            } else if (value == 4) {
+              widget._callbackSaveTemp(model);
             }
           },
           child: Container(
@@ -295,6 +301,14 @@ class _EventTypesItemState extends State<EventTypesItem> {
               value: 3,
               child: Text(
                 GlobleString.PH_ACT_Duplicate,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 4,
+              child: Text(
+                GlobleString.PH_ACT_SaveTemplate,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),

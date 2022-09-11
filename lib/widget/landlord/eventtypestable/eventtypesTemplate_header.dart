@@ -66,8 +66,10 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
 
     result.add(_headerCity('Relationship'));
     result.add(_headerCountry('Duration'));
-    result.add(_headerTextAction(' '));
-    result.add(_headerTextAction(' '));
+    result.add(_headerTextAction('# of Questions'));
+    result.add(_headerTextAction('Routing Logic'));
+    result.add(_headerTextAction('Notifications'));
+    result.add(_headerTextAction('Reconfirmations'));
     return result;
   }
 
@@ -276,13 +278,37 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
   }
 
   Widget _headerTextAction(String text) {
-    return Expanded(
-      flex: 1,
+    return InkWell(
+      onTap: () {
+        widget._callbackSortEventTypesType();
+      },
       child: Container(
-        height: 20,
-        margin: EdgeInsets.only(left: 10, right: 20),
-        alignment: Alignment.centerRight,
-        child: const Text(""),
+        height: 40,
+        width: parte * 10,
+        margin: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Text(
+                text,
+                textAlign: TextAlign.start,
+                style: MyStyles.SemiBold(12, myColor.text_color),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -104,7 +104,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     sortinglist.add(sort);
 
     DSQQuery dsqQuery = DSQQuery();
-    dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingList;
+    dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingListTemp;
     dsqQuery.loadLookUpValues = true;
     dsqQuery.loadRecordInfo = true;
     dsqQuery.eventTypesListReqtokens = reqtokens;
