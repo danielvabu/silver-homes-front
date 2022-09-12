@@ -624,7 +624,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         _store.dispatch(
                                             UpdateMER_selectproperty1(value));
                                         _changeData();
-                                        textprop = value!.propertyName!;
+                                        textprop = value!.adress!;
                                       },
                                     ),
                                   ),
@@ -1134,6 +1134,87 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     ],
                                   ),
                                   const SizedBox(height: 5.0),
+                                  if (eventtypesState.EventTypesRange == 1)
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 22.0),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: const [
+                                                SizedBox(width: 8.0),
+                                                Text("Date"),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 5.0),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  _selectDate1(
+                                                      context, eventtypesState);
+                                                },
+                                                child: Container(
+                                                  width: 220,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: myColor
+                                                          .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8),
+                                                          child: Text(
+                                                            eventtypesState
+                                                                        .dateto ==
+                                                                    null
+                                                                ? ""
+                                                                : DateFormat(
+                                                                        "dd-MMM-yyyy")
+                                                                    .format(eventtypesState
+                                                                        .dateto!)
+                                                                    .toString(),
+                                                            style: MyStyles.Medium(
+                                                                13,
+                                                                myColor
+                                                                    .text_color),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8,
+                                                                right: 5),
+                                                        child: Icon(
+                                                          Icons
+                                                              .calendar_today_outlined,
+                                                          color: Colors.grey,
+                                                          size: 20,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  const SizedBox(height: 5.0),
                                   Row(
                                     children: [
                                       Container(
@@ -1160,154 +1241,160 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     ],
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 22.0),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: const [
-                                              SizedBox(width: 8.0),
-                                              Text(GlobleString.ET_From_Date),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 5.0),
-                                          Container(
-                                            child: TextButton(
-                                              onPressed: () {
-                                                _selectDate1(
-                                                    context, eventtypesState);
-                                              },
-                                              child: Container(
-                                                width: 220,
-                                                height: 30,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: myColor
-                                                        .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
-                                                    width: 1.0,
+                                  if (eventtypesState.EventTypesRange == 2)
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 22.0),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: const [
+                                                SizedBox(width: 8.0),
+                                                Text(GlobleString.ET_From_Date),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 5.0),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  _selectDate1(
+                                                      context, eventtypesState);
+                                                },
+                                                child: Container(
+                                                  width: 220,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: myColor
+                                                          .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 8),
-                                                        child: Text(
-                                                          eventtypesState
-                                                                      .dateto ==
-                                                                  null
-                                                              ? ""
-                                                              : DateFormat(
-                                                                      "dd-MMM-yyyy")
-                                                                  .format(
-                                                                      eventtypesState
-                                                                          .dateto!)
-                                                                  .toString(),
-                                                          style: MyStyles.Medium(
-                                                              13,
-                                                              myColor
-                                                                  .text_color),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8),
+                                                          child: Text(
+                                                            eventtypesState
+                                                                        .dateto ==
+                                                                    null
+                                                                ? ""
+                                                                : DateFormat(
+                                                                        "dd-MMM-yyyy")
+                                                                    .format(eventtypesState
+                                                                        .dateto!)
+                                                                    .toString(),
+                                                            style: MyStyles.Medium(
+                                                                13,
+                                                                myColor
+                                                                    .text_color),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 8, right: 5),
-                                                      child: Icon(
-                                                        Icons
-                                                            .calendar_today_outlined,
-                                                        color: Colors.grey,
-                                                        size: 20,
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8,
+                                                                right: 5),
+                                                        child: Icon(
+                                                          Icons
+                                                              .calendar_today_outlined,
+                                                          color: Colors.grey,
+                                                          size: 20,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: const [
-                                              SizedBox(width: 8.0),
-                                              Text(GlobleString.ET_To_Date),
-                                            ],
-                                          ),
-                                          const SizedBox(width: 5.0),
-                                          Container(
-                                            child: TextButton(
-                                              onPressed: () {
-                                                _selectDate2(
-                                                    context, eventtypesState);
-                                              },
-                                              child: Container(
-                                                width: 220,
-                                                height: 30,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: myColor
-                                                        .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
-                                                    width: 1.0,
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: const [
+                                                SizedBox(width: 8.0),
+                                                Text(GlobleString.ET_To_Date),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 5.0),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  _selectDate2(
+                                                      context, eventtypesState);
+                                                },
+                                                child: Container(
+                                                  width: 220,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: myColor
+                                                          .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 8),
-                                                        child: Text(
-                                                          eventtypesState
-                                                                      .datefrom ==
-                                                                  null
-                                                              ? ""
-                                                              : DateFormat(
-                                                                      "dd-MMM-yyyy")
-                                                                  .format(eventtypesState
-                                                                      .datefrom!)
-                                                                  .toString(),
-                                                          style: MyStyles.Medium(
-                                                              13,
-                                                              myColor
-                                                                  .text_color),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8),
+                                                          child: Text(
+                                                            eventtypesState
+                                                                        .datefrom ==
+                                                                    null
+                                                                ? ""
+                                                                : DateFormat(
+                                                                        "dd-MMM-yyyy")
+                                                                    .format(eventtypesState
+                                                                        .datefrom!)
+                                                                    .toString(),
+                                                            style: MyStyles.Medium(
+                                                                13,
+                                                                myColor
+                                                                    .text_color),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    const Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 8, right: 5),
-                                                      child: Icon(
-                                                        Icons
-                                                            .calendar_today_outlined,
-                                                        color: Colors.grey,
-                                                        size: 20,
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8,
+                                                                right: 5),
+                                                        child: Icon(
+                                                          Icons
+                                                              .calendar_today_outlined,
+                                                          color: Colors.grey,
+                                                          size: 20,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   const SizedBox(height: 5.0),
                                   Row(
                                     children: [
@@ -1334,6 +1421,88 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       const Text(GlobleString.ET_Indefinitely),
                                     ],
                                   ),
+                                  const SizedBox(width: 5.0),
+                                  if (eventtypesState.EventTypesRange == 3)
+                                    Row(
+                                      children: [
+                                        SizedBox(width: 22.0),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: const [
+                                                SizedBox(width: 8.0),
+                                                Text(GlobleString.ET_From_Date),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 5.0),
+                                            Container(
+                                              child: TextButton(
+                                                onPressed: () {
+                                                  _selectDate1(
+                                                      context, eventtypesState);
+                                                },
+                                                child: Container(
+                                                  width: 220,
+                                                  height: 30,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: myColor
+                                                          .gray, //tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4.0),
+                                                  ),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 8),
+                                                          child: Text(
+                                                            eventtypesState
+                                                                        .dateto ==
+                                                                    null
+                                                                ? ""
+                                                                : DateFormat(
+                                                                        "dd-MMM-yyyy")
+                                                                    .format(eventtypesState
+                                                                        .dateto!)
+                                                                    .toString(),
+                                                            style: MyStyles.Medium(
+                                                                13,
+                                                                myColor
+                                                                    .text_color),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 8,
+                                                                right: 5),
+                                                        child: Icon(
+                                                          Icons
+                                                              .calendar_today_outlined,
+                                                          color: Colors.grey,
+                                                          size: 20,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  const SizedBox(height: 5.0),
                                 ],
                               ),
                             ),

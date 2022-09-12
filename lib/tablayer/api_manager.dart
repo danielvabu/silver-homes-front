@@ -12315,6 +12315,9 @@ class ApiManager {
 
           propertyDropData.id = ID;
           propertyDropData.propertyName = address;
+          propertyDropData.adress =
+              Property_Address + ", " + City + ", " + Province + ", " + Country;
+          ;
 
           propertylist.add(propertyDropData);
         }
