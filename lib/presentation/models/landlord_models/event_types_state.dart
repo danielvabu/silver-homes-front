@@ -8,8 +8,8 @@ part 'event_types_state.freezed.dart';
 @freezed
 abstract class EventTypesState with _$EventTypesState {
   const factory EventTypesState({
-    required List<SystemEnumDetails> eventtypestypelist,
-    SystemEnumDetails? eventtypestypeValue,
+    required List<EventTypesTemplate> eventtypestypelist,
+    EventTypesTemplate? eventtypestypeValue,
     required String eventtypestypeOtherValue,
     required List<SystemEnumDetails> rentalspacelist,
     SystemEnumDetails? rentalspaceValue,

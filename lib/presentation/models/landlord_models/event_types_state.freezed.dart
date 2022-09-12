@@ -17,8 +17,8 @@ class _$EventTypesStateTearOff {
   const _$EventTypesStateTearOff();
 
   _EventTypesState call(
-      {required List<SystemEnumDetails> eventtypestypelist,
-      SystemEnumDetails? eventtypestypeValue,
+      {required List<EventTypesTemplate> eventtypestypelist,
+      EventTypesTemplate? eventtypestypeValue,
       required String eventtypestypeOtherValue,
       required List<SystemEnumDetails> rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
@@ -251,9 +251,9 @@ const $EventTypesState = _$EventTypesStateTearOff();
 
 /// @nodoc
 mixin _$EventTypesState {
-  List<SystemEnumDetails> get eventtypestypelist =>
+  List<EventTypesTemplate> get eventtypestypelist =>
       throw _privateConstructorUsedError;
-  SystemEnumDetails? get eventtypestypeValue =>
+  EventTypesTemplate? get eventtypestypeValue =>
       throw _privateConstructorUsedError;
   String get eventtypestypeOtherValue => throw _privateConstructorUsedError;
   List<SystemEnumDetails> get rentalspacelist =>
@@ -392,8 +392,8 @@ abstract class $EventTypesStateCopyWith<$Res> {
           EventTypesState value, $Res Function(EventTypesState) then) =
       _$EventTypesStateCopyWithImpl<$Res>;
   $Res call(
-      {List<SystemEnumDetails> eventtypestypelist,
-      SystemEnumDetails? eventtypestypeValue,
+      {List<EventTypesTemplate> eventtypestypelist,
+      EventTypesTemplate? eventtypestypeValue,
       String eventtypestypeOtherValue,
       List<SystemEnumDetails> rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
@@ -634,11 +634,11 @@ class _$EventTypesStateCopyWithImpl<$Res>
       eventtypestypelist: eventtypestypelist == freezed
           ? _value.eventtypestypelist
           : eventtypestypelist // ignore: cast_nullable_to_non_nullable
-              as List<SystemEnumDetails>,
+              as List<EventTypesTemplate>,
       eventtypestypeValue: eventtypestypeValue == freezed
           ? _value.eventtypestypeValue
           : eventtypestypeValue // ignore: cast_nullable_to_non_nullable
-              as SystemEnumDetails?,
+              as EventTypesTemplate?,
       eventtypestypeOtherValue: eventtypestypeOtherValue == freezed
           ? _value.eventtypestypeOtherValue
           : eventtypestypeOtherValue // ignore: cast_nullable_to_non_nullable
@@ -1093,8 +1093,8 @@ abstract class _$EventTypesStateCopyWith<$Res>
       __$EventTypesStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<SystemEnumDetails> eventtypestypelist,
-      SystemEnumDetails? eventtypestypeValue,
+      {List<EventTypesTemplate> eventtypestypelist,
+      EventTypesTemplate? eventtypestypeValue,
       String eventtypestypeOtherValue,
       List<SystemEnumDetails> rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
@@ -1337,11 +1337,11 @@ class __$EventTypesStateCopyWithImpl<$Res>
       eventtypestypelist: eventtypestypelist == freezed
           ? _value.eventtypestypelist
           : eventtypestypelist // ignore: cast_nullable_to_non_nullable
-              as List<SystemEnumDetails>,
+              as List<EventTypesTemplate>,
       eventtypestypeValue: eventtypestypeValue == freezed
           ? _value.eventtypestypeValue
           : eventtypestypeValue // ignore: cast_nullable_to_non_nullable
-              as SystemEnumDetails?,
+              as EventTypesTemplate?,
       eventtypestypeOtherValue: eventtypestypeOtherValue == freezed
           ? _value.eventtypestypeOtherValue
           : eventtypestypeOtherValue // ignore: cast_nullable_to_non_nullable
@@ -1906,9 +1906,9 @@ class _$_EventTypesState implements _EventTypesState {
       required this.error_Parkingstalls});
 
   @override
-  final List<SystemEnumDetails> eventtypestypelist;
+  final List<EventTypesTemplate> eventtypestypelist;
   @override
-  final SystemEnumDetails? eventtypestypeValue;
+  final EventTypesTemplate? eventtypestypeValue;
   @override
   final String eventtypestypeOtherValue;
   @override
@@ -2334,8 +2334,8 @@ class _$_EventTypesState implements _EventTypesState {
 
 abstract class _EventTypesState implements EventTypesState {
   const factory _EventTypesState(
-      {required List<SystemEnumDetails> eventtypestypelist,
-      SystemEnumDetails? eventtypestypeValue,
+      {required List<EventTypesTemplate> eventtypestypelist,
+      EventTypesTemplate? eventtypestypeValue,
       required String eventtypestypeOtherValue,
       required List<SystemEnumDetails> rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
@@ -2448,10 +2448,10 @@ abstract class _EventTypesState implements EventTypesState {
       required bool error_Parkingstalls}) = _$_EventTypesState;
 
   @override
-  List<SystemEnumDetails> get eventtypestypelist =>
+  List<EventTypesTemplate> get eventtypestypelist =>
       throw _privateConstructorUsedError;
   @override
-  SystemEnumDetails? get eventtypestypeValue =>
+  EventTypesTemplate? get eventtypestypeValue =>
       throw _privateConstructorUsedError;
   @override
   String get eventtypestypeOtherValue => throw _privateConstructorUsedError;

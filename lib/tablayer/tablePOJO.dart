@@ -62,6 +62,31 @@ class SystemEnumDetails {
   }
 }
 
+class EventTypesTemplate {
+  int? id;
+  String? name;
+
+  EventTypesTemplate({
+    this.id,
+    this.name,
+  });
+
+  factory EventTypesTemplate.fromJson(Map<String, dynamic> json) =>
+      EventTypesTemplate(id: json["id"], name: json["name"]);
+
+  Map toJson() => {
+        "id": id,
+        "name": name,
+      };
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["name"] = name;
+    return map;
+  }
+}
+
 class MyModal {
   int myField1;
   String myField2;

@@ -6,7 +6,7 @@ import 'package:silverhome/presentation/models/app_state.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 
 class UpdateProperTytypeList implements Action {
-  final List<SystemEnumDetails> eventtypestypelist;
+  final List<EventTypesTemplate> eventtypestypelist;
 
   UpdateProperTytypeList(this.eventtypestypelist);
 
@@ -18,7 +18,7 @@ class UpdateProperTytypeList implements Action {
 }
 
 class UpdateProperTytypeValue1 implements Action {
-  final SystemEnumDetails? eventtypestypeValue;
+  final EventTypesTemplate? eventtypestypeValue;
 
   UpdateProperTytypeValue1(this.eventtypestypeValue);
 

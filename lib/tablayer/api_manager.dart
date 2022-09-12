@@ -2130,6 +2130,174 @@ class ApiManager {
     });
   }
 
+  getEventTypesDetailsTemp(BuildContext context, String id,
+      CallBackEventTypesDetails CallBackQuesy) async {
+    var myjson = {
+      "DSQID": Weburl.DSQ_EventTypeDetailsTemplate,
+      "LoadLookUpValues": true,
+      "Reqtokens": {"ID": id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    Helper.Log("getEventTypeDetails", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        //Helper.Log("getPropertyDetails", respoce);
+
+        EventTypesData eventTypesData = new EventTypesData();
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          var myobject = data['Result'][i];
+          String ID = myobject['id'] != null ? myobject['id'].toString() : "";
+
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
+
+          bool RelationShip =
+              myobject['relation'] != null ? myobject['relation'] : false;
+
+          int Duration =
+              myobject['duration'] != null ? myobject['duration'] : 0;
+
+          bool showing =
+              myobject['showing'] != null ? myobject['showing'] : false;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
+
+          bool spa = myobject['spa'] != null ? myobject['spa'] : false;
+          bool notap = myobject['notap'] != null ? myobject['notap'] : false;
+          String datefrom = myobject['datefrom'] != null
+              ? myobject['datefrom'].toString()
+              : "";
+          String dateto =
+              myobject['dateto'] != null ? myobject['dateto'].toString() : "";
+          String location = myobject['location'] != null
+              ? myobject['location'].toString()
+              : "";
+          String description = myobject['description'] != null
+              ? myobject['description'].toString()
+              : "";
+          String link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
+
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
+          int range = myobject['range'] != null ? myobject['range'] : 0;
+
+          int buffer_after =
+              myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
+
+          String buffer_after_measure =
+              myobject['aftermed'] != null ? myobject['aftermed'] : "";
+          int buffer_before =
+              myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
+          String buffer_before_measure =
+              myobject['beforemed'] != null ? myobject['beforemed'] : "";
+          String durationmed =
+              myobject['durationmed'] != null ? myobject['durationmed'] : "";
+          String confirmation_message = myobject['confirmation_message'] != null
+              ? myobject['confirmation_message'].toString()
+              : "";
+          String time_zone =
+              myobject['time_zone'] != null ? myobject['time_zone'] : "";
+          int time_scheduling = myobject['time_scheduling'] != null
+              ? myobject['time_scheduling']
+              : 0;
+          String time_scheduling_medida =
+              myobject['time_scheduling_medida'] != null
+                  ? myobject['time_scheduling_medida']
+                  : "";
+          int max_event_per_day = myobject['max_event_per_day'] != null
+              ? myobject['max_event_per_day']
+              : 0;
+          String prop_id =
+              myobject['prop_id'] != null ? myobject['prop_id'] : 0;
+          int owner_id =
+              myobject['owner_id'] != null ? myobject['owner_id'] : 0;
+          bool sun = myobject['sun'] != null ? myobject['sun'] : false;
+          bool mon = myobject['mon'] != null ? myobject['mon'] : false;
+
+          bool tue = myobject['tue'] != null ? myobject['tue'] : false;
+          bool wed = myobject['wed'] != null ? myobject['wed'] : false;
+          bool thu = myobject['thu'] != null ? myobject['thu'] : false;
+          bool fri = myobject['fri'] != null ? myobject['fri'] : false;
+          bool sat = myobject['sat'] != null ? myobject['sat'] : false;
+          List sunlist = myobject['sunlist'];
+          List sunlist2 = myobject['sunlist2'];
+          List monlist = myobject['monlist'];
+          List monlist2 = myobject['monlist2'];
+          List tuelist = myobject['tuelist'];
+          List tuelist2 = myobject['tuelist2'];
+          List wedlist = myobject['wedlist'];
+          List wedlist2 = myobject['wedlist2'];
+          List thulist = myobject['thulist'];
+          List thulist2 = myobject['thulist2'];
+          List frilist = myobject['frilist'];
+          List frilist2 = myobject['frilist2'];
+          List satlist = myobject['satlist'];
+          List satlist2 = myobject['satlist2'];
+          eventTypesData.id = ID;
+
+          eventTypesData.duration = Duration;
+          eventTypesData.durationmed = durationmed;
+          eventTypesData.ispublished = ispublished;
+          eventTypesData.spa = spa;
+          eventTypesData.notap = notap;
+          eventTypesData.datefrom = datefrom;
+          eventTypesData.dateto = dateto;
+          eventTypesData.name = Name;
+          eventTypesData.relation = RelationShip;
+          eventTypesData.showing = showing;
+          eventTypesData.location = location;
+          eventTypesData.description = description;
+          eventTypesData.link = link;
+          eventTypesData.color = color;
+          eventTypesData.range = range;
+          eventTypesData.buffer_after = buffer_after;
+          eventTypesData.buffer_after_measure = buffer_after_measure;
+          eventTypesData.buffer_before = buffer_before;
+          eventTypesData.buffer_before_measure = buffer_before_measure;
+          eventTypesData.confirmation_message = confirmation_message;
+          eventTypesData.time_zone = time_zone;
+          eventTypesData.time_scheduling = time_scheduling;
+          eventTypesData.time_scheduling_medida = time_scheduling_medida;
+          eventTypesData.max_event_per_day = max_event_per_day;
+          eventTypesData.prop_id = prop_id;
+          eventTypesData.owner_id = owner_id;
+          eventTypesData.sun = sun;
+          eventTypesData.mon = mon;
+          eventTypesData.tue = tue;
+          eventTypesData.wed = wed;
+          eventTypesData.thu = thu;
+          eventTypesData.fri = fri;
+          eventTypesData.sat = sat;
+          eventTypesData.sunh1 = sunlist;
+          eventTypesData.sunh2 = sunlist2;
+          eventTypesData.monh1 = monlist;
+          eventTypesData.monh2 = monlist2;
+          eventTypesData.tueh1 = tuelist;
+          eventTypesData.tueh2 = tuelist2;
+          eventTypesData.wedh1 = wedlist;
+          eventTypesData.wedh2 = wedlist2;
+          eventTypesData.thuh1 = thulist;
+          eventTypesData.thuh2 = thulist2;
+          eventTypesData.frih1 = frilist;
+          eventTypesData.frih2 = frilist2;
+          eventTypesData.sath1 = satlist;
+          eventTypesData.sath2 = satlist2;
+        }
+        CallBackQuesy(true, respoce, eventTypesData);
+      } else {
+        ToastUtils.showCustomToast(context, respoce, false);
+        CallBackQuesy(false, respoce, null);
+      }
+    });
+  }
+
   getPropertyAmanityUtility(BuildContext context, String Id,
       CallBackAmntUtltlist CallBackQuesy) async {
     var myjson = {
@@ -12128,6 +12296,52 @@ class ApiManager {
           propertylist.add(propertyDropData);
         }
         callback(true, "", propertylist);
+      } else {
+        callback(false, "", []);
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
+  getTemplates(
+      BuildContext context, String ownerid, CallBackTemplate callback) async {
+    /*loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+
+    var myjson = {
+      "DSQID": Weburl.DSQ_EventTypesOnBoardingListTemp,
+      "Reqtokens": {"Owner_ID": ownerid, "Name": ""},
+      "LoadLookUpValues": false,
+      "LoadRecordInfo": false
+    };
+
+    String json = jsonEncode(myjson);
+
+    Helper.Log("events_type_template", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        //loader.remove();
+        var data = jsonDecode(respoce);
+
+        List<EventTypesTemplate> templatelist = <EventTypesTemplate>[];
+
+        for (int i = 0; i < data['Result'].length; i++) {
+          EventTypesTemplate templatesDropData = new EventTypesTemplate();
+
+          var myobject = data['Result'][i];
+
+          int ID = myobject['id'] != null ? myobject['id'] : 0;
+
+          String name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
+
+          templatesDropData.id = ID;
+          templatesDropData.name = name;
+
+          templatelist.add(templatesDropData);
+        }
+        callback(true, "", templatelist);
       } else {
         callback(false, "", []);
         ToastUtils.showCustomToast(context, respoce, false);

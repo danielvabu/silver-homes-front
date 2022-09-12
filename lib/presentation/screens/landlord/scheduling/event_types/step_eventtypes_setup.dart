@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
@@ -21,7 +18,6 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypes_actions.dar
 import 'package:silverhome/domain/actions/landlord_action/eventtypes_summery_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
 import 'package:silverhome/domain/entities/property_drop_data.dart';
-import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -65,7 +61,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   int stepper = 0;
   String color = "";
   TextEditingController locationcontroler = new TextEditingController();
-
+  late OverlayEntry loader;
   //FocusNode _focusNode = new FocusNode();
   // bool firsttime = true;
   bool change = false;
@@ -74,8 +70,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   void initState() {
     Prefs.init();
     traerpropiedades();
-
-    filldata();
+    traerplantillas();
+    // filldata();
     initNavigationBack();
     AddEditEventTypes.isValueUpdate = false;
     super.initState();
@@ -101,6 +97,18 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     });
   }
 
+  traerplantillas() async {
+    // _store.dispatch(UpdateProperTytypeValue1([]));
+    await ApiManager().getTemplates(context, Prefs.getString(PrefsName.OwnerID),
+        (status, responce, errorlist) {
+      if (status) {
+        _store.dispatch(UpdateProperTytypeList(errorlist));
+      } else {
+        //  _store.dispatch(UpdateProperTytypeValue1([]));
+      }
+    });
+  }
+
   initNavigationBack() {
     navigationNotifier.addListener(() {
       if (mounted) if (navigationNotifier.backScreen ==
@@ -114,35 +122,35 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     });
   }
 
-  void filldata() {
-    List<SystemEnumDetails> eventtypestypelist = [];
-    eventtypestypelist =
-        QueryFilter().PlainValues(eSystemEnums().EventTypesType);
+  // void filldata() {
+  //   List<SystemEnumDetails> eventtypestypelist = [];
+  //   eventtypestypelist =
+  //       QueryFilter().PlainValues(eSystemEnums().EventTypesType);
 
-    _store.dispatch(UpdateProperTytypeList(eventtypestypelist));
+  //   _store.dispatch(UpdateProperTytypeList(eventtypestypelist));
 
-    List<SystemEnumDetails> rentalspacelist = [];
-    rentalspacelist = QueryFilter().PlainValues(eSystemEnums().RentalSpace);
+  //   List<SystemEnumDetails> rentalspacelist = [];
+  //   rentalspacelist = QueryFilter().PlainValues(eSystemEnums().RentalSpace);
 
-    _store.dispatch(UpdateRentalSpaceList(rentalspacelist));
+  //   _store.dispatch(UpdateRentalSpaceList(rentalspacelist));
 
-    List<SystemEnumDetails> leasetypelist = [];
-    leasetypelist = QueryFilter().PlainValues(eSystemEnums().LeaseType);
+  //   List<SystemEnumDetails> leasetypelist = [];
+  //   leasetypelist = QueryFilter().PlainValues(eSystemEnums().LeaseType);
 
-    _store.dispatch(UpdateLeaseTypeList(leasetypelist));
+  //   _store.dispatch(UpdateLeaseTypeList(leasetypelist));
 
-    List<SystemEnumDetails> rentplaymentFrequencylist = [];
-    rentplaymentFrequencylist =
-        QueryFilter().PlainValues(eSystemEnums().RentPaymentFrequency);
+  //   List<SystemEnumDetails> rentplaymentFrequencylist = [];
+  //   rentplaymentFrequencylist =
+  //       QueryFilter().PlainValues(eSystemEnums().RentPaymentFrequency);
 
-    _store.dispatch(UpdateRentPaymentFrequencylist(rentplaymentFrequencylist));
+  //   _store.dispatch(UpdateRentPaymentFrequencylist(rentplaymentFrequencylist));
 
-    List<SystemEnumDetails> minimumleasedurationlist = [];
-    minimumleasedurationlist =
-        QueryFilter().PlainValues(eSystemEnums().MinLeaseTime);
+  //   List<SystemEnumDetails> minimumleasedurationlist = [];
+  //   minimumleasedurationlist =
+  //       QueryFilter().PlainValues(eSystemEnums().MinLeaseTime);
 
-    _store.dispatch(UpdateMinimumLeasedurationList(minimumleasedurationlist));
-  }
+  //   _store.dispatch(UpdateMinimumLeasedurationList(minimumleasedurationlist));
+  // }
 
   Future<void> _selectDate1(BuildContext context, eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -253,8 +261,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 const SizedBox(height: 10.0),
                                 Container(
                                   height: 32,
-                                  child: DropdownSearch<SystemEnumDetails>(
-                                    enabled: false,
+                                  child: DropdownSearch<EventTypesTemplate>(
                                     mode: Mode.MENU,
                                     key: UniqueKey(),
                                     errorcolor: myColor.errorcolor,
@@ -274,15 +281,60 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                             35,
                                     textstyle:
                                         MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (SystemEnumDetails? u) =>
-                                        u != null ? u.displayValue : "",
+                                    itemAsString: (EventTypesTemplate? u) =>
+                                        u != null ? u.name! : "",
                                     hint: GlobleString.ET_Select_Template,
                                     selectedItem: eventtypesState
                                                 .eventtypestypeValue !=
                                             null
                                         ? eventtypesState.eventtypestypeValue
                                         : null,
-                                    onChanged: (value) {},
+                                    onChanged: (value) async {
+                                      loader = Helper.overlayLoader(context);
+                                      Overlay.of(context)!.insert(loader);
+                                      String EventTypeId = value!.id.toString();
+                                      await ApiManager()
+                                          .getEventTypesDetailsTemp(
+                                              context, EventTypeId, (status,
+                                                  responce,
+                                                  eventtypesData) async {
+                                        if (status) {
+                                          await ApiManager().bindEventTypeData(
+                                              eventtypesData!);
+
+                                          AddEditEventTypes.isValueUpdate =
+                                              false;
+
+                                          await Prefs.setBool(
+                                              PrefsName.EventTypesEdit, true);
+                                          await Prefs.setBool(
+                                              PrefsName.EventTypesEditMode,
+                                              true);
+                                          await Prefs.setString(
+                                              PrefsName.EventTypesID,
+                                              eventtypesData.id!);
+
+                                          // await Prefs.setBool(PrefsName.EventTypesAgreeTC, true);
+                                          await Prefs.setBool(
+                                              PrefsName.EventTypesStep1, true);
+                                          await Prefs.setBool(
+                                              PrefsName.EventTypesStep2, true);
+                                          await Prefs.setBool(
+                                              PrefsName.EventTypesStep3, false);
+
+                                          _store.dispatch(
+                                              UpdateEventTypesForm(8));
+                                          _store.dispatch(
+                                              UpdateEventTypesFormAddress(""));
+                                          _store.dispatch(
+                                              UpdateAddEditEventTypes());
+
+                                          loader.remove();
+                                        } else {
+                                          loader.remove();
+                                        }
+                                      });
+                                    },
                                   ),
                                 ),
                               ],
@@ -1864,42 +1916,5 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
         });
       }
     }
-  }
-
-  void updateSummeryData(EventTypesState eventtypesState) {
-    _store.dispatch(
-        UpdateSummeryProperTytypeValue(eventtypesState.eventtypestypeValue));
-    _store.dispatch(UpdateSummeryEventTypesTypeOtherValue(
-        eventtypesState.eventtypestypeOtherValue));
-    _store.dispatch(
-        UpdateSummeryDateofavailable(eventtypesState.dateofavailable));
-    _store.dispatch(
-        UpdateSummeryRentalSpaceValue(eventtypesState.rentalspaceValue));
-    _store
-        .dispatch(UpdateSummeryEventTypesName(eventtypesState.EventTypesName));
-    _store.dispatch(
-        UpdateSummeryEventTypesAddress(eventtypesState.EventTypesAddress));
-    _store.dispatch(UpdateSummeryEventTypesDescription(
-        eventtypesState.EventTypesDescription));
-    _store.dispatch(UpdateSummerySuiteunit(eventtypesState.Suiteunit));
-    _store.dispatch(UpdateSummeryBuildingname(eventtypesState.Buildingname));
-    _store.dispatch(UpdateSummeryEventTypesCity(eventtypesState.City));
-    _store.dispatch(
-        UpdateSummeryEventTypesCountryCode(eventtypesState.CountryCode));
-    _store.dispatch(
-        UpdateSummeryEventTypesCountryName(eventtypesState.CountryName));
-    _store.dispatch(UpdateSummeryEventTypesProvince(eventtypesState.Province));
-    _store.dispatch(
-        UpdateSummeryEventTypesPostalcode(eventtypesState.Postalcode));
-    _store.dispatch(
-        UpdateSummeryEventTypesRentAmount(eventtypesState.RentAmount));
-    _store.dispatch(UpdateSummeryRentPaymentFrequencyValue(
-        eventtypesState.rentpaymentFrequencyValue));
-    _store
-        .dispatch(UpdateSummeryLeaseTypeValue(eventtypesState.leasetypeValue));
-    _store.dispatch(UpdateSummeryMinimumLeasedurationValue(
-        eventtypesState.minimumleasedurationValue));
-    _store.dispatch(UpdateSummeryMinimumleasedurationNumber(
-        eventtypesState.minimumleasedurationnumber.toString()));
   }
 }

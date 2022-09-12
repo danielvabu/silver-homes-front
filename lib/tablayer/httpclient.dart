@@ -73,6 +73,8 @@ typedef CallBackQuesyError = void Function(
     bool status, String title, List<BulkProperty> errorlist);
 typedef CallBackMaintenancePro = void Function(
     bool status, String responce, List<PropertyDropData> errorlist);
+typedef CallBackTemplate = void Function(
+    bool status, String responce, List<EventTypesTemplate> errorlist);
 typedef CallBackQuesyEmailExit = void Function(
     bool status, String responce, List<EmailExit> EmailExitlist);
 typedef CallBackCountry = void Function(
