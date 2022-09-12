@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
@@ -254,6 +255,18 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                 view: CalendarView.month,
                                                 controller:
                                                     _calendarController1,
+                                                onTap: (CalendarTapDetails
+                                                    details) {
+                                                  dynamic appointment =
+                                                      details.appointments;
+                                                  DateTime date = details.date!;
+                                                  CalendarElement element =
+                                                      details.targetElement;
+
+                                                  _calendarController2
+                                                          .displayDate =
+                                                      details.date;
+                                                },
                                                 cellBorderColor: Colors.white,
                                                 firstDayOfWeek: 1,
                                                 headerHeight: 40,
@@ -339,7 +352,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                 }
                                               });
                                             },
-                                            child: Text(
+                                            child: const Text(
                                                 GlobleString
                                                     .CALENDAR_Expand_All,
                                                 style: TextStyle(
@@ -608,6 +621,11 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   }
 
   void calendar1ViewChanged(ViewChangedDetails viewChangedDetails) {
+    print(_calendarController1.displayDate!.year.toString() +
+        '--' +
+        _calendarController1.displayDate!.month.toString() +
+        '--' +
+        _calendarController1.displayDate!.day.toString());
     SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
       _calendarController2.displayDate = DateTime(
           _calendarController1.displayDate!.year,
