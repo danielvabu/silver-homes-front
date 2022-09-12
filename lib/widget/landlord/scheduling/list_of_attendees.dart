@@ -16,6 +16,8 @@ import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/store/app_store.dart';
+import 'package:silverhome/tablayer/api_manager.dart';
+import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
 class ListOfAttendees extends StatefulWidget {
@@ -41,6 +43,9 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
     "purple": Colors.purple,
     "pink": Colors.pink
   };
+  int myRating = 0;
+  String myRatingView = "";
+
   @override
   void initState() {
     init();
@@ -128,10 +133,10 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                     onPressed: () {},
                                     child: Container(),
                                     style: ElevatedButton.styleFrom(
-                                        shape: CircleBorder(),
-                                        padding: EdgeInsets.all(15),
-                                        primary: color1[widget
-                                            .slot1.eventTypesData!.color]),
+                                        shape: const CircleBorder(),
+                                        backgroundColor: color1[
+                                            widget.slot1.eventTypesData!.color],
+                                        padding: const EdgeInsets.all(15)),
                                   ),
                                 ],
                               ),
@@ -250,7 +255,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                     child: Text(
                                         ponerfecha(
                                             widget.slot1.date_start.toString()),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: myColor.text_color,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold)),
@@ -290,7 +295,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                       widget.s1[i].name ?? "",
                                                       maxLines: 3)),
                                               const SizedBox(width: 8),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 8 * 25,
                                                 child: Text('Confirmed',
                                                     style: TextStyle(
@@ -318,9 +323,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                     press[i]
                                                         ? "assets/images/circle_up.png"
                                                         : "assets/images/circle_down.png",
-
                                                     height: 19,
-                                                    //width: 20,
                                                     alignment: Alignment.center,
                                                   ),
                                                 ),
@@ -340,7 +343,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Divider(),
+                                                const Divider(),
                                                 Text(
                                                   GlobleString.LMV_AV_Rating,
                                                   style: MyStyles.Medium(
@@ -357,9 +360,8 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                     Icons.star,
                                                     color: myColor.blue,
                                                   ),
-                                                  onRatingUpdate: (rating) {
-                                                    //_store.dispatch(UpdateADV_rating(rating));
-                                                    //_changeData();
+                                                  onRatingUpdate: (llega) {
+                                                    myRating = llega as int;
                                                   },
                                                   itemCount: 5,
                                                   itemSize: 25.0,
@@ -411,9 +413,8 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                           fillColor:
                                                               myColor.white,
                                                           filled: true),
-                                                  onChanged: (value) {
-                                                    //_store.dispatch(UpdateADV_Note(value));
-                                                    //_changeData();
+                                                  onChanged: (llega) {
+                                                    myRatingView = llega;
                                                   },
                                                 ),
                                                 const SizedBox(height: 10.0),
@@ -422,7 +423,34 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                       MainAxisAlignment.end,
                                                   children: [
                                                     InkWell(
-                                                      onTap: () {},
+                                                      onTap: () async {
+// TenancyApplicationID updateid = TenancyApplicationID();
+// updateid.ID = model.applicantId.toString();
+                                                        TenancyApplicationUpdateRating2
+                                                            updaterating =
+                                                            TenancyApplicationUpdateRating2();
+                                                        updaterating.Rating =
+                                                            myRating as double?;
+                                                        updaterating.Note =
+                                                            myRatingView;
+                                                        updaterating.Email =
+                                                            widget.s1[i].email;
+                                                        updaterating.ETid = widget
+                                                            .s1[i]
+                                                            .eventTypesDataId;
+
+                                                        await ApiManager()
+                                                            .UpdateRatingApplication2(
+                                                                context,
+                                                                updaterating,
+                                                                (status,
+                                                                    responce) async {
+                                                          //if (status) {leadcallApi();}
+                                                        });
+
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
                                                       child: CustomeWidget
                                                           .AddSimpleButton(
                                                               GlobleString
@@ -477,6 +505,5 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
         fecha.day.toString() +
         ", " +
         fecha.year.toString();
-    //  date.year.toString();
   }
 }
