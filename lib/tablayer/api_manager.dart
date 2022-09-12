@@ -4095,6 +4095,29 @@ class ApiManager {
     });
   }
 
+  UpdateRatingApplication2(
+      BuildContext context, Object UpPOJO, CallBackQuesy callBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().UpdateQuery(
+        0, //falta cosiatar
+        UpPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
+      if (error) {
+        loader.remove();
+        callBackQuesy(true, "");
+      } else {
+        loader.remove();
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
   UpdateArchiveApplication(BuildContext context, Object CPOJO, Object UpPOJO,
       CallBackQuesy callBackQuesy) {
     loader = Helper.overlayLoader(context);

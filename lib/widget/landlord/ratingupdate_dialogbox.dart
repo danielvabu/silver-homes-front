@@ -48,23 +48,23 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment(0, 0),
+      alignment: const Alignment(0, 0),
       child: Material(
         color: Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
                 minWidth: 600, maxWidth: 600, minHeight: 380, maxHeight: 380),
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 1.0),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10.0),
                   ),
                   color: Colors.white),
-              padding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+              padding: const EdgeInsets.only(
+                  top: 20, bottom: 20, left: 30, right: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -106,15 +106,13 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                                 },
                               );
                             },
-                            child: Icon(Icons.clear, size: 25),
+                            child: const Icon(Icons.clear, size: 25),
                           ),
                         ],
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -127,14 +125,12 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                               GlobleString.DLR_General_Rating,
                               style: MyStyles.Medium(14, myColor.text_color),
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
+                            const SizedBox(height: 10.0),
                             RatingBar.builder(
                               initialRating: widget.Ratingset,
                               allowHalfRating: false,
                               glow: false,
-                              itemBuilder: (context, index) => Icon(
+                              itemBuilder: (context, index) => const Icon(
                                 Icons.star,
                                 color: myColor.blue,
                               ),
@@ -152,9 +148,7 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -171,9 +165,7 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                                       MyStyles.Medium(14, myColor.text_color),
                                   textAlign: TextAlign.start,
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 10.0),
                                 Text(
                                   GlobleString.Optional,
                                   style: MyStyles.Medium(10, myColor.optional),
@@ -181,9 +173,7 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
+                            const SizedBox(height: 5.0),
                             TextField(
                               controller: _textReatingReview,
                               textAlign: TextAlign.start,
@@ -191,11 +181,11 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                               maxLines: 6,
                               decoration: InputDecoration(
                                   //border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: myColor.gray, width: 1.0),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: myColor.gray, width: 1.0),
                                   ),
@@ -203,7 +193,7 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                                   hintText: GlobleString.DLR_hint_notes_here,
                                   hintStyle:
                                       MyStyles.Regular(12, myColor.hintcolor),
-                                  contentPadding: EdgeInsets.all(10),
+                                  contentPadding: const EdgeInsets.all(10),
                                   fillColor: myColor.white,
                                   filled: true),
                             ),
@@ -212,9 +202,7 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 40,
-                  ),
+                  const SizedBox(height: 40.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -234,7 +222,8 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
                           width: 90,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
                             color: myColor.Circle_main,
                             border: Border.all(
                                 color: myColor.Circle_main, width: 1),

@@ -45,17 +45,14 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       height: 350,
-      padding: EdgeInsets.only(left: 30, right: 30),
+      padding: const EdgeInsets.only(left: 30, right: 30),
       child: FocusScope(
         node: _focusScopeNode,
         child: Column(
           children: [
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -74,9 +71,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -90,9 +85,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         style: MyStyles.Medium(14, myColor.text_color),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       TextFormField(
                         initialValue: widget.dmodel.firstname,
                         textAlign: TextAlign.start,
@@ -100,11 +93,11 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         style: MyStyles.Medium(14, myColor.text_color),
                         decoration: InputDecoration(
                             //border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.blue, width: 1.0),
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.gray, width: 1.0),
                             ),
@@ -113,7 +106,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                             //errorStyle: MyStyles.Regular(12, myColor.errorcolor),
                             //errorText: widget.dmodel.firstname!=null || widget.dmodel.firstname!="" ? "":GlobleString.NL_error_First_name,
                             hintStyle: MyStyles.Regular(12, myColor.hintcolor),
-                            contentPadding: EdgeInsets.all(10),
+                            contentPadding: const EdgeInsets.all(10),
                             fillColor: myColor.white,
                             filled: true),
                         onChanged: (value) {
@@ -124,9 +117,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -137,20 +128,18 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         style: MyStyles.Medium(14, myColor.text_color),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       TextFormField(
                         initialValue: widget.dmodel.lastname,
                         textAlign: TextAlign.start,
                         style: MyStyles.Medium(14, myColor.text_color),
                         decoration: InputDecoration(
                             //border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.blue, width: 1.0),
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.gray, width: 1.0),
                             ),
@@ -159,7 +148,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                             // errorStyle: MyStyles.Regular(12, myColor.errorcolor),
                             hintText: GlobleString.NL_hint_Last_name,
                             hintStyle: MyStyles.Regular(12, myColor.hintcolor),
-                            contentPadding: EdgeInsets.all(10),
+                            contentPadding: const EdgeInsets.all(10),
                             fillColor: myColor.white,
                             filled: true),
                         onChanged: (value) {
@@ -172,9 +161,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -188,20 +175,18 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         style: MyStyles.Medium(14, myColor.text_color),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       TextFormField(
                         initialValue: widget.dmodel.Email,
                         textAlign: TextAlign.start,
                         style: MyStyles.Medium(14, myColor.text_color),
                         decoration: InputDecoration(
                             //border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.blue, width: 1.0),
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.gray, width: 1.0),
                             ),
@@ -210,7 +195,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                             // errorStyle: MyStyles.Regular(12, myColor.errorcolor),
                             hintText: GlobleString.NL_hint_Enter_email,
                             hintStyle: MyStyles.Regular(12, myColor.hintcolor),
-                            contentPadding: EdgeInsets.all(10),
+                            contentPadding: const EdgeInsets.all(10),
                             fillColor: myColor.white,
                             filled: true),
                         onChanged: (value) {
@@ -221,9 +206,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 15,
-                ),
+                const SizedBox(width: 15.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -236,9 +219,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                             style: MyStyles.Medium(14, myColor.text_color),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10.0),
                           Text(
                             GlobleString.Optional,
                             style: MyStyles.Medium(10, myColor.optional),
@@ -246,9 +227,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -284,7 +263,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                                 inputFormatters: [
                                   MaskedInputFormatter("(000) 000 0000")
                                 ],
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintStyle: TextStyle(color: Colors.grey),
                                   contentPadding: EdgeInsets.all(10),
@@ -305,9 +284,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -323,9 +300,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                             style: MyStyles.Medium(14, myColor.text_color),
                             textAlign: TextAlign.start,
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10.0),
                           Text(
                             GlobleString.Optional,
                             style: MyStyles.Medium(10, myColor.optional),
@@ -333,9 +308,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5.0),
                       TextFormField(
                         initialValue: widget.dmodel.PrivateNotes,
                         textAlign: TextAlign.start,
@@ -347,18 +320,18 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                         ],
                         decoration: InputDecoration(
                             //border: InputBorder.none,
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.blue, width: 1.0),
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderSide:
                                   BorderSide(color: myColor.gray, width: 1.0),
                             ),
                             isDense: true,
                             hintText: GlobleString.NL_hint_notes_here,
                             hintStyle: MyStyles.Regular(12, myColor.hintcolor),
-                            contentPadding: EdgeInsets.all(10),
+                            contentPadding: const EdgeInsets.all(10),
                             fillColor: myColor.white,
                             filled: true),
                         onChanged: (value) {
@@ -371,9 +344,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10.0),
             widget.count > 1
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -399,7 +370,7 @@ class _AddNewLeadWidgetState extends State<AddNewLeadWidget> {
                 ? Container(
                     height: 1,
                     color: myColor.TA_tab_devide,
-                    margin: EdgeInsets.only(top: 15),
+                    margin: const EdgeInsets.only(top: 15),
                   )
                 : Container(),
           ],

@@ -355,6 +355,31 @@ class TenancyApplicationUpdateRating {
       };
 }
 
+class TenancyApplicationUpdateRating2 {
+  int? ETid;
+  double? Rating;
+  String? Note;
+  String? Email;
+
+  TenancyApplicationUpdateRating2(
+      {this.ETid, this.Rating, this.Note, this.Email});
+
+  factory TenancyApplicationUpdateRating2.fromJson(Map<String, dynamic> json) =>
+      TenancyApplicationUpdateRating2(
+        ETid: json["ETid"],
+        Rating: json["Rating"],
+        Note: json["Note"],
+        Email: json["Email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ETid": ETid,
+        "Rating": Rating,
+        "Note": Note,
+        "Email": Email,
+      };
+}
+
 class InviteWorkFlow {
   InviteWorkFlow({
     this.workFlowId,

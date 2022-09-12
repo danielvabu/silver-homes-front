@@ -451,7 +451,6 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                             ],
                                           ),
                                         ),
-// Este container es el que se debe desplegar o esconder
                                         if (press[i] == true)
                                           Container(
                                             child: Column(
@@ -621,11 +620,6 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   }
 
   void calendar1ViewChanged(ViewChangedDetails viewChangedDetails) {
-    print(_calendarController1.displayDate!.year.toString() +
-        '--' +
-        _calendarController1.displayDate!.month.toString() +
-        '--' +
-        _calendarController1.displayDate!.day.toString());
     SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
       _calendarController2.displayDate = DateTime(
           _calendarController1.displayDate!.year,
