@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +67,7 @@ class _StepEventTypesAvailabilityState
   int stepper = 0;
   // bool firsttime = true;
   bool change = false;
+  List listaoverider = [];
 
   void initState() {
     Prefs.init();
@@ -103,7 +106,7 @@ class _StepEventTypesAvailabilityState
   void initilize() {
     if (_store.state!.eventTypesSummeryState != null) {
       EventTypesState eventTypesState = _store.state!.eventTypesState;
-
+      print(eventTypesState.overrrides);
       // _store.dispatch(
       //     UpdateEventTypesBedrooms(eventtypesSummeryState.EventTypesBedrooms));
       // _store.dispatch(UpdateEventTypesBathrooms(
@@ -2100,9 +2103,44 @@ class _StepEventTypesAvailabilityState
                                     Text(GlobleString.ET_Overrides_Txt),
                                     const SizedBox(height: 10.0),
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        _selectDate1(context, eventtypesState);
+                                      },
                                       child: CustomeWidget.AddETOverride(),
                                     ),
+                                    SizedBox(width: 4.0),
+                                    SizedBox(width: 4.0),
+                                    for (int i = 0;
+                                        i < eventtypesState.overrrides.length;
+                                        i++)
+                                      Column(
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              SizedBox(width: 4.0),
+                                              Text(ponerfecha(eventtypesState
+                                                  .overrrides[i])),
+                                              SizedBox(width: 10.0),
+                                              SizedBox(width: 10.0),
+                                              GestureDetector(
+                                                child:
+                                                    Icon(Icons.delete_outline),
+                                                onTap: () {
+                                                  eventtypesState.overrrides
+                                                      .removeAt(i);
+                                                  _store.dispatch(
+                                                      UpdateRentalSpaceList1(
+                                                          eventtypesState
+                                                              .overrrides));
+                                                },
+                                              )
+                                            ],
+                                          ),
+                                          const Divider(),
+                                        ],
+                                      )
                                   ],
                                 ),
                               ),
@@ -2697,11 +2735,40 @@ class _StepEventTypesAvailabilityState
       eventtypesInsert.time_zone = eventtypesState.timezone;
       eventtypesInsert.time_scheduling = eventtypesState.timescheduling;
       eventtypesInsert.max_event_per_day = eventtypesState.maximum;
+
+//ee
+
+      overiderdel overdel = new overiderdel();
+      overdel.event_type_id =
+          int.parse(Prefs.getString(PrefsName.EventTypesID));
+
+      ApiManager().DeleteOverider(context, overdel, (status, responce) {
+        for (int i = 0; i < eventtypesState.overrrides.length; i++) {
+          Newoverides newoverides = Newoverides();
+          newoverides.event_type_id =
+              int.parse(Prefs.getString(PrefsName.EventTypesID));
+          newoverides.date_overrides = eventtypesState.overrrides[i];
+          ApiManager().AddOverider(context, newoverides,
+              (error, responce) async {
+            if (error) {
+            } else {
+              // loader.remove();
+              ToastUtils.showCustomToast(context, responce, false);
+            }
+          });
+        }
+
+        //gotoNext();
+      });
+
+//ee
+
       ApiManager().UpdateEventTypesDetails(
           context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
         if (error) {
         } else {}
       });
+
       //  _store.dispatch(UpdateSchedulingEventTypes());
       // for (int i = 0; i < eventtypesState.restrictionlist.length; i++) {
       //   if (eventtypesState.restrictionlist[i].ischeck!) {
@@ -2825,5 +2892,53 @@ class _StepEventTypesAvailabilityState
     }
 
     return isvehicallist;
+  }
+
+  Future<void> _selectDate1(BuildContext context, eventtypesState) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2200),
+      builder: (BuildContext? context, Widget? child) {
+        return Theme(
+          data: new ThemeData(
+            primarySwatch: MaterialColor(0xFF010B32, Helper.color),
+            accentColor: myColor.Circle_main,
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (pickedDate != null) {
+      AddEditEventTypes.isValueUpdate = true;
+      eventtypesState.overrrides.add(pickedDate.toString());
+      // setState(() {
+      //   listaoverider.add(pickedDate.toString());
+      // });
+
+      _store.dispatch(UpdateRentalSpaceList1(eventtypesState.overrrides));
+
+      // _store.dispatch(UpdateErrorDateofavailable(false));
+    }
+  }
+
+  String ponerfecha(String date) {
+    DateTime fecha = DateFormat("yyyy-MM-dd").parse(date);
+    dynamic dayData =
+        '{ "1" : "Monday", "2" : "Tuesday", "3" : "Wednesday", "4" : "Thursday ", "5" : "Friday", "6" : "Saturday ", "7" : "Sunday" }';
+
+    dynamic monthData =
+        '{ "1" : "Jan", "2" : "Feb", "3" : "Mar", "4" : "Apr", "5" : "May", "6" : "Jun", "7" : "Jul", "8" : "Aug", "9" : "Sep", "10" : "Oct", "11" : "Nov", "12" : "Dec" }';
+
+    return json.decode(dayData)['${fecha.weekday}'] +
+        " - " +
+        json.decode(monthData)['${fecha.month}'] +
+        " " +
+        fecha.day.toString() +
+        ", " +
+        fecha.year.toString();
+    //  date.year.toString();
   }
 }

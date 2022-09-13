@@ -41,14 +41,14 @@ class UpdateEventTypesTypeOtherValue implements Action {
   }
 }
 
-class UpdateRentalSpaceList implements Action {
-  final List<SystemEnumDetails> rentalspacelist;
+class UpdateRentalSpaceList1 implements Action {
+  final List rentalspacelist;
 
-  UpdateRentalSpaceList(this.rentalspacelist);
+  UpdateRentalSpaceList1(this.rentalspacelist);
 
   @override
   AppState updateState(AppState appState) {
-    return appState.copyWith.eventTypesState(rentalspacelist: rentalspacelist);
+    return appState.copyWith.eventTypesState(overrrides: rentalspacelist);
   }
 }
 

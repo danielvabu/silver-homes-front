@@ -896,6 +896,29 @@ class ApiManager {
     });
   }
 
+  AddOverider(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   getPropertyFeaturelist(BuildContext context) async {
     Object blankObject = new Object();
 
@@ -2072,6 +2095,7 @@ class ApiManager {
           List frilist2 = myobject['frilist2'];
           List satlist = myobject['satlist'];
           List satlist2 = myobject['satlist2'];
+          List overider = myobject['overider'];
           eventTypesData.id = ID;
 
           eventTypesData.duration = Duration;
@@ -2121,6 +2145,7 @@ class ApiManager {
           eventTypesData.frih2 = frilist2;
           eventTypesData.sath1 = satlist;
           eventTypesData.sath2 = satlist2;
+          eventTypesData.overrrides = overider;
         }
         CallBackQuesy(true, respoce, eventTypesData);
       } else {
@@ -2240,6 +2265,7 @@ class ApiManager {
           List frilist2 = myobject['frilist2'];
           List satlist = myobject['satlist'];
           List satlist2 = myobject['satlist2'];
+          List overider = myobject['overider'];
           eventTypesData.id = ID;
 
           eventTypesData.duration = Duration;
@@ -2289,6 +2315,7 @@ class ApiManager {
           eventTypesData.frih2 = frilist2;
           eventTypesData.sath1 = satlist;
           eventTypesData.sath2 = satlist2;
+          eventTypesData.overrrides = overider;
         }
         CallBackQuesy(true, respoce, eventTypesData);
       } else {
@@ -2818,6 +2845,7 @@ class ApiManager {
     _store.dispatch(
         Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
 
+    _store.dispatch(UpdateRentalSpaceList1(eventTypesData.overrrides!));
     /*Summery*/
   }
 
@@ -9767,6 +9795,24 @@ class ApiManager {
       BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
     String query = QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTime,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+  DeleteOverider(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {

@@ -1668,6 +1668,7 @@ class EventTypesUpdate1 {
   int? time_scheduling;
   String? time_scheduling_medida;
   int? max_event_per_day;
+  List? overiders;
 
   EventTypesUpdate1({
     this.time_zone,
@@ -1675,6 +1676,7 @@ class EventTypesUpdate1 {
     this.time_scheduling,
     this.time_scheduling_medida,
     this.max_event_per_day,
+    this.overiders,
   });
 
   factory EventTypesUpdate1.fromJson(Map<String, dynamic> json) =>
@@ -1684,6 +1686,7 @@ class EventTypesUpdate1 {
         time_scheduling: json["time_scheduling"],
         time_scheduling_medida: json["time_scheduling_medida"],
         max_event_per_day: json["max_event_per_day"],
+        overiders: json["overiders"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -1692,6 +1695,24 @@ class EventTypesUpdate1 {
         "time_scheduling": time_scheduling,
         "time_scheduling_medida": time_scheduling_medida,
         "max_event_per_day": max_event_per_day,
+        "overiders": overiders,
+      };
+}
+
+class Newoverides {
+  int? event_type_id;
+  String? date_overrides;
+
+  Newoverides({this.event_type_id, this.date_overrides});
+
+  factory Newoverides.fromJson(Map<String, dynamic> json) => Newoverides(
+        event_type_id: json["event_type_id"],
+        date_overrides: json["date_overrides"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_id": event_type_id,
+        "date_overrides": date_overrides,
       };
 }
 
@@ -2334,6 +2355,22 @@ class AviabilityTimedel {
 
   Map<String, dynamic> toJson() => {
         "eventtype": eventtype,
+      };
+}
+
+class overiderdel {
+  int? event_type_id;
+
+  overiderdel({
+    this.event_type_id,
+  });
+
+  factory overiderdel.fromJson(Map<String, dynamic> json) => overiderdel(
+        event_type_id: json["event_type_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_id": event_type_id,
       };
 }
 

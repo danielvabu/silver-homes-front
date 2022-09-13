@@ -20,7 +20,7 @@ class _$EventTypesStateTearOff {
       {required List<EventTypesTemplate> eventtypestypelist,
       EventTypesTemplate? eventtypestypeValue,
       required String eventtypestypeOtherValue,
-      required List<SystemEnumDetails> rentalspacelist,
+      required List rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
       required List<SystemEnumDetails> rentpaymentFrequencylist,
       SystemEnumDetails? rentpaymentFrequencyValue,
@@ -256,8 +256,7 @@ mixin _$EventTypesState {
   EventTypesTemplate? get eventtypestypeValue =>
       throw _privateConstructorUsedError;
   String get eventtypestypeOtherValue => throw _privateConstructorUsedError;
-  List<SystemEnumDetails> get rentalspacelist =>
-      throw _privateConstructorUsedError;
+  List get rentalspacelist => throw _privateConstructorUsedError;
   SystemEnumDetails? get rentalspaceValue => throw _privateConstructorUsedError;
   List<SystemEnumDetails> get rentpaymentFrequencylist =>
       throw _privateConstructorUsedError;
@@ -395,7 +394,7 @@ abstract class $EventTypesStateCopyWith<$Res> {
       {List<EventTypesTemplate> eventtypestypelist,
       EventTypesTemplate? eventtypestypeValue,
       String eventtypestypeOtherValue,
-      List<SystemEnumDetails> rentalspacelist,
+      List rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
       List<SystemEnumDetails> rentpaymentFrequencylist,
       SystemEnumDetails? rentpaymentFrequencyValue,
@@ -646,7 +645,7 @@ class _$EventTypesStateCopyWithImpl<$Res>
       rentalspacelist: rentalspacelist == freezed
           ? _value.rentalspacelist
           : rentalspacelist // ignore: cast_nullable_to_non_nullable
-              as List<SystemEnumDetails>,
+              as List,
       rentalspaceValue: rentalspaceValue == freezed
           ? _value.rentalspaceValue
           : rentalspaceValue // ignore: cast_nullable_to_non_nullable
@@ -1096,7 +1095,7 @@ abstract class _$EventTypesStateCopyWith<$Res>
       {List<EventTypesTemplate> eventtypestypelist,
       EventTypesTemplate? eventtypestypeValue,
       String eventtypestypeOtherValue,
-      List<SystemEnumDetails> rentalspacelist,
+      List rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
       List<SystemEnumDetails> rentpaymentFrequencylist,
       SystemEnumDetails? rentpaymentFrequencyValue,
@@ -1349,7 +1348,7 @@ class __$EventTypesStateCopyWithImpl<$Res>
       rentalspacelist: rentalspacelist == freezed
           ? _value.rentalspacelist
           : rentalspacelist // ignore: cast_nullable_to_non_nullable
-              as List<SystemEnumDetails>,
+              as List,
       rentalspaceValue: rentalspaceValue == freezed
           ? _value.rentalspaceValue
           : rentalspaceValue // ignore: cast_nullable_to_non_nullable
@@ -1912,7 +1911,7 @@ class _$_EventTypesState implements _EventTypesState {
   @override
   final String eventtypestypeOtherValue;
   @override
-  final List<SystemEnumDetails> rentalspacelist;
+  final List rentalspacelist;
   @override
   final SystemEnumDetails? rentalspaceValue;
   @override
@@ -2337,7 +2336,7 @@ abstract class _EventTypesState implements EventTypesState {
       {required List<EventTypesTemplate> eventtypestypelist,
       EventTypesTemplate? eventtypestypeValue,
       required String eventtypestypeOtherValue,
-      required List<SystemEnumDetails> rentalspacelist,
+      required List rentalspacelist,
       SystemEnumDetails? rentalspaceValue,
       required List<SystemEnumDetails> rentpaymentFrequencylist,
       SystemEnumDetails? rentpaymentFrequencyValue,
@@ -2456,8 +2455,7 @@ abstract class _EventTypesState implements EventTypesState {
   @override
   String get eventtypestypeOtherValue => throw _privateConstructorUsedError;
   @override
-  List<SystemEnumDetails> get rentalspacelist =>
-      throw _privateConstructorUsedError;
+  List get rentalspacelist => throw _privateConstructorUsedError;
   @override
   SystemEnumDetails? get rentalspaceValue => throw _privateConstructorUsedError;
   @override

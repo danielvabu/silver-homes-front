@@ -32,7 +32,8 @@ enum etableName {
   Events_type,
   Availability,
   AvailabilityTime,
-  Slots
+  Slots,
+  availability_overrides,
 }
 
 class TableNames {
@@ -141,6 +142,9 @@ class TableNames {
         break;
       case etableName.Slots:
         name = "slots";
+        break;
+      case etableName.availability_overrides:
+        name = "availability_overrides";
         break;
       default:
         name = "";

@@ -11,7 +11,7 @@ abstract class EventTypesState with _$EventTypesState {
     required List<EventTypesTemplate> eventtypestypelist,
     EventTypesTemplate? eventtypestypeValue,
     required String eventtypestypeOtherValue,
-    required List<SystemEnumDetails> rentalspacelist,
+    required List rentalspacelist,
     SystemEnumDetails? rentalspaceValue,
     required List<SystemEnumDetails> rentpaymentFrequencylist,
     SystemEnumDetails? rentpaymentFrequencyValue,

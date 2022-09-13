@@ -87,6 +87,31 @@ class EventTypesTemplate {
   }
 }
 
+class EventTypesOverride {
+  int? id;
+  String? name;
+
+  EventTypesOverride({
+    this.id,
+    this.name,
+  });
+
+  factory EventTypesOverride.fromJson(Map<String, dynamic> json) =>
+      EventTypesOverride(id: json["id"], name: json["name"]);
+
+  Map toJson() => {
+        "id": id,
+        "name": name,
+      };
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["name"] = name;
+    return map;
+  }
+}
+
 class MyModal {
   int myField1;
   String myField2;

@@ -248,9 +248,11 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: const EdgeInsets.only(left: 5, right: 10.0),
       alignment: Alignment.center,
       child: GestureDetector(
-          onTap: () {
-            openDialogListAttendees(model.id!);
-          },
+          onTap: (model.slots! > 0)
+              ? () {
+                  openDialogListAttendees(model.id!);
+                }
+              : null,
           child: Icon(Icons.groups)),
     );
   }
