@@ -72,7 +72,6 @@ class _StepEventTypesAvailabilityState
   void initState() {
     Prefs.init();
     filldata();
-    initilize();
     initNavigationBack();
     AddEditEventTypes.isValueUpdate = false;
     super.initState();
@@ -101,32 +100,6 @@ class _StepEventTypesAvailabilityState
     furnishinglist = QueryFilter().PlainValues(eSystemEnums().Furnishing);
 
     _store.dispatch(UpdateFurnishinglist(furnishinglist));
-  }
-
-  void initilize() {
-    if (_store.state!.eventTypesSummeryState != null) {
-      EventTypesState eventTypesState = _store.state!.eventTypesState;
-      print(eventTypesState.overrrides);
-      // _store.dispatch(
-      //     UpdateEventTypesBedrooms(eventtypesSummeryState.EventTypesBedrooms));
-      // _store.dispatch(UpdateEventTypesBathrooms(
-      //     eventtypesSummeryState.EventTypesBathrooms));
-      // _store.dispatch(UpdateEventTypesSizeinsquarefeet(
-      //     eventtypesSummeryState.EventTypesSizeinsquarefeet));
-      // _store.dispatch(UpdateEventTypesMaxoccupancy(
-      //     eventtypesSummeryState.EventTypesMaxoccupancy));
-      // _store.dispatch(
-      //     UpdateFurnishingValue(eventtypesSummeryState.furnishingValue));
-      // _store.dispatch(UpdateOtherPartialFurniture(
-      //     eventtypesSummeryState.Other_Partial_Furniture));
-
-      // List<SystemEnumDetails> secondList = eventtypesSummeryState
-      //     .restrictionlist
-      //     .map((item) => new SystemEnumDetails.clone(item))
-      //     .toList();
-
-      // _store.dispatch(UpdateRestrictionlist(secondList));
-    }
   }
 
   @override
@@ -2894,7 +2867,8 @@ class _StepEventTypesAvailabilityState
     return isvehicallist;
   }
 
-  Future<void> _selectDate1(BuildContext context, eventtypesState) async {
+  Future<void> _selectDate1(
+      BuildContext context, EventTypesState eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -2912,7 +2886,7 @@ class _StepEventTypesAvailabilityState
     );
 
     if (pickedDate != null) {
-      AddEditEventTypes.isValueUpdate = true;
+      //  AddEditEventTypes.isValueUpdate = true;
       eventtypesState.overrrides.add(pickedDate.toString());
       // setState(() {
       //   listaoverider.add(pickedDate.toString());

@@ -183,7 +183,7 @@ abstract class EventTypesState with _$EventTypesState {
         timescheduling: 0,
         timeschedulingmed: 'minutes',
         maximum: 0,
-        overrrides: List.empty(),
+        overrrides: [],
         EventTypesDuration: 0,
         EventTypesDurationPeriod: "minutes",
         EventTypesBefore: 0,

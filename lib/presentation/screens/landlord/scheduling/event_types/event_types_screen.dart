@@ -307,18 +307,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         await Prefs.setBool(PrefsName.EventTypesStep2, false);
         await Prefs.setBool(PrefsName.EventTypesStep3, false);
 
-        List<SystemEnumDetails> restrictionlist = [];
-        restrictionlist =
-            QueryFilter().PlainValues(eSystemEnums().Restrictions);
-
-        List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-            .map((item) => new SystemEnumDetails.clone(item))
-            .toList();
-
-        _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
-
-        _store.dispatch(UpdateRestrictionlist(restrictionlist));
-
         _store.dispatch(UpdateEventTypesForm(8));
         _store.dispatch(UpdateEventTypesFormAddress(""));
         _store.dispatch(UpdateAddEditEventTypes());
