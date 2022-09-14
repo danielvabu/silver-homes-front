@@ -572,6 +572,30 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                             eventtypesListState, true, eventtypesData.id!);
                         //}
                       },
+                      onPresseDelete: (EventTypesDataList eventtypesData) {
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black45,
+                          useSafeArea: true,
+                          barrierDismissible: false,
+                          builder: (BuildContext context1) {
+                            return AlertDialogBox(
+                              title: GlobleString.LMV_DL_EvenType,
+                              positiveText:
+                                  GlobleString.LMV_DL_Vendor_btn_Delete,
+                              negativeText:
+                                  GlobleString.LMV_DL_Vendor_btn_Cancel,
+                              onPressedYes: () {
+                                Navigator.of(context1).pop();
+                                deleteEvenType(eventtypesData);
+                              },
+                              onPressedNo: () {
+                                Navigator.of(context1).pop();
+                              },
+                            );
+                          },
+                        );
+                      },
                       onPresseIsPublish: (EventTypesDataList eventtypesData,
                           int pos, bool flag) {
                         showDialog(
@@ -1136,5 +1160,25 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
         return ShareLink(eventtypesData.url);
       },
     );
+  }
+
+  deleteEvenType(EventTypesDataList eventtypesData) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    CommonID id = new CommonID(ID: eventtypesData.id);
+
+    ApiManager().deleteEventTpeAPI(context, id, (error, respoce) async {
+      if (error) {
+        loader.remove();
+        init();
+        ToastUtils.showCustomToast(
+            context, GlobleString.EventType_delete_successfully, true);
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(context, respoce, false);
+        Helper.Log("respoce", respoce);
+      }
+    });
   }
 }

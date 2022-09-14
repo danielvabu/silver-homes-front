@@ -41,7 +41,7 @@ import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dar
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import 'package:silverhome/widget/landlord/scheduling/share_link.dart';
 import '../../../../models/landlord_models/eventtypes_list_state.dart';
-import 'add_edit_eventtypes.dart';
+import 'add_edit_eventtypes_templates.dart';
 
 class EventTypeTemplateScreen extends StatefulWidget {
   @override

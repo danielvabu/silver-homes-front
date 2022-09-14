@@ -16,6 +16,7 @@ typedef VoidCallDetails = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallEdit = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDuplicat = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallSaveTemp = void Function(EventTypesDataList eventtypesData);
+typedef VoidCallDelete = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallActive = void Function(
     EventTypesDataList eventtypesData, int pos);
 typedef VoidCallInActive = void Function(
@@ -30,6 +31,7 @@ class EventTypesItem extends StatefulWidget {
   final VoidCallDuplicat _callbackDuplicat;
   final VoidCallSaveTemp _callbackSaveTemp;
   final VoidCallActive _callbackActive;
+  final VoidCallDelete _callbackDelete;
   final VoidCallInActive _callbackInActive;
   final VoidCallIsPublish _callbackIsPublish;
   List<EventTypesDataList> listdata;
@@ -42,6 +44,7 @@ class EventTypesItem extends StatefulWidget {
     required VoidCallDuplicat onPresseDuplicat,
     required VoidCallSaveTemp onPresseSaveTemp,
     required VoidCallActive onPresseActive,
+    required VoidCallDelete onPresseDelete,
     required VoidCallInActive onPresseInActive,
     required VoidCallIsPublish onPresseIsPublish,
   })  : listdata = listdata1,
@@ -51,6 +54,7 @@ class EventTypesItem extends StatefulWidget {
         _callbackDuplicat = onPresseDuplicat,
         _callbackSaveTemp = onPresseSaveTemp,
         _callbackActive = onPresseActive,
+        _callbackDelete = onPresseDelete,
         _callbackInActive = onPresseInActive,
         _callbackIsPublish = onPresseIsPublish;
 
@@ -274,6 +278,8 @@ class _EventTypesItemState extends State<EventTypesItem> {
               widget._callbackDuplicat(model);
             } else if (value == 4) {
               widget._callbackSaveTemp(model);
+            } else if (value == 5) {
+              widget._callbackDelete(model);
             }
           },
           child: Container(
@@ -311,6 +317,14 @@ class _EventTypesItemState extends State<EventTypesItem> {
               value: 4,
               child: Text(
                 GlobleString.PH_ACT_SaveTemplate,
+                style: MyStyles.Medium(14, myColor.text_color),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            PopupMenuItem(
+              value: 5,
+              child: Text(
+                GlobleString.Mant_action_Delete,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),

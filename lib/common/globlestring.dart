@@ -1811,6 +1811,8 @@ class GlobleString {
       "Are you sure you want to delete this vendor? If you do, all of the impacted maintenance requests will have the vendor information removed.";
   static const String LMV_DL_Vendor_btn_Cancel = "Cancel";
   static const String LMV_DL_Vendor_btn_Delete = "Delete";
+  static const String LMV_DL_EvenType =
+      "Are you sure you want to delete this Event Type?";
 
   /* Calendar Screen */
   static const String CALENDAR_Search = "Search";
@@ -2020,6 +2022,8 @@ class GlobleString {
 
   static const String Vendor_delete_successfully =
       "The vendor has been deleted.";
+  static const String EventType_delete_successfully =
+      "The Event Type has been deleted.";
 
   static const String maintenance_Delete_image_title =
       "Are you sure you want to remove this file? ";
