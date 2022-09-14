@@ -249,7 +249,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                           children: [
                                             const SizedBox(height: 55.0),
                                             Container(
-                                              width: 170,
+                                              width: 200,
                                               height: 200,
                                               child: SfCalendar(
                                                 view: CalendarView.month,
@@ -313,6 +313,16 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         MonthNavigationDirection
                                                             .horizontal),
                                             onViewChanged: calendar2ViewChanged,
+                                            allowedViews: const <CalendarView>[
+                                              CalendarView.day,
+                                              CalendarView.week,
+                                              CalendarView.workWeek,
+                                              CalendarView.month,
+                                              CalendarView.timelineDay,
+                                              CalendarView.timelineWeek,
+                                              CalendarView.timelineWorkWeek,
+                                              CalendarView.timelineMonth,
+                                            ],
                                           ),
                                         ),
                                       ],
