@@ -188,24 +188,27 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          //profileState.companyimage != null ?
-                                          Container(
-                                            width: 60.0,
-                                            height: 50.0,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.rectangle,
-                                              color: myColor.white,
-                                              border: Border.all(
-                                                  width: 2,
-                                                  color: myColor.blue),
+                                          if (Prefs.getString(PrefsName
+                                                  .BT_CompanyLogoURL) !=
+                                              null)
+                                            Container(
+                                              width: 60.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                color: myColor.white,
+                                                border: Border.all(
+                                                    width: 2,
+                                                    color: myColor.blue),
+                                              ),
+                                              child: Image.network(
+                                                Prefs.getString(PrefsName
+                                                    .BT_CompanyLogoURL),
+                                                fit: BoxFit.contain,
+                                                width: 148,
+                                                height: 148,
+                                              ),
                                             ),
-                                            child: Image.network(
-                                              'https://silverhome1.s3.amazonaws.com/files/20220824150755237_1661353675069.png',
-                                              fit: BoxFit.contain,
-                                              width: 148,
-                                              height: 148,
-                                            ),
-                                          ),
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: Column(
