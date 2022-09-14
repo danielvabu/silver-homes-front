@@ -166,7 +166,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                 hintStyle: MyStyles.Medium(
                                                     14, myColor.hintcolor),
                                                 contentPadding:
-                                                    EdgeInsets.all(10),
+                                                    const EdgeInsets.all(10),
                                                 isDense: true,
                                                 hintText: GlobleString
                                                     .CALENDAR_Search,
@@ -247,7 +247,6 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                       children: [
                                         Column(
                                           children: [
-                                            //Aca se puede poner boton today
                                             const SizedBox(height: 55.0),
                                             Container(
                                               width: 200,
@@ -417,7 +416,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                       style: const TextStyle(
                                                           color: myColor
                                                               .text_color,
-                                                          fontSize: 18,
+                                                          fontSize: 19,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   const SizedBox(width: 10),
@@ -431,7 +430,9 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                           color: Colors.grey,
                                                           fontSize: 18,
                                                           fontWeight:
-                                                              FontWeight.bold)),
+                                                              FontWeight.bold,
+                                                          fontStyle: FontStyle
+                                                              .italic)),
                                                 ],
                                               ),
                                               InkWell(
