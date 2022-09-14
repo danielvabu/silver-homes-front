@@ -122,11 +122,23 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                           'https://silverhome1.s3.amazonaws.com/files/20220824150755237_1661353675069.png')),
                                   Container(
                                     alignment: Alignment.topLeft,
-                                    child: Text(
-                                      GlobleString.CAL_List_of_Attendees,
-                                      style:
-                                          MyStyles.Bold(22, myColor.text_color),
-                                      textAlign: TextAlign.start,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          GlobleString.CAL_List_of_Attendees,
+                                          style: MyStyles.Bold(
+                                              22, myColor.text_color),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 5.0),
+                                        Text(
+                                          widget.slot1.eventTypesData!.name ??
+                                              "",
+                                          style: MyStyles.Bold(
+                                              17, myColor.text_color),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   ElevatedButton(
