@@ -112,10 +112,11 @@ class _ViewEventState extends State<ViewEvent> {
                                           onPressed: () {},
                                           child: Container(),
                                           style: ElevatedButton.styleFrom(
-                                              shape: CircleBorder(),
-                                              padding: EdgeInsets.all(12),
-                                              primary: color1[widget.s1[0]
-                                                  .eventTypesData!.color]),
+                                              shape: const CircleBorder(),
+                                              backgroundColor: color1[widget
+                                                  .s1[0].eventTypesData!.color],
+                                              padding:
+                                                  const EdgeInsets.all(12)),
                                         ),
                                       ),
                                       const SizedBox(width: 30.0),

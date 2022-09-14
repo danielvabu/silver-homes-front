@@ -161,8 +161,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             height: header_height,
             alignment: Alignment.centerLeft,
             color: myColor.white,
-            margin: EdgeInsets.only(left: 15),
-            padding: EdgeInsets.all(5),
+            margin: const EdgeInsets.only(left: 15),
+            padding: const EdgeInsets.all(5),
             child: InkWell(
               onTap: () async {},
               child: Image.asset(
@@ -188,7 +188,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     },
                     child: Container(
                       height: 60,
-                      padding: EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15),
                       color: portalState.index == 1
                           ? myColor.drawselectcolor
                           : myColor.white,
@@ -206,7 +206,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Properties,
                                 style: portalState.index == 1
@@ -219,82 +219,6 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       ),
                     ),
                   ),
-                  /*InkWell(
-                    onTap: () {
-                      _store.dispatch(
-                          UpdatePortalPage(2, GlobleString.NAV_Finances));
-                    },
-                    child: Container(
-                      height: 60,
-                      color: portalState.index == 2
-                          ? myColor.drawselectcolor
-                          : myColor.white,
-                      padding: EdgeInsets.only(left: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 35,
-                            child: Image.asset(
-                              "assets/images/ic_nav_finance.png",
-                              width: 34,
-                              height: 28,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: Text(
-                                GlobleString.NAV_Finances,
-                                style: portalState.index == 2
-                                    ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                    : MyStyles.Regular(16, myColor.Circle_main),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/
-                  /*InkWell(
-                    onTap: () {
-                      _store.dispatch(
-                          UpdatePortalPage(3, GlobleString.NAV_Documents));
-                    },
-                    child: Container(
-                      height: 60,
-                      color: portalState.index == 3
-                          ? myColor.drawselectcolor
-                          : myColor.white,
-                      padding: EdgeInsets.only(left: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 35,
-                            child: Image.asset(
-                              "assets/images/ic_nav_documents.png",
-                              width: 19,
-                              height: 26,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: Text(
-                                GlobleString.NAV_Documents,
-                                style: portalState.index == 3
-                                    ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                    : MyStyles.Regular(16, myColor.Circle_main),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),*/
                   InkWell(
                     onTap: () {
                       tenantView();
@@ -304,7 +228,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 4
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -319,7 +243,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5),
                               child: Text(
                                 GlobleString.NAV_Tenants,
                                 style: portalState.index == 4
@@ -345,7 +269,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       color: portalState.index == 5
                           ? myColor.drawselectcolor
                           : myColor.white,
-                      padding: EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -360,7 +284,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(left: 5),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -396,14 +320,14 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           color: portalState.index == 5
                               ? myColor.drawselectcolor2
                               : myColor.white,
-                          padding: EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(width: 5),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 40),
+                                  padding: const EdgeInsets.only(left: 40),
                                   child: Column(
                                     children: [
                                       SizedBox(height: 10),
@@ -467,6 +391,82 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                           ),
                         )
                       : Container(),
+                  /*InkWell(
+                    onTap: () {
+                      _store.dispatch(
+                          UpdatePortalPage(2, GlobleString.NAV_Finances));
+                    },
+                    child: Container(
+                      height: 60,
+                      color: portalState.index == 2
+                          ? myColor.drawselectcolor
+                          : myColor.white,
+                      padding: EdgeInsets.only(left: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 35,
+                            child: Image.asset(
+                              "assets/images/ic_nav_finance.png",
+                              width: 34,
+                              height: 28,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text(
+                                GlobleString.NAV_Finances,
+                                style: portalState.index == 2
+                                    ? MyStyles.SemiBold(16, myColor.Circle_main)
+                                    : MyStyles.Regular(16, myColor.Circle_main),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),*/
+                  InkWell(
+                    onTap: () {
+                      _store.dispatch(
+                          UpdatePortalPage(3, GlobleString.NAV_Documents));
+                    },
+                    child: Container(
+                      height: 60,
+                      color: portalState.index == 3
+                          ? myColor.drawselectcolor
+                          : myColor.white,
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 35,
+                            child: Image.asset(
+                              "assets/images/ic_nav_documents.png",
+                              width: 19,
+                              height: 26,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                GlobleString.NAV_Documents,
+                                style: portalState.index == 3
+                                    ? MyStyles.SemiBold(16, myColor.Circle_main)
+                                    : MyStyles.Regular(16, myColor.Circle_main),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                   InkWell(
                     onTap: () {
                       _store.dispatch(UpdateSchedulingExpand(
@@ -666,7 +666,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Container(
             width: drawer_width,
             padding: EdgeInsets.only(left: 10, right: 10),
@@ -680,7 +680,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   ),
                 ]),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -735,7 +735,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
               ? Container(
                   width: MediaQuery.of(context).size.width - drawer_width,
                   height: MediaQuery.of(context).size.height - header_height,
-                  child: Center(
+                  child: const Center(
                     child: Text('Please wait...'),
                   ),
                 )
@@ -807,8 +807,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       _store.dispatch(UpdateMantenaceVendor());
                     }
                   }
-
-                  new Timer(Duration(milliseconds: 3), () {
+                  Timer(const Duration(milliseconds: 3), () {
                     _store.dispatch(UpdatePortalPageisLoading(false));
                   });
                 },
@@ -820,9 +819,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               InkWell(
                 onTap: () {
                   OverlayEntry loader = Helper.overlayLoader(context);
@@ -861,13 +858,14 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     ),
                     if (portalState.notificationCount > 0)
                       Container(
-                        margin: EdgeInsets.only(left: 15),
-                        padding: EdgeInsets.only(
+                        margin: const EdgeInsets.only(left: 15),
+                        padding: const EdgeInsets.only(
                             left: 3, right: 3, top: 1, bottom: 1),
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: myColor.noti_count_border, width: 0.5),
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(100)),
                           color: myColor.noti_count_fill,
                         ),
                         //alignment: Alignment.topRight,
@@ -880,9 +878,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   ],
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               InkWell(
                 onTap: () {
                   MenuPopup(portalState);
@@ -895,9 +891,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
             ],
           )
         ],
@@ -1262,12 +1256,11 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
 
   void _tapNotificationItem(
       NotificationData notification, PortalState portalState) {
-    //if (notification.typeOfNotification ==
-    //    NotificationType()
-    //        .getNotificationType(NotificationName.Attendance_Confirmed)) {
-    //  openCalendar(notification);
-    //} else
     if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Attendance_Confirmed)) {
+      openCalendar(notification);
+    } else if (notification.typeOfNotification ==
         NotificationType()
             .getNotificationType(NotificationName.Application_Received)) {
       openTenancyApplicationDetails(notification);
@@ -1394,19 +1387,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
   }
 
   void openCalendar(NotificationData notification) {
-    //List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
-    //TenancyApplication tenancyApplication = TenancyApplication();
-    //tenancyApplication.id = notification.applicationId;
-    //tenancyApplication.applicantId = notification.applicantId;
-    //tenancyApplication.applicantName = notification.applicantName;
-    //listdataviewlist.add(tenancyApplication);
-    //_store.dispatch(UpdateTenancyDetails(listdataviewlist));
+    //muestra un dialog pero no se como traer la info
   }
 
   void openTenancyApplicationDetails(NotificationData notification) {
     List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
-
-    TenancyApplication tenancyApplication = new TenancyApplication();
+    TenancyApplication tenancyApplication = TenancyApplication();
     tenancyApplication.id = notification.applicationId;
     tenancyApplication.applicantId = notification.applicantId;
     tenancyApplication.applicantName = notification.applicantName;
@@ -1468,12 +1454,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateLLTALeadleadList(<TenancyApplication>[]));
     _store.dispatch(UpdateLLTLeadFilterleadList(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "1";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1491,12 +1477,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateLLTAApplicantleadList(<TenancyApplication>[]));
     _store.dispatch(UpdateLLTAFilterApplicantleadList(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "2";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1515,12 +1501,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store
         .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "3";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1538,12 +1524,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store
         .dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "4";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1560,12 +1546,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateLLTLleaseleadlist(<TenancyApplication>[]));
     _store.dispatch(UpdateLLTLfilterleaseleadlist(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "5";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1582,12 +1568,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateLLTLleaseleadlist(<TenancyApplication>[]));
     _store.dispatch(UpdateLLTLfilterleaseleadlist(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "6";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;
@@ -1634,7 +1620,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
           negativeText: GlobleString.activeTenant_NO,
           onPressedYes: () async {
             Navigator.of(context1).pop();
-            CommonID commonID = new CommonID();
+            CommonID commonID = CommonID();
             commonID.ID = notification.applicationId.toString();
 
             ApiManager().getPropertyIdForApplication(context, commonID,
