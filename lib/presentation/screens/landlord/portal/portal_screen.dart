@@ -807,8 +807,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       _store.dispatch(UpdateMantenaceVendor());
                     }
                   }
-
-                  new Timer(Duration(milliseconds: 3), () {
+                  Timer(const Duration(milliseconds: 3), () {
                     _store.dispatch(UpdatePortalPageisLoading(false));
                   });
                 },
@@ -820,9 +819,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               InkWell(
                 onTap: () {
                   OverlayEntry loader = Helper.overlayLoader(context);
@@ -861,13 +858,14 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     ),
                     if (portalState.notificationCount > 0)
                       Container(
-                        margin: EdgeInsets.only(left: 15),
-                        padding: EdgeInsets.only(
+                        margin: const EdgeInsets.only(left: 15),
+                        padding: const EdgeInsets.only(
                             left: 3, right: 3, top: 1, bottom: 1),
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: myColor.noti_count_border, width: 0.5),
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(100)),
                           color: myColor.noti_count_fill,
                         ),
                         //alignment: Alignment.topRight,
@@ -880,9 +878,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   ],
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               InkWell(
                 onTap: () {
                   MenuPopup(portalState);
@@ -895,9 +891,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   fit: BoxFit.contain,
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
             ],
           )
         ],
@@ -1262,12 +1256,11 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
 
   void _tapNotificationItem(
       NotificationData notification, PortalState portalState) {
-    //if (notification.typeOfNotification ==
-    //    NotificationType()
-    //        .getNotificationType(NotificationName.Attendance_Confirmed)) {
-    //  openCalendar(notification);
-    //} else
     if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Attendance_Confirmed)) {
+      openCalendar(notification);
+    } else if (notification.typeOfNotification ==
         NotificationType()
             .getNotificationType(NotificationName.Application_Received)) {
       openTenancyApplicationDetails(notification);
@@ -1394,13 +1387,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
   }
 
   void openCalendar(NotificationData notification) {
-    //List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
-    //TenancyApplication tenancyApplication = TenancyApplication();
-    //tenancyApplication.id = notification.applicationId;
-    //tenancyApplication.applicantId = notification.applicantId;
-    //tenancyApplication.applicantName = notification.applicantName;
-    //listdataviewlist.add(tenancyApplication);
-    //_store.dispatch(UpdateTenancyDetails(listdataviewlist));
+    //muestra un dialog pero no se como traer la info
   }
 
   void openTenancyApplicationDetails(NotificationData notification) {
