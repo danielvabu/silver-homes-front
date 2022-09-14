@@ -188,18 +188,50 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Container(
+                                          if (Prefs.getString(PrefsName
+                                                  .BT_CompanyLogoURL) !=
+                                              null)
+                                            Container(
                                               width: 60.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                                color: myColor.white,
+                                                border: Border.all(
+                                                    width: 2,
+                                                    color: myColor.blue),
+                                              ),
                                               child: Image.network(
-                                                  'https://silverhome1.s3.amazonaws.com/files/20220824150755237_1661353675069.png')),
+                                                Prefs.getString(PrefsName
+                                                    .BT_CompanyLogoURL),
+                                                fit: BoxFit.contain,
+                                                width: 148,
+                                                height: 148,
+                                              ),
+                                            ),
                                           Container(
                                             alignment: Alignment.topLeft,
-                                            child: Text(
-                                              GlobleString
-                                                  .CAL_List_of_Attendees,
-                                              style: MyStyles.Bold(
-                                                  22, myColor.text_color),
-                                              textAlign: TextAlign.start,
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  GlobleString
+                                                      .CAL_List_of_Attendees,
+                                                  style: MyStyles.Bold(
+                                                      22, myColor.text_color),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                                const SizedBox(height: 5.0),
+                                                Text(
+                                                  slotsListState!
+                                                          .eventtypeslist[0]
+                                                          .eventTypesData!
+                                                          .name ??
+                                                      "",
+                                                  style: MyStyles.Bold(
+                                                      17, myColor.text_color),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           ElevatedButton(
