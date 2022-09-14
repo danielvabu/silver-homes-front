@@ -1059,9 +1059,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             child: Material(
               type: MaterialType.transparency,
               child: Align(
-                alignment: Alignment(1.0, -1.0),
+                alignment: const Alignment(1.0, -1.0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.rectangle,
                     boxShadow: [
@@ -1078,8 +1078,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   ),
                   height: mheight,
                   width: 250,
-                  margin: EdgeInsets.only(top: 60, right: 40),
-                  padding: EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(top: 60, right: 40),
+                  padding: const EdgeInsets.all(5),
                   child: ConnectState<NotificationState>(
                       map: (state) => state.notificationState,
                       where: notIdentical,
@@ -1108,7 +1108,6 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       onPressNotification: (notification1) {
                                         Navigator.of(context).pop();
                                         isNotifiDialogshow = false;
-
                                         _tapNotificationItem(
                                             notification1, portalState);
                                       },
@@ -1119,7 +1118,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                               ),
                             ),
                             if (notificationState.IsLoadmore)
-                              Divider(
+                              const Divider(
                                 height: 1,
                                 color: myColor.text_color,
                               ),
@@ -1170,9 +1169,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                 return true;
               },
               child: Align(
-                alignment: Alignment(1.0, -1.0),
+                alignment: const Alignment(1.0, -1.0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.rectangle,
                     boxShadow: [
                       BoxShadow(
@@ -1183,10 +1182,10 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   ),
                   height: 90,
                   width: 120,
-                  margin: EdgeInsets.only(top: 50, right: 40),
+                  margin: const EdgeInsets.only(top: 50, right: 40),
                   child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
                           InkWell(
@@ -1209,9 +1208,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                     height: 20,
                                     fit: BoxFit.contain,
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
+                                  const SizedBox(width: 10.0),
                                   Text(
                                     GlobleString.Menu_Profile,
                                     style:
@@ -1242,9 +1239,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                     height: 20,
                                     fit: BoxFit.contain,
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
+                                  const SizedBox(width: 10.0),
                                   Text(
                                     GlobleString.Menu_Logout,
                                     style:
@@ -1267,6 +1262,11 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
 
   void _tapNotificationItem(
       NotificationData notification, PortalState portalState) {
+    //if (notification.typeOfNotification ==
+    //    NotificationType()
+    //        .getNotificationType(NotificationName.Attendance_Confirmed)) {
+    //  openCalendar(notification);
+    //} else
     if (notification.typeOfNotification ==
         NotificationType()
             .getNotificationType(NotificationName.Application_Received)) {
@@ -1297,13 +1297,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             NotificationName.Owner_Maintenance_Change_Priority)) {
       _dailogMaintenance(notification);
     }
-
     _updateReadNotification(notification, portalState);
   }
 
   _dailogMaintenance(NotificationData notification) {
     CheckMaintenanceExitOrNotOwner_ID checkMaintenanceExitOrNot =
-        new CheckMaintenanceExitOrNotOwner_ID();
+        CheckMaintenanceExitOrNotOwner_ID();
     checkMaintenanceExitOrNot.ID = notification.MaintenanceID.toString();
     checkMaintenanceExitOrNot.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
@@ -1350,10 +1349,10 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
 
   void _updateReadNotification(
       NotificationData notification, PortalState portalState) {
-    CommonID commonID = new CommonID();
+    CommonID commonID = CommonID();
     commonID.ID = notification.id.toString();
 
-    NotificationIsRead notificationIsRead = new NotificationIsRead();
+    NotificationIsRead notificationIsRead = NotificationIsRead();
     notificationIsRead.IsRead = "1";
 
     ApiManager().UpdateNotificationRead(context, commonID, notificationIsRead,
@@ -1392,6 +1391,16 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
         loader.remove();
       }
     });
+  }
+
+  void openCalendar(NotificationData notification) {
+    //List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
+    //TenancyApplication tenancyApplication = TenancyApplication();
+    //tenancyApplication.id = notification.applicationId;
+    //tenancyApplication.applicantId = notification.applicantId;
+    //tenancyApplication.applicantName = notification.applicantName;
+    //listdataviewlist.add(tenancyApplication);
+    //_store.dispatch(UpdateTenancyDetails(listdataviewlist));
   }
 
   void openTenancyApplicationDetails(NotificationData notification) {
