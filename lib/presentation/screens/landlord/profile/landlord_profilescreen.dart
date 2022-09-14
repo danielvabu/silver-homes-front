@@ -65,7 +65,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
       color: myColor.bg_color1,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Container(
             height: ssheight,
             width: sswidth,
@@ -74,7 +74,8 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: myColor.application_boreder, width: 1),
             ),
-            padding: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
+            padding:
+                const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
             child: ConnectState<LandlordProfileState>(
               map: (state) => state.profileState,
               where: notIdentical,
@@ -91,13 +92,9 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                           style: MyStyles.SemiBold(16, myColor.black),
                           textAlign: TextAlign.start,
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30.0),
                         companylogo(profileState!),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20.0),
                         Container(
                           width: 800,
                           child: FocusScope(
@@ -743,9 +740,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               style: MyStyles.Medium(14, myColor.black),
               textAlign: TextAlign.start,
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10.0),
             Text(
               GlobleString.Optional,
               style: MyStyles.Regular(12, myColor.optional),
@@ -753,18 +748,16 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
             ),
           ],
         ),
-        SizedBox(
-          height: 15,
-        ),
+        const SizedBox(height: 15.0),
         profileState.companylogo != null && profileState.companylogo!.id != null
             ? Container(
                 width: 150.0,
                 height: 150.0,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: myColor.white,
                   border: Border.all(width: 2, color: myColor.blue),
-                  image: new DecorationImage(
+                  image: DecorationImage(
                     fit: BoxFit.fill,
                     image: CustomNetworkImage(
                         Weburl.image_API +
