@@ -1006,7 +1006,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
     String EventTypeId = eventtypesData1.id.toString();
 
-    await ApiManager().getEventTypesDetails(context, EventTypeId,
+    await ApiManager().getEventTypesDetailsTemp(context, EventTypeId,
         (status, responce, eventtypesData) async {
       if (status) {
         await ApiManager().bindEventTypeData(eventtypesData!);
