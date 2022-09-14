@@ -160,9 +160,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       lastDate: DateTime(2200),
       builder: (BuildContext? context, Widget? child) {
         return Theme(
-          data: new ThemeData(
-            primarySwatch: MaterialColor(0xFF010B32, Helper.color),
-            accentColor: myColor.Circle_main,
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: MaterialColor(0xFF010B32, Helper.color))
+                .copyWith(secondary: myColor.Circle_main),
           ),
           child: child!,
         );
@@ -184,9 +185,10 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       lastDate: DateTime(2200),
       builder: (BuildContext? context, Widget? child) {
         return Theme(
-          data: new ThemeData(
-            primarySwatch: MaterialColor(0xFF010B32, Helper.color),
-            accentColor: myColor.Circle_main,
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: MaterialColor(0xFF010B32, Helper.color))
+                .copyWith(secondary: myColor.Circle_main),
           ),
           child: child!,
         );
@@ -1137,7 +1139,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   if (eventtypesState.EventTypesRange == 1)
                                     Row(
                                       children: [
-                                        SizedBox(width: 22.0),
+                                        const SizedBox(width: 22.0),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1425,7 +1427,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   if (eventtypesState.EventTypesRange == 3)
                                     Row(
                                       children: [
-                                        SizedBox(width: 22.0),
+                                        const SizedBox(width: 22.0),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1565,7 +1567,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           width: 1.0),
                                     ),
                                     isDense: true,
-                                    contentPadding: EdgeInsets.all(12),
+                                    contentPadding: const EdgeInsets.all(12),
                                     fillColor: myColor.white,
                                     filled: true),
                                 onChanged: (value) {
@@ -1655,7 +1657,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                             Container(
                                 width: 105,
                                 height: 32,
-                                child: Text(GlobleString.ET_Before_event)),
+                                child:
+                                    const Text(GlobleString.ET_Before_event)),
                             Container(
                               width: 100,
                               height: 32,
@@ -1690,7 +1693,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           width: 1.0),
                                     ),
                                     isDense: true,
-                                    contentPadding: EdgeInsets.all(12),
+                                    contentPadding: const EdgeInsets.all(12),
                                     fillColor: myColor.white,
                                     filled: true),
                                 onChanged: (value) {
@@ -1746,7 +1749,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                             Container(
                                 width: 105,
                                 height: 32,
-                                child: Text(GlobleString.ET_After_event)),
+                                child: const Text(GlobleString.ET_After_event)),
                             Container(
                               width: 100,
                               height: 32,
