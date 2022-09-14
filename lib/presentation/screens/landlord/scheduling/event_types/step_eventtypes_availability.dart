@@ -2083,6 +2083,7 @@ class _StepEventTypesAvailabilityState
                                     ),
                                     SizedBox(width: 4.0),
                                     SizedBox(width: 4.0),
+                                    const SizedBox(height: 10.0),
                                     for (int i = 0;
                                         i < eventtypesState.overrrides.length;
                                         i++)
