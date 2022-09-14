@@ -313,6 +313,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         MonthNavigationDirection
                                                             .horizontal),
                                             onViewChanged: calendar2ViewChanged,
+                                            showNavigationArrow: true,
                                             allowedViews: const <CalendarView>[
                                               CalendarView.day,
                                               CalendarView.week,
