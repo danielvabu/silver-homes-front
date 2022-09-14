@@ -247,6 +247,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                       children: [
                                         Column(
                                           children: [
+                                            //Aca se puede poner boton today
                                             const SizedBox(height: 55.0),
                                             Container(
                                               width: 200,
@@ -313,6 +314,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         MonthNavigationDirection
                                                             .horizontal),
                                             onViewChanged: calendar2ViewChanged,
+                                            showDatePickerButton: true,
+                                            allowViewNavigation: true,
                                             showNavigationArrow: true,
                                             allowedViews: const <CalendarView>[
                                               CalendarView.day,
