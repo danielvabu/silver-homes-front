@@ -152,7 +152,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   //   _store.dispatch(UpdateMinimumLeasedurationList(minimumleasedurationlist));
   // }
 
-  Future<void> _selectDate1(BuildContext context, eventtypesState) async {
+  Future<void> _selectDate2(BuildContext context, eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -177,7 +177,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     }
   }
 
-  Future<void> _selectDate2(BuildContext context, eventtypesState) async {
+  Future<void> _selectDate1(BuildContext context, eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -1180,13 +1180,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                                   left: 8),
                                                           child: Text(
                                                             eventtypesState
-                                                                        .dateto ==
+                                                                        .datefrom ==
                                                                     null
                                                                 ? ""
                                                                 : DateFormat(
                                                                         "dd-MMM-yyyy")
                                                                     .format(eventtypesState
-                                                                        .dateto!)
+                                                                        .datefrom!)
                                                                     .toString(),
                                                             style: MyStyles.Medium(
                                                                 13,
@@ -1287,13 +1287,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                                   left: 8),
                                                           child: Text(
                                                             eventtypesState
-                                                                        .dateto ==
+                                                                        .datefrom ==
                                                                     null
                                                                 ? ""
                                                                 : DateFormat(
                                                                         "dd-MMM-yyyy")
                                                                     .format(eventtypesState
-                                                                        .dateto!)
+                                                                        .datefrom!)
                                                                     .toString(),
                                                             style: MyStyles.Medium(
                                                                 13,
@@ -1361,13 +1361,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                                   left: 8),
                                                           child: Text(
                                                             eventtypesState
-                                                                        .datefrom ==
+                                                                        .dateto ==
                                                                     null
                                                                 ? ""
                                                                 : DateFormat(
                                                                         "dd-MMM-yyyy")
                                                                     .format(eventtypesState
-                                                                        .datefrom!)
+                                                                        .dateto!)
                                                                     .toString(),
                                                             style: MyStyles.Medium(
                                                                 13,
@@ -1468,13 +1468,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                                   left: 8),
                                                           child: Text(
                                                             eventtypesState
-                                                                        .dateto ==
+                                                                        .datefrom ==
                                                                     null
                                                                 ? ""
                                                                 : DateFormat(
                                                                         "dd-MMM-yyyy")
                                                                     .format(eventtypesState
-                                                                        .dateto!)
+                                                                        .datefrom!)
                                                                     .toString(),
                                                             style: MyStyles.Medium(
                                                                 13,
