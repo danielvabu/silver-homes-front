@@ -287,7 +287,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
             PopupMenuItem(
               value: 2,
               child: Text(
-                GlobleString.Share,
+                GlobleString.PH_ACT_Duplicate,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
@@ -295,7 +295,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
             PopupMenuItem(
               value: 3,
               child: Text(
-                GlobleString.PH_ACT_Duplicate,
+                GlobleString.Mant_action_Delete,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),

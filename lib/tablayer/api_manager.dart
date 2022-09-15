@@ -13417,6 +13417,20 @@ class ApiManager {
     });
   }
 
+  deleteSlotAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Slots,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        CallBackQuesy(true, respoce);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
 /*==========================================================================*/
 /*======================== Basic Tenant Module ==========================*/
 /*==========================================================================*/

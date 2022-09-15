@@ -609,6 +609,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         SizedBox(
                                                             width: ancho * 2,
                                                             child: _actionEventPopup(
+                                                                context,
                                                                 slots[dias[i]]
                                                                     [j],
                                                                 slotsListState!
@@ -824,7 +825,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  Widget _actionEventPopup(Slots slot, List<Slots> lista) {
+  Widget _actionEventPopup(
+      BuildContext context, Slots slot, List<Slots> lista) {
     return Container(
       height: 32,
       width: 30,
@@ -836,6 +838,28 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
           }
           if (value == 2) {
             openDialogListAttendees(slot, lista);
+          }
+          if (value == 5) {
+            showDialog(
+              context: context,
+              barrierColor: Colors.black45,
+              useSafeArea: true,
+              barrierDismissible: false,
+              builder: (BuildContext context1) {
+                return AlertDialogBox(
+                  title: GlobleString.LMV_DL_Slot,
+                  positiveText: GlobleString.LMV_DL_Vendor_btn_Delete,
+                  negativeText: GlobleString.LMV_DL_Vendor_btn_Cancel,
+                  onPressedYes: () {
+                    Navigator.of(context1).pop();
+                    delete(context, slot.eventTypesDataId!, slot.date_start!);
+                  },
+                  onPressedNo: () {
+                    Navigator.of(context1).pop();
+                  },
+                );
+              },
+            );
           }
         },
         child: Container(
@@ -959,6 +983,25 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       },
     );
   }
+}
+
+delete(BuildContext context, int id, String fecha) {
+  // loader = Helper.overlayLoader(context);
+  // Overlay.of(context)!.insert(loader);
+
+  SlotDelete id1 = SlotDelete(event_type_id: id, date_start: fecha);
+
+  ApiManager().deleteSlotAPI(context, id1, (error, respoce) async {
+    if (error) {
+      //loader.remove();
+      // init();
+      ToastUtils.showCustomToast(context, GlobleString.Slots_Delete, true);
+    } else {
+      // loader.remove();
+      ToastUtils.showCustomToast(context, respoce, false);
+      Helper.Log("respoce", respoce);
+    }
+  });
 }
 
 Widget scheduleViewHeaderBuilder(

@@ -615,6 +615,26 @@ class CommonID {
       };
 }
 
+class SlotDelete {
+  int? event_type_id;
+  String? date_start;
+
+  SlotDelete({
+    this.event_type_id,
+    this.date_start,
+  });
+
+  factory SlotDelete.fromJson(Map<String, dynamic> json) => SlotDelete(
+        event_type_id: json["event_type_id"],
+        date_start: json["date_start"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_id": event_type_id,
+        "date_start": date_start,
+      };
+}
+
 class UpdatePersonInfo {
   String? YourStory;
   PersonIdInfo? Person_ID;

@@ -155,8 +155,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   Future<void> _selectDate2(BuildContext context, eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      initialDate: eventtypesState.datefrom,
+      firstDate: eventtypesState.datefrom,
       lastDate: DateTime(2200),
       builder: (BuildContext? context, Widget? child) {
         return Theme(
@@ -590,46 +590,81 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     ],
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Container(
-                                    height: 32,
-                                    child: DropdownSearch<PropertyDropData>(
-                                      enabled: (eventtypesState.EventTypesNA)
-                                          ? false
-                                          : true,
-                                      mode: Mode.MENU,
-                                      items:
-                                          eventtypesState.PropertyDropDatalist,
-                                      textstyle:
-                                          MyStyles.Medium(12, myColor.black),
-                                      itemAsString: (PropertyDropData? u) =>
-                                          u!.propertyName!,
-                                      hint: GlobleString.Select_Property,
-                                      showSearchBox: true,
-                                      defultHeight: eventtypesState
-                                                      .PropertyDropDatalist
-                                                      .length *
-                                                  35 >
-                                              300
-                                          ? 300
-                                          : (eventtypesState
-                                                      .PropertyDropDatalist
-                                                      .length *
-                                                  35) +
-                                              50,
-                                      showClearButton: false,
-                                      selectedItem:
-                                          eventtypesState.selectproperty,
-                                      focuscolor: myColor.blue,
-                                      focusWidth: 2,
-                                      isFilteredOnline: true,
-                                      onChanged: (value) {
-                                        _store.dispatch(
-                                            UpdateMER_selectproperty1(value));
-                                        _changeData();
-                                        textprop = value!.adress!;
-                                      },
+                                  if (!eventtypesState.EventTypesNA)
+                                    Container(
+                                      height: 32,
+                                      child: DropdownSearch<PropertyDropData>(
+                                        enabled: (eventtypesState.EventTypesNA)
+                                            ? false
+                                            : true,
+                                        mode: Mode.MENU,
+                                        items: eventtypesState
+                                            .PropertyDropDatalist,
+                                        textstyle:
+                                            MyStyles.Medium(12, myColor.black),
+                                        itemAsString: (PropertyDropData? u) =>
+                                            u!.propertyName!,
+                                        hint: GlobleString.Select_Property,
+                                        showSearchBox: true,
+                                        defultHeight: eventtypesState
+                                                        .PropertyDropDatalist
+                                                        .length *
+                                                    35 >
+                                                300
+                                            ? 300
+                                            : (eventtypesState
+                                                        .PropertyDropDatalist
+                                                        .length *
+                                                    35) +
+                                                50,
+                                        showClearButton: false,
+                                        selectedItem:
+                                            eventtypesState.selectproperty,
+                                        focuscolor: myColor.blue,
+                                        focusWidth: 2,
+                                        isFilteredOnline: true,
+                                        onChanged: (value) {
+                                          _store.dispatch(
+                                              UpdateMER_selectproperty1(value));
+                                          _changeData();
+                                          textprop = value!.adress!;
+                                        },
+                                      ),
                                     ),
-                                  ),
+                                  if (eventtypesState.EventTypesNA)
+                                    TextFormField(
+                                      enabled: false,
+                                      textAlign: TextAlign.start,
+                                      style: MyStyles.Regular(
+                                          14, myColor.text_color),
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(25),
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[a-z A-Z]")),
+                                      ],
+                                      decoration: InputDecoration(
+                                          //border: InputBorder.none,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: eventtypesState
+                                                        .error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.blue,
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: eventtypesState
+                                                        .error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.gray,
+                                                width: 1.0),
+                                          ),
+                                          isDense: true,
+                                          contentPadding: EdgeInsets.all(12),
+                                          fillColor: myColor.white,
+                                          filled: true),
+                                    ),
                                   const SizedBox(height: 5.0),
                                   Row(
                                     children: [
@@ -639,11 +674,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         value: eventtypesState
                                             .EventTypesNA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
-                                          if (value == true) {
-                                            _store.dispatch(
-                                                UpdateMER_selectproperty1(
-                                                    null));
-                                          }
+                                          if (value == true) {}
                                           _store.dispatch(
                                               UpdateNotAplicable(value!));
                                           _changeData();
@@ -724,10 +755,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                 true;
                                             _store.dispatch(
                                                 UpdateLocation(textprop));
-
-                                            setState(() {
-                                              locationcontroler.text = textprop;
-                                            });
+                                          } else {
+                                            _store.dispatch(UpdateLocation(""));
                                           }
 
                                           _changeData();
