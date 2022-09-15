@@ -116,11 +116,9 @@ class _EventTypesItemState extends State<EventTypesItem> {
     result.add(_datavalueCity(model));
     result.add(_datavalueCountry(model));
     result.add(_datavalueEventTypesType(model));
-
     result.add(_datavalueIsPublished(model, Index));
     result.add(_datavalueAttendees(model, Index));
     result.add(_actionPopup(model));
-
     return result;
   }
 
@@ -132,7 +130,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       child: Container(
         height: 40,
         width: parte * 25,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: model.name!,
@@ -151,7 +149,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return Container(
       height: 40,
       width: parte * 20,
-      margin: EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.property_name!,
@@ -166,7 +164,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return Container(
       height: 40,
       width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.relationship!,
@@ -181,7 +179,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return Container(
       height: 40,
       width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.duration!,
@@ -196,7 +194,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return Container(
       height: 40,
       width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.slots.toString()!,
@@ -210,7 +208,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return Container(
       height: 40,
       width: parte * 10,
-      margin: EdgeInsets.only(left: 15),
+      margin: const EdgeInsets.only(left: 15),
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -258,7 +256,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
                         openDialogListAttendees(model.id!);
                       }
                     : null,
-                child: Icon(Icons.groups)),
+                child: const Icon(Icons.groups)),
           )
         : Container(
             height: 40,
@@ -278,7 +276,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       flex: 1,
       child: Container(
         height: 28,
-        margin: EdgeInsets.only(left: 10, right: 20),
+        margin: const EdgeInsets.only(left: 10, right: 20),
         alignment: Alignment.centerRight,
         child: PopupMenuButton(
           onSelected: (value) {
@@ -297,8 +295,8 @@ class _EventTypesItemState extends State<EventTypesItem> {
           child: Container(
             height: 40,
             width: 20,
-            margin: EdgeInsets.only(right: 5),
-            child: Icon(Icons.more_vert),
+            margin: const EdgeInsets.only(right: 5),
+            child: const Icon(Icons.more_vert),
           ),
           itemBuilder: (context) => [
             PopupMenuItem(

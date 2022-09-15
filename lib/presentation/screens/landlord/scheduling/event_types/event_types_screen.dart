@@ -169,8 +169,8 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
     return Container(
       width: sswidth,
       height: ssheight - 45,
-      margin: EdgeInsets.only(top: 15),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: myColor.white,
         borderRadius: BorderRadius.circular(10),
@@ -406,7 +406,6 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(3)),
-          //color: Hexcolor("#16C395"),
           border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
         children: [
@@ -628,7 +627,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
                     child: Container(
                       width: sswidth,
                       height: ssheight - 310,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
                         'no data',
@@ -814,8 +813,8 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "EventTypesName",
-          eventtypesListState.NameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager(
+          "", 1, "name", eventtypesListState.NameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(
           eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1));
@@ -827,7 +826,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Suite_Unit",
+      apimanager("", 1, "propertyname",
           eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(
@@ -840,8 +839,8 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager(
-          "", 1, "City", eventtypesListState.CitySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "relation",
+          eventtypesListState.CitySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
       _store.dispatch(UpdateEventTypesListCountrySortAcsDes(
           eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1));
@@ -853,7 +852,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Country",
+      apimanager("", 1, "duration",
           eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
       _store.dispatch(UpdateEventTypesListEventTypesTypeSortAcsDes(
@@ -866,7 +865,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "EventTypes_Type",
+      apimanager("", 1, "slots",
           eventtypesListState.EventTypesTypeSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
       _store.dispatch(UpdateEventTypesListVacancySortAcsDes(
@@ -879,7 +878,7 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Vacancy",
+      apimanager("", 1, "publish",
           eventtypesListState.VacancySortAcsDes == 1 ? 0 : 1, 0);
     }
 
