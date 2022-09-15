@@ -371,7 +371,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                   children: [
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "grey";
+                                                        setState(() {
+                                                          eventColor = "grey";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -390,7 +392,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "red";
+                                                        setState(() {
+                                                          eventColor = "red";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -409,7 +413,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "orange";
+                                                        setState(() {
+                                                          eventColor = "orange";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -428,7 +434,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "yellow";
+                                                        setState(() {
+                                                          eventColor = "yellow";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -447,7 +455,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "green";
+                                                        setState(() {
+                                                          eventColor = "green";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -466,7 +476,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "cyan";
+                                                        setState(() {
+                                                          eventColor = "cyan";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -485,7 +497,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "blue";
+                                                        setState(() {
+                                                          eventColor = "blue";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -504,8 +518,10 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor =
-                                                            "deepPurple";
+                                                        setState(() {
+                                                          eventColor =
+                                                              "deepPurple";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -524,7 +540,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "purple";
+                                                        setState(() {
+                                                          eventColor = "purple";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
@@ -543,7 +561,9 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const SizedBox(width: 1.0),
                                                     ElevatedButton(
                                                       onPressed: () {
-                                                        eventColor = "pink";
+                                                        setState(() {
+                                                          eventColor = "pink";
+                                                        });
                                                       },
                                                       style: ElevatedButton.styleFrom(
                                                           shape:
