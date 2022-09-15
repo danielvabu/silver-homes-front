@@ -142,8 +142,8 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                   data1(slotsListState!.eventtypeslist);
                   return ConstrainedBox(
                     constraints: const BoxConstraints(
-                        minWidth: 800,
-                        maxWidth: 800,
+                        minWidth: 900,
+                        maxWidth: 900,
                         minHeight: 500,
                         maxHeight: 500),
                     child: Container(
