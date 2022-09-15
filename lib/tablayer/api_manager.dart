@@ -12421,6 +12421,40 @@ class ApiManager {
     });
   }
 
+  getNamesEvent(
+      BuildContext context, String ownerid, CallBackLink callback) async {
+    /*loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+
+    var myjson = {
+      "DSQID": Weburl.DSQ_getNamesEvent,
+      "Reqtokens": {"Owner_ID": ownerid, "Name": ""},
+      "LoadLookUpValues": false,
+      "LoadRecordInfo": false
+    };
+
+    String json = jsonEncode(myjson);
+
+    Helper.Log("events_type_template", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        //loader.remove();
+        var data = jsonDecode(respoce);
+        List names = [];
+
+        var myobject = data['Result'][0];
+
+        names = myobject['listado'] != null ? myobject['listado'] : [];
+
+        callback(true, "", names);
+      } else {
+        callback(false, "", []);
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
   getPropertyWiseApplicantID(
       BuildContext context, String propid, CallBackApplicant callback) async {
     /*loader = Helper.overlayLoader(context);

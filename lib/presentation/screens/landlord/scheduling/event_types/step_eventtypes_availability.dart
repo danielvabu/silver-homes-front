@@ -68,7 +68,7 @@ class _StepEventTypesAvailabilityState
   // bool firsttime = true;
   bool change = false;
   List listaoverider = [];
-
+  int salvar = 0;
   void initState() {
     Prefs.init();
     filldata();
@@ -2694,6 +2694,7 @@ class _StepEventTypesAvailabilityState
               }
             });
           }
+          salvar = 1;
         });
 
         //gotoNext();
@@ -2740,6 +2741,10 @@ class _StepEventTypesAvailabilityState
       ApiManager().UpdateEventTypesDetails(
           context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
         if (error) {
+          if (salvar == 1) {
+            _store.dispatch(UpdateMantenaceExpand(false));
+            _store.dispatch(UpdateSchedulingEventTypes());
+          }
         } else {}
       });
 
