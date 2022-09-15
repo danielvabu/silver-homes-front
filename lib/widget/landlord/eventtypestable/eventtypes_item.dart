@@ -246,19 +246,31 @@ class _EventTypesItemState extends State<EventTypesItem> {
   }
 
   Widget _datavalueAttendees(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: 20,
-      margin: const EdgeInsets.only(left: 5, right: 10.0),
-      alignment: Alignment.center,
-      child: GestureDetector(
-          onTap: (model.slots! > 0)
-              ? () {
-                  openDialogListAttendees(model.id!);
-                }
-              : null,
-          child: Icon(Icons.groups)),
-    );
+    return (model.slots! > 0)
+        ? Container(
+            height: 40,
+            width: 20,
+            margin: const EdgeInsets.only(left: 5, right: 10.0),
+            alignment: Alignment.center,
+            child: GestureDetector(
+                onTap: (model.slots! > 0)
+                    ? () {
+                        openDialogListAttendees(model.id!);
+                      }
+                    : null,
+                child: Icon(Icons.groups)),
+          )
+        : Container(
+            height: 40,
+            width: 50,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Empty",
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+              style: MyStyles.Medium(12, myColor.Circle_main),
+            ),
+          );
   }
 
   Widget _actionPopup(EventTypesDataList model) {
