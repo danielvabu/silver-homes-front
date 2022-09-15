@@ -61,6 +61,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   int stepper = 0;
   String color = "";
   TextEditingController locationcontroler = new TextEditingController();
+
   late OverlayEntry loader;
   //FocusNode _focusNode = new FocusNode();
   // bool firsttime = true;
@@ -231,6 +232,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
           where: notIdentical,
           builder: (eventtypesState) {
             locationcontroler.text = eventtypesState!.EventTypesLocation;
+            //linkcontroller.text = eventtypesState.EventTypesLink;
             if (eventtypesState != null &&
                 eventtypesState.RentAmount != null &&
                 eventtypesState.RentAmount.isNotEmpty) {
@@ -750,7 +752,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     onChanged: (value) {
                                       _changeData();
                                       AddEditEventTypes.isValueUpdate = true;
-                                      _store.dispatch(UpdateLocation(value));
+
                                       // _store
                                       //     .dispatch(UpdateErrorProvince(false));
                                     },
@@ -905,11 +907,26 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   ),
                                   Expanded(
                                     child: TextFormField(
-                                      onChanged: (newValue) {
-                                        _store.dispatch(UpdateURL(newValue));
-                                      },
                                       initialValue:
                                           eventtypesState.EventTypesLink,
+                                      onChanged: (newValue) {
+                                        //  _store.dispatch(UpdateURL(newValue));
+
+                                        if (links.indexWhere(
+                                                (item) => item == newValue) >
+                                            0) {
+                                          ToastUtils.showCustomToast(
+                                              context,
+                                              "this link is already in use",
+                                              false);
+                                          _store.dispatch(UpdateURL(newValue));
+                                          //_store.dispatch(UpdateURL(" "));
+                                        } else {
+                                          _store.dispatch(UpdateURL(newValue));
+                                        }
+                                        _changeData();
+                                        AddEditEventTypes.isValueUpdate = true;
+                                      },
                                       keyboardType: TextInputType.text,
                                       inputFormatters: [
                                         FilteringTextInputFormatter.allow(
@@ -2001,17 +2018,19 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   }
 
   void apiCallAndValidation(EventTypesState eventtypesState) {
-    if (eventtypesState.EventTypesName == "") {
+    if (links.indexWhere((item) => item == eventtypesState.EventTypesLink) >
+        0) {
       /* setState(() {
         FocusManager.instance.primaryFocus!.unfocus();
         FocusScope.of(context).requestFocus(_focus1);
       });*/
 
       // _controller.jumpTo(-1.0);
-      _store.dispatch(UpdateErrorEventTypesName(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS1_EventTypes_name_error", false);
+      //_store.dispatch(UpdateErrorEventTypesName(true));
+      ToastUtils.showCustomToast(context, "this link is already in use", false);
     } else {
+      // _store.dispatch(UpdateLocation(locationcontroler.text));
+      //_store.dispatch(UpdateURL(linkcontroller.text));
       EventTypesInsert eventtypesInsert = new EventTypesInsert();
       eventtypesInsert.name = eventtypesState.EventTypesName;
       eventtypesInsert.relation = eventtypesState.EventTypesRelation;
