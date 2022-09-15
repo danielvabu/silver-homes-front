@@ -104,8 +104,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     await ApiManager().getEventTypesSlots(context, filterjson, ftime);
   }
 
-  CalendarController _calendarController1 = CalendarController();
-  CalendarController _calendarController2 = CalendarController();
+  final CalendarController _calendarController1 = CalendarController();
+  final CalendarController _calendarController2 = CalendarController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +119,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       color: myColor.bg_color1,
       child: Center(
         child: Padding(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: ConnectState<SlotsListState>(
                 map: (state) => state.slotsListState,
                 where: notIdentical,
@@ -129,8 +129,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                       Container(
                         width: width,
                         height: height - 45,
-                        margin: EdgeInsets.only(top: 15),
-                        padding: EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: myColor.white,
                           borderRadius: BorderRadius.circular(10),
@@ -384,7 +384,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                 }
                                               });
                                             },
-                                            child: Text(
+                                            child: const Text(
                                                 GlobleString
                                                     .CALENDAR_Collapse_All,
                                                 style: TextStyle(
@@ -499,7 +499,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         width: ancho * 26,
                                                         child: const Text(
                                                             GlobleString
-                                                                .CALENDAR_Event_Type,
+                                                                .CALENDAR_Event_Name,
                                                             style: TextStyle(
                                                                 color: myColor
                                                                     .text_color,

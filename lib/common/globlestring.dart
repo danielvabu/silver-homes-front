@@ -1827,6 +1827,7 @@ class GlobleString {
   static const String CALENDAR_Collapse_All = "Collapse all";
   static const String CALENDAR_Time = "Time";
   static const String CALENDAR_Event_Type = "Event Type";
+  static const String CALENDAR_Event_Name = "Event Name";
   static const String CALENDAR_Attendees = "Attendees";
   static const String CALENDAR_Location = "Location";
   static const String CALENDAR_View_Event = "View Event";
