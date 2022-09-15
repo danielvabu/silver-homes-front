@@ -66,11 +66,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   // bool firsttime = true;
   bool change = false;
   String textprop = "";
+  List links = [];
   @override
   void initState() {
     Prefs.init();
     traerpropiedades();
     traerplantillas();
+    traerLinks();
     // filldata();
     initNavigationBack();
     AddEditEventTypes.isValueUpdate = false;
@@ -103,6 +105,20 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
         (status, responce, errorlist) {
       if (status) {
         _store.dispatch(UpdateProperTytypeList(errorlist));
+      } else {
+        //  _store.dispatch(UpdateProperTytypeValue1([]));
+      }
+    });
+  }
+
+  traerLinks() async {
+    // _store.dispatch(UpdateProperTytypeValue1([]));
+    await ApiManager()
+        .getNamesEvent(context, Prefs.getString(PrefsName.OwnerID),
+            (status, responce, errorlist) {
+      if (status) {
+        links = errorlist;
+        //   _store.dispatch(UpdateProperTytypeList(errorlist));
       } else {
         //  _store.dispatch(UpdateProperTytypeValue1([]));
       }
