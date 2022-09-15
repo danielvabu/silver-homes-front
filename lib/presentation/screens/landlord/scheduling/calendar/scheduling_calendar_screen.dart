@@ -215,28 +215,6 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                               child: Column(
                                 children: [
                                   const SizedBox(height: 15.0),
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  //   children: [
-                                  //     Row(
-                                  //       children: [
-                                  //         Text('Today'),
-                                  //         Text('<'),
-                                  //         Text('>'),
-                                  //         Text('Agosto'),
-                                  //       ],
-                                  //     ),
-                                  //     SizedBox(width: 10),
-                                  //     Text('Yo creo que quitar esta row'),
-                                  //     SizedBox(width: 10),
-                                  //     Row(
-                                  //       children: [
-                                  //         Icon(Icons.settings),
-                                  //         Text('Week'),
-                                  //       ],
-                                  //     ),
-                                  //   ],
-                                  // ),
                                   const SizedBox(height: 5.0),
                                   const Divider(),
                                   const SizedBox(height: 5.0),
@@ -249,8 +227,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                           children: [
                                             const SizedBox(height: 55.0),
                                             Container(
-                                              width: 200,
-                                              height: 200,
+                                              width: 270,
+                                              height: 270,
                                               child: SfCalendar(
                                                 view: CalendarView.month,
                                                 controller:
