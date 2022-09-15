@@ -92,19 +92,19 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
     });*/
 
     return Align(
-      alignment: Alignment(0, 0),
+      alignment: const Alignment(0, 0),
       child: Material(
         color: Colors.transparent,
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
                 minWidth: 700, maxWidth: 700, minHeight: 550, maxHeight: 550),
             //maxHeight: newleadlist.length > 1 ? 1000 : 550),
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 1.0),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(10.0),
                   ),
                   color: Colors.white),
@@ -120,8 +120,8 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
-                              padding:
-                                  EdgeInsets.only(top: 20, left: 30, right: 30),
+                              padding: const EdgeInsets.only(
+                                  top: 20, left: 30, right: 30),
                               child: Text(
                                 GlobleString.NL_Lead_Information,
                                 style: MyStyles.Medium(20, myColor.text_color),
@@ -132,24 +132,22 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       top: 20, left: 30, right: 30),
                                   child: InkWell(
                                     onTap: () {
                                       closevalidation(newleadstate!);
                                     },
-                                    child: Icon(Icons.clear, size: 25),
+                                    child: const Icon(Icons.clear, size: 25),
                                   ),
                                 ),
                               ],
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 25,
-                        ),
+                        const SizedBox(height: 25.0),
                         Padding(
-                          padding: EdgeInsets.only(left: 30, right: 30),
+                          padding: const EdgeInsets.only(left: 30, right: 30),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -164,9 +162,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                                           14, myColor.text_color),
                                       textAlign: TextAlign.start,
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
+                                    const SizedBox(height: 5.0),
                                     Container(
                                       height: 30,
                                       // ignore: missing_required_param
@@ -204,9 +200,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                width: 15,
-                              ),
+                              const SizedBox(width: 15.0),
                               Expanded(
                                 child: Container(),
                               ),
@@ -217,7 +211,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                           child: SingleChildScrollView(
                             controller: _scrollController,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 0, right: 0),
+                              padding: const EdgeInsets.only(left: 0, right: 0),
                               child: ListView.builder(
                                 key: UniqueKey(),
                                 shrinkWrap: true,
@@ -237,11 +231,9 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10.0),
                         Padding(
-                          padding: EdgeInsets.only(left: 30, right: 30),
+                          padding: const EdgeInsets.only(left: 30, right: 30),
                           child: InkWell(
                             onTap: () {
                               addNewLeadValidation(newleadstate);
@@ -252,7 +244,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                               alignment: Alignment.centerLeft,
                               child: Row(
                                 children: <Widget>[
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.only(right: 10),
                                     child: Icon(
                                       Icons.add_circle,
@@ -270,12 +262,10 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10.0),
                         Padding(
-                          padding:
-                              EdgeInsets.only(bottom: 20, left: 30, right: 30),
+                          padding: const EdgeInsets.only(
+                              bottom: 20, left: 30, right: 30),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -285,9 +275,10 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                                 },
                                 child: Container(
                                   height: 35,
-                                  padding: EdgeInsets.only(left: 25, right: 25),
+                                  padding: const EdgeInsets.only(
+                                      left: 25, right: 25),
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5)),
                                     color: myColor.Circle_main,

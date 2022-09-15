@@ -207,7 +207,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueIsPublished(EventTypesDataList model, int index) {
     return Container(
       height: 40,
-      width: parte * 10,
+      width: parte * 9,
       margin: const EdgeInsets.only(left: 15),
       alignment: Alignment.center,
       child: Row(
@@ -247,8 +247,8 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return (model.slots! > 0)
         ? Container(
             height: 40,
-            width: 20,
-            margin: const EdgeInsets.only(left: 5, right: 10.0),
+            width: 30,
+            margin: const EdgeInsets.only(left: 5, right: 8.0),
             alignment: Alignment.center,
             child: GestureDetector(
                 onTap: (model.slots! > 0)
@@ -260,13 +260,13 @@ class _EventTypesItemState extends State<EventTypesItem> {
           )
         : Container(
             height: 40,
-            width: 50,
+            width: 43,
             alignment: Alignment.centerLeft,
             child: Text(
               "Empty",
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,
-              style: MyStyles.Medium(12, myColor.Circle_main),
+              style: MyStyles.Medium(10, myColor.Circle_main),
             ),
           );
   }
@@ -276,6 +276,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       flex: 1,
       child: Container(
         height: 28,
+        width: 15,
         margin: const EdgeInsets.only(left: 10, right: 20),
         alignment: Alignment.centerRight,
         child: PopupMenuButton(
@@ -290,6 +291,8 @@ class _EventTypesItemState extends State<EventTypesItem> {
               widget._callbackSaveTemp(model);
             } else if (value == 5) {
               widget._callbackDelete(model);
+            } else if (value == 6) {
+              openDialogListAttendees(model.id!);
             }
           },
           child: Container(
@@ -315,6 +318,15 @@ class _EventTypesItemState extends State<EventTypesItem> {
                 textAlign: TextAlign.start,
               ),
             ),
+            if (model.slots! > 0)
+              PopupMenuItem(
+                value: 6,
+                child: Text(
+                  GlobleString.CALENDAR_View_Attendees,
+                  style: MyStyles.Medium(14, myColor.text_color),
+                  textAlign: TextAlign.start,
+                ),
+              ),
             PopupMenuItem(
               value: 3,
               child: Text(

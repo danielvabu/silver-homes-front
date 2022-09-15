@@ -144,9 +144,19 @@ class _ViewEventState extends State<ViewEvent> {
                                     ],
                                   ),
                                   const SizedBox(height: 10.0),
-                                  Text(widget
-                                          .s1[0].eventTypesData!.description ??
-                                      ""),
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 45.0),
+                                      Container(
+                                        width: 530,
+                                        child: Text(
+                                            widget.s1[0].eventTypesData!
+                                                    .description ??
+                                                "",
+                                            textAlign: TextAlign.start),
+                                      ),
+                                    ],
+                                  ),
                                   const SizedBox(height: 10.0),
                                   if (widget.s1[0].eventTypesData!.range != 0)
                                     Row(
@@ -178,7 +188,7 @@ class _ViewEventState extends State<ViewEvent> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 15.0),
+                                  const SizedBox(height: 20.0),
                                   if (widget.s1[0].eventTypesData!.range != 0)
                                     Row(
                                       children: [
@@ -196,7 +206,7 @@ class _ViewEventState extends State<ViewEvent> {
                                         ),
                                       ],
                                     ),
-                                  const SizedBox(height: 20.0),
+                                  const SizedBox(height: 15.0),
                                   if (widget.s1[0].eventTypesData!.range != 0)
                                     for (int i = 0; i < widget.s1.length; i++)
                                       Column(
@@ -211,21 +221,20 @@ class _ViewEventState extends State<ViewEvent> {
                                                     child: Text(
                                                         widget.s1[i].email![0]
                                                             .toString(),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color:
                                                                 Colors.white)),
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                            shape:
-                                                                CircleBorder(),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    12),
-                                                            primary:
-                                                                Colors.grey),
+                                                    style: ElevatedButton.styleFrom(
+                                                        shape:
+                                                            const CircleBorder(),
+                                                        backgroundColor:
+                                                            Colors.grey,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(12)),
                                                   )),
                                               const SizedBox(width: 10.0),
                                               Container(
@@ -239,6 +248,7 @@ class _ViewEventState extends State<ViewEvent> {
                                           const SizedBox(height: 10.0),
                                         ],
                                       ),
+                                  const SizedBox(height: 10.0),
                                   Row(
                                     children: [
                                       const SizedBox(
@@ -251,7 +261,7 @@ class _ViewEventState extends State<ViewEvent> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 10.0),
+                                  const SizedBox(height: 20.0),
                                   if (widget.s1[0].eventTypesData!.range != 0)
                                     for (int i = 0; i < widget.s1.length; i++)
                                       Row(
@@ -269,7 +279,7 @@ class _ViewEventState extends State<ViewEvent> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 20.0),
+                            const SizedBox(height: 10.0),
                           ],
                         ),
                       ),

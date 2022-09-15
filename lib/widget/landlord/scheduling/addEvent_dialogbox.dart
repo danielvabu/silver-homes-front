@@ -584,9 +584,10 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               ),
                                               const SizedBox(height: 10.0),
                                               Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                    vertical: 0.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 0.0),
                                                 child: Text(
                                                   GlobleString.EVENT_Date,
                                                   style: MyStyles.Medium(
@@ -640,102 +641,129 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 8.0,
                                                         vertical: 0.0),
-                                                child: Text(
-                                                  GlobleString.EVENT_Start_Time,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0,
-                                                        vertical: 0.0),
-                                                child: TextFormField(
-                                                  controller: timeCtl,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  decoration: const InputDecoration(
-                                                      hintText: "hh:mm",
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  color:
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                        width: 280,
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              GlobleString
+                                                                  .EVENT_Start_Time,
+                                                              style: MyStyles
+                                                                  .Medium(
+                                                                      14,
                                                                       myColor
+                                                                          .text_color),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 5.0),
+                                                            TextFormField(
+                                                              controller:
+                                                                  timeCtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: MyStyles
+                                                                  .Medium(
+                                                                      14,
+                                                                      myColor
+                                                                          .text_color),
+                                                              decoration: const InputDecoration(
+                                                                  hintText:
+                                                                      "hh:mm",
+                                                                  focusedBorder: OutlineInputBorder(
+                                                                      borderSide: BorderSide(
+                                                                          color: myColor
+                                                                              .blue,
+                                                                          width:
+                                                                              2)),
+                                                                  enabledBorder: OutlineInputBorder(
+                                                                      borderSide: BorderSide(
+                                                                          color: myColor
+                                                                              .gray,
+                                                                          width:
+                                                                              1.0)),
+                                                                  isDense: true,
+                                                                  contentPadding:
+                                                                      EdgeInsets
+                                                                          .all(
+                                                                              10),
+                                                                  fillColor:
+                                                                      myColor
+                                                                          .white,
+                                                                  filled: true),
+                                                              readOnly: true,
+                                                              onTap: () {
+                                                                _selectTime1(
+                                                                    context);
+                                                              },
+                                                            ),
+                                                          ],
+                                                        )),
+                                                    const SizedBox(width: 10.0),
+                                                    Expanded(
+                                                        child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          GlobleString
+                                                              .EVENT_End_Time,
+                                                          style: MyStyles.Medium(
+                                                              14,
+                                                              myColor
+                                                                  .text_color),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 5.0),
+                                                        TextFormField(
+                                                          controller: timeECtl,
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          style: MyStyles.Medium(
+                                                              14,
+                                                              myColor
+                                                                  .text_color),
+                                                          decoration: const InputDecoration(
+                                                              hintText: "hh:mm",
+                                                              focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: myColor
                                                                           .blue,
-                                                                  width: 2)),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
+                                                                      width:
+                                                                          2)),
+                                                              enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
                                                                       color: myColor
                                                                           .gray,
                                                                       width:
                                                                           1.0)),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  readOnly: true,
-                                                  onTap: () {
-                                                    _selectTime1(context);
-                                                  },
-                                                ),
-                                              ),
-                                              const SizedBox(height: 10.0),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0,
-                                                        vertical: 0.0),
-                                                child: Text(
-                                                  GlobleString.EVENT_End_Time,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 5.0),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0,
-                                                        vertical: 0.0),
-                                                child: TextFormField(
-                                                  controller: timeECtl,
-                                                  textAlign: TextAlign.start,
-                                                  style: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  decoration: const InputDecoration(
-                                                      hintText: "hh:mm",
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide: BorderSide(
-                                                                  color:
-                                                                      myColor
-                                                                          .blue,
-                                                                  width: 2)),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                      color: myColor
-                                                                          .gray,
-                                                                      width:
-                                                                          1.0)),
-                                                      isDense: true,
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
-                                                      fillColor: myColor.white,
-                                                      filled: true),
-                                                  readOnly: true,
-                                                  onTap: () {
-                                                    _selectTime2(context);
-                                                  },
+                                                              isDense: true,
+                                                              contentPadding:
+                                                                  EdgeInsets
+                                                                      .all(10),
+                                                              fillColor:
+                                                                  myColor.white,
+                                                              filled: true),
+                                                          readOnly: true,
+                                                          onTap: () {
+                                                            _selectTime2(
+                                                                context);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    )),
+                                                  ],
                                                 ),
                                               ),
                                               const SizedBox(height: 10.0),
@@ -810,6 +838,12 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                                   textAlign: TextAlign.start,
                                                   style: MyStyles.Medium(
                                                       14, myColor.text_color),
+                                                  maxLines: 4,
+                                                  maxLength: 10000,
+                                                  inputFormatters: [
+                                                    LengthLimitingTextInputFormatter(
+                                                        10000),
+                                                  ],
                                                   decoration: const InputDecoration(
                                                       focusedBorder:
                                                           OutlineInputBorder(
