@@ -59,8 +59,8 @@ class CustomeWidget {
   static Widget FunnelCountBox(String text, String count) {
     return Container(
       //height: 25,
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.only(left: 14, right: 10),
+      margin: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(left: 14, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -68,16 +68,14 @@ class CustomeWidget {
             text,
             style: MyStyles.Medium(18, myColor.text_color),
           ),
-          SizedBox(
-            width: 20,
-          ),
+          const SizedBox(width: 20.0),
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 color: myColor.FV_Count),
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: Text(
                 count,
                 style: MyStyles.Medium(13, myColor.text_color),
@@ -101,12 +99,12 @@ class CustomeWidget {
                 tabindex == 1
                     ? Container(
                         height: 34,
-                        margin: EdgeInsets.only(top: 3),
+                        margin: const EdgeInsets.only(top: 3),
                         alignment: Alignment.centerRight,
                       )
                     : Container(
                         height: 34,
-                        margin: EdgeInsets.only(top: 3, right: 2),
+                        margin: const EdgeInsets.only(top: 3, right: 2),
                         alignment: Alignment.centerRight,
                         child: Image.asset(
                           'assets/images/tab_arrow.png',
@@ -120,7 +118,7 @@ class CustomeWidget {
                       ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Text(
                       title,
                       style: selecttab == tabindex
@@ -135,7 +133,7 @@ class CustomeWidget {
                 tabindex == 7
                     ? Container(
                         height: 34,
-                        margin: EdgeInsets.only(top: 3, right: 2),
+                        margin: const EdgeInsets.only(top: 3, right: 2),
                         alignment: Alignment.centerRight,
                         child: Image.asset(
                           'assets/images/tab_arrow.png',
@@ -149,7 +147,7 @@ class CustomeWidget {
                       )
                     : Container(
                         height: 34,
-                        margin: EdgeInsets.only(top: 3),
+                        margin: const EdgeInsets.only(top: 3),
                         alignment: Alignment.centerRight,
                       )
               ],
@@ -158,12 +156,12 @@ class CustomeWidget {
                 ? tabindex == 7
                     ? Container(
                         height: 2,
-                        margin: EdgeInsets.only(top: 33, right: 15),
+                        margin: const EdgeInsets.only(top: 33, right: 15),
                         color: myColor.blue,
                       )
                     : Container(
                         height: 2,
-                        margin: EdgeInsets.only(top: 33),
+                        margin: const EdgeInsets.only(top: 33),
                         color: myColor.blue,
                       )
                 : Container(
@@ -181,7 +179,7 @@ class CustomeWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.all(6),
+          padding: const EdgeInsets.all(6),
           child: Text(
             title,
             style: selecttab == tabindex
@@ -192,9 +190,7 @@ class CustomeWidget {
             textAlign: TextAlign.center,
           ),
         ),
-        SizedBox(
-          height: 5,
-        ),
+        const SizedBox(height: 5.0),
         selecttab == tabindex
             ? Container(
                 height: 3,
@@ -211,28 +207,24 @@ class CustomeWidget {
   static Widget TenantsStutas(String count, String title) {
     return Expanded(
       child: Card(
-        margin: EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 10),
         elevation: 0,
         shadowColor: myColor.application_boreder,
         shape: RoundedRectangleBorder(
-            side: BorderSide(color: myColor.TA_Border, width: 0.5),
+            side: const BorderSide(color: myColor.TA_Border, width: 0.5),
             borderRadius: BorderRadius.circular(5)),
         child: Container(
           height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               Text(
                 count,
                 style: MyStyles.Bold(25, myColor.blue),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               Text(
                 title,
                 style: MyStyles.Medium(14, myColor.statustitle),
@@ -250,28 +242,24 @@ class CustomeWidget {
   static Widget PropertyStutas(String count, String title) {
     return Expanded(
       child: Card(
-        margin: EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 10),
         elevation: 0,
         shadowColor: myColor.application_boreder,
         shape: RoundedRectangleBorder(
-            side: BorderSide(color: myColor.TA_Border, width: 0.5),
+            side: const BorderSide(color: myColor.TA_Border, width: 0.5),
             borderRadius: BorderRadius.circular(5)),
         child: Container(
           height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               Text(
                 count,
                 style: MyStyles.Bold(25, myColor.blue),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                width: 20,
-              ),
+              const SizedBox(width: 20.0),
               Text(
                 title,
                 style: MyStyles.Medium(14, myColor.statustitle),
@@ -289,15 +277,15 @@ class CustomeWidget {
   static Widget AddNewLead() {
     return Container(
       height: 32,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -317,15 +305,15 @@ class CustomeWidget {
   static Widget AddNewMember() {
     return Container(
       height: 32,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -345,15 +333,15 @@ class CustomeWidget {
   static Widget AddNewRequest() {
     return Container(
       height: 32,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -373,10 +361,10 @@ class CustomeWidget {
   static Widget AttechDoc() {
     return Container(
       height: 30,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(color: myColor.Circle_main, width: 1.5),
       ),
       child: Text(
@@ -389,10 +377,10 @@ class CustomeWidget {
   static Widget DesebleAttechDoc() {
     return Container(
       height: 30,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(color: myColor.disablecolor, width: 1.5),
       ),
       child: Text(
@@ -446,7 +434,7 @@ class CustomeWidget {
       //padding: EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(width: 1, color: myColor.TA_Border),
         color: selected == index ? myColor.TA_tab_text : Colors.transparent,
       ),
@@ -461,10 +449,10 @@ class CustomeWidget {
   static Widget FillButton(double height, String title, bool isActive) {
     return Container(
       height: 35,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         color: isActive ? myColor.Circle_main : myColor.disablecolor,
       ),
       child: Text(
@@ -478,10 +466,10 @@ class CustomeWidget {
     return Container(
       height: 30,
       width: 120,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(color: myColor.Circle_main, width: 1.5),
       ),
       child: Text(
@@ -494,9 +482,9 @@ class CustomeWidget {
   static Widget SaveAndNext(String name) {
     return Container(
       height: 35,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
@@ -510,10 +498,10 @@ class CustomeWidget {
   static Widget TenantBackButton() {
     return Container(
       height: 35,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(color: myColor.Circle_main, width: 1.5),
       ),
       child: Text(
@@ -526,15 +514,15 @@ class CustomeWidget {
   static Widget AddNewProperty() {
     return Container(
       height: 32,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -610,15 +598,15 @@ class CustomeWidget {
   static Widget AddNewButton(String title) {
     return Container(
       height: 32,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         color: myColor.Circle_main,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -639,16 +627,16 @@ class CustomeWidget {
     return Container(
       height: 32,
       width: 176,
-      padding: EdgeInsets.only(left: 15, right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
         border: Border.all(color: myColor.Circle_main, width: 0.5),
         color: myColor.white,
       ),
       child: Row(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.add_circle,
@@ -689,7 +677,7 @@ class CustomeWidget {
       children: [
         InkWell(
           child: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: Image.asset(
               "assets/images/ic_fnl_tntapp.png",
               width: 20,
@@ -697,9 +685,7 @@ class CustomeWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 5,
-        ),
+        const SizedBox(width: 5.0),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -710,9 +696,7 @@ class CustomeWidget {
                 style: MyStyles.Medium(13, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(
-                height: 2,
-              ),
+              const SizedBox(height: 2.0),
               Text(
                 "1 JAN",
                 style: MyStyles.Medium(11, myColor.fnl_status_date),
@@ -733,7 +717,7 @@ class CustomeWidget {
       children: [
         InkWell(
           child: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: Image.asset(
               "assets/images/ic_fnl_docvarif.png",
               width: 20,
@@ -741,9 +725,7 @@ class CustomeWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 5,
-        ),
+        const SizedBox(width: 5.0),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -754,9 +736,7 @@ class CustomeWidget {
                 style: MyStyles.Medium(13, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(
-                height: 2,
-              ),
+              const SizedBox(height: 2.0),
               Text(
                 "1 JAN",
                 style: MyStyles.Medium(11, myColor.fnl_status_date),
@@ -777,7 +757,7 @@ class CustomeWidget {
       children: [
         InkWell(
           child: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: Image.asset(
               "assets/images/ic_fnl_refercheck.png",
               width: 20,
@@ -785,9 +765,7 @@ class CustomeWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 5,
-        ),
+        const SizedBox(width: 5.0),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -798,9 +776,7 @@ class CustomeWidget {
                 style: MyStyles.Medium(13, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(
-                height: 2,
-              ),
+              const SizedBox(height: 2.0),
               Text(
                 "1 JAN",
                 style: MyStyles.Medium(11, myColor.fnl_status_date),
@@ -821,7 +797,7 @@ class CustomeWidget {
       children: [
         InkWell(
           child: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: Image.asset(
               "assets/images/ic_fnl_leaseagree.png",
               width: 20,
@@ -829,9 +805,7 @@ class CustomeWidget {
             ),
           ),
         ),
-        SizedBox(
-          width: 5,
-        ),
+        const SizedBox(width: 5.0),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -842,9 +816,7 @@ class CustomeWidget {
                 style: MyStyles.Medium(13, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
-              SizedBox(
-                height: 2,
-              ),
+              const SizedBox(height: 2.0),
               Text(
                 "1 JAN",
                 style: MyStyles.Medium(11, myColor.fnl_status_date),
@@ -919,7 +891,7 @@ class CustomeWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: myColor.TA_status_Border, width: 2),
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Row(
@@ -932,7 +904,7 @@ class CustomeWidget {
                   highlightColor: Colors.transparent,
                   onTap: () {},
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 5),
                     child: Image.asset(
                       "assets/images/ic_fnl_tntapp.png",
                       width: 18,
@@ -940,9 +912,7 @@ class CustomeWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -956,11 +926,9 @@ class CustomeWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Padding(
-                  padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Text(
                     "1 JAN",
                     style: MyStyles.Regular(12, myColor.fnl_status_date),
@@ -969,9 +937,7 @@ class CustomeWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             TBL_STATUS_NOTSTART(),
           ],
         ),
@@ -987,7 +953,7 @@ class CustomeWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: myColor.TA_status_Border, width: 2),
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Row(
@@ -1000,7 +966,7 @@ class CustomeWidget {
                   highlightColor: Colors.transparent,
                   onTap: () {},
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 5),
                     child: Image.asset(
                       "assets/images/ic_fnl_docvarif.png",
                       width: 18,
@@ -1008,9 +974,7 @@ class CustomeWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1024,11 +988,9 @@ class CustomeWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Padding(
-                  padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Text(
                     "1 JAN",
                     style: MyStyles.Regular(12, myColor.fnl_status_date),
@@ -1037,9 +999,7 @@ class CustomeWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             TBL_STATUS_RECEIVE(),
           ],
         ),
@@ -1055,7 +1015,7 @@ class CustomeWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: myColor.TA_status_Border, width: 2),
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Row(
@@ -1068,7 +1028,7 @@ class CustomeWidget {
                   highlightColor: Colors.transparent,
                   onTap: () {},
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 5),
                     child: Image.asset(
                       "assets/images/ic_fnl_refercheck.png",
                       width: 20,
@@ -1076,9 +1036,7 @@ class CustomeWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1092,11 +1050,9 @@ class CustomeWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Padding(
-                  padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Text(
                     "1 JAN",
                     style: MyStyles.Regular(12, myColor.fnl_status_date),
@@ -1105,9 +1061,7 @@ class CustomeWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             TBL_STATUS_SENT(),
           ],
         ),
@@ -1123,7 +1077,7 @@ class CustomeWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: myColor.TA_status_Border, width: 2),
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Row(
@@ -1136,7 +1090,7 @@ class CustomeWidget {
                   highlightColor: Colors.transparent,
                   onTap: () {},
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 5),
                     child: Image.asset(
                       "assets/images/ic_fnl_leaseagree.png",
                       width: 20,
@@ -1144,9 +1098,7 @@ class CustomeWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5.0),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1160,11 +1112,9 @@ class CustomeWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5.0),
                 Padding(
-                  padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Text(
                     "1 JAN",
                     style: MyStyles.Regular(12, myColor.fnl_status_date),
@@ -1173,9 +1123,7 @@ class CustomeWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15.0),
             TBL_STATUS_NOTSTART(),
           ],
         ),
@@ -1548,7 +1496,7 @@ class CustomeWidget {
           var res = await get(Uri.parse(Weburl.image_API + img.id.toString()),
               headers: {
                 'Authorization':
-                    'bearer ' + Prefs.getString(PrefsName.userTokan),
+                    'bearer ${Prefs.getString(PrefsName.userTokan)}',
                 'ApplicationCode': Weburl.API_CODE,
               });
 
@@ -1574,8 +1522,8 @@ class CustomeWidget {
         webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
 
     var bytes;
-    String zipname = "properties_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString();
+    String zipname =
+        "properties_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
 
     if (defaultTargetPlatform == TargetPlatform.macOS ||
         defaultTargetPlatform == TargetPlatform.linux) {
@@ -1604,7 +1552,7 @@ class CustomeWidget {
   static MaintenancePdfgenerate(
       BuildContext context, MaintenanceDetails maintenanceDetails) async {
     final pdf = pw.Document(
-      author: "Silver Home",
+      author: "Silver Homes",
       pageMode: PdfPageMode.fullscreen,
       title: "Maintenance Request",
     );
@@ -1620,7 +1568,7 @@ class CustomeWidget {
           Uri.parse(Weburl.image_API +
               maintenanceDetails.Company_logo!.id.toString()),
           headers: {
-            'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+            'Authorization': 'bearer ${Prefs.getString(PrefsName.userTokan)}',
             'ApplicationCode': Weburl.API_CODE,
           });
       companyImage = pw.MemoryImage(res.bodyBytes);
@@ -1647,14 +1595,14 @@ class CustomeWidget {
           );
         },*/
           pageFormat: PdfPageFormat.a4,
-          margin: pw.EdgeInsets.all(10),
+          margin: const pw.EdgeInsets.all(10),
           build: (pw.Context context) {
             return <pw.Widget>[
               pw.Container(
                   color: PdfColor.fromHex("#FBFBFB"),
                   child: header(maintenanceDetails, companyImage)),
               pw.Padding(
-                padding: pw.EdgeInsets.all(15),
+                padding: const pw.EdgeInsets.all(15),
                 child: pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
                     mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -1690,9 +1638,8 @@ class CustomeWidget {
           }),
     );
 
-    String filename = "maintenance_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".pdf";
+    String filename =
+        "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.pdf";
 
     Uint8List pdfInBytes = await pdf.save();
     webarc.Archive archive = webarc.Archive();
@@ -1710,7 +1657,7 @@ class CustomeWidget {
               Uri.parse(Weburl.image_API + img.mediaId!.id.toString()),
               headers: {
                 'Authorization':
-                    'bearer ' + Prefs.getString(PrefsName.userTokan),
+                    'bearer ${Prefs.getString(PrefsName.userTokan)}',
                 'ApplicationCode': Weburl.API_CODE,
               });
 
@@ -1732,8 +1679,8 @@ class CustomeWidget {
     webarc.OutputStream stream =
         webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
 
-    String zipname = "maintenance_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString();
+    String zipname =
+        "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
     var bytes;
     if (defaultTargetPlatform == TargetPlatform.macOS ||
         defaultTargetPlatform == TargetPlatform.linux) {
@@ -1769,7 +1716,7 @@ class CustomeWidget {
         color: PdfColor.fromHex("F8F9F9"),
         //border: pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
       ),
-      padding: pw.EdgeInsets.all(10),
+      padding: const pw.EdgeInsets.all(10),
       child: pw.Row(
         crossAxisAlignment: pw.CrossAxisAlignment.center,
         mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -1850,7 +1797,7 @@ class CustomeWidget {
                             decoration: pw.BoxDecoration(
                               borderRadius: pw.BorderRadius.circular(5),
                               border: pw.Border.all(
-                                  color: PdfColor.fromInt(0xFF979797),
+                                  color: const PdfColor.fromInt(0xFF979797),
                                   width: 1),
                               color: PdfColor.fromHex("#FFFFFF"),
                             ),
@@ -1897,16 +1844,16 @@ class CustomeWidget {
                             decoration: pw.BoxDecoration(
                               borderRadius: pw.BorderRadius.circular(5),
                               border: pw.Border.all(
-                                  color: PdfColor.fromInt(0xff25AFBF),
+                                  color: const PdfColor.fromInt(0xff25AFBF),
                                   width: 1),
-                              color: PdfColor.fromInt(0xffD5EDEF),
+                              color: const PdfColor.fromInt(0xffD5EDEF),
                             ),
                             child: pw.Text(
                               maintenanceDetails.Priority != null
                                   ? maintenanceDetails.Priority!.displayValue
                                   : "",
                               style: pw.TextStyle(
-                                color: PdfColor.fromInt(0xff25AFBF),
+                                color: const PdfColor.fromInt(0xff25AFBF),
                                 font: pw.Font.ttf(font_medium),
                                 fontSize: 10,
                               ),
@@ -1932,7 +1879,7 @@ class CustomeWidget {
         //color: PdfColor.fromInt(0xd6b7485),
         color: PdfColor.fromHex("E5E7E9"),
       ),
-      padding: pw.EdgeInsets.all(10),
+      padding: const pw.EdgeInsets.all(10),
       child: pw.Row(
         children: [
           pw.Expanded(
@@ -1953,13 +1900,7 @@ class CustomeWidget {
                   height: 5,
                 ),
                 pw.Text(
-                  GlobleString.Mant_view_PropertyName +
-                      " " +
-                      mDetailsState.PropertyName! +
-                      "" +
-                      (mDetailsState.Suite_Unit!.isNotEmpty
-                          ? " - " + mDetailsState.Suite_Unit!
-                          : ""),
+                  "${GlobleString.Mant_view_PropertyName} ${mDetailsState.PropertyName!}${mDetailsState.Suite_Unit!.isNotEmpty ? " - ${mDetailsState.Suite_Unit!}" : ""}",
                   style: pw.TextStyle(
                     color: PdfColors.black,
                     font: pw.Font.ttf(font_medium),
@@ -1971,9 +1912,7 @@ class CustomeWidget {
                   height: 5,
                 ),
                 pw.Text(
-                  GlobleString.Mant_view_Address +
-                      " " +
-                      mDetailsState.Property_Address!,
+                  "${GlobleString.Mant_view_Address} ${mDetailsState.Property_Address!}",
                   style: pw.TextStyle(
                     color: PdfColors.black,
                     font: pw.Font.ttf(font_medium),
@@ -1993,11 +1932,12 @@ class CustomeWidget {
     return pw.Container(
       width: double.infinity,
       decoration: pw.BoxDecoration(
-        border: pw.Border.all(color: PdfColor.fromInt(0xFF979797), width: 1.0),
+        border: pw.Border.all(
+            color: const PdfColor.fromInt(0xFF979797), width: 1.0),
         borderRadius: pw.BorderRadius.circular(0.0),
         color: PdfColors.white,
       ),
-      padding: pw.EdgeInsets.all(10),
+      padding: const pw.EdgeInsets.all(10),
       child: pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2015,9 +1955,7 @@ class CustomeWidget {
             height: 10,
           ),
           pw.Text(
-            GlobleString.Mant_view_RequestName +
-                " " +
-                mDetailsState.RequestName!,
+            "${GlobleString.Mant_view_RequestName} ${mDetailsState.RequestName!}",
             style: pw.TextStyle(
               color: PdfColors.black,
               font: pw.Font.ttf(font_medium),
@@ -2029,11 +1967,7 @@ class CustomeWidget {
             height: 5,
           ),
           pw.Text(
-            GlobleString.Mant_view_Category +
-                " " +
-                (mDetailsState.Category != null
-                    ? mDetailsState.Category!.displayValue
-                    : ""),
+            "${GlobleString.Mant_view_Category} ${mDetailsState.Category != null ? mDetailsState.Category!.displayValue : ""}",
             style: pw.TextStyle(
               color: PdfColors.black,
               font: pw.Font.ttf(font_medium),
@@ -2083,7 +2017,7 @@ class CustomeWidget {
               PropertyMaintenanceImages maintenanceimage =
                   mDetailsState.maintenanceImageslist![index];
               return pw.Container(
-                margin: pw.EdgeInsets.only(top: 5, bottom: 5),
+                margin: const pw.EdgeInsets.only(top: 5, bottom: 5),
                 child: pw.Row(
                   crossAxisAlignment: pw.CrossAxisAlignment.center,
                   children: [
@@ -2120,7 +2054,7 @@ class CustomeWidget {
                 //color: PdfColor.fromInt(0x334b74ff),
                 color: PdfColor.fromHex("E9EDFB"),
               ),
-              padding: pw.EdgeInsets.all(10),
+              padding: const pw.EdgeInsets.all(10),
               child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2138,11 +2072,7 @@ class CustomeWidget {
                     height: 10,
                   ),
                   pw.Text(
-                    GlobleString.Mant_view_FullName +
-                        " " +
-                        mDetailsState.Owner_firstname! +
-                        " " +
-                        mDetailsState.Owner_lastname!,
+                    "${GlobleString.Mant_view_FullName} ${mDetailsState.Owner_firstname!} ${mDetailsState.Owner_lastname!}",
                     style: pw.TextStyle(
                       color: PdfColors.black,
                       font: pw.Font.ttf(font_medium),
@@ -2154,9 +2084,7 @@ class CustomeWidget {
                     height: 5,
                   ),
                   pw.Text(
-                    GlobleString.Mant_view_Email +
-                        " " +
-                        mDetailsState.Owner_email!,
+                    "${GlobleString.Mant_view_Email} ${mDetailsState.Owner_email!}",
                     style: pw.TextStyle(
                       color: PdfColors.black,
                       font: pw.Font.ttf(font_medium),
@@ -2168,9 +2096,7 @@ class CustomeWidget {
                     height: 5,
                   ),
                   pw.Text(
-                    GlobleString.Mant_view_Phone +
-                        " " +
-                        mDetailsState.Owner_mobile!,
+                    "${GlobleString.Mant_view_Phone} ${mDetailsState.Owner_mobile!}",
                     style: pw.TextStyle(
                       color: PdfColors.black,
                       font: pw.Font.ttf(font_medium),
@@ -2193,7 +2119,7 @@ class CustomeWidget {
                 //color: PdfColor.fromInt(0x14efbb34),
                 color: PdfColor.fromHex("FFF9E9"),
               ),
-              padding: pw.EdgeInsets.all(10),
+              padding: const pw.EdgeInsets.all(10),
               child: mDetailsState.Applicant_ID != ""
                   ? pw.Column(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2212,13 +2138,7 @@ class CustomeWidget {
                           height: 10,
                         ),
                         pw.Text(
-                          GlobleString.Mant_view_FullName +
-                              " " +
-                              Helper.checkNull(
-                                  mDetailsState.Applicant_firstname) +
-                              " " +
-                              Helper.checkNull(
-                                  mDetailsState.Applicant_lastname),
+                          "${GlobleString.Mant_view_FullName} ${Helper.checkNull(mDetailsState.Applicant_firstname)} ${Helper.checkNull(mDetailsState.Applicant_lastname)}",
                           style: pw.TextStyle(
                             color: PdfColors.black,
                             font: pw.Font.ttf(font_medium),
@@ -2230,9 +2150,7 @@ class CustomeWidget {
                           height: 5,
                         ),
                         pw.Text(
-                          GlobleString.Mant_view_Email +
-                              " " +
-                              Helper.checkNull(mDetailsState.Applicant_email),
+                          "${GlobleString.Mant_view_Email} ${Helper.checkNull(mDetailsState.Applicant_email)}",
                           style: pw.TextStyle(
                             color: PdfColors.black,
                             font: pw.Font.ttf(font_medium),
@@ -2244,9 +2162,7 @@ class CustomeWidget {
                           height: 5,
                         ),
                         pw.Text(
-                          GlobleString.Mant_view_Phone +
-                              " " +
-                              Helper.checkNull(mDetailsState.Applicant_mobile),
+                          "${GlobleString.Mant_view_Phone} ${Helper.checkNull(mDetailsState.Applicant_mobile)}",
                           style: pw.TextStyle(
                             color: PdfColors.black,
                             font: pw.Font.ttf(font_medium),
@@ -2289,11 +2205,11 @@ class CustomeWidget {
         children: [
           pw.Container(
             height: 0.5,
-            color: PdfColor.fromInt(0xFF979797),
+            color: const PdfColor.fromInt(0xFF979797),
           ),
           pw.Container(
             height: 25,
-            margin: pw.EdgeInsets.only(top: 5, bottom: 5),
+            margin: const pw.EdgeInsets.only(top: 5, bottom: 5),
             alignment: pw.Alignment.center,
             child: pw.Row(
               crossAxisAlignment: pw.CrossAxisAlignment.center,
@@ -2303,13 +2219,13 @@ class CustomeWidget {
                   flex: 2,
                   child: pw.Container(
                     //width: sswidth / 5,
-                    padding: pw.EdgeInsets.only(left: 10),
+                    padding: const pw.EdgeInsets.only(left: 10),
                     alignment: pw.Alignment.centerLeft,
                     child: pw.Text(
                       vendordata.companyName!,
                       textAlign: pw.TextAlign.center,
                       style: pw.TextStyle(
-                        color: PdfColor.fromInt(0xFF010B32),
+                        color: const PdfColor.fromInt(0xFF010B32),
                         font: pw.Font.ttf(font_demi),
                         fontSize: 10,
                       ),
@@ -2320,7 +2236,7 @@ class CustomeWidget {
                   flex: 1,
                   child: pw.Container(
                     //width: sswidth / 7,
-                    padding: pw.EdgeInsets.only(left: 10),
+                    padding: const pw.EdgeInsets.only(left: 10),
                     alignment: pw.Alignment.centerLeft,
                     child: pw.Text(
                       vendordata.category != null
@@ -2328,7 +2244,7 @@ class CustomeWidget {
                           : "",
                       textAlign: pw.TextAlign.center,
                       style: pw.TextStyle(
-                        color: PdfColor.fromInt(0xFF010B32),
+                        color: const PdfColor.fromInt(0xFF010B32),
                         font: pw.Font.ttf(font_demi),
                         fontSize: 10,
                       ),
@@ -2339,13 +2255,13 @@ class CustomeWidget {
                   flex: 2,
                   child: pw.Container(
                     //width: sswidth / 4,
-                    padding: pw.EdgeInsets.only(left: 10),
+                    padding: const pw.EdgeInsets.only(left: 10),
                     alignment: pw.Alignment.centerLeft,
                     child: pw.Text(
                       vendordata.email!,
                       textAlign: pw.TextAlign.center,
                       style: pw.TextStyle(
-                        color: PdfColor.fromInt(0xFF010B32),
+                        color: const PdfColor.fromInt(0xFF010B32),
                         font: pw.Font.ttf(font_demi),
                         fontSize: 10,
                       ),
@@ -2356,13 +2272,13 @@ class CustomeWidget {
                   flex: 1,
                   child: pw.Container(
                     //width: sswidth / 7,
-                    padding: pw.EdgeInsets.only(left: 10),
+                    padding: const pw.EdgeInsets.only(left: 10),
                     alignment: pw.Alignment.centerLeft,
                     child: pw.Text(
                       vendordata.mobileNumber!,
                       textAlign: pw.TextAlign.center,
                       style: pw.TextStyle(
-                        color: PdfColor.fromInt(0xFF010B32),
+                        color: const PdfColor.fromInt(0xFF010B32),
                         font: pw.Font.ttf(font_demi),
                         fontSize: 10,
                       ),
@@ -2380,8 +2296,8 @@ class CustomeWidget {
               // color: PdfColor.fromInt(0x1bbfc1c1),
               color: PdfColor.fromHex("E5E7E9"),
             ),
-            padding: pw.EdgeInsets.all(10),
-            margin: pw.EdgeInsets.only(top: 5, bottom: 10),
+            padding: const pw.EdgeInsets.all(10),
+            margin: const pw.EdgeInsets.only(top: 5, bottom: 10),
             child: pw.Column(
               mainAxisAlignment: pw.MainAxisAlignment.start,
               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2390,7 +2306,7 @@ class CustomeWidget {
                   GlobleString.Mant_view_Instructions,
                   textAlign: pw.TextAlign.left,
                   style: pw.TextStyle(
-                    color: PdfColor.fromInt(0xFF010B32),
+                    color: const PdfColor.fromInt(0xFF010B32),
                     font: pw.Font.ttf(font_demi),
                     fontSize: 10,
                   ),
@@ -2402,7 +2318,7 @@ class CustomeWidget {
                   vendordata.Instruction!,
                   textAlign: pw.TextAlign.left,
                   style: pw.TextStyle(
-                    color: PdfColor.fromInt(0xFF010B32),
+                    color: const PdfColor.fromInt(0xFF010B32),
                     font: pw.Font.ttf(font_regular),
                     fontSize: 11,
                   ),
@@ -2413,12 +2329,12 @@ class CustomeWidget {
           if ((mDetailsState.maintenanceVendorlist!.length - 1) < index)
             pw.Container(
               height: 0.5,
-              color: PdfColor.fromInt(0xd6b7485),
+              color: const PdfColor.fromInt(0xd6b7485),
             )
           else
             pw.Container(
               height: 0.5,
-              color: PdfColor.fromInt(0x00000000),
+              color: const PdfColor.fromInt(0x00000000),
             )
         ],
       ),
@@ -2455,11 +2371,11 @@ class CustomeWidget {
                 children: [
                   pw.Container(
                     height: 0.5,
-                    color: PdfColor.fromInt(0xFF979797),
+                    color: const PdfColor.fromInt(0xFF979797),
                   ),
                   pw.Container(
                     height: 25,
-                    margin: pw.EdgeInsets.only(top: 5, bottom: 5),
+                    margin: const pw.EdgeInsets.only(top: 5, bottom: 5),
                     alignment: pw.Alignment.center,
                     child: pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.center,
@@ -2469,13 +2385,13 @@ class CustomeWidget {
                           flex: 2,
                           child: pw.Container(
                             //width: sswidth / 5,
-                            padding: pw.EdgeInsets.only(left: 10),
+                            padding: const pw.EdgeInsets.only(left: 10),
                             alignment: pw.Alignment.centerLeft,
                             child: pw.Text(
                               vendordata.companyName!,
                               textAlign: pw.TextAlign.center,
                               style: pw.TextStyle(
-                                color: PdfColor.fromInt(0xFF010B32),
+                                color: const PdfColor.fromInt(0xFF010B32),
                                 font: pw.Font.ttf(font_demi),
                                 fontSize: 10,
                               ),
@@ -2486,7 +2402,7 @@ class CustomeWidget {
                           flex: 1,
                           child: pw.Container(
                             //width: sswidth / 7,
-                            padding: pw.EdgeInsets.only(left: 10),
+                            padding: const pw.EdgeInsets.only(left: 10),
                             alignment: pw.Alignment.centerLeft,
                             child: pw.Text(
                               vendordata.category != null
@@ -2494,7 +2410,7 @@ class CustomeWidget {
                                   : "",
                               textAlign: pw.TextAlign.center,
                               style: pw.TextStyle(
-                                color: PdfColor.fromInt(0xFF010B32),
+                                color: const PdfColor.fromInt(0xFF010B32),
                                 font: pw.Font.ttf(font_demi),
                                 fontSize: 10,
                               ),
@@ -2505,13 +2421,13 @@ class CustomeWidget {
                           flex: 2,
                           child: pw.Container(
                             //width: sswidth / 4,
-                            padding: pw.EdgeInsets.only(left: 10),
+                            padding: const pw.EdgeInsets.only(left: 10),
                             alignment: pw.Alignment.centerLeft,
                             child: pw.Text(
                               vendordata.email!,
                               textAlign: pw.TextAlign.center,
                               style: pw.TextStyle(
-                                color: PdfColor.fromInt(0xFF010B32),
+                                color: const PdfColor.fromInt(0xFF010B32),
                                 font: pw.Font.ttf(font_demi),
                                 fontSize: 10,
                               ),
@@ -2522,13 +2438,13 @@ class CustomeWidget {
                           flex: 1,
                           child: pw.Container(
                             //width: sswidth / 7,
-                            padding: pw.EdgeInsets.only(left: 10),
+                            padding: const pw.EdgeInsets.only(left: 10),
                             alignment: pw.Alignment.centerLeft,
                             child: pw.Text(
                               vendordata.mobileNumber!,
                               textAlign: pw.TextAlign.center,
                               style: pw.TextStyle(
-                                color: PdfColor.fromInt(0xFF010B32),
+                                color: const PdfColor.fromInt(0xFF010B32),
                                 font: pw.Font.ttf(font_demi),
                                 fontSize: 10,
                               ),
@@ -2542,10 +2458,10 @@ class CustomeWidget {
                     width: sswidth,
                     decoration: pw.BoxDecoration(
                       borderRadius: pw.BorderRadius.circular(0.0),
-                      color: PdfColor.fromInt(0xd6b7485),
+                      color: const PdfColor.fromInt(0xd6b7485),
                     ),
-                    padding: pw.EdgeInsets.all(10),
-                    margin: pw.EdgeInsets.only(top: 5, bottom: 10),
+                    padding: const pw.EdgeInsets.all(10),
+                    margin: const pw.EdgeInsets.only(top: 5, bottom: 10),
                     child: pw.Column(
                       mainAxisAlignment: pw.MainAxisAlignment.start,
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2554,7 +2470,7 @@ class CustomeWidget {
                           GlobleString.Mant_view_Instructions,
                           textAlign: pw.TextAlign.left,
                           style: pw.TextStyle(
-                            color: PdfColor.fromInt(0xFF010B32),
+                            color: const PdfColor.fromInt(0xFF010B32),
                             font: pw.Font.ttf(font_demi),
                             fontSize: 10,
                           ),
@@ -2566,7 +2482,7 @@ class CustomeWidget {
                           vendordata.Instruction!,
                           textAlign: pw.TextAlign.left,
                           style: pw.TextStyle(
-                            color: PdfColor.fromInt(0xFF010B32),
+                            color: const PdfColor.fromInt(0xFF010B32),
                             font: pw.Font.ttf(font_regular),
                             fontSize: 11,
                           ),
@@ -2577,12 +2493,12 @@ class CustomeWidget {
                   if ((mDetailsState.maintenanceVendorlist!.length - 1) < index)
                     pw.Container(
                       height: 0.5,
-                      color: PdfColor.fromInt(0xd6b7485),
+                      color: const PdfColor.fromInt(0xd6b7485),
                     )
                   else
                     pw.Container(
                       height: 0.5,
-                      color: PdfColor.fromInt(0x00000000),
+                      color: const PdfColor.fromInt(0x00000000),
                     )
                 ],
               ),

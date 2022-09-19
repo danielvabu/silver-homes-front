@@ -65,7 +65,6 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     _store.dispatch(UpdateLLMaintenance_status_WorkinProgress(0));
     _store.dispatch(UpdateLLMaintenance_status_Resolved(0));
     _store.dispatch(UpdateLLMaintenance_status_Paid(0));
-
     ApiManager().getMaintenaceCount(context, (status, responce) {});
   }
 
@@ -91,19 +90,19 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
 
   apimanager(String search, int pageNo, String SortField, int saquence,
       int ftime) async {
-    MaintenanceListReqtokens reqtokens = new MaintenanceListReqtokens();
+    MaintenanceListReqtokens reqtokens = MaintenanceListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-    reqtokens.Name = search != null ? search : "";
+    reqtokens.Name = search ?? "";
 
-    Pager pager = new Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
+    Pager pager = Pager(pageNo: pageNo, noOfRecords: Helper.noofrecored);
 
     List<Sort> sortinglist = [];
-    Sort sort = new Sort();
+    Sort sort = Sort();
     sort.fieldId = SortField;
     sort.sortSequence = saquence;
     sortinglist.add(sort);
 
-    DSQQuery dsqQuery = new DSQQuery();
+    DSQQuery dsqQuery = DSQQuery();
     dsqQuery.dsqid = Weburl.DSQ_landlord_MaintenanceList;
     dsqQuery.loadLookUpValues = true;
     dsqQuery.loadRecordInfo = false;
@@ -131,7 +130,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       color: myColor.bg_color1,
       child: Center(
         child: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: ConnectState<LandlordMaintenanceState>(
             map: (state) => state.landlordMaintenanceState,
             where: notIdentical,
@@ -177,8 +176,8 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     return Container(
       width: width,
       height: height - 95,
-      margin: EdgeInsets.only(top: 15),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: myColor.white,
         borderRadius: BorderRadius.circular(10),
@@ -205,7 +204,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        padding: EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10),
                         child: Row(
                           children: <Widget>[
                             Expanded(
@@ -214,7 +213,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                                 style: MyStyles.Medium(14, myColor.hintcolor),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left: 8, right: 5),
                               child: Icon(
                                 Icons.search,
@@ -237,7 +236,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                         ),
                         child: Row(
                           children: <Widget>[
-                            new Expanded(
+                            Expanded(
                               child: TextFormField(
                                 initialValue:
                                     landlordMaintenanceState.SearchText,
@@ -245,8 +244,8 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                                   if (_timer != null) {
                                     _timer!.cancel();
                                   }
-                                  _timer = new Timer.periodic(
-                                      Duration(seconds: 2), (timer) {
+                                  _timer = Timer.periodic(
+                                      const Duration(seconds: 2), (timer) {
                                     _store.dispatch(
                                         UpdateLLMaintenance_isloding(true));
                                     _store.dispatch(
@@ -262,14 +261,14 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                                   border: InputBorder.none,
                                   hintStyle:
                                       MyStyles.Medium(14, myColor.hintcolor),
-                                  contentPadding: EdgeInsets.all(10),
+                                  contentPadding: const EdgeInsets.all(10),
                                   isDense: true,
                                   hintText: GlobleString.LL_Search,
                                 ),
                                 style: MyStyles.Medium(14, myColor.text_color),
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left: 8, right: 5),
                               child: Icon(
                                 Icons.search,
@@ -280,9 +279,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           ],
                         ),
                       ),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10.0),
                     _addNewRequest(),
                   ],
                 ),
@@ -313,14 +310,14 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) async {
-          MaintenanceListReqtokens reqtokens = new MaintenanceListReqtokens();
+          MaintenanceListReqtokens reqtokens = MaintenanceListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
           reqtokens.Name = landlordMaintenanceState.SearchText != null
               ? landlordMaintenanceState.SearchText
               : "";
 
           List<Sort> sortinglist = [];
-          Sort sort = new Sort();
+          Sort sort = Sort();
           if (landlordMaintenanceState.SearchText != null &&
               landlordMaintenanceState.SearchText.isNotEmpty) {
             sort.fieldId = "ID";
@@ -360,7 +357,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
           }
           sortinglist.add(sort);
 
-          DSQQuery dsqQuery = new DSQQuery();
+          DSQQuery dsqQuery = DSQQuery();
           dsqQuery.dsqid = Weburl.DSQ_landlord_MaintenanceList;
           dsqQuery.loadLookUpValues = true;
           dsqQuery.loadRecordInfo = false;
@@ -376,8 +373,8 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
         child: Container(
           height: 40,
           width: 20,
-          margin: EdgeInsets.only(right: 5),
-          child: Icon(Icons.more_vert),
+          margin: const EdgeInsets.only(right: 5),
+          child: const Icon(Icons.more_vert),
         ),
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -397,10 +394,10 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     return Container(
       width: width,
       height: height - 167,
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
+          borderRadius: const BorderRadius.all(Radius.circular(3)),
           //color: Hexcolor("#16C395"),
           border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
@@ -461,7 +458,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                 child: Container(
                   width: width,
                   height: height - 229,
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
                   child: Text(
                     "Please wait.....",
@@ -623,7 +620,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                     child: Container(
                       width: width,
                       height: height - 229,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
                         GlobleString.maintenence_data_not_found,
@@ -655,7 +652,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
           Container(
             height: 30,
             width: 80,
-            margin: EdgeInsets.only(left: 10, right: 20),
+            margin: const EdgeInsets.only(left: 10, right: 20),
             alignment: Alignment.center,
             child: DropdownSearch<String>(
               mode: Mode.MENU,

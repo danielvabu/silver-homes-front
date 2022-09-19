@@ -1316,6 +1316,11 @@ class ApiManager {
               ? myobject['property_name'].toString()
               : "";
 
+          String PropId = myobject['prop_id'] != null &&
+                  myobject['prop_id'] != "dddddddd-dddd-dddd-dddd-dddddddddddd"
+              ? myobject['prop_id'].toString()
+              : "";
+
           String RelationShip = myobject['relationship'] != null
               ? myobject['relationship'].toString()
               : "";

@@ -79,7 +79,6 @@ class _RequestsItemState extends State<RequestsItem> {
     MaintenanceStatuslist.clear();
     MaintenanceStatuslist =
         QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
-
     super.initState();
   }
 
@@ -87,7 +86,6 @@ class _RequestsItemState extends State<RequestsItem> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
     width = MediaQuery.of(context).size.width - 230;
-
     return Container(
       width: width,
       height: height - 249,
@@ -97,7 +95,7 @@ class _RequestsItemState extends State<RequestsItem> {
 
   Widget ListviewBuid(List<MaintenanceData> listdata) {
     return ListView.separated(
-      separatorBuilder: (context, index) => Divider(
+      separatorBuilder: (context, index) => const Divider(
         color: myColor.TA_table_header,
         thickness: 0,
         height: 0,
@@ -141,7 +139,7 @@ class _RequestsItemState extends State<RequestsItem> {
       child: Container(
         height: 40,
         width: width / 7,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: model.PropertyName!,
@@ -165,7 +163,7 @@ class _RequestsItemState extends State<RequestsItem> {
       child: Container(
         height: 40,
         width: width / 9,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Text(
           model.RequestName!,
@@ -182,7 +180,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 40,
       width: width / 9,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.Category != null ? model.Category!.displayValue : "",
@@ -198,7 +196,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 40,
       width: width / 12,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.Priority != null ? model.Priority!.displayValue : "",
@@ -214,13 +212,13 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 40,
       width: width / 11,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.Date_Created != null &&
                 model.Date_Created != "0" &&
                 model.Date_Created != ""
-            ? new DateFormat("dd-MMM-yyyy")
+            ? DateFormat("dd-MMM-yyyy")
                 .format(DateTime.parse(model.Date_Created!))
                 .toString()
             : "",
@@ -236,7 +234,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 40,
       width: width / 9,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.CreatedBy!,
@@ -253,7 +251,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 28,
       width: width / 7,
-      padding: EdgeInsets.only(left: 2),
+      padding: const EdgeInsets.only(left: 2),
       alignment: Alignment.centerLeft,
       child: DropdownSearch<SystemEnumDetails>(
         mode: Mode.MENU,
@@ -269,9 +267,9 @@ class _RequestsItemState extends State<RequestsItem> {
         isFilteredOnline: true,
         onChanged: (data) {
           if (data != model.Status) {
-            MainatenanceID updateid = new MainatenanceID();
+            MainatenanceID updateid = MainatenanceID();
             updateid.ID = model.ID.toString();
-            MainatenanceStatus updatestatus = new MainatenanceStatus();
+            MainatenanceStatus updatestatus = MainatenanceStatus();
             updatestatus.Status = data!.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
@@ -297,7 +295,7 @@ class _RequestsItemState extends State<RequestsItem> {
     return Container(
       height: 40,
       width: width / 12,
-      margin: EdgeInsets.only(left: 25),
+      margin: const EdgeInsets.only(left: 25),
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -319,22 +317,22 @@ class _RequestsItemState extends State<RequestsItem> {
               color: myColor.TA_tab_devide,
               width: 2.0,
             ),
-            activeIcon: FaIcon(
+            activeIcon: const FaIcon(
               FontAwesomeIcons.lock,
               color: myColor.CM_Lead_border,
               size: 15,
             ),
-            inactiveIcon: FaIcon(
+            inactiveIcon: const FaIcon(
               FontAwesomeIcons.unlock,
               color: myColor.CM_Lead_border,
               size: 15,
             ),
             showOnOff: true,
             onToggle: (val) {
-              MainatenanceID updateid = new MainatenanceID();
+              MainatenanceID updateid = MainatenanceID();
               updateid.ID = model.ID.toString();
 
-              MainatenanceIsLock updateIsLock = new MainatenanceIsLock();
+              MainatenanceIsLock updateIsLock = MainatenanceIsLock();
               updateIsLock.IsLock = val;
 
               loader = Helper.overlayLoader(context);
@@ -363,7 +361,7 @@ class _RequestsItemState extends State<RequestsItem> {
       child: Container(
         height: 28,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20),
+        padding: const EdgeInsets.only(right: 20),
         child: PopupMenuButton(
           onSelected: (value) {
             if (value == 1) {
@@ -383,8 +381,8 @@ class _RequestsItemState extends State<RequestsItem> {
           child: Container(
             height: 40,
             width: 20,
-            margin: EdgeInsets.only(right: 5),
-            child: Icon(Icons.more_vert),
+            margin: const EdgeInsets.only(right: 5),
+            child: const Icon(Icons.more_vert),
           ),
           itemBuilder: (context) => [
             PopupMenuItem(
@@ -444,15 +442,15 @@ class _RequestsItemState extends State<RequestsItem> {
   insertNotificationCall(MaintenanceData model) {
     List<MaintenanceNotificationData> notificationlist = [];
 
-    MaintenanceNotificationData mn = new MaintenanceNotificationData();
+    MaintenanceNotificationData mn = MaintenanceNotificationData();
     mn.applicantName = "";
     mn.mid = model.ID.toString();
     mn.propid = model.Prop_ID;
-    mn.applicantId = model.Applicant_ID != null ? model.Applicant_ID : "";
+    mn.applicantId = model.Applicant_ID ?? "";
     mn.applicationId = "";
     mn.ownerId = Prefs.getString(PrefsName.OwnerID);
     mn.notificationDate =
-        new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+        DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
     mn.typeOfNotification = NotificationType()
         .getNotificationType(NotificationName.Owner_Maintenance_Change_Status);
     mn.isRead = false;
@@ -460,16 +458,15 @@ class _RequestsItemState extends State<RequestsItem> {
     notificationlist.add(mn);
 
     if (model.Applicant_ID != null) {
-      MaintenanceNotificationData mn2 = new MaintenanceNotificationData();
+      MaintenanceNotificationData mn2 = MaintenanceNotificationData();
       mn2.applicantName = "";
       mn2.mid = model.ID.toString();
       mn2.propid = model.Prop_ID;
-      mn2.applicantId = model.Applicant_ID != null ? model.Applicant_ID : "";
+      mn2.applicantId = model.Applicant_ID ?? "";
       mn2.applicationId = "";
       mn2.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
+      mn2.notificationDate =
+          DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
       mn2.typeOfNotification = NotificationType().getNotificationType(
           NotificationName.Tenant_Maintenance_Change_Status);
       ;

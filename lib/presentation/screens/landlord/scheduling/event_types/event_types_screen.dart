@@ -335,29 +335,29 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
             sort.sortSequence = 0;
           } else {
             if (eventtypesListState.isEventTypesNameSort) {
-              sort.fieldId = "EventTypesName";
+              sort.fieldId = "Name";
               sort.sortSequence = eventtypesListState.NameSortAcsDes;
             } else if (eventtypesListState.isEventTypesUnitSort) {
-              sort.fieldId = "Suite_Unit";
+              sort.fieldId = "propertyname";
               sort.sortSequence = eventtypesListState.UnitSortAcsDes;
             } else if (eventtypesListState.isCitySort) {
-              sort.fieldId = "City";
+              sort.fieldId = "relation";
               sort.sortSequence = eventtypesListState.CitySortAcsDes;
             } else if (eventtypesListState.isCountrySort) {
-              sort.fieldId = "Country";
+              sort.fieldId = "duration";
               sort.sortSequence = eventtypesListState.CountrySortAcsDes;
             } else if (eventtypesListState.isEventTypesTypeSort) {
-              sort.fieldId = "EventTypes_Type";
+              sort.fieldId = "slots";
               sort.sortSequence = eventtypesListState.EventTypesTypeSortAcsDes;
             } else if (eventtypesListState.isvacancySort) {
-              sort.fieldId = "Vacancy";
+              sort.fieldId = "publish";
               sort.sortSequence = eventtypesListState.VacancySortAcsDes;
-            } else if (eventtypesListState.isActiveInactiveSort) {
-              sort.fieldId = "IsActive";
-              sort.sortSequence = eventtypesListState.ActiveSortAcsDes;
-            } else if (eventtypesListState.isPublishedSort) {
-              sort.fieldId = "IsPublished";
-              sort.sortSequence = eventtypesListState.PublishedSortAcsDes;
+              //} else if (eventtypesListState.isActiveInactiveSort) {
+              //  sort.fieldId = "IsActive";
+              //  sort.sortSequence = eventtypesListState.ActiveSortAcsDes;
+              //} else if (eventtypesListState.isPublishedSort) {
+              //  sort.fieldId = "IsPublished";
+              //  sort.sortSequence = eventtypesListState.PublishedSortAcsDes;
             } else {
               sort.fieldId = "ID";
               sort.sortSequence = 0;

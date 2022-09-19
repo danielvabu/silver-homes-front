@@ -9,6 +9,7 @@ import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
+import 'package:silverhome/widget/Landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dart';
 
 typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
@@ -146,16 +147,26 @@ class _EventTypesItemState extends State<EventTypesItem> {
   }
 
   Widget _datavalueUnit(EventTypesDataList model) {
-    return Container(
-      height: 40,
-      width: parte * 20,
-      margin: const EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        model.property_name!,
-        textAlign: TextAlign.start,
-        overflow: TextOverflow.ellipsis,
-        style: MyStyles.Medium(12, myColor.Circle_main),
+    return InkWell(
+      onTap: () {
+        if (model.prop_id != "") {
+          CustomeWidget.getPropertyDetailsByPropertyID(context, model.prop_id!);
+        }
+      },
+      child: Container(
+        height: 40,
+        width: parte * 20,
+        margin: const EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: model.property_name!,
+          child: Text(
+            model.property_name!,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            style: MyStyles.Medium(12, myColor.blue),
+          ),
+        ),
       ),
     );
   }
