@@ -1342,7 +1342,7 @@ class ApiManager {
               ? objRecordInfo['updatedon'].toString()
               : "0";
 
-          EventTypesDataList eventData = new EventTypesDataList();
+          EventTypesDataList eventData = EventTypesDataList();
           eventData.id = ID;
           eventData.property_name = PropertyName;
           eventData.duration = Duration;
@@ -1624,19 +1624,7 @@ class ApiManager {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    /* var myjson = {
-      "DSQID": Weburl.DSQ_PropertyOnBoardingList,
-      "Reqtokens": {"Owner_ID": ownerid, "Name": ""},
-      "LoadLookUpValues": true,
-      "LoadRecordInfo": true,
-      "Sort": [
-        {"FieldID": "ID", "SortSequence": 1}
-      ]
-    };
-
-    String json = jsonEncode(myjson);*/
-
-    Helper.Log("Property", json);
+    Helper.Log("EventTypes", json);
 
     HttpClientCall().DSQAPICall(context, json, (error, respoce) {
       if (error) {
@@ -1648,119 +1636,62 @@ class ApiManager {
           List<List<dynamic>> csvList = [];
 
           List csvHeaderTitle = [];
+          csvHeaderTitle.add("Event Type Name");
           csvHeaderTitle.add("Property Name");
-          csvHeaderTitle.add("# of Unit");
-          csvHeaderTitle.add("City");
-          csvHeaderTitle.add("Country");
-          csvHeaderTitle.add("Property Type");
-          csvHeaderTitle.add("Vacancy");
-          csvHeaderTitle.add("Active/Inactive");
+          csvHeaderTitle.add("Relationship");
+          csvHeaderTitle.add("Duration");
+          csvHeaderTitle.add("Scheduled Slots");
           csvHeaderTitle.add("Publish");
 
           csvList.add(csvHeaderTitle);
 
-          List<PropertyDataList> propertylist = <PropertyDataList>[];
-
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-            String PropertyName = myobject['PropertyName'] != null
-                ? myobject['PropertyName'].toString()
+            String Name =
+                myobject['name'] != null ? myobject['name'].toString() : "";
+
+            String PropertyName = myobject['property_name'] != null
+                ? myobject['property_name'].toString()
                 : "";
 
-            String Other_Property_Type = myobject['Other_Property_Type'] != null
-                ? myobject['Other_Property_Type'].toString()
+            String RelationShip = myobject['relationship'] != null
+                ? myobject['relationship'].toString()
                 : "";
 
-            String Suite_Unit = myobject['Suite_Unit'] != null
-                ? myobject['Suite_Unit'].toString()
+            String Duration = myobject['duration'] != null
+                ? myobject['duration'].toString()
                 : "";
 
-            bool IsActive =
-                myobject['IsActive'] != null ? myobject['IsActive'] : false;
+            String Link =
+                myobject['link'] != null ? myobject['link'].toString() : "";
 
-            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
-                ? myobject['IsAgreed_TandC']
+            int Slots = myobject['slots'] != null ? myobject['slots'] : 0;
+
+            bool IsPublished = myobject['ispublished'] != null
+                ? myobject['ispublished']
                 : false;
-
-            String City =
-                myobject['City'] != null ? myobject['City'].toString() : "";
-
-            String Country = myobject['Country'] != null
-                ? myobject['Country'].toString()
-                : "";
-
-            int PropDrafting =
-                myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
-
-            bool Vacancy =
-                myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
-
-            bool IsPublished = myobject['IsPublished'] != null
-                ? myobject['IsPublished']
-                : false;
-
-            SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
-                ? SystemEnumDetails.fromJson(myobject['Property_Type'])
-                : null;
 
             /*RecordInfo*/
-
-            var objRecordInfo = myobject["RecordInfo"];
-
-            String CreatedOn = objRecordInfo['CreatedOn'] != null
-                ? objRecordInfo['CreatedOn'].toString()
-                : "0";
-
-            String UpdatedOn = objRecordInfo['UpdatedOn'] != null
-                ? objRecordInfo['UpdatedOn'].toString()
-                : "0";
-
-            PropertyDataList propertyData = new PropertyDataList();
-            propertyData.id = ID;
-            propertyData.propertyName = PropertyName;
-            propertyData.otherPropertyType = Other_Property_Type;
-            propertyData.isActive = IsActive;
-            propertyData.isAgreedTandC = IsAgreed_TandC;
-            propertyData.city = City;
-            propertyData.country = Country;
-            propertyData.suiteUnit = Suite_Unit;
-            propertyData.propertyType = Property_Type;
-            propertyData.propDrafting = PropDrafting;
-            propertyData.vacancy = Vacancy;
-            propertyData.isPublished = IsPublished;
-            propertyData.createdOn = CreatedOn;
-            propertyData.updatedOn = UpdatedOn;
+            //var objRecordInfo = myobject["RecordInfo"];
+            //String CreatedOn = objRecordInfo['createdon'] != null ? objRecordInfo['createdon'].toString() : "0";
+            //String UpdatedOn = objRecordInfo['updatedon'] != null ? objRecordInfo['updatedon'].toString() : "0";
 
             List row = [];
+            row.add(Name);
             row.add(PropertyName);
-            row.add(Suite_Unit);
-            row.add(City);
-            row.add(Country);
-            if (Property_Type != null) {
-              if (Property_Type.EnumDetailID == 6) {
-                row.add(Other_Property_Type);
-              } else {
-                row.add(Property_Type.displayValue);
-              }
-            } else {
-              row.add("");
-            }
-
-            row.add(Vacancy);
-            row.add(IsActive ? "Active" : "Inactive");
+            row.add(RelationShip);
+            row.add(Duration);
+            row.add(Slots);
             row.add(IsPublished ? "true" : "false");
 
             csvList.add(row);
           }
-
           csv = const ListToCsvConverter().convert(csvList);
-
-          String filename = "property_" +
-              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-              ".csv";
+          String filename =
+              "eventtypes_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -1770,21 +1701,15 @@ class ApiManager {
             ..href = url
             ..style.display = 'none'
             ..download = filename;
-
-          //property.csv
-
           html.document.body!.children.add(anchor);
-
           anchor.click();
         } else {
           ToastUtils.showCustomToast(
               context, GlobleString.Blank_Landloadview, false);
         }
-
         loader.remove();
       } else {
         loader.remove();
-
         ToastUtils.showCustomToast(context, respoce, false);
       }
     });

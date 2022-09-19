@@ -363,26 +363,22 @@ class _EventTypesScreenState extends State<EventTypesScreen> {
               sort.sortSequence = 0;
             }
           }
-
           sortinglist.add(sort);
-
-          DSQQuery dsqQuery = new DSQQuery();
+          DSQQuery dsqQuery = DSQQuery();
           dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingList;
           dsqQuery.loadLookUpValues = true;
           dsqQuery.loadRecordInfo = true;
           dsqQuery.eventTypesListReqtokens = reqtokens;
           dsqQuery.sort = sortinglist;
-
           String filterjson = jsonEncode(dsqQuery);
-
           await ApiManager()
               .getAllEventTypesOnboadingListCSV(context, filterjson);
         },
         child: Container(
           height: 40,
           width: 20,
-          margin: EdgeInsets.only(right: 5),
-          child: Icon(Icons.more_vert),
+          margin: const EdgeInsets.only(right: 5),
+          child: const Icon(Icons.more_vert),
         ),
         itemBuilder: (context) => [
           PopupMenuItem(
