@@ -150,6 +150,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
     return InkWell(
       onTap: () {
         if (model.prop_id != "") {
+          print("el prop id es: " + model.prop_id!);
           CustomeWidget.getPropertyDetailsByPropertyID(context, model.prop_id!);
         }
       },
