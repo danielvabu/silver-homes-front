@@ -124,11 +124,9 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                     Container(
                                       width: 60.0,
                                       height: 50.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.rectangle,
                                         color: myColor.white,
-                                        border: Border.all(
-                                            width: 2, color: myColor.blue),
                                       ),
                                       child: Image.network(Weburl.image_API +
                                           widget.CompanyLogo.toString()),
