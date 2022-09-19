@@ -419,11 +419,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                               FontWeight.bold)),
                                                   const SizedBox(width: 10),
                                                   Text(
-                                                      '(' +
-                                                          slots[dias[i]]
-                                                              .length
-                                                              .toString() +
-                                                          ' scheduled slots)',
+                                                      '(${slots[dias[i]].length} scheduled slots)',
                                                       style: const TextStyle(
                                                           color: Colors.grey,
                                                           fontSize: 18,
@@ -563,16 +559,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                             width: ancho * 14,
-                                                            child: Text(DateFormat
-                                                                        .jm()
-                                                                    .format(DateTime.parse(
-                                                                        slots[dias[i]][j]
-                                                                            .date_start)) +
-                                                                " - " +
-                                                                DateFormat.jm().format(
-                                                                    DateTime.parse(
-                                                                        slots[dias[i]][j]
-                                                                            .date_end)))),
+                                                            child: Text(
+                                                                "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
                                                         SizedBox(width: ancho),
                                                         SizedBox(
                                                             width: ancho * 25,
@@ -761,7 +749,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
         fontSize: 14.0,
         cornerRadius: 5,
         initialLabelIndex: muestraElListado,
-        activeBgColor: [myColor.text_color],
+        activeBgColor: const [myColor.text_color],
         activeFgColor: Colors.white,
         inactiveBgColor: Colors.white,
         inactiveFgColor: myColor.text_color,

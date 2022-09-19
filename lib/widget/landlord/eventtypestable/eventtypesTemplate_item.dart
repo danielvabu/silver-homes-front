@@ -89,7 +89,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
       itemCount: listdata.length,
       itemBuilder: (BuildContext ctxt, int Index) {
         return Container(
-          height: 40,
+          height: 44,
           color: Index % 2 == 0 ? myColor.TA_dark : myColor.TA_light,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,29 +103,86 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
 
   List<Widget> _tableData(EventTypesDataList model, int Index) {
     var result = <Widget>[];
-    result.add(_datavalueEventTypes(model));
-    // result.add(_datavalueUnit(model));
-    result.add(_datavalueCity(model));
-    result.add(_datavalueCountry(model));
-
-    //  result.add(_datavalueEventTypesType(model));
-
-    // result.add(_datavalueIsPublished(model, Index));
-    // result.add(_datavalueAttendees(model, Index));
+    result.add(_datavalueColor(model, 2));
+    result.add(_datavalueTemplateName(model, 25));
+    result.add(_datavalueRelation(model, 10));
+    result.add(_datavalueDuration(model, 9));
+    result.add(_textTextEmpty(" ", 9)); //Question
+    result.add(_textTextEmpty(" ", 9)); //Routing
+    result.add(_textTextEmpty(" ", 9)); //Noti
+    result.add(_textTextEmpty(" ", 9)); //Reconf
+    result.add(_useBoton(model, 4));
     result.add(_actionPopup(model));
-
     return result;
   }
 
-  Widget _datavalueEventTypes(EventTypesDataList model) {
+  Widget _textTextEmpty(String text, int porcent) {
+    return Container(
+      height: 40,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+          ),
+          const SizedBox(width: 5.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _datavalueColor(model, int porcent) {
+    Map _color1 = {
+      "grey": Colors.grey,
+      "red": Colors.red,
+      "orange": Colors.orange,
+      "yellow": Colors.yellow,
+      "green": Colors.green,
+      "cyan": Colors.cyan,
+      "blue": Colors.blue,
+      "deepPurple": Colors.deepPurple,
+      "purple": Colors.purple,
+      "pink": Colors.pink
+    };
+    return Container(
+      height: 40,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Icon(
+              Icons.circle,
+              color: _color1[model.color],
+              size: 17.0,
+            ),
+          ),
+          const SizedBox(width: 5.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _datavalueTemplateName(EventTypesDataList model, int porcent) {
     return InkWell(
       onTap: () {
         widget._callbackEventTypesName(model);
       },
       child: Container(
         height: 40,
-        width: parte * 25,
-        margin: EdgeInsets.only(left: 10),
+        width: parte * porcent,
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: model.name!,
@@ -140,26 +197,11 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
     );
   }
 
-  Widget _datavalueUnit(EventTypesDataList model) {
+  Widget _datavalueRelation(EventTypesDataList model, int porcent) {
     return Container(
       height: 40,
-      width: parte * 20,
-      margin: EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        model.property_name!,
-        textAlign: TextAlign.start,
-        overflow: TextOverflow.ellipsis,
-        style: MyStyles.Medium(12, myColor.Circle_main),
-      ),
-    );
-  }
-
-  Widget _datavalueCity(EventTypesDataList model) {
-    return Container(
-      height: 40,
-      width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.relationship!,
@@ -170,14 +212,14 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
     );
   }
 
-  Widget _datavalueCountry(EventTypesDataList model) {
+  Widget _datavalueDuration(EventTypesDataList model, int porcent) {
     return Container(
       height: 40,
-      width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.duration! + " Minutes",
+        "${model.duration!} Minutes",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -185,70 +227,16 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
     );
   }
 
-  Widget _datavalueEventTypesType(EventTypesDataList model) {
+  Widget _useBoton(EventTypesDataList model, int porcent) {
     return Container(
-      height: 40,
-      width: parte * 10,
-      margin: EdgeInsets.only(left: 10),
+      height: 30,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
-      child: Text(
-        model.slots.toString()!,
-        textAlign: TextAlign.center,
-        style: MyStyles.Medium(12, myColor.Circle_main),
+      child: InkWell(
+        onTap: () {},
+        child: _useButton(),
       ),
-    );
-  }
-
-  Widget _datavalueIsPublished(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: parte * 10,
-      margin: EdgeInsets.only(left: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlutterSwitch(
-            width: 55.0,
-            height: 25.0,
-            valueFontSize: 10.0,
-            toggleSize: 20.0,
-            value: model.ispublished!,
-            borderRadius: 30.0,
-            padding: 2.0,
-            activeColor: myColor.propertyOn,
-            activeText: "ON",
-            activeTextColor: myColor.white,
-            inactiveColor: myColor.gray,
-            inactiveText: "OFF",
-            inactiveTextColor: myColor.white,
-            showOnOff: true,
-            onToggle: (val) {
-              if (val) {
-                widget._callbackIsPublish(model, index, val);
-              } else {
-                widget._callbackIsPublish(model, index, val);
-              }
-            },
-          ),
-          Expanded(child: Container())
-        ],
-      ),
-    );
-  }
-
-  Widget _datavalueAttendees(EventTypesDataList model, int index) {
-    return Container(
-      height: 40,
-      width: 20,
-      margin: const EdgeInsets.only(left: 5, right: 10.0),
-      alignment: Alignment.center,
-      child: GestureDetector(
-          onTap: () {
-            openDialogListAttendees(model.id!);
-          },
-          child: Icon(Icons.groups)),
     );
   }
 
@@ -257,7 +245,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
       flex: 1,
       child: Container(
         height: 28,
-        margin: EdgeInsets.only(left: 10, right: 20),
+        margin: const EdgeInsets.only(left: 5, right: 10),
         alignment: Alignment.centerRight,
         child: PopupMenuButton(
           onSelected: (value) {
@@ -272,8 +260,8 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
           child: Container(
             height: 40,
             width: 20,
-            margin: EdgeInsets.only(right: 5),
-            child: Icon(Icons.more_vert),
+            margin: const EdgeInsets.only(right: 5),
+            child: const Icon(Icons.more_vert),
           ),
           itemBuilder: (context) => [
             PopupMenuItem(
@@ -315,6 +303,22 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
       builder: (BuildContext context1) {
         return ListOfAttendeesEvent(id);
       },
+    );
+  }
+
+  Widget _useButton() {
+    return Container(
+      height: 32,
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: myColor.blue,
+      ),
+      child: Text(
+        GlobleString.ET_Use,
+        style: MyStyles.Regular(14, myColor.white),
+      ),
     );
   }
 }

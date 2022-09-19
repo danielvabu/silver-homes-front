@@ -62,25 +62,50 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
-    result.add(_headerEventTypesName('Template Name'));
-
-    result.add(_headerCity('Relationship'));
-    result.add(_headerCountry('Duration'));
-    result.add(_headerTextAction('# of Questions'));
-    result.add(_headerTextAction('Routing Logic'));
-    result.add(_headerTextAction('Notifications'));
-    result.add(_headerTextAction('Reconfirmations'));
+    result.add(_headerTextEmpty(" ", 2));
+    result.add(_headerTemplateName('Template Name', 25));
+    result.add(_headerRelation('Relationship', 10));
+    result.add(_headerDuration('Duration', 9));
+    result.add(_headerTextAction('# of Questions', 9));
+    result.add(_headerTextAction('Routing Logic', 9));
+    result.add(_headerTextAction('Notifications', 9));
+    result.add(_headerTextAction('Reconfirmations', 9));
+    result.add(_headerTextEmpty("Use", 4));
+    result.add(_headerTextEmpty(" ", 1));
     return result;
   }
 
-  Widget _headerEventTypesName(String text) {
+  Widget _headerTextEmpty(String text, int porcent) {
+    return Container(
+      height: 40,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+          ),
+          const SizedBox(width: 5.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _headerTemplateName(String text, int porcent) {
     return InkWell(
       onTap: () {
         widget._callbackSortEventTypes();
       },
       child: Container(
         height: 40,
-        width: parte * 25,
+        width: parte * porcent,
         margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -105,49 +130,15 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
     );
   }
 
-  Widget _headerUnit(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortUnit();
-      },
-      child: Container(
-        height: 40,
-        width: parte * 20,
-        margin: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerCity(String text) {
+  Widget _headerRelation(String text, int porcent) {
     return InkWell(
       onTap: () {
         widget._callbackSortCity();
       },
       child: Container(
         height: 40,
-        width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        width: parte * porcent,
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -158,9 +149,7 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -173,15 +162,15 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
     );
   }
 
-  Widget _headerCountry(String text) {
+  Widget _headerDuration(String text, int porcent) {
     return InkWell(
       onTap: () {
         widget._callbackSortCountry();
       },
       child: Container(
         height: 40,
-        width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        width: parte * porcent,
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -192,9 +181,7 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -207,15 +194,15 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
     );
   }
 
-  Widget _headerEventTypesType(String text) {
+  Widget _headerTextAction(String text, int porcent) {
     return InkWell(
       onTap: () {
         widget._callbackSortEventTypesType();
       },
       child: Container(
         height: 40,
-        width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        width: parte * porcent,
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -228,79 +215,7 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
                 style: MyStyles.SemiBold(12, myColor.text_color),
               ),
             ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerVacancy(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortVacancy();
-      },
-      child: Container(
-        height: 40,
-        width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.start,
-              style: MyStyles.SemiBold(12, myColor.text_color),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Image.asset(
-              'assets/images/ic_sort.png',
-              width: 12,
-              height: 12,
-              fit: BoxFit.contain,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _headerTextAction(String text) {
-    return InkWell(
-      onTap: () {
-        widget._callbackSortEventTypesType();
-      },
-      child: Container(
-        height: 40,
-        width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Text(
-                text,
-                textAlign: TextAlign.start,
-                style: MyStyles.SemiBold(12, myColor.text_color),
-              ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,

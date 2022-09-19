@@ -236,11 +236,13 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                             child: Container(),
                                             style: ElevatedButton.styleFrom(
                                                 shape: CircleBorder(),
-                                                padding: EdgeInsets.all(15),
-                                                primary: color1[slotsListState!
-                                                    .eventtypeslist[0]
-                                                    .eventTypesData!
-                                                    .color]),
+                                                backgroundColor: color1[
+                                                    slotsListState!
+                                                        .eventtypeslist[0]
+                                                        .eventTypesData!
+                                                        .color],
+                                                padding:
+                                                    const EdgeInsets.all(15)),
                                           ),
                                         ],
                                       ),
@@ -468,11 +470,8 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                                                     width:
                                                                         ancho *
                                                                             14,
-                                                                    child: Text(DateFormat.jm().format(DateTime.parse(slots[dias[i]][j]
-                                                                            .date_start)) +
-                                                                        " - " +
-                                                                        DateFormat.jm()
-                                                                            .format(DateTime.parse(slots[dias[i]][j].date_end)))),
+                                                                    child: Text(
+                                                                        "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
                                                                 SizedBox(
                                                                     width:
                                                                         ancho),

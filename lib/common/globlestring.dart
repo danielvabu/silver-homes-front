@@ -1939,7 +1939,7 @@ class GlobleString {
   static const String ET_SC_Of_Start_Time = 'of an event start time.';
   static const String ET_SC_Max_Allowed =
       'Maximun allowed events per day for this type of event';
-  //static const String ET_Optional = 'Optional';
+  static const String ET_Use = 'Use';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';

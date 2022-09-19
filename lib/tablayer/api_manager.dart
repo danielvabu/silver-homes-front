@@ -1321,6 +1321,9 @@ class ApiManager {
               ? myobject['prop_id'].toString()
               : "";
 
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
+
           String RelationShip = myobject['relationship'] != null
               ? myobject['relationship'].toString()
               : "";
@@ -1351,6 +1354,7 @@ class ApiManager {
           eventData.id = ID;
           eventData.property_name = PropertyName;
           eventData.propId = PropId;
+          eventData.color = color;
           eventData.duration = Duration;
           eventData.ispublished = ispublished;
           eventData.name = Name;

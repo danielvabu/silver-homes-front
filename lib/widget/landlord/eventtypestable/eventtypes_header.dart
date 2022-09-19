@@ -112,7 +112,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       child: Container(
         height: 40,
         width: parte * 20,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -123,9 +123,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -146,7 +144,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       child: Container(
         height: 40,
         width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -157,9 +155,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -180,7 +176,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       child: Container(
         height: 40,
         width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -191,9 +187,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -214,7 +208,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       child: Container(
         height: 40,
         width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -227,9 +221,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
                 style: MyStyles.SemiBold(12, myColor.text_color),
               ),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -250,7 +242,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       child: Container(
         height: 40,
         width: parte * 10,
-        margin: EdgeInsets.only(left: 10),
+        margin: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -261,9 +253,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -281,7 +271,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
       flex: 1,
       child: Container(
         height: 20,
-        margin: EdgeInsets.only(left: 10, right: 20),
+        margin: const EdgeInsets.only(left: 10, right: 20),
         alignment: Alignment.centerRight,
         child: const Text(""),
       ),
