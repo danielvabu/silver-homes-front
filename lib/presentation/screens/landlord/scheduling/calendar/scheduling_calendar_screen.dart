@@ -67,6 +67,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     "purple": Colors.purple,
     "pink": Colors.pink
   };
+  String CompanyLogo = "";
   @override
   void initState() {
     init();
@@ -76,6 +77,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
   void init() async {
     await Prefs.init();
     apimanager("", 1, "ID", 0, 0);
+    traerlogo();
   }
 
   apimanager(String search, int pageNo, String SortField, int saquence,
@@ -102,6 +104,24 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     String filterjson = jsonEncode(dsqQuery);
     Helper.Log("EventTypesSlots", filterjson);
     await ApiManager().getEventTypesSlots(context, filterjson, ftime);
+  }
+
+  void traerlogo() async {
+    await ApiManager()
+        .landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+            (error, respoce2, landlordProfile) {
+      if (error) {
+        if (landlordProfile!.companylogo != null &&
+            landlordProfile.companylogo!.id != null) {
+          CompanyLogo = landlordProfile.companylogo!.id.toString();
+        } else {
+          CompanyLogo = '1';
+        }
+      } else {
+        //loader.remove();
+        ToastUtils.showCustomToast(context, respoce2, false);
+      }
+    });
   }
 
   final CalendarController _calendarController1 = CalendarController();
@@ -815,7 +835,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                 slot.eventTypesDataId!, slot.date_start!, lista);
           }
           if (value == 2) {
-            openDialogListAttendees(slot, lista);
+            openDialogListAttendees(slot, lista, CompanyLogo);
           }
           if (value == 5) {
             showDialog(
@@ -928,14 +948,15 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     );
   }
 
-  void openDialogListAttendees(Slots slot, List<Slots> lista) {
+  void openDialogListAttendees(
+      Slots slot, List<Slots> lista, String CompanyLogo) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
       barrierDismissible: false,
       builder: (BuildContext context1) {
-        return ListOfAttendees(slot, lista);
+        return ListOfAttendees(slot, lista, CompanyLogo);
       },
     );
   }
