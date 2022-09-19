@@ -6,7 +6,7 @@ class EventTypesDataList {
     this.name,
     this.ispublished,
     this.property_name,
-    this.prop_id,
+    this.propId,
     this.relationship,
     this.duration,
     this.slots,
@@ -18,7 +18,7 @@ class EventTypesDataList {
   String? name;
   bool? ispublished;
   String? property_name;
-  String? prop_id;
+  String? propId;
   String? relationship;
   String? duration;
   int? slots;
@@ -31,7 +31,7 @@ class EventTypesDataList {
         id: json["id"],
         name: json["name"],
         property_name: json["property_name"],
-        prop_id: json["prop_id"],
+        propId: json["prop_id"],
         relationship: json["relationship"],
         ispublished: json["ispublished"],
         duration: json["duration"],
@@ -45,7 +45,7 @@ class EventTypesDataList {
         "id": id,
         "name": name,
         "property_name": property_name,
-        "prop_id": prop_id,
+        "propId": propId,
         "relationShip": relationship,
         "isPublished": ispublished,
         "duration": duration,

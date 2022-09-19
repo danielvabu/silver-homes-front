@@ -1316,8 +1316,8 @@ class ApiManager {
               ? myobject['property_name'].toString()
               : "";
 
-          String PropId = myobject['prop_id'] != null &&
-                  myobject['prop_id'] != "dddddddd-dddd-dddd-dddd-dddddddddddd"
+          String PropId = (myobject['prop_id'] != null &&
+                  myobject['prop_id'] != "dddddddd-dddd-dddd-dddd-dddddddddddd")
               ? myobject['prop_id'].toString()
               : "";
 
@@ -1350,6 +1350,7 @@ class ApiManager {
           EventTypesDataList eventData = EventTypesDataList();
           eventData.id = ID;
           eventData.property_name = PropertyName;
+          eventData.propId = PropId;
           eventData.duration = Duration;
           eventData.ispublished = ispublished;
           eventData.name = Name;
