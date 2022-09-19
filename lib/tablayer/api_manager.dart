@@ -1645,8 +1645,6 @@ class ApiManager {
 
           csvList.add(csvHeaderTitle);
 
-          List<PropertyDataList> propertylist = <PropertyDataList>[];
-
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
@@ -1677,45 +1675,23 @@ class ApiManager {
                 : false;
 
             /*RecordInfo*/
-
-            var objRecordInfo = myobject["RecordInfo"];
-
-            String CreatedOn = objRecordInfo['createdon'] != null
-                ? objRecordInfo['createdon'].toString()
-                : "0";
-
-            String UpdatedOn = objRecordInfo['updatedon'] != null
-                ? objRecordInfo['updatedon'].toString()
-                : "0";
-
-            EventTypesDataList eventData = EventTypesDataList();
-            eventData.id = ID;
-            eventData.property_name = PropertyName;
-            eventData.duration = Duration;
-            eventData.ispublished = IsPublished;
-            eventData.name = Name;
-            eventData.relationship = RelationShip;
-            eventData.url = Link;
-            eventData.slots = Slots;
-            eventData.createdon = CreatedOn;
-            eventData.updatedon = UpdatedOn;
+            //var objRecordInfo = myobject["RecordInfo"];
+            //String CreatedOn = objRecordInfo['createdon'] != null ? objRecordInfo['createdon'].toString() : "0";
+            //String UpdatedOn = objRecordInfo['updatedon'] != null ? objRecordInfo['updatedon'].toString() : "0";
 
             List row = [];
             row.add(Name);
             row.add(PropertyName);
-            row.add(RelationShip == "true" ? "One-on-one" : "Group");
+            row.add(RelationShip);
             row.add(Duration);
             row.add(Slots);
             row.add(IsPublished ? "true" : "false");
 
             csvList.add(row);
           }
-
           csv = const ListToCsvConverter().convert(csvList);
-
-          String filename = "property_" +
-              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-              ".csv";
+          String filename =
+              "eventtypes_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -1725,21 +1701,15 @@ class ApiManager {
             ..href = url
             ..style.display = 'none'
             ..download = filename;
-
-          //property.csv
-
           html.document.body!.children.add(anchor);
-
           anchor.click();
         } else {
           ToastUtils.showCustomToast(
               context, GlobleString.Blank_Landloadview, false);
         }
-
         loader.remove();
       } else {
         loader.remove();
-
         ToastUtils.showCustomToast(context, respoce, false);
       }
     });
