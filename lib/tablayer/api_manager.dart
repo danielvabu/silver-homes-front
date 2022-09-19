@@ -1725,6 +1725,77 @@ class ApiManager {
     });
   }
 
+  getAllEventTypesTemplateOnboadingListCSV(
+      BuildContext context, String json) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    Helper.Log("EventTypesTemplates", json);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        if (data['Result'] != null && data['Result'].length > 0) {
+          String csv;
+
+          List<List<dynamic>> csvList = [];
+
+          List csvHeaderTitle = [];
+          csvHeaderTitle.add("Template Name");
+          csvHeaderTitle.add("Relationship");
+          csvHeaderTitle.add("Duration");
+
+          csvList.add(csvHeaderTitle);
+
+          for (int i = 0; i < data['Result'].length; i++) {
+            var myobject = data['Result'][i];
+
+            String ID = myobject['id'] != null ? myobject['id'].toString() : "";
+
+            String Name =
+                myobject['name'] != null ? myobject['name'].toString() : "";
+
+            String RelationShip = myobject['relationship'] != null
+                ? myobject['relationship'].toString()
+                : "";
+
+            String Duration = myobject['duration'] != null
+                ? myobject['duration'].toString()
+                : "";
+
+            List row = [];
+            row.add(Name);
+            row.add(RelationShip);
+            row.add(Duration);
+            csvList.add(row);
+          }
+          csv = const ListToCsvConverter().convert(csvList);
+          String filename =
+              "et_templates_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
+
+          // prepare
+          final bytes = utf8.encode(csv);
+          final blob = html.Blob([bytes]);
+          final url = html.Url.createObjectUrlFromBlob(blob);
+          final anchor = html.document.createElement('a') as html.AnchorElement
+            ..href = url
+            ..style.display = 'none'
+            ..download = filename;
+          html.document.body!.children.add(anchor);
+          anchor.click();
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
+        }
+        loader.remove();
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(context, respoce, false);
+      }
+    });
+  }
+
   getPropertyDetails(BuildContext context, String id,
       CallBackPropertyDetails CallBackQuesy) async {
     var myjson = {

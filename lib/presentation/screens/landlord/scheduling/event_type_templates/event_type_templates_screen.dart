@@ -172,8 +172,8 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     return Container(
       width: sswidth,
       height: ssheight - 45,
-      margin: EdgeInsets.only(top: 15),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: myColor.white,
         borderRadius: BorderRadius.circular(10),
@@ -244,7 +244,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                                         _timer!.cancel();
                                       }
                                       _timer = Timer.periodic(
-                                          Duration(seconds: 2), (timer) {
+                                          const Duration(seconds: 2), (timer) {
                                         _store.dispatch(
                                             UpdateEventTypesListIsloding(true));
                                         _store.dispatch(UpdateEventTypesList(
@@ -315,7 +315,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
             QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
         List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-            .map((item) => new SystemEnumDetails.clone(item))
+            .map((item) => SystemEnumDetails.clone(item))
             .toList();
 
         _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
@@ -381,8 +381,8 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
           sortinglist.add(sort);
 
-          DSQQuery dsqQuery = new DSQQuery();
-          dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingList;
+          DSQQuery dsqQuery = DSQQuery();
+          dsqQuery.dsqid = Weburl.DSQ_EventTypesOnBoardingListTemp;
           dsqQuery.loadLookUpValues = true;
           dsqQuery.loadRecordInfo = true;
           dsqQuery.eventTypesListReqtokens = reqtokens;
@@ -391,13 +391,13 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
           String filterjson = jsonEncode(dsqQuery);
 
           await ApiManager()
-              .getAllEventTypesOnboadingListCSV(context, filterjson);
+              .getAllEventTypesTemplateOnboadingListCSV(context, filterjson);
         },
         child: Container(
           height: 40,
           width: 20,
-          margin: EdgeInsets.only(right: 5),
-          child: Icon(Icons.more_vert),
+          margin: const EdgeInsets.only(right: 5),
+          child: const Icon(Icons.more_vert),
         ),
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -605,7 +605,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                     child: Container(
                       width: sswidth,
                       height: ssheight - 310,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
                         'no data',
@@ -638,7 +638,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
           Container(
             height: 30,
             width: 80,
-            margin: EdgeInsets.only(left: 10, right: 20),
+            margin: const EdgeInsets.only(left: 10, right: 20),
             alignment: Alignment.center,
             child: DropdownSearch<String>(
               mode: Mode.MENU,
@@ -973,7 +973,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     EventTypesIsPublished proactive = EventTypesIsPublished();
     proactive.IsPublished = isAct;
 
-    EventTypesUpdate eventtypesUpdate = new EventTypesUpdate();
+    EventTypesUpdate eventtypesUpdate = EventTypesUpdate();
     eventtypesUpdate.ID = eventtypesid;
     eventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
