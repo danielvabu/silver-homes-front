@@ -20,13 +20,16 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
+import '../../../tablayer/weburl.dart';
+
 class ListOfAttendees extends StatefulWidget {
   @override
   State<ListOfAttendees> createState() => _ListOfAttendeesState();
   final Slots slot1;
   final List<Slots> listado;
   late List<Slots> s1 = [];
-  ListOfAttendees(this.slot1, this.listado);
+  final String CompanyLogo;
+  ListOfAttendees(this.slot1, this.listado, this.CompanyLogo);
 }
 
 class _ListOfAttendeesState extends State<ListOfAttendees> {
@@ -49,6 +52,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
   @override
   void initState() {
     init();
+
     widget.s1 = widget.listado
         .where((e) =>
             e.date_start == widget.slot1.date_start &&
@@ -116,9 +120,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  if (Prefs.getString(
-                                          PrefsName.BT_CompanyLogoURL) !=
-                                      null)
+                                  if (widget.CompanyLogo != null)
                                     Container(
                                       width: 60.0,
                                       height: 50.0,
@@ -128,13 +130,8 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                         border: Border.all(
                                             width: 2, color: myColor.blue),
                                       ),
-                                      child: Image.network(
-                                        Prefs.getString(
-                                            PrefsName.BT_CompanyLogoURL),
-                                        fit: BoxFit.contain,
-                                        width: 148,
-                                        height: 148,
-                                      ),
+                                      child: Image.network(Weburl.image_API +
+                                          widget.CompanyLogo.toString()),
                                     ),
                                   Container(
                                     alignment: Alignment.topLeft,
