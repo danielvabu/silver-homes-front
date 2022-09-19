@@ -87,7 +87,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
   Widget ListviewBuid(List<TenancyApplication> listdata) {
     return ListView.separated(
       controller: _scrollController,
-      separatorBuilder: (context, index) => Divider(
+      separatorBuilder: (context, index) => const Divider(
         color: myColor.TA_table_header,
         thickness: 0,
         height: 0,
@@ -110,7 +110,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
             listdata[Index].isexpand!
                 ? Container(
                     width: width - 55,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
                           color: myColor.TA_espand_status_Border,
@@ -124,7 +124,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                         left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
@@ -139,7 +139,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                           sentdate: listdata[Index].applicationSentDate!,
                           receivedate: listdata[Index].applicationReceivedDate!,
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         TBLDocumentVerificationStatus(
                           sentdate: listdata[Index].docRequestSentDate!,
                           receivedate: listdata[Index].docReceivedDate!,
@@ -152,7 +152,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                             }
                           },
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[Index].referenceRequestSentDate!,
                           receivedate:
@@ -167,7 +167,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                             }
                           },
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         TBLLeaseAgreementStatus(
                           sentdate: listdata[Index].agreementSentDate!,
                           receivedate: listdata[Index].agreementReceivedDate!,
@@ -181,7 +181,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                       ],
                     ),
                   )
-                : SizedBox()
+                : const SizedBox()
           ],
         );
       },
@@ -218,7 +218,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
       child: Container(
         height: 40,
         width: width / 8,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: model.applicantName!,
@@ -242,7 +242,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
       child: Container(
         height: 40,
         width: width / 8,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: model.propertyName!,
@@ -275,11 +275,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
               },
               ratingset: model.rating!,
               onPressedYes: (double rating, String ratingraview) async {
-                TenancyApplicationID updateid = new TenancyApplicationID();
+                TenancyApplicationID updateid = TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
                 TenancyApplicationUpdateRating updaterating =
-                    new TenancyApplicationUpdateRating();
+                    TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
@@ -299,11 +299,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
       child: Container(
         height: 40,
         width: width / 12,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: RatingBarIndicator(
           rating: model.rating!,
-          itemBuilder: (context, index) => Icon(
+          itemBuilder: (context, index) => const Icon(
             Icons.star,
             color: myColor.blue,
           ),
@@ -319,7 +319,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     return Container(
       height: 40,
       width: width / 7,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         text,
@@ -334,7 +334,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     return Container(
       height: 40,
       width: width / 9,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         text,
@@ -349,13 +349,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     return Container(
       height: 40,
       width: width / 9,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         text != null && text != "0" && text != ""
-            ? new DateFormat("dd-MMM-yyyy")
-                .format(DateTime.parse(text))
-                .toString()
+            ? DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString()
             : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
@@ -368,7 +366,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     return Container(
       height: 28,
       width: width / 6,
-      padding: EdgeInsets.only(left: 2),
+      padding: const EdgeInsets.only(left: 2),
       child: DropdownSearch<SystemEnumDetails>(
         mode: Mode.MENU,
         items: statuslist,
@@ -388,7 +386,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
             updateid.ID = model.id.toString();
 
             TenancyApplicationUpdateStatus updatestatus =
-                new TenancyApplicationUpdateStatus();
+                TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
@@ -481,7 +479,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
         setState(() {});
       },
       child: Container(
-        margin: EdgeInsets.only(left: 15, right: 10),
+        margin: const EdgeInsets.only(left: 15, right: 10),
         height: 40,
         width: widthv,
         alignment: Alignment.center,
@@ -524,11 +522,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
           onPressedYes: () async {
             Navigator.of(context).pop();
 
-            TenancyApplicationID updateid = new TenancyApplicationID();
+            TenancyApplicationID updateid = TenancyApplicationID();
             updateid.ID = model.id.toString();
 
             TenancyApplicationUpdateArchive updateArchive =
-                new TenancyApplicationUpdateArchive();
+                TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
             await ApiManager().UpdateArchiveApplication(
@@ -834,12 +832,12 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     _store.dispatch(UpdateLLTALeadleadList(<TenancyApplication>[]));
     _store.dispatch(UpdateLLTLeadFilterleadList(<TenancyApplication>[]));
 
-    FilterReqtokens reqtokens = new FilterReqtokens();
+    FilterReqtokens reqtokens = FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
     reqtokens.ApplicationStatus = "1";
 
-    FilterData filterData = new FilterData();
+    FilterData filterData = FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
     filterData.LoadLookupValues = true;
     filterData.LoadRecordInfo = true;

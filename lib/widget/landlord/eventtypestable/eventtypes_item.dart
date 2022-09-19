@@ -149,10 +149,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   Widget _datavalueUnit(EventTypesDataList model) {
     return InkWell(
       onTap: () {
-        if (model.prop_id != "") {
-          print("el prop id es: " + model.prop_id!);
-          CustomeWidget.getPropertyDetailsByPropertyID(context, model.prop_id!);
-        }
+        CustomeWidget.getPropertyDetailsByPropertyID(context, model.prop_id!);
       },
       child: Container(
         height: 40,

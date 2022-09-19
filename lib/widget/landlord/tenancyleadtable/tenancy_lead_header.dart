@@ -84,7 +84,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 8,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -95,9 +95,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -118,7 +116,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 8,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -129,9 +127,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -152,7 +148,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 12,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -163,9 +159,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -186,7 +180,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 7,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -197,9 +191,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               textAlign: TextAlign.start,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -220,7 +212,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 9,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -232,9 +224,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               overflow: TextOverflow.ellipsis,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -255,7 +245,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 9,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -267,9 +257,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               overflow: TextOverflow.ellipsis,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -290,7 +278,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       child: Container(
         height: 40,
         width: width / 6,
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -302,9 +290,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
               overflow: TextOverflow.ellipsis,
               style: MyStyles.SemiBold(12, myColor.text_color),
             ),
-            SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5.0),
             Image.asset(
               'assets/images/ic_sort.png',
               width: 12,
@@ -322,7 +308,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
       flex: 1,
       child: Container(
         height: 40,
-        padding: EdgeInsets.only(left: 20),
+        padding: const EdgeInsets.only(left: 20),
         alignment: Alignment.centerRight,
         child: Text(
           "",
@@ -337,7 +323,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
     return Container(
       height: 40,
       width: widthv,
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerRight,
       child: Text(
         text,
