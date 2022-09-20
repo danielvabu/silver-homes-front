@@ -1483,6 +1483,15 @@ class ApiManager {
           String name =
               myobject['name'] != null ? myobject['name'].toString() : "";
 
+          String fname =
+              myobject['fname'] != null ? myobject['fname'].toString() : "";
+
+          String lname =
+              myobject['lname'] != null ? myobject['lname'].toString() : "";
+
+          String phone =
+              myobject['phone'] != null ? myobject['phone'].toString() : "";
+
           String email =
               myobject['email'] != null ? myobject['email'].toString() : "";
           int state = myobject['state'] != null ? myobject['state'] : 0;
@@ -1494,6 +1503,9 @@ class ApiManager {
           eventData.date_start = datestart;
           eventData.date_end = dateend;
           eventData.name = name;
+          eventData.fname = fname;
+          eventData.lname = lname;
+          eventData.phone = phone;
           eventData.email = email;
           eventData.state = state;
           slotslist.add(eventData);

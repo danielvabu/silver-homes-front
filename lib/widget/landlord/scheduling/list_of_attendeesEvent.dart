@@ -437,7 +437,6 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                                     ],
                                                   ),
                                                 ),
-// Este container es el que se debe desplegar o esconder
                                                 if (press[i] == true)
                                                   Container(
                                                     child: Column(
