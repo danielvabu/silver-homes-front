@@ -36,23 +36,23 @@ typedef VoidCallbackSaveandNext = void Function();
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");
 
-class StepEventTypesNotifications extends StatefulWidget {
+class StepEventTypesTemplatesNotifications extends StatefulWidget {
   final VoidCallback _callbackBack;
   final VoidCallbackSaveandNext _callbackSaveandNext;
 
-  StepEventTypesNotifications({
+  StepEventTypesTemplatesNotifications({
     required VoidCallback onPressedBack,
     required VoidCallbackSaveandNext onPressedSave,
   })  : _callbackBack = onPressedBack,
         _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesNotificationsState createState() =>
-      _StepEventTypesNotificationsState();
+  _StepEventTypesTemplatesNotificationsState createState() =>
+      _StepEventTypesTemplatesNotificationsState();
 }
 
-class _StepEventTypesNotificationsState
-    extends State<StepEventTypesNotifications> {
+class _StepEventTypesTemplatesNotificationsState
+    extends State<StepEventTypesTemplatesNotifications> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();
@@ -137,11 +137,11 @@ class _StepEventTypesNotificationsState
   }
 
   Widget UpdateMethod() {
-    if (!firsttime && !AddEditEventTypes.isValueUpdate) {
-      AddEditEventTypes.isValueUpdate = true;
+    if (!firsttime && !AddEditEventTypesTemplates.isValueUpdate) {
+      AddEditEventTypesTemplates.isValueUpdate = true;
       firsttime = false;
     } else if (firsttime) {
-      AddEditEventTypes.isValueUpdate = false;
+      AddEditEventTypesTemplates.isValueUpdate = false;
       firsttime = false;
     }
 

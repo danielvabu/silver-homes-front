@@ -299,7 +299,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
   Widget _addNewLead() {
     return InkWell(
       onTap: () async {
-        AddEditEventTypes.isValueUpdate = false;
+        AddEditEventTypesTemplates.isValueUpdate = false;
         await Prefs.setBool(PrefsName.EventTypesActive, true);
         await Prefs.setBool(PrefsName.EventTypesEdit, false);
         await Prefs.setBool(PrefsName.EventTypesEditMode, false);
@@ -1011,7 +1011,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       if (status) {
         await ApiManager().bindEventTypeData(eventtypesData!);
 
-        AddEditEventTypes.isValueUpdate = false;
+        AddEditEventTypesTemplates.isValueUpdate = false;
 
         await Prefs.setBool(PrefsName.EventTypesEdit, true);
         await Prefs.setBool(PrefsName.EventTypesEditMode, true);
@@ -1024,7 +1024,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
         _store.dispatch(UpdateEventTypesForm(8));
         _store.dispatch(UpdateEventTypesFormAddress(""));
-        _store.dispatch(UpdateAddEditEventTypes());
+        _store.dispatch(UpdateAddEditEventTypesTemplates());
 
         loader.remove();
       } else {

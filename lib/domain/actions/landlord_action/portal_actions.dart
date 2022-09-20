@@ -37,6 +37,16 @@ class UpdateAddEditEventTypes implements Action {
   }
 }
 
+class UpdateAddEditEventTypesTemplates implements Action {
+  UpdateAddEditEventTypesTemplates();
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith
+        .portalState(index: 8, title: 'Event Types Templates', subindex: 31);
+  }
+}
+
 class UpdateDetailsProperty implements Action {
   UpdateDetailsProperty();
 

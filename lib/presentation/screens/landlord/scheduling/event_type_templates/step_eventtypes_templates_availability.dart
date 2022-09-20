@@ -36,23 +36,23 @@ import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes_templates.dart';
 
-class StepEventTypesAvailability extends StatefulWidget {
+class StepEventTypesTemplatesAvailability extends StatefulWidget {
   final VoidCallback _callbackBack;
   final VoidCallback _callbackSaveandNext;
 
-  StepEventTypesAvailability({
+  StepEventTypesTemplatesAvailability({
     required VoidCallback onPressedBack,
     required VoidCallback onPressedSave,
   })  : _callbackBack = onPressedBack,
         _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesAvailabilityState createState() =>
-      _StepEventTypesAvailabilityState();
+  _StepEventTypesTemplatesAvailabilityState createState() =>
+      _StepEventTypesTemplatesAvailabilityState();
 }
 
-class _StepEventTypesAvailabilityState
-    extends State<StepEventTypesAvailability> {
+class _StepEventTypesTemplatesAvailabilityState
+    extends State<StepEventTypesTemplatesAvailability> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();
@@ -73,13 +73,13 @@ class _StepEventTypesAvailabilityState
     Prefs.init();
     filldata();
     initNavigationBack();
-    AddEditEventTypes.isValueUpdate = false;
+    AddEditEventTypesTemplates.isValueUpdate = false;
     super.initState();
   }
 
   _changeData() {
     if (!change) {
-      AddEditEventTypes.isValueUpdate = true;
+      AddEditEventTypesTemplates.isValueUpdate = true;
       change = true;
     }
   }
@@ -179,7 +179,8 @@ class _StepEventTypesAvailabilityState
                                     isFilteredOnline: true,
                                     onChanged: (value) {
                                       _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
+                                      AddEditEventTypesTemplates.isValueUpdate =
+                                          true;
 
                                       _store.dispatch(UpdateTimezon(value!));
 
@@ -370,7 +371,7 @@ class _StepEventTypesAvailabilityState
                                                                         .sunh1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -451,7 +452,7 @@ class _StepEventTypesAvailabilityState
                                                                         .sunh2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -625,7 +626,7 @@ class _StepEventTypesAvailabilityState
                                                                         .monh1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -706,7 +707,7 @@ class _StepEventTypesAvailabilityState
                                                                         .monh2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -880,7 +881,7 @@ class _StepEventTypesAvailabilityState
                                                                         .tueh1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -961,7 +962,7 @@ class _StepEventTypesAvailabilityState
                                                                         .tueh2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1135,7 +1136,7 @@ class _StepEventTypesAvailabilityState
                                                                         .wedh1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1216,7 +1217,7 @@ class _StepEventTypesAvailabilityState
                                                                         .wedh2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1390,7 +1391,7 @@ class _StepEventTypesAvailabilityState
                                                                         .thuh1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1471,7 +1472,7 @@ class _StepEventTypesAvailabilityState
                                                                         .thuh2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1645,7 +1646,7 @@ class _StepEventTypesAvailabilityState
                                                                         .frih1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1726,7 +1727,7 @@ class _StepEventTypesAvailabilityState
                                                                         .frih2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1900,7 +1901,7 @@ class _StepEventTypesAvailabilityState
                                                                         .sath1[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -1981,7 +1982,7 @@ class _StepEventTypesAvailabilityState
                                                                         .sath2[
                                                                     i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypes
+                                                                AddEditEventTypesTemplates
                                                                         .isValueUpdate =
                                                                     true;
 
@@ -2187,8 +2188,8 @@ class _StepEventTypesAvailabilityState
                                             filled: true),
                                         onChanged: (value) {
                                           _changeData();
-                                          AddEditEventTypes.isValueUpdate =
-                                              true;
+                                          AddEditEventTypesTemplates
+                                              .isValueUpdate = true;
 
                                           _store.dispatch(Updatetimescheduling(
                                               int.parse(value)));
@@ -2220,8 +2221,8 @@ class _StepEventTypesAvailabilityState
                                         isFilteredOnline: true,
                                         onChanged: (value) {
                                           _changeData();
-                                          AddEditEventTypes.isValueUpdate =
-                                              true;
+                                          AddEditEventTypesTemplates
+                                              .isValueUpdate = true;
 
                                           _store.dispatch(
                                               Updatetimeschedulingmed(value!));
@@ -2292,7 +2293,8 @@ class _StepEventTypesAvailabilityState
                                       filled: true),
                                   onChanged: (value) {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
 
                                     _store.dispatch(
                                         Updatemaximum(int.parse(value)));

@@ -136,11 +136,11 @@ class _StepEventTypesQuestionsState extends State<StepEventTypesQuestions> {
   }
 
   Widget UpdateMethod() {
-    if (!firsttime && !AddEditEventTypes.isValueUpdate) {
-      AddEditEventTypes.isValueUpdate = true;
+    if (!firsttime && !AddEditEventTypesTemplates.isValueUpdate) {
+      AddEditEventTypesTemplates.isValueUpdate = true;
       firsttime = false;
     } else if (firsttime) {
-      AddEditEventTypes.isValueUpdate = false;
+      AddEditEventTypesTemplates.isValueUpdate = false;
       firsttime = false;
     }
 

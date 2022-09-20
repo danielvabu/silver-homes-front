@@ -27,6 +27,8 @@ import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions
 import 'package:silverhome/domain/entities/eventtypes_amenities.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_summery_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/event_types_form_state.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/step_eventtypes_templates_availability.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/step_eventtypes_templates_setup.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_notifications.dart';
 //import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_feature.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/step_eventtypes_setup.dart';
@@ -46,14 +48,16 @@ import 'package:silverhome/widget/alert_dialogbox.dart';
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");
 
-class AddEditEventTypes extends StatefulWidget {
+class AddEditEventTypesTemplates extends StatefulWidget {
   static bool isValueUpdate = false;
 
   @override
-  _AddEditEventTypesState createState() => _AddEditEventTypesState();
+  _AddEditEventTypesTemplatesState createState() =>
+      _AddEditEventTypesTemplatesState();
 }
 
-class _AddEditEventTypesState extends State<AddEditEventTypes> {
+class _AddEditEventTypesTemplatesState
+    extends State<AddEditEventTypesTemplates> {
   final _store = getIt<AppStore>();
 
   double ssheight = 0, sswidth = 0;
@@ -62,7 +66,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
   @override
   void initState() {
     Prefs.init();
-    AddEditEventTypes.isValueUpdate = false;
+    AddEditEventTypesTemplates.isValueUpdate = false;
     fontload();
     if (!Prefs.getBool(PrefsName.EventTypesEditMode)) {
       // fillAmenities();
@@ -242,7 +246,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                           InkWell(
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                                if (AddEditEventTypes.isValueUpdate)
+                                if (AddEditEventTypesTemplates.isValueUpdate)
                                   showBackDialog(eventtypesFormState, false,
                                       stepper: 1);
                                 else
@@ -278,7 +282,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                           InkWell(
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                                if (AddEditEventTypes.isValueUpdate)
+                                if (AddEditEventTypesTemplates.isValueUpdate)
                                   showBackDialog(eventtypesFormState, false,
                                       stepper: 2);
                                 else
@@ -316,7 +320,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                           InkWell(
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-                                if (AddEditEventTypes.isValueUpdate)
+                                if (AddEditEventTypesTemplates.isValueUpdate)
                                   showBackDialog(eventtypesFormState, false,
                                       stepper: 3);
                                 else
@@ -356,7 +360,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
                                 // _store.dispatch(UpdateEventTypesForm(4));
 
-                                if (AddEditEventTypes.isValueUpdate)
+                                if (AddEditEventTypesTemplates.isValueUpdate)
                                   showBackDialog(eventtypesFormState, false,
                                       stepper: 4);
                                 else
@@ -467,7 +471,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
     switch (val) {
       case 1:
         {
-          return StepEventTypesSetup(
+          return StepEventTypesTemplateSetup(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(2));
             },
@@ -475,12 +479,12 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
         }
       case 2:
         {
-          return StepEventTypesAvailability(
+          return StepEventTypesTemplatesAvailability(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(3));
             },
             onPressedBack: () {
-              if (AddEditEventTypes.isValueUpdate)
+              if (AddEditEventTypesTemplates.isValueUpdate)
                 showBackDialog(eventtypesFormState, false, stepper: 1);
               else
                 _store.dispatch(UpdateEventTypesForm(1));
@@ -494,7 +498,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
               _store.dispatch(UpdateEventTypesForm(4));
             },
             onPressedBack: () {
-              if (AddEditEventTypes.isValueUpdate)
+              if (AddEditEventTypesTemplates.isValueUpdate)
                 showBackDialog(eventtypesFormState, false, stepper: 2);
               else
                 _store.dispatch(UpdateEventTypesForm(2));
@@ -513,7 +517,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                   UpdatePortalPage(8, GlobleString.NAV_Scheduling_event_types));
             },
             onPressedBack: () {
-              if (AddEditEventTypes.isValueUpdate)
+              if (AddEditEventTypesTemplates.isValueUpdate)
                 showBackDialog(eventtypesFormState, false, stepper: 3);
               else
                 _store.dispatch(UpdateEventTypesForm(3));
@@ -528,7 +532,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
           //return StepEventTypesSetup(onPressedSave: () {_store.dispatch(UpdateEventTypesForm(2));},);
 
           // Segunda Pantalla
-          return StepEventTypesSetup(
+          return StepEventTypesTemplateSetup(
             onPressedSave: () {
               _store.dispatch(UpdateEventTypesForm(2));
             },

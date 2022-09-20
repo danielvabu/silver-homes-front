@@ -34,18 +34,20 @@ import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 import '../../../../models/landlord_models/event_types_state.dart';
 import 'add_edit_eventtypes_templates.dart';
 
-class StepEventTypesSetup extends StatefulWidget {
+class StepEventTypesTemplateSetup extends StatefulWidget {
   final VoidCallback _callbackSaveandNext;
 
-  StepEventTypesSetup({
+  StepEventTypesTemplateSetup({
     required VoidCallback onPressedSave,
   }) : _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesSetupState createState() => _StepEventTypesSetupState();
+  _StepEventTypesTemplateSetupState createState() =>
+      _StepEventTypesTemplateSetupState();
 }
 
-class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
+class _StepEventTypesTemplateSetupState
+    extends State<StepEventTypesTemplateSetup> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();
@@ -70,16 +72,16 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
   void initState() {
     Prefs.init();
     traerpropiedades();
-    traerplantillas();
+    //traerplantillas();
     // filldata();
     initNavigationBack();
-    AddEditEventTypes.isValueUpdate = false;
+    AddEditEventTypesTemplates.isValueUpdate = false;
     super.initState();
   }
 
   _changeData() {
     if (!change) {
-      AddEditEventTypes.isValueUpdate = true;
+      AddEditEventTypesTemplates.isValueUpdate = true;
       change = true;
     }
   }
@@ -97,17 +99,17 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     });
   }
 
-  traerplantillas() async {
-    // _store.dispatch(UpdateProperTytypeValue1([]));
-    await ApiManager().getTemplates(context, Prefs.getString(PrefsName.OwnerID),
-        (status, responce, errorlist) {
-      if (status) {
-        _store.dispatch(UpdateProperTytypeList(errorlist));
-      } else {
-        //  _store.dispatch(UpdateProperTytypeValue1([]));
-      }
-    });
-  }
+  // traerplantillas() async {
+  //   // _store.dispatch(UpdateProperTytypeValue1([]));
+  //   await ApiManager().getTemplates(context, Prefs.getString(PrefsName.OwnerID),
+  //       (status, responce, errorlist) {
+  //     if (status) {
+  //       _store.dispatch(UpdateProperTytypeList(errorlist));
+  //     } else {
+  //       //  _store.dispatch(UpdateProperTytypeValue1([]));
+  //     }
+  //   });
+  // }
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
@@ -171,7 +173,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     );
 
     if (pickedDate != null && pickedDate != eventtypesState.dateto) {
-      AddEditEventTypes.isValueUpdate = true;
+      AddEditEventTypesTemplates.isValueUpdate = true;
       _store.dispatch(UpdateDateto2(pickedDate));
       // _store.dispatch(UpdateErrorDateofavailable(false));
     }
@@ -196,7 +198,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     );
 
     if (pickedDate != null && pickedDate != eventtypesState.datefrom) {
-      AddEditEventTypes.isValueUpdate = true;
+      AddEditEventTypesTemplates.isValueUpdate = true;
       _store.dispatch(UpdateDatefrom2(pickedDate));
       //_store.dispatch(UpdateErrorDateofavailable(false));
     }
@@ -233,119 +235,6 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                   node: _focusScopeNode,
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 0, horizontal: 8.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        GlobleString.ET_Apply_Template,
-                                        style:
-                                            MyStyles.Medium(14, myColor.black),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Text(
-                                        GlobleString.Optional,
-                                        style: MyStyles.Light(
-                                            12, myColor.TA_Border),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Container(
-                                  height: 32,
-                                  child: DropdownSearch<EventTypesTemplate>(
-                                    mode: Mode.MENU,
-                                    key: UniqueKey(),
-                                    errorcolor: myColor.errorcolor,
-                                    isError:
-                                        eventtypesState!.error_eventtypestype,
-                                    focuscolor: myColor.blue,
-                                    focusWidth: 2,
-                                    popupBackgroundColor: myColor.white,
-                                    items: eventtypesState.eventtypestypelist,
-                                    defultHeight: eventtypesState
-                                                    .eventtypestypelist.length *
-                                                35 >
-                                            250
-                                        ? 250
-                                        : eventtypesState
-                                                .eventtypestypelist.length *
-                                            35,
-                                    textstyle:
-                                        MyStyles.Medium(14, myColor.text_color),
-                                    itemAsString: (EventTypesTemplate? u) =>
-                                        u != null ? u.name! : "",
-                                    hint: GlobleString.ET_Select_Template,
-                                    selectedItem: eventtypesState
-                                                .eventtypestypeValue !=
-                                            null
-                                        ? eventtypesState.eventtypestypeValue
-                                        : null,
-                                    onChanged: (value) async {
-                                      loader = Helper.overlayLoader(context);
-                                      Overlay.of(context)!.insert(loader);
-                                      String EventTypeId = value!.id.toString();
-                                      await ApiManager()
-                                          .getEventTypesDetailsTemp(
-                                              context, EventTypeId, (status,
-                                                  responce,
-                                                  eventtypesData) async {
-                                        if (status) {
-                                          await ApiManager().bindEventTypeData(
-                                              eventtypesData!);
-
-                                          AddEditEventTypes.isValueUpdate =
-                                              false;
-
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesEdit, true);
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesEditMode,
-                                              true);
-                                          await Prefs.setString(
-                                              PrefsName.EventTypesID,
-                                              eventtypesData.id!);
-
-                                          // await Prefs.setBool(PrefsName.EventTypesAgreeTC, true);
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesStep1, true);
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesStep2, true);
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesStep3, false);
-
-                                          _store.dispatch(
-                                              UpdateEventTypesForm(8));
-                                          _store.dispatch(
-                                              UpdateEventTypesFormAddress(""));
-                                          _store.dispatch(
-                                              UpdateAddEditEventTypes());
-
-                                          loader.remove();
-                                        } else {
-                                          loader.remove();
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 30.0),
-                          Expanded(child: Container()),
-                        ],
-                      ),
                       const SizedBox(height: 20.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -400,7 +289,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         filled: true),
                                     onChanged: (value) {
                                       _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
+                                      AddEditEventTypesTemplates.isValueUpdate =
+                                          true;
                                       _store.dispatch(
                                           UpdateEventTypesName(value));
                                       //_store.dispatch(UpdateErrorEventTypesName(false));
@@ -456,8 +346,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               .EventTypesRelation,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                false;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = false;
 
                                             _store.dispatch(
                                                 UpdateEventTypesRelations(
@@ -487,8 +377,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               .EventTypesRelation,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                false;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = false;
 
                                             _store.dispatch(
                                                 UpdateEventTypesRelations(
@@ -551,8 +441,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         inactiveTextColor: myColor.white,
                                         showOnOff: true,
                                         onToggle: (val) {
-                                          AddEditEventTypes.isValueUpdate =
-                                              false;
+                                          AddEditEventTypesTemplates
+                                              .isValueUpdate = false;
 
                                           _store.dispatch(
                                               UpdateEventTypesShowing(val));
@@ -702,7 +592,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         filled: true),
                                     onChanged: (value) {
                                       _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
+                                      AddEditEventTypesTemplates.isValueUpdate =
+                                          true;
                                       _store.dispatch(UpdateLocation(value));
                                       // _store
                                       //     .dispatch(UpdateErrorProvince(false));
@@ -720,8 +611,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           _store.dispatch(UpdateSPA(value!));
 
                                           if (value == true) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = true;
                                             _store.dispatch(
                                                 UpdateLocation(textprop));
 
@@ -798,7 +689,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                         filled: true),
                                     onChanged: (value) {
                                       _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
+                                      AddEditEventTypesTemplates.isValueUpdate =
+                                          true;
                                       _store.dispatch(
                                           UpdateEventTypesDescription(value));
                                     },
@@ -914,7 +806,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('grey'));
                                   },
@@ -931,7 +824,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store
                                         .dispatch(UpdateEventTypesColor('red'));
                                   },
@@ -948,7 +842,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('orange'));
                                   },
@@ -965,7 +860,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('yellow'));
                                   },
@@ -982,7 +878,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('green'));
                                   },
@@ -999,7 +896,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('cyan'));
                                   },
@@ -1016,7 +914,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('blue'));
                                   },
@@ -1033,7 +932,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('deepPurple'));
                                   },
@@ -1050,7 +950,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('purple'));
                                   },
@@ -1067,7 +968,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 ElevatedButton(
                                   onPressed: () {
                                     _changeData();
-                                    AddEditEventTypes.isValueUpdate = true;
+                                    AddEditEventTypesTemplates.isValueUpdate =
+                                        true;
                                     _store.dispatch(
                                         UpdateEventTypesColor('pink'));
                                   },
@@ -1124,8 +1026,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = true;
                                             _store.dispatch(
                                                 UpdateEventTypesRanges(1));
                                           },
@@ -1231,8 +1133,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = true;
                                             _store.dispatch(
                                                 UpdateEventTypesRanges(2));
                                           },
@@ -1412,8 +1314,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               eventtypesState.EventTypesRange,
                                           activeColor: myColor.Circle_main,
                                           onChanged: (value) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
+                                            AddEditEventTypesTemplates
+                                                .isValueUpdate = true;
                                             _store.dispatch(
                                                 UpdateEventTypesRanges(3));
                                           },
@@ -1572,7 +1474,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     filled: true),
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store.dispatch(
                                       UpdateDuration(int.parse(value)));
@@ -1604,7 +1507,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store.dispatch(UpdateDurationp(value!));
 
@@ -1698,7 +1602,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     filled: true),
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store
                                       .dispatch(UpdateBefore(int.parse(value)));
@@ -1730,7 +1635,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store.dispatch(UpdateBeforep(value!));
                                 },
@@ -1789,7 +1695,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     filled: true),
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store
                                       .dispatch(UpdateAfter(int.parse(value)));
@@ -1821,7 +1728,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
-                                  AddEditEventTypes.isValueUpdate = true;
+                                  AddEditEventTypesTemplates.isValueUpdate =
+                                      true;
 
                                   _store.dispatch(UpdateAfterp(value!));
                                 },
@@ -1889,7 +1797,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               filled: true),
                           onChanged: (value) {
                             _changeData();
-                            AddEditEventTypes.isValueUpdate = true;
+                            AddEditEventTypesTemplates.isValueUpdate = true;
                             _store
                                 .dispatch(UpdateEventTypesConfirmation(value));
                           },
@@ -1911,11 +1819,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
 
   // Widget UpdateMethod() {
   //   if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
-  //     if (!firsttime && !AddEditEventTypes.isValueUpdate) {
-  //       AddEditEventTypes.isValueUpdate = true;
+  //     if (!firsttime && !AddEditEventTypesTemplates.isValueUpdate) {
+  //       AddEditEventTypesTemplates.isValueUpdate = true;
   //       firsttime = false;
   //     } else if (firsttime) {
-  //       AddEditEventTypes.isValueUpdate = false;
+  //       AddEditEventTypesTemplates.isValueUpdate = false;
   //       firsttime = false;
   //     }
   //   }
@@ -2046,7 +1954,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
           }
         });
       } else {
-        ApiManager().InsertEventTypesDetails(context, eventtypesInsert,
+        ApiManager().InsertEventTypesDetailsTemplates(context, eventtypesInsert,
             (error, respoce) async {
           if (error) {
             await Prefs.setBool(PrefsName.EventTypesEdit, true);
