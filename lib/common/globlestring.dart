@@ -1940,9 +1940,11 @@ class GlobleString {
   static const String ET_SC_Max_Allowed =
       'Maximun allowed events per day for this type of event';
   static const String ET_Use = 'Use';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
-  //static const String ET_Optional = 'Optional';
+  static const String ET_First_Name = 'First Name:';
+  static const String ET_Last_Name = 'Last Name:';
+  static const String ET_Phone = 'Phone :';
+  static const String ET_Email = 'Email:';
+  static const String ET_Confirmed = 'Confirmed';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';

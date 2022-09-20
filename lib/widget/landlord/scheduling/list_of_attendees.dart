@@ -293,51 +293,56 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 0, vertical: 5),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              const SizedBox(width: 10),
+                                              const SizedBox(width: 20),
                                               SizedBox(
-                                                  width: 8 * 20,
+                                                  width: 150.0,
                                                   child: Text(
                                                       "${DateFormat.jm().format(DateTime.parse(widget.s1[i].date_start ?? ""))} - ${DateFormat.jm().format(DateTime.parse(widget.s1[i].date_end ?? ""))}")),
-                                              const SizedBox(width: 8),
+                                              const SizedBox(width: 10.0),
                                               SizedBox(
-                                                  width: 8 * 30,
+                                                  width: 375.0,
                                                   child: Text(
                                                       widget.s1[i].name ?? "",
                                                       maxLines: 3)),
                                               const SizedBox(width: 8),
                                               const SizedBox(
-                                                width: 8 * 25,
-                                                child: Text('Confirmed',
+                                                width: 165.0,
+                                                child: Text(
+                                                    GlobleString.ET_Confirmed,
                                                     style: TextStyle(
                                                         color:
                                                             myColor.CAL_green)),
                                               ),
                                               const SizedBox(width: 8),
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (press[i]) {
-                                                      press[i] = false;
-                                                    } else {
-                                                      press[i] = true;
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 15, right: 10),
-                                                  height: 40,
-                                                  width: 30,
-                                                  alignment: Alignment.center,
-                                                  child: Image.asset(
-                                                    press[i]
-                                                        ? "assets/images/circle_up.png"
-                                                        : "assets/images/circle_down.png",
-                                                    height: 19,
+                                              Expanded(
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      if (press[i]) {
+                                                        press[i] = false;
+                                                      } else {
+                                                        press[i] = true;
+                                                      }
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 15,
+                                                            right: 10),
+                                                    height: 40,
+                                                    width: 30,
                                                     alignment: Alignment.center,
+                                                    child: Image.asset(
+                                                      press[i]
+                                                          ? "assets/images/circle_up.png"
+                                                          : "assets/images/circle_down.png",
+                                                      height: 19,
+                                                      alignment:
+                                                          Alignment.center,
+                                                    ),
                                                   ),
                                                 ),
                                               )
@@ -351,12 +356,106 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                 : myColor.TA_light,
                                             width: double.infinity,
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 15, vertical: 0),
+                                                horizontal: 20, vertical: 0),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 const Divider(),
+                                                const SizedBox(height: 5.0),
+                                                Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        const SizedBox(
+                                                            width: 160),
+                                                        const Text(
+                                                            GlobleString
+                                                                .ET_First_Name,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 8.0),
+                                                        Text(widget
+                                                                .s1[i].fname ??
+                                                            ""),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                        height: 10.0),
+                                                    Row(
+                                                      children: [
+                                                        const SizedBox(
+                                                            width: 160),
+                                                        const Text(
+                                                            GlobleString
+                                                                .ET_Last_Name,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 8.0),
+                                                        Text(widget
+                                                                .s1[i].lname ??
+                                                            ""),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                        height: 10.0),
+                                                    Row(
+                                                      children: [
+                                                        const SizedBox(
+                                                            width: 160),
+                                                        const Text(
+                                                            GlobleString
+                                                                .ET_Email,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 8.0),
+                                                        Text(widget
+                                                                .s1[i].email ??
+                                                            ""),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                        height: 10.0),
+                                                    Row(
+                                                      children: [
+                                                        const SizedBox(
+                                                            width: 160),
+                                                        const Text(
+                                                            GlobleString
+                                                                .ET_Phone,
+                                                            style: TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 8.0),
+                                                        Text(widget
+                                                                .s1[i].phone ??
+                                                            ""),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 5.0),
+                                                const Divider(),
+                                                const SizedBox(height: 5.0),
                                                 Text(
                                                   GlobleString.LMV_AV_Rating,
                                                   style: MyStyles.Medium(

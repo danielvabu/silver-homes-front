@@ -8,12 +8,18 @@ class Slots {
       this.date_start,
       this.date_end,
       this.name,
+      this.fname,
+      this.lname,
+      this.phone,
       this.email,
       this.state});
   int? eventTypesDataId;
   String? date_start;
   String? date_end;
   String? name;
+  String? fname;
+  String? lname;
+  String? phone;
   String? email;
   int? state;
   EventTypesData? eventTypesData;
@@ -24,6 +30,9 @@ class Slots {
       date_start: json["date_start"],
       date_end: json["date_end"],
       name: json["name"],
+      fname: json["fname"],
+      lname: json["lname"],
+      phone: json["phone"],
       email: json["email"],
       state: json["state"]);
 
@@ -33,6 +42,9 @@ class Slots {
         "date_start": date_start,
         "date_end": date_end,
         "name": name,
+        "fname": fname,
+        "lname": lname,
+        "phone": phone,
         "email": email,
         "state": state
       };
