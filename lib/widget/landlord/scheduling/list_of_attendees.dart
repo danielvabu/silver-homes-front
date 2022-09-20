@@ -299,18 +299,8 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                               const SizedBox(width: 10),
                                               SizedBox(
                                                   width: 8 * 20,
-                                                  child: Text(DateFormat.jm()
-                                                          .format(DateTime
-                                                              .parse(widget
-                                                                      .s1[i]
-                                                                      .date_start ??
-                                                                  "")) +
-                                                      " - " +
-                                                      DateFormat.jm().format(
-                                                          DateTime.parse(widget
-                                                                  .s1[i]
-                                                                  .date_end ??
-                                                              "")))),
+                                                  child: Text(
+                                                      "${DateFormat.jm().format(DateTime.parse(widget.s1[i].date_start ?? ""))} - ${DateFormat.jm().format(DateTime.parse(widget.s1[i].date_end ?? ""))}")),
                                               const SizedBox(width: 8),
                                               SizedBox(
                                                   width: 8 * 30,
@@ -447,8 +437,6 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                   children: [
                                                     InkWell(
                                                       onTap: () async {
-// TenancyApplicationID updateid = TenancyApplicationID();
-// updateid.ID = model.applicantId.toString();
                                                         TenancyApplicationUpdateRating2
                                                             updaterating =
                                                             TenancyApplicationUpdateRating2();
@@ -470,7 +458,6 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                                     responce) async {
                                                           //if (status) {leadcallApi();}
                                                         });
-
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
