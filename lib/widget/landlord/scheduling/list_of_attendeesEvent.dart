@@ -235,7 +235,7 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                             onPressed: () {},
                                             child: Container(),
                                             style: ElevatedButton.styleFrom(
-                                                shape: CircleBorder(),
+                                                shape: const CircleBorder(),
                                                 backgroundColor: color1[
                                                     slotsListState!
                                                         .eventtypeslist[0]
@@ -404,7 +404,6 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                                       ),
                                                       InkWell(
                                                         onTap: () {
-                                                          //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
                                                           setState(() {
                                                             if (press[i]) {
                                                               press[i] = false;
