@@ -754,6 +754,31 @@ class ApiManager {
     });
   }
 
+  UpdateEventTypesDetailsTemplate(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type_templates,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        loader.remove();
+        CallBackQuesy(true, Result);
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   UpdateEventTypesDetailsTemplates(BuildContext context, Object CPOJO,
       Object UpPOJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
@@ -924,6 +949,30 @@ class ApiManager {
     });
   }
 
+  AddEventTypesAvailabilityTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AvailabilityTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   AddEventTypesAvailabilityTime(
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
@@ -945,6 +994,30 @@ class ApiManager {
     });
   }
 
+  AddEventTypesAvailabilityTimeTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AvailabilityTimeTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   AddOverider(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
@@ -952,6 +1025,30 @@ class ApiManager {
     String query = QueryFilter().InsertQuery(
         POJO,
         etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  AddOveriderTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.availability_overridesTemplate,
         eConjuctionClause().AND,
         eRelationalOperator().EqualTo);
 
@@ -9878,6 +9975,61 @@ class ApiManager {
     String query = QueryFilter().DeleteQuery(
         POJO,
         etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+//templates
+  DeleteavailabilityTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AvailabilityTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+  DeleteavailabilityTimeTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AvailabilityTimeTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        callBackQuesy(true, respoce);
+      } else {
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, "");
+      }
+    });
+  }
+
+  DeleteOveriderTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.availability_overridesTemplate,
         eConjuctionClause().AND,
         eRelationalOperator().EqualTo);
 

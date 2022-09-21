@@ -2424,22 +2424,22 @@ class _StepEventTypesTemplatesAvailabilityState
       currentAvability.event_type_id =
           int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-      ApiManager().Deleteavailability(context, currentAvability,
+      ApiManager().DeleteavailabilityTemplate(context, currentAvability,
           (status, responce) {
         AviabilityTimedel currentAvabilityTime = new AviabilityTimedel();
         currentAvabilityTime.eventtype =
             int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-        ApiManager().DeleteavailabilityTime(context, currentAvabilityTime,
-            (status, responce) {
+        ApiManager().DeleteavailabilityTimeTemplate(
+            context, currentAvabilityTime, (status, responce) {
           //sunday
           if (eventtypesState.sun) {
-            EventTypesAvailability eventtypesAvailability =
-                new EventTypesAvailability();
-            eventtypesAvailability.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability.weekday = 1;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.sunh1.length; i++) {
@@ -2453,7 +2453,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.sunh2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2471,12 +2471,12 @@ class _StepEventTypesTemplatesAvailabilityState
           }
           //monday
           if (eventtypesState.mon) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 2;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.monh1.length; i++) {
@@ -2490,7 +2490,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.monh2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2509,12 +2509,12 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //tuesday
           if (eventtypesState.tue) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 3;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.tueh1.length; i++) {
@@ -2528,7 +2528,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.tueh2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2547,12 +2547,12 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //wetday
           if (eventtypesState.wed) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 4;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.wedh1.length; i++) {
@@ -2566,7 +2566,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.wedh2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2585,12 +2585,12 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //thuday
           if (eventtypesState.thu) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 5;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.thuh1.length; i++) {
@@ -2604,7 +2604,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.thuh2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2623,12 +2623,12 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //friday
           if (eventtypesState.fri) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 6;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.frih1.length; i++) {
@@ -2642,7 +2642,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.frih2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2661,12 +2661,12 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //saturday
           if (eventtypesState.sat) {
-            EventTypesAvailability eventtypesAvailability2 =
-                new EventTypesAvailability();
-            eventtypesAvailability2.event_type_id =
+            EventTypesAvailabilityTemplate eventtypesAvailability2 =
+                new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id =
                 int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 7;
-            ApiManager().AddEventTypesAvailability(
+            ApiManager().AddEventTypesAvailabilityTemplate(
                 context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.sath1.length; i++) {
@@ -2680,7 +2680,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       eventtypesState.sath2[i];
                   eventtypesAvailabilitytime.eventtype =
                       int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTime(
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
                       context, eventtypesAvailabilitytime,
                       (error, responce) async {
                     if (error) {
@@ -2714,17 +2714,17 @@ class _StepEventTypesTemplatesAvailabilityState
 
 //ee
 
-      overiderdel overdel = new overiderdel();
-      overdel.event_type_id =
+      overiderdelTemplate overdel = new overiderdelTemplate();
+      overdel.event_type_template_id =
           int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-      ApiManager().DeleteOverider(context, overdel, (status, responce) {
+      ApiManager().DeleteOveriderTemplate(context, overdel, (status, responce) {
         for (int i = 0; i < eventtypesState.overrrides.length; i++) {
-          Newoverides newoverides = Newoverides();
-          newoverides.event_type_id =
+          NewoveridesTemplate newoverides = NewoveridesTemplate();
+          newoverides.event_type_template_id =
               int.parse(Prefs.getString(PrefsName.EventTypesID));
           newoverides.date_overrides = eventtypesState.overrrides[i];
-          ApiManager().AddOverider(context, newoverides,
+          ApiManager().AddOveriderTemplate(context, newoverides,
               (error, responce) async {
             if (error) {
             } else {
@@ -2739,7 +2739,7 @@ class _StepEventTypesTemplatesAvailabilityState
 
 //ee
 
-      ApiManager().UpdateEventTypesDetails(
+      ApiManager().UpdateEventTypesDetailsTemplate(
           context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
         if (error) {
         } else {}

@@ -1736,6 +1736,24 @@ class Newoverides {
       };
 }
 
+class NewoveridesTemplate {
+  int? event_type_template_id;
+  String? date_overrides;
+
+  NewoveridesTemplate({this.event_type_template_id, this.date_overrides});
+
+  factory NewoveridesTemplate.fromJson(Map<String, dynamic> json) =>
+      NewoveridesTemplate(
+        event_type_template_id: json["event_type_template_id"],
+        date_overrides: json["date_overrides"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_template_id": event_type_template_id,
+        "date_overrides": date_overrides,
+      };
+}
+
 class PropertyUpdate {
   String? ID;
   String? Owner_ID;
@@ -1917,6 +1935,24 @@ class EventTypesRestriction {
   Map<String, dynamic> toJson() => {
         "Prop_ID": Prop_ID,
         "Restrictions": Restrictions,
+      };
+}
+
+class EventTypesAvailabilityTemplate {
+  int? event_type_template_id;
+  int? weekday;
+
+  EventTypesAvailabilityTemplate({this.event_type_template_id, this.weekday});
+
+  factory EventTypesAvailabilityTemplate.fromJson(Map<String, dynamic> json) =>
+      EventTypesAvailabilityTemplate(
+        event_type_template_id: json["event_type_template_id"],
+        weekday: json["weekday"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_template_id": event_type_template_id,
+        "weekday": weekday,
       };
 }
 
@@ -2391,6 +2427,23 @@ class overiderdel {
 
   Map<String, dynamic> toJson() => {
         "event_type_id": event_type_id,
+      };
+}
+
+class overiderdelTemplate {
+  int? event_type_template_id;
+
+  overiderdelTemplate({
+    this.event_type_template_id,
+  });
+
+  factory overiderdelTemplate.fromJson(Map<String, dynamic> json) =>
+      overiderdelTemplate(
+        event_type_template_id: json["event_type_template_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "event_type_template_id": event_type_template_id,
       };
 }
 

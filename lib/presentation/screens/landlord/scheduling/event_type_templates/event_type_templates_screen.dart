@@ -324,7 +324,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
         _store.dispatch(UpdateEventTypesForm(8));
         _store.dispatch(UpdateEventTypesFormAddress(""));
-        _store.dispatch(UpdateAddEditEventTypes());
+        _store.dispatch(UpdateAddEditEventTypesTemplates());
       },
       child: CustomeWidget.AddEventTypes(),
     );
