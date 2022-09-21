@@ -12600,7 +12600,7 @@ class ApiManager {
     Overlay.of(context)!.insert(loader);*/
 
     var myjson = {
-      "DSQID": Weburl.DSQ_EventTypesOnBoardingListTemp,
+      "DSQID": Weburl.DSQ_EventTypesOnBoardingListTempver,
       "Reqtokens": {"Owner_ID": ownerid, "Name": ""},
       "LoadLookUpValues": false,
       "LoadRecordInfo": false

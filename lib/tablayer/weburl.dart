@@ -151,6 +151,9 @@ class Weburl {
   static var DSQ_EventTypesOnBoardingListTemp =
       "A31C1BFE-C78D-425F-B9F5-F7D2A6B60999";
 
+  static var DSQ_EventTypesOnBoardingListTempver =
+      "A31C1BFE-C78D-425F-B9F5-F7D2A6B60992";
+
   static var DSQ_getNamesEvent = "A31C1BFE-C78D-425F-B9F5-F7D2A6B60NNN";
   static var DSQ_EventTypesSlots = "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE2";
   static var DSQ_EventTypesSlots1 = "A31C1BFE-C78D-425F-B9F5-F7D2A6B60BE1";
