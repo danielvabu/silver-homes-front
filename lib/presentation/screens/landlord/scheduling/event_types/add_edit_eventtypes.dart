@@ -128,7 +128,7 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                       border: Border.all(
                           color: myColor.application_boreder, width: 1),
                     ),
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: [
                         _headerView(eventtypesFormState!),
@@ -172,8 +172,8 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
                                             },
                                             child: Container(
                                               width: 100,
-                                              margin:
-                                                  EdgeInsets.only(right: 10),
+                                              margin: const EdgeInsets.only(
+                                                  right: 10),
                                               alignment: Alignment.centerRight,
                                               child: Text(
                                                 'Export',
