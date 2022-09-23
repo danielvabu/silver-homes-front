@@ -413,7 +413,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               width: 1.0),
                                         ),
                                         isDense: true,
-                                        contentPadding: EdgeInsets.all(12),
+                                        contentPadding:
+                                            const EdgeInsets.all(12),
                                         fillColor: myColor.white,
                                         filled: true),
                                     onChanged: (value) {
@@ -550,8 +551,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   const SizedBox(height: 5.0),
                                   Row(
                                     children: [
-                                      Text(GlobleString.ET_Is_Showing),
-                                      SizedBox(width: 5.0),
+                                      const Text(GlobleString.ET_Is_Showing),
+                                      const SizedBox(width: 5.0),
                                       FlutterSwitch(
                                         width: 55.0,
                                         height: 25.0,
@@ -679,7 +680,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                                 width: 1.0),
                                           ),
                                           isDense: true,
-                                          contentPadding: EdgeInsets.all(12),
+                                          contentPadding:
+                                              const EdgeInsets.all(12),
                                           fillColor: myColor.white,
                                           filled: true),
                                     ),
@@ -746,7 +748,8 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               width: 1.0),
                                         ),
                                         isDense: true,
-                                        contentPadding: EdgeInsets.all(12),
+                                        contentPadding:
+                                            const EdgeInsets.all(12),
                                         fillColor: myColor.white,
                                         filled: true),
                                     onChanged: (value) {
@@ -896,11 +899,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     padding: const EdgeInsets.only(
                                         left: 10, right: 10),
                                     child: Text(
-                                      Weburl.Email_URL +
-                                          "events/" +
-                                          Prefs.getString(
-                                              PrefsName.user_CompanyName) +
-                                          "/",
+                                      "${Weburl.Email_URL}events/${Prefs.getString(PrefsName.user_CompanyName)}/",
                                       style: MyStyles.Medium(14, myColor.black),
                                       textAlign: TextAlign.start,
                                     ),
@@ -985,9 +984,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(), //Icon(Icons.check),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.grey),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.grey,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1002,9 +1001,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           ? Icon(Icons.check)
                                           : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.red),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.red,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1019,9 +1018,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.orange),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.orange,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1036,9 +1035,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.yellow),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.yellow,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1053,9 +1052,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.green),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.green,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1070,9 +1069,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.cyan),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.cyan,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1087,9 +1086,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.blue),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.blue,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1104,9 +1103,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.deepPurple),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.deepPurple,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1121,9 +1120,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.purple),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.purple,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                                 const SizedBox(width: 1.0),
                                 ElevatedButton(
@@ -1138,9 +1137,9 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       ? Icon(Icons.check)
                                       : Container(),
                                   style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                      padding: EdgeInsets.all(15),
-                                      primary: Colors.pink),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: Colors.pink,
+                                      padding: const EdgeInsets.all(15)),
                                 ),
                               ],
                             ),
@@ -1308,7 +1307,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   if (eventtypesState.EventTypesRange == 2)
                                     Row(
                                       children: [
-                                        SizedBox(width: 22.0),
+                                        const SizedBox(width: 22.0),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1655,7 +1654,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 focuscolor: myColor.blue,
                                 focusWidth: 2,
                                 popupBackgroundColor: myColor.white,
-                                items: ["minutes", "hours"],
+                                items: const ["minutes", "hours"],
                                 defultHeight: 80,
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
@@ -1872,7 +1871,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 focuscolor: myColor.blue,
                                 focusWidth: 2,
                                 popupBackgroundColor: myColor.white,
-                                items: ["minutes", "hours"],
+                                items: const ["minutes", "hours"],
                                 defultHeight: 80,
                                 textstyle:
                                     MyStyles.Medium(14, myColor.text_color),
@@ -2031,7 +2030,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
     } else {
       // _store.dispatch(UpdateLocation(locationcontroler.text));
       //_store.dispatch(UpdateURL(linkcontroller.text));
-      EventTypesInsert eventtypesInsert = new EventTypesInsert();
+      EventTypesInsert eventtypesInsert = EventTypesInsert();
       eventtypesInsert.name = eventtypesState.EventTypesName;
       eventtypesInsert.relation = eventtypesState.EventTypesRelation;
       eventtypesInsert.showing = eventtypesState.EventTypesShowing;
@@ -2064,7 +2063,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
       //updateSummeryData(eventtypesState);
 
       if (Prefs.getBool(PrefsName.EventTypesEdit)) {
-        EventTypesUpdate ceventtypesUpdate = new EventTypesUpdate();
+        EventTypesUpdate ceventtypesUpdate = EventTypesUpdate();
         ceventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
         ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
