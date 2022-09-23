@@ -215,7 +215,7 @@ class _AddEditEventTypesTemplatesState
               Row(
                 children: [
                   Text(
-                    GlobleString.ET_New_Event_Type,
+                    GlobleString.ET_New_Event_Type_Template,
                     style: MyStyles.Bold(25, myColor.Circle_main),
                   ),
                 ],

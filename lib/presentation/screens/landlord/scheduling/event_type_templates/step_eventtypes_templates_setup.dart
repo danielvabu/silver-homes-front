@@ -1912,7 +1912,7 @@ class _StepEventTypesTemplateSetupState
         ceventtypesUpdate.ID = Prefs.getString(PrefsName.EventTypesID);
         ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-        ApiManager().UpdateEventTypesDetails(
+        ApiManager().UpdateEventTypesDetailsTemplate(
             context, ceventtypesUpdate, eventtypesInsert,
             (error, respoce) async {
           if (error) {

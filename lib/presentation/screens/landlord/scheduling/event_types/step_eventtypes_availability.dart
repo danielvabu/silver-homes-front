@@ -31,6 +31,7 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
+import 'package:silverhome/widget/landlord/scheduling/copyh.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 import '../../../../models/landlord_models/event_types_state.dart';
@@ -521,7 +522,11 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.sunh2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(eventtypesState, "Sunday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -776,7 +781,11 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.monh2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(eventtypesState, "Monday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -1031,7 +1040,12 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.tueh2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(
+                                                eventtypesState, "Tuesday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -1286,7 +1300,12 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.wedh2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(
+                                                eventtypesState, "Wednesday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -1541,7 +1560,12 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.thuh2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(
+                                                eventtypesState, "Thursday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -1796,7 +1820,11 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.frih2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(eventtypesState, "Friday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -2051,7 +2079,12 @@ class _StepEventTypesAvailabilityState
                                                 eventtypesState.sath2));
                                           }),
                                       const SizedBox(width: 10.0),
-                                      Icon(Icons.copy),
+                                      GestureDetector(
+                                          onTap: () {
+                                            copyday1(
+                                                eventtypesState, "Saturday");
+                                          },
+                                          child: Icon(Icons.copy)),
                                       const SizedBox(width: 15.0),
                                     ],
                                   ),
@@ -2920,5 +2953,17 @@ class _StepEventTypesAvailabilityState
         ", " +
         fecha.year.toString();
     //  date.year.toString();
+  }
+
+  void copyday1(EventTypesState eventtypesData, String day) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context1) {
+        return Copyh(eventtypesData, day);
+      },
+    );
   }
 }

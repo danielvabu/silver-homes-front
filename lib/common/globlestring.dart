@@ -1813,6 +1813,8 @@ class GlobleString {
   static const String LMV_DL_Vendor_btn_Delete = "Delete";
   static const String LMV_DL_EvenType =
       "Are you sure you want to delete this Event Type?";
+  static const String LMV_DL_EvenTypeTemplate =
+      "Are you sure you want to delete this Event Type Template?";
   static const String LMV_DL_Slot =
       "Are you sure you want to delete this Slot?";
 
@@ -1865,6 +1867,8 @@ class GlobleString {
 
   static const String Share_Link = "Share Link";
   static const String Copy_Link = "Copy Link";
+  static const String Copy_Linkday = "Copy to";
+  static const String Copy_Linkdaybutton = "Copy";
   static const String Guests = "Guests";
   static const String Minutes = 'minutes';
   static const String Hours = 'Hours';
@@ -1886,6 +1890,7 @@ class GlobleString {
 
   /*EventTypes*/
   static const String ET_New_Event_Type = "New Event Type";
+  static const String ET_New_Event_Type_Template = "New Event Type Template";
   static const String ET_Event_Setup = 'Event Setup';
   static const String ET_Availability = 'Availability';
   static const String ET_Invitee_Questions = 'Invitee Questions';
@@ -2029,6 +2034,8 @@ class GlobleString {
       "The vendor has been deleted.";
   static const String EventType_delete_successfully =
       "The Event Type has been deleted.";
+  static const String EventTypeTemplate_delete_successfully =
+      "The Event Type Template has been deleted.";
   static const String Slots_Delete = "The Slot has been deleted.";
 
   static const String maintenance_Delete_image_title =

@@ -61,6 +61,7 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
 
   List<Widget> _headerRow() {
     var result = <Widget>[];
+    result.add(_headerTextEmpty(" ", 2));
     result.add(_headerEventTypesName('Event Types Name'));
     result.add(_headerUnit('Property Name'));
     result.add(_headerCity('Relationship'));
@@ -70,6 +71,29 @@ class _EventTypesHeaderState extends State<EventTypesHeader> {
     result.add(_headerTextAction(' '));
     result.add(_headerTextAction(' '));
     return result;
+  }
+
+  Widget _headerTextEmpty(String text, int porcent) {
+    return Container(
+      height: 40,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+          ),
+          const SizedBox(width: 5.0),
+        ],
+      ),
+    );
   }
 
   Widget _headerEventTypesName(String text) {

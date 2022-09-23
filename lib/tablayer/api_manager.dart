@@ -10249,6 +10249,30 @@ class ApiManager {
     });
   }
 
+  DuplicatEventTypesGenerateTemplate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_DuplicateEventypeTemplate,
+      "Reqtokens": {"ID": propertyid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        loader.remove();
+        callBackQuesy(true, respoce);
+      } else {
+        loader.remove();
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
   SaveAsTemplate(BuildContext context, String propertyid,
       CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
@@ -13660,6 +13684,23 @@ class ApiManager {
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     String query = QueryFilter().DeleteQuery(POJO, etableName.Events_type,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        CallBackQuesy(true, respoce);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  deleteEventTpeTemplateAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.Events_type_templates,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);

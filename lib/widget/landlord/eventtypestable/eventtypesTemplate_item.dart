@@ -15,6 +15,7 @@ typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDetails = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallEdit = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallDuplicat = void Function(EventTypesDataList eventtypesData);
+typedef VoidCallDelete = void Function(EventTypesDataList eventtypesData);
 typedef VoidCallActive = void Function(
     EventTypesDataList eventtypesData, int pos);
 typedef VoidCallInActive = void Function(
@@ -26,6 +27,7 @@ class EventTypesTemplateItem extends StatefulWidget {
   final VoidCallName _callbackEventTypesName;
   final VoidCallDetails _callbackDetails;
   final VoidCallEdit _callbackEdit;
+  final VoidCallDelete _callbackDelete;
   final VoidCallDuplicat _callbackDuplicat;
   final VoidCallActive _callbackActive;
   final VoidCallInActive _callbackInActive;
@@ -38,6 +40,7 @@ class EventTypesTemplateItem extends StatefulWidget {
     required VoidCallDetails onPressDetails,
     required VoidCallEdit onPresseEdit,
     required VoidCallDuplicat onPresseDuplicat,
+    required VoidCallDelete onPresseDelete,
     required VoidCallActive onPresseActive,
     required VoidCallInActive onPresseInActive,
     required VoidCallIsPublish onPresseIsPublish,
@@ -45,6 +48,7 @@ class EventTypesTemplateItem extends StatefulWidget {
         _callbackEventTypesName = onPressName,
         _callbackDetails = onPressDetails,
         _callbackEdit = onPresseEdit,
+        _callbackDelete = onPresseDelete,
         _callbackDuplicat = onPresseDuplicat,
         _callbackActive = onPresseActive,
         _callbackInActive = onPresseInActive,
@@ -252,9 +256,9 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
             if (value == 1) {
               widget._callbackDetails(model);
             } else if (value == 2) {
-              widget._callbackEdit(model);
-            } else if (value == 3) {
               widget._callbackDuplicat(model);
+            } else if (value == 3) {
+              widget._callbackDelete(model);
             }
           },
           child: Container(

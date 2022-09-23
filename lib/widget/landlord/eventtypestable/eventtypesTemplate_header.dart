@@ -70,7 +70,7 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
     result.add(_headerTextAction('Routing Logic', 9));
     result.add(_headerTextAction('Notifications', 9));
     result.add(_headerTextAction('Reconfirmations', 9));
-    result.add(_headerTextEmpty("Use", 4));
+    result.add(_headerTextEmpty("", 4));
     result.add(_headerTextEmpty(" ", 1));
     return result;
   }

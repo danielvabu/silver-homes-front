@@ -496,7 +496,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                         openDialogShareLink(eventtypesData);
                       },
                       onPresseDuplicat: (EventTypesDataList eventtypesData) {
-                        ApiManager().DuplicatEventTypesGenerate(
+                        ApiManager().DuplicatEventTypesGenerateTemplate(
                             context, eventtypesData.id!,
                             (status, responce) async {
                           if (status) {
@@ -509,6 +509,30 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                                 context, GlobleString.Error1, false);
                           }
                         });
+                      },
+                      onPresseDelete: (EventTypesDataList eventtypesData) {
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black45,
+                          useSafeArea: true,
+                          barrierDismissible: false,
+                          builder: (BuildContext context1) {
+                            return AlertDialogBox(
+                              title: GlobleString.LMV_DL_EvenTypeTemplate,
+                              positiveText:
+                                  GlobleString.LMV_DL_Vendor_btn_Delete,
+                              negativeText:
+                                  GlobleString.LMV_DL_Vendor_btn_Cancel,
+                              onPressedYes: () {
+                                Navigator.of(context1).pop();
+                                deleteEvenTypeTemplate(eventtypesData);
+                              },
+                              onPressedNo: () {
+                                Navigator.of(context1).pop();
+                              },
+                            );
+                          },
+                        );
                       },
                       onPressDetails: (EventTypesDataList eventtypesData) {
                         getEventTypesDetails(
@@ -1137,5 +1161,25 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
         return ShareLink(eventtypesData.url);
       },
     );
+  }
+
+  deleteEvenTypeTemplate(EventTypesDataList eventtypesData) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    CommonID id = new CommonID(ID: eventtypesData.id);
+
+    ApiManager().deleteEventTpeTemplateAPI(context, id, (error, respoce) async {
+      if (error) {
+        loader.remove();
+        init();
+        ToastUtils.showCustomToast(
+            context, GlobleString.EventTypeTemplate_delete_successfully, true);
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(context, respoce, false);
+        Helper.Log("respoce", respoce);
+      }
+    });
   }
 }

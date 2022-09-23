@@ -195,6 +195,8 @@ class Weburl {
   static var WorkFlow_DuplicatProperty = "1DF5CC24-A44B-45DE-B9E4-289D65EAC2DD";
   static var WorkFlow_DuplicateEventype =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC222";
+  static var WorkFlow_DuplicateEventypeTemplate =
+      "1DF5CC24-A44B-45DE-B9E4-289D65EAC777";
   static var WorkFlow_CreateTemplateEventype =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC333";
   static var WorkFlow_Featured_image = "17D6D091-6A4D-49E9-84AD-8A0C675DDC8B";

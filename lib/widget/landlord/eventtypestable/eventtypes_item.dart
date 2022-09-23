@@ -112,6 +112,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
 
   List<Widget> _tableData(EventTypesDataList model, int Index) {
     var result = <Widget>[];
+    result.add(_datavalueColor(model, 2));
     result.add(_datavalueEventTypes(model));
     result.add(_datavalueUnit(model));
     result.add(_datavalueCity(model));
@@ -209,6 +210,41 @@ class _EventTypesItemState extends State<EventTypesItem> {
         model.slots.toString()!,
         textAlign: TextAlign.center,
         style: MyStyles.Medium(12, myColor.Circle_main),
+      ),
+    );
+  }
+
+  Widget _datavalueColor(model, int porcent) {
+    Map _color1 = {
+      "grey": Colors.grey,
+      "red": Colors.red,
+      "orange": Colors.orange,
+      "yellow": Colors.yellow,
+      "green": Colors.green,
+      "cyan": Colors.cyan,
+      "blue": Colors.blue,
+      "deepPurple": Colors.deepPurple,
+      "purple": Colors.purple,
+      "pink": Colors.pink
+    };
+    return Container(
+      height: 40,
+      width: parte * porcent,
+      margin: const EdgeInsets.only(left: 10),
+      alignment: Alignment.centerLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Icon(
+              Icons.circle,
+              color: _color1[model.color],
+              size: 17.0,
+            ),
+          ),
+          const SizedBox(width: 5.0),
+        ],
       ),
     );
   }
