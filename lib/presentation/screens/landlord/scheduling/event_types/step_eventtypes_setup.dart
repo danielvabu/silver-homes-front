@@ -343,11 +343,12 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                               PrefsName.EventTypesStep2, true);
                                           await Prefs.setBool(
                                               PrefsName.EventTypesStep3, false);
+                                          _store.dispatch(
+                                              UpdateProperTytypeValue1(value));
 
                                           _store.dispatch(
                                               UpdateEventTypesForm(8));
-                                          _store.dispatch(
-                                              UpdateEventTypesFormAddress(""));
+
                                           _store.dispatch(
                                               UpdateAddEditEventTypes());
 
@@ -363,11 +364,12 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                             ),
                           ),
                           const SizedBox(width: 5.0),
-                          const FaIcon(
-                            FontAwesomeIcons.check,
-                            color: myColor.propertyOn1,
-                            size: 30,
-                          ),
+                          if (eventtypesState.eventtypestypeValue != null)
+                            FaIcon(
+                              FontAwesomeIcons.check,
+                              color: myColor.propertyOn1,
+                              size: 30,
+                            ),
                           const SizedBox(width: 32.0),
                           Expanded(child: Container()),
                         ],
