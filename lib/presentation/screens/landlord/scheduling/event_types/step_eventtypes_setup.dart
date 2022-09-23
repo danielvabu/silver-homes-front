@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
@@ -253,6 +254,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Expanded(
                             child: Column(
@@ -279,7 +281,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                   ),
                                 ),
                                 const SizedBox(height: 10.0),
-                                Container(
+                                SizedBox(
                                   height: 32,
                                   child: DropdownSearch<EventTypesTemplate>(
                                     mode: Mode.MENU,
@@ -360,7 +362,13 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 30.0),
+                          const SizedBox(width: 5.0),
+                          const FaIcon(
+                            FontAwesomeIcons.check,
+                            color: myColor.propertyOn1,
+                            size: 30,
+                          ),
+                          const SizedBox(width: 32.0),
                           Expanded(child: Container()),
                         ],
                       ),
