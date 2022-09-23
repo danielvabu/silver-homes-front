@@ -536,6 +536,12 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                   children: [
                                                     InkWell(
                                                       onTap: () async {
+                                                        TenancyApplicationPersonID
+                                                            person1 =
+                                                            TenancyApplicationPersonID();
+                                                        person1.person_id =
+                                                            widget.s1[i]
+                                                                .person_id;
                                                         TenancyApplicationUpdateRating2
                                                             updaterating =
                                                             TenancyApplicationUpdateRating2();
@@ -543,15 +549,11 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                             myRating as double?;
                                                         updaterating.Note =
                                                             myRatingView;
-                                                        updaterating.Email =
-                                                            widget.s1[i].email;
-                                                        updaterating.ETid = widget
-                                                            .s1[i]
-                                                            .eventTypesDataId;
 
                                                         await ApiManager()
-                                                            .UpdateRatingApplication2(
+                                                            .UpdateRatingApplication(
                                                                 context,
+                                                                person1,
                                                                 updaterating,
                                                                 (status,
                                                                     responce) async {

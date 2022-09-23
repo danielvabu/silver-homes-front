@@ -665,6 +665,7 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
             date_end: listado[i].date_end,
             name: "",
             email: "",
+            person_id: listado[i].person_id,
             state: listado[i].state);
 
         unico.add(ns);

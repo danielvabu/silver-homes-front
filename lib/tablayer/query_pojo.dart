@@ -320,6 +320,21 @@ class TenancyApplicationID {
       };
 }
 
+class TenancyApplicationPersonID {
+  String? person_id;
+
+  TenancyApplicationPersonID({this.person_id});
+
+  factory TenancyApplicationPersonID.fromJson(Map<String, dynamic> json) =>
+      TenancyApplicationPersonID(
+        person_id: json["person_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "person_id": person_id,
+      };
+}
+
 class TenancyApplicationUpdateArchive {
   String? IsArchived;
 
@@ -356,27 +371,20 @@ class TenancyApplicationUpdateRating {
 }
 
 class TenancyApplicationUpdateRating2 {
-  int? ETid;
   double? Rating;
   String? Note;
-  String? Email;
 
-  TenancyApplicationUpdateRating2(
-      {this.ETid, this.Rating, this.Note, this.Email});
+  TenancyApplicationUpdateRating2({this.Rating, this.Note});
 
   factory TenancyApplicationUpdateRating2.fromJson(Map<String, dynamic> json) =>
       TenancyApplicationUpdateRating2(
-        ETid: json["ETid"],
         Rating: json["Rating"],
         Note: json["Note"],
-        Email: json["Email"],
       );
 
   Map<String, dynamic> toJson() => {
-        "ETid": ETid,
         "Rating": Rating,
         "Note": Note,
-        "Email": Email,
       };
 }
 

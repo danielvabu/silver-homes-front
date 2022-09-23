@@ -308,7 +308,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             width: 43,
             alignment: Alignment.centerLeft,
             child: Text(
-              "Empty",
+              "",
               textAlign: TextAlign.start,
               overflow: TextOverflow.ellipsis,
               style: MyStyles.Medium(10, myColor.Circle_main),

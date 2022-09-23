@@ -1588,7 +1588,9 @@ class ApiManager {
 
           String phone =
               myobject['phone'] != null ? myobject['phone'].toString() : "";
-
+          String person_id = myobject['person_id'] != null
+              ? myobject['person_id'].toString()
+              : "";
           String email =
               myobject['email'] != null ? myobject['email'].toString() : "";
           int state = myobject['state'] != null ? myobject['state'] : 0;
@@ -1603,6 +1605,7 @@ class ApiManager {
           eventData.fname = fname;
           eventData.lname = lname;
           eventData.phone = phone;
+          eventData.person_id = person_id;
           eventData.email = email;
           eventData.state = state;
           slotslist.add(eventData);
@@ -4271,29 +4274,6 @@ class ApiManager {
 
     String query = QueryFilter().UpdateQuery(
         CPOJO,
-        UpPOJO,
-        etableName.Applicant,
-        eConjuctionClause().AND,
-        eRelationalOperator().EqualTo);
-
-    HttpClientCall().updateAPICall(context, query, (error, respoce) async {
-      if (error) {
-        loader.remove();
-        callBackQuesy(true, "");
-      } else {
-        loader.remove();
-        callBackQuesy(false, "");
-      }
-    });
-  }
-
-  UpdateRatingApplication2(
-      BuildContext context, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    loader = Helper.overlayLoader(context);
-    Overlay.of(context)!.insert(loader);
-
-    String query = QueryFilter().UpdateQuery(
-        0, //falta cosiatar
         UpPOJO,
         etableName.Applicant,
         eConjuctionClause().AND,
@@ -12605,7 +12585,14 @@ class ApiManager {
           propertyDropData.id = ID;
           propertyDropData.propertyName = address;
           propertyDropData.adress =
-              Property_Address + ", " + City + ", " + Province + ", " + Country;
+              (Suite_Unit.isNotEmpty ? Suite_Unit + " - " : "") +
+                  Property_Address +
+                  ", " +
+                  City +
+                  ", " +
+                  Province +
+                  ", " +
+                  Country;
           ;
 
           propertylist.add(propertyDropData);

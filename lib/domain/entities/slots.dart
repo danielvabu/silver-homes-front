@@ -11,6 +11,7 @@ class Slots {
       this.fname,
       this.lname,
       this.phone,
+      this.person_id,
       this.email,
       this.state});
   int? eventTypesDataId;
@@ -20,6 +21,7 @@ class Slots {
   String? fname;
   String? lname;
   String? phone;
+  String? person_id;
   String? email;
   int? state;
   EventTypesData? eventTypesData;
@@ -33,6 +35,7 @@ class Slots {
       fname: json["fname"],
       lname: json["lname"],
       phone: json["phone"],
+      person_id: json["person_id"],
       email: json["email"],
       state: json["state"]);
 
@@ -45,6 +48,7 @@ class Slots {
         "fname": fname,
         "lname": lname,
         "phone": phone,
+        "person_id": person_id,
         "email": email,
         "state": state
       };
