@@ -4,11 +4,18 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
+import 'package:silverhome/common/prefsname.dart';
+import 'package:silverhome/common/sharedpref.dart';
+import 'package:silverhome/domain/actions/landlord_action/eventtypes_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/eventtypesform_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/portal_actions.dart';
 import 'package:silverhome/domain/entities/eventtypeslist.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
+import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendeesEvent.dart';
 
 typedef VoidCallName = void Function(EventTypesDataList eventtypesData);
@@ -62,7 +69,7 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
   double height = 0, width = 0, parte = 0;
 
   final _store = getIt<AppStore>();
-
+  late OverlayEntry loader;
   @override
   void initState() {
     super.initState();
@@ -238,7 +245,38 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
       margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          String EventTypeId = model.id.toString();
+          loader = Helper.overlayLoader(context);
+          Overlay.of(context)!.insert(loader);
+          //  String EventTypeId = value!.id.toString();
+          await ApiManager().getEventTypesDetailsTemp(context, EventTypeId,
+              (status, responce, eventtypesData) async {
+            if (status) {
+              await ApiManager().bindEventTypeData(eventtypesData!);
+
+              // await Prefs.setBool(
+              //     PrefsName.EventTypesEdit, true);
+              // await Prefs.setBool(
+              //     PrefsName.EventTypesEditMode,
+              //     true);
+              await Prefs.setString(PrefsName.EventTypesID, eventtypesData.id!);
+
+              // await Prefs.setBool(PrefsName.EventTypesAgreeTC, true);
+              await Prefs.setBool(PrefsName.EventTypesStep1, true);
+              await Prefs.setBool(PrefsName.EventTypesStep2, true);
+              await Prefs.setBool(PrefsName.EventTypesStep3, false);
+              // _store.dispatch(
+              //     UpdateProperTytypeValue1(value));
+
+              _store.dispatch(UpdateEventTypesForm(8));
+
+              _store.dispatch(UpdateAddEditEventTypes());
+
+              loader.remove();
+            }
+          });
+        },
         child: _useButton(),
       ),
     );
