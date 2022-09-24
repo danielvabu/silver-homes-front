@@ -559,7 +559,7 @@ class CustomeWidget {
             ),
           ),
           Text(
-            'Add Event Type',
+            'Add Event Type Template',
             style: MyStyles.Regular(14, myColor.white),
           ),
         ],

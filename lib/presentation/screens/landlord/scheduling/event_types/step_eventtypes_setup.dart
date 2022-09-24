@@ -327,11 +327,11 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                           AddEditEventTypes.isValueUpdate =
                                               false;
 
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesEdit, true);
-                                          await Prefs.setBool(
-                                              PrefsName.EventTypesEditMode,
-                                              true);
+                                          // await Prefs.setBool(
+                                          //     PrefsName.EventTypesEdit, true);
+                                          // await Prefs.setBool(
+                                          //     PrefsName.EventTypesEditMode,
+                                          //     true);
                                           await Prefs.setString(
                                               PrefsName.EventTypesID,
                                               eventtypesData.id!);
