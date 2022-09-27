@@ -176,7 +176,7 @@ class _StepEventTypesAvailabilityState
                                       "Alaska - US",
                                       "Hawai - US"
                                     ],
-                                    defultHeight: 80,
+                                    defultHeight: 170,
                                     textstyle:
                                         MyStyles.Medium(14, myColor.text_color),
                                     hint: "Select",
