@@ -76,7 +76,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height - 70;
-    width = MediaQuery.of(context).size.width - 230;
+    width = MediaQuery.of(context).size.width - 275;
     parte = width / 100;
 
     return Container(
