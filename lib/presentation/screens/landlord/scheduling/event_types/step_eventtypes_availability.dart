@@ -166,14 +166,14 @@ class _StepEventTypesAvailabilityState
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
                                     items: const [
-                                      "NewfoundLand",
-                                      "Atlantic",
-                                      "Eastern",
-                                      "Central",
-                                      "Mountain",
-                                      "Pacific",
-                                      "Alaska",
-                                      "Hawai"
+                                      "NewfoundLand Time - Canada",
+                                      "Atlantic Time - Canada",
+                                      "Eastern Time - US & Canada",
+                                      "Central Time - US & Canada",
+                                      "Mountain Time - US & Canada",
+                                      "Pacific Time - US & Canada",
+                                      "Alaska Time - US",
+                                      "Hawai Time - US"
                                     ],
                                     defultHeight: 80,
                                     textstyle:
