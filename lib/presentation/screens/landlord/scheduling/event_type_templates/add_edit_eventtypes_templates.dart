@@ -484,10 +484,10 @@ class _AddEditEventTypesTemplatesState
               _store.dispatch(UpdateEventTypesForm(3));
             },
             onPressedBack: () {
-              if (AddEditEventTypesTemplates.isValueUpdate)
-                showBackDialog(eventtypesFormState, false, stepper: 1);
-              else
-                _store.dispatch(UpdateEventTypesForm(1));
+              // if (AddEditEventTypesTemplates.isValueUpdate)
+              //   showBackDialog(eventtypesFormState, false, stepper: 1);
+              // else
+              _store.dispatch(UpdateEventTypesForm(1));
             },
           );
         }

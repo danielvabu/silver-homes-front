@@ -183,9 +183,9 @@ class _StepEventTypesTemplatesAvailabilityState
                                     selectedItem: eventtypesState.timezone,
                                     isFilteredOnline: true,
                                     onChanged: (value) {
-                                      _changeData();
-                                      AddEditEventTypesTemplates.isValueUpdate =
-                                          true;
+                                      // _changeData();
+                                      // AddEditEventTypesTemplates.isValueUpdate =
+                                      //     true;
 
                                       _store.dispatch(UpdateTimezon(value!));
 

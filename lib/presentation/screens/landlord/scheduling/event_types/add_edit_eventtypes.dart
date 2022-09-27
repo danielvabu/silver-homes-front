@@ -480,10 +480,10 @@ class _AddEditEventTypesState extends State<AddEditEventTypes> {
               _store.dispatch(UpdateEventTypesForm(3));
             },
             onPressedBack: () {
-              if (AddEditEventTypes.isValueUpdate)
-                showBackDialog(eventtypesFormState, false, stepper: 1);
-              else
-                _store.dispatch(UpdateEventTypesForm(1));
+              // if (AddEditEventTypes.isValueUpdate)
+              //   showBackDialog(eventtypesFormState, false, stepper: 1);
+              // else
+              _store.dispatch(UpdateEventTypesForm(1));
             },
           );
         }
