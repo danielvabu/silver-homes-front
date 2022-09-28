@@ -57,6 +57,9 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   simple_animations: ^4.0.2
   syncfusion_flutter_calendar: ^20.2.43
+  provider:  ^6.0.3
+  flutter_custom_clippers: ^2.0.0
+  assorted_layout_widgets: ^1.0.15
 
 
 dev_dependencies:

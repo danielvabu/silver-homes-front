@@ -186,7 +186,6 @@ class _StepEventTypesTemplatesAvailabilityState
                                       // _changeData();
                                       // AddEditEventTypesTemplates.isValueUpdate =
                                       //     true;
-
                                       _store.dispatch(UpdateTimezon(value!));
 
                                       // _store.dispatch(

@@ -299,4 +299,17 @@ class Weburl {
   static var DSQ_tenant_Details = "aad4e3d4-1270-4235-ba7f-7fe681fdbe3f";
   static var DSQ_Application_by_Applicant =
       "02d871a8-5ce3-4579-9f6c-ba0ec83c53db";
+  /*============================================================================*/
+  /*=============================  Documents  ===============================*/
+  /*============================================================================*/
+  static var Create_Document_Api = base_url + "documents/create/folder";
+  static var Restore_Document_Api = base_url + "documents/restore";
+  static var Rename_Document_Api = base_url + "documents/remane";
+  static var Upload_Document_Api = base_url + "documents/upload";
+  static var Duplicate_Document_Api = base_url + "documents/duplicate";
+  static var Delete_Document_Api = base_url + "documents/delete";
+  static var Move_Document_Api = base_url + "documents/move";
+  static var Get_Document_Filters_Api = base_url + "documents/filters";
+  static var Get_Documents_List = base_url + "documents/list";
+  static var Change_Restrict_Editing = base_url + "documents/restrict";
 }

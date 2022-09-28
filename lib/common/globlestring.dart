@@ -2140,4 +2140,51 @@ class GlobleString {
   static const String Activity_Log_deleted = "Activity log deleted.";
   static const String Share = "Share";
   static const String ShareEvent = "Share Link";
+  /*Documents module*/
+  static const String NAV_Files_string = "Files";
+  static const String NAV_Document_builder = "Document Builder";
+  static const String NAV_Document_templates = "Document Templates";
+  static const String Tab_Document_property = "Porperty";
+  static const String Tab_Document_properties = "Porperties";
+  static const String Tab_Document_tenants = "Tenants";
+  static const String Tab_Document_onwers = "Onwers";
+  static const String Tab_Document_vendors = "Vendors";
+  static const String Tab_Document_other = "Other";
+  static const String Tab_Document_trash = "Trash";
+  static const String Button_Document_new = "New";
+  static const String Option_Upload_file = "Upload File";
+  static const String Option_Create_file = "Create Folder";
+  static const String Button_Document_view_trash = "View Trash";
+  static const String Table_Header_Document_name = "Document Name";
+  static const String Table_Header_Document_tpye = "Document Type";
+  static const String Table_Header_Document_date_created = "Date Created";
+  static const String Table_Header_Document_created_by = "Created by";
+  static const String Table_Header_Document_restrict_editing =
+      "Restrict Editing";
+  static const String Pop_Menu_documents_table_view = "View";
+  static const String Pop_Menu_documents_table_rename = "Rename";
+  static const String Pop_Menu_documents_table_download = "Download";
+  static const String Pop_Menu_documents_table_duplicate = "Duplicate";
+  static const String Pop_Menu_documents_table_delete = "Delete";
+  static const String Pop_Menu_documents_table_move = "Move to";
+  static const String Pop_Menu_documents_table_restore = "Restore";
+  static const String Title_documents = "Documnets";
+  static const String Message_No_File_upload = "No files uploaded yet.";
+  static const String Document_name = "Folder name";
+  static const String Document_create = "Create folder";
+  static const String Document_rename = "Rename Document";
+  static const String Document_restore = "Restore Document";
+  static const String Document_move = "Move Document";
+  static const String Document_duplicate = "Duplicate Document";
+  static const String Document_delete = "Delete Document";
+  static const String Document_rename_folder = "Rename Folder";
+  static const String Document_restore_folder = "Restore Folder";
+  static const String Document_move_folder = "Move Folder";
+  static const String Document_duplicate_folder = "Duplicate Foldzer";
+  static const String Document_delete_folder = "Delete Folder";
+  static const String Document_Button_move = "Move";
+  static const String Document_Button_cancel = "Cancel";
+
+  /*Messagin module*/
+  static const String Messaging_search = "Search messages";
 }
