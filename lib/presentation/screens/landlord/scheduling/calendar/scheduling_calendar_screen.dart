@@ -346,7 +346,8 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                          'Time Zone: Pacific Standar Time (PST)',
+                                          'Time Zone: ' +
+                                              DateTime.now().timeZoneName,
                                           style: TextStyle(
                                               color: myColor.text_color,
                                               fontWeight: FontWeight.bold)),

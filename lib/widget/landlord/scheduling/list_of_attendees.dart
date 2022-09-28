@@ -262,7 +262,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                       ),
                                       const SizedBox(width: 5.0),
                                       Text(
-                                        "Pacific Standard Time (PST)",
+                                        DateTime.now().timeZoneName,
                                         style: MyStyles.Bold(
                                             15, myColor.text_color),
                                       ),
