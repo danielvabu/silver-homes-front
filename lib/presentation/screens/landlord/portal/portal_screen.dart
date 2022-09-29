@@ -41,6 +41,7 @@ import 'package:silverhome/presentation/screens/landlord/profile/landlord_profil
 import 'package:silverhome/presentation/screens/landlord/property/add_edit_property.dart';
 import 'package:silverhome/presentation/screens/landlord/property/property_screen_new.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/calendar/scheduling_calendar_screen.dart';
+import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/add_edit_eventtypes_templates.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/event_type_templates_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/add_edit_eventtypes.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/event_types_screen.dart';
@@ -1385,6 +1386,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             return AddEditEventTypes();
           } else if (portalState.subindex == 3 && portalState.index == 8) {
             return EventTypeTemplateScreen();
+          } else if (portalState.subindex == 31 && portalState.index == 8) {
+            return AddEditEventTypesTemplates();
           }
           return SchedulingCalendarScreen();
         }
