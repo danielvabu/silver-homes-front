@@ -463,7 +463,7 @@ class _ListOfAttendeesState extends State<ListOfAttendees> {
                                                 ),
                                                 const SizedBox(height: 5.0),
                                                 RatingBar.builder(
-                                                  initialRating: 4,
+                                                  initialRating: 0,
                                                   allowHalfRating: false,
                                                   glow: false,
                                                   itemBuilder:

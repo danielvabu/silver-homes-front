@@ -21,6 +21,7 @@ import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/store.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/dsq_query.dart';
+import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 
@@ -50,6 +51,8 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
     "purple": Colors.purple,
     "pink": Colors.pink
   };
+  int myRating = 0;
+  String myRatingView = "";
   apimanager(String search, int pageNo, String SortField, int saquence,
       int ftime) async {
     EventTypesListReqtokens reqtokens = EventTypesListReqtokens();
@@ -96,7 +99,10 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
           date_end: listado[i].date_end,
           name: listado[i].name,
           email: listado[i].email,
-          state: listado[i].state);
+          state: listado[i].state,
+          fname: listado[i].fname,
+          lname: listado[i].lname,
+          phone: listado[i].phone);
 
       unico.add(ns);
     }
@@ -446,45 +452,270 @@ class _ListOfAttendeesEventState extends State<ListOfAttendeesEvent> {
                                                                 slots[dias[i]]
                                                                     .length;
                                                             j++)
-                                                          Container(
-                                                            color: j % 2 == 0
-                                                                ? myColor
-                                                                    .TA_dark
-                                                                : myColor
-                                                                    .TA_light,
-                                                            padding:
-                                                                const EdgeInsets
+                                                          Column(
+                                                            children: [
+                                                              Container(
+                                                                color: j % 2 ==
+                                                                        0
+                                                                    ? myColor
+                                                                        .TA_dark
+                                                                    : myColor
+                                                                        .TA_light,
+                                                                padding: const EdgeInsets
                                                                         .symmetric(
                                                                     horizontal:
                                                                         0,
                                                                     vertical:
                                                                         5),
-                                                            child: Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                    width:
-                                                                        ancho),
-                                                                SizedBox(
-                                                                    width:
-                                                                        ancho *
+                                                                child: Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                        width:
+                                                                            ancho),
+                                                                    SizedBox(
+                                                                        width: ancho *
                                                                             14,
-                                                                    child: Text(
-                                                                        "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
-                                                                SizedBox(
-                                                                    width:
-                                                                        ancho),
-                                                                SizedBox(
-                                                                    width:
-                                                                        ancho *
+                                                                        child: Text(
+                                                                            "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            ancho),
+                                                                    SizedBox(
+                                                                        width: ancho *
                                                                             19,
-                                                                    child: Text(
-                                                                        slots[dias[i]][j]
-                                                                            .name)),
-                                                                SizedBox(
-                                                                    width:
-                                                                        ancho),
-                                                              ],
-                                                            ),
+                                                                        child: Text(
+                                                                            slots[dias[i]][j].name)),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            ancho),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                color: j % 2 ==
+                                                                        0
+                                                                    ? myColor
+                                                                        .TA_dark
+                                                                    : myColor
+                                                                        .TA_light,
+                                                                width: double
+                                                                    .infinity,
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        20,
+                                                                    vertical:
+                                                                        0),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    const Divider(),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            5.0),
+                                                                    Column(
+                                                                      children: [
+                                                                        Row(
+                                                                          children: [
+                                                                            const SizedBox(width: 160),
+                                                                            const Text(GlobleString.ET_First_Name,
+                                                                                style: TextStyle(color: myColor.text_color, fontWeight: FontWeight.bold)),
+                                                                            const SizedBox(width: 8.0),
+                                                                            Text(slots[dias[i]][j].fname ??
+                                                                                ""),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                10.0),
+                                                                        Row(
+                                                                          children: [
+                                                                            const SizedBox(width: 160),
+                                                                            const Text(GlobleString.ET_Last_Name,
+                                                                                style: TextStyle(color: myColor.text_color, fontWeight: FontWeight.bold)),
+                                                                            const SizedBox(width: 8.0),
+                                                                            Text(slots[dias[i]][j].lname ??
+                                                                                ""),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                10.0),
+                                                                        Row(
+                                                                          children: [
+                                                                            const SizedBox(width: 160),
+                                                                            const Text(GlobleString.ET_Email,
+                                                                                style: TextStyle(color: myColor.text_color, fontWeight: FontWeight.bold)),
+                                                                            const SizedBox(width: 8.0),
+                                                                            Text(slots[dias[i]][j].email ??
+                                                                                ""),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                            height:
+                                                                                10.0),
+                                                                        Row(
+                                                                          children: [
+                                                                            const SizedBox(width: 160),
+                                                                            const Text(GlobleString.ET_Phone,
+                                                                                style: TextStyle(color: myColor.text_color, fontWeight: FontWeight.bold)),
+                                                                            const SizedBox(width: 8.0),
+                                                                            Text(slots[dias[i]][j].phone ??
+                                                                                ""),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            5.0),
+                                                                    const Divider(),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            5.0),
+                                                                    Text(
+                                                                      GlobleString
+                                                                          .LMV_AV_Rating,
+                                                                      style: MyStyles.Medium(
+                                                                          14,
+                                                                          myColor
+                                                                              .text_color),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            5.0),
+                                                                    RatingBar
+                                                                        .builder(
+                                                                      initialRating:
+                                                                          0,
+                                                                      allowHalfRating:
+                                                                          false,
+                                                                      glow:
+                                                                          false,
+                                                                      itemBuilder:
+                                                                          (context, index) =>
+                                                                              const Icon(
+                                                                        Icons
+                                                                            .star,
+                                                                        color: myColor
+                                                                            .blue,
+                                                                      ),
+                                                                      onRatingUpdate:
+                                                                          (llega) {
+                                                                        myRating =
+                                                                            llega
+                                                                                as int;
+                                                                      },
+                                                                      itemCount:
+                                                                          5,
+                                                                      itemSize:
+                                                                          25.0,
+                                                                      unratedColor:
+                                                                          myColor
+                                                                              .TA_Border,
+                                                                      direction:
+                                                                          Axis.horizontal,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            10.0),
+                                                                    Text(
+                                                                      GlobleString
+                                                                          .LMV_AV_Note,
+                                                                      style: MyStyles.Medium(
+                                                                          14,
+                                                                          myColor
+                                                                              .text_color),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            5.0),
+                                                                    TextFormField(
+                                                                      //initialValue: addVendorState.Note,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: MyStyles.Medium(
+                                                                          14,
+                                                                          myColor
+                                                                              .text_color),
+                                                                      maxLines:
+                                                                          4,
+                                                                      maxLength:
+                                                                          10000,
+                                                                      inputFormatters: [
+                                                                        LengthLimitingTextInputFormatter(
+                                                                            10000),
+                                                                      ],
+                                                                      decoration: const InputDecoration(
+                                                                          focusedBorder: OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(color: myColor.blue, width: 2.0),
+                                                                          ),
+                                                                          enabledBorder: OutlineInputBorder(
+                                                                            borderSide:
+                                                                                BorderSide(color: myColor.gray, width: 1.0),
+                                                                          ),
+                                                                          isDense: true,
+                                                                          contentPadding: EdgeInsets.all(10),
+                                                                          fillColor: myColor.white,
+                                                                          filled: true),
+                                                                      onChanged:
+                                                                          (llega) {
+                                                                        myRatingView =
+                                                                            llega;
+                                                                      },
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            10.0),
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .end,
+                                                                      children: [
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            TenancyApplicationPersonID
+                                                                                person1 =
+                                                                                TenancyApplicationPersonID();
+                                                                            person1.person_id =
+                                                                                slots[dias[i]][j].person_id;
+                                                                            TenancyApplicationUpdateRating2
+                                                                                updaterating =
+                                                                                TenancyApplicationUpdateRating2();
+                                                                            updaterating.Rating =
+                                                                                myRating as double?;
+                                                                            updaterating.Note =
+                                                                                myRatingView;
+
+                                                                            await ApiManager().UpdateRatingApplication(
+                                                                                context,
+                                                                                person1,
+                                                                                updaterating,
+                                                                                (status, responce) async {
+                                                                              //if (status) {leadcallApi();}
+                                                                            });
+                                                                            Navigator.of(context).pop();
+                                                                          },
+                                                                          child:
+                                                                              CustomeWidget.AddSimpleButton(GlobleString.SAVE),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            15.0),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
                                                           ),
                                                       ],
                                                     ),
