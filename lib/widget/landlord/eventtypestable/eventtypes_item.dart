@@ -192,7 +192,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.duration!,
+        model.duration! + " minutes",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -350,7 +350,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
             PopupMenuItem(
               value: 1,
               child: Text(
-                GlobleString.PH_ACT_ViewDetails,
+                GlobleString.PH_ACT_Edit,
                 style: MyStyles.Medium(14, myColor.text_color),
                 textAlign: TextAlign.start,
               ),
@@ -363,7 +363,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
                 textAlign: TextAlign.start,
               ),
             ),
-            if (model.slots! > 0)
+            if ((model.slots ?? 0) > 0)
               PopupMenuItem(
                 value: 6,
                 child: Text(

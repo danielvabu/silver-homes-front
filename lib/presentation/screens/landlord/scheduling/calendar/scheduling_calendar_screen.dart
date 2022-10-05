@@ -76,6 +76,12 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   void init() async {
     await Prefs.init();
+    muestraElListado = 0;
+    _timer = null;
+    dias = [];
+    press = [];
+    slots = {};
+    unique = [];
     apimanager("", 1, "ID", 0, 0);
     traerlogo();
   }
@@ -397,219 +403,262 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
                                   ),
                                   const SizedBox(height: 20),
                                   for (int i = 0; i < dias.length; i++)
-                                    Column(
-                                      children: [
-                                        Container(
-                                          color: myColor.TA_table_header,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                    slots[dias[i]].length <= 0
+                                        ? SizedBox.shrink()
+                                        : Column(
                                             children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                      ponerfecha(
-                                                          dias[i].toString()),
-                                                      style: const TextStyle(
-                                                          color: myColor
-                                                              .text_color,
-                                                          fontSize: 19,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                  const SizedBox(width: 10),
-                                                  Text(
-                                                      '(${slots[dias[i]].length} scheduled slots)',
-                                                      style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle: FontStyle
-                                                              .italic)),
-                                                ],
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
-                                                  setState(() {
-                                                    if (press[i]) {
-                                                      press[i] = false;
-                                                    } else {
-                                                      press[i] = true;
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 15, right: 10),
-                                                  height: 40,
-                                                  width: 30,
-                                                  alignment: Alignment.center,
-                                                  child: Image.asset(
-                                                    press[i]
-                                                        ? "assets/images/circle_up.png"
-                                                        : "assets/images/circle_down.png",
+                                              Container(
+                                                color: myColor.TA_table_header,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20,
+                                                        vertical: 15),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            ponerfecha(dias[i]
+                                                                .toString()),
+                                                            style: const TextStyle(
+                                                                color: myColor
+                                                                    .text_color,
+                                                                fontSize: 19,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        Text(
+                                                            '(${slots[dias[i]].length} scheduled slots)',
+                                                            style: const TextStyle(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .italic)),
+                                                      ],
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        //if(model.isexpand!){widget.listdata[index].isexpand=false;}else{widget.listdata[index].isexpand=true;}
+                                                        setState(() {
+                                                          if (press[i]) {
+                                                            press[i] = false;
+                                                          } else {
+                                                            press[i] = true;
+                                                          }
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        margin: const EdgeInsets
+                                                                .only(
+                                                            left: 15,
+                                                            right: 10),
+                                                        height: 40,
+                                                        width: 30,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Image.asset(
+                                                          press[i]
+                                                              ? "assets/images/circle_up.png"
+                                                              : "assets/images/circle_down.png",
 
-                                                    height: 19,
-                                                    //width: 20,
-                                                    alignment: Alignment.center,
-                                                  ),
+                                                          height: 19,
+                                                          //width: 20,
+                                                          alignment:
+                                                              Alignment.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        if (press[i] == true)
-                                          Container(
-                                            child: Column(
-                                              children: [
+                                              if (press[i] == true)
                                                 Container(
-                                                  color:
-                                                      myColor.drawselectcolor2,
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 0,
-                                                      vertical: 5),
-                                                  child: Row(
+                                                  child: Column(
                                                     children: [
-                                                      SizedBox(
-                                                          width: ancho * 5,
-                                                          child:
-                                                              const Text(" ")),
-                                                      SizedBox(
-                                                        width: ancho * 15,
-                                                        child: const Text(
-                                                            GlobleString
-                                                                .CALENDAR_Time,
-                                                            style: TextStyle(
-                                                                color: myColor
-                                                                    .text_color,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
+                                                      Container(
+                                                        color: myColor
+                                                            .drawselectcolor2,
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 0,
+                                                                vertical: 5),
+                                                        child: Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    ancho * 5,
+                                                                child:
+                                                                    const Text(
+                                                                        " ")),
+                                                            SizedBox(
+                                                              width: ancho * 15,
+                                                              child: const Text(
+                                                                  GlobleString
+                                                                      .CALENDAR_Time,
+                                                                  style: TextStyle(
+                                                                      color: myColor
+                                                                          .text_color,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
+                                                            SizedBox(
+                                                              width: ancho * 26,
+                                                              child: const Text(
+                                                                  GlobleString
+                                                                      .CALENDAR_Event_Name,
+                                                                  style: TextStyle(
+                                                                      color: myColor
+                                                                          .text_color,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
+                                                            SizedBox(
+                                                              width: ancho * 20,
+                                                              child: const Text(
+                                                                  GlobleString
+                                                                      .CALENDAR_Attendees,
+                                                                  style: TextStyle(
+                                                                      color: myColor
+                                                                          .text_color,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
+                                                            SizedBox(
+                                                              width: ancho * 27,
+                                                              child: const Text(
+                                                                  GlobleString
+                                                                      .CALENDAR_Location,
+                                                                  style: TextStyle(
+                                                                      color: myColor
+                                                                          .text_color,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
+                                                            SizedBox(
+                                                                width:
+                                                                    ancho * 2,
+                                                                child:
+                                                                    const Text(
+                                                                        " "))
+                                                          ],
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                        width: ancho * 26,
-                                                        child: const Text(
-                                                            GlobleString
-                                                                .CALENDAR_Event_Name,
-                                                            style: TextStyle(
-                                                                color: myColor
-                                                                    .text_color,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ),
-                                                      SizedBox(
-                                                        width: ancho * 20,
-                                                        child: const Text(
-                                                            GlobleString
-                                                                .CALENDAR_Attendees,
-                                                            style: TextStyle(
-                                                                color: myColor
-                                                                    .text_color,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ),
-                                                      SizedBox(
-                                                        width: ancho * 27,
-                                                        child: const Text(
-                                                            GlobleString
-                                                                .CALENDAR_Location,
-                                                            style: TextStyle(
-                                                                color: myColor
-                                                                    .text_color,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                      ),
-                                                      SizedBox(
-                                                          width: ancho * 2,
-                                                          child:
-                                                              const Text(" "))
+                                                      for (int j = 0;
+                                                          j <
+                                                              slots[dias[i]]
+                                                                  .length;
+                                                          j++)
+                                                        Container(
+                                                          color: j % 2 == 0
+                                                              ? myColor.TA_dark
+                                                              : myColor
+                                                                  .TA_light,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal: 0,
+                                                                  vertical: 5),
+                                                          child: Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                width:
+                                                                    ancho * 4,
+                                                                child: Icon(
+                                                                  Icons.circle,
+                                                                  color: color1[
+                                                                      slots[dias[i]]
+                                                                              [
+                                                                              j]
+                                                                          .eventTypesData
+                                                                          .color],
+                                                                  size: 17.0,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: ancho),
+                                                              SizedBox(
+                                                                  width: ancho *
+                                                                      14,
+                                                                  child: Text(
+                                                                      "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
+                                                              SizedBox(
+                                                                  width: ancho),
+                                                              SizedBox(
+                                                                  width: ancho *
+                                                                      25,
+                                                                  child: Text(
+                                                                      slots[dias[i]]
+                                                                              [
+                                                                              j]
+                                                                          .eventTypesData
+                                                                          .name,
+                                                                      maxLines:
+                                                                          3)),
+                                                              SizedBox(
+                                                                  width: ancho),
+                                                              SizedBox(
+                                                                  width: ancho *
+                                                                      19,
+                                                                  child: Text(attendens(
+                                                                      slots[dias[i]]
+                                                                              [
+                                                                              j]
+                                                                          .eventTypesDataId,
+                                                                      slots[dias[i]]
+                                                                              [
+                                                                              j]
+                                                                          .date_start,
+                                                                      slotsListState!
+                                                                          .eventtypeslist))),
+                                                              SizedBox(
+                                                                  width: ancho),
+                                                              SizedBox(
+                                                                width:
+                                                                    ancho * 26,
+                                                                child: Text(
+                                                                    slots[dias[i]]
+                                                                            [j]
+                                                                        .eventTypesData
+                                                                        .location,
+                                                                    maxLines:
+                                                                        3),
+                                                              ),
+                                                              SizedBox(
+                                                                  width: ancho),
+                                                              SizedBox(
+                                                                  width:
+                                                                      ancho * 2,
+                                                                  child: _actionEventPopup(
+                                                                      context,
+                                                                      slots[dias[
+                                                                              i]]
+                                                                          [j],
+                                                                      slotsListState!
+                                                                          .eventtypeslist)),
+                                                            ],
+                                                          ),
+                                                        ),
                                                     ],
                                                   ),
                                                 ),
-                                                for (int j = 0;
-                                                    j < slots[dias[i]].length;
-                                                    j++)
-                                                  Container(
-                                                    color: j % 2 == 0
-                                                        ? myColor.TA_dark
-                                                        : myColor.TA_light,
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 0,
-                                                        vertical: 5),
-                                                    child: Row(
-                                                      children: [
-                                                        SizedBox(
-                                                          width: ancho * 4,
-                                                          child: Icon(
-                                                            Icons.circle,
-                                                            color: color1[slots[
-                                                                    dias[i]][j]
-                                                                .eventTypesData
-                                                                .color],
-                                                            size: 17.0,
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: ancho),
-                                                        SizedBox(
-                                                            width: ancho * 14,
-                                                            child: Text(
-                                                                "${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_start))} - ${DateFormat.jm().format(DateTime.parse(slots[dias[i]][j].date_end))}")),
-                                                        SizedBox(width: ancho),
-                                                        SizedBox(
-                                                            width: ancho * 25,
-                                                            child: Text(
-                                                                slots[dias[i]]
-                                                                        [j]
-                                                                    .eventTypesData
-                                                                    .name,
-                                                                maxLines: 3)),
-                                                        SizedBox(width: ancho),
-                                                        SizedBox(
-                                                            width: ancho * 19,
-                                                            child: Text(attendens(
-                                                                slots[dias[i]]
-                                                                        [j]
-                                                                    .eventTypesDataId,
-                                                                slots[dias[i]]
-                                                                        [j]
-                                                                    .date_start,
-                                                                slotsListState!
-                                                                    .eventtypeslist))),
-                                                        SizedBox(width: ancho),
-                                                        SizedBox(
-                                                          width: ancho * 26,
-                                                          child: Text(
-                                                              slots[dias[i]][j]
-                                                                  .eventTypesData
-                                                                  .location,
-                                                              maxLines: 3),
-                                                        ),
-                                                        SizedBox(width: ancho),
-                                                        SizedBox(
-                                                            width: ancho * 2,
-                                                            child: _actionEventPopup(
-                                                                context,
-                                                                slots[dias[i]]
-                                                                    [j],
-                                                                slotsListState!
-                                                                    .eventtypeslist)),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
+                                              const SizedBox(height: 20.0),
+                                            ],
                                           ),
-                                        const SizedBox(height: 20.0),
-                                      ],
-                                    ),
                                 ]),
                               ),
                             ),
@@ -974,25 +1023,26 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
       },
     );
   }
-}
 
-delete(BuildContext context, int id, String fecha) {
-  // loader = Helper.overlayLoader(context);
-  // Overlay.of(context)!.insert(loader);
+  delete(BuildContext context, int id, String fecha) {
+    // loader = Helper.overlayLoader(context);
+    // Overlay.of(context)!.insert(loader);
 
-  SlotDelete id1 = SlotDelete(event_type_id: id, date_start: fecha);
+    SlotDelete id1 = SlotDelete(event_type_id: id, date_start: fecha);
 
-  ApiManager().deleteSlotAPI(context, id1, (error, respoce) async {
-    if (error) {
-      //loader.remove();
-      // init();
-      ToastUtils.showCustomToast(context, GlobleString.Slots_Delete, true);
-    } else {
-      // loader.remove();
-      ToastUtils.showCustomToast(context, respoce, false);
-      Helper.Log("respoce", respoce);
-    }
-  });
+    ApiManager().deleteSlotAPI(context, id1, (error, respoce) async {
+      if (error) {
+        //loader.remove();
+        init();
+
+        ToastUtils.showCustomToast(context, GlobleString.Slots_Delete, true);
+      } else {
+        // loader.remove();
+        ToastUtils.showCustomToast(context, respoce, false);
+        Helper.Log("respoce", respoce);
+      }
+    });
+  }
 }
 
 Widget scheduleViewHeaderBuilder(

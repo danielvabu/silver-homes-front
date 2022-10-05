@@ -66,10 +66,10 @@ class _EventTypesTemplateHeaderState extends State<EventTypesTemplateHeader> {
     result.add(_headerTemplateName('Template Name', 25));
     result.add(_headerRelation('Relationship', 10));
     result.add(_headerDuration('Duration', 9));
-    result.add(_headerTextAction('# of Questions', 9));
-    result.add(_headerTextAction('Routing Logic', 9));
-    result.add(_headerTextAction('Notifications', 9));
-    result.add(_headerTextAction('Reconfirmations', 9));
+    result.add(_headerTextAction('# of Questions', 18));
+/*     result.add(_headerTextAction('Routing Logic', 9)); */
+    result.add(_headerTextAction('Notifications', 20));
+/*     result.add(_headerTextAction('Reconfirmations', 9)); */
     result.add(_headerTextEmpty("", 4));
     result.add(_headerTextEmpty(" ", 1));
     return result;

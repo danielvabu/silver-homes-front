@@ -212,7 +212,7 @@ class _StepEventTypesTemplatesAvailabilityState
                                   Container(
                                     height: 25,
                                     width: 25,
-                                    color: myColor.pf_incudevalue,
+                                    color: myColor.transparent,
                                     alignment: Alignment.center,
                                     child: Radio(
                                       value: 0,
@@ -238,7 +238,7 @@ class _StepEventTypesTemplatesAvailabilityState
                                   Container(
                                     height: 25,
                                     width: 25,
-                                    color: myColor.pf_incudevalue,
+                                    color: myColor.transparent,
                                     alignment: Alignment.center,
                                     child: Radio(
                                       value: 1,

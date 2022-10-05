@@ -40,7 +40,8 @@ class _RatingUpdateDialogBoxState extends State<RatingUpdateDialogBox> {
 
   @override
   void initState() {
-    _textReatingReview.text = widget.ratingcomment;
+    _textReatingReview.text =
+        widget.ratingcomment != "0" ? widget.ratingcomment : "";
 
     super.initState();
   }

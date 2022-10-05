@@ -412,6 +412,8 @@ class HttpClientCall {
       Helper.Log("statusCode", response.statusCode.toString());
 
       if (response.statusCode == 200) {
+        var temp = jsonDecode(response.body);
+        print(temp);
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
           CallBackQuesy(true, response.body);
         } else {

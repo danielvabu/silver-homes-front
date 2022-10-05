@@ -118,10 +118,10 @@ class _EventTypesTemplateItemState extends State<EventTypesTemplateItem> {
     result.add(_datavalueTemplateName(model, 25));
     result.add(_datavalueRelation(model, 10));
     result.add(_datavalueDuration(model, 9));
-    result.add(_textTextEmpty(" ", 9)); //Question
-    result.add(_textTextEmpty(" ", 9)); //Routing
-    result.add(_textTextEmpty(" ", 9)); //Noti
-    result.add(_textTextEmpty(" ", 9)); //Reconf
+    result.add(_textTextEmpty(" ", 18)); //Question
+/*     result.add(_textTextEmpty(" ", 9)); //Routing */
+    result.add(_textTextEmpty(" ", 20)); //Noti
+/*     result.add(_textTextEmpty(" ", 9)); //Reconf */
     result.add(_useBoton(model, 4));
     result.add(_actionPopup(model));
     return result;

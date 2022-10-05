@@ -1816,7 +1816,7 @@ class GlobleString {
   static const String LMV_DL_EvenTypeTemplate =
       "Are you sure you want to delete this Event Type Template?";
   static const String LMV_DL_Slot =
-      "Are you sure you want to delete this Slot?";
+      "Are you sure you want to delete this slot?";
 
   /* Calendar Screen */
   static const String CALENDAR_Search = "Search";
@@ -2036,7 +2036,7 @@ class GlobleString {
       "The Event Type has been deleted.";
   static const String EventTypeTemplate_delete_successfully =
       "The Event Type Template has been deleted.";
-  static const String Slots_Delete = "The Slot has been deleted.";
+  static const String Slots_Delete = "The slot has been deleted.";
 
   static const String maintenance_Delete_image_title =
       "Are you sure you want to remove this file? ";
@@ -2139,7 +2139,7 @@ class GlobleString {
   static const String File_deleted = "File deleted.";
   static const String Activity_Log_deleted = "Activity log deleted.";
   static const String Share = "Share";
-  static const String ShareEvent = "Share Link";
+  static const String ShareEvent = "Share Event Link";
   /*Documents module*/
   static const String NAV_Files_string = "Files";
   static const String NAV_Document_builder = "Document Builder";

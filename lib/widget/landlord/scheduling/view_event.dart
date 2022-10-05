@@ -263,19 +263,22 @@ class _ViewEventState extends State<ViewEvent> {
                                   ),
                                   const SizedBox(height: 20.0),
                                   if (widget.s1[0].eventTypesData!.range != 0)
-                                    for (int i = 0; i < widget.s1.length; i++)
+                                    for (int i = 0;
+                                        i < widget.s1.length;
+                                        i++) ...[
                                       Row(
                                         children: [
                                           const SizedBox(
                                               width: 15.0,
-                                              child:
-                                                  Icon(Icons.calendar_today)),
+                                              child: Icon(Icons.person)),
                                           const SizedBox(width: 30.0),
                                           Container(
-                                            child: Text(widget.s1[i].name!),
+                                            child: Text(
+                                                "${widget.s1[i].fname!} ${widget.s1[i].lname!}"),
                                           ),
                                         ],
                                       ),
+                                    ]
                                 ],
                               ),
                             ),

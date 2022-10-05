@@ -476,7 +476,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Container(
                                         height: 25,
                                         width: 25,
-                                        color: myColor.pf_incudevalue,
+                                        color: myColor.transparent,
                                         alignment: Alignment.center,
                                         child: Radio(
                                           value: true,
@@ -507,7 +507,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Container(
                                         height: 25,
                                         width: 25,
-                                        color: myColor.pf_incudevalue,
+                                        color: myColor.transparent,
                                         alignment: Alignment.center,
                                         child: Radio(
                                           value: false,
@@ -723,79 +723,85 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    GlobleString.ET_Location,
-                                    style: MyStyles.Medium(14, myColor.black),
-                                    textAlign: TextAlign.start,
-                                  ),
+                                  if (!eventtypesState.EventTypesNA)
+                                    Text(
+                                      GlobleString.ET_Location,
+                                      style: MyStyles.Medium(14, myColor.black),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   const SizedBox(height: 5.0),
-                                  TextFormField(
-                                    controller: locationcontroler,
-                                    textAlign: TextAlign.start,
-                                    style: MyStyles.Regular(
-                                        14, myColor.text_color),
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(25),
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp("[a-z A-Z]")),
-                                    ],
-                                    decoration: InputDecoration(
-                                        //border: InputBorder.none,
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color:
-                                                  eventtypesState.error_Province
-                                                      ? myColor.errorcolor
-                                                      : myColor.blue,
-                                              width: 2),
+                                  if (!eventtypesState.EventTypesNA)
+                                    TextFormField(
+                                      controller: locationcontroler,
+                                      textAlign: TextAlign.start,
+                                      style: MyStyles.Regular(
+                                          14, myColor.text_color),
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(25),
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[a-z A-Z]")),
+                                      ],
+                                      decoration: InputDecoration(
+                                          //border: InputBorder.none,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: eventtypesState
+                                                        .error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.blue,
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: eventtypesState
+                                                        .error_Province
+                                                    ? myColor.errorcolor
+                                                    : myColor.gray,
+                                                width: 1.0),
+                                          ),
+                                          isDense: true,
+                                          contentPadding:
+                                              const EdgeInsets.all(12),
+                                          fillColor: myColor.white,
+                                          filled: true),
+                                      onChanged: (value) {
+                                        _changeData();
+                                        AddEditEventTypes.isValueUpdate = true;
+
+                                        // _store
+                                        //     .dispatch(UpdateErrorProvince(false));
+                                      },
+                                    ),
+                                  if (!eventtypesState.EventTypesNA)
+                                    const SizedBox(height: 5.0),
+                                  if (!eventtypesState.EventTypesNA)
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          activeColor: myColor.Circle_main,
+                                          checkColor: myColor.white,
+                                          value: eventtypesState
+                                              .EventTypesSPA, //tfAdditionalReferenceState.isAutherize,
+                                          onChanged: (value) {
+                                            _store.dispatch(UpdateSPA(value!));
+
+                                            if (value == true) {
+                                              AddEditEventTypes.isValueUpdate =
+                                                  true;
+                                              _store.dispatch(
+                                                  UpdateLocation(textprop));
+                                            } else {
+                                              _store
+                                                  .dispatch(UpdateLocation(""));
+                                            }
+
+                                            _changeData();
+                                          },
                                         ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color:
-                                                  eventtypesState.error_Province
-                                                      ? myColor.errorcolor
-                                                      : myColor.gray,
-                                              width: 1.0),
-                                        ),
-                                        isDense: true,
-                                        contentPadding:
-                                            const EdgeInsets.all(12),
-                                        fillColor: myColor.white,
-                                        filled: true),
-                                    onChanged: (value) {
-                                      _changeData();
-                                      AddEditEventTypes.isValueUpdate = true;
-
-                                      // _store
-                                      //     .dispatch(UpdateErrorProvince(false));
-                                    },
-                                  ),
-                                  const SizedBox(height: 5.0),
-                                  Row(
-                                    children: [
-                                      Checkbox(
-                                        activeColor: myColor.Circle_main,
-                                        checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .EventTypesSPA, //tfAdditionalReferenceState.isAutherize,
-                                        onChanged: (value) {
-                                          _store.dispatch(UpdateSPA(value!));
-
-                                          if (value == true) {
-                                            AddEditEventTypes.isValueUpdate =
-                                                true;
-                                            _store.dispatch(
-                                                UpdateLocation(textprop));
-                                          } else {
-                                            _store.dispatch(UpdateLocation(""));
-                                          }
-
-                                          _changeData();
-                                        },
-                                      ),
-                                      const Text(GlobleString.ET_Same_Address),
-                                    ],
-                                  ),
+                                        const Text(
+                                            GlobleString.ET_Same_Address),
+                                      ],
+                                    ),
                                 ],
                               ),
                             ),
@@ -1186,7 +1192,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Container(
                                         height: 25,
                                         width: 25,
-                                        color: myColor.pf_incudevalue,
+                                        color: myColor.transparent,
                                         alignment: Alignment.center,
                                         child: Radio(
                                           value: 1,
@@ -1293,7 +1299,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Container(
                                         height: 25,
                                         width: 25,
-                                        color: myColor.pf_incudevalue,
+                                        color: myColor.transparent,
                                         alignment: Alignment.center,
                                         child: Radio(
                                           value: 2,
@@ -1474,7 +1480,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       Container(
                                         height: 25,
                                         width: 25,
-                                        color: myColor.pf_incudevalue,
+                                        color: myColor.transparent,
                                         alignment: Alignment.center,
                                         child: Radio(
                                           value: 3,

@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "dart",
+            "args":["-d", "chrome", "--web-port=51975"]
+        },
+        {
             "name": "silverhome",
             "request": "launch",
             "type": "dart"
@@ -13,7 +19,9 @@
             "name": "silverhome (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+             
+            
         },
         {
             "name": "silverhome (release mode)",
