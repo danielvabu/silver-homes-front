@@ -19,6 +19,7 @@ import '../bloc.dart';
 
 class TestBloc with Validators {
   TestBloc();
+  int muestraElListado = 0;
   List<dynamic> dataTest = [];
   final _store = getIt<AppStore>();
 

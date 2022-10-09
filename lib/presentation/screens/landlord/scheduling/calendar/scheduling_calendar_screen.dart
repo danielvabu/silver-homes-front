@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
+import 'package:silverhome/domain/actions/actions.dart';
 import 'package:silverhome/domain/entities/slots.dart';
 import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
 import 'package:silverhome/widget/landlord/scheduling/list_of_attendees.dart';
@@ -76,13 +77,13 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
 
   void init() async {
     await Prefs.init();
-    muestraElListado = 0;
+
     _timer = null;
     dias = [];
     press = [];
     slots = {};
     unique = [];
-    apimanager("", 1, "ID", 0, 0);
+    await apimanager("", 1, "ID", 0, 0);
     traerlogo();
   }
 
@@ -1029,12 +1030,12 @@ class _SchedulingCalendarState extends State<SchedulingCalendarScreen> {
     // Overlay.of(context)!.insert(loader);
 
     SlotDelete id1 = SlotDelete(event_type_id: id, date_start: fecha);
-
+    _store.dispatch(UpdatePortalPageisLoading(true));
     ApiManager().deleteSlotAPI(context, id1, (error, respoce) async {
       if (error) {
         //loader.remove();
         init();
-
+        _store.dispatch(UpdatePortalPageisLoading(false));
         ToastUtils.showCustomToast(context, GlobleString.Slots_Delete, true);
       } else {
         // loader.remove();

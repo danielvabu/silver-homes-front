@@ -619,83 +619,46 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     ],
                                   ),
                                   const SizedBox(height: 5.0),
-                                  if (!eventtypesState.EventTypesNA)
-                                    Container(
-                                      height: 32,
-                                      child: DropdownSearch<PropertyDropData>(
-                                        enabled: (eventtypesState.EventTypesNA)
-                                            ? false
-                                            : true,
-                                        mode: Mode.MENU,
-                                        items: eventtypesState
-                                            .PropertyDropDatalist,
-                                        textstyle:
-                                            MyStyles.Medium(12, myColor.black),
-                                        itemAsString: (PropertyDropData? u) =>
-                                            u!.propertyName!,
-                                        hint: GlobleString.Select_Property,
-                                        showSearchBox: true,
-                                        defultHeight: eventtypesState
-                                                        .PropertyDropDatalist
-                                                        .length *
-                                                    35 >
-                                                300
-                                            ? 300
-                                            : (eventtypesState
-                                                        .PropertyDropDatalist
-                                                        .length *
-                                                    35) +
-                                                50,
-                                        showClearButton: false,
-                                        selectedItem:
-                                            eventtypesState.selectproperty,
-                                        focuscolor: myColor.blue,
-                                        focusWidth: 2,
-                                        isFilteredOnline: true,
-                                        onChanged: (value) {
-                                          _store.dispatch(
-                                              UpdateMER_selectproperty1(value));
-                                          _changeData();
-                                          textprop = value!.adress!;
-                                        },
-                                      ),
+                                  Container(
+                                    height: 32,
+                                    child: DropdownSearch<PropertyDropData>(
+                                      enabled: (eventtypesState.EventTypesNA)
+                                          ? false
+                                          : true,
+                                      mode: Mode.MENU,
+                                      items:
+                                          eventtypesState.PropertyDropDatalist,
+                                      textstyle:
+                                          MyStyles.Medium(12, myColor.black),
+                                      itemAsString: (PropertyDropData? u) =>
+                                          u!.propertyName!,
+                                      hint: GlobleString.Select_Property,
+                                      showSearchBox: true,
+                                      defultHeight: eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35 >
+                                              300
+                                          ? 300
+                                          : (eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35) +
+                                              50,
+                                      showClearButton: false,
+                                      selectedItem:
+                                          eventtypesState.selectproperty,
+                                      focuscolor: myColor.blue,
+                                      focusWidth: 2,
+                                      isFilteredOnline: true,
+                                      onChanged: (value) {
+                                        _store.dispatch(
+                                            UpdateMER_selectproperty1(value));
+                                        _changeData();
+                                        textprop = value!.adress!;
+                                      },
                                     ),
-                                  if (eventtypesState.EventTypesNA)
-                                    TextFormField(
-                                      enabled: false,
-                                      textAlign: TextAlign.start,
-                                      style: MyStyles.Regular(
-                                          14, myColor.text_color),
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(25),
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp("[a-z A-Z]")),
-                                      ],
-                                      decoration: InputDecoration(
-                                          //border: InputBorder.none,
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
-                                                width: 2),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
-                                                width: 1.0),
-                                          ),
-                                          isDense: true,
-                                          contentPadding:
-                                              const EdgeInsets.all(12),
-                                          fillColor: myColor.white,
-                                          filled: true),
-                                    ),
-                                  const SizedBox(height: 5.0),
+                                  ),
                                   Row(
                                     children: [
                                       Checkbox(
@@ -705,6 +668,7 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                             .EventTypesNA, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           if (value == true) {}
+
                                           _store.dispatch(
                                               UpdateNotAplicable(value!));
                                           _changeData();
@@ -723,57 +687,53 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if (!eventtypesState.EventTypesNA)
-                                    Text(
-                                      GlobleString.ET_Location,
-                                      style: MyStyles.Medium(14, myColor.black),
-                                      textAlign: TextAlign.start,
-                                    ),
+                                  Text(
+                                    GlobleString.ET_Location,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
+                                  ),
                                   const SizedBox(height: 5.0),
-                                  if (!eventtypesState.EventTypesNA)
-                                    TextFormField(
-                                      controller: locationcontroler,
-                                      textAlign: TextAlign.start,
-                                      style: MyStyles.Regular(
-                                          14, myColor.text_color),
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(25),
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp("[a-z A-Z]")),
-                                      ],
-                                      decoration: InputDecoration(
-                                          //border: InputBorder.none,
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
-                                                width: 2),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
-                                                width: 1.0),
-                                          ),
-                                          isDense: true,
-                                          contentPadding:
-                                              const EdgeInsets.all(12),
-                                          fillColor: myColor.white,
-                                          filled: true),
-                                      onChanged: (value) {
-                                        _changeData();
-                                        AddEditEventTypes.isValueUpdate = true;
+                                  TextFormField(
+                                    controller: locationcontroler,
+                                    textAlign: TextAlign.start,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(25),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[a-z A-Z]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                        //border: InputBorder.none,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.blue,
+                                              width: 2),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.gray,
+                                              width: 1.0),
+                                        ),
+                                        isDense: true,
+                                        contentPadding:
+                                            const EdgeInsets.all(12),
+                                        fillColor: myColor.white,
+                                        filled: true),
+                                    onChanged: (value) {
+                                      _changeData();
+                                      AddEditEventTypes.isValueUpdate = true;
 
-                                        // _store
-                                        //     .dispatch(UpdateErrorProvince(false));
-                                      },
-                                    ),
-                                  if (!eventtypesState.EventTypesNA)
-                                    const SizedBox(height: 5.0),
+                                      // _store
+                                      //     .dispatch(UpdateErrorProvince(false));
+                                    },
+                                  ),
                                   if (!eventtypesState.EventTypesNA)
                                     Row(
                                       children: [

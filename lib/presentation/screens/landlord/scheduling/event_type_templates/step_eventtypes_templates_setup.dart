@@ -480,47 +480,46 @@ class _StepEventTypesTemplateSetupState
                                     ],
                                   ),
                                   const SizedBox(height: 5.0),
-                                  if (!eventtypesState.EventTypesNA)
-                                    Container(
-                                      height: 32,
-                                      child: DropdownSearch<PropertyDropData>(
-                                        enabled: (eventtypesState.EventTypesNA)
-                                            ? false
-                                            : true,
-                                        mode: Mode.MENU,
-                                        items: eventtypesState
-                                            .PropertyDropDatalist,
-                                        textstyle:
-                                            MyStyles.Medium(12, myColor.black),
-                                        itemAsString: (PropertyDropData? u) =>
-                                            u!.propertyName!,
-                                        hint: GlobleString.Select_Property,
-                                        showSearchBox: true,
-                                        defultHeight: eventtypesState
-                                                        .PropertyDropDatalist
-                                                        .length *
-                                                    35 >
-                                                300
-                                            ? 300
-                                            : (eventtypesState
-                                                        .PropertyDropDatalist
-                                                        .length *
-                                                    35) +
-                                                50,
-                                        showClearButton: false,
-                                        selectedItem:
-                                            eventtypesState.selectproperty,
-                                        focuscolor: myColor.blue,
-                                        focusWidth: 2,
-                                        isFilteredOnline: true,
-                                        onChanged: (value) {
-                                          _store.dispatch(
-                                              UpdateMER_selectproperty1(value));
-                                          _changeData();
-                                          textprop = value!.adress!;
-                                        },
-                                      ),
+                                  Container(
+                                    height: 32,
+                                    child: DropdownSearch<PropertyDropData>(
+                                      enabled: (eventtypesState.EventTypesNA)
+                                          ? false
+                                          : true,
+                                      mode: Mode.MENU,
+                                      items:
+                                          eventtypesState.PropertyDropDatalist,
+                                      textstyle:
+                                          MyStyles.Medium(12, myColor.black),
+                                      itemAsString: (PropertyDropData? u) =>
+                                          u!.propertyName!,
+                                      hint: GlobleString.Select_Property,
+                                      showSearchBox: true,
+                                      defultHeight: eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35 >
+                                              300
+                                          ? 300
+                                          : (eventtypesState
+                                                      .PropertyDropDatalist
+                                                      .length *
+                                                  35) +
+                                              50,
+                                      showClearButton: false,
+                                      selectedItem:
+                                          eventtypesState.selectproperty,
+                                      focuscolor: myColor.blue,
+                                      focusWidth: 2,
+                                      isFilteredOnline: true,
+                                      onChanged: (value) {
+                                        _store.dispatch(
+                                            UpdateMER_selectproperty1(value));
+                                        _changeData();
+                                        textprop = value!.adress!;
+                                      },
                                     ),
+                                  ),
                                   const SizedBox(height: 5.0),
                                   Row(
                                     children: [
@@ -548,60 +547,60 @@ class _StepEventTypesTemplateSetupState
                               ),
                             ),
                             const SizedBox(width: 30.0),
-                            if (eventtypesState.EventTypesNA)
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      GlobleString.ET_Location,
-                                      style: MyStyles.Medium(14, myColor.black),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                    const SizedBox(height: 5.0),
-                                    TextFormField(
-                                      controller: locationcontroler,
-                                      textAlign: TextAlign.start,
-                                      style: MyStyles.Regular(
-                                          14, myColor.text_color),
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(25),
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp("[a-z A-Z]")),
-                                      ],
-                                      decoration: InputDecoration(
-                                          //border: InputBorder.none,
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.blue,
-                                                width: 2),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: eventtypesState
-                                                        .error_Province
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
-                                                width: 1.0),
-                                          ),
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.all(12),
-                                          fillColor: myColor.white,
-                                          filled: true),
-                                      onChanged: (value) {
-                                        _changeData();
-                                        AddEditEventTypesTemplates
-                                            .isValueUpdate = true;
-                                        _store.dispatch(UpdateLocation(value));
-                                        // _store
-                                        //     .dispatch(UpdateErrorProvince(false));
-                                      },
-                                    ),
-                                    const SizedBox(height: 5.0),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    GlobleString.ET_Location,
+                                    style: MyStyles.Medium(14, myColor.black),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  TextFormField(
+                                    controller: locationcontroler,
+                                    textAlign: TextAlign.start,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(25),
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[a-z A-Z]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                        //border: InputBorder.none,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.blue,
+                                              width: 2),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color:
+                                                  eventtypesState.error_Province
+                                                      ? myColor.errorcolor
+                                                      : myColor.gray,
+                                              width: 1.0),
+                                        ),
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.all(12),
+                                        fillColor: myColor.white,
+                                        filled: true),
+                                    onChanged: (value) {
+                                      _changeData();
+                                      AddEditEventTypesTemplates.isValueUpdate =
+                                          true;
+                                      _store.dispatch(UpdateLocation(value));
+                                      // _store
+                                      //     .dispatch(UpdateErrorProvince(false));
+                                    },
+                                  ),
+                                  const SizedBox(height: 5.0),
+                                  if (!eventtypesState.EventTypesNA)
                                     Row(
                                       children: [
                                         Checkbox(
@@ -631,9 +630,9 @@ class _StepEventTypesTemplateSetupState
                                             GlobleString.ET_Same_Address),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                ],
                               ),
+                            ),
                           ],
                         ),
                       ),
