@@ -25,16 +25,22 @@ class DocumentModel {
   });
 
   DocumentModel.fromJson(Map<String, dynamic> json) {
-    documentName = json['document_name'];
-    documentType = json['document_type'];
-    documentDateCreated = json['document_date_created'];
-    documentCreatedBy = json['document_created_by'];
-    isFile = json['is_file'];
-    isDelete = json['is_delete'];
-    isRestricted = json['is_restricted'];
-    url = json['url'];
-    documentUUID = json['document_uuid'];
-    folderFatherUUID = json['folder_father_uuid'];
+    documentName = json['document_name'] ?? "";
+    documentType = json['document_type'] ?? "";
+    documentDateCreated = json['document_date_created'] ?? "";
+    documentCreatedBy = json['document_created_by'] ?? "";
+    isFile = json['is_file'] != null
+        ? (json['is_file'] is bool? ? json['is_file'] : false)
+        : false;
+    isDelete = json['is_delete'] != null
+        ? (json['is_delete'] is bool? ? json['is_delete'] : false)
+        : false;
+    isRestricted = json['is_restricted'] != null
+        ? (json['is_restricted'] is bool? ? json['is_restricted'] : false)
+        : false;
+    url = json['url'] ?? "";
+    documentUUID = json['document_uuid'] ?? "";
+    folderFatherUUID = json['folder_father_uuid'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

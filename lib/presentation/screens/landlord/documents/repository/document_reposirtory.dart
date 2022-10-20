@@ -21,6 +21,7 @@ import 'package:silverhome/presentation/screens/landlord/documents/model/request
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:http_parser/src/media_type.dart';
+import 'package:silverhome/common/prefsname.dart';
 
 class DocumentsService {
   http.Client? _client;
@@ -47,25 +48,25 @@ class DocumentsService {
   }
 
 /*  static var Create_Folder_Api = base_url + "documents/create/folder"; */
-  Future<bool?> createFolder(
-      BuildContext context, String folderName, String fatherUUID) async {
+  Future<bool?> createFolder(BuildContext context, String folderName,
+      String fatherUUID, String currenTab,
+      [String propertyUUID = ""]) async {
     try {
-      final bloc = Provider.of<Bloc>(context);
-      var response = await _client?.post(Uri.parse(Weburl.Create_Document_Api),
+      /*     */
+      var response = await _client?.post(
+          Uri.parse(
+              /* Weburl.Create_Document_Api */ "https://api.ren-hogar.com/documentsnewfolder"),
           headers: getHeadersJson(),
-          body: RequestCreateFolder(fatherUUID: fatherUUID, name: folderName));
+          body: jsonEncode(RequestCreateFolder(
+                  fatherUUID: fatherUUID,
+                  name: folderName,
+                  ownerUUID: Prefs.getString(PrefsName.OwnerID),
+                  propertyUUID: propertyUUID,
+                  type: currenTab.toUpperCase())
+              .toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, fatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -90,25 +91,18 @@ class DocumentsService {
   /*   static var Restore_File_Api = base_url + "documents/restore"; */
   Future<bool?> restoreDocument(BuildContext context, String documentUUID,
       String documentFatherUUID) async {
-    final bloc = Provider.of<Bloc>(context);
     try {
-      var response = await _client?.post(Uri.parse(Weburl.Restore_Document_Api),
+      var response = await _client?.post(
+          Uri.parse(
+              "https://api.ren-hogar.com/documentsrestore" /* Weburl.Restore_Document_Api */),
           headers: getHeadersJson(),
-          body: RequestDuplicateDocument(
-              documentUUID: documentUUID,
-              documentFatherUUID: documentFatherUUID));
+          body: jsonEncode(RequestDuplicateDocument(
+                  documentUUID: documentUUID,
+                  documentFatherUUID: documentFatherUUID)
+              .toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, documentFatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -132,23 +126,16 @@ class DocumentsService {
   Future<bool?> renameDocument(BuildContext context, String documentUUID,
       String documentName, String documentFatherUUID) async {
     try {
-      final bloc = Provider.of<Bloc>(context);
-      var response = await _client?.post(Uri.parse(Weburl.Rename_Document_Api),
+      var response = await _client?.post(
+          Uri.parse(
+              /* Weburl.Rename_Document_Api */ "https://api.ren-hogar.com/documentsrename"),
           headers: getHeadersJson(),
-          body: RequestRenameDocument(
-              documentUUID: documentUUID, name: documentName));
+          body: jsonEncode(RequestRenameDocument(
+                  documentUUID: documentUUID, name: documentName)
+              .toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, documentFatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -171,26 +158,17 @@ class DocumentsService {
   /*   static var Duplicate_File_Api = base_url + "documents/duplicate"; */
   Future<bool?> duplicateDocument(BuildContext context, String documentUUID,
       String documentFatherUUID) async {
-    final bloc = Provider.of<Bloc>(context);
     try {
       var response = await _client?.post(
           Uri.parse(Weburl.Duplicate_Document_Api),
           headers: getHeadersJson(),
-          body: RequestDuplicateDocument(
-              documentUUID: documentUUID,
-              documentFatherUUID: documentFatherUUID));
+          body: jsonEncode(RequestDuplicateDocument(
+                  documentUUID: documentUUID,
+                  documentFatherUUID: documentFatherUUID)
+              .toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, documentFatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -214,26 +192,16 @@ class DocumentsService {
   Future<bool?> deleteDocument(BuildContext context, String documentUUID,
       String documentFatherUUID) async {
     try {
-      final bloc = Provider.of<Bloc>(context);
-      var response =
-          await _client?.delete(Uri.parse(Weburl.Delete_Document_Api),
-              headers: getHeadersJson(),
-              body: RequestDeleteDocument(
-                documentUUID: documentUUID,
-              ));
+      var response = await _client?.post(
+          Uri.parse(
+              /* Weburl.Delete_Document_Api */ "https://api.ren-hogar.com/documentsdelete"),
+          headers: getHeadersJson(),
+          body: jsonEncode(RequestDeleteDocument(
+            documentUUID: documentUUID,
+          ).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, documentFatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -256,27 +224,19 @@ class DocumentsService {
   /*   static var Move_To_Folder_Api = base_url + "documents/move";*/
   Future<bool?> moveDocument(BuildContext context, String documentUUID,
       String fatherUUID, String newFatherUUID) async {
-    final bloc = Provider.of<Bloc>(context);
     try {
-      var response = await _client?.post(Uri.parse(Weburl.Move_Document_Api),
+      var response = await _client?.post(
+          Uri.parse(
+              /* Weburl.Move_Document_Api */ "https://api.ren-hogar.com/documentsmove"),
           headers: getHeadersJson(),
-          body: RequestMoveDocument(
+          body: jsonEncode(RequestMoveDocument(
             documentUUID: documentUUID,
             fatherUUID: fatherUUID,
             newFatherUUID: newFatherUUID,
-          ));
+          ).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(context, newFatherUUID,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -298,18 +258,23 @@ class DocumentsService {
 
   /*  static var Upload_File_Api = base_url + "documents/upload"; */
 
-  Future<DocumentModel?> uploadDocument(
-      BuildContext context, Uint8List data, String extension) async {
+  Future<DocumentModel?> uploadDocument(BuildContext context, Uint8List data,
+      String extension, String type, String propertyId, String fatherId) async {
     try {
       List<int> _selectedFile = data;
-      final bloc = Provider.of<Bloc>(context);
+
       String filepath = '${DateTime.now().millisecondsSinceEpoch}.$extension';
 
       var multipartRequest = new http.MultipartRequest(
-          "POST", Uri.parse(Weburl.Upload_Document_Api));
+          "POST",
+          Uri.parse(
+              /* Weburl.Upload_Document_Api */ "https://www.ren-hogar.com/documentupload/"));
 
       multipartRequest.headers.addAll(getHeadersMultipart());
-
+      multipartRequest.fields["property_id"] = propertyId;
+      multipartRequest.fields["father_id"] = fatherId;
+      multipartRequest.fields["type"] = type;
+      multipartRequest.fields["owner_id"] = Prefs.getString(PrefsName.OwnerID);
       multipartRequest.files.add(await http.MultipartFile.fromBytes(
           'file', _selectedFile,
           contentType: new MediaType('application', extension),
@@ -318,24 +283,27 @@ class DocumentsService {
       await multipartRequest.send().then((result) {
         //print('admin');
         if (result.statusCode == 200) {
+          print(result);
           http.Response.fromStream(result).then((response) async {
             if (response.statusCode == 200) {
+              print(jsonDecode(response.body));
+              print("result");
               if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-                DocumentsListScreenModel? temporalDocumentList =
+                /*          DocumentsListScreenModel? temporalDocumentList =
                     await getDocumentListByUUID(
                         context,
                         bloc.documentBloc.currentFatherFolderUUID!,
-                        bloc.documentBloc.currentDocumentTab.toLowerCase());
-                bloc.documentBloc.changeDocumentFileList(
+                        bloc.documentBloc.currentDocumentTab.toUpperCase()); */
+                /*    bloc.documentBloc.changeDocumentFileList(
                     temporalDocumentList!.folderContent!);
                 bloc.documentBloc.changeDocumentBreadcumList(
                     temporalDocumentList.breadcumbs!);
                 bloc.documentBloc.currentFatherFolderUUID =
-                    temporalDocumentList.documentFatherUUID;
+                    temporalDocumentList.documentFatherUUID; */
                 var data = jsonDecode(response.body);
 
-                if (data != null && data['Result'] is Map<String, dynamic>) {
-                  return DocumentModel.fromJson(data['Result']);
+                if (data != null && data['Result'] != null) {
+                  return DocumentModel.fromJson(data['Result'][0]);
                 } else {
                   ToastUtils.showCustomToast(
                       context, GlobleString.Error, false);
@@ -409,21 +377,28 @@ class DocumentsService {
 /*   static var Get_List_Documents = base_url + "documents/list"; */
   Future<DocumentsListScreenModel?> getDocumentListByUUID(
       BuildContext context, String folderUUID, String type,
-      [String? search, String? filter]) async {
+      [String search = "", String? filter = ""]) async {
     try {
-      var urlParams = Weburl.Get_Documents_List;
+      /*    var urlParams = Weburl.Get_Documents_List;=
       urlParams = (search == "" || search == null)
           ? urlParams
           : urlParams + "search=$search";
       urlParams =
           (type == "" || type == null) ? urlParams : urlParams + "type=$type";
-
-      var response =
-          await _client?.get(Uri.parse(urlParams), headers: getHeadersJson());
+ */
+      var response = await _client?.post(
+          Uri.parse("https://api.ren-hogar.com/documentslist"),
+          headers: getHeadersJson(),
+          body: jsonEncode({
+            "type": type.toUpperCase(),
+            "owner_id": Prefs.getString(PrefsName.OwnerID),
+            "search": search,
+            "property_id": filter,
+            "father_id": folderUUID
+          }));
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          return DocumentsListScreenModel.fromJson(
-              jsonDecode(response.body)['Result']);
+          return DocumentsListScreenModel.fromJson(jsonDecode(response.body));
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);
           return null;
@@ -444,25 +419,17 @@ class DocumentsService {
   /*   static var Change_Restric_Api = base_url + "documents/restric";*/
   Future<bool?> changeRestrictEditing(BuildContext context, String documentUUID,
       bool newValue, String fatherUUID) async {
-    final bloc = Provider.of<Bloc>(context);
     try {
       var response = await _client?.post(
-          Uri.parse(Weburl.Change_Restrict_Editing),
+          Uri.parse(
+              /*Weburl.Change_Restrict_Editing */ "https://api.ren-hogar.com/documentsrestrict"),
           headers: getHeadersJson(),
-          body: RequestChangeRestrictDocument(
-              documentUUID: documentUUID, isRestricted: newValue));
+          body: jsonEncode(RequestChangeRestrictDocument(
+                  documentUUID: documentUUID, isRestricted: newValue)
+              .toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-          DocumentsListScreenModel? temporalDocumentList =
-              await getDocumentListByUUID(
-                  context,
-                  bloc.documentBloc.currentFatherFolderUUID!,
-                  bloc.documentBloc.currentDocumentTab.toLowerCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
           return true;
         } else {
           ToastUtils.showCustomToast(context, GlobleString.Error, false);

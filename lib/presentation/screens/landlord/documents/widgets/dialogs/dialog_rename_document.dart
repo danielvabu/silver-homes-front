@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:silverhome/bloc/bloc.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
@@ -39,14 +40,32 @@ class AlertDialogRenameDocument extends StatefulWidget {
 class _AlertDialogRenameDocumentState extends State<AlertDialogRenameDocument> {
   final _nameFolderController = new TextEditingController();
   DocumentsService documentsService = new DocumentsService();
-
+  late OverlayEntry loader;
   _renameDocument(Bloc bloc) async {
     bool? isRenamedDocument = await documentsService.renameDocument(
         context,
         widget.documentUUID,
         _nameFolderController.text,
         widget.documentFatherUUID);
-    print("isRenamedDocument $isRenamedDocument");
+    if (isRenamedDocument ?? false) {
+      loader = Helper.overlayLoader(context);
+      Overlay.of(context)!.insert(loader);
+      DocumentsListScreenModel? temporalDocumentList =
+          await documentsService.getDocumentListByUUID(
+              context,
+              widget.documentFatherUUID,
+              bloc.documentBloc.currentDocumentTab.toUpperCase());
+      loader.remove();
+      bloc.documentBloc
+          .changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc
+          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID =
+          temporalDocumentList.documentFatherUUID;
+      Navigator.pop(context);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override

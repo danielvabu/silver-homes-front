@@ -1,4 +1,5 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:silverhome/domain/entities/propertylist.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/breadcumb_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/filter_document_model.dart';
@@ -11,7 +12,8 @@ class DocumentBloc with Validators {
   String currentDocumentTab = "Property";
   DocumentModel? currentDocumentMenuSelected;
   String? currentFatherFolderUUID;
-  FilterDocumentModel? currentFilterSelected;
+  PropertyDataList? currentFilterSelected;
+  DocumentModel? currentDocument;
 
   ///DocumentBloc
   ///MenuDrawer
@@ -85,10 +87,10 @@ class DocumentBloc with Validators {
   }
 
   ///List Filters
-  final _documentFilterList = BehaviorSubject<List<FilterDocumentModel>>();
-  Stream<List<FilterDocumentModel>> get getDocumentFilterListTransformer =>
+  final _documentFilterList = BehaviorSubject<List<PropertyDataList>>();
+  Stream<List<PropertyDataList>> get getDocumentFilterListTransformer =>
       _documentFilterList.stream;
-  Function(List<FilterDocumentModel>) get changeDocumentFilterList =>
+  Function(List<PropertyDataList>) get changeDocumentFilterList =>
       _documentFilterList.sink.add;
   openDocumentFilterListValue() {
     return _documentFilterList.value;
@@ -316,7 +318,7 @@ class DocumentBloc with Validators {
       folderFatherUUID: "1398-erqd-54da-45541-asdad",
     ),
   ];
-  List<String> temporalList = ['Brentwood - Unit 100', 'Brentwood - Unit 200'];
+  List<PropertyDataList> filterList = [];
 
   dispose() {
     _documentMenuDrawer.close();

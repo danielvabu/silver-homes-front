@@ -2144,7 +2144,7 @@ class GlobleString {
   static const String NAV_Files_string = "Files";
   static const String NAV_Document_builder = "Document Builder";
   static const String NAV_Document_templates = "Document Templates";
-  static const String Tab_Document_property = "Porperty";
+  static const String Tab_Document_property = "Property";
   static const String Tab_Document_properties = "Porperties";
   static const String Tab_Document_tenants = "Tenants";
   static const String Tab_Document_onwers = "Onwers";
@@ -2168,7 +2168,7 @@ class GlobleString {
   static const String Pop_Menu_documents_table_delete = "Delete";
   static const String Pop_Menu_documents_table_move = "Move to";
   static const String Pop_Menu_documents_table_restore = "Restore";
-  static const String Title_documents = "Documnets";
+  static const String Title_documents = "Documents";
   static const String Message_No_File_upload = "No files uploaded yet.";
   static const String Document_name = "Folder name";
   static const String Document_create = "Create folder";

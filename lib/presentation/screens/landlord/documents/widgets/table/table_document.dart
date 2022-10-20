@@ -38,6 +38,7 @@ class _TableDocumentState extends State<TableDocument> {
       decoration:
           BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(3))),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           DocumentTableHeader(
             onPressedSortName: () async {},

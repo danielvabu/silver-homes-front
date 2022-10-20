@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:silverhome/bloc/bloc.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
@@ -42,14 +43,32 @@ class AlertDialogMoveDocument extends StatefulWidget {
 class _AlertDialogMoveDocumentState extends State<AlertDialogMoveDocument> {
   final _nameFolderController = new TextEditingController();
   DocumentsService documentsService = new DocumentsService();
-
+late OverlayEntry loader;
   _moveDocument(Bloc bloc) async {
     bool? isMoveDocument = await documentsService.moveDocument(
         context,
         widget.documentUUID,
         widget.documentFatherUUID,
         widget.documentNewFatherUUID);
-    print("isMoveDocument $isMoveDocument");
+    if (isMoveDocument ?? false) {
+      loader = Helper.overlayLoader(context);
+      Overlay.of(context)!.insert(loader);
+      DocumentsListScreenModel? temporalDocumentList =
+          await documentsService.getDocumentListByUUID(
+              context,
+              widget.documentFatherUUID,
+              bloc.documentBloc.currentDocumentTab.toUpperCase());
+      loader.remove();
+      bloc.documentBloc
+          .changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc
+          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID =
+          temporalDocumentList.documentFatherUUID;
+      Navigator.pop(context);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override
