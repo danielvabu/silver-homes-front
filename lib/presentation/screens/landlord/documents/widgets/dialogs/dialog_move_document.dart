@@ -43,7 +43,7 @@ class AlertDialogMoveDocument extends StatefulWidget {
 class _AlertDialogMoveDocumentState extends State<AlertDialogMoveDocument> {
   final _nameFolderController = new TextEditingController();
   DocumentsService documentsService = new DocumentsService();
-late OverlayEntry loader;
+  late OverlayEntry loader;
   _moveDocument(Bloc bloc) async {
     bool? isMoveDocument = await documentsService.moveDocument(
         context,
@@ -56,15 +56,14 @@ late OverlayEntry loader;
       DocumentsListScreenModel? temporalDocumentList =
           await documentsService.getDocumentListByUUID(
               context,
-              widget.documentFatherUUID,
+              widget.documentNewFatherUUID,
               bloc.documentBloc.currentDocumentTab.toUpperCase());
       loader.remove();
       bloc.documentBloc
           .changeDocumentFileList(temporalDocumentList!.folderContent!);
       bloc.documentBloc
           .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-      bloc.documentBloc.currentFatherFolderUUID =
-          temporalDocumentList.documentFatherUUID;
+      bloc.documentBloc.currentFatherFolderUUID = widget.documentNewFatherUUID;
       Navigator.pop(context);
     } else {
       Navigator.pop(context);

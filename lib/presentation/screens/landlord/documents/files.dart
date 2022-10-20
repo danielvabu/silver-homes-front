@@ -77,7 +77,8 @@ _sendFileToApi(BuildContext context, Bloc bloc) async {
           bloc.documentBloc.currentFilterSelected == null
               ? ""
               : bloc.documentBloc.currentFilterSelected!.id ?? "",
-          bloc.documentBloc.currentFatherFolderUUID ?? "");
+          bloc.documentBloc.currentFatherFolderUUID ?? "",
+          file.name.split('.').first);
       /* if (documentModel != null) { */
       DocumentsListScreenModel? temporalDocumentList =
           await _documentsService.getDocumentListByUUID(
@@ -149,305 +150,7 @@ _onSearchChanged(String searchValue, Bloc bloc, BuildContext context) async {
       bloc.documentBloc.currentFilterSelected == null
           ? ""
           : bloc.documentBloc.currentFilterSelected!.id ?? "");
-  _searchController.clear();
-}
-
-Widget _searchRow(
-    double width, double height, Bloc bloc, BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Row(
-        children: [
-          Container(
-              /* width: 260, */
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: myColor.TA_Border,
-                  width: 1.0,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerRight,
-                    width: width * .20,
-                    child: TextFormField(
-                      controller: _searchController,
-                      onChanged: (value) {},
-                      onFieldSubmitted: (value) {
-                        _onSearchChanged(value, bloc, context);
-                      },
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintStyle: MyStyles.Medium(14, myColor.hintcolor),
-                        contentPadding: const EdgeInsets.all(10),
-                        isDense: true,
-                        hintText: GlobleString.CALENDAR_Search,
-                      ),
-                      style: MyStyles.Medium(14, myColor.text_color),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 6, right: 4),
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                      size: 20,
-                    ),
-                  ),
-                ],
-              )),
-          PopupMenuButton(
-            constraints: BoxConstraints(
-              maxWidth: width * .107,
-              maxHeight: height * .25,
-            ),
-            shape: Border.all(color: myColor.black),
-            onSelected: (value) async {
-              switch (value) {
-                case 0:
-                  _sendFileToApi(context, bloc);
-                  break;
-                case 1:
-                  _createFolder(
-                      context, bloc.documentBloc.currentFatherFolderUUID ?? "");
-                  break;
-                default:
-              }
-            },
-            position: PopupMenuPosition.under,
-            child: Container(
-              height: 32,
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              margin: const EdgeInsets.only(left: 15, right: 15),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
-                ),
-                border: Border.all(color: myColor.black),
-                color: myColor.Circle_main,
-              ),
-              child: Row(
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(left: 5),
-                    child: Icon(
-                      Icons.add_circle,
-                      color: myColor.white,
-                      size: 20,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    GlobleString.Button_Document_new,
-                    style: MyStyles.Regular(14, myColor.white),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Icon(
-                      Icons.keyboard_arrow_down_sharp,
-                      color: myColor.white,
-                      size: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 0,
-                child: Text(
-                  GlobleString.Option_Upload_file,
-                  style: MyStyles.Medium(14, myColor.text_color),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              PopupMenuItem(
-                value: 1,
-                child: Text(
-                  GlobleString.Option_Create_file,
-                  style: MyStyles.Medium(14, myColor.text_color),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      Row(
-        children: [
-          StreamBuilder(
-            stream: bloc.propertyBloc.getpropertyTransformer,
-            builder: (BuildContext context,
-                AsyncSnapshot snapshotDocumentFilterList) {
-              if (snapshotDocumentFilterList.hasData &&
-                  bloc.documentBloc.currentDocumentTab.toUpperCase() ==
-                      "PROPERTY") {
-                List<PropertyDataList> temporalListP =
-                    snapshotDocumentFilterList.data;
-                return Container(
-                  width: width * .30,
-                  height: 32,
-                  child: DropdownSearch<PropertyDataList>(
-                    mode: Mode.MENU,
-                    key: UniqueKey(),
-                    errorcolor: myColor.errorcolor,
-                    focuscolor: myColor.blue,
-                    focusWidth: 2,
-                    popupBackgroundColor: myColor.white,
-                    items: temporalListP,
-                    itemAsString: (PropertyDataList? p) =>
-                        p != null ? p.propertyName! : "",
-                    defultHeight: temporalListP.length * 35 > 250
-                        ? 250
-                        : temporalListP.length * 35,
-                    textstyle: MyStyles.Medium(14, myColor.text_color),
-                    hint: "All properties",
-                    selectedItem: bloc.documentBloc.currentFilterSelected,
-                    onChanged: (value) async {
-                      bloc.documentBloc.currentFilterSelected = value;
-                      await _getDocumentsFileList(
-                          bloc,
-                          context,
-                          bloc.documentBloc.currentDocumentTab.toUpperCase(),
-                          "",
-                          bloc.documentBloc.currentFilterSelected!.id!);
-                    },
-                  ),
-                );
-              } else {
-                return SizedBox();
-              }
-            },
-          ),
-          StreamBuilder(
-            stream: bloc.documentBloc.getDocumentShowMoveTransformer,
-            initialData: false,
-            builder:
-                (BuildContext context, AsyncSnapshot snapshotDocumentShowMove) {
-              if (snapshotDocumentShowMove.hasData &&
-                  snapshotDocumentShowMove.data) {
-                return Row(
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          _moveDocument(bloc, context);
-                        },
-                        child: Container(
-                          height: 32,
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          margin: const EdgeInsets.only(left: 5, right: 5),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                            border: Border.all(color: myColor.gray),
-                            color: myColor.Circle_main,
-                          ),
-                          child: Text(
-                            GlobleString.Document_Button_move,
-                            style: MyStyles.Regular(14, myColor.white),
-                          ),
-                        )),
-                    InkWell(
-                        onTap: () {
-                          bloc.documentBloc.changeDocumentShowMove(false);
-                        },
-                        child: Container(
-                          height: 32,
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          margin: const EdgeInsets.only(left: 5, right: 5),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                            border: Border.all(color: myColor.black),
-                            color: myColor.white,
-                          ),
-                          child: Text(
-                            GlobleString.Document_Button_cancel,
-                            style: MyStyles.Regular(14, myColor.Circle_main),
-                          ),
-                        ))
-                  ],
-                );
-              } else {
-                return StreamBuilder(
-                  stream: bloc.documentBloc.getDocumentTrashTransformer,
-                  initialData: false,
-                  builder: (BuildContext context,
-                      AsyncSnapshot snapshotTrashButton) {
-                    return InkWell(
-                        onTap: () {
-                          bloc.documentBloc
-                              .changeDocumentTrash(!snapshotTrashButton.data);
-                          _changeDocumentList(
-                              snapshotTrashButton.data ? 0 : 5, bloc, context);
-                        },
-                        child: Container(
-                          height: 32,
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          margin: const EdgeInsets.only(left: 5, right: 5),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                            border: Border.all(
-                                color: snapshotTrashButton.hasData &&
-                                        snapshotTrashButton.data
-                                    ? myColor.gray
-                                    : myColor.black),
-                            color: snapshotTrashButton.hasData &&
-                                    snapshotTrashButton.data
-                                ? myColor.gray
-                                : myColor.white,
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Icon(
-                                  FontAwesomeIcons.trashAlt,
-                                  color: snapshotTrashButton.hasData &&
-                                          snapshotTrashButton.data
-                                      ? myColor.white
-                                      : myColor.Circle_main,
-                                  size: 15,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                GlobleString.Button_Document_view_trash,
-                                style: MyStyles.Regular(
-                                    14,
-                                    snapshotTrashButton.hasData &&
-                                            snapshotTrashButton.data
-                                        ? myColor.white
-                                        : myColor.Circle_main),
-                              ),
-                            ],
-                          ),
-                        ));
-                  },
-                );
-              }
-            },
-          ),
-        ],
-      )
-    ],
-  );
+/*   _searchController.clear(); */
 }
 
 Widget _breadcrumbs(Bloc bloc) {
@@ -464,7 +167,7 @@ Widget _breadcrumbs(Bloc bloc) {
             scrollDirection: Axis.horizontal,
             itemCount: tempBreadList.length,
             itemBuilder: (BuildContext context, int index) {
-              return BreadCumb(bread: tempBreadList[index].name!);
+              return BreadCumb(bread: tempBreadList[index]);
             },
           ),
         );
@@ -487,71 +190,40 @@ _changeDocumentList(int value, Bloc bloc, BuildContext context) async {
   switch (value) {
     case 0:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_property;
-
-      /*   bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");*/
       _searchController.clear();
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 1:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_tenants;
-
-      /*  bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_tenants}"; */
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", ""); */
       _searchController.clear();
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 2:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_onwers;
-
-      /*   bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_onwers}"; */
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", ""); */
       _searchController.clear();
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 3:
-      /*     bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_vendors}"; */
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_vendors;
-
       _searchController.clear();
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
-      _searchController.clear(); */
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 4:
-      /*    bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_other}"; */
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_other;
-
       _searchController.clear();
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
-      _searchController.clear(); */
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(true);
 
       break;
     case 5:
-      /*     bloc.documentBloc.temporalList[0] = "All"; */
-
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_trash;
-
       _searchController.clear();
       initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(false);
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
-      _searchController.clear(); */
 
       break;
     default:
@@ -579,12 +251,353 @@ initData(Bloc bloc, BuildContext context, [String type = ""]) async {
   await bloc.propertyBloc
       .getPropertyFilterList("", 1, "PropertyName", 1, 0, context);
   await _getDocumentsFileList(
-      bloc, context, type == "" ? "property" : type, "", "");
+      bloc,
+      context,
+      type == "" ? "property" : type,
+      "",
+      bloc.documentBloc.currentFilterSelected != null
+          ? (bloc.documentBloc.currentFilterSelected!.id ?? "")
+          : "");
 }
 
 class _FileDocumentsState extends State<FileDocuments> {
   double height = 0, width = 0, ancho = 0;
   bool isFirstCharge = true;
+  Widget _searchRow(
+      double width, double height, Bloc bloc, BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: myColor.TA_Border,
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerRight,
+                      width: width * .20,
+                      child: TextFormField(
+                        controller: _searchController,
+                        onChanged: (value) {},
+                        onFieldSubmitted: (value) {
+                          _onSearchChanged(value, bloc, context);
+                        },
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintStyle: MyStyles.Medium(14, myColor.hintcolor),
+                          contentPadding: const EdgeInsets.all(10),
+                          isDense: true,
+                          hintText: GlobleString.CALENDAR_Search,
+                        ),
+                        style: MyStyles.Medium(14, myColor.text_color),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 6, right: 4),
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                    ),
+                  ],
+                )),
+            StreamBuilder(
+                stream: bloc.documentBloc.getDocumentTrashTransformer,
+                initialData: false,
+                builder:
+                    (BuildContext context, AsyncSnapshot snapshotTrashButton) {
+                  if (!snapshotTrashButton.hasData ||
+                      !snapshotTrashButton.data) {
+                    return PopupMenuButton(
+                      constraints: BoxConstraints(
+                        maxWidth: width * .107,
+                        maxHeight: height * .25,
+                      ),
+                      shape: Border.all(color: myColor.black),
+                      onSelected: (value) async {
+                        switch (value) {
+                          case 0:
+                            _sendFileToApi(context, bloc);
+                            break;
+                          case 1:
+                            _createFolder(
+                                context,
+                                bloc.documentBloc.currentFatherFolderUUID ??
+                                    "");
+                            break;
+                          default:
+                        }
+                      },
+                      position: PopupMenuPosition.under,
+                      child: Container(
+                        height: 32,
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        margin: const EdgeInsets.only(left: 15, right: 15),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          border: Border.all(color: myColor.black),
+                          color: myColor.Circle_main,
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            const Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Icon(
+                                Icons.add_circle,
+                                color: myColor.white,
+                                size: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              GlobleString.Button_Document_new,
+                              style: MyStyles.Regular(14, myColor.white),
+                            ),
+                            /* ;
+                          } else {
+                            return SizedBox();
+                          } 
+                        }),*/
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Icon(
+                                Icons.keyboard_arrow_down_sharp,
+                                color: myColor.white,
+                                size: 20,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 0,
+                          child: Text(
+                            GlobleString.Option_Upload_file,
+                            style: MyStyles.Medium(14, myColor.text_color),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: 1,
+                          child: Text(
+                            GlobleString.Option_Create_file,
+                            style: MyStyles.Medium(14, myColor.text_color),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                })
+          ],
+        ),
+        Row(
+          children: [
+            StreamBuilder(
+                stream: bloc.propertyBloc.getpropertyTransformer,
+                builder: (BuildContext context,
+                    AsyncSnapshot snapshotDocumentFilterList) {
+                  if (snapshotDocumentFilterList.hasData) {
+                    List<PropertyDataList> temporalListP =
+                        snapshotDocumentFilterList.data;
+
+                    return Container(
+                      width: width * .30,
+                      height: 32,
+                      child: DropdownSearch<PropertyDataList>(
+                        mode: Mode.MENU,
+                        key: UniqueKey(),
+                        errorcolor: myColor.errorcolor,
+                        /*  clearButton: Icon(Icons.close, size: 4, color: Colors.black), */
+                        clearButtonBuilder: (context) {
+                          return InkWell(
+                            onTap: () async {
+                              bloc.documentBloc.currentFilterSelected = null;
+                              setState(() {});
+                              await _getDocumentsFileList(
+                                  bloc,
+                                  context,
+                                  bloc.documentBloc.currentDocumentTab
+                                      .toUpperCase(),
+                                  "",
+                                  "");
+                            },
+                            child: Icon(Icons.close,
+                                size: 12, color: Colors.black),
+                          );
+                        },
+                        showClearButton: true,
+                        focuscolor: myColor.blue,
+                        focusWidth: 2,
+                        popupBackgroundColor: myColor.white,
+                        items: temporalListP,
+                        itemAsString: (PropertyDataList? p) =>
+                            p != null ? p.propertyName! : "",
+                        defultHeight: temporalListP.length * 35 > 250
+                            ? 250
+                            : temporalListP.length * 35,
+                        textstyle: MyStyles.Medium(14, myColor.text_color),
+                        hint:
+                            "All ${bloc.documentBloc.currentDocumentTab.toUpperCase()}",
+                        selectedItem: bloc.documentBloc.currentFilterSelected,
+                        onChanged: (value) async {
+                          bloc.documentBloc.currentFilterSelected = value;
+                          await _getDocumentsFileList(
+                              bloc,
+                              context,
+                              bloc.documentBloc.currentDocumentTab
+                                  .toUpperCase(),
+                              "",
+                              bloc.documentBloc.currentFilterSelected!.id!);
+                        },
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }),
+            StreamBuilder(
+              stream: bloc.documentBloc.getDocumentShowMoveTransformer,
+              initialData: false,
+              builder: (BuildContext context,
+                  AsyncSnapshot snapshotDocumentShowMove) {
+                if (snapshotDocumentShowMove.hasData &&
+                    snapshotDocumentShowMove.data) {
+                  return Row(
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            _moveDocument(bloc, context);
+                          },
+                          child: Container(
+                            height: 32,
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            margin: const EdgeInsets.only(left: 5, right: 5),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              border: Border.all(color: myColor.gray),
+                              color: myColor.Circle_main,
+                            ),
+                            child: Text(
+                              GlobleString.Document_Button_move,
+                              style: MyStyles.Regular(14, myColor.white),
+                            ),
+                          )),
+                      InkWell(
+                          onTap: () {
+                            bloc.documentBloc.changeDocumentShowMove(false);
+                          },
+                          child: Container(
+                            height: 32,
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            margin: const EdgeInsets.only(left: 5, right: 5),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              border: Border.all(color: myColor.black),
+                              color: myColor.white,
+                            ),
+                            child: Text(
+                              GlobleString.Document_Button_cancel,
+                              style: MyStyles.Regular(14, myColor.Circle_main),
+                            ),
+                          ))
+                    ],
+                  );
+                } else {
+                  return StreamBuilder(
+                    stream: bloc.documentBloc.getDocumentTrashTransformer,
+                    initialData: false,
+                    builder: (BuildContext context,
+                        AsyncSnapshot snapshotTrashButton) {
+                      return InkWell(
+                          onTap: () {
+                            bloc.documentBloc
+                                .changeDocumentTrash(!snapshotTrashButton.data);
+                            _changeDocumentList(
+                                snapshotTrashButton.data ? 0 : 5,
+                                bloc,
+                                context);
+                          },
+                          child: Container(
+                            height: 32,
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            margin: const EdgeInsets.only(left: 5, right: 5),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(5),
+                              ),
+                              border: Border.all(
+                                  color: snapshotTrashButton.hasData &&
+                                          snapshotTrashButton.data
+                                      ? myColor.gray
+                                      : myColor.black),
+                              color: snapshotTrashButton.hasData &&
+                                      snapshotTrashButton.data
+                                  ? myColor.gray
+                                  : myColor.white,
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5),
+                                  child: Icon(
+                                    FontAwesomeIcons.trashAlt,
+                                    color: snapshotTrashButton.hasData &&
+                                            snapshotTrashButton.data
+                                        ? myColor.white
+                                        : myColor.Circle_main,
+                                    size: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  GlobleString.Button_Document_view_trash,
+                                  style: MyStyles.Regular(
+                                      14,
+                                      snapshotTrashButton.hasData &&
+                                              snapshotTrashButton.data
+                                          ? myColor.white
+                                          : myColor.Circle_main),
+                                ),
+                              ],
+                            ),
+                          ));
+                    },
+                  );
+                }
+              },
+            ),
+          ],
+        )
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -596,15 +609,6 @@ class _FileDocumentsState extends State<FileDocuments> {
     if (isFirstCharge) {
       isFirstCharge = false;
       initData(bloc, context);
-      /*  _getDocumentsFileList(bloc, context, "", "", ""); */
-      /*      if (!bloc.documentBloc.fi.contains("All Properties")) {
-        bloc.documentBloc.temporalList.add("All Properties");
-        bloc.documentBloc.temporalList.toSet();
-        bloc.documentBloc.temporalList =
-            bloc.documentBloc.temporalList.reversed.toList();
-      } */
-      /*    bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentPropertyList); */
     }
     return Container(
       /*     height: height, */

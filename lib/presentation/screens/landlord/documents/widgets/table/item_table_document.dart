@@ -100,7 +100,7 @@ class _DocumentItemState extends State<DocumentItem> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return AlertDialogRestoreDocument(
-          title: GlobleString.Document_restore,
+          title: GlobleString.Document_restore + " " + model.documentName!,
           negativeText: GlobleString.Mant_DL_Cancel,
           positiveText: GlobleString.Button_OK,
           negativeButton: () {
@@ -180,8 +180,8 @@ class _DocumentItemState extends State<DocumentItem> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return AlertDialogDeleteDocument(
-          title: GlobleString.Document_delete,
-          negativeText: GlobleString.Mant_DL_Cancel,
+          title: GlobleString.Document_delete + " " + model.documentName!,
+          negativeText: GlobleString.Mant_DL_Cancel_text,
           positiveText: GlobleString.Button_OK,
           negativeButton: () {
             Navigator.pop(context);
@@ -277,23 +277,27 @@ class _DocumentItemState extends State<DocumentItem> {
   Widget _datavalueDocumentName(DocumentModel model, Bloc bloc) {
     return InkWell(
       onTap: () async {
-        bloc.documentBloc.currentDocument = model;
-        if (model.isFile!) {
-          _downloadDocument(model);
+        if (model.isDelete == null || model.isDelete!) {
         } else {
-          bloc.documentBloc.changeDocumentFileList([]);
-          bloc.documentBloc.changeDocumentBreadcumList([]);
-          DocumentsListScreenModel? temporalDocumentList =
-              await _documentsService.getDocumentListByUUID(
-                  context,
-                  model.documentUUID == null ? "" : model.documentUUID!,
-                  bloc.documentBloc.currentDocumentTab.toUpperCase());
-          bloc.documentBloc
-              .changeDocumentFileList(temporalDocumentList!.folderContent!);
-          bloc.documentBloc
-              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-          bloc.documentBloc.currentFatherFolderUUID =
-              temporalDocumentList.documentFatherUUID;
+          if (model.isFile!) {
+            bloc.documentBloc.currentDocument = model;
+            _downloadDocument(model);
+          } else {
+            bloc.documentBloc.currentDocument = model;
+            bloc.documentBloc.changeDocumentFileList([]);
+            bloc.documentBloc.changeDocumentBreadcumList([]);
+            DocumentsListScreenModel? temporalDocumentList =
+                await _documentsService.getDocumentListByUUID(
+                    context,
+                    model.documentUUID == null ? "" : model.documentUUID!,
+                    bloc.documentBloc.currentDocumentTab.toUpperCase());
+            bloc.documentBloc
+                .changeDocumentFileList(temporalDocumentList!.folderContent!);
+            bloc.documentBloc
+                .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+            bloc.documentBloc.currentFatherFolderUUID =
+                temporalDocumentList.documentFatherUUID;
+          }
         }
       },
       child: Container(
@@ -329,7 +333,7 @@ class _DocumentItemState extends State<DocumentItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.documentType!,
+        model.isFile! ? model.documentType! : "Folder",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -344,7 +348,13 @@ class _DocumentItemState extends State<DocumentItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.documentDateCreated!,
+        model.documentDateCreated != null
+            ? !model.documentDateCreated!.contains(".")
+                ? model.documentDateCreated!
+                : model.documentDateCreated!.split(":")[0] +
+                    ":" +
+                    model.documentDateCreated!.split(":")[1]
+            : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -492,14 +502,15 @@ class _DocumentItemState extends State<DocumentItem> {
                               ),
                             ),
                           ],
-                          PopupMenuItem(
-                            value: 6,
-                            child: Text(
-                              GlobleString.Pop_Menu_documents_table_delete,
-                              style: MyStyles.Medium(14, myColor.text_color),
-                              textAlign: TextAlign.start,
+                          if (model.isDeleteable!)
+                            PopupMenuItem(
+                              value: 6,
+                              child: Text(
+                                GlobleString.Pop_Menu_documents_table_delete,
+                                style: MyStyles.Medium(14, myColor.text_color),
+                                textAlign: TextAlign.start,
+                              ),
                             ),
-                          ),
                         ],
                       );
                     },

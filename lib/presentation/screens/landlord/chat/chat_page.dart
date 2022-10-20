@@ -838,7 +838,7 @@ class _ChatPageState extends State<ChatPage> {
               subtitle: Row(
                 children: [
                   filterMessagesCard("Tenants"),
-                  filterMessagesCard("Onwers"),
+                  filterMessagesCard("Owners"),
                   filterMessagesCard("Vendors"),
                   filterMessagesCard("Team Members"),
                 ],
