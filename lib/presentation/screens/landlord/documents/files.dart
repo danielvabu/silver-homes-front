@@ -12,6 +12,9 @@ import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/toastutils.dart';
+import 'package:silverhome/domain/entities/propertydata.dart';
+import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/presentation/screens/landlord/documents/model/breadcumb_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/filter_document_model.dart';
@@ -36,6 +39,7 @@ late OverlayEntry loader;
 DocumentsService _documentsService = new DocumentsService();
 TextEditingController _searchController = new TextEditingController();
 Timer? _debounce;
+
 _sendFileToApi(BuildContext context, Bloc bloc) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowedExtensions: ['jpg', 'png', 'pdf', "doc", "jpeg"],
@@ -66,8 +70,28 @@ _sendFileToApi(BuildContext context, Bloc bloc) async {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
       DocumentModel? documentModel = await _documentsService.uploadDocument(
-          context, file.bytes!, file.name.split('.').last);
+          context,
+          file.bytes!,
+          file.name.split('.').last,
+          bloc.documentBloc.currentDocumentTab.toUpperCase(),
+          bloc.documentBloc.currentFilterSelected == null
+              ? ""
+              : bloc.documentBloc.currentFilterSelected!.id ?? "",
+          bloc.documentBloc.currentFatherFolderUUID ?? "");
+      /* if (documentModel != null) { */
+      DocumentsListScreenModel? temporalDocumentList =
+          await _documentsService.getDocumentListByUUID(
+              context,
+              bloc.documentBloc.currentFatherFolderUUID!,
+              bloc.documentBloc.currentDocumentTab.toUpperCase());
+      bloc.documentBloc
+          .changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc
+          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID =
+          temporalDocumentList.documentFatherUUID;
       loader.remove();
+      /*   } */
     }
   }
 }
@@ -117,13 +141,19 @@ _moveDocument(Bloc bloc, BuildContext context) async {
 }
 
 _onSearchChanged(String searchValue, Bloc bloc, BuildContext context) async {
-  await _getDocumentsFileList(bloc, context,
-      bloc.documentBloc.currentDocumentTab.toLowerCase(), searchValue, "");
+  await _getDocumentsFileList(
+      bloc,
+      context,
+      bloc.documentBloc.currentDocumentTab.toUpperCase(),
+      searchValue,
+      bloc.documentBloc.currentFilterSelected == null
+          ? ""
+          : bloc.documentBloc.currentFilterSelected!.id ?? "");
   _searchController.clear();
 }
 
-Widget _searchRow(double width, double height, List<String> temporalList,
-    Bloc bloc, BuildContext context) {
+Widget _searchRow(
+    double width, double height, Bloc bloc, BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -253,81 +283,46 @@ Widget _searchRow(double width, double height, List<String> temporalList,
       Row(
         children: [
           StreamBuilder(
-            stream: bloc.documentBloc.getDocumentOthersTransformer,
-            initialData: false,
-            builder: (BuildContext context, AsyncSnapshot snapshotOthers) {
-              if (snapshotOthers.hasData && snapshotOthers.data == true) {
-                return SizedBox(
-                  width: 15,
+            stream: bloc.propertyBloc.getpropertyTransformer,
+            builder: (BuildContext context,
+                AsyncSnapshot snapshotDocumentFilterList) {
+              if (snapshotDocumentFilterList.hasData &&
+                  bloc.documentBloc.currentDocumentTab.toUpperCase() ==
+                      "PROPERTY") {
+                List<PropertyDataList> temporalListP =
+                    snapshotDocumentFilterList.data;
+                return Container(
+                  width: width * .30,
+                  height: 32,
+                  child: DropdownSearch<PropertyDataList>(
+                    mode: Mode.MENU,
+                    key: UniqueKey(),
+                    errorcolor: myColor.errorcolor,
+                    focuscolor: myColor.blue,
+                    focusWidth: 2,
+                    popupBackgroundColor: myColor.white,
+                    items: temporalListP,
+                    itemAsString: (PropertyDataList? p) =>
+                        p != null ? p.propertyName! : "",
+                    defultHeight: temporalListP.length * 35 > 250
+                        ? 250
+                        : temporalListP.length * 35,
+                    textstyle: MyStyles.Medium(14, myColor.text_color),
+                    hint: "All properties",
+                    selectedItem: bloc.documentBloc.currentFilterSelected,
+                    onChanged: (value) async {
+                      bloc.documentBloc.currentFilterSelected = value;
+                      await _getDocumentsFileList(
+                          bloc,
+                          context,
+                          bloc.documentBloc.currentDocumentTab.toUpperCase(),
+                          "",
+                          bloc.documentBloc.currentFilterSelected!.id!);
+                    },
+                  ),
                 );
               } else {
-                return StreamBuilder(
-                  stream: bloc.documentBloc.getDocumentFilterListTransformer,
-                  builder: (BuildContext context,
-                      AsyncSnapshot snapshotDocumentFilterList) {
-                    if (snapshotDocumentFilterList.hasData) {
-                      return Container(
-                        width: width * .30,
-                        height: 32,
-                        child: DropdownSearch<FilterDocumentModel>(
-                          mode: Mode.MENU,
-                          key: UniqueKey(),
-                          errorcolor: myColor.errorcolor,
-                          focuscolor: myColor.blue,
-                          focusWidth: 2,
-                          popupBackgroundColor: myColor.white,
-                          items: snapshotDocumentFilterList.data
-                              as List<FilterDocumentModel>,
-                          defultHeight:
-                              (snapshotDocumentFilterList.data).length * 35 >
-                                      250
-                                  ? 250
-                                  : (snapshotDocumentFilterList
-                                              as List<FilterDocumentModel>)
-                                          .length *
-                                      35,
-                          textstyle: MyStyles.Medium(14, myColor.text_color),
-                          hint: "Select Unit",
-                          selectedItem: bloc.documentBloc.currentFilterSelected,
-                          onChanged: (value) async {
-                            bloc.documentBloc.currentFilterSelected = value;
-                            await _getDocumentsFileList(
-                                bloc,
-                                context,
-                                bloc.documentBloc.currentDocumentTab
-                                    .toLowerCase(),
-                                value!.filterUUID!,
-                                "");
-                          },
-                        ),
-                      );
-                    } else {
-                      /*/Comentar esto  */
-                      return Container(
-                        width: width * .30,
-                        height: 32,
-                        child: DropdownSearch<String>(
-                          mode: Mode.MENU,
-                          key: UniqueKey(),
-                          errorcolor: myColor.errorcolor,
-                          focuscolor: myColor.blue,
-                          focusWidth: 2,
-                          popupBackgroundColor: myColor.white,
-                          items: temporalList,
-                          defultHeight: temporalList.length * 35 > 250
-                              ? 250
-                              : temporalList.length * 35,
-                          textstyle: MyStyles.Medium(14, myColor.text_color),
-                          hint: "Select Unit",
-                          selectedItem: temporalList[0],
-                          onChanged: (value) async {},
-                        ),
-                      );
-
-                      /*    return SizedBox(); */
-                    }
-                  },
-                );
+                return SizedBox();
               }
             },
           ),
@@ -456,33 +451,28 @@ Widget _searchRow(double width, double height, List<String> temporalList,
 }
 
 Widget _breadcrumbs(Bloc bloc) {
-  return bloc.documentBloc.breadcrumbsList.length > 0
-      ? Container(
-          height: 0,
+  return StreamBuilder(
+    stream: bloc.documentBloc.getDocumentBreadcumListTransformer,
+    builder: (BuildContext context, AsyncSnapshot snapshotBreadcumList) {
+      if (snapshotBreadcumList.hasData) {
+        List<BreadcumbModel> tempBreadList =
+            snapshotBreadcumList.data as List<BreadcumbModel>;
+        return Container(
+          height: tempBreadList.isNotEmpty ? 35 : 0,
           margin: EdgeInsets.fromLTRB(5, 12, 5, 6),
-          child: StreamBuilder(
-            stream: bloc.documentBloc.getDocumentBreadcumListTransformer,
-            builder:
-                (BuildContext context, AsyncSnapshot snapshotBreadcumList) {
-              if (snapshotBreadcumList.hasData &&
-                  bloc.documentBloc.breadcrumbsList.isNotEmpty) {
-                return Container(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: bloc.documentBloc.breadcrumbsList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BreadCumb(
-                          bread: bloc.documentBloc.breadcrumbsList[index]);
-                    },
-                  ),
-                );
-              } else {
-                return SizedBox();
-              }
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: tempBreadList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return BreadCumb(bread: tempBreadList[index].name!);
             },
           ),
-        )
-      : SizedBox();
+        );
+      } else {
+        return SizedBox();
+      }
+    },
+  );
 }
 
 Widget _getTableDocuments() {
@@ -497,69 +487,72 @@ _changeDocumentList(int value, Bloc bloc, BuildContext context) async {
   switch (value) {
     case 0:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_property;
-      bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_properties}";
-      /*   bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", "");*/
-      _searchController.clear();
 
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentPropertyList);
+      /*   bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");*/
+      _searchController.clear();
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
+      bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 1:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_tenants;
-      bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_tenants}";
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", ""); */
-      _searchController.clear();
 
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentTenatsList);
+      /*  bloc.documentBloc.temporalList[0] =
+          "All ${GlobleString.Tab_Document_tenants}"; */
+      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", ""); */
+      _searchController.clear();
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
+      bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 2:
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_onwers;
-      bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_onwers}";
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", ""); */
-      _searchController.clear();
 
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentOnwersList);
+      /*   bloc.documentBloc.temporalList[0] =
+          "All ${GlobleString.Tab_Document_onwers}"; */
+      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", ""); */
+      _searchController.clear();
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
+      bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 3:
-      bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_vendors}";
+      /*     bloc.documentBloc.temporalList[0] =
+          "All ${GlobleString.Tab_Document_vendors}"; */
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_vendors;
-      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", "");
-      _searchController.clear(); */
 
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentVendorsList);
+      _searchController.clear();
+      /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
+      _searchController.clear(); */
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
+      bloc.documentBloc.changeDocumentOthers(false);
       break;
     case 4:
-      bloc.documentBloc.temporalList[0] =
-          "All ${GlobleString.Tab_Document_other}";
+      /*    bloc.documentBloc.temporalList[0] =
+          "All ${GlobleString.Tab_Document_other}"; */
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_other;
+
+      _searchController.clear();
       /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", "");
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
       _searchController.clear(); */
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
       bloc.documentBloc.changeDocumentOthers(true);
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentOthersList);
+
       break;
     case 5:
-      bloc.documentBloc.temporalList[0] = "All";
+      /*     bloc.documentBloc.temporalList[0] = "All"; */
 
       bloc.documentBloc.currentDocumentTab = GlobleString.Tab_Document_trash;
+
+      _searchController.clear();
+      initData(bloc, context, bloc.documentBloc.currentDocumentTab);
+      bloc.documentBloc.changeDocumentOthers(false);
       /*     bloc.documentBloc.documentPropertyList = await _getDocumentsFileList(bloc,
-          context, bloc.documentBloc.currentDocumentTab.toLowerCase(), "", "");
+          context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
       _searchController.clear(); */
 
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentTrashList);
       break;
     default:
       bloc.documentBloc.changeDocumentFileList([]);
@@ -568,15 +561,25 @@ _changeDocumentList(int value, Bloc bloc, BuildContext context) async {
 
 _getDocumentsFileList(Bloc bloc, BuildContext context, String type,
     String search, String filter) async {
+  print(filter);
+  bloc.documentBloc.changeDocumentFileList([]);
+  bloc.documentBloc.changeDocumentBreadcumList([]);
   DocumentsListScreenModel? temporalDocumentList =
       await _documentsService.getDocumentListByUUID(
-          context, "", type != "" ? type : "Property", "", "");
+          context, "", type != "" ? type : "property", search, filter);
   bloc.documentBloc
       .changeDocumentFileList(temporalDocumentList!.folderContent!);
   bloc.documentBloc
       .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
   bloc.documentBloc.currentFatherFolderUUID =
       temporalDocumentList.documentFatherUUID;
+}
+
+initData(Bloc bloc, BuildContext context, [String type = ""]) async {
+  await bloc.propertyBloc
+      .getPropertyFilterList("", 1, "PropertyName", 1, 0, context);
+  await _getDocumentsFileList(
+      bloc, context, type == "" ? "property" : type, "", "");
 }
 
 class _FileDocumentsState extends State<FileDocuments> {
@@ -592,18 +595,19 @@ class _FileDocumentsState extends State<FileDocuments> {
 
     if (isFirstCharge) {
       isFirstCharge = false;
+      initData(bloc, context);
       /*  _getDocumentsFileList(bloc, context, "", "", ""); */
-      if (!bloc.documentBloc.temporalList.contains("All Properties")) {
+      /*      if (!bloc.documentBloc.fi.contains("All Properties")) {
         bloc.documentBloc.temporalList.add("All Properties");
         bloc.documentBloc.temporalList.toSet();
         bloc.documentBloc.temporalList =
             bloc.documentBloc.temporalList.reversed.toList();
-      }
-      bloc.documentBloc
-          .changeDocumentFileList(bloc.documentBloc.documentPropertyList);
+      } */
+      /*    bloc.documentBloc
+          .changeDocumentFileList(bloc.documentBloc.documentPropertyList); */
     }
     return Container(
-      height: height,
+      /*     height: height, */
       width: width,
       color: myColor.bg_color1,
       child: Center(
@@ -659,7 +663,6 @@ class _FileDocumentsState extends State<FileDocuments> {
                       _searchRow(
                         width,
                         height,
-                        bloc.documentBloc.temporalList,
                         bloc,
                         context,
                       ),

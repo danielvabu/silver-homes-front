@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:silverhome/bloc/bloc.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
@@ -40,11 +41,29 @@ class _AlertDialogDuplicateDocumentState
     extends State<AlertDialogDuplicateDocument> {
   final _nameFolderController = new TextEditingController();
   DocumentsService documentsService = new DocumentsService();
-
+  late OverlayEntry loader;
   _duplicateDocument(Bloc bloc) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
     bool? isDuplicatedDocument = await documentsService.duplicateDocument(
         context, widget.documentUUID, widget.documentFatherUUID);
-    print("isDuplicatedDocument $isDuplicatedDocument");
+    loader.remove();
+    if (isDuplicatedDocument ?? false) {
+      DocumentsListScreenModel? temporalDocumentList =
+          await documentsService.getDocumentListByUUID(
+              context,
+              widget.documentFatherUUID,
+              bloc.documentBloc.currentDocumentTab.toUpperCase());
+      bloc.documentBloc
+          .changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc
+          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID =
+          temporalDocumentList.documentFatherUUID;
+      Navigator.pop(context);
+    } else {
+      Navigator.pop(context);
+    }
   }
 
   @override

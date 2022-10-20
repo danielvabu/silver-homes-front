@@ -10,9 +10,11 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:silverhome/bloc/bloc.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/repository/document_reposirtory.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/widgets/dialogs/dialog_delete_document.dart';
@@ -60,6 +62,7 @@ class DocumentItem extends StatefulWidget {
 }
 
 class _DocumentItemState extends State<DocumentItem> {
+  late OverlayEntry loader;
   double height = 0, width = 0;
   DocumentsService _documentsService = new DocumentsService();
   final _store = getIt<AppStore>();
@@ -70,12 +73,15 @@ class _DocumentItemState extends State<DocumentItem> {
   }
 
   _changeRestrictEditing(DocumentModel model, bool currentValue) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
     bool? isRestrictedChange = await _documentsService.changeRestrictEditing(
         context, model.documentUUID!, currentValue, model.folderFatherUUID!);
     if (isRestrictedChange!) {
       model.isRestricted = currentValue;
       setState(() {});
     }
+    loader.remove();
   }
 
   _openDocument(
@@ -221,7 +227,7 @@ class _DocumentItemState extends State<DocumentItem> {
     final bloc = Provider.of<Bloc>(context);
     return Container(
       width: width,
-      height: height - 249,
+      height: height - 220,
       child: ListviewBuid(widget.documentList, bloc),
     );
   }
@@ -258,7 +264,7 @@ class _DocumentItemState extends State<DocumentItem> {
 
   List<Widget> _tableData(DocumentModel documentModel, Bloc bloc) {
     var result = <Widget>[];
-    result.add(_datavalueDocumentName(documentModel));
+    result.add(_datavalueDocumentName(documentModel, bloc));
     result.add(_datavalueDocumentType(documentModel));
     result.add(_datavalueDateCreated(documentModel));
     result.add(_datavalueCreatedBy(documentModel));
@@ -268,12 +274,27 @@ class _DocumentItemState extends State<DocumentItem> {
     return result;
   }
 
-  Widget _datavalueDocumentName(DocumentModel model) {
+  Widget _datavalueDocumentName(DocumentModel model, Bloc bloc) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
+        bloc.documentBloc.currentDocument = model;
         if (model.isFile!) {
           _downloadDocument(model);
-        } else {}
+        } else {
+          bloc.documentBloc.changeDocumentFileList([]);
+          bloc.documentBloc.changeDocumentBreadcumList([]);
+          DocumentsListScreenModel? temporalDocumentList =
+              await _documentsService.getDocumentListByUUID(
+                  context,
+                  model.documentUUID == null ? "" : model.documentUUID!,
+                  bloc.documentBloc.currentDocumentTab.toUpperCase());
+          bloc.documentBloc
+              .changeDocumentFileList(temporalDocumentList!.folderContent!);
+          bloc.documentBloc
+              .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+          bloc.documentBloc.currentFatherFolderUUID =
+              temporalDocumentList.documentFatherUUID;
+        }
       },
       child: Container(
         height: 40,
@@ -359,7 +380,7 @@ class _DocumentItemState extends State<DocumentItem> {
         height: 25.0,
         valueFontSize: 10.0,
         toggleSize: 20.0,
-        value: !model.isRestricted!,
+        value: model.isRestricted!,
         borderRadius: 30.0,
         padding: 2.0,
         activeColor: myColor.propertyOn,
@@ -383,8 +404,7 @@ class _DocumentItemState extends State<DocumentItem> {
       builder: (BuildContext context, AsyncSnapshot snapshotShowMove) {
         return Expanded(
           flex: 1,
-          child: !model.isFile! ||
-                  model.isRestricted! ||
+          child: model.isRestricted! ||
                   (snapshotShowMove.hasData && snapshotShowMove.data)
               ? SizedBox()
               : Container(
@@ -451,14 +471,15 @@ class _DocumentItemState extends State<DocumentItem> {
                               ),
                             ),
                           ],
-                          PopupMenuItem(
-                            value: 4,
-                            child: Text(
-                              GlobleString.Pop_Menu_documents_table_download,
-                              style: MyStyles.Medium(14, myColor.text_color),
-                              textAlign: TextAlign.start,
+                          if (model.isFile!)
+                            PopupMenuItem(
+                              value: 4,
+                              child: Text(
+                                GlobleString.Pop_Menu_documents_table_download,
+                                style: MyStyles.Medium(14, myColor.text_color),
+                                textAlign: TextAlign.start,
+                              ),
                             ),
-                          ),
                           if ((snapshotTrashDocument.hasData &&
                                   snapshotTrashDocument.data == false) ||
                               !snapshotTrashDocument.hasData) ...[

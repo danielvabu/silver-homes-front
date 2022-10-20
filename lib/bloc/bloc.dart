@@ -4,12 +4,12 @@ import 'package:silverhome/bloc/test/testBloc.dart';
 import 'package:silverhome/validators/validators.dart';
 
 class Bloc with Validators {
-  TestBloc testBloc = TestBloc();
+  PropertyBloc propertyBloc = PropertyBloc();
   DocumentBloc documentBloc = DocumentBloc();
   MessaginBloc messaginBloc = MessaginBloc();
 
   dispose() {
-    testBloc.dispose();
+    propertyBloc.dispose();
     documentBloc.dispose();
   }
 }

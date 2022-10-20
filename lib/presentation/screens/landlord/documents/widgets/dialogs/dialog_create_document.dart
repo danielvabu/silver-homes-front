@@ -1,8 +1,11 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:silverhome/bloc/bloc.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/document_list_screen_model.dart';
@@ -36,10 +39,39 @@ class AlertDialogCreateDocument extends StatefulWidget {
 class _AlertDialogCreateDocumentState extends State<AlertDialogCreateDocument> {
   final _nameFolderController = new TextEditingController();
   DocumentsService documentsService = new DocumentsService();
+  late OverlayEntry loader;
 
   _createFolder(Bloc bloc) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
     bool? isCreatedFolder = await documentsService.createFolder(
-        context, _nameFolderController.text, widget.documentFatherUUID);
+        context,
+        _nameFolderController.text,
+        widget.documentFatherUUID,
+        bloc.documentBloc.currentDocumentTab,
+        bloc.documentBloc.currentDocumentTab.toUpperCase() == "PROPERTY"
+            ? (bloc.documentBloc.currentFilterSelected != null
+                    ? bloc.documentBloc.currentFilterSelected!.id
+                    : "") ??
+                ""
+            : "");
+    loader.remove();
+    if (isCreatedFolder ?? false) {
+      DocumentsListScreenModel? temporalDocumentList =
+          await documentsService.getDocumentListByUUID(
+              context,
+              widget.documentFatherUUID,
+              bloc.documentBloc.currentDocumentTab.toUpperCase());
+      bloc.documentBloc
+          .changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc
+          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID =
+          temporalDocumentList.documentFatherUUID;
+      Navigator.pop(context);
+    } else {
+      Navigator.pop(context);
+    }
     print("isCreatedFolder $isCreatedFolder");
   }
 
