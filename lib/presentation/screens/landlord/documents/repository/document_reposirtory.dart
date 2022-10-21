@@ -96,7 +96,7 @@ class DocumentsService {
           Uri.parse(
               "https://api.ren-hogar.com/documentsrestore" /* Weburl.Restore_Document_Api */),
           headers: getHeadersJson(),
-          body: jsonEncode(RequestDuplicateDocument(
+          body: jsonEncode(RequestRestoreDocument(
                   documentUUID: documentUUID,
                   documentFatherUUID: documentFatherUUID)
               .toJson()));
@@ -160,7 +160,8 @@ class DocumentsService {
       String documentFatherUUID) async {
     try {
       var response = await _client?.post(
-          Uri.parse(Weburl.Duplicate_Document_Api),
+          Uri.parse(
+              /* Weburl.Duplicate_Document_Api */ "https://www.ren-hogar.com/documentsduplicate/"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestDuplicateDocument(
                   documentUUID: documentUUID,
@@ -258,12 +259,18 @@ class DocumentsService {
 
   /*  static var Upload_File_Api = base_url + "documents/upload"; */
 
-  Future<DocumentModel?> uploadDocument(BuildContext context, Uint8List data,
-      String extension, String type, String propertyId, String fatherId) async {
+  Future<DocumentModel?> uploadDocument(
+      BuildContext context,
+      Uint8List data,
+      String extension,
+      String type,
+      String propertyId,
+      String fatherId,
+      String name) async {
     try {
       List<int> _selectedFile = data;
 
-      String filepath = '${DateTime.now().millisecondsSinceEpoch}.$extension';
+      String filepath = '$name.$extension';
 
       var multipartRequest = new http.MultipartRequest(
           "POST",
@@ -275,6 +282,7 @@ class DocumentsService {
       multipartRequest.fields["father_id"] = fatherId;
       multipartRequest.fields["type"] = type;
       multipartRequest.fields["owner_id"] = Prefs.getString(PrefsName.OwnerID);
+      multipartRequest.fields["name"] = name;
       multipartRequest.files.add(await http.MultipartFile.fromBytes(
           'file', _selectedFile,
           contentType: new MediaType('application', extension),
@@ -289,17 +297,6 @@ class DocumentsService {
               print(jsonDecode(response.body));
               print("result");
               if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-                /*          DocumentsListScreenModel? temporalDocumentList =
-                    await getDocumentListByUUID(
-                        context,
-                        bloc.documentBloc.currentFatherFolderUUID!,
-                        bloc.documentBloc.currentDocumentTab.toUpperCase()); */
-                /*    bloc.documentBloc.changeDocumentFileList(
-                    temporalDocumentList!.folderContent!);
-                bloc.documentBloc.changeDocumentBreadcumList(
-                    temporalDocumentList.breadcumbs!);
-                bloc.documentBloc.currentFatherFolderUUID =
-                    temporalDocumentList.documentFatherUUID; */
                 var data = jsonDecode(response.body);
 
                 if (data != null && data['Result'] != null) {

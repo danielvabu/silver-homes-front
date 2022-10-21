@@ -8,6 +8,7 @@ class DocumentModel {
   bool? isFile;
   bool? isDelete;
   bool? isRestricted;
+  bool? isDeleteable;
   String? url;
   String? documentUUID;
   String? folderFatherUUID;
@@ -19,6 +20,7 @@ class DocumentModel {
     required this.isFile,
     required this.isDelete,
     required this.isRestricted,
+    required this.isDeleteable,
     required this.url,
     required this.documentUUID,
     required this.folderFatherUUID,
@@ -38,6 +40,9 @@ class DocumentModel {
     isRestricted = json['is_restricted'] != null
         ? (json['is_restricted'] is bool? ? json['is_restricted'] : false)
         : false;
+    isDeleteable = json['is_deleteable'] != null
+        ? (json['is_delete'] is bool? ? json['is_delete'] : false)
+        : false;
     url = json['url'] ?? "";
     documentUUID = json['document_uuid'] ?? "";
     folderFatherUUID = json['folder_father_uuid'] ?? "";
@@ -52,6 +57,7 @@ class DocumentModel {
     data['is_file'] = this.isFile;
     data['is_delete'] = this.isDelete;
     data['is_restricted'] = this.isRestricted;
+    data['is_deleteable'] = this.isDeleteable;
     data['url'] = this.url;
     data['document_uuid'] = this.documentUUID;
     data['folder_father_uuid'] = this.folderFatherUUID;

@@ -49,10 +49,7 @@ class _AlertDialogRestoreDocumentState
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
       DocumentsListScreenModel? temporalDocumentList =
-          await documentsService.getDocumentListByUUID(
-              context,
-              widget.documentFatherUUID,
-              bloc.documentBloc.currentDocumentTab.toUpperCase());
+          await documentsService.getDocumentListByUUID(context, "", "TRASH");
       loader.remove();
       bloc.documentBloc
           .changeDocumentFileList(temporalDocumentList!.folderContent!);

@@ -1699,7 +1699,7 @@ class GlobleString {
   static const String Mant_DL_Upload = "Upload";
   static const String Mant_DL_Save = "Save";
   static const String Mant_DL_Cancel = "Close";
-
+  static const String Mant_DL_Cancel_text = "Cancel";
   static const String Mant_DL_Uploadfiles_error1 =
       "Please select files to upload. Acceptable formats include: jpeg, heif, png, pdf, and mp4.";
 
@@ -2147,7 +2147,7 @@ class GlobleString {
   static const String Tab_Document_property = "Property";
   static const String Tab_Document_properties = "Porperties";
   static const String Tab_Document_tenants = "Tenants";
-  static const String Tab_Document_onwers = "Onwers";
+  static const String Tab_Document_onwers = "Owners";
   static const String Tab_Document_vendors = "Vendors";
   static const String Tab_Document_other = "Other";
   static const String Tab_Document_trash = "Trash";
