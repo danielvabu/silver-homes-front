@@ -151,8 +151,11 @@ class _ViewEventState extends State<ViewEvent> {
                                         width: 530,
                                         child: Text(
                                             widget.s1[0].eventTypesData!
-                                                    .description ??
-                                                "",
+                                                        .description ==
+                                                    '0'
+                                                ? ""
+                                                : widget.s1[0].eventTypesData!
+                                                    .description!,
                                             textAlign: TextAlign.start),
                                       ),
                                     ],
@@ -299,6 +302,8 @@ class _ViewEventState extends State<ViewEvent> {
   }
 
   String ponerfecha(String date) {
+    List<String> strarray = date.split(" ");
+    List<String> strarray1 = strarray[1].split(":");
     DateTime fecha = DateFormat("yyyy-MM-dd").parse(date);
     dynamic dayData =
         '{ "1" : "Monday", "2" : "Tuesday", "3" : "Wednesday", "4" : "Thursday ", "5" : "Friday", "6" : "Saturday ", "7" : "Sunday" }';
@@ -312,7 +317,11 @@ class _ViewEventState extends State<ViewEvent> {
         " " +
         fecha.day.toString() +
         ", " +
-        fecha.year.toString();
+        fecha.year.toString() +
+        " " +
+        strarray1[0] +
+        ":" +
+        strarray1[1];
     //  date.year.toString();
   }
 }

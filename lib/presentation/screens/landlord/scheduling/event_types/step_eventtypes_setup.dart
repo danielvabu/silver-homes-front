@@ -563,6 +563,17 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                     children: [
                                       const Text(GlobleString.ET_Is_Showing),
                                       const SizedBox(width: 5.0),
+                                      Tooltip(
+                                          message:
+                                              'if the event category is a showing, the event attendees will be added as leads in the tenant screening module under the respective property.',
+                                          child: IconButton(
+                                            icon: Icon(Icons.info,
+                                                color: Colors.grey),
+                                            onPressed: () {
+/* your code */
+                                            },
+                                          )),
+                                      const SizedBox(width: 5.0),
                                       FlutterSwitch(
                                         width: 55.0,
                                         height: 25.0,
@@ -1935,7 +1946,34 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                       const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [saveandnext(eventtypesState)],
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _store.dispatch(UpdateMantenaceExpand(false));
+                              _store.dispatch(UpdateSchedulingEventTypes());
+                            },
+                            child: Container(
+                              height: 35,
+                              padding:
+                                  const EdgeInsets.only(left: 25, right: 25),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(5)),
+                                  color: myColor.white,
+                                  border: Border.all(
+                                      color: myColor.Circle_main, width: 1)),
+                              child: Text(
+                                GlobleString.LMV_DL_Vendor_btn_Cancel,
+                                style: MyStyles.Medium(14, myColor.Circle_main),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          saveandnext(eventtypesState)
+                        ],
                       ),
                     ],
                   ),

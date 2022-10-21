@@ -632,7 +632,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                       margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
                       child: Text(
-                        'no data',
+                        'No results found',
                         //GlobleString.Blank_EventTypes,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
