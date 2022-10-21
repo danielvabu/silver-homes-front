@@ -161,7 +161,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Duplicate_Document_Api */ "https://www.ren-hogar.com/documentsduplicate/"),
+              /* Weburl.Duplicate_Document_Api */ "https://api.ren-hogar.com/documents/duplicate/"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestDuplicateDocument(
                   documentUUID: documentUUID,
