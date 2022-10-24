@@ -1123,7 +1123,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
           ),
           Row(
             children: [
-              InkWell(
+              /*     InkWell(
                   onTap: () async {
                     _store.dispatch(UpdatePortalPageisLoading(true));
                     bloc.documentBloc.changeDocumentSubMenuDrawer(-1);
@@ -1143,7 +1143,7 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   child: Icon(
                     FontAwesomeIcons.envelope,
                     size: 37,
-                  )),
+                  )), */
               SizedBox(
                 width: 20,
               ),
