@@ -564,8 +564,20 @@ class _StepEventTypesSetupState extends State<StepEventTypesSetup> {
                                       const Text(GlobleString.ET_Is_Showing),
                                       const SizedBox(width: 5.0),
                                       Tooltip(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: Colors
+                                                    .black, //                   <--- border color
+                                                width: 1.0,
+                                              ),
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(22)),
+                                          textStyle: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black),
                                           message:
-                                              'if the event category is a showing, the event attendees will be added as leads in the tenant screening module under the respective property.',
+                                              'if the event category is a showing, the event attendees will be added as leads \n in the tenant screening module under the respective property.',
                                           child: IconButton(
                                             icon: Icon(Icons.info,
                                                 color: Colors.grey),

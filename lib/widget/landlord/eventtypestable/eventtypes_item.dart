@@ -192,7 +192,7 @@ class _EventTypesItemState extends State<EventTypesItem> {
       margin: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.duration!,
+        "${model.duration!} Minutes",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
