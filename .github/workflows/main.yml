@@ -5,58 +5,32 @@ name: On Website Deploy
     branches:
       - "main"
 jobs:
-  test-stable:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        version: 
-          - 3.3.0
-          - 3.0.0
-          - 2.10.5
+  build_and_deploy_web:
+    name: Build & Deploy Flutter to Web
+    runs-on: ubuntu-latest
+    # (2)
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+
+      - uses: subosito/flutter-action@v2
         with:
-          channel: stable
-          version: ${{ matrix.version }}
+          channel: "stable"
 
-      - name: Dart version
-        run: dart --version
-      - name: Flutter version
-        run: flutter --version
-      - name: Flutter doctor
-        run: flutter doctor
+      - name: 🌍 Enable Web
+        run: flutter config --enable-web
 
-      - name: Run hello world
+      - name: 📦 Get packages
+        run: flutter pub get
+
+      - name: 🏭 Build Web Application
+        run: flutter build web --release
+
+      # (3)
+      - name: Make copy of artifacts
         run: |
-          echo "main() { print('hello world'); }" > hello.dart
-          dart hello.dart
-  test-beta:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        version: 
-          - 3.3.0-0.0.pre
-          - 3.1.0
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
+          chmod u+x "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
+          bash "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
+      # (4)
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          channel: beta
-          version: ${{ matrix.version }}
-
-      - name: Dart version
-        run: dart --version
-      - name: Flutter version
-        run: flutter --version
-      - name: Flutter doctor
-        run: flutter doctor
-
-      - name: Run hello world
-        run: |
-          echo "main() { print('hello world'); }" > hello.dart
-          dart hello.dart
+          commit_message: Commit the artifacts.
