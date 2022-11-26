@@ -20,7 +20,7 @@ jobs:
         run: flutter config --enable-web
 
       - name: 📦 Get packages
-        run: flutter pub get
+        run: flutter clean && flutter pub get
 
       - name: 🏭 Build Web Application
         run: flutter build web --release
