@@ -26,9 +26,6 @@ jobs:
         
       - name: 📦 Clean packages
         run: flutter clean
-        
-      - name: 📦 Upgrade packages
-        run: flutter upgrade
 
       - name: 🏭 Build Web Application
         run: flutter build web
