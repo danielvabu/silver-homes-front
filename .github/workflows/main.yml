@@ -5,26 +5,58 @@ name: On Website Deploy
     branches:
       - "main"
 jobs:
-  build_and_deploy_web:
-    name: Build & Deploy Flutter to Web
-    runs-on: ubuntu-latest
-    # (2)
+  test-stable:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        version: 
+          - 3.3.0
+          - 3.0.0
+          - 2.10.5
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: ./
         with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-      - name: 'Run flutter pub get'
-        run: flutter pub get
-      - name: 'Build Web App'
-        run: flutter build web
-      # (3)
-      - name: Make copy of artifacts
+          channel: stable
+          version: ${{ matrix.version }}
+
+      - name: Dart version
+        run: dart --version
+      - name: Flutter version
+        run: flutter --version
+      - name: Flutter doctor
+        run: flutter doctor
+
+      - name: Run hello world
         run: |
-          chmod u+x "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
-          bash "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
-      # (4)
-      - uses: stefanzweifel/git-auto-commit-action@v4
+          echo "main() { print('hello world'); }" > hello.dart
+          dart hello.dart
+  test-beta:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        version: 
+          - 3.3.0-0.0.pre
+          - 3.1.0
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
         with:
-          commit_message: Commit the artifacts.
+          channel: beta
+          version: ${{ matrix.version }}
+
+      - name: Dart version
+        run: dart --version
+      - name: Flutter version
+        run: flutter --version
+      - name: Flutter doctor
+        run: flutter doctor
+
+      - name: Run hello world
+        run: |
+          echo "main() { print('hello world'); }" > hello.dart
+          dart hello.dart
