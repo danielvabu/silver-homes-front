@@ -29,6 +29,6 @@ jobs:
           chmod u+x "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
           bash "${GITHUB_WORKSPACE}/createandcopytofolder.sh"
       # (4)
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Commit the artifacts.
+      #- uses: stefanzweifel/git-auto-commit-action@v4
+        #with:
+          #commit_message: Commit the artifacts.
