@@ -1,29 +1,27 @@
 name: On Website Deploy
-"on":
+on:
   push:
-    # (1)
     branches:
-      - "main"
+      - main
 jobs:
   build_and_deploy_web:
     name: Build & Deploy Flutter to Web
     runs-on: ubuntu-latest
     # (2)
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
         with:
-          channel: "stable"
-
-      - name: 🌍 Enable Web
-        run: flutter config --enable-web
+          channel: "dev"
 
       - name: 📦 Get packages
         run: flutter pub get
+        
+      - name: 🌍 Enable Web
+        run: flutter config --enable-web
 
       - name: 🏭 Build Web Application
-        run: flutter build web --release
+        run: flutter build web
 
       # (3)
       - name: Make copy of artifacts
