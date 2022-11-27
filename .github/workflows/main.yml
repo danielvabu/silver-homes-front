@@ -14,14 +14,14 @@ jobs:
         with:
           channel: "stable"
 
-      - name: 📦 Get packages
-        run: flutter pub get
+      #- name: 📦 Get packages
+        #run: flutter pub get
         
-      - name: 🌍 Enable Web
-        run: flutter config --enable-web
+      #- name: 🌍 Enable Web
+        #run: flutter config --enable-web
 
-      - name: 🏭 Build Web Application
-        run: flutter build web
+      #- name: 🏭 Build Web Application
+        #run: flutter build web
 
       # (3)
       - name: Make copy of artifacts
