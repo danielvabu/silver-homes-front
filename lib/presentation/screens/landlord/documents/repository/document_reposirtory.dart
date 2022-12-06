@@ -55,7 +55,7 @@ class DocumentsService {
       /*     */
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Create_Document_Api */ "https://api.ren-hogar.com/documentsnewfolder"),
+              /* Weburl.Create_Document_Api */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsnewfolder"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestCreateFolder(
                   fatherUUID: fatherUUID,
@@ -94,7 +94,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              "https://api.ren-hogar.com/documentsrestore" /* Weburl.Restore_Document_Api */),
+              "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsrestore" /* Weburl.Restore_Document_Api */),
           headers: getHeadersJson(),
           body: jsonEncode(RequestRestoreDocument(
                   documentUUID: documentUUID,
@@ -128,7 +128,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Rename_Document_Api */ "https://api.ren-hogar.com/documentsrename"),
+              /* Weburl.Rename_Document_Api */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsrename"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestRenameDocument(
                   documentUUID: documentUUID, name: documentName)
@@ -161,7 +161,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Duplicate_Document_Api */ "https://api.ren-hogar.com/documentsduplicate/"),
+              /* Weburl.Duplicate_Document_Api */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsduplicate/"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestDuplicateDocument(
                   documentUUID: documentUUID,
@@ -195,7 +195,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Delete_Document_Api */ "https://api.ren-hogar.com/documentsdelete"),
+              /* Weburl.Delete_Document_Api */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsdelete"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestDeleteDocument(
             documentUUID: documentUUID,
@@ -228,7 +228,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /* Weburl.Move_Document_Api */ "https://api.ren-hogar.com/documentsmove"),
+              /* Weburl.Move_Document_Api */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsmove"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestMoveDocument(
             documentUUID: documentUUID,
@@ -384,7 +384,7 @@ class DocumentsService {
           (type == "" || type == null) ? urlParams : urlParams + "type=$type";
  */
       var response = await _client?.post(
-          Uri.parse("https://api.ren-hogar.com/documentslist"),
+          Uri.parse("https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentslist"),
           headers: getHeadersJson(),
           body: jsonEncode({
             "type": type.toUpperCase(),
@@ -419,7 +419,7 @@ class DocumentsService {
     try {
       var response = await _client?.post(
           Uri.parse(
-              /*Weburl.Change_Restrict_Editing */ "https://api.ren-hogar.com/documentsrestrict"),
+              /*Weburl.Change_Restrict_Editing */ "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentsrestrict"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestChangeRestrictDocument(
                   documentUUID: documentUUID, isRestricted: newValue)

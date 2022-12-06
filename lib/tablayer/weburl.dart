@@ -39,8 +39,8 @@ class Weburl {
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static var API_Server =
-      isPROD_API ? "https://api.silverhomes.ai" : "https://api.ren-hogar.com";
+  static var API_Server = 
+      isPROD_API ? "https://api.silverhomes.ai" : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";
 
 //      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 
