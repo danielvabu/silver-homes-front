@@ -78,7 +78,7 @@ class _LandlordVarificationDocumentScreenState
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.IsArchived = "0";
-    reqtokens.ApplicationStatus = "3";
+    reqtokens.ApplicationStatus = "2";
 
     FilterData filterData = new FilterData();
     filterData.DSQID = Weburl.DSQ_CommonView;
@@ -103,8 +103,8 @@ class _LandlordVarificationDocumentScreenState
     FilterData? filterData = FilterData.fromJson(filter);
     if (filterData.Reqtokens!.ApplicationStatus == null ||
         filterData.Reqtokens!.ApplicationStatus == "" ||
-        filterData.Reqtokens!.ApplicationStatus!.contains("3")) {
-      filterData.Reqtokens!.ApplicationStatus = "3";
+        filterData.Reqtokens!.ApplicationStatus!.contains("2")) {
+      filterData.Reqtokens!.ApplicationStatus = "2";
       String filterjson = jsonEncode(filterData);
       _store.dispatch(UpdateLLVDapplicationisloding(true));
       await ApiManager().getVarificationDocumentList(context, filterjson);
@@ -705,8 +705,8 @@ class _LandlordVarificationDocumentScreenState
     csvHeaderTitle.add("Applicant Name");
     csvHeaderTitle.add("Property Name");
     csvHeaderTitle.add("Rating");
-    csvHeaderTitle.add("DocumentS Request Sent");
-    csvHeaderTitle.add("Documents Received");
+    csvHeaderTitle.add("Application Sent");
+    csvHeaderTitle.add("Application Received");
     csvHeaderTitle.add("Application Status");
     csvHeaderTitle.add("Documents Review Status");
 

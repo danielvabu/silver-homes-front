@@ -197,8 +197,8 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     result.add(_datavalueTitle(model.applicantName!, index));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
-    result.add(_datavalueDatesent(model.docRequestSentDate!));
-    result.add(_datavalueDateReceive(model.docReceivedDate!));
+    result.add(_datavalueDatesent(model.applicationSentDate!));
+    result.add(_datavalueDateReceive(model.applicationReceivedDate!));
     result.add(_appstatusdropdown(model));
     result.add(_reviewstatusdropdown(model));
     result.add(_priviewdocs(model));

@@ -42,14 +42,14 @@ class ApplicantPopupMenu extends StatelessWidget {
         child: Icon(Icons.more_vert),
       ),
       itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 1,
-          child: Text(
-            GlobleString.FNL_AC_Request_documents,
-            style: MyStyles.Medium(14, myColor.text_color),
-            textAlign: TextAlign.start,
-          ),
-        ),
+        // PopupMenuItem(
+        //   value: 1,
+        //   child: Text(
+        //     GlobleString.FNL_AC_Request_documents,
+        //     style: MyStyles.Medium(14, myColor.text_color),
+        //     textAlign: TextAlign.start,
+        //   ),
+        // ),
         PopupMenuItem(
           value: 2,
           child: Text(

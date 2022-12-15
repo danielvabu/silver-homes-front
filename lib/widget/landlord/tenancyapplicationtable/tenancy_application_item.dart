@@ -14,6 +14,8 @@ import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/actions/landlord_action/landlord_tenancy_applicant_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/portal_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/reference_check_dialog_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/varification_document_actions.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
 import 'package:silverhome/store/app_store.dart';
@@ -25,6 +27,9 @@ import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/action_popup/applicant_popupmenu.dart';
+import 'package:silverhome/widget/Landlord/action_popup/document_popupmenu.dart';
+import 'package:silverhome/widget/Landlord/emailtemplet/referencerequest_dialogbox.dart';
+import 'package:silverhome/widget/Landlord/reference_dialog/check_reference_list_dialog.dart';
 import 'package:silverhome/widget/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/documentrequest_dialogbox.dart';
@@ -35,6 +40,7 @@ import 'package:silverhome/widget/landlord/listviewitemstatus/tbl_tenancyapplica
 import 'package:silverhome/widget/landlord/preview_Lease_dialogbox.dart';
 import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
 import 'package:silverhome/widget/landlord/ratingupdate_dialogbox.dart';
+import 'package:silverhome/widget/landlord/reference_dialog/check_reference_confirm_dialog.dart';
 import 'package:silverhome/widget/message_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
@@ -62,11 +68,14 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
   late OverlayEntry loader;
   final _store = getIt<AppStore>();
   static List<SystemEnumDetails> statuslist = [];
-
+  static List<SystemEnumDetails> reviewstatuslist = [];
   @override
   void initState() {
     statuslist.clear();
     statuslist = QueryFilter().PlainValues(eSystemEnums().ApplicationStatus);
+    reviewstatuslist.clear();
+    reviewstatuslist =
+        QueryFilter().PlainValuesWithSorting(eSystemEnums().DocReviewStatus);
     super.initState();
   }
 
@@ -194,6 +203,8 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     result.add(_datavalueTitleDataSent(model.applicationSentDate!));
     result.add(_datavalueTitleDataReceive(model.applicationReceivedDate!));
     result.add(_statusdropdown(model));
+    result.add(_reviewstatusdropdown(model));
+    result.add(_priviewdocs(model));
     result.add(_actionPopup(model));
     result.add(_datavalueExpand(
         model.isexpand!
@@ -408,16 +419,38 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     );
   }
 
+  // Widget _actionPopup(TenancyApplication model) {
+  //   return Expanded(
+  //     flex: 1,
+  //     child: Container(
+  //       height: 28,
+  //       //width: width / 17,
+  //       alignment: Alignment.centerRight,
+  //       child: ApplicantPopupMenu(
+  //         onPressedRequestdocuments: () {
+  //           _dailogRequestDocument(model);
+  //         },
+  //         onPressedEditapplicant: () {
+  //           CustomeWidget.EditApplicant(context, model.applicantId.toString());
+  //         },
+  //         onPressedArchive: () {
+  //           _dailogSetArchive(model);
+  //         },
+  //         isListView: true,
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _actionPopup(TenancyApplication model) {
     return Expanded(
       flex: 1,
       child: Container(
         height: 28,
-        //width: width / 17,
         alignment: Alignment.centerRight,
-        child: ApplicantPopupMenu(
-          onPressedRequestdocuments: () {
-            _dailogRequestDocument(model);
+        child: DocumentvarifyPopupMenu(
+          onPressedCheckReferences: () {
+            _dailogReferenceConfirmDialog(model);
           },
           onPressedEditapplicant: () {
             CustomeWidget.EditApplicant(context, model.applicantId.toString());
@@ -692,6 +725,152 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     );
   }
 
+  _dailogReferenceConfirmDialog(TenancyApplication model) async {
+    showDialog(
+      barrierColor: Colors.black45,
+      context: context,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CheckReferenceConfirmDialog(
+          onPressedClose: () {
+            Navigator.of(context).pop();
+          },
+          onPressedFillOutManually: () {
+            Navigator.of(context).pop();
+            _dailogCheckReferenceFillOutManiual(model);
+          },
+          onPressedSendQuestionnaire: () {
+            Navigator.of(context).pop();
+            _dailogRequestReference(model);
+          },
+        );
+      },
+    );
+  }
+
+  _dailogCheckReferenceFillOutManiual(TenancyApplication model) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
+      if (status) {
+        loader.remove();
+        if (responce.length > 0) {
+          showDialog(
+            barrierColor: Colors.black45,
+            context: context,
+            useSafeArea: true,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CheckReferenceListDialog(
+                onPressedClose: () {
+                  Navigator.of(context).pop();
+                },
+                applicantionname: model.applicantName.toString(),
+                referencelist: responce,
+              );
+            },
+          );
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
+        }
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
+      }
+    });
+  }
+
+  _dailogRequestReference(TenancyApplication model) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    _store.dispatch(UpdateRCDisAllCheck(false));
+
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
+      if (status) {
+        loader.remove();
+        if (responce.length > 0) {
+          showDialog(
+            barrierColor: Colors.black45,
+            context: context,
+            useSafeArea: true,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return ReferenceRequestDialogbox(
+                onPressedClose: () {
+                  Navigator.of(context).pop();
+                },
+                onPressedSave: () {
+                  Navigator.of(context).pop();
+                  _showSuceessReferenceRequest();
+                },
+                leadReferenceitems: responce,
+                applicantionId: model.id.toString(),
+                applicantionname: model.applicantName.toString(),
+              );
+            },
+          );
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
+        }
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
+      }
+    });
+  }
+
+  _showSuceessReferenceRequest() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return MessageDialogBox(
+          title: GlobleString.DCR_success,
+          onPressed: () async {
+            Navigator.of(context).pop();
+
+            await varificationDocCallApi();
+          },
+          buttontitle: GlobleString.DCR_success_close,
+        );
+      },
+    );
+  }
+
+  varificationDocCallApi() async {
+    await Prefs.setBool(PrefsName.IsApplyFilterList, false);
+    _store.dispatch(UpdateLLVDapplicationisloding(true));
+    _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
+    _store
+        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+
+    FilterReqtokens reqtokens = new FilterReqtokens();
+    reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+    reqtokens.IsArchived = "0";
+    reqtokens.ApplicationStatus = "3";
+
+    FilterData filterData = new FilterData();
+    filterData.DSQID = Weburl.DSQ_CommonView;
+    filterData.LoadLookupValues = true;
+    filterData.LoadRecordInfo = true;
+    filterData.Reqtokens = reqtokens;
+
+    String filterjson = jsonEncode(filterData);
+
+    await ApiManager().getVarificationDocumentList(context, filterjson);
+  }
+
   ApplicantcallApi() async {
     _store.dispatch(UpdateLLTAApplicantisloding(true));
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
@@ -713,5 +892,66 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     String filterjson = jsonEncode(filterData);
 
     await ApiManager().getCommonApplicantList(context, filterjson);
+  }
+
+  Widget _reviewstatusdropdown(TenancyApplication model) {
+    return Container(
+        height: 28,
+        width: width / 8.5,
+        padding: EdgeInsets.only(left: 12),
+        // ignore: missing_required_param
+        child: DropdownSearch<SystemEnumDetails>(
+          mode: Mode.MENU,
+          items: reviewstatuslist,
+          textstyle: MyStyles.Medium(12, myColor.text_color),
+          itemAsString: (SystemEnumDetails? u) => u!.displayValue,
+          hint: "Action",
+          defultHeight: reviewstatuslist.length * 33 > 250
+              ? 250
+              : reviewstatuslist.length * 33,
+          showSearchBox: false,
+          selectedItem:
+              model.docReviewStatus != null ? model.docReviewStatus : null,
+          isFilteredOnline: true,
+          onChanged: (data) {
+            TenancyApplicationID updateid = new TenancyApplicationID();
+            updateid.ID = model.id.toString();
+
+            DocumentReviewUpdateStatus updatestatus =
+                new DocumentReviewUpdateStatus();
+            updatestatus.DocReviewStatus = data!.EnumDetailID.toString();
+
+            ApiManager().UpdateReviewstatusVarificationDocumentList(
+                context, updateid, updatestatus, (status, responce) {
+              if (status) {}
+            });
+          },
+        ));
+  }
+
+  Widget _priviewdocs(TenancyApplication model) {
+    return (model.docReceivedDate != null && model.docReceivedDate != "")
+        ? InkWell(
+            onTap: () {
+              _dailogPreviewDoc(model);
+            },
+            child: Container(
+              height: 28,
+              width: width / 11.5,
+              padding: EdgeInsets.only(left: 10),
+              alignment: Alignment.center,
+              child: Text(
+                "Preview Docs",
+                textAlign: TextAlign.center,
+                style: MyStyles.Medium(12, myColor.blue),
+              ),
+            ),
+          )
+        : Container(
+            height: 28,
+            width: width / 11.5,
+            padding: EdgeInsets.only(left: 10),
+            alignment: Alignment.center,
+          );
   }
 }

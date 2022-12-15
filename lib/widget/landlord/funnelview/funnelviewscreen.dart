@@ -122,7 +122,7 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     children: [
                       _leadView(),
                       _applicantView(),
-                      _docmentvarifyView(),
+                      //  _docmentvarifyView(),
                       _referencescheckedView(),
                       _leasesentView(),
                       _activetenantView(),
@@ -324,7 +324,7 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                           ApiManager().funUpdateStatus(
                               context,
                               lead.id.toString(),
-                              eApplicationStatus().DocVarify.toString(),
+                              eApplicationStatus().ReferenceCheck.toString(),
                               widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
@@ -349,9 +349,15 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
 
                           OpenRetingDialog(lead);
                         },
-                        onPressedRequestdocuments: () {
-                          _dailogRequestDocument(
-                              funnelviewstate.applicantlist[Index]);
+                        // onPressedRequestdocuments: () {
+                        //   _dailogRequestDocument(
+                        //       funnelviewstate.applicantlist[Index]);
+                        // },
+                        onPressedCheckReferences: () {
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
+
+                          _dailogReferenceConfirmDialog(lead);
                         },
                         onPressedEditapplicant: () {
                           CustomeWidget.EditApplicant(

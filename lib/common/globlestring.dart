@@ -561,8 +561,8 @@ class GlobleString {
   static const String VDH_Applicant_Name = "Applicant Name";
   static const String VDH_Property_Name = "Property Name";
   static const String VDH_Rating = "Rating";
-  static const String VDH_Date_Sent = "Doc. Request Sent";
-  static const String VDH_Date_Received = "Documents Received";
+  static const String VDH_Date_Sent = "Application Sent";
+  static const String VDH_Date_Received = "Application Received";
   static const String VDH_Review_Status = "Docs Review Status";
   static const String VDH_Application_Status = "Applicant Status";
   static const String VDH_Filter = "Filter";
@@ -829,8 +829,11 @@ class GlobleString {
   static const String DIA_Recipient_Name = "Recipient Name";
   static const String DIA_Email = "Email";
   static const String DIA_Phone_Number = "Phone Number";
+  static const String DIA_R_Documents = "Request Documents";
   static const String DIA_Invite_to_Apply_title =
       "Below is a preview of the message that will be sent to the applicants including the application link. ";
+  static const String DIA_Invite_to_Apply_List =
+      "List the documents that the applicant should upload. ";
   static const String DIA_Send = "Send";
   static const String DIA_Back = "Back";
   static const String DIA_Close = "Close";
@@ -1909,6 +1912,7 @@ class GlobleString {
   static const String ET_Is_Showing = 'Is this event a showing?';
   static const String ET_Yes = 'Yes';
   static const String ET_No = 'No';
+  static const String Required = 'Required';
   static const String ET_Property_Name = 'Property name';
   static const String ET_Select_Property = 'Select property';
   static const String ET_Not_Applicable = 'Not applicable';
