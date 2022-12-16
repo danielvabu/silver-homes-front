@@ -216,7 +216,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                                   if (_timer != null) {
                                     _timer!.cancel();
                                   }
-                                  _timer = Timer.periodic(Duration(seconds: 2), (timer) {
+                                  _timer = Timer.periodic(Duration(milliseconds: 400), (timer) {
                                     _store.dispatch(UpdateLLVendor_isloding(true));
                                     _store.dispatch(UpdateLL_vendordatalist(<VendorData>[]));
                                     updateState();

@@ -229,12 +229,13 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                                       if (_timer != null) {
                                         _timer!.cancel();
                                       }
-                                      _timer = new Timer.periodic(Duration(seconds: 2), (timer) {
+                                      _timer = new Timer.periodic(Duration(milliseconds: 400), (timer) {
                                         _store.dispatch(UpdatePropertyListIsloding(true));
                                         _store.dispatch(UpdatePropertyList(<PropertyDataList>[]));
                                         apimanager(value, 1, "PropertyName", 1, 0);
                                         _timer!.cancel();
                                       });
+                                      //  apimanager(value, 1, "PropertyName", propertyListState.NameSortAcsDes, 1);
                                     },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
