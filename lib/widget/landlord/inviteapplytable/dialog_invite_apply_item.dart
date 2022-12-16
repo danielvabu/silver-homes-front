@@ -5,7 +5,7 @@ import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 class DailogInviteApplyItem extends StatefulWidget {
   final VoidCallback _callbackback;
@@ -65,13 +65,8 @@ class __DailogInviteApplyItemState extends State<DailogInviteApplyItem> {
     result.add(_datavalueTitle(model.applicantName!, 150));
     result.add(_datavalueTitle(model.email!, 250));
     result.add(_datavalueTitle(
-        model.mobileNumber != null && model.mobileNumber!.isNotEmpty
-            ? model.dialCode! + " " + model.mobileNumber!
-            : "",
-        150));
-    result.add(count > 1
-        ? _datavalueDelete("assets/images/ic_delete.png", 30, Index)
-        : _datavalueBlank(30));
+        model.mobileNumber != null && model.mobileNumber!.isNotEmpty ? model.dialCode! + " " + model.mobileNumber! : "", 150));
+    result.add(count > 1 ? _datavalueDelete("assets/images/ic_delete.png", 30, Index) : _datavalueBlank(30));
 
     return result;
   }

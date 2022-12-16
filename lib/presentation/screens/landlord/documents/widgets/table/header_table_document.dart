@@ -59,7 +59,7 @@ class _DocumentTableHeaderState extends State<DocumentTableHeader> {
           widget._callbackSortDateCreated),
       _headerCreatedTitle(GlobleString.Table_Header_Document_created_by,
           widget._callbackSortCreatedBy),
-      _headerCreatedTitle(GlobleString.Table_Header_Document_restrict_editing,
+      _headerCreatedTitle(GlobleString.Table_Header_Document_private_editing,
           widget._callbackSortRestricEditing),
     ];
     return result;

@@ -31,7 +31,7 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypesTemplate_header.dart';
 import 'package:silverhome/widget/landlord/eventtypestable/eventtypesTemplate_item.dart';
@@ -45,8 +45,7 @@ import 'add_edit_eventtypes_templates.dart';
 
 class EventTypeTemplateScreen extends StatefulWidget {
   @override
-  _EventTypeTemplateScreenState createState() =>
-      _EventTypeTemplateScreenState();
+  _EventTypeTemplateScreenState createState() => _EventTypeTemplateScreenState();
 }
 
 class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
@@ -89,8 +88,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     EventTypesListReqtokens reqtokens = EventTypesListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
@@ -190,8 +188,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                   children: [
                     Row(
                       children: [
-                        if (eventTypesListState.isloding &&
-                            eventTypesListState.EventTypesSearchText == "")
+                        if (eventTypesListState.isloding && eventTypesListState.EventTypesSearchText == "")
                           Container(
                             width: 260,
                             height: 30,
@@ -208,8 +205,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                                 Expanded(
                                   child: Text(
                                     GlobleString.LL_Search,
-                                    style:
-                                        MyStyles.Medium(14, myColor.hintcolor),
+                                    style: MyStyles.Medium(14, myColor.hintcolor),
                                   ),
                                 ),
                                 const Padding(
@@ -237,34 +233,27 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                               children: <Widget>[
                                 Expanded(
                                   child: TextFormField(
-                                    initialValue: eventTypesListState
-                                        .EventTypesSearchText,
+                                    initialValue: eventTypesListState.EventTypesSearchText,
                                     onChanged: (value) async {
                                       if (_timer != null) {
                                         _timer!.cancel();
                                       }
-                                      _timer = Timer.periodic(
-                                          const Duration(seconds: 2), (timer) {
-                                        _store.dispatch(
-                                            UpdateEventTypesListIsloding(true));
-                                        _store.dispatch(UpdateEventTypesList(
-                                            <EventTypesDataList>[]));
-                                        apimanager(
-                                            value, 1, "EventTypesName", 1, 0);
+                                      _timer = Timer.periodic(const Duration(milliseconds: 400), (timer) {
+                                        _store.dispatch(UpdateEventTypesListIsloding(true));
+                                        _store.dispatch(UpdateEventTypesList(<EventTypesDataList>[]));
+                                        apimanager(value, 1, "EventTypesName", 1, 0);
                                         _timer!.cancel();
                                       });
                                     },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintStyle: MyStyles.Medium(
-                                          14, myColor.hintcolor),
+                                      hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                       contentPadding: const EdgeInsets.all(10),
                                       isDense: true,
                                       hintText: GlobleString.LL_Search,
                                     ),
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                   ),
                                 ),
                                 const Padding(
@@ -311,12 +300,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
         await Prefs.setBool(PrefsName.EventTypesStep3, false);
 
         List<SystemEnumDetails> restrictionlist = [];
-        restrictionlist =
-            QueryFilter().PlainValues(eSystemEnums().Restrictions);
+        restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
-        List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-            .map((item) => SystemEnumDetails.clone(item))
-            .toList();
+        List<SystemEnumDetails> secondrestrictionlist = restrictionlist.map((item) => SystemEnumDetails.clone(item)).toList();
 
         _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
 
@@ -338,14 +324,11 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
         onSelected: (value) async {
           EventTypesListReqtokens reqtokens = EventTypesListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-          reqtokens.Name = eventtypesListState.EventTypesSearchText != null
-              ? eventtypesListState.EventTypesSearchText
-              : "";
+          reqtokens.Name = eventtypesListState.EventTypesSearchText != null ? eventtypesListState.EventTypesSearchText : "";
 
           List<Sort> sortinglist = [];
           Sort sort = Sort();
-          if (eventtypesListState.EventTypesSearchText != null &&
-              eventtypesListState.EventTypesSearchText.isNotEmpty) {
+          if (eventtypesListState.EventTypesSearchText != null && eventtypesListState.EventTypesSearchText.isNotEmpty) {
             sort.fieldId = "ID";
             sort.sortSequence = 0;
           } else {
@@ -390,8 +373,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
           String filterjson = jsonEncode(dsqQuery);
 
-          await ApiManager()
-              .getAllEventTypesTemplateOnboadingListCSV(context, filterjson);
+          await ApiManager().getAllEventTypesTemplateOnboadingListCSV(context, filterjson);
         },
         child: Container(
           height: 40,
@@ -460,9 +442,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
             },
           ),
           tableItem(eventtypesListState),
-          if (eventtypesListState.eventtypeslist != null &&
-              eventtypesListState.eventtypeslist.length > 0)
-            tablefooter(eventtypesListState)
+          if (eventtypesListState.eventtypeslist != null && eventtypesListState.eventtypeslist.length > 0) tablefooter(eventtypesListState)
         ],
       ),
     );
@@ -487,8 +467,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                   ),
                 ),
               )
-            : eventtypesListState.eventtypeslist != null &&
-                    eventtypesListState.eventtypeslist.length > 0
+            : eventtypesListState.eventtypeslist != null && eventtypesListState.eventtypeslist.length > 0
                 ? Expanded(
                     child: EventTypesTemplateItem(
                       listdata1: eventtypesListState.eventtypeslist,
@@ -496,17 +475,13 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                         openDialogShareLink(eventtypesData);
                       },
                       onPresseDuplicat: (EventTypesDataList eventtypesData) {
-                        ApiManager().DuplicatEventTypesGenerateTemplate(
-                            context, eventtypesData.id!,
-                            (status, responce) async {
+                        ApiManager().DuplicatEventTypesGenerateTemplate(context, eventtypesData.id!, (status, responce) async {
                           if (status) {
                             _store.dispatch(UpdateEventTypesListIsloding(true));
-                            _store.dispatch(
-                                UpdateEventTypesList(<EventTypesDataList>[]));
+                            _store.dispatch(UpdateEventTypesList(<EventTypesDataList>[]));
                             apimanager("", 1, "EventTypesName", 1, 0);
                           } else {
-                            ToastUtils.showCustomToast(
-                                context, GlobleString.Error1, false);
+                            ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                           }
                         });
                       },
@@ -519,10 +494,8 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                           builder: (BuildContext context1) {
                             return AlertDialogBox(
                               title: GlobleString.LMV_DL_EvenTypeTemplate,
-                              positiveText:
-                                  GlobleString.LMV_DL_Vendor_btn_Delete,
-                              negativeText:
-                                  GlobleString.LMV_DL_Vendor_btn_Cancel,
+                              positiveText: GlobleString.LMV_DL_Vendor_btn_Delete,
+                              negativeText: GlobleString.LMV_DL_Vendor_btn_Cancel,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
                                 deleteEvenTypeTemplate(eventtypesData);
@@ -535,16 +508,13 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                         );
                       },
                       onPressDetails: (EventTypesDataList eventtypesData) {
-                        getEventTypesDetails(
-                            eventtypesData, 1, eventtypesData.slots!);
+                        getEventTypesDetails(eventtypesData, 1, eventtypesData.slots!);
                       },
                       onPressName: (EventTypesDataList eventtypesData) {
-                        getEventTypesDetails(
-                            eventtypesData, 1, eventtypesData.slots!);
+                        getEventTypesDetails(eventtypesData, 1, eventtypesData.slots!);
                         print("asdasd");
                       },
-                      onPresseInActive:
-                          (EventTypesDataList eventtypesData, int pos) {
+                      onPresseInActive: (EventTypesDataList eventtypesData, int pos) {
                         /*ApiManager().TenantAvailableInEventTypes(
                             context,
                             Prefs.getString(PrefsName.OwnerID),
@@ -586,19 +556,16 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                           }
                         });*/
                       },
-                      onPresseActive:
-                          (EventTypesDataList eventtypesData, int pos) {
+                      onPresseActive: (EventTypesDataList eventtypesData, int pos) {
                         //if (eventtypesData.propDrafting != 3) {
                         //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_all_details, false);
                         //} else if (!eventtypesData.isAgreedTandC!) {
                         //  ToastUtils.showCustomToast(context,GlobleString.PS3_EventTypes_Disclosures, false);
                         //} else {
-                        eventtypesActive_InAction_call(
-                            eventtypesListState, true, eventtypesData.id!);
+                        eventtypesActive_InAction_call(eventtypesListState, true, eventtypesData.id!);
                         //}
                       },
-                      onPresseIsPublish: (EventTypesDataList eventtypesData,
-                          int pos, bool flag) {
+                      onPresseIsPublish: (EventTypesDataList eventtypesData, int pos, bool flag) {
                         showDialog(
                           context: context,
                           barrierColor: Colors.black45,
@@ -606,15 +573,12 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                           barrierDismissible: false,
                           builder: (BuildContext context1) {
                             return AlertDialogBox(
-                              title: flag
-                                  ? GlobleString.Event_Publish
-                                  : GlobleString.Event_UnPublish,
+                              title: flag ? GlobleString.Event_Publish : GlobleString.Event_UnPublish,
                               positiveText: GlobleString.Prop_btn_yes,
                               negativeText: GlobleString.Prop_btn_cancel,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                eventtypesIsPublished_call(eventtypesListState,
-                                    flag, eventtypesData.id!);
+                                eventtypesIsPublished_call(eventtypesListState, flag, eventtypesData.id!);
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -668,23 +632,16 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
               mode: Mode.MENU,
               textstyle: MyStyles.Medium(14, myColor.black),
               hint: "Select page",
-              defultHeight:
-                  Helper.PagingRecord(eventtypesListState.totalRecord).length *
-                              35 >
-                          350
-                      ? 350
-                      : Helper.PagingRecord(eventtypesListState.totalRecord)
-                              .length *
-                          35,
+              defultHeight: Helper.PagingRecord(eventtypesListState.totalRecord).length * 35 > 350
+                  ? 350
+                  : Helper.PagingRecord(eventtypesListState.totalRecord).length * 35,
               selectedItem: eventtypesListState.pageNo.toString(),
               items: Helper.PagingRecord(eventtypesListState.totalRecord),
               showSearchBox: false,
               isFilteredOnline: true,
               onChanged: (value) {
-                _store.dispatch(
-                    UpdateEventTypesListPageNo(int.parse(value.toString())));
-                paginationCall(
-                    eventtypesListState, int.parse(value.toString()));
+                _store.dispatch(UpdateEventTypesListPageNo(int.parse(value.toString())));
+                paginationCall(eventtypesListState, int.parse(value.toString()));
               },
             ),
           )
@@ -761,43 +718,35 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
 
   void paginationCall(EventTypesListState eventtypesListState, int pageno) {
     if (eventtypesListState.isEventTypesNameSort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno,
-          "EventTypesName", eventtypesListState.NameSortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "EventTypesName", eventtypesListState.NameSortAcsDes, 1);
     }
 
     if (eventtypesListState.isEventTypesUnitSort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Suite_Unit",
-          eventtypesListState.UnitSortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Suite_Unit", eventtypesListState.UnitSortAcsDes, 1);
     }
 
     if (eventtypesListState.isCitySort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno, "City",
-          eventtypesListState.CitySortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "City", eventtypesListState.CitySortAcsDes, 1);
     }
 
     if (eventtypesListState.isCountrySort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Country",
-          eventtypesListState.CountrySortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Country", eventtypesListState.CountrySortAcsDes, 1);
     }
 
     if (eventtypesListState.isEventTypesTypeSort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno,
-          "EventTypes_Type", eventtypesListState.EventTypesTypeSortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "EventTypes_Type", eventtypesListState.EventTypesTypeSortAcsDes, 1);
     }
 
     if (eventtypesListState.isvacancySort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Vacancy",
-          eventtypesListState.VacancySortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "Vacancy", eventtypesListState.VacancySortAcsDes, 1);
     }
 
     if (eventtypesListState.isActiveInactiveSort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno, "IsActive",
-          eventtypesListState.ActiveSortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "IsActive", eventtypesListState.ActiveSortAcsDes, 1);
     }
 
     if (eventtypesListState.isPublishedSort) {
-      apimanager(eventtypesListState.EventTypesSearchText, pageno,
-          "IsPublished", eventtypesListState.PublishedSortAcsDes, 1);
+      apimanager(eventtypesListState.EventTypesSearchText, pageno, "IsPublished", eventtypesListState.PublishedSortAcsDes, 1);
     }
   }
 
@@ -805,8 +754,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateEventTypesListNameSortAcsDes(
-          eventtypesListState.NameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListNameSortAcsDes(eventtypesListState.NameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCountrySortAcsDes(0));
@@ -815,11 +763,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "EventTypesName",
-          eventtypesListState.NameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "EventTypesName", eventtypesListState.NameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateEventTypesListUnitSortAcsDes(
-          eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListUnitSortAcsDes(eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCountrySortAcsDes(0));
@@ -828,11 +774,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Suite_Unit",
-          eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Suite_Unit", eventtypesListState.UnitSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateEventTypesListCitySortAcsDes(
-          eventtypesListState.CitySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListCitySortAcsDes(eventtypesListState.CitySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCountrySortAcsDes(0));
@@ -841,11 +785,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager(
-          "", 1, "City", eventtypesListState.CitySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "City", eventtypesListState.CitySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateEventTypesListCountrySortAcsDes(
-          eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListCountrySortAcsDes(eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
@@ -854,11 +796,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Country",
-          eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Country", eventtypesListState.CountrySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateEventTypesListEventTypesTypeSortAcsDes(
-          eventtypesListState.EventTypesTypeSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListEventTypesTypeSortAcsDes(eventtypesListState.EventTypesTypeSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
@@ -867,11 +807,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "EventTypes_Type",
-          eventtypesListState.EventTypesTypeSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "EventTypes_Type", eventtypesListState.EventTypesTypeSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdateEventTypesListVacancySortAcsDes(
-          eventtypesListState.VacancySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListVacancySortAcsDes(eventtypesListState.VacancySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
@@ -880,13 +818,11 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Vacancy",
-          eventtypesListState.VacancySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Vacancy", eventtypesListState.VacancySortAcsDes == 1 ? 0 : 1, 0);
     }
 
     if (flag == 7) {
-      _store.dispatch(UpdateEventTypesListActiveSortAcsDes(
-          eventtypesListState.ActiveSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListActiveSortAcsDes(eventtypesListState.ActiveSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
@@ -895,13 +831,11 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListVacancySortAcsDes(0));
       _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "IsActive",
-          eventtypesListState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsActive", eventtypesListState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
     }
 
     if (flag == 8) {
-      _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(
-          eventtypesListState.PublishedSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateEventTypesListPublishedSortAcsDes(eventtypesListState.PublishedSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateEventTypesListNameSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListUnitSortAcsDes(0));
       _store.dispatch(UpdateEventTypesListCitySortAcsDes(0));
@@ -910,8 +844,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       _store.dispatch(UpdateEventTypesListVacancySortAcsDes(0));
       _store.dispatch(UpdateEventTypesListActiveSortAcsDes(0));
 
-      apimanager("", 1, "IsPublished",
-          eventtypesListState.PublishedSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsPublished", eventtypesListState.PublishedSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -942,8 +875,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     }
   }
 
-  eventtypesActive_InAction_call(EventTypesListState eventtypesListState,
-      bool isAct, String eventtypesid) {
+  eventtypesActive_InAction_call(EventTypesListState eventtypesListState, bool isAct, String eventtypesid) {
     EventTypesActive proactive = EventTypesActive();
     proactive.IsActive = isAct;
     proactive.IsPublished = false;
@@ -955,15 +887,12 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().UpdateEventTypesActive(context, eventtypesUpdate, proactive,
-        (error, responce) async {
+    ApiManager().UpdateEventTypesActive(context, eventtypesUpdate, proactive, (error, responce) async {
       if (error) {
         if (isAct) {
-          ApiManager().ArchiveLeadRestoreInEventTypes(context, eventtypesid,
-              (status, responce) async {
+          ApiManager().ArchiveLeadRestoreInEventTypes(context, eventtypesid, (status, responce) async {
             if (status) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Prop_activated_success, true);
+              ToastUtils.showCustomToast(context, GlobleString.Prop_activated_success, true);
               paginationCall(eventtypesListState, eventtypesListState.pageNo);
               loader.remove();
             } else {
@@ -972,11 +901,9 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
             }
           });
         } else {
-          ApiManager().ArchiveLeadInEventTypes(context, eventtypesid,
-              (status, responce) async {
+          ApiManager().ArchiveLeadInEventTypes(context, eventtypesid, (status, responce) async {
             if (status) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Prop_deactivated_success, true);
+              ToastUtils.showCustomToast(context, GlobleString.Prop_deactivated_success, true);
               paginationCall(eventtypesListState, eventtypesListState.pageNo);
               loader.remove();
             } else {
@@ -992,8 +919,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     });
   }
 
-  eventtypesIsPublished_call(EventTypesListState eventtypesListState,
-      bool isAct, String eventtypesid) {
+  eventtypesIsPublished_call(EventTypesListState eventtypesListState, bool isAct, String eventtypesid) {
     EventTypesIsPublished proactive = EventTypesIsPublished();
     proactive.IsPublished = isAct;
 
@@ -1004,15 +930,12 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().UpdateEventTypesActive(context, eventtypesUpdate, proactive,
-        (error, responce) async {
+    ApiManager().UpdateEventTypesActive(context, eventtypesUpdate, proactive, (error, responce) async {
       if (error) {
         if (isAct) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Event_published_success, true);
+          ToastUtils.showCustomToast(context, GlobleString.Event_published_success, true);
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Event_unpublished_success, true);
+          ToastUtils.showCustomToast(context, GlobleString.Event_unpublished_success, true);
         }
         paginationCall(eventtypesListState, eventtypesListState.pageNo);
         loader.remove();
@@ -1023,15 +946,13 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
     });
   }
 
-  getEventTypesDetails(
-      EventTypesDataList eventtypesData1, int flag, int PropDrafting) async {
+  getEventTypesDetails(EventTypesDataList eventtypesData1, int flag, int PropDrafting) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
     String EventTypeId = eventtypesData1.id.toString();
 
-    await ApiManager().getEventTypesDetailsTemp(context, EventTypeId,
-        (status, responce, eventtypesData) async {
+    await ApiManager().getEventTypesDetailsTemp(context, EventTypeId, (status, responce, eventtypesData) async {
       if (status) {
         await ApiManager().bindEventTypeData(eventtypesData!);
 
@@ -1173,8 +1094,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
       if (error) {
         loader.remove();
         init();
-        ToastUtils.showCustomToast(
-            context, GlobleString.EventTypeTemplate_delete_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.EventTypeTemplate_delete_successfully, true);
       } else {
         loader.remove();
         ToastUtils.showCustomToast(context, respoce, false);

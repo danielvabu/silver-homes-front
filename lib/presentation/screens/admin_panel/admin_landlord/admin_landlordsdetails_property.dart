@@ -21,19 +21,17 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/api_manager_admin.dart';
 import 'package:silverhome/tablayer/dsq_query.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/admin_panel/import_property_dialog.dart';
-import 'package:silverhome/widget/admin_panel/landlord_property/landlord_property_header.dart';
-import 'package:silverhome/widget/admin_panel/landlord_property/landlord_property_item.dart';
+import 'package:silverhome/widget/adminPanel/import_property_dialog.dart';
+import 'package:silverhome/widget/adminPanel/landlord_property/landlord_property_header.dart';
+import 'package:silverhome/widget/adminPanel/landlord_property/landlord_property_item.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class AdminLandlordsDetailsProperty extends StatefulWidget {
   @override
-  _AdminLandlordsDetailsPropertyState createState() =>
-      _AdminLandlordsDetailsPropertyState();
+  _AdminLandlordsDetailsPropertyState createState() => _AdminLandlordsDetailsPropertyState();
 }
 
-class _AdminLandlordsDetailsPropertyState
-    extends State<AdminLandlordsDetailsProperty> {
+class _AdminLandlordsDetailsPropertyState extends State<AdminLandlordsDetailsProperty> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
 
@@ -71,8 +69,7 @@ class _AdminLandlordsDetailsPropertyState
     _store.dispatch(UpdateAdminLL_Property_totalRecord(0));
   }
 
-  void apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  void apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     PropertyListReqtokens reqtokens = new PropertyListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
@@ -124,9 +121,7 @@ class _AdminLandlordsDetailsPropertyState
                     children: [
                       Row(
                         children: [
-                          if (adminLLPropertyState!.isloding &&
-                              adminLLPropertyState.LandlordPropertySearchText ==
-                                  "")
+                          if (adminLLPropertyState!.isloding && adminLLPropertyState.LandlordPropertySearchText == "")
                             Container(
                               width: 260,
                               height: 30,
@@ -143,8 +138,7 @@ class _AdminLandlordsDetailsPropertyState
                                   Expanded(
                                     child: Text(
                                       GlobleString.LL_Search,
-                                      style: MyStyles.Medium(
-                                          14, myColor.hintcolor),
+                                      style: MyStyles.Medium(14, myColor.hintcolor),
                                     ),
                                   ),
                                   Padding(
@@ -172,22 +166,19 @@ class _AdminLandlordsDetailsPropertyState
                                 children: <Widget>[
                                   new Expanded(
                                     child: TextFormField(
-                                      initialValue: adminLLPropertyState
-                                          .LandlordPropertySearchText,
+                                      initialValue: adminLLPropertyState.LandlordPropertySearchText,
                                       onChanged: (value) async {
                                         searchMethos(value);
                                       },
                                       keyboardType: TextInputType.text,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintStyle: MyStyles.Medium(
-                                            14, myColor.hintcolor),
+                                        hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                         contentPadding: EdgeInsets.all(10),
                                         isDense: true,
                                         hintText: GlobleString.LL_Search,
                                       ),
-                                      style: MyStyles.Medium(
-                                          14, myColor.text_color),
+                                      style: MyStyles.Medium(14, myColor.text_color),
                                     ),
                                   ),
                                   Padding(
@@ -235,8 +226,7 @@ class _AdminLandlordsDetailsPropertyState
       child: PopupMenuButton(
         onSelected: (value) async {
           if (value == 1) {
-            await ApiManagerAdmin().getLandlordPropertyListExportCSV(
-                context, Prefs.getString(PrefsName.OwnerID));
+            await ApiManagerAdmin().getLandlordPropertyListExportCSV(context, Prefs.getString(PrefsName.OwnerID));
           } else {
             ImportDialog();
           }
@@ -329,8 +319,7 @@ class _AdminLandlordsDetailsPropertyState
               updateOtherSortingValue(6, adminLLPropertyState);
             },
             onPressedSortTenantName: () {
-              _store
-                  .dispatch(UpdateAdminLL_property_isPropTenantNameSort(true));
+              _store.dispatch(UpdateAdminLL_property_isPropTenantNameSort(true));
               updateOtherSortingValue(7, adminLLPropertyState);
             },
             onPressedSortActiveInactive: () {
@@ -339,8 +328,7 @@ class _AdminLandlordsDetailsPropertyState
             },
           ),
           tableItem(adminLLPropertyState),
-          if (adminLLPropertyState.PropertyDatalist != null &&
-              adminLLPropertyState.PropertyDatalist.length > 0)
+          if (adminLLPropertyState.PropertyDatalist != null && adminLLPropertyState.PropertyDatalist.length > 0)
             Container(
               height: 40,
               color: myColor.TA_table_header,
@@ -364,26 +352,16 @@ class _AdminLandlordsDetailsPropertyState
                       mode: Mode.MENU,
                       textstyle: MyStyles.Medium(14, myColor.black),
                       hint: "Select page",
-                      defultHeight:
-                          Helper.PagingRecord(adminLLPropertyState.totalRecord)
-                                          .length *
-                                      35 >
-                                  350
-                              ? 350
-                              : Helper.PagingRecord(
-                                          adminLLPropertyState.totalRecord)
-                                      .length *
-                                  35,
+                      defultHeight: Helper.PagingRecord(adminLLPropertyState.totalRecord).length * 35 > 350
+                          ? 350
+                          : Helper.PagingRecord(adminLLPropertyState.totalRecord).length * 35,
                       selectedItem: adminLLPropertyState.pageNo.toString(),
-                      items:
-                          Helper.PagingRecord(adminLLPropertyState.totalRecord),
+                      items: Helper.PagingRecord(adminLLPropertyState.totalRecord),
                       showSearchBox: false,
                       isFilteredOnline: true,
                       onChanged: (value) {
-                        _store.dispatch(UpdateAdminLL_Property_pageNo(
-                            int.parse(value.toString())));
-                        paginationCall(
-                            adminLLPropertyState, int.parse(value.toString()));
+                        _store.dispatch(UpdateAdminLL_Property_pageNo(int.parse(value.toString())));
+                        paginationCall(adminLLPropertyState, int.parse(value.toString()));
                       },
                     ),
                   ),
@@ -479,8 +457,7 @@ class _AdminLandlordsDetailsPropertyState
                   ),
                 ),
               )
-            : adminLLPropertyState.PropertyDatalist != null &&
-                    adminLLPropertyState.PropertyDatalist.length > 0
+            : adminLLPropertyState.PropertyDatalist != null && adminLLPropertyState.PropertyDatalist.length > 0
                 ? Expanded(
                     child: LandLordPropertyItem(
                       listdata1: adminLLPropertyState.PropertyDatalist,
@@ -491,8 +468,7 @@ class _AdminLandlordsDetailsPropertyState
                         getPropertyDetails(propertyData);
                       },
                       onPressTenantDetails: (PropertyData propertyData) {
-                        if (propertyData.ApplicantID != null &&
-                            propertyData.ApplicantID != "") {
+                        if (propertyData.ApplicantID != null && propertyData.ApplicantID != "") {
                           tenantDetailsAPI(propertyData.ApplicantID.toString());
                         }
                       },
@@ -516,56 +492,45 @@ class _AdminLandlordsDetailsPropertyState
     );
   }
 
-  void paginationCall(
-      AdminLandlordPropertyState adminLLPropertyState, int pageno) {
+  void paginationCall(AdminLandlordPropertyState adminLLPropertyState, int pageno) {
     if (adminLLPropertyState.isPropNameSort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "PropertyName", adminLLPropertyState.PropNameSortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "PropertyName", adminLLPropertyState.PropNameSortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropUnitSort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "Suite_Unit", adminLLPropertyState.PropUnitSortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "Suite_Unit", adminLLPropertyState.PropUnitSortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropCitySort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "City", adminLLPropertyState.PropCitySortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "City", adminLLPropertyState.PropCitySortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropCountrySort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "Country", adminLLPropertyState.PropCountrySortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "Country", adminLLPropertyState.PropCountrySortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropTypeSort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "Property_Type", adminLLPropertyState.PropTypeSortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "Property_Type", adminLLPropertyState.PropTypeSortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropVacancySort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "Vacancy", adminLLPropertyState.PropVacancySortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "Vacancy", adminLLPropertyState.PropVacancySortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropVacancySort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "TenantName", adminLLPropertyState.PropTenantNameSortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "TenantName", adminLLPropertyState.PropTenantNameSortAcsDes, 1);
     }
 
     if (adminLLPropertyState.isPropActInActSort) {
-      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno,
-          "IsActive", adminLLPropertyState.PropActInActSortAcsDes, 1);
+      apimanager(adminLLPropertyState.LandlordPropertySearchText, pageno, "IsActive", adminLLPropertyState.PropActInActSortAcsDes, 1);
     }
   }
 
-  updateOtherSortingValue(
-      int flag, AdminLandlordPropertyState adminLLPropertyState) {
+  updateOtherSortingValue(int flag, AdminLandlordPropertyState adminLLPropertyState) {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(
-          adminLLPropertyState.PropNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(adminLLPropertyState.PropNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCountrySortAcsDes(0));
@@ -575,11 +540,9 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "PropertyName",
-          adminLLPropertyState.PropNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "PropertyName", adminLLPropertyState.PropNameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(
-          adminLLPropertyState.PropUnitSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(adminLLPropertyState.PropUnitSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCountrySortAcsDes(0));
@@ -589,11 +552,9 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "Suite_Unit",
-          adminLLPropertyState.PropUnitSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Suite_Unit", adminLLPropertyState.PropUnitSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(
-          adminLLPropertyState.PropCitySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(adminLLPropertyState.PropCitySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCountrySortAcsDes(0));
@@ -603,11 +564,9 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "City",
-          adminLLPropertyState.PropCitySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "City", adminLLPropertyState.PropCitySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateAdminLL_PropCountrySortAcsDes(
-          adminLLPropertyState.PropCountrySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropCountrySortAcsDes(adminLLPropertyState.PropCountrySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
@@ -617,11 +576,9 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "Country",
-          adminLLPropertyState.PropCountrySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Country", adminLLPropertyState.PropCountrySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateAdminLL_PropTypeSortAcsDes(
-          adminLLPropertyState.PropTypeSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropTypeSortAcsDes(adminLLPropertyState.PropTypeSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
@@ -631,11 +588,9 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "Property_Type",
-          adminLLPropertyState.PropTypeSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Property_Type", adminLLPropertyState.PropTypeSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdateAdminLL_PropVacancySortAcsDes(
-          adminLLPropertyState.PropVacancySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropVacancySortAcsDes(adminLLPropertyState.PropVacancySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
@@ -645,12 +600,10 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
 
-      apimanager("", 1, "Vacancy",
-          adminLLPropertyState.PropVacancySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Vacancy", adminLLPropertyState.PropVacancySortAcsDes == 1 ? 0 : 1, 0);
     }
     if (flag == 7) {
-      _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(
-          adminLLPropertyState.PropTenantNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(adminLLPropertyState.PropTenantNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
@@ -660,13 +613,11 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropStatusSortAcsDes(0));
 
-      apimanager("", 1, "TenantName",
-          adminLLPropertyState.PropTenantNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "TenantName", adminLLPropertyState.PropTenantNameSortAcsDes == 1 ? 0 : 1, 0);
     }
 
     if (flag == 8) {
-      _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(
-          adminLLPropertyState.PropActInActSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLL_PropActInActSortAcsDes(adminLLPropertyState.PropActInActSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLL_PropNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropUnitSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropCitySortAcsDes(0));
@@ -676,8 +627,7 @@ class _AdminLandlordsDetailsPropertyState
       _store.dispatch(UpdateAdminLL_PropTenantNameSortAcsDes(0));
       _store.dispatch(UpdateAdminLL_PropStatusSortAcsDes(0));
 
-      apimanager("", 1, "IsActive",
-          adminLLPropertyState.PropActInActSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsActive", adminLLPropertyState.PropActInActSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -709,8 +659,7 @@ class _AdminLandlordsDetailsPropertyState
   }
 
   getPropertyDetails(PropertyData propertyData) async {
-    ApiManager().getPropertyRestriction(context, propertyData.ID!,
-        (status, responce, restrictionlist) {
+    ApiManager().getPropertyRestriction(context, propertyData.ID!, (status, responce, restrictionlist) {
       if (status) {
         _store.dispatch(UpdateAdminSummeryRestrictionlist(restrictionlist));
       } else {
@@ -718,8 +667,7 @@ class _AdminLandlordsDetailsPropertyState
       }
     });
 
-    ApiManager().getPropertyAmanityUtility(context, propertyData.ID!,
-        (status, responce, amenitieslist, utilitylist) {
+    ApiManager().getPropertyAmanityUtility(context, propertyData.ID!, (status, responce, amenitieslist, utilitylist) {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
@@ -732,24 +680,20 @@ class _AdminLandlordsDetailsPropertyState
       }
     });
 
-    ApiManager().getPropertyImagesDSQ(context, propertyData.ID!,
-        (status, responce, PropertyImageMediaInfolist) {
+    ApiManager().getPropertyImagesDSQ(context, propertyData.ID!, (status, responce, PropertyImageMediaInfolist) {
       if (status) {
-        _store.dispatch(
-            UpdateAdminSummeryPropertyImageList(PropertyImageMediaInfolist));
+        _store.dispatch(UpdateAdminSummeryPropertyImageList(PropertyImageMediaInfolist));
       } else {
         _store.dispatch(UpdateAdminSummeryPropertyImageList([]));
       }
     });
 
-    await ApiManager().getPropertyDetails(context, propertyData.ID!,
-        (status, responce, propertyData) async {
+    await ApiManager().getPropertyDetails(context, propertyData.ID!, (status, responce, propertyData) async {
       if (status) {
         await bindPropertyData(propertyData!);
         Prefs.setBool(PrefsName.admin_PropertyBack, true);
         Prefs.setBool(PrefsName.admin_Landlord_PropertyBack, false);
-        _store.dispatch(UpdateAdminPortalLandlordPropertyDetails(
-            GlobleString.NAV_admin_Landlords));
+        _store.dispatch(UpdateAdminPortalLandlordPropertyDetails(GlobleString.NAV_admin_Landlords));
       } else {}
     });
 
@@ -768,69 +712,46 @@ class _AdminLandlordsDetailsPropertyState
 
     /*Summery*/
 
-    _store.dispatch(
-        UpdateAdminSummeryProperTytypeValue(propertyData.propertyType));
-    _store.dispatch(UpdateAdminSummeryPropertyTypeOtherValue(
-        propertyData.otherPropertyType!));
+    _store.dispatch(UpdateAdminSummeryProperTytypeValue(propertyData.propertyType));
+    _store.dispatch(UpdateAdminSummeryPropertyTypeOtherValue(propertyData.otherPropertyType!));
     _store.dispatch(UpdateAdminSummeryDateofavailable(tempDate));
-    _store
-        .dispatch(UpdateAdminSummeryRentalSpaceValue(propertyData.rentalSpace));
+    _store.dispatch(UpdateAdminSummeryRentalSpaceValue(propertyData.rentalSpace));
     _store.dispatch(UpdateAdminSummeryPropertyName(propertyData.propertyName!));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyAddress(propertyData.propertyAddress!));
-    _store.dispatch(UpdateAdminSummeryPropertyDescription(
-        propertyData.propertyDescription!));
+    _store.dispatch(UpdateAdminSummeryPropertyAddress(propertyData.propertyAddress!));
+    _store.dispatch(UpdateAdminSummeryPropertyDescription(propertyData.propertyDescription!));
     _store.dispatch(UpdateAdminSummerySuiteunit(propertyData.suiteUnit!));
     _store.dispatch(UpdateAdminSummeryBuildingname(propertyData.buildingName!));
     _store.dispatch(UpdateAdminSummeryPropertyCity(propertyData.city!));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyCountryCode(propertyData.countryCode!));
-    _store
-        .dispatch(UpdateAdminSummeryPropertyCountryName(propertyData.country!));
+    _store.dispatch(UpdateAdminSummeryPropertyCountryCode(propertyData.countryCode!));
+    _store.dispatch(UpdateAdminSummeryPropertyCountryName(propertyData.country!));
     _store.dispatch(UpdateAdminSummeryPropertyProvince(propertyData.province!));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyPostalcode(propertyData.postalCode!));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyRentAmount(propertyData.rentAmount!));
-    _store.dispatch(UpdateAdminSummeryRentPaymentFrequencyValue(
-        propertyData.rentPaymentFrequency));
+    _store.dispatch(UpdateAdminSummeryPropertyPostalcode(propertyData.postalCode!));
+    _store.dispatch(UpdateAdminSummeryPropertyRentAmount(propertyData.rentAmount!));
+    _store.dispatch(UpdateAdminSummeryRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
     _store.dispatch(UpdateAdminSummeryLeaseTypeValue(propertyData.leaseType));
-    _store.dispatch(UpdateAdminSummeryMinimumLeasedurationValue(
-        propertyData.minLeaseDuration));
-    _store.dispatch(UpdateAdminSummeryMinimumleasedurationNumber(
-        propertyData.minLeaseNumber.toString()));
-    _store
-        .dispatch(UpdateAdminSummeryPropertyImage(propertyData.propertyImage));
+    _store.dispatch(UpdateAdminSummeryMinimumLeasedurationValue(propertyData.minLeaseDuration));
+    _store.dispatch(UpdateAdminSummeryMinimumleasedurationNumber(propertyData.minLeaseNumber.toString()));
+    _store.dispatch(UpdateAdminSummeryPropertyImage(propertyData.propertyImage));
     _store.dispatch(UpdateAdminSummeryPropertyUint8List(null));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyBedrooms(propertyData.bedrooms.toString()));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyBathrooms(propertyData.bathrooms.toString()));
-    _store.dispatch(UpdateAdminSummeryPropertySizeinsquarefeet(
-        propertyData.size.toString()));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyMaxoccupancy(propertyData.maxOccupancy!));
+    _store.dispatch(UpdateAdminSummeryPropertyBedrooms(propertyData.bedrooms.toString()));
+    _store.dispatch(UpdateAdminSummeryPropertyBathrooms(propertyData.bathrooms.toString()));
+    _store.dispatch(UpdateAdminSummeryPropertySizeinsquarefeet(propertyData.size.toString()));
+    _store.dispatch(UpdateAdminSummeryPropertyMaxoccupancy(propertyData.maxOccupancy!));
     _store.dispatch(UpdateAdminSummeryFurnishingValue(propertyData.furnishing));
-    _store.dispatch(UpdateAdminSummeryOtherPartialFurniture(
-        propertyData.otherPartialFurniture.toString()));
-    _store
-        .dispatch(UpdateAdminSummeryParkingstalls(propertyData.parkingStalls!));
-    _store.dispatch(
-        UpdateAdminSummeryStorageAvailableValue(propertyData.storageAvailable));
+    _store.dispatch(UpdateAdminSummeryOtherPartialFurniture(propertyData.otherPartialFurniture.toString()));
+    _store.dispatch(UpdateAdminSummeryParkingstalls(propertyData.parkingStalls!));
+    _store.dispatch(UpdateAdminSummeryStorageAvailableValue(propertyData.storageAvailable));
     _store.dispatch(UpdateAdminSummeryAgreeTCPP(propertyData.isAgreedTandC!));
-    _store.dispatch(
-        UpdateAdminSummeryPropertyDrafting(propertyData.PropDrafting!));
+    _store.dispatch(UpdateAdminSummeryPropertyDrafting(propertyData.PropDrafting!));
     _store.dispatch(UpdateAdminSummeryPropertyVacancy(propertyData.Vacancy!));
   }
 
   tenantDetailsAPI(String applicantId) async {
-    ApiManagerAdmin().getLandlordTenancyDetails(context, applicantId,
-        (status, responce) {
+    ApiManagerAdmin().getLandlordTenancyDetails(context, applicantId, (status, responce) {
       if (status) {
         Prefs.setBool(PrefsName.Is_adminLandlord_lead, false);
         Prefs.setBool(PrefsName.Is_adminLandlord_Property, true);
-        _store.dispatch(UpdateAdminPortalLandlordTenancyDetails(
-            GlobleString.NAV_admin_Landlords));
+        _store.dispatch(UpdateAdminPortalLandlordTenancyDetails(GlobleString.NAV_admin_Landlords));
       } else {
         Helper.Log("respoce", responce);
       }

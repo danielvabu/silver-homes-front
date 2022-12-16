@@ -20,7 +20,7 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 
 class MaintenanceRequest extends StatefulWidget {
   const MaintenanceRequest({

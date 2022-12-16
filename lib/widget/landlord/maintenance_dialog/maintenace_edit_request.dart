@@ -35,7 +35,7 @@ import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'edit_assigne_vendor_item_widget.dart';
 
 class MaintenanceEditRequestDialogBox extends StatefulWidget {
@@ -50,12 +50,10 @@ class MaintenanceEditRequestDialogBox extends StatefulWidget {
         _callbackClose = onPressedClose;
 
   @override
-  _MaintenanceEditRequestDialogBoxState createState() =>
-      _MaintenanceEditRequestDialogBoxState();
+  _MaintenanceEditRequestDialogBoxState createState() => _MaintenanceEditRequestDialogBoxState();
 }
 
-class _MaintenanceEditRequestDialogBoxState
-    extends State<MaintenanceEditRequestDialogBox> {
+class _MaintenanceEditRequestDialogBoxState extends State<MaintenanceEditRequestDialogBox> {
   late OverlayEntry loader;
   final _store = getIt<AppStore>();
 
@@ -110,8 +108,7 @@ class _MaintenanceEditRequestDialogBoxState
         child: Padding(
           padding: EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-                minWidth: 900, maxWidth: 900, minHeight: 600, maxHeight: 600),
+            constraints: BoxConstraints(minWidth: 900, maxWidth: 900, minHeight: 600, maxHeight: 600),
             child: Container(
               height: 600,
               decoration: BoxDecoration(
@@ -168,8 +165,7 @@ class _MaintenanceEditRequestDialogBoxState
             margin: EdgeInsets.all(10),
             child: SingleChildScrollView(
               child: Padding(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
+                padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,28 +201,18 @@ class _MaintenanceEditRequestDialogBoxState
                                   mode: Mode.MENU,
                                   focuscolor: myColor.blue,
                                   focusWidth: 2,
-                                  items: editMaintenanceState
-                                      .MaintenanceStatuslist,
+                                  items: editMaintenanceState.MaintenanceStatuslist,
                                   textstyle: MyStyles.Medium(12, myColor.black),
-                                  itemAsString: (SystemEnumDetails? u) =>
-                                      u!.displayValue,
+                                  itemAsString: (SystemEnumDetails? u) => u!.displayValue,
                                   hint: GlobleString.Select_Status,
                                   showSearchBox: false,
-                                  defultHeight: editMaintenanceState
-                                                  .MaintenanceStatuslist
-                                                  .length *
-                                              35 >
-                                          250
+                                  defultHeight: editMaintenanceState.MaintenanceStatuslist.length * 35 > 250
                                       ? 250
-                                      : editMaintenanceState
-                                              .MaintenanceStatuslist.length *
-                                          35,
-                                  selectedItem:
-                                      editMaintenanceState.selectStatus,
+                                      : editMaintenanceState.MaintenanceStatuslist.length * 35,
+                                  selectedItem: editMaintenanceState.selectStatus,
                                   isFilteredOnline: true,
                                   onChanged: (value) {
-                                    _store.dispatch(
-                                        UpdateMER_selectStatus(value));
+                                    _store.dispatch(UpdateMER_selectStatus(value));
                                     _changeData();
                                   },
                                 ),
@@ -243,8 +229,7 @@ class _MaintenanceEditRequestDialogBoxState
                     SizedBox(
                       height: 25,
                     ),
-                    if (editMaintenanceState.vendordatalist.length > 0)
-                      _vendorInformation(editMaintenanceState),
+                    if (editMaintenanceState.vendordatalist.length > 0) _vendorInformation(editMaintenanceState),
                     _addNewVendor(editMaintenanceState)
                   ],
                 ),
@@ -363,13 +348,9 @@ class _MaintenanceEditRequestDialogBoxState
                   itemAsString: (PropertyDropData? u) => u!.propertyName!,
                   hint: GlobleString.Select_Property,
                   showSearchBox: true,
-                  defultHeight:
-                      editMaintenanceState.PropertyDropDatalist.length * 35 >
-                              300
-                          ? 300
-                          : (editMaintenanceState.PropertyDropDatalist.length *
-                                  35) +
-                              50,
+                  defultHeight: editMaintenanceState.PropertyDropDatalist.length * 35 > 300
+                      ? 300
+                      : (editMaintenanceState.PropertyDropDatalist.length * 35) + 50,
                   showClearButton: false,
                   selectedItem: editMaintenanceState.selectproperty,
                   focuscolor: myColor.blue,
@@ -489,14 +470,9 @@ class _MaintenanceEditRequestDialogBoxState
                       showSearchBox: false,
                       selectedItem: editMaintenanceState.selectCategory,
                       isFilteredOnline: true,
-                      defultHeight:
-                          editMaintenanceState.MaintenanceCategorylist.length *
-                                      35 >
-                                  250
-                              ? 250
-                              : editMaintenanceState
-                                      .MaintenanceCategorylist.length *
-                                  35,
+                      defultHeight: editMaintenanceState.MaintenanceCategorylist.length * 35 > 250
+                          ? 250
+                          : editMaintenanceState.MaintenanceCategorylist.length * 35,
                       focuscolor: myColor.blue,
                       focusWidth: 2,
                       onChanged: (value) {
@@ -536,21 +512,13 @@ class _MaintenanceEditRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: editMaintenanceState.priority == 1
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: editMaintenanceState.priority == 1 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_Low,
-                              style: MyStyles.Medium(
-                                  12,
-                                  editMaintenanceState.priority == 1
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, editMaintenanceState.priority == 1 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -568,21 +536,13 @@ class _MaintenanceEditRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: editMaintenanceState.priority == 2
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: editMaintenanceState.priority == 2 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_Medium,
-                              style: MyStyles.Medium(
-                                  12,
-                                  editMaintenanceState.priority == 2
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, editMaintenanceState.priority == 2 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -600,21 +560,13 @@ class _MaintenanceEditRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: editMaintenanceState.priority == 3
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: editMaintenanceState.priority == 3 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_High,
-                              style: MyStyles.Medium(
-                                  12,
-                                  editMaintenanceState.priority == 3
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, editMaintenanceState.priority == 3 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -707,10 +659,7 @@ class _MaintenanceEditRequestDialogBoxState
                           width: 400,
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            fileObject.filename != null &&
-                                    fileObject.filename!.isNotEmpty
-                                ? fileObject.filename!
-                                : "",
+                            fileObject.filename != null && fileObject.filename!.isNotEmpty ? fileObject.filename! : "",
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
                             style: MyStyles.Medium(12, myColor.black),
@@ -725,17 +674,12 @@ class _MaintenanceEditRequestDialogBoxState
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
                             onTap: () async {
-                              if (fileObject.mediaId != null &&
-                                  fileObject.mediaId!.url != null &&
-                                  fileObject.mediaId!.url!.isNotEmpty) {
-                                await Helper.launchURL(
-                                    fileObject.mediaId!.url!);
+                              if (fileObject.mediaId != null && fileObject.mediaId!.url != null && fileObject.mediaId!.url!.isNotEmpty) {
+                                await Helper.launchURL(fileObject.mediaId!.url!);
                               }
                             },
                             child: Text(
-                              fileObject.mediaId != null
-                                  ? Helper.FileName(fileObject.mediaId!.url!)
-                                  : "",
+                              fileObject.mediaId != null ? Helper.FileName(fileObject.mediaId!.url!) : "",
                               textAlign: TextAlign.start,
                               overflow: TextOverflow.ellipsis,
                               style: MyStyles.Medium(12, myColor.blue),
@@ -751,8 +695,7 @@ class _MaintenanceEditRequestDialogBoxState
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     onTap: () {
-                      if (editMaintenanceState.fileobjectlist != null &&
-                          editMaintenanceState.fileobjectlist.isNotEmpty) {
+                      if (editMaintenanceState.fileobjectlist != null && editMaintenanceState.fileobjectlist.isNotEmpty) {
                         deleteImage(editMaintenanceState, index);
                       }
                     },
@@ -814,19 +757,16 @@ class _MaintenanceEditRequestDialogBoxState
             if (fileObject.islocal!) {
               List<FileObject> mylist = editMaintenanceState.fileobjectlist;
               mylist.removeAt(index);
-              ToastUtils.showCustomToast(
-                  context, GlobleString.File_deleted, true);
+              ToastUtils.showCustomToast(context, GlobleString.File_deleted, true);
               _store.dispatch(UpdateMER_fileobjectlist(mylist));
             } else {
               CommonID commonID = new CommonID(ID: fileObject.id.toString());
 
-              ApiManager().deleteMaintenanceImage(context, commonID,
-                  (error, respoce) async {
+              ApiManager().deleteMaintenanceImage(context, commonID, (error, respoce) async {
                 if (error) {
                   List<FileObject> mylist = editMaintenanceState.fileobjectlist;
                   mylist.removeAt(index);
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.File_deleted, true);
+                  ToastUtils.showCustomToast(context, GlobleString.File_deleted, true);
                   _store.dispatch(UpdateMER_fileobjectlist(mylist));
                 } else {
                   ToastUtils.showCustomToast(context, respoce, false);
@@ -844,10 +784,8 @@ class _MaintenanceEditRequestDialogBoxState
   }
 
   void PickMultipleImage(EditMaintenanceState editMaintenanceState) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg', 'heif', 'mp4'],
-        allowMultiple: true);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg', 'heif', 'mp4'], allowMultiple: true);
     if (result != null) {
       _changeData();
       List<PlatformFile> files = result.files;
@@ -879,8 +817,7 @@ class _MaintenanceEditRequestDialogBoxState
           }
 
           if ((file.name.split('.').last).contains("mp4") && size > 10) {
-            ToastUtils.showCustomToast(
-                context, "MP4 file maximum size 10 MB", false);
+            ToastUtils.showCustomToast(context, "MP4 file maximum size 10 MB", false);
           } else {
             FileObject fileObject = new FileObject();
             fileObject.appImage = file.bytes;
@@ -891,16 +828,14 @@ class _MaintenanceEditRequestDialogBoxState
             fileobjectlist1.add(fileObject);
 
             if (files.length - 1 == i) {
-              if (editMaintenanceState.fileobjectlist != null &&
-                  editMaintenanceState.fileobjectlist.isNotEmpty)
+              if (editMaintenanceState.fileobjectlist != null && editMaintenanceState.fileobjectlist.isNotEmpty)
                 fileobjectlist1.addAll(editMaintenanceState.fileobjectlist);
 
               _store.dispatch(UpdateMER_fileobjectlist(fileobjectlist1));
             }
           }
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Mant_DL_Uploadfiles_error1, false);
+          ToastUtils.showCustomToast(context, GlobleString.Mant_DL_Uploadfiles_error1, false);
           break;
         }
       }
@@ -962,10 +897,7 @@ class _MaintenanceEditRequestDialogBoxState
                       hint: GlobleString.Select_Country,
                       showSearchBox: false,
                       defultHeight:
-                          editMaintenanceState.countrydatalist.length * 35 > 250
-                              ? 250
-                              : editMaintenanceState.countrydatalist.length *
-                                  35,
+                          editMaintenanceState.countrydatalist.length * 35 > 250 ? 250 : editMaintenanceState.countrydatalist.length * 35,
                       selectedItem: editMaintenanceState.selectedCountry,
                       isFilteredOnline: true,
                       focuscolor: myColor.blue,
@@ -985,8 +917,7 @@ class _MaintenanceEditRequestDialogBoxState
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
 
-                        ApiManager().getStateList(context, value!.ID.toString(),
-                            (status, responce, errorlist) {
+                        ApiManager().getStateList(context, value!.ID.toString(), (status, responce, errorlist) {
                           if (status) {
                             loader.remove();
                             _store.dispatch(UpdateMER_statedatalist(errorlist));
@@ -1027,13 +958,9 @@ class _MaintenanceEditRequestDialogBoxState
                       itemAsString: (StateData? u) => u!.StateName!,
                       hint: GlobleString.Select_State,
                       showSearchBox: false,
-                      selectedItem: editMaintenanceState.selectedState != null
-                          ? editMaintenanceState.selectedState
-                          : null,
+                      selectedItem: editMaintenanceState.selectedState != null ? editMaintenanceState.selectedState : null,
                       defultHeight:
-                          editMaintenanceState.statedatalist.length * 35 > 250
-                              ? 250
-                              : editMaintenanceState.statedatalist.length * 35,
+                          editMaintenanceState.statedatalist.length * 35 > 250 ? 250 : editMaintenanceState.statedatalist.length * 35,
                       isFilteredOnline: true,
                       focuscolor: myColor.blue,
                       focusWidth: 2,
@@ -1050,8 +977,7 @@ class _MaintenanceEditRequestDialogBoxState
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
 
-                        ApiManager().getCityList(context, value!.ID.toString(),
-                            (status, responce, errorlist) {
+                        ApiManager().getCityList(context, value!.ID.toString(), (status, responce, errorlist) {
                           if (status) {
                             loader.remove();
                             _store.dispatch(UpdateMER_citydatalist(errorlist));
@@ -1085,9 +1011,7 @@ class _MaintenanceEditRequestDialogBoxState
             textstyle: MyStyles.Medium(12, myColor.black),
             compareFn: (item, selectedItem) => item?.ID == selectedItem?.ID,
             itemAsString: (CityData? u) => u!.CityName!,
-            selectedItems: editMaintenanceState.selectedCity != null
-                ? editMaintenanceState.selectedCity!
-                : [],
+            selectedItems: editMaintenanceState.selectedCity != null ? editMaintenanceState.selectedCity! : [],
             items: editMaintenanceState.citydatalist,
             defultHeight: editMaintenanceState.citydatalist.length == 0
                 ? 100
@@ -1123,12 +1047,9 @@ class _MaintenanceEditRequestDialogBoxState
 
               addVendorItemList(editMaintenanceState);
 
-              if (editMaintenanceState.selectedCity != null &&
-                  editMaintenanceState.selectedCity!.isNotEmpty) {
-                _store.dispatch(
-                    UpdateMER_selectedCity(editMaintenanceState.selectedCity));
-                UpdateVendorAPI(
-                    editMaintenanceState, editMaintenanceState.selectedCity);
+              if (editMaintenanceState.selectedCity != null && editMaintenanceState.selectedCity!.isNotEmpty) {
+                _store.dispatch(UpdateMER_selectedCity(editMaintenanceState.selectedCity));
+                UpdateVendorAPI(editMaintenanceState, editMaintenanceState.selectedCity);
               } else {
                 _store.dispatch(UpdateMER_selectedCity([]));
               }
@@ -1164,12 +1085,8 @@ class _MaintenanceEditRequestDialogBoxState
             : Container(
                 child: EditAssigneVendorItemWidget(
                   count: 1,
-                  dmodel1: new AddVendorData(
-                      filtervendordatalist: [],
-                      id: "1",
-                      Instruction: "",
-                      selectvendor: null,
-                      selectfilterCategory: null),
+                  dmodel1:
+                      new AddVendorData(filtervendordatalist: [], id: "1", Instruction: "", selectvendor: null, selectfilterCategory: null),
                   pos: 1,
                   onPressedDelete: (pos) {},
                   editMaintenanceState: editMaintenanceState,
@@ -1182,8 +1099,7 @@ class _MaintenanceEditRequestDialogBoxState
     );
   }
 
-  UpdateVendorAPI(
-      EditMaintenanceState editMaintenanceState, List<CityData>? selectedCity) {
+  UpdateVendorAPI(EditMaintenanceState editMaintenanceState, List<CityData>? selectedCity) {
     String city = "";
 
     for (int i = 0; i < selectedCity!.length; i++) {
@@ -1199,17 +1115,14 @@ class _MaintenanceEditRequestDialogBoxState
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getCityWiseVendorList(context, city,
-        (status, responce, errorlist) async {
+    ApiManager().getCityWiseVendorList(context, city, (status, responce, errorlist) async {
       if (status) {
         loader.remove();
         _store.dispatch(UpdateMER_mainvendordatalist(errorlist));
-        List<SystemEnumDetails> categorylist =
-            await Helper.removeDuplicates(errorlist);
+        List<SystemEnumDetails> categorylist = await Helper.removeDuplicates(errorlist);
         _store.dispatch(UpdateMER_filterCategorylist(categorylist));
 
-        Helper.Log(
-            "getCityWiseVendorList categorylist", categorylist.toString());
+        Helper.Log("getCityWiseVendorList categorylist", categorylist.toString());
       } else {
         loader.remove();
       }
@@ -1221,8 +1134,7 @@ class _MaintenanceEditRequestDialogBoxState
       onTap: () async {
         addNewVendorinValidation(editMaintenanceState);
       },
-      child: CustomeWidget.AddNewButtonFillOut(
-          GlobleString.Mant_DL_Vendor_AddVendor),
+      child: CustomeWidget.AddNewButtonFillOut(GlobleString.Mant_DL_Vendor_AddVendor),
     );
   }
 
@@ -1249,15 +1161,11 @@ class _MaintenanceEditRequestDialogBoxState
   addNewVendorinValidation(EditMaintenanceState? editMaintenanceState) {
     if (editMaintenanceState!.vendordatalist.length > 0) {
       if (editMaintenanceState.selectedCountry == null) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_country, false);
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_country, false);
       } else if (editMaintenanceState.selectedCountry == null) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_state, false);
-      } else if (editMaintenanceState.selectedCity == null ||
-          editMaintenanceState.selectedCity!.isEmpty) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_city, false);
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_state, false);
+      } else if (editMaintenanceState.selectedCity == null || editMaintenanceState.selectedCity!.isEmpty) {
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_city, false);
       } else {
         bool isAdd = false;
 
@@ -1268,24 +1176,20 @@ class _MaintenanceEditRequestDialogBoxState
 
           if (vendor.selectfilterCategory == null) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_category, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_category, false);
             break;
           } else if (vendor.selectvendor == null) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_vendor, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_vendor, false);
             break;
           } else if (checkdupvendor.contains(vendor.selectvendor!.id)) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_samevendor, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_samevendor, false);
             break;
           } else {
             checkdupvendor.add(vendor.selectvendor!.id);
 
-            if ((editMaintenanceState.vendordatalist.length - 1) == i &&
-                !isAdd) {
+            if ((editMaintenanceState.vendordatalist.length - 1) == i && !isAdd) {
               addVendorFunction(editMaintenanceState);
 
               break;
@@ -1308,11 +1212,9 @@ class _MaintenanceEditRequestDialogBoxState
     main.selectvendor = null;
     main.Instruction = "";
 
-    if (editMaintenanceState.vendordatalist != null &&
-        editMaintenanceState.vendordatalist.isNotEmpty) {
+    if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.isNotEmpty) {
       editMaintenanceState.vendordatalist.add(main);
-      _store.dispatch(
-          UpdateMER_vendordatalist(editMaintenanceState.vendordatalist));
+      _store.dispatch(UpdateMER_vendordatalist(editMaintenanceState.vendordatalist));
     } else {
       vendordatalist.add(main);
       _store.dispatch(UpdateMER_vendordatalist(vendordatalist));
@@ -1333,8 +1235,7 @@ class _MaintenanceEditRequestDialogBoxState
           onPressedYes: () {
             Navigator.of(context1).pop();
             _changeData();
-            if (editMaintenanceState.vendordatalist != null &&
-                editMaintenanceState.vendordatalist.isNotEmpty) {
+            if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.isNotEmpty) {
               List<AddVendorData> mylist = editMaintenanceState.vendordatalist;
               mylist.removeAt(index);
 
@@ -1402,15 +1303,13 @@ class _MaintenanceEditRequestDialogBoxState
                   child: ListView.builder(
                     itemCount: editMaintenanceState.logActivitylist.length,
                     itemBuilder: (context, index) {
-                      LogActivity logactivity =
-                          editMaintenanceState.logActivitylist[index];
+                      LogActivity logactivity = editMaintenanceState.logActivitylist[index];
                       return Padding(
                         padding: EdgeInsets.all(5),
                         child: Container(
                           alignment: Alignment.topLeft,
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: myColor.log_activity_bg, width: 1.0),
+                            border: Border.all(color: myColor.log_activity_bg, width: 1.0),
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
                             ),
@@ -1420,8 +1319,7 @@ class _MaintenanceEditRequestDialogBoxState
                           child: Stack(
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(
-                                    left: 5, top: 10, bottom: 5, right: 15),
+                                padding: EdgeInsets.only(left: 5, top: 10, bottom: 5, right: 15),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1429,17 +1327,14 @@ class _MaintenanceEditRequestDialogBoxState
                                     Padding(
                                       padding: EdgeInsets.only(right: 5),
                                       child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Text(
                                               logactivity.LogText!,
                                               textAlign: TextAlign.start,
-                                              style: MyStyles.Medium(
-                                                  12, myColor.Circle_main),
+                                              style: MyStyles.Medium(12, myColor.Circle_main),
                                             ),
                                           ),
                                         ],
@@ -1449,17 +1344,11 @@ class _MaintenanceEditRequestDialogBoxState
                                       height: 10,
                                     ),
                                     Text(
-                                      logactivity.Date_Created != null &&
-                                              logactivity.Date_Created != "0" &&
-                                              logactivity.Date_Created != ""
-                                          ? new DateFormat("dd-MMM-yyyy")
-                                              .format(DateTime.parse(
-                                                  logactivity.Date_Created!))
-                                              .toString()
+                                      logactivity.Date_Created != null && logactivity.Date_Created != "0" && logactivity.Date_Created != ""
+                                          ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(logactivity.Date_Created!)).toString()
                                           : "",
                                       textAlign: TextAlign.start,
-                                      style: MyStyles.Regular(
-                                          10, myColor.Circle_main),
+                                      style: MyStyles.Regular(10, myColor.Circle_main),
                                     ),
                                   ],
                                 ),
@@ -1470,10 +1359,7 @@ class _MaintenanceEditRequestDialogBoxState
                                   padding: EdgeInsets.all(0),
                                   child: InkWell(
                                     onTap: () {
-                                      deleteLogActivityDialog(
-                                          editMaintenanceState,
-                                          logactivity,
-                                          index);
+                                      deleteLogActivityDialog(editMaintenanceState, logactivity, index);
                                     },
                                     child: FaIcon(
                                       FontAwesomeIcons.trashAlt,
@@ -1515,12 +1401,10 @@ class _MaintenanceEditRequestDialogBoxState
                         decoration: InputDecoration(
                             //border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: myColor.blue, width: 2.0),
+                              borderSide: BorderSide(color: myColor.blue, width: 2.0),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: myColor.gray, width: 1.0),
+                              borderSide: BorderSide(color: myColor.gray, width: 1.0),
                             ),
                             isDense: true,
                             /* hintText: GlobleString
@@ -1540,20 +1424,17 @@ class _MaintenanceEditRequestDialogBoxState
                         children: [
                           InkWell(
                             onTap: () {
-                              if (_textlog.text != null &&
-                                  _textlog.text.isNotEmpty)
+                              if (_textlog.text != null && _textlog.text.isNotEmpty)
                                 addLogActivity(editMaintenanceState);
                               else
-                                ToastUtils.showCustomToast(context,
-                                    GlobleString.LogActivity_enter, false);
+                                ToastUtils.showCustomToast(context, GlobleString.LogActivity_enter, false);
                             },
                             child: Container(
                               height: 30,
                               width: 80,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
                                 color: myColor.Circle_main,
                               ),
                               child: Text(
@@ -1577,25 +1458,17 @@ class _MaintenanceEditRequestDialogBoxState
 
   checkValidation(EditMaintenanceState editMaintenanceState) {
     if (editMaintenanceState.selectStatus == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_status, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_status, false);
     } else if (editMaintenanceState.selectproperty == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_property, false);
-    } else if (editMaintenanceState.requestName == null ||
-        editMaintenanceState.requestName.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_requestname, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_property, false);
+    } else if (editMaintenanceState.requestName == null || editMaintenanceState.requestName.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_requestname, false);
     } else if (editMaintenanceState.selectCategory == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_category, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_category, false);
     } else if (editMaintenanceState.priority == 0) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_priority, false);
-    } else if (editMaintenanceState.description == null ||
-        editMaintenanceState.description.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_description, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_priority, false);
+    } else if (editMaintenanceState.description == null || editMaintenanceState.description.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_description, false);
     }
     /*else if (editMaintenanceState.fileobjectlist == null ||
         editMaintenanceState.fileobjectlist.length == 0) {
@@ -1603,18 +1476,13 @@ class _MaintenanceEditRequestDialogBoxState
           context, GlobleString.ADM_error_Select_uploadfile, false);
     } */
     else {
-      if (editMaintenanceState.vendordatalist != null &&
-          editMaintenanceState.vendordatalist.length > 0) {
+      if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.length > 0) {
         if (editMaintenanceState.selectedCountry == null) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_country, false);
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_country, false);
         } else if (editMaintenanceState.selectedState == null) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_state, false);
-        } else if (editMaintenanceState.selectedCity == null ||
-            editMaintenanceState.selectedCity!.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_city, false);
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_state, false);
+        } else if (editMaintenanceState.selectedCity == null || editMaintenanceState.selectedCity!.isEmpty) {
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_city, false);
         } else {
           bool isAdd = false;
 
@@ -1625,24 +1493,20 @@ class _MaintenanceEditRequestDialogBoxState
 
             if (vendor.selectfilterCategory == null) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_category, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_category, false);
               break;
             } else if (vendor.selectvendor == null) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_vendor, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_vendor, false);
               break;
             } else if (checkdupvendor.contains(vendor.selectvendor!.id)) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_samevendor, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_samevendor, false);
               break;
             } else {
               checkdupvendor.add(vendor.selectvendor!.id);
 
-              if ((editMaintenanceState.vendordatalist.length - 1) == i &&
-                  !isAdd) {
+              if ((editMaintenanceState.vendordatalist.length - 1) == i && !isAdd) {
                 updateMaintenaceApi(editMaintenanceState);
               }
             }
@@ -1661,8 +1525,7 @@ class _MaintenanceEditRequestDialogBoxState
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getPropertyWiseApplicantID(
-        context, editMaintenanceState.selectproperty!.id.toString(),
+    await ApiManager().getPropertyWiseApplicantID(context, editMaintenanceState.selectproperty!.id.toString(),
         (status, responce, Applicant_Id, ApplicantionID) {
       if (status) {
         if (Applicant_Id != null && Applicant_Id.isNotEmpty) {
@@ -1682,14 +1545,11 @@ class _MaintenanceEditRequestDialogBoxState
     });
   }
 
-  updateMaintenaceApiCall(EditMaintenanceState editMaintenanceState,
-      String? Applicant, String? Applicantion) {
+  updateMaintenaceApiCall(EditMaintenanceState editMaintenanceState, String? Applicant, String? Applicantion) {
     UpdateMaintenanceQuery addmintenance = new UpdateMaintenanceQuery();
     addmintenance.Prop_ID = editMaintenanceState.selectproperty!.id;
-    addmintenance.Category =
-        editMaintenanceState.selectCategory!.EnumDetailID.toString();
-    addmintenance.Status =
-        editMaintenanceState.selectStatus!.EnumDetailID.toString();
+    addmintenance.Category = editMaintenanceState.selectCategory!.EnumDetailID.toString();
+    addmintenance.Status = editMaintenanceState.selectStatus!.EnumDetailID.toString();
     addmintenance.Priority = editMaintenanceState.priority.toString();
     addmintenance.Describe_Issue = editMaintenanceState.description.toString();
     addmintenance.IsLock = editMaintenanceState.IsLock;
@@ -1698,10 +1558,8 @@ class _MaintenanceEditRequestDialogBoxState
     addmintenance.RequestName = editMaintenanceState.requestName;
     addmintenance.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-    if (editMaintenanceState.vendordatalist != null &&
-        editMaintenanceState.vendordatalist.length > 0) {
-      addmintenance.Country =
-          editMaintenanceState.selectedCountry!.ID.toString();
+    if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.length > 0) {
+      addmintenance.Country = editMaintenanceState.selectedCountry!.ID.toString();
       addmintenance.State = editMaintenanceState.selectedState!.ID.toString();
 
       String city = "";
@@ -1726,27 +1584,23 @@ class _MaintenanceEditRequestDialogBoxState
     Update.ID = editMaintenanceState.mid.toString();
     Update.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-    ApiManager().UpdateMaintenanceRequest(context, Update, addmintenance,
-        (error, respoce) {
+    ApiManager().UpdateMaintenanceRequest(context, Update, addmintenance, (error, respoce) {
       if (error) {
         if (oldStatusid == editMaintenanceState.selectStatus!.EnumDetailID &&
             oldPriority == editMaintenanceState.priority &&
             oldPropid == editMaintenanceState.selectproperty!.id) {
           ImageVendorUpdate(editMaintenanceState);
         } else {
-          insertNotification_Priority_Status(
-              editMaintenanceState, Applicant, Applicantion);
+          insertNotification_Priority_Status(editMaintenanceState, Applicant, Applicantion);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }
 
-  insertNotification_Priority_Status(EditMaintenanceState editMaintenanceState,
-      String? Applicant, String? Applicantion) {
+  insertNotification_Priority_Status(EditMaintenanceState editMaintenanceState, String? Applicant, String? Applicantion) {
     List<MaintenanceNotificationData> notificationlist = [];
 
     if (oldStatusid != editMaintenanceState.selectStatus!.EnumDetailID) {
@@ -1757,11 +1611,8 @@ class _MaintenanceEditRequestDialogBoxState
       mn.applicantId = Applicant != null ? Applicant : "";
       mn.applicationId = Applicantion != null ? Applicantion : "";
       mn.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
-      mn.typeOfNotification = NotificationType().getNotificationType(
-          NotificationName.Owner_Maintenance_Change_Status);
+      mn.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+      mn.typeOfNotification = NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Change_Status);
       mn.isRead = false;
 
       notificationlist.add(mn);
@@ -1774,11 +1625,8 @@ class _MaintenanceEditRequestDialogBoxState
         mn2.applicantId = Applicant;
         mn2.applicationId = Applicantion;
         mn2.ownerId = Prefs.getString(PrefsName.OwnerID);
-        mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-            .format(DateTime.now())
-            .toString();
-        mn2.typeOfNotification = NotificationType().getNotificationType(
-            NotificationName.Tenant_Maintenance_Change_Status);
+        mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+        mn2.typeOfNotification = NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Change_Status);
         mn2.isRead = false;
 
         notificationlist.add(mn2);
@@ -1793,11 +1641,8 @@ class _MaintenanceEditRequestDialogBoxState
       mn3.applicantId = Applicant != null ? Applicant : "";
       mn3.applicationId = Applicantion != null ? Applicantion : "";
       mn3.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn3.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
-      mn3.typeOfNotification = NotificationType().getNotificationType(
-          NotificationName.Owner_Maintenance_Change_Priority);
+      mn3.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+      mn3.typeOfNotification = NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Change_Priority);
       mn3.isRead = false;
 
       notificationlist.add(mn3);
@@ -1810,11 +1655,8 @@ class _MaintenanceEditRequestDialogBoxState
         mn4.applicantId = Applicant;
         mn4.applicationId = Applicantion;
         mn4.ownerId = Prefs.getString(PrefsName.OwnerID);
-        mn4.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-            .format(DateTime.now())
-            .toString();
-        mn4.typeOfNotification = NotificationType().getNotificationType(
-            NotificationName.Tenant_Maintenance_Change_Priority);
+        mn4.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+        mn4.typeOfNotification = NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Change_Priority);
         mn4.isRead = false;
 
         notificationlist.add(mn4);
@@ -1829,11 +1671,8 @@ class _MaintenanceEditRequestDialogBoxState
       mn5.applicantId = Applicant != null ? Applicant : "";
       mn5.applicationId = Applicantion != null ? Applicantion : "";
       mn5.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn5.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
-      mn5.typeOfNotification = NotificationType()
-          .getNotificationType(NotificationName.Owner_Maintenance_Requests);
+      mn5.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+      mn5.typeOfNotification = NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Requests);
       mn5.isRead = false;
 
       notificationlist.add(mn5);
@@ -1846,11 +1685,8 @@ class _MaintenanceEditRequestDialogBoxState
         mn6.applicantId = Applicant;
         mn6.applicationId = Applicantion;
         mn6.ownerId = Prefs.getString(PrefsName.OwnerID);
-        mn6.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-            .format(DateTime.now())
-            .toString();
-        mn6.typeOfNotification = NotificationType()
-            .getNotificationType(NotificationName.Tenant_Maintenance_Requests);
+        mn6.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+        mn6.typeOfNotification = NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Requests);
         mn6.isRead = false;
 
         notificationlist.add(mn6);
@@ -1864,10 +1700,8 @@ class _MaintenanceEditRequestDialogBoxState
     }
   }
 
-  insertNotificationCall(EditMaintenanceState editMaintenanceState,
-      List<MaintenanceNotificationData> notificationlist) {
-    ApiManager().AddMaintenaceNotification(context, notificationlist,
-        (error, responce) async {
+  insertNotificationCall(EditMaintenanceState editMaintenanceState, List<MaintenanceNotificationData> notificationlist) {
+    ApiManager().AddMaintenaceNotification(context, notificationlist, (error, responce) async {
       if (error) {
         ImageVendorUpdate(editMaintenanceState);
       } else {
@@ -1878,9 +1712,7 @@ class _MaintenanceEditRequestDialogBoxState
   }
 
   insertImageCall(EditMaintenanceState editMaintenanceState) {
-    ApiManager()
-        .MaintenanceImagesUpload(context, editMaintenanceState.fileobjectlist,
-            (status, listString, responce) {
+    ApiManager().MaintenanceImagesUpload(context, editMaintenanceState.fileobjectlist, (status, listString, responce) {
       if (status) {
         if (listString.length > 0) {
           List<InsertMaintenanceImage> imagelist = <InsertMaintenanceImage>[];
@@ -1892,12 +1724,10 @@ class _MaintenanceEditRequestDialogBoxState
             ));
           }
 
-          ApiManager().InsetMaintenanceImages(context, imagelist,
-              (status, responce) async {
+          ApiManager().InsetMaintenanceImages(context, imagelist, (status, responce) async {
             if (status) {
               loader.remove();
-              ToastUtils.showCustomToast(
-                  context, GlobleString.maintenace_update_successfully, true);
+              ToastUtils.showCustomToast(context, GlobleString.maintenace_update_successfully, true);
               widget._callbackSave();
             } else {
               loader.remove();
@@ -1913,13 +1743,11 @@ class _MaintenanceEditRequestDialogBoxState
   }
 
   ImageVendorUpdate(EditMaintenanceState editMaintenanceState) {
-    if (editMaintenanceState.vendordatalist == null ||
-        editMaintenanceState.vendordatalist.isEmpty) {
+    if (editMaintenanceState.vendordatalist == null || editMaintenanceState.vendordatalist.isEmpty) {
       DeleteVendor(editMaintenanceState);
     }
 
-    if (editMaintenanceState.fileobjectlist != null &&
-        editMaintenanceState.fileobjectlist.length > 0) {
+    if (editMaintenanceState.fileobjectlist != null && editMaintenanceState.fileobjectlist.length > 0) {
       bool iscall = false;
       for (int i = 0; i < editMaintenanceState.fileobjectlist.length; i++) {
         FileObject file = editMaintenanceState.fileobjectlist[i];
@@ -1932,37 +1760,31 @@ class _MaintenanceEditRequestDialogBoxState
           if (iscall) {
             insertImageCall(editMaintenanceState);
           } else {
-            if (editMaintenanceState.vendordatalist != null &&
-                editMaintenanceState.vendordatalist.length > 0) {
+            if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.length > 0) {
               AddVendor(editMaintenanceState);
             } else {
               loader.remove();
-              ToastUtils.showCustomToast(
-                  context, GlobleString.maintenace_update_successfully, true);
+              ToastUtils.showCustomToast(context, GlobleString.maintenace_update_successfully, true);
               widget._callbackSave();
             }
           }
         }
       }
     } else {
-      if (editMaintenanceState.vendordatalist != null &&
-          editMaintenanceState.vendordatalist.length > 0) {
+      if (editMaintenanceState.vendordatalist != null && editMaintenanceState.vendordatalist.length > 0) {
         AddVendor(editMaintenanceState);
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.maintenace_update_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.maintenace_update_successfully, true);
         widget._callbackSave();
       }
     }
   }
 
   void DeleteVendor(EditMaintenanceState editMaintenanceState) {
-    DeleteMaintenanceVendor MaintenanceID =
-        new DeleteMaintenanceVendor(MaintenanceID: editMaintenanceState.mid);
+    DeleteMaintenanceVendor MaintenanceID = new DeleteMaintenanceVendor(MaintenanceID: editMaintenanceState.mid);
 
-    ApiManager().deleteMaintenanceVendor(context, MaintenanceID,
-        (error, respoce) async {
+    ApiManager().deleteMaintenanceVendor(context, MaintenanceID, (error, respoce) async {
       if (error) {
       } else {
         ToastUtils.showCustomToast(context, respoce, false);
@@ -1985,20 +1807,16 @@ class _MaintenanceEditRequestDialogBoxState
       assignevendorlist.add(assigneVendor);
     }
 
-    DeleteMaintenanceVendor MaintenanceID =
-        new DeleteMaintenanceVendor(MaintenanceID: editMaintenanceState.mid);
+    DeleteMaintenanceVendor MaintenanceID = new DeleteMaintenanceVendor(MaintenanceID: editMaintenanceState.mid);
 
-    ApiManager().InsetAssigneVendorRequest(
-        context, assignevendorlist, MaintenanceID, (error, respoce) {
+    ApiManager().InsetAssigneVendorRequest(context, assignevendorlist, MaintenanceID, (error, respoce) {
       if (error) {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.maintenace_update_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.maintenace_update_successfully, true);
         widget._callbackSave();
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }
@@ -2010,18 +1828,13 @@ class _MaintenanceEditRequestDialogBoxState
     AddLogActivity addmintenance = new AddLogActivity();
     addmintenance.LogText = _textlog.text.trim();
     addmintenance.Maintenance_ID =
-        editMaintenanceState.mid != null && editMaintenanceState.mid.isNotEmpty
-            ? int.parse(editMaintenanceState.mid.toString())
-            : 0;
+        editMaintenanceState.mid != null && editMaintenanceState.mid.isNotEmpty ? int.parse(editMaintenanceState.mid.toString()) : 0;
     addmintenance.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-    addmintenance.Date_Created =
-        new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString();
+    addmintenance.Date_Created = new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString();
 
     ApiManager().InsetLogActivity(context, addmintenance, (error, respoce) {
       if (error) {
-        ApiManager()
-            .getLogActivityList(context, editMaintenanceState.mid.toString(),
-                (error, respoce) async {
+        ApiManager().getLogActivityList(context, editMaintenanceState.mid.toString(), (error, respoce) async {
           if (error) {
             loader.remove();
             _textlog.clear();
@@ -2033,14 +1846,12 @@ class _MaintenanceEditRequestDialogBoxState
         });
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }
 
-  deleteLogActivityDialog(EditMaintenanceState editMaintenanceState,
-      LogActivity logactivity, int index) {
+  deleteLogActivityDialog(EditMaintenanceState editMaintenanceState, LogActivity logactivity, int index) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
@@ -2064,8 +1875,7 @@ class _MaintenanceEditRequestDialogBoxState
     );
   }
 
-  void deleteLogActivity(EditMaintenanceState editMaintenanceState,
-      LogActivity logactivity, int index) {
+  void deleteLogActivity(EditMaintenanceState editMaintenanceState, LogActivity logactivity, int index) {
     CommonID id = new CommonID(ID: logactivity.id.toString());
 
     loader = Helper.overlayLoader(context);
@@ -2075,8 +1885,7 @@ class _MaintenanceEditRequestDialogBoxState
       if (error) {
         loader.remove();
 
-        ToastUtils.showCustomToast(
-            context, GlobleString.Activity_Log_deleted, true);
+        ToastUtils.showCustomToast(context, GlobleString.Activity_Log_deleted, true);
 
         List<LogActivity> activitylist = editMaintenanceState.logActivitylist;
         activitylist.removeAt(index);

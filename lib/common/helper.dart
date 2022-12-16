@@ -24,9 +24,8 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
+import 'package:silverhome/widget/alert/circular_loading_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../widget/circular_loading_widget.dart';
 
 class Helper {
   late BuildContext context;
@@ -80,12 +79,9 @@ class Helper {
 
   static Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
   static OverlayEntry overlayLoader(context) {
@@ -120,10 +116,7 @@ class Helper {
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(Uri.parse(url));
     } else {
-      Fluttertoast.showToast(
-          msg: "Could not launch $url",
-          backgroundColor: Colors.black,
-          textColor: Colors.white);
+      Fluttertoast.showToast(msg: "Could not launch $url", backgroundColor: Colors.black, textColor: Colors.white);
 
       throw 'Could not launch $url';
     }
@@ -146,10 +139,7 @@ class Helper {
           if (await canLaunchUrl(Uri.parse(url2))) {
             await launchUrl(Uri.parse(url2));
           } else {
-            Fluttertoast.showToast(
-                msg: "Could not launch $url2",
-                backgroundColor: Colors.black,
-                textColor: Colors.white);
+            Fluttertoast.showToast(msg: "Could not launch $url2", backgroundColor: Colors.black, textColor: Colors.white);
 
             throw 'Could not launch $url2';
           }
@@ -183,8 +173,7 @@ class Helper {
     }
   }
 
-  static download(BuildContext context, String url, String Mediaid,
-      String filenameold, int? flag) async {
+  static download(BuildContext context, String url, String Mediaid, String filenameold, int? flag) async {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -221,9 +210,7 @@ class Helper {
       List<int> bytes = ubytes;
       final _base64 = base64Encode(bytes);
 
-      final anchor = html.AnchorElement(
-          href: 'data:application/octet-stream;base64,$_base64')
-        ..target = 'blank';
+      final anchor = html.AnchorElement(href: 'data:application/octet-stream;base64,$_base64')..target = 'blank';
       // add the name
       if (filename != null) {
         anchor.download = filename;
@@ -246,10 +233,8 @@ class Helper {
     });
   }
 
-  static String limitString(String text,
-      {int limit = 24, String hiddenText = "..."}) {
-    return text.substring(0, min<int>(limit, text.length)) +
-        (text.length > limit ? hiddenText : '');
+  static String limitString(String text, {int limit = 24, String hiddenText = "..."}) {
+    return text.substring(0, min<int>(limit, text.length)) + (text.length > limit ? hiddenText : '');
   }
 
   static String getCreditCardNumber(String number) {
@@ -306,8 +291,7 @@ class Helper {
     String finaldate = "";
 
     if (timestamp != null && timestamp != "") {
-      var date =
-          DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
+      var date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp) * 1000);
 
       final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
       finaldate = formatter.format(DateTime.parse(date.toString()));
@@ -340,9 +324,8 @@ class Helper {
   }
 
   static bool ValidLinkLinedProfile(String url) {
-    bool urlValid = RegExp(
-            r'((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$')
-        .hasMatch(url);
+    bool urlValid =
+        RegExp(r'((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$').hasMatch(url);
     return urlValid;
   }
 
@@ -380,8 +363,7 @@ class Helper {
     bool hasUppercase = password.contains(new RegExp(r'[A-Z]'));
     bool hasDigits = password.contains(new RegExp(r'[0-9]'));
     // bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
-    bool hasSpecialCharacters =
-        password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    bool hasSpecialCharacters = password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
     bool hasMinLength = password.length >= 8;
 
     //return hasDigits & hasUppercase & hasLowercase & hasSpecialCharacters & hasMinLength;
@@ -389,10 +371,7 @@ class Helper {
   }
 
   static Size textSize(String text, TextStyle style) {
-    final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text, style: style),
-        maxLines: 1,
-        textDirection: ui.TextDirection.ltr)
+    final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: ui.TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size;
   }
@@ -453,8 +432,7 @@ class Helper {
     window.navigator.clipboard!.writeText(text).then((value) {
       Log("copyToClipboardHack", value.toString());
       print("copyToClipboardHack" + value.toString());
-      ToastUtils.showCustomToastWithColor(
-          context, "Linked Copied", myColor.link_copy);
+      ToastUtils.showCustomToastWithColor(context, "Linked Copied", myColor.link_copy);
     });
   }
 
@@ -472,8 +450,7 @@ class Helper {
 
     final uniqueNumbers = category.toSet().toList();
 
-    List<SystemEnumDetails> MaintenanceCategorylist =
-        QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
+    List<SystemEnumDetails> MaintenanceCategorylist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
 
     List<SystemEnumDetails> newList = [];
 
@@ -491,8 +468,7 @@ class Helper {
     return newList;
   }
 
-  static List<VendorData> filtervendor(
-      List<VendorData> list, SystemEnumDetails enumdata) {
+  static List<VendorData> filtervendor(List<VendorData> list, SystemEnumDetails enumdata) {
     List<VendorData> newList = [];
 
     for (int i = 0; i < list.length; i++) {
@@ -565,12 +541,9 @@ class Helper {
     int length = 20;
 
     final _random = Random();
-    const _availableChars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+    const _availableChars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
 
-    final randomString = List.generate(length,
-            (index) => _availableChars[_random.nextInt(_availableChars.length)])
-        .join();
+    final randomString = List.generate(length, (index) => _availableChars[_random.nextInt(_availableChars.length)]).join();
 
     return randomString;
   }

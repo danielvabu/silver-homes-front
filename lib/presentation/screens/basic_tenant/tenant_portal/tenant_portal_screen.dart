@@ -24,9 +24,9 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 import 'package:silverhome/widget/basic_tenant/maintenace_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/notification/tenant_notification_item.dart';
 
 class TenantPortalScreen extends BasePage {

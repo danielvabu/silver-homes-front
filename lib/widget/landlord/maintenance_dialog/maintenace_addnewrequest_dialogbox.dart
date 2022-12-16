@@ -34,7 +34,7 @@ import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/maintenance_dialog/add_assigne_vendor_item_widget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 class MaintenanceAddNewRequestDialogBox extends StatefulWidget {
   final VoidCallback _callbackSave;
@@ -48,12 +48,10 @@ class MaintenanceAddNewRequestDialogBox extends StatefulWidget {
         _callbackClose = onPressedClose;
 
   @override
-  _MaintenanceAddNewRequestDialogBoxState createState() =>
-      _MaintenanceAddNewRequestDialogBoxState();
+  _MaintenanceAddNewRequestDialogBoxState createState() => _MaintenanceAddNewRequestDialogBoxState();
 }
 
-class _MaintenanceAddNewRequestDialogBoxState
-    extends State<MaintenanceAddNewRequestDialogBox> {
+class _MaintenanceAddNewRequestDialogBoxState extends State<MaintenanceAddNewRequestDialogBox> {
   late OverlayEntry loader;
   final _store = getIt<AppStore>();
 
@@ -79,11 +77,8 @@ class _MaintenanceAddNewRequestDialogBoxState
 
     if (_store.state!.addMaintenanceState != null) {
       if (_store.state!.addMaintenanceState.selectStatus == null) {
-        for (int i = 0;
-            i < _store.state!.addMaintenanceState.MaintenanceStatuslist.length;
-            i++) {
-          SystemEnumDetails enumdata =
-              _store.state!.addMaintenanceState.MaintenanceStatuslist[i];
+        for (int i = 0; i < _store.state!.addMaintenanceState.MaintenanceStatuslist.length; i++) {
+          SystemEnumDetails enumdata = _store.state!.addMaintenanceState.MaintenanceStatuslist[i];
 
           if (enumdata.EnumDetailID == 1) {
             _store.dispatch(UpdateMAR_selectStatus(enumdata));
@@ -103,8 +98,7 @@ class _MaintenanceAddNewRequestDialogBoxState
         child: Padding(
           padding: EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-                minWidth: 750, maxWidth: 750, minHeight: 600, maxHeight: 600),
+            constraints: BoxConstraints(minWidth: 750, maxWidth: 750, minHeight: 600, maxHeight: 600),
             child: Container(
               height: 600,
               decoration: BoxDecoration(
@@ -124,8 +118,7 @@ class _MaintenanceAddNewRequestDialogBoxState
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(top: 10, left: 10, right: 10),
+                            padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                             child: InkWell(
                               onTap: () {
                                 closeDialog(addMaintenanceState!);
@@ -187,8 +180,7 @@ class _MaintenanceAddNewRequestDialogBoxState
             margin: EdgeInsets.all(10),
             child: SingleChildScrollView(
               child: Padding(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
+                padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,28 +214,18 @@ class _MaintenanceAddNewRequestDialogBoxState
                                   mode: Mode.MENU,
                                   focuscolor: myColor.blue,
                                   focusWidth: 2,
-                                  items:
-                                      addMaintenanceState.MaintenanceStatuslist,
+                                  items: addMaintenanceState.MaintenanceStatuslist,
                                   textstyle: MyStyles.Medium(12, myColor.black),
-                                  itemAsString: (SystemEnumDetails? u) =>
-                                      u!.displayValue,
-                                  defultHeight: addMaintenanceState
-                                                  .MaintenanceStatuslist
-                                                  .length *
-                                              35 >
-                                          250
+                                  itemAsString: (SystemEnumDetails? u) => u!.displayValue,
+                                  defultHeight: addMaintenanceState.MaintenanceStatuslist.length * 35 > 250
                                       ? 250
-                                      : addMaintenanceState
-                                              .MaintenanceStatuslist.length *
-                                          35,
+                                      : addMaintenanceState.MaintenanceStatuslist.length * 35,
                                   hint: GlobleString.Select_Status,
                                   showSearchBox: false,
-                                  selectedItem:
-                                      addMaintenanceState.selectStatus,
+                                  selectedItem: addMaintenanceState.selectStatus,
                                   isFilteredOnline: true,
                                   onChanged: (value) {
-                                    _store.dispatch(
-                                        UpdateMAR_selectStatus(value));
+                                    _store.dispatch(UpdateMAR_selectStatus(value));
                                     _changeData();
                                   },
                                 ),
@@ -260,8 +242,7 @@ class _MaintenanceAddNewRequestDialogBoxState
                     SizedBox(
                       height: 25,
                     ),
-                    if (addMaintenanceState.vendordatalist.length > 0)
-                      _vendorInformation(addMaintenanceState),
+                    if (addMaintenanceState.vendordatalist.length > 0) _vendorInformation(addMaintenanceState),
                     _addNewVendor(addMaintenanceState)
                   ],
                 ),
@@ -356,12 +337,9 @@ class _MaintenanceAddNewRequestDialogBoxState
                   itemAsString: (PropertyDropData? u) => u!.propertyName!,
                   hint: GlobleString.Select_Property,
                   showSearchBox: true,
-                  defultHeight:
-                      addMaintenanceState.PropertyDropDatalist.length * 35 > 400
-                          ? 400
-                          : (addMaintenanceState.PropertyDropDatalist.length *
-                                  35) +
-                              50,
+                  defultHeight: addMaintenanceState.PropertyDropDatalist.length * 35 > 400
+                      ? 400
+                      : (addMaintenanceState.PropertyDropDatalist.length * 35) + 50,
                   showClearButton: false,
                   selectedItem: addMaintenanceState.selectproperty,
                   focuscolor: myColor.blue,
@@ -483,13 +461,9 @@ class _MaintenanceAddNewRequestDialogBoxState
                       isFilteredOnline: true,
                       focuscolor: myColor.blue,
                       focusWidth: 2,
-                      defultHeight: addMaintenanceState
-                                      .MaintenanceCategorylist.length *
-                                  35 >
-                              250
+                      defultHeight: addMaintenanceState.MaintenanceCategorylist.length * 35 > 250
                           ? 250
-                          : addMaintenanceState.MaintenanceCategorylist.length *
-                              35,
+                          : addMaintenanceState.MaintenanceCategorylist.length * 35,
                       onChanged: (value) {
                         _store.dispatch(UpdateMAR_selectCategory(value));
                         _changeData();
@@ -527,21 +501,13 @@ class _MaintenanceAddNewRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: addMaintenanceState.priority == 1
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: addMaintenanceState.priority == 1 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_Low,
-                              style: MyStyles.Medium(
-                                  12,
-                                  addMaintenanceState.priority == 1
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, addMaintenanceState.priority == 1 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -559,21 +525,13 @@ class _MaintenanceAddNewRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: addMaintenanceState.priority == 2
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: addMaintenanceState.priority == 2 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_Medium,
-                              style: MyStyles.Medium(
-                                  12,
-                                  addMaintenanceState.priority == 2
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, addMaintenanceState.priority == 2 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -591,21 +549,13 @@ class _MaintenanceAddNewRequestDialogBoxState
                             height: 30,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
-                              color: addMaintenanceState.priority == 3
-                                  ? myColor.TA_tab_text
-                                  : myColor.white,
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
+                              color: addMaintenanceState.priority == 3 ? myColor.TA_tab_text : myColor.white,
                             ),
                             child: Text(
                               GlobleString.Mant_DL_High,
-                              style: MyStyles.Medium(
-                                  12,
-                                  addMaintenanceState.priority == 3
-                                      ? myColor.white
-                                      : myColor.black),
+                              style: MyStyles.Medium(12, addMaintenanceState.priority == 3 ? myColor.white : myColor.black),
                             ),
                           ),
                         ),
@@ -712,13 +662,10 @@ class _MaintenanceAddNewRequestDialogBoxState
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     onTap: () {
-                      if (addMaintenanceState.fileobjectlist != null &&
-                          addMaintenanceState.fileobjectlist.isNotEmpty) {
-                        ToastUtils.showCustomToast(
-                            context, GlobleString.File_deleted, true);
+                      if (addMaintenanceState.fileobjectlist != null && addMaintenanceState.fileobjectlist.isNotEmpty) {
+                        ToastUtils.showCustomToast(context, GlobleString.File_deleted, true);
 
-                        List<FileObject> mylist =
-                            addMaintenanceState.fileobjectlist;
+                        List<FileObject> mylist = addMaintenanceState.fileobjectlist;
                         mylist.removeAt(index);
 
                         _store.dispatch(UpdateMAR_fileobjectlist(mylist));
@@ -813,12 +760,8 @@ class _MaintenanceAddNewRequestDialogBoxState
                       hint: GlobleString.Select_Country,
                       showSearchBox: false,
                       defultHeight:
-                          addMaintenanceState.countrydatalist.length * 35 > 250
-                              ? 250
-                              : addMaintenanceState.countrydatalist.length * 35,
-                      selectedItem: addMaintenanceState.selectedCountry != null
-                          ? addMaintenanceState.selectedCountry
-                          : null,
+                          addMaintenanceState.countrydatalist.length * 35 > 250 ? 250 : addMaintenanceState.countrydatalist.length * 35,
+                      selectedItem: addMaintenanceState.selectedCountry != null ? addMaintenanceState.selectedCountry : null,
                       isFilteredOnline: true,
                       focuscolor: myColor.blue,
                       focusWidth: 2,
@@ -837,8 +780,7 @@ class _MaintenanceAddNewRequestDialogBoxState
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
 
-                        ApiManager().getStateList(context, value!.ID.toString(),
-                            (status, responce, errorlist) {
+                        ApiManager().getStateList(context, value!.ID.toString(), (status, responce, errorlist) {
                           if (status) {
                             loader.remove();
                             _store.dispatch(UpdateMAR_statedatalist(errorlist));
@@ -877,18 +819,12 @@ class _MaintenanceAddNewRequestDialogBoxState
                       items: addMaintenanceState.statedatalist,
                       textstyle: MyStyles.Medium(12, myColor.black),
                       itemAsString: (StateData? u) => u!.StateName!,
-                      enabled: addMaintenanceState.selectedCountry != null
-                          ? true
-                          : false,
+                      enabled: addMaintenanceState.selectedCountry != null ? true : false,
                       hint: GlobleString.Select_State,
                       showSearchBox: false,
-                      selectedItem: addMaintenanceState.selectedState != null
-                          ? addMaintenanceState.selectedState
-                          : null,
+                      selectedItem: addMaintenanceState.selectedState != null ? addMaintenanceState.selectedState : null,
                       defultHeight:
-                          addMaintenanceState.statedatalist.length * 35 > 250
-                              ? 250
-                              : addMaintenanceState.statedatalist.length * 35,
+                          addMaintenanceState.statedatalist.length * 35 > 250 ? 250 : addMaintenanceState.statedatalist.length * 35,
                       isFilteredOnline: true,
                       focuscolor: myColor.blue,
                       focusWidth: 2,
@@ -905,8 +841,7 @@ class _MaintenanceAddNewRequestDialogBoxState
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
 
-                        ApiManager().getCityList(context, value!.ID.toString(),
-                            (status, responce, errorlist) {
+                        ApiManager().getCityList(context, value!.ID.toString(), (status, responce, errorlist) {
                           if (status) {
                             loader.remove();
                             _store.dispatch(UpdateMAR_citydatalist(errorlist));
@@ -940,9 +875,7 @@ class _MaintenanceAddNewRequestDialogBoxState
             textstyle: MyStyles.Medium(12, myColor.black),
             compareFn: (item, selectedItem) => item?.ID == selectedItem?.ID,
             itemAsString: (CityData? u) => u!.CityName!,
-            selectedItems: addMaintenanceState.selectedCity != null
-                ? addMaintenanceState.selectedCity!
-                : [],
+            selectedItems: addMaintenanceState.selectedCity != null ? addMaintenanceState.selectedCity! : [],
             hint: GlobleString.Select_City,
             enabled: addMaintenanceState.selectedState != null ? true : false,
             items: addMaintenanceState.citydatalist,
@@ -983,12 +916,9 @@ class _MaintenanceAddNewRequestDialogBoxState
 
               addVendorItemList(addMaintenanceState);
 
-              if (addMaintenanceState.selectedCity != null &&
-                  addMaintenanceState.selectedCity!.isNotEmpty) {
-                _store.dispatch(
-                    UpdateMAR_selectedCity(addMaintenanceState.selectedCity));
-                UpdateVendorAPI(
-                    addMaintenanceState, addMaintenanceState.selectedCity);
+              if (addMaintenanceState.selectedCity != null && addMaintenanceState.selectedCity!.isNotEmpty) {
+                _store.dispatch(UpdateMAR_selectedCity(addMaintenanceState.selectedCity));
+                UpdateVendorAPI(addMaintenanceState, addMaintenanceState.selectedCity);
               } else {
                 _store.dispatch(UpdateMAR_selectedCity([]));
               }
@@ -1024,12 +954,8 @@ class _MaintenanceAddNewRequestDialogBoxState
             : Container(
                 child: AddAssigneVendorItemWidget(
                   count: 1,
-                  dmodel1: new AddVendorData(
-                      filtervendordatalist: [],
-                      id: "1",
-                      Instruction: "",
-                      selectvendor: null,
-                      selectfilterCategory: null),
+                  dmodel1:
+                      new AddVendorData(filtervendordatalist: [], id: "1", Instruction: "", selectvendor: null, selectfilterCategory: null),
                   pos: 1,
                   onPressedDelete: (pos) {},
                   addMaintenanceState: addMaintenanceState,
@@ -1047,16 +973,13 @@ class _MaintenanceAddNewRequestDialogBoxState
       onTap: () async {
         addNewVendorinValidation(addMaintenanceState);
       },
-      child: CustomeWidget.AddNewButtonFillOut(
-          GlobleString.Mant_DL_Vendor_AddVendor),
+      child: CustomeWidget.AddNewButtonFillOut(GlobleString.Mant_DL_Vendor_AddVendor),
     );
   }
 
   void PickMultipleImage(AddMaintenanceState addMaintenanceState) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg', 'heif', 'mp4'],
-        allowMultiple: true);
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg', 'heif', 'mp4'], allowMultiple: true);
     if (result != null) {
       _changeData();
       List<PlatformFile> files = result.files;
@@ -1088,8 +1011,7 @@ class _MaintenanceAddNewRequestDialogBoxState
           }
 
           if ((file.name.split('.').last).contains("mp4") && size > 10) {
-            ToastUtils.showCustomToast(
-                context, "MP4 file maximum size 10 MB", false);
+            ToastUtils.showCustomToast(context, "MP4 file maximum size 10 MB", false);
           } else {
             FileObject fileObject = new FileObject();
             fileObject.appImage = file.bytes;
@@ -1100,16 +1022,14 @@ class _MaintenanceAddNewRequestDialogBoxState
             fileobjectlist1.add(fileObject);
 
             if (files.length - 1 == i) {
-              if (addMaintenanceState.fileobjectlist != null &&
-                  addMaintenanceState.fileobjectlist.isNotEmpty)
+              if (addMaintenanceState.fileobjectlist != null && addMaintenanceState.fileobjectlist.isNotEmpty)
                 fileobjectlist1.addAll(addMaintenanceState.fileobjectlist);
 
               _store.dispatch(UpdateMAR_fileobjectlist(fileobjectlist1));
             }
           }
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Mant_DL_Uploadfiles_error1, false);
+          ToastUtils.showCustomToast(context, GlobleString.Mant_DL_Uploadfiles_error1, false);
           break;
         }
       }
@@ -1122,8 +1042,7 @@ class _MaintenanceAddNewRequestDialogBoxState
     }
   }
 
-  UpdateVendorAPI(
-      AddMaintenanceState? addMaintenanceState, List<CityData>? selectedCity) {
+  UpdateVendorAPI(AddMaintenanceState? addMaintenanceState, List<CityData>? selectedCity) {
     String city = "";
 
     for (int i = 0; i < selectedCity!.length; i++) {
@@ -1139,17 +1058,14 @@ class _MaintenanceAddNewRequestDialogBoxState
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getCityWiseVendorList(context, city,
-        (status, responce, errorlist) async {
+    ApiManager().getCityWiseVendorList(context, city, (status, responce, errorlist) async {
       if (status) {
         loader.remove();
         _store.dispatch(UpdateMAR_mainvendordatalist(errorlist));
-        List<SystemEnumDetails> categorylist =
-            await Helper.removeDuplicates(errorlist);
+        List<SystemEnumDetails> categorylist = await Helper.removeDuplicates(errorlist);
         _store.dispatch(UpdateMAR_filterCategorylist(categorylist));
 
-        Helper.Log(
-            "getCityWiseVendorList categorylist", categorylist.toString());
+        Helper.Log("getCityWiseVendorList categorylist", categorylist.toString());
       } else {
         loader.remove();
       }
@@ -1159,15 +1075,11 @@ class _MaintenanceAddNewRequestDialogBoxState
   addNewVendorinValidation(AddMaintenanceState? addMaintenanceState) {
     if (addMaintenanceState!.vendordatalist.length > 0) {
       if (addMaintenanceState.selectedCountry == null) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_country, false);
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_country, false);
       } else if (addMaintenanceState.selectedCountry == null) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_state, false);
-      } else if (addMaintenanceState.selectedCity == null ||
-          addMaintenanceState.selectedCity!.isEmpty) {
-        ToastUtils.showCustomToast(
-            context, GlobleString.ADM_error_Select_city, false);
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_state, false);
+      } else if (addMaintenanceState.selectedCity == null || addMaintenanceState.selectedCity!.isEmpty) {
+        ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_city, false);
       } else {
         bool isAdd = false;
 
@@ -1178,24 +1090,20 @@ class _MaintenanceAddNewRequestDialogBoxState
 
           if (vendor.selectfilterCategory == null) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_category, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_category, false);
             break;
           } else if (vendor.selectvendor == null) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_vendor, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_vendor, false);
             break;
           } else if (checkdupvendor.contains(vendor.selectvendor!.id)) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.ADM_error_Avendor_samevendor, false);
+            ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_samevendor, false);
             break;
           } else {
             checkdupvendor.add(vendor.selectvendor!.id);
 
-            if ((addMaintenanceState.vendordatalist.length - 1) == i &&
-                !isAdd) {
+            if ((addMaintenanceState.vendordatalist.length - 1) == i && !isAdd) {
               addVendorFunction(addMaintenanceState);
 
               break;
@@ -1218,11 +1126,9 @@ class _MaintenanceAddNewRequestDialogBoxState
     main.selectvendor = null;
     main.Instruction = "";
 
-    if (addMaintenanceState.vendordatalist != null &&
-        addMaintenanceState.vendordatalist.isNotEmpty) {
+    if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.isNotEmpty) {
       addMaintenanceState.vendordatalist.add(main);
-      _store.dispatch(
-          UpdateMAR_vendordatalist(addMaintenanceState.vendordatalist));
+      _store.dispatch(UpdateMAR_vendordatalist(addMaintenanceState.vendordatalist));
     } else {
       vendordatalist.add(main);
       _store.dispatch(UpdateMAR_vendordatalist(vendordatalist));
@@ -1263,8 +1169,7 @@ class _MaintenanceAddNewRequestDialogBoxState
           onPressedYes: () {
             Navigator.of(context1).pop();
 
-            if (addMaintenanceState.vendordatalist != null &&
-                addMaintenanceState.vendordatalist.isNotEmpty) {
+            if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.isNotEmpty) {
               List<AddVendorData> mylist = addMaintenanceState.vendordatalist;
               mylist.removeAt(index);
 
@@ -1281,25 +1186,17 @@ class _MaintenanceAddNewRequestDialogBoxState
 
   checkValidation(AddMaintenanceState addMaintenanceState) {
     if (addMaintenanceState.selectStatus == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_status, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_status, false);
     } else if (addMaintenanceState.selectproperty == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_property, false);
-    } else if (addMaintenanceState.requestName == null ||
-        addMaintenanceState.requestName.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_requestname, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_property, false);
+    } else if (addMaintenanceState.requestName == null || addMaintenanceState.requestName.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_requestname, false);
     } else if (addMaintenanceState.selectCategory == null) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_category, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_category, false);
     } else if (addMaintenanceState.priority == 0) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_priority, false);
-    } else if (addMaintenanceState.description == null ||
-        addMaintenanceState.description.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.ADM_error_Select_description, false);
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_priority, false);
+    } else if (addMaintenanceState.description == null || addMaintenanceState.description.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_description, false);
     }
     /*else if (addMaintenanceState.fileobjectlist == null ||
         addMaintenanceState.fileobjectlist.length == 0) {
@@ -1307,18 +1204,13 @@ class _MaintenanceAddNewRequestDialogBoxState
           context, GlobleString.ADM_error_Select_uploadfile, false);
     }*/
     else {
-      if (addMaintenanceState.vendordatalist != null &&
-          addMaintenanceState.vendordatalist.length > 0) {
+      if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.length > 0) {
         if (addMaintenanceState.selectedCountry == null) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_country, false);
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_country, false);
         } else if (addMaintenanceState.selectedState == null) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_state, false);
-        } else if (addMaintenanceState.selectedCity == null ||
-            addMaintenanceState.selectedCity!.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.ADM_error_Select_city, false);
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_state, false);
+        } else if (addMaintenanceState.selectedCity == null || addMaintenanceState.selectedCity!.isEmpty) {
+          ToastUtils.showCustomToast(context, GlobleString.ADM_error_Select_city, false);
         } else {
           bool isAdd = false;
 
@@ -1329,24 +1221,20 @@ class _MaintenanceAddNewRequestDialogBoxState
 
             if (vendor.selectfilterCategory == null) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_category, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_category, false);
               break;
             } else if (vendor.selectvendor == null) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_vendor, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_vendor, false);
               break;
             } else if (checkdupvendor.contains(vendor.selectvendor!.id)) {
               isAdd = true;
-              ToastUtils.showCustomToast(
-                  context, GlobleString.ADM_error_Avendor_samevendor, false);
+              ToastUtils.showCustomToast(context, GlobleString.ADM_error_Avendor_samevendor, false);
               break;
             } else {
               checkdupvendor.add(vendor.selectvendor!.id);
 
-              if ((addMaintenanceState.vendordatalist.length - 1) == i &&
-                  !isAdd) {
+              if ((addMaintenanceState.vendordatalist.length - 1) == i && !isAdd) {
                 addMaintenaceApi(addMaintenanceState);
               }
             }
@@ -1365,8 +1253,7 @@ class _MaintenanceAddNewRequestDialogBoxState
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getPropertyWiseApplicantID(
-        context, addMaintenanceState.selectproperty!.id.toString(),
+    await ApiManager().getPropertyWiseApplicantID(context, addMaintenanceState.selectproperty!.id.toString(),
         (status, responce, Applicant_Id, ApplicantionID) {
       if (status) {
         if (Applicant_Id != null && Applicant_Id.isNotEmpty) {
@@ -1386,19 +1273,15 @@ class _MaintenanceAddNewRequestDialogBoxState
     });
   }
 
-  addMiantenanceAPiCall(AddMaintenanceState addMaintenanceState,
-      String? Applicant, String? Applicantion) {
+  addMiantenanceAPiCall(AddMaintenanceState addMaintenanceState, String? Applicant, String? Applicantion) {
     AddMaintenanceQuery addmintenance = new AddMaintenanceQuery();
     addmintenance.Prop_ID = addMaintenanceState.selectproperty!.id;
-    addmintenance.Category =
-        addMaintenanceState.selectCategory!.EnumDetailID.toString();
-    addmintenance.Status =
-        addMaintenanceState.selectStatus!.EnumDetailID.toString();
+    addmintenance.Category = addMaintenanceState.selectCategory!.EnumDetailID.toString();
+    addmintenance.Status = addMaintenanceState.selectStatus!.EnumDetailID.toString();
     addmintenance.Priority = addMaintenanceState.priority.toString();
     addmintenance.Describe_Issue = addMaintenanceState.description.toString();
     addmintenance.IsLock = false;
-    addmintenance.Date_Created =
-        new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString();
+    addmintenance.Date_Created = new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString();
     addmintenance.Applicant_ID = Applicant;
     addmintenance.Type_User = "1";
     addmintenance.RequestName = addMaintenanceState.requestName;
@@ -1407,10 +1290,8 @@ class _MaintenanceAddNewRequestDialogBoxState
     addmintenance.State = "";
     addmintenance.City = "";
 
-    if (addMaintenanceState.vendordatalist != null &&
-        addMaintenanceState.vendordatalist.length > 0) {
-      addmintenance.Country =
-          addMaintenanceState.selectedCountry!.ID.toString();
+    if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.length > 0) {
+      addmintenance.Country = addMaintenanceState.selectedCountry!.ID.toString();
       addmintenance.State = addMaintenanceState.selectedState!.ID.toString();
 
       String city = "";
@@ -1429,18 +1310,15 @@ class _MaintenanceAddNewRequestDialogBoxState
 
     ApiManager().InsetNewRequest(context, addmintenance, (error, respoce) {
       if (error) {
-        insertNotificationCall(
-            addMaintenanceState, respoce, Applicant, Applicantion);
+        insertNotificationCall(addMaintenanceState, respoce, Applicant, Applicantion);
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }
 
-  insertNotificationCall(AddMaintenanceState addMaintenanceState, String mid,
-      String? Applicant, String? Applicantion) {
+  insertNotificationCall(AddMaintenanceState addMaintenanceState, String mid, String? Applicant, String? Applicantion) {
     List<MaintenanceNotificationData> notificationlist = [];
 
     MaintenanceNotificationData mn = new MaintenanceNotificationData();
@@ -1450,10 +1328,8 @@ class _MaintenanceAddNewRequestDialogBoxState
     mn.applicantId = Applicant != null ? Applicant : "";
     mn.applicationId = Applicantion != null ? Applicantion : "";
     mn.ownerId = Prefs.getString(PrefsName.OwnerID);
-    mn.notificationDate =
-        new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
-    mn.typeOfNotification = NotificationType()
-        .getNotificationType(NotificationName.Owner_Maintenance_Requests);
+    mn.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+    mn.typeOfNotification = NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Requests);
     mn.isRead = false;
 
     notificationlist.add(mn);
@@ -1466,30 +1342,23 @@ class _MaintenanceAddNewRequestDialogBoxState
       mn2.applicantId = Applicant;
       mn2.applicationId = Applicantion;
       mn2.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
-      mn2.typeOfNotification = NotificationType()
-          .getNotificationType(NotificationName.Tenant_Maintenance_Requests);
+      mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+      mn2.typeOfNotification = NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Requests);
       mn2.isRead = false;
 
       notificationlist.add(mn2);
     }
 
-    ApiManager().AddMaintenaceNotification(context, notificationlist,
-        (error, responce) async {
+    ApiManager().AddMaintenaceNotification(context, notificationlist, (error, responce) async {
       if (error) {
-        if (addMaintenanceState.fileobjectlist != null &&
-            addMaintenanceState.fileobjectlist.length > 0) {
+        if (addMaintenanceState.fileobjectlist != null && addMaintenanceState.fileobjectlist.length > 0) {
           insertImageCall(addMaintenanceState, mid);
         } else {
-          if (addMaintenanceState.vendordatalist != null &&
-              addMaintenanceState.vendordatalist.length > 0) {
+          if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.length > 0) {
             AddVendor(addMaintenanceState, mid);
           } else {
             loader.remove();
-            ToastUtils.showCustomToast(
-                context, GlobleString.maintenace_insert_successfully, true);
+            ToastUtils.showCustomToast(context, GlobleString.maintenace_insert_successfully, true);
             widget._callbackSave();
           }
         }
@@ -1501,9 +1370,7 @@ class _MaintenanceAddNewRequestDialogBoxState
   }
 
   insertImageCall(AddMaintenanceState addMaintenanceState, String mid) {
-    ApiManager()
-        .MaintenanceImagesUpload(context, addMaintenanceState.fileobjectlist,
-            (status, listString, responce) {
+    ApiManager().MaintenanceImagesUpload(context, addMaintenanceState.fileobjectlist, (status, listString, responce) {
       if (status) {
         if (listString.length > 0) {
           List<InsertMaintenanceImage> imagelist = <InsertMaintenanceImage>[];
@@ -1515,16 +1382,13 @@ class _MaintenanceAddNewRequestDialogBoxState
             ));
           }
 
-          ApiManager().InsetMaintenanceImages(context, imagelist,
-              (status, responce) async {
+          ApiManager().InsetMaintenanceImages(context, imagelist, (status, responce) async {
             if (status) {
-              if (addMaintenanceState.vendordatalist != null &&
-                  addMaintenanceState.vendordatalist.length > 0) {
+              if (addMaintenanceState.vendordatalist != null && addMaintenanceState.vendordatalist.length > 0) {
                 AddVendor(addMaintenanceState, mid);
               } else {
                 loader.remove();
-                ToastUtils.showCustomToast(
-                    context, GlobleString.maintenace_insert_successfully, true);
+                ToastUtils.showCustomToast(context, GlobleString.maintenace_insert_successfully, true);
                 widget._callbackSave();
               }
             } else {
@@ -1554,17 +1418,14 @@ class _MaintenanceAddNewRequestDialogBoxState
       assignevendorlist.add(assigneVendor);
     }
 
-    ApiManager().InsetAssigneVendorRequest(context, assignevendorlist, null,
-        (error, respoce) {
+    ApiManager().InsetAssigneVendorRequest(context, assignevendorlist, null, (error, respoce) {
       if (error) {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.maintenace_insert_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.maintenace_insert_successfully, true);
         widget._callbackSave();
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }

@@ -15,7 +15,7 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 
 class TenantResetPWScreen extends StatefulWidget {
   const TenantResetPWScreen({
@@ -63,9 +63,7 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
           await Prefs.setString(PrefsName.userTokan, respoce);
 
           if (widget.ID != null && widget.ID != "") {
-            ApiManager()
-                .CompanyDetailsDSQCall(context, widget.Companyname.toString(),
-                    (error1, respoce2) async {
+            ApiManager().CompanyDetailsDSQCall(context, widget.Companyname.toString(), (error1, respoce2) async {
               if (error1) {
                 updateLoding();
               } else {
@@ -163,9 +161,7 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
                     ),
                     child: Column(
                       children: [
-                        Prefs.getString(PrefsName.BT_CompanyLogoid) != null &&
-                                Prefs.getString(PrefsName.BT_CompanyLogoid)
-                                    .isNotEmpty
+                        Prefs.getString(PrefsName.BT_CompanyLogoid) != null && Prefs.getString(PrefsName.BT_CompanyLogoid).isNotEmpty
                             ? Container(
                                 width: 380,
                                 height: 80,
@@ -175,14 +171,10 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
                                     fit: BoxFit.contain,
                                     alignment: Alignment.center,
                                     image: CustomNetworkImage(
-                                      Weburl.image_API +
-                                          Prefs.getString(
-                                              PrefsName.BT_CompanyLogoid),
+                                      Weburl.image_API + Prefs.getString(PrefsName.BT_CompanyLogoid),
                                       scale: 1.5,
                                       headers: {
-                                        'Authorization': 'bearer ' +
-                                            Prefs.getString(
-                                                PrefsName.userTokan),
+                                        'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                                         'ApplicationCode': Weburl.API_CODE,
                                       },
                                     ),
@@ -243,8 +235,7 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
             Container(
               alignment: Alignment.center,
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                    maxHeight: 80, minHeight: 80, maxWidth: 380, minWidth: 380),
+                constraints: BoxConstraints(maxHeight: 80, minHeight: 80, maxWidth: 380, minWidth: 380),
                 child: Image.asset(
                   "assets/images/silverhome.png",
                 ),
@@ -345,9 +336,7 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
                 contentPadding: EdgeInsets.all(8),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    cnfpasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                    cnfpasswordVisible ? Icons.visibility_off : Icons.visibility,
                     color: Colors.black38,
                   ),
                   onPressed: () {
@@ -402,16 +391,13 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
     String cnfpass = _textloginCnfPass.text.toString().trim();
 
     if (newpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.RP_newpassword_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.RP_newpassword_error, false);
     } else if (!Helper.isPasswordCompliant(newpass)) {
       ToastUtils.showCustomToast(context, GlobleString.password_error, false);
     } else if (cnfpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.RP_confirmpassword_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.RP_confirmpassword_error, false);
     } else if (newpass != cnfpass) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.RP_password_not_match, false);
+      ToastUtils.showCustomToast(context, GlobleString.RP_password_not_match, false);
     } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
@@ -427,31 +413,23 @@ class _TenantResetPWScreenState extends State<TenantResetPWScreen> {
       ApiManager().getTenantEmail_DSQCall(context, json, (error, respoce) {
         if (error) {
           if (respoce.isNotEmpty) {
-            ApiManager().ResetPasswordAPI(context, respoce.toString(), newpass,
-                (error, respoce1) {
+            ApiManager().ResetPasswordAPI(context, respoce.toString(), newpass, (error, respoce1) {
               if (error) {
                 loader.remove();
-                ToastUtils.showCustomToast(
-                    context, GlobleString.RP_reset_success, true);
-                Navigator.of(context).pushReplacementNamed("/" +
-                    widget.Companyname! +
-                    "/" +
-                    RouteNames.Basic_Tenant_Login);
+                ToastUtils.showCustomToast(context, GlobleString.RP_reset_success, true);
+                Navigator.of(context).pushReplacementNamed("/" + widget.Companyname! + "/" + RouteNames.Basic_Tenant_Login);
               } else {
                 loader.remove();
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Error_server, false);
+                ToastUtils.showCustomToast(context, GlobleString.Error_server, false);
               }
             });
           } else {
             loader.remove();
-            ToastUtils.showCustomToast(
-                context, GlobleString.forgot_error_user, false);
+            ToastUtils.showCustomToast(context, GlobleString.forgot_error_user, false);
           }
         } else {
           loader.remove();
-          ToastUtils.showCustomToast(
-              context, GlobleString.forgot_error_user, false);
+          ToastUtils.showCustomToast(context, GlobleString.forgot_error_user, false);
         }
       });
     }

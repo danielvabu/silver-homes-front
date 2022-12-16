@@ -24,9 +24,9 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 typedef VoidCallbackRecordStep = void Function(int stepper);
 
@@ -47,12 +47,10 @@ class TAFAdditionalReferencesScreen extends StatefulWidget {
         _callbackRecordStep = onPressedRecordStep;
 
   @override
-  _TAFAdditionalReferencesScreenState createState() =>
-      _TAFAdditionalReferencesScreenState();
+  _TAFAdditionalReferencesScreenState createState() => _TAFAdditionalReferencesScreenState();
 }
 
-class _TAFAdditionalReferencesScreenState
-    extends State<TAFAdditionalReferencesScreen> {
+class _TAFAdditionalReferencesScreenState extends State<TAFAdditionalReferencesScreen> {
   double height = 0, width = 0;
 
   final _store = getIt<AppStore>();
@@ -72,34 +70,27 @@ class _TAFAdditionalReferencesScreenState
 
   initilizedata() {
     if (_store.state!.tfAdditionalReferenceState != null) {
-      TFAdditionalReferenceState tfAdditionalReferenceState =
-          _store.state!.tfAdditionalReferenceState;
+      TFAdditionalReferenceState tfAdditionalReferenceState = _store.state!.tfAdditionalReferenceState;
 
       _store.dispatch(UpdateTFAdditionalReferencelist([]));
       _store.dispatch(UpdateTFAdditionalLiveServerReferencelist([]));
 
       List<TenancyAdditionalReference> secondList =
-          tfAdditionalReferenceState.FNLreferencelist.map(
-              (item) => new TenancyAdditionalReference.clone(item)).toList();
+          tfAdditionalReferenceState.FNLreferencelist.map((item) => new TenancyAdditionalReference.clone(item)).toList();
       List<TenancyAdditionalReference> livesecondList =
-          tfAdditionalReferenceState.FNLLiveServerreferencelist.map(
-              (item) => new TenancyAdditionalReference.clone(item)).toList();
+          tfAdditionalReferenceState.FNLLiveServerreferencelist.map((item) => new TenancyAdditionalReference.clone(item)).toList();
 
       _store.dispatch(UpdateTFAdditionalReferencelist(secondList));
-      _store
-          .dispatch(UpdateTFAdditionalLiveServerReferencelist(livesecondList));
+      _store.dispatch(UpdateTFAdditionalLiveServerReferencelist(livesecondList));
 
-      _store.dispatch(UpdateTFAdditionalReferenceisAutherize(
-          tfAdditionalReferenceState.FNLisAutherize));
-      _store.dispatch(UpdateTFAdditionalReferenceisTermsCondition(
-          tfAdditionalReferenceState.FNLisTermsCondition));
+      _store.dispatch(UpdateTFAdditionalReferenceisAutherize(tfAdditionalReferenceState.FNLisAutherize));
+      _store.dispatch(UpdateTFAdditionalReferenceisTermsCondition(tfAdditionalReferenceState.FNLisTermsCondition));
     }
   }
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.tenancyReference) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.tenancyReference) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         _saveDataAndNext(_store.state!.tfAdditionalReferenceState);
@@ -143,8 +134,7 @@ class _TAFAdditionalReferencesScreenState
           builder: (tfAdditionalReferenceState) {
             if (tfAdditionalReferenceState!.referencelist.length == 0) {
               List<TenancyAdditionalReference> listreference = [];
-              TenancyAdditionalReference referenceinfo =
-                  new TenancyAdditionalReference();
+              TenancyAdditionalReference referenceinfo = new TenancyAdditionalReference();
               referenceinfo.id = "1";
               referenceinfo.firstname = "";
               referenceinfo.lastname = "";
@@ -187,8 +177,7 @@ class _TAFAdditionalReferencesScreenState
                     key: UniqueKey(),
                     itemCount: tfAdditionalReferenceState.referencelist.length,
                     itemBuilder: (BuildContext ctxt, int Index) {
-                      TenancyAdditionalReference reference =
-                          tfAdditionalReferenceState.referencelist[Index];
+                      TenancyAdditionalReference reference = tfAdditionalReferenceState.referencelist[Index];
                       return FocusScope(
                         node: FocusScopeNode(),
                         child: Column(
@@ -199,16 +188,11 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AR_first_name,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -216,35 +200,23 @@ class _TAFAdditionalReferencesScreenState
                                       ),
                                       TextFormField(
                                         onChanged: (newValue) {
-                                          tfAdditionalReferenceState
-                                              .referencelist[Index]
-                                              .firstname = newValue.toString();
+                                          tfAdditionalReferenceState.referencelist[Index].firstname = newValue.toString();
                                           _changeData();
                                         },
                                         autofocus: true,
                                         initialValue: reference.firstname,
                                         textAlign: TextAlign.start,
                                         readOnly: reference.isEditable!,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.blue,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.blue, width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.gray, width: 1.0),
                                             ),
                                             isDense: true,
                                             contentPadding: EdgeInsets.all(10),
@@ -260,16 +232,11 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AR_Last_name,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -277,34 +244,22 @@ class _TAFAdditionalReferencesScreenState
                                       ),
                                       TextFormField(
                                         onChanged: (newValue) {
-                                          tfAdditionalReferenceState
-                                              .referencelist[Index]
-                                              .lastname = newValue.toString();
+                                          tfAdditionalReferenceState.referencelist[Index].lastname = newValue.toString();
                                           _changeData();
                                         },
                                         initialValue: reference.lastname,
                                         textAlign: TextAlign.start,
                                         readOnly: reference.isEditable!,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.blue,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.blue, width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.gray, width: 1.0),
                                             ),
                                             isDense: true,
                                             contentPadding: EdgeInsets.all(10),
@@ -320,17 +275,11 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        GlobleString
-                                            .TAF_AR_Relationship_applicant,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        GlobleString.TAF_AR_Relationship_applicant,
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -338,36 +287,23 @@ class _TAFAdditionalReferencesScreenState
                                       ),
                                       TextFormField(
                                         onChanged: (newValue) {
-                                          tfAdditionalReferenceState
-                                                  .referencelist[Index]
-                                                  .reletionshipprimaryApplicant =
+                                          tfAdditionalReferenceState.referencelist[Index].reletionshipprimaryApplicant =
                                               newValue.toString();
                                           _changeData();
                                         },
-                                        initialValue: reference
-                                            .reletionshipprimaryApplicant,
+                                        initialValue: reference.reletionshipprimaryApplicant,
                                         textAlign: TextAlign.start,
                                         readOnly: reference.isEditable!,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.blue,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.blue, width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.gray, width: 1.0),
                                             ),
                                             isDense: true,
                                             contentPadding: EdgeInsets.all(10),
@@ -388,16 +324,11 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AR_Phone_number,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -407,73 +338,47 @@ class _TAFAdditionalReferencesScreenState
                                         height: 30,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.gray,
+                                            color: reference.isEditable! ? myColor.disablecolor : myColor.gray,
                                             width: 1.0,
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(4.0),
+                                          borderRadius: BorderRadius.circular(4.0),
                                         ),
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
                                             CountryCodePicker(
                                               onChanged: (value) {
-                                                tfAdditionalReferenceState
-                                                        .referencelist[Index]
-                                                        .countrycode =
-                                                    value.code.toString();
+                                                tfAdditionalReferenceState.referencelist[Index].countrycode = value.code.toString();
 
-                                                tfAdditionalReferenceState
-                                                        .referencelist[Index]
-                                                        .dailcode =
-                                                    value.dialCode.toString();
+                                                tfAdditionalReferenceState.referencelist[Index].dailcode = value.dialCode.toString();
                                                 _changeData();
                                               },
                                               // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                              initialSelection:
-                                                  reference.countrycode,
+                                              initialSelection: reference.countrycode,
                                               showFlag: true,
-                                              textStyle: MyStyles.Medium(
-                                                  13, myColor.text_color),
-                                              dialogTextStyle: MyStyles.Medium(
-                                                  13, myColor.text_color),
+                                              textStyle: MyStyles.Medium(13, myColor.text_color),
+                                              dialogTextStyle: MyStyles.Medium(13, myColor.text_color),
                                               enabled: !reference.isEditable!,
                                               //showDropDownButton: true,
                                             ),
                                             Expanded(
                                               child: TextFormField(
                                                 onChanged: (newValue) {
-                                                  tfAdditionalReferenceState
-                                                          .referencelist[Index]
-                                                          .phonenumber =
-                                                      newValue.toString();
+                                                  tfAdditionalReferenceState.referencelist[Index].phonenumber = newValue.toString();
                                                   _changeData();
                                                 },
-                                                initialValue:
-                                                    reference.phonenumber,
-                                                keyboardType:
-                                                    TextInputType.phone,
+                                                initialValue: reference.phonenumber,
+                                                keyboardType: TextInputType.phone,
                                                 readOnly: reference.isEditable!,
-                                                inputFormatters: [
-                                                  MaskedInputFormatter(
-                                                      "(000) 000 0000")
-                                                ],
+                                                inputFormatters: [MaskedInputFormatter("(000) 000 0000")],
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintStyle: TextStyle(
-                                                      color: Colors.grey),
-                                                  contentPadding:
-                                                      EdgeInsets.all(10),
+                                                  hintStyle: TextStyle(color: Colors.grey),
+                                                  contentPadding: EdgeInsets.all(10),
                                                   isDense: true,
                                                 ),
-                                                style: MyStyles.Medium(
-                                                    13,
-                                                    reference.isEditable!
-                                                        ? myColor.disablecolor
-                                                        : myColor.text_color),
+                                                style:
+                                                    MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                               ),
                                             ),
                                           ],
@@ -488,16 +393,11 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AR_Email_address,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -505,34 +405,22 @@ class _TAFAdditionalReferencesScreenState
                                       ),
                                       TextFormField(
                                         onChanged: (newValue) {
-                                          tfAdditionalReferenceState
-                                              .referencelist[Index]
-                                              .email = newValue.toString();
+                                          tfAdditionalReferenceState.referencelist[Index].email = newValue.toString();
                                           _changeData();
                                         },
                                         initialValue: reference.email,
                                         textAlign: TextAlign.start,
                                         readOnly: reference.isEditable!,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            reference.isEditable!
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                        style: MyStyles.Medium(13, reference.isEditable! ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.blue,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.blue, width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: reference.isEditable!
-                                                      ? myColor.disablecolor
-                                                      : myColor.gray,
-                                                  width: 1.0),
+                                                  color: reference.isEditable! ? myColor.disablecolor : myColor.gray, width: 1.0),
                                             ),
                                             isDense: true,
                                             contentPadding: EdgeInsets.all(10),
@@ -548,58 +436,37 @@ class _TAFAdditionalReferencesScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      tfAdditionalReferenceState
-                                                  .referencelist.length >
-                                              1
+                                      tfAdditionalReferenceState.referencelist.length > 1
                                           ? reference.isEditable!
                                               ? Container()
                                               : InkWell(
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
+                                                  hoverColor: Colors.transparent,
+                                                  focusColor: Colors.transparent,
+                                                  splashColor: Colors.transparent,
+                                                  highlightColor: Colors.transparent,
                                                   onTap: () {
                                                     showDialog(
                                                       context: context,
-                                                      barrierColor:
-                                                          Colors.black45,
+                                                      barrierColor: Colors.black45,
                                                       useSafeArea: true,
                                                       barrierDismissible: false,
-                                                      builder: (BuildContext
-                                                          context1) {
+                                                      builder: (BuildContext context1) {
                                                         return AlertDialogBox(
-                                                          title: GlobleString
-                                                              .TAF_Additional_References_dailog_msg,
-                                                          positiveText: GlobleString
-                                                              .TAF_Additional_References_dailog_yes,
-                                                          negativeText: GlobleString
-                                                              .TAF_Additional_References_dailog_no,
+                                                          title: GlobleString.TAF_Additional_References_dailog_msg,
+                                                          positiveText: GlobleString.TAF_Additional_References_dailog_yes,
+                                                          negativeText: GlobleString.TAF_Additional_References_dailog_no,
                                                           onPressedYes: () {
-                                                            Navigator.of(
-                                                                    context1)
-                                                                .pop();
-                                                            tfAdditionalReferenceState
-                                                                .referencelist
-                                                                .removeAt(
-                                                                    Index);
+                                                            Navigator.of(context1).pop();
+                                                            tfAdditionalReferenceState.referencelist.removeAt(Index);
 
                                                             _store.dispatch(
-                                                                UpdateTFAdditionalReferencelist(
-                                                                    tfAdditionalReferenceState
-                                                                        .referencelist));
+                                                                UpdateTFAdditionalReferencelist(tfAdditionalReferenceState.referencelist));
                                                             _changeData();
                                                           },
                                                           onPressedNo: () {
-                                                            Navigator.of(
-                                                                    context1)
-                                                                .pop();
+                                                            Navigator.of(context1).pop();
                                                           },
                                                         );
                                                       },
@@ -608,15 +475,13 @@ class _TAFAdditionalReferencesScreenState
                                                   child: Container(
                                                     height: 30,
                                                     width: 30,
-                                                    margin: EdgeInsets.only(
-                                                        top: 20),
+                                                    margin: EdgeInsets.only(top: 20),
                                                     alignment: Alignment.center,
                                                     child: Image.asset(
                                                       "assets/images/ic_delete.png",
                                                       height: 22,
                                                       //width: 20,
-                                                      alignment:
-                                                          Alignment.centerLeft,
+                                                      alignment: Alignment.centerLeft,
                                                     ),
                                                   ),
                                                 )
@@ -650,8 +515,7 @@ class _TAFAdditionalReferencesScreenState
                         checkColor: myColor.white,
                         value: tfAdditionalReferenceState.isAutherize,
                         onChanged: (value) {
-                          _store.dispatch(
-                              UpdateTFAdditionalReferenceisAutherize(value!));
+                          _store.dispatch(UpdateTFAdditionalReferenceisAutherize(value!));
                           _changeData();
                         },
                       ),
@@ -681,9 +545,7 @@ class _TAFAdditionalReferencesScreenState
                         checkColor: myColor.white,
                         value: tfAdditionalReferenceState.isTermsCondition,
                         onChanged: (value) {
-                          _store.dispatch(
-                              UpdateTFAdditionalReferenceisTermsCondition(
-                                  value!));
+                          _store.dispatch(UpdateTFAdditionalReferenceisTermsCondition(value!));
                           _changeData();
                         },
                       ),
@@ -699,29 +561,24 @@ class _TAFAdditionalReferencesScreenState
                                   style: MyStyles.Medium(12, myColor.blue),
                                   recognizer: new TapGestureRecognizer()
                                     ..onTap = () {
-                                      Helper.launchURL(Weburl
-                                          .PrivacyPolicy_and_TermsConditions);
+                                      Helper.launchURL(Weburl.PrivacyPolicy_and_TermsConditions);
                                     },
                                 ),
                                 TextSpan(
                                   text: ' and ',
-                                  style:
-                                      MyStyles.Medium(12, myColor.text_color),
+                                  style: MyStyles.Medium(12, myColor.text_color),
                                 ),
                                 TextSpan(
                                   text: 'Privacy Policy',
                                   style: MyStyles.Medium(12, myColor.blue),
                                   recognizer: new TapGestureRecognizer()
                                     ..onTap = () {
-                                      Helper.launchURL(Weburl
-                                          .PrivacyPolicy_and_TermsConditions);
+                                      Helper.launchURL(Weburl.PrivacyPolicy_and_TermsConditions);
                                     },
                                 ),
                                 TextSpan(
-                                  text:
-                                      ' from Silver Homes Technology Inc. included in the website',
-                                  style:
-                                      MyStyles.Medium(12, myColor.text_color),
+                                  text: ' from Silver Homes Technology Inc. included in the website',
+                                  style: MyStyles.Medium(12, myColor.text_color),
                                 )
                               ]),
                         ),
@@ -733,11 +590,7 @@ class _TAFAdditionalReferencesScreenState
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      back(),
-                      SizedBox(width: 10),
-                      saveandnext(tfAdditionalReferenceState)
-                    ],
+                    children: [back(), SizedBox(width: 10), saveandnext(tfAdditionalReferenceState)],
                   ),
                 ],
               ),
@@ -746,8 +599,7 @@ class _TAFAdditionalReferencesScreenState
     );
   }
 
-  Widget AddNewReference(
-      TFAdditionalReferenceState tfAdditionalReferenceState) {
+  Widget AddNewReference(TFAdditionalReferenceState tfAdditionalReferenceState) {
     return InkWell(
       onTap: () {
         _addnewoccupation(tfAdditionalReferenceState);
@@ -780,70 +632,58 @@ class _TAFAdditionalReferencesScreenState
     );
   }
 
-  void _addnewoccupation(
-      TFAdditionalReferenceState tfAdditionalReferenceState) {
+  void _addnewoccupation(TFAdditionalReferenceState tfAdditionalReferenceState) {
     bool isAdd = false;
 
     for (int i = 0; i < tfAdditionalReferenceState.referencelist.length; i++) {
-      TenancyAdditionalReference reference =
-          tfAdditionalReferenceState.referencelist[i];
+      TenancyAdditionalReference reference = tfAdditionalReferenceState.referencelist[i];
 
       if (reference.firstname!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_firstname, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_firstname, false);
         break;
       } else if (reference.lastname!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_lastname, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_lastname, false);
         break;
       } else if (reference.reletionshipprimaryApplicant!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_primaryApplicant, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_primaryApplicant, false);
         break;
       } else if (reference.phonenumber!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error_phonenumber, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_phonenumber, false);
         break;
       } else if (Helper.ValidPhonenumber(reference.phonenumber!)) {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_reference_error__validphonenumber, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_reference_error__validphonenumber, false);
       } else if (reference.email!.isEmpty) {
         // esto lo comente para que no sea obligatorio el email
         //isAdd = true;
         //ToastUtils.showCustomToast(
         //context, GlobleString.taf_reference_error_email, false);
         //break;
-      } else if (Helper.ValidEmail(reference.email!.trim().toString()) !=
-          true) {
+      } else if (Helper.ValidEmail(reference.email!.trim().toString()) != true) {
         //isAdd = true;
         //ToastUtils.showCustomToast(
         //context, GlobleString.taf_reference_error_valid_email, false);
         //break;
       }
 
-      if ((tfAdditionalReferenceState.referencelist.length - 1) == i &&
-          !isAdd) {
-        tfAdditionalReferenceState.referencelist.add(
-            new TenancyAdditionalReference(
-                id: (tfAdditionalReferenceState.referencelist.length + 1)
-                    .toString(),
-                firstname: "",
-                lastname: "",
-                reletionshipprimaryApplicant: "",
-                phonenumber: "",
-                countrycode: "CA",
-                dailcode: "+1",
-                email: "",
-                isEditable: false,
-                isLive: false));
+      if ((tfAdditionalReferenceState.referencelist.length - 1) == i && !isAdd) {
+        tfAdditionalReferenceState.referencelist.add(new TenancyAdditionalReference(
+            id: (tfAdditionalReferenceState.referencelist.length + 1).toString(),
+            firstname: "",
+            lastname: "",
+            reletionshipprimaryApplicant: "",
+            phonenumber: "",
+            countrycode: "CA",
+            dailcode: "+1",
+            email: "",
+            isEditable: false,
+            isLive: false));
 
-        _store.dispatch(UpdateTFAdditionalReferencelist(
-            tfAdditionalReferenceState.referencelist));
+        _store.dispatch(UpdateTFAdditionalReferencelist(tfAdditionalReferenceState.referencelist));
         _changeData();
         break;
       }
@@ -882,51 +722,40 @@ class _TAFAdditionalReferencesScreenState
         } else {
           if (reference.firstname == "") {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_firstname, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_firstname, false);
             break;
           } else if (reference.lastname == "") {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_lastname, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_lastname, false);
             break;
           } else if (reference.reletionshipprimaryApplicant == "") {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_reference_error_primaryApplicant, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_primaryApplicant, false);
             break;
           } else if (reference.phonenumber == "") {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_phonenumber, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_phonenumber, false);
             break;
-          } else if (Helper.ValidPhonenumber(
-              reference.phonenumber.toString())) {
+          } else if (Helper.ValidPhonenumber(reference.phonenumber.toString())) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_reference_error__validphonenumber, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error__validphonenumber, false);
             break;
           } else if (reference.email == "") {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_email, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_email, false);
             break;
-          } else if (Helper.ValidEmail(reference.email!.trim().toString()) !=
-              true) {
+          } else if (Helper.ValidEmail(reference.email!.trim().toString()) != true) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_valid_email, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_valid_email, false);
             break;
           }
         }
 
         if ((ReferenceState.referencelist.length - 1) == i && !isAdd) {
           if (!ReferenceState.isAutherize) {
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_isAuthorize, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_isAuthorize, false);
           } else if (!ReferenceState.isTermsCondition) {
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_termcondition, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_termcondition, false);
           } else {
             //ToastUtils.showCustomToast(context, "Success", true);
             ApiCall(ReferenceState);
@@ -935,49 +764,39 @@ class _TAFAdditionalReferencesScreenState
       } else {
         if (reference.firstname == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_reference_error_firstname, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_firstname, false);
           break;
         } else if (reference.lastname == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_reference_error_lastname, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_lastname, false);
           break;
         } else if (reference.reletionshipprimaryApplicant == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(context,
-              GlobleString.taf_reference_error_primaryApplicant, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_primaryApplicant, false);
           break;
         } else if (reference.phonenumber == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_reference_error_phonenumber, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_phonenumber, false);
           break;
         } else if (Helper.ValidPhonenumber(reference.phonenumber.toString())) {
           isAdd = true;
-          ToastUtils.showCustomToast(context,
-              GlobleString.taf_reference_error__validphonenumber, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error__validphonenumber, false);
           break;
         } else if (reference.email == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_reference_error_email, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_email, false);
           break;
-        } else if (Helper.ValidEmail(reference.email!.trim().toString()) !=
-            true) {
+        } else if (Helper.ValidEmail(reference.email!.trim().toString()) != true) {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_reference_error_valid_email, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_valid_email, false);
           break;
         }
 
         if ((ReferenceState.referencelist.length - 1) == i && !isAdd) {
           if (!ReferenceState.isAutherize) {
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_isAuthorize, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_isAuthorize, false);
           } else if (!ReferenceState.isTermsCondition) {
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_reference_error_termcondition, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_reference_error_termcondition, false);
           } else {
             //ToastUtils.showCustomToast(context, "Success", true);
             ApiCall(ReferenceState);
@@ -994,12 +813,10 @@ class _TAFAdditionalReferencesScreenState
     List<CommonID> CommonIDlist = <CommonID>[];
 
     for (int i = 0; i < ReferenceState.LiveServerreferencelist.length; i++) {
-      TenancyAdditionalReference taoccupant =
-          ReferenceState.LiveServerreferencelist[i];
+      TenancyAdditionalReference taoccupant = ReferenceState.LiveServerreferencelist[i];
 
       if (taoccupant.ReferenceID != "") {
-        if (Prefs.getString(PrefsName.TCF_CurrentlandlordID) !=
-            taoccupant.ReferenceID) {
+        if (Prefs.getString(PrefsName.TCF_CurrentlandlordID) != taoccupant.ReferenceID) {
           if (!taoccupant.isEditable!) {
             CommonIDlist.add(new CommonID(ID: taoccupant.ReferenceID));
           }
@@ -1008,15 +825,12 @@ class _TAFAdditionalReferencesScreenState
     }
 
     if (CommonIDlist.length > 0) {
-      DeleteAdditionalReference deleteAddreference =
-          new DeleteAdditionalReference();
-      deleteAddreference.Applicantion_ID =
-          Prefs.getString(PrefsName.TCF_ApplicationID);
+      DeleteAdditionalReference deleteAddreference = new DeleteAdditionalReference();
+      deleteAddreference.Applicantion_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
       deleteAddreference.QuestionnaireSentDate = null;
       deleteAddreference.QuestionnaireReceivedDate = null;
 
-      ApiManager().TFAdditionalReferenceDelete(
-          context, CommonIDlist, deleteAddreference, (status, responce) {
+      ApiManager().TFAdditionalReferenceDelete(context, CommonIDlist, deleteAddreference, (status, responce) {
         if (status) {
           InserData(ReferenceState);
         } else {
@@ -1030,8 +844,7 @@ class _TAFAdditionalReferencesScreenState
   }
 
   InserData(TFAdditionalReferenceState referenceState) {
-    List<AdditionalReferencesInfo> additionalreferencelist =
-        <AdditionalReferencesInfo>[];
+    List<AdditionalReferencesInfo> additionalreferencelist = <AdditionalReferencesInfo>[];
 
     for (int j = 0; j < referenceState.referencelist.length; j++) {
       TenancyAdditionalReference taoccupant1 = referenceState.referencelist[j];
@@ -1052,12 +865,9 @@ class _TAFAdditionalReferencesScreenState
             referenceID.Dial_Code = taoccupant1.dailcode;
             referenceID.Country_Code = taoccupant1.countrycode;
 
-            AdditionalReferencesInfo additionalOccupants =
-                new AdditionalReferencesInfo();
-            additionalOccupants.Applicantion_ID =
-                Prefs.getString(PrefsName.TCF_ApplicationID);
-            additionalOccupants.RelationWithApplicant =
-                taoccupant1.reletionshipprimaryApplicant;
+            AdditionalReferencesInfo additionalOccupants = new AdditionalReferencesInfo();
+            additionalOccupants.Applicantion_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
+            additionalOccupants.RelationWithApplicant = taoccupant1.reletionshipprimaryApplicant;
             additionalOccupants.referenceID = referenceID;
 
             additionalreferencelist.add(additionalOccupants);
@@ -1071,12 +881,9 @@ class _TAFAdditionalReferencesScreenState
           referenceID.Dial_Code = taoccupant1.dailcode;
           referenceID.Country_Code = taoccupant1.countrycode;
 
-          AdditionalReferencesInfo additionalOccupants =
-              new AdditionalReferencesInfo();
-          additionalOccupants.Applicantion_ID =
-              Prefs.getString(PrefsName.TCF_ApplicationID);
-          additionalOccupants.RelationWithApplicant =
-              taoccupant1.reletionshipprimaryApplicant;
+          AdditionalReferencesInfo additionalOccupants = new AdditionalReferencesInfo();
+          additionalOccupants.Applicantion_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
+          additionalOccupants.RelationWithApplicant = taoccupant1.reletionshipprimaryApplicant;
           additionalOccupants.referenceID = referenceID;
 
           additionalreferencelist.add(additionalOccupants);
@@ -1087,14 +894,11 @@ class _TAFAdditionalReferencesScreenState
     AdditionalReferences upojo = new AdditionalReferences();
     upojo.IsAuthorized = referenceState.isAutherize;
     upojo.IsAgreedTerms = referenceState.isTermsCondition;
-    upojo.ApplicationReceivedDate =
-        new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+    upojo.ApplicationReceivedDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
 
-    CommonID cpojo =
-        new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicationID));
+    CommonID cpojo = new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicationID));
 
-    ApiManager().InsetTFAdditionalReference(
-        context, additionalreferencelist, cpojo, upojo, (status, responce) {
+    ApiManager().InsetTFAdditionalReference(context, additionalreferencelist, cpojo, upojo, (status, responce) {
       if (status) {
         if (Prefs.getBool(PrefsName.TCF_Current_isReference)) {
           InsertAsReference();
@@ -1126,11 +930,9 @@ class _TAFAdditionalReferencesScreenState
 
   InsertAsReference() {
     CheckReferenceExit currentLandLord = new CheckReferenceExit();
-    currentLandLord.ReferenceID =
-        Prefs.getString(PrefsName.TCF_CurrentlandlordID);
+    currentLandLord.ReferenceID = Prefs.getString(PrefsName.TCF_CurrentlandlordID);
 
-    ApiManager().CheckReferenceCurrentLandLord(context, currentLandLord,
-        (status, responce) {
+    ApiManager().CheckReferenceCurrentLandLord(context, currentLandLord, (status, responce) {
       if (status) {
         if (Prefs.getBool(PrefsName.TCF_EditApplicant) != null &&
             Prefs.getBool(PrefsName.TCF_EditApplicant) != "" &&
@@ -1141,14 +943,12 @@ class _TAFAdditionalReferencesScreenState
           NotificationCall();
         }
       } else {
-        AdditionalReferencesAsCurrentTenancy arc =
-            new AdditionalReferencesAsCurrentTenancy();
+        AdditionalReferencesAsCurrentTenancy arc = new AdditionalReferencesAsCurrentTenancy();
         arc.Applicantion_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
         arc.RelationWithApplicant = "Current LandLord";
         arc.referenceID = Prefs.getString(PrefsName.TCF_CurrentlandlordID);
 
-        ApiManager().InsertCurrentLandLordAsReference(context, arc,
-            (status, responce) {
+        ApiManager().InsertCurrentLandLordAsReference(context, arc, (status, responce) {
           if (status) {
             if (Prefs.getBool(PrefsName.TCF_EditApplicant) != null &&
                 Prefs.getBool(PrefsName.TCF_EditApplicant) != "" &&
@@ -1167,9 +967,7 @@ class _TAFAdditionalReferencesScreenState
   }
 
   NotificationCall() {
-    ApiManager().NotificationAppReceive(
-        context, Prefs.getString(PrefsName.TCF_ApplicationID),
-        (status, responce) async {
+    ApiManager().NotificationAppReceive(context, Prefs.getString(PrefsName.TCF_ApplicationID), (status, responce) async {
       if (status) {
         loader.remove();
         showdialod();

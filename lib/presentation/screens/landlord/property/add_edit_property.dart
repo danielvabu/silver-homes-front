@@ -40,7 +40,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");
@@ -85,9 +85,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
 
     _store.dispatch(UpdateRestrictionlist(restrictionlist));
 
-    List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-        .map((item) => new SystemEnumDetails.clone(item))
-        .toList();
+    List<SystemEnumDetails> secondrestrictionlist = restrictionlist.map((item) => new SystemEnumDetails.clone(item)).toList();
 
     _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
   }
@@ -97,11 +95,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     ssheight = MediaQuery.of(context).size.height - 70;
     sswidth = MediaQuery.of(context).size.width - 230;
 
-    return Container(
-        height: ssheight,
-        width: sswidth,
-        color: myColor.bg_color1,
-        child: _initialview());
+    return Container(height: ssheight, width: sswidth, color: myColor.bg_color1, child: _initialview());
   }
 
   Widget _initialview() {
@@ -147,11 +141,9 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                                   builder: (propertySummeryState) {
                                     return InkWell(
                                       onTap: () async {
-                                        var loader =
-                                            Helper.overlayLoader(context);
+                                        var loader = Helper.overlayLoader(context);
                                         Overlay.of(context)!.insert(loader);
-                                        await Pdfgenerate(
-                                            propertySummeryState!);
+                                        await Pdfgenerate(propertySummeryState!);
                                         loader.remove();
                                       },
                                       child: Container(
@@ -160,8 +152,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                                         alignment: Alignment.centerRight,
                                         child: Text(
                                           GlobleString.PS_Property_Export,
-                                          style: MyStyles.Medium(
-                                              14, myColor.black),
+                                          style: MyStyles.Medium(14, myColor.black),
                                           textAlign: TextAlign.end,
                                         ),
                                       ),
@@ -178,12 +169,10 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                     decoration: BoxDecoration(
                       color: myColor.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: myColor.application_boreder, width: 1),
+                      border: Border.all(color: myColor.application_boreder, width: 1),
                     ),
                     padding: EdgeInsets.all(20),
-                    child: _centerView(
-                        propertyFormState.selectView, propertyFormState),
+                    child: _centerView(propertyFormState.selectView, propertyFormState),
                   ),
                 ],
               );
@@ -203,8 +192,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
               if (AddEditProperty.isValueUpdate)
                 showBackDialog(propertyFormState, true);
               else
-                _store
-                    .dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+                _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
             },
             child: Text(
               GlobleString.PS_Back_to_Propertys,
@@ -243,8 +231,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  void showBackDialog(PropertyFormState propertyFormState, bool goback,
-      {int stepper = 0}) {
+  void showBackDialog(PropertyFormState propertyFormState, bool goback, {int stepper = 0}) {
     if (stepper == propertyFormState.selectView) return;
     showDialog(
       context: context,
@@ -266,28 +253,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
           onPressedYes: () {
             switch (propertyFormState.selectView) {
               case 1:
-                navigationNotifier.change(
-                    back: NavigationConstant.propertyDetails,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.propertyDetails, goBack: goback, step: stepper);
                 break;
               case 2:
-                navigationNotifier.change(
-                    back: NavigationConstant.specificationAndRestriction,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.specificationAndRestriction, goBack: goback, step: stepper);
                 break;
               case 3:
-                navigationNotifier.change(
-                    back: NavigationConstant.featuresAndPhotos,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.featuresAndPhotos, goBack: goback, step: stepper);
                 break;
               case 4:
-                navigationNotifier.change(
-                    back: NavigationConstant.propertySummary,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.propertySummary, goBack: goback, step: stepper);
                 break;
             }
             Navigator.of(context1).pop();
@@ -323,9 +298,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 Container(
                   alignment: Alignment.topLeft,
                   child: Image.asset(
-                    Prefs.getBool(PrefsName.PropertyStep1)
-                        ? "assets/images/ic_circle_check.png"
-                        : "assets/images/ic_circle_fill.png",
+                    Prefs.getBool(PrefsName.PropertyStep1) ? "assets/images/ic_circle_check.png" : "assets/images/ic_circle_fill.png",
                     width: 30,
                     height: 30,
                     alignment: Alignment.topLeft,
@@ -564,27 +537,21 @@ class _AddEditPropertyState extends State<AddEditProperty> {
       ),
     );
 
-    String filename = "property_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".pdf";
+    String filename = "property_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".pdf";
 
     Uint8List pdfInBytes = await pdf.save();
     webarc.Archive archive = webarc.Archive();
-    var pdffile =
-        webarc.ArchiveFile.string(filename, String.fromCharCodes(pdfInBytes));
+    var pdffile = webarc.ArchiveFile.string(filename, String.fromCharCodes(pdfInBytes));
     archive.addFile(pdffile);
 
     try {
       List<String> namestring = [];
-      for (PropertyImageMediaInfo img
-          in propertyState.SummerypropertyImagelist) {
+      for (PropertyImageMediaInfo img in propertyState.SummerypropertyImagelist) {
         try {
-          var res = await get(Uri.parse(Weburl.image_API + img.id.toString()),
-              headers: {
-                'Authorization':
-                    'bearer ' + Prefs.getString(PrefsName.userTokan),
-                'ApplicationCode': Weburl.API_CODE,
-              });
+          var res = await get(Uri.parse(Weburl.image_API + img.id.toString()), headers: {
+            'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+            'ApplicationCode': Weburl.API_CODE,
+          });
 
           String filename = Helper.FileName(img.url!);
 
@@ -592,8 +559,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
 
           namestring.add(newfilename);
 
-          var file = webarc.ArchiveFile.string(
-              newfilename, String.fromCharCodes(res.bodyBytes));
+          var file = webarc.ArchiveFile.string(newfilename, String.fromCharCodes(res.bodyBytes));
           archive.addFile(file);
         } catch (e) {}
       }
@@ -601,14 +567,11 @@ class _AddEditPropertyState extends State<AddEditProperty> {
       print("fileerror: $e");
     }
 
-    webarc.OutputStream stream =
-        webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
+    webarc.OutputStream stream = webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
 
-    String zipname = "property_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString();
+    String zipname = "property_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString();
     var bytes;
-    if (defaultTargetPlatform == TargetPlatform.macOS ||
-        defaultTargetPlatform == TargetPlatform.linux) {
+    if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.linux) {
       webarc.TarEncoder tarEncoder = webarc.TarEncoder();
       bytes = tarEncoder.encode(archive, output: stream);
       zipname += ".tar";
@@ -623,9 +586,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
       zipname += ".zip";
     }
 
-    html.AnchorElement(
-        href:
-            "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
+    html.AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
       ..setAttribute("download", zipname)
       ..click();
   }
@@ -834,9 +795,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 pw.Expanded(
                   flex: 3,
                   child: pw.Text(
-                    propertyState.rentalspaceValue == null
-                        ? ""
-                        : propertyState.rentalspaceValue!.displayValue,
+                    propertyState.rentalspaceValue == null ? "" : propertyState.rentalspaceValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -928,8 +887,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     String rentAmount = "";
 
     if (propertyState.RentAmount != null && propertyState.RentAmount != "") {
-      String amount =
-          '${formatCurrency.format(int.parse(propertyState.RentAmount.replaceAll(",", "").toString()))}';
+      String amount = '${formatCurrency.format(int.parse(propertyState.RentAmount.replaceAll(",", "").toString()))}';
       rentAmount = amount.replaceAll(".00", "");
     }
 
@@ -1023,9 +981,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                   child: pw.Text(
                     propertyState.dateofavailable == null
                         ? ""
-                        : new DateFormat("dd-MMM-yyyy")
-                            .format(propertyState.dateofavailable!)
-                            .toString(),
+                        : new DateFormat("dd-MMM-yyyy").format(propertyState.dateofavailable!).toString(),
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1058,9 +1014,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 pw.Expanded(
                   flex: 3,
                   child: pw.Text(
-                    propertyState.rentpaymentFrequencyValue == null
-                        ? ""
-                        : propertyState.rentpaymentFrequencyValue!.displayValue,
+                    propertyState.rentpaymentFrequencyValue == null ? "" : propertyState.rentpaymentFrequencyValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1093,9 +1047,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 pw.Expanded(
                   flex: 3,
                   child: pw.Text(
-                    propertyState.leasetypeValue == null
-                        ? ""
-                        : propertyState.leasetypeValue!.displayValue,
+                    propertyState.leasetypeValue == null ? "" : propertyState.leasetypeValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1181,9 +1133,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                 pw.Expanded(
                   flex: 3,
                   child: pw.Text(
-                    propertyState.minimumleasedurationValue == null
-                        ? ""
-                        : propertyState.minimumleasedurationValue!.displayValue,
+                    propertyState.minimumleasedurationValue == null ? "" : propertyState.minimumleasedurationValue!.displayValue,
                     style: pw.TextStyle(
                       color: PdfColor.fromHex("#010B32"),
                       font: pw.Font.ttf(font_regular),
@@ -1200,8 +1150,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  pw.Widget PropertySpecificationRestrictionView(
-      PropertySummeryState propertyState) {
+  pw.Widget PropertySpecificationRestrictionView(PropertySummeryState propertyState) {
     return pw.Padding(
       padding: pw.EdgeInsets.only(left: 10, bottom: 10, right: 10),
       child: pw.Container(
@@ -1228,11 +1177,8 @@ class _AddEditPropertyState extends State<AddEditProperty> {
   pw.Widget SpecificationView(PropertySummeryState propertyState) {
     String Size = "";
 
-    if (propertyState.PropertySizeinsquarefeet != null &&
-        propertyState.PropertySizeinsquarefeet != "") {
-      String sqft = formatSize.format(int.parse(
-          propertyState.PropertySizeinsquarefeet.replaceAll(",", "")
-              .toString()));
+    if (propertyState.PropertySizeinsquarefeet != null && propertyState.PropertySizeinsquarefeet != "") {
+      String sqft = formatSize.format(int.parse(propertyState.PropertySizeinsquarefeet.replaceAll(",", "").toString()));
       Size = sqft.replaceAll(".00", "");
     }
 
@@ -1396,9 +1342,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         height: 2,
                       ),
                       pw.Text(
-                        propertyState.furnishingValue == null
-                            ? ""
-                            : propertyState.furnishingValue!.displayValue,
+                        propertyState.furnishingValue == null ? "" : propertyState.furnishingValue!.displayValue,
                         style: pw.TextStyle(
                           color: PdfColor.fromHex("#000000"),
                           font: pw.Font.ttf(font_regular),
@@ -1481,8 +1425,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                           //scrollDirection: Axis.vertical,
                           itemCount: propertyState.restrictionlist.length,
                           itemBuilder: (pw.Context ctxt, int Index) {
-                            SystemEnumDetails data =
-                                propertyState.restrictionlist[Index];
+                            SystemEnumDetails data = propertyState.restrictionlist[Index];
                             return pw.Container(
                                 alignment: pw.Alignment.centerLeft,
                                 child: !data.ischeck!
@@ -1528,8 +1471,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                           //scrollDirection: Axis.vertical,
                           itemCount: propertyState.restrictionlist.length,
                           itemBuilder: (pw.Context ctxt, int Index) {
-                            SystemEnumDetails data =
-                                propertyState.restrictionlist[Index];
+                            SystemEnumDetails data = propertyState.restrictionlist[Index];
                             return pw.Container(
                                 alignment: pw.Alignment.centerLeft,
                                 child: data.ischeck!
@@ -1648,9 +1590,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         height: 2,
                       ),
                       pw.Text(
-                        propertyState.storageavailableValue == null
-                            ? ""
-                            : propertyState.storageavailableValue!.displayValue,
+                        propertyState.storageavailableValue == null ? "" : propertyState.storageavailableValue!.displayValue,
                         style: pw.TextStyle(
                           color: PdfColors.black,
                           font: pw.Font.ttf(font_regular),
@@ -1671,11 +1611,8 @@ class _AddEditPropertyState extends State<AddEditProperty> {
 
   pw.Widget PropertyFeatureView(PropertySummeryState propertyState) {
     int Acount1 = 0, Acount2 = 0, Acount3 = 0;
-    for (int i = 0;
-        i < propertyState.Summerypropertyamenitieslist.length;
-        i++) {
-      PropertyAmenitiesUtility amenitiesUtility =
-          propertyState.Summerypropertyamenitieslist[i];
+    for (int i = 0; i < propertyState.Summerypropertyamenitieslist.length; i++) {
+      PropertyAmenitiesUtility amenitiesUtility = propertyState.Summerypropertyamenitieslist[i];
 
       if (amenitiesUtility.value == "1") {
         Acount1++;
@@ -1687,11 +1624,8 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     }
 
     int Ucount1 = 0, Ucount2 = 0, Ucount3 = 0;
-    for (int j = 0;
-        j < propertyState.Summerypropertyamenitieslist.length;
-        j++) {
-      PropertyAmenitiesUtility amenitiesUtility =
-          propertyState.Summerypropertyamenitieslist[j];
+    for (int j = 0; j < propertyState.Summerypropertyamenitieslist.length; j++) {
+      PropertyAmenitiesUtility amenitiesUtility = propertyState.Summerypropertyamenitieslist[j];
 
       if (amenitiesUtility.value == "1") {
         Ucount1++;
@@ -1730,8 +1664,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  pw.Widget IncludedInTheRent(
-      PropertySummeryState propertyState, int Acount, int Ucount) {
+  pw.Widget IncludedInTheRent(PropertySummeryState propertyState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -1797,19 +1730,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Acount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyamenitieslist.length,
+                                itemCount: propertyState.Summerypropertyamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyamenitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyamenitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "1"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#010B32"),
+                                              color: PdfColor.fromHex("#010B32"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -1863,19 +1793,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Ucount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyutilitieslist.length,
+                                itemCount: propertyState.Summerypropertyutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyutilitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyutilitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "1"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#010B32"),
+                                              color: PdfColor.fromHex("#010B32"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -1906,8 +1833,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  pw.Widget AvailableNotIncludedInTheRent(
-      PropertySummeryState propertyState, int Acount, int Ucount) {
+  pw.Widget AvailableNotIncludedInTheRent(PropertySummeryState propertyState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -1934,8 +1860,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
             pw.Container(
               height: 35,
               child: pw.Text(
-                GlobleString
-                    .ps4_Features_Available_But_Not_Included_In_The_Rent,
+                GlobleString.ps4_Features_Available_But_Not_Included_In_The_Rent,
                 style: pw.TextStyle(
                   color: PdfColors.black,
                   font: pw.Font.ttf(font_demi),
@@ -1974,19 +1899,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Acount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyamenitieslist.length,
+                                itemCount: propertyState.Summerypropertyamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyamenitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyamenitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "2"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#010B32"),
+                                              color: PdfColor.fromHex("#010B32"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -2040,19 +1962,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Ucount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyutilitieslist.length,
+                                itemCount: propertyState.Summerypropertyutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyutilitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyutilitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "2"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#010B32"),
+                                              color: PdfColor.fromHex("#010B32"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -2083,8 +2002,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  pw.Widget NotAvailable(
-      PropertySummeryState propertyState, int Acount, int Ucount) {
+  pw.Widget NotAvailable(PropertySummeryState propertyState, int Acount, int Ucount) {
     return pw.Expanded(
       child: pw.Container(
         decoration: pw.BoxDecoration(
@@ -2150,19 +2068,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Acount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyamenitieslist.length,
+                                itemCount: propertyState.Summerypropertyamenitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyamenitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyamenitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "3"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#979797"),
+                                              color: PdfColor.fromHex("#979797"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -2216,19 +2131,16 @@ class _AddEditPropertyState extends State<AddEditProperty> {
                         child: Ucount > 0
                             ? pw.ListView.builder(
                                 //scrollDirection: Axis.vertical,
-                                itemCount: propertyState
-                                    .Summerypropertyutilitieslist.length,
+                                itemCount: propertyState.Summerypropertyutilitieslist.length,
                                 itemBuilder: (pw.Context ctxt, int Index) {
-                                  PropertyAmenitiesUtility data = propertyState
-                                      .Summerypropertyutilitieslist[Index];
+                                  PropertyAmenitiesUtility data = propertyState.Summerypropertyutilitieslist[Index];
                                   return pw.Container(
                                     alignment: pw.Alignment.centerLeft,
                                     child: data.value == "3"
                                         ? pw.Text(
                                             data.Feature!,
                                             style: pw.TextStyle(
-                                              color:
-                                                  PdfColor.fromHex("#979797"),
+                                              color: PdfColor.fromHex("#979797"),
                                               font: pw.Font.ttf(font_regular),
                                               fontSize: 9,
                                             ),
@@ -2259,8 +2171,7 @@ class _AddEditPropertyState extends State<AddEditProperty> {
     );
   }
 
-  double gethightofFeature(
-      PropertySummeryState propertyState, int AV, int AVR, int NAV) {
+  double gethightofFeature(PropertySummeryState propertyState, int AV, int AVR, int NAV) {
     double Fheight = 0;
     if (AV >= AVR) {
       if (AV >= NAV) {

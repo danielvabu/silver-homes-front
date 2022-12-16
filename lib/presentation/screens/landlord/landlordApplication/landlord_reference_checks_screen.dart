@@ -36,19 +36,17 @@ import 'package:silverhome/widget/landlord/lead_dialog/addnewlead_dialogbox.dart
 import 'package:silverhome/widget/landlord/propertydropdown.dart';
 import 'package:silverhome/widget/landlord/referencechecktabel/reference_header.dart';
 import 'package:silverhome/widget/landlord/referencechecktabel/reference_item.dart';
-import 'package:silverhome/widget/searchboxview.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/search/searchboxview.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 
 import '../../../models/landlord_models/referencecheck_state.dart';
 
 class LandlordReferenceCheckScreen extends StatefulWidget {
   @override
-  _LandlordReferenceCheckScreenState createState() =>
-      _LandlordReferenceCheckScreenState();
+  _LandlordReferenceCheckScreenState createState() => _LandlordReferenceCheckScreenState();
 }
 
-class _LandlordReferenceCheckScreenState
-    extends State<LandlordReferenceCheckScreen> {
+class _LandlordReferenceCheckScreenState extends State<LandlordReferenceCheckScreen> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
   late OverlayEntry overlayEntry;
@@ -73,8 +71,7 @@ class _LandlordReferenceCheckScreenState
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
 
     _store.dispatch(UpdateLLRCReferenceCheckslist(<TenancyApplication>[]));
-    _store
-        .dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
+    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -96,8 +93,7 @@ class _LandlordReferenceCheckScreenState
     String json = await Prefs.getString(PrefsName.ApplyFilterJson);
 
     _store.dispatch(UpdateLLRCReferenceCheckslist(<TenancyApplication>[]));
-    _store
-        .dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
+    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
 
     var filter = jsonDecode(json);
 
@@ -145,27 +141,15 @@ class _LandlordReferenceCheckScreenState
                             ? SearchBoxView(
                                 callbackOnChanetext: (String text) {
                                   if (text.isNotEmpty) {
-                                    List<TenancyApplication>
-                                        filterReferencelist = List.empty();
+                                    List<TenancyApplication> filterReferencelist = List.empty();
 
-                                    filterReferencelist = referenceCheckState
-                                            .ReferenceCheckslist.where((u) => (u
-                                                .propertyName!
-                                                .toLowerCase()
-                                                .contains(text.toLowerCase()) ||
-                                            u.applicantName!
-                                                .toLowerCase()
-                                                .contains(text.toLowerCase())))
-                                        .toList();
+                                    filterReferencelist = referenceCheckState.ReferenceCheckslist.where((u) =>
+                                        (u.propertyName!.toLowerCase().contains(text.toLowerCase()) ||
+                                            u.applicantName!.toLowerCase().contains(text.toLowerCase()))).toList();
 
-                                    _store.dispatch(
-                                        UpdateLLRCfilterReferenceCheckslist(
-                                            filterReferencelist));
+                                    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(filterReferencelist));
                                   } else {
-                                    _store.dispatch(
-                                        UpdateLLRCfilterReferenceCheckslist(
-                                            referenceCheckState
-                                                .ReferenceCheckslist));
+                                    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(referenceCheckState.ReferenceCheckslist));
                                   }
 
                                   RefreshstartTime();
@@ -174,25 +158,18 @@ class _LandlordReferenceCheckScreenState
                             : PropertyDropdown(
                                 onSelectVal: (item) async {
                                   _store.dispatch(UpdateLLRCPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTLleasePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateArchivePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTALeadPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLVDapplicationPropertyItem(item));
+                                  _store.dispatch(UpdateLLTLleasePropertyItem(item));
+                                  _store.dispatch(UpdateArchivePropertyItem(item));
+                                  _store.dispatch(UpdateLLTALeadPropertyItem(item));
+                                  _store.dispatch(UpdateLLVDapplicationPropertyItem(item));
 
-                                  _store.dispatch(
-                                      UpdateLLTAApplicantPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLActiveTenantPropertyItem(item));
+                                  _store.dispatch(UpdateLLTAApplicantPropertyItem(item));
+                                  _store.dispatch(UpdateLLActiveTenantPropertyItem(item));
 
                                   await finnleviewcallapi(item!.ID.toString());
                                 },
                                 propertylist: referenceCheckState.propertylist,
-                                propertyValue:
-                                    referenceCheckState.propertyValue,
+                                propertyValue: referenceCheckState.propertyValue,
                               ),
                         SizedBox(
                           width: 10,
@@ -202,8 +179,7 @@ class _LandlordReferenceCheckScreenState
                     ),
                     Row(
                       children: [
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                           InkWell(
                             onTap: () {
                               ClearFilter(referenceCheckState);
@@ -213,10 +189,8 @@ class _LandlordReferenceCheckScreenState
                               padding: EdgeInsets.only(left: 25, right: 25),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                    color: myColor.errorcolor, width: 1),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(color: myColor.errorcolor, width: 1),
                                 color: myColor.white,
                               ),
                               child: Text(
@@ -225,8 +199,7 @@ class _LandlordReferenceCheckScreenState
                               ),
                             ),
                           ),
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                           SizedBox(
                             width: 30,
                           ),
@@ -240,9 +213,7 @@ class _LandlordReferenceCheckScreenState
                   ],
                 ),
               ),
-              referenceCheckState.selecttoggle == 0
-                  ? _tableview(referenceCheckState)
-                  : _funnelview(referenceCheckState)
+              referenceCheckState.selecttoggle == 0 ? _tableview(referenceCheckState) : _funnelview(referenceCheckState)
             ],
           );
         },
@@ -268,8 +239,7 @@ class _LandlordReferenceCheckScreenState
                       context, Prefs.getString(PrefsName.OwnerID));*/
                 } else {
                   if (referenceCheckState.propertyValue != null) {
-                    await finnleviewcallapi(
-                        referenceCheckState.propertyValue!.ID.toString());
+                    await finnleviewcallapi(referenceCheckState.propertyValue!.ID.toString());
                   }
                 }
               },
@@ -311,8 +281,7 @@ class _LandlordReferenceCheckScreenState
               referencecallApi();
             } else {
               if (referenceCheckState.propertyValue != null) {
-                await finnleviewcallapi(
-                    referenceCheckState.propertyValue!.ID.toString());
+                await finnleviewcallapi(referenceCheckState.propertyValue!.ID.toString());
               }
             }
             await Prefs.setBool(PrefsName.IsApplyFilterFunnel, false);
@@ -338,26 +307,21 @@ class _LandlordReferenceCheckScreenState
               if (referenceCheckState.propertyValue != null) {
                 _showFilterOverlayView(context, referenceCheckState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 2) {
             if (referenceCheckState.selecttoggle == 0) {
-              if (referenceCheckState.filterReferenceCheckslist != null &&
-                  referenceCheckState.filterReferenceCheckslist.length > 0) {
+              if (referenceCheckState.filterReferenceCheckslist != null && referenceCheckState.filterReferenceCheckslist.length > 0) {
                 createTableDataCSVFile(referenceCheckState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_export, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_export, false);
               }
             } else {
               if (referenceCheckState.propertyValue != null) {
-                CustomeWidget.FunnelDataCSVFile(
-                    context, referenceCheckState.propertyValue!.ID.toString());
+                CustomeWidget.FunnelDataCSVFile(context, referenceCheckState.propertyValue!.ID.toString());
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 3) {
@@ -365,22 +329,17 @@ class _LandlordReferenceCheckScreenState
               loader = Helper.overlayLoader(context);
               Overlay.of(context)!.insert(loader);
 
-              ApiManager().AllArchivePropertyWise(
-                  context, referenceCheckState.propertyValue!.ID.toString(),
-                  (status, responce) async {
+              ApiManager().AllArchivePropertyWise(context, referenceCheckState.propertyValue!.ID.toString(), (status, responce) async {
                 if (status) {
-                  await finnleviewcallapi(
-                      referenceCheckState.propertyValue!.ID.toString());
+                  await finnleviewcallapi(referenceCheckState.propertyValue!.ID.toString());
                   loader.remove();
                 } else {
                   loader.remove();
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Error1, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                 }
               });
             } else {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Blank_funnel, false);
+              ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
             }
           }
         },
@@ -456,35 +415,25 @@ class _LandlordReferenceCheckScreenState
           ReferenceHeader(
             onPressedSortName: () async {
               await updateOtherSortingValue(1);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
               if (!referenceCheckState.isNameSort) {
-                lalist.sort((a, b) => a.applicantName!
-                    .toLowerCase()
-                    .compareTo(b.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => a.applicantName!.toLowerCase().compareTo(b.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLRCisNameSort(true));
               } else {
-                lalist.sort((a, b) => b.applicantName!
-                    .toLowerCase()
-                    .compareTo(a.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => b.applicantName!.toLowerCase().compareTo(a.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLRCisNameSort(false));
               }
               _store.dispatch(UpdateLLRCfilterReferenceCheckslist(lalist));
             },
             onPressedSortProperty: () async {
               await updateOtherSortingValue(2);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
 
               if (!referenceCheckState.isPropertySort) {
-                lalist.sort((a, b) => a.propertyName!
-                    .toLowerCase()
-                    .compareTo(b.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => a.propertyName!.toLowerCase().compareTo(b.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLRCisPropertySort(true));
               } else {
-                lalist.sort((a, b) => b.propertyName!
-                    .toLowerCase()
-                    .compareTo(a.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => b.propertyName!.toLowerCase().compareTo(a.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLRCisPropertySort(false));
               }
 
@@ -492,80 +441,61 @@ class _LandlordReferenceCheckScreenState
             },
             onPressedSortRating: () async {
               await updateOtherSortingValue(3);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
               if (!referenceCheckState.isRatingSort) {
-                lalist.sort((a, b) =>
-                    b.rating.toString().compareTo(a.rating.toString()));
+                lalist.sort((a, b) => b.rating.toString().compareTo(a.rating.toString()));
                 _store.dispatch(UpdateLLRCisRatingSort(true));
               } else {
-                lalist.sort((a, b) =>
-                    a.rating.toString().compareTo(b.rating.toString()));
+                lalist.sort((a, b) => a.rating.toString().compareTo(b.rating.toString()));
                 _store.dispatch(UpdateLLRCisRatingSort(false));
               }
               _store.dispatch(UpdateLLRCfilterReferenceCheckslist(lalist));
             },
             onPressedSortReferences: () async {
               await updateOtherSortingValue(7);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
               if (!referenceCheckState.isReferenceSort) {
-                lalist.sort((a, b) => b.referencesCount
-                    .toString()
-                    .compareTo(a.referencesCount.toString()));
+                lalist.sort((a, b) => b.referencesCount.toString().compareTo(a.referencesCount.toString()));
                 _store.dispatch(UpdateLLRCisReferenceSort(true));
               } else {
-                lalist.sort((a, b) => a.referencesCount
-                    .toString()
-                    .compareTo(b.referencesCount.toString()));
+                lalist.sort((a, b) => a.referencesCount.toString().compareTo(b.referencesCount.toString()));
                 _store.dispatch(UpdateLLRCisReferenceSort(false));
               }
               _store.dispatch(UpdateLLRCfilterReferenceCheckslist(lalist));
             },
             onPressedSortQuesSent: () async {
               await updateOtherSortingValue(4);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
               if (!referenceCheckState.isDateSentSort) {
-                lalist.sort((a, b) => b.questionnairesSentCount
-                    .toString()
-                    .compareTo(a.questionnairesSentCount.toString()));
+                lalist.sort((a, b) => b.questionnairesSentCount.toString().compareTo(a.questionnairesSentCount.toString()));
                 _store.dispatch(UpdateLLRCisDateSentSort(true));
               } else {
-                lalist.sort((a, b) => a.questionnairesSentCount
-                    .toString()
-                    .compareTo(b.questionnairesSentCount.toString()));
+                lalist.sort((a, b) => a.questionnairesSentCount.toString().compareTo(b.questionnairesSentCount.toString()));
                 _store.dispatch(UpdateLLRCisDateSentSort(false));
               }
               _store.dispatch(UpdateLLRCfilterReferenceCheckslist(lalist));
             },
             onPressedSortQuesReceive: () async {
               await updateOtherSortingValue(5);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
               if (!referenceCheckState.isDateReceiveSort) {
-                lalist.sort((a, b) => b.questionnairesReceivedCount!
-                    .compareTo(a.questionnairesReceivedCount!));
+                lalist.sort((a, b) => b.questionnairesReceivedCount!.compareTo(a.questionnairesReceivedCount!));
                 _store.dispatch(UpdateLLRCisDateReceiveSort(true));
               } else {
-                lalist.sort((a, b) => a.questionnairesReceivedCount!
-                    .compareTo(b.questionnairesReceivedCount!));
+                lalist.sort((a, b) => a.questionnairesReceivedCount!.compareTo(b.questionnairesReceivedCount!));
                 _store.dispatch(UpdateLLRCisDateReceiveSort(false));
               }
               _store.dispatch(UpdateLLRCfilterReferenceCheckslist(lalist));
             },
             onPressedSortAppStatus: () async {
               await updateOtherSortingValue(6);
-              List<TenancyApplication> lalist =
-                  referenceCheckState.filterReferenceCheckslist;
+              List<TenancyApplication> lalist = referenceCheckState.filterReferenceCheckslist;
 
               if (!referenceCheckState.isAppStatusSort) {
-                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID
-                    .compareTo(b.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID.compareTo(b.applicationStatus!.EnumDetailID));
                 _store.dispatch(UpdateLLRCisAppStatusSort(true));
               } else {
-                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID
-                    .compareTo(a.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID.compareTo(a.applicationStatus!.EnumDetailID));
                 //lalist.reversed.toList();
                 _store.dispatch(UpdateLLRCisAppStatusSort(false));
               }
@@ -598,8 +528,7 @@ class _LandlordReferenceCheckScreenState
                   ),
                 ),
               )
-            : refCheckState.filterReferenceCheckslist != null &&
-                    refCheckState.filterReferenceCheckslist.length > 0
+            : refCheckState.filterReferenceCheckslist != null && refCheckState.filterReferenceCheckslist.length > 0
                 ? Expanded(
                     child: ReferenceItem(
                       OnRefresh: () {},
@@ -634,8 +563,7 @@ class _LandlordReferenceCheckScreenState
       referencecallApi();
     } else {
       if (referenceCheckState.propertyValue != null) {
-        await finnleviewcallapi(
-            referenceCheckState.propertyValue!.ID.toString());
+        await finnleviewcallapi(referenceCheckState.propertyValue!.ID.toString());
       }
     }
 
@@ -678,8 +606,7 @@ class _LandlordReferenceCheckScreenState
     _store.dispatch(UpdateLLRCisloding(false));
   }
 
-  _showFilterOverlayView(
-      BuildContext context, ReferenceCheckState referenceCheckState) {
+  _showFilterOverlayView(BuildContext context, ReferenceCheckState referenceCheckState) {
     OverlayState overlayState = Overlay.of(context)!;
     overlayEntry = OverlayEntry(builder: (context) {
       return Container(
@@ -716,38 +643,30 @@ class _LandlordReferenceCheckScreenState
                   } else {
                     if (isclear) {
                       if (referenceCheckState.propertyValue != null) {
-                        await finnleviewcallapi(
-                            referenceCheckState.propertyValue!.ID.toString());
+                        await finnleviewcallapi(referenceCheckState.propertyValue!.ID.toString());
                       }
                     } else {
                       _store.dispatch(UpdateLLRCToggle(1));
 
-                      _store.dispatch(
-                          UpdateFunnelAllListData(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelAllListData(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeadCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeadList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeadList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelApplicantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelApplicantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelApplicantList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelDocumentVarifyCount(0));
-                      _store.dispatch(UpdateFunnelDocumentVarifyList(
-                          <TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelDocumentVarifyList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelReferenceCheckCount(0));
-                      _store.dispatch(
-                          UpdateFunnelReferenceList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelReferenceList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeaseCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeassentList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeassentList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelActiveTenantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelActiveTenantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelActiveTenantList(<TenancyApplication>[]));
 
                       await ApiManager().getPropertyWiseFunnel(context, json);
                     }
@@ -790,18 +709,14 @@ class _LandlordReferenceCheckScreenState
       row.add(data.referencesCount);
       row.add(data.questionnairesSentCount);
       row.add(data.questionnairesReceivedCount);
-      row.add(data.applicationStatus != null
-          ? data.applicationStatus!.displayValue.toString()
-          : "");
+      row.add(data.applicationStatus != null ? data.applicationStatus!.displayValue.toString() : "");
 
       csvList.add(row);
     }
 
     csv = const ListToCsvConverter().convert(csvList);
 
-    String filename = "ReferenceCheck_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".csv";
+    String filename = "ReferenceCheck_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
 
     // prepare
     final bytes = utf8.encode(csv);

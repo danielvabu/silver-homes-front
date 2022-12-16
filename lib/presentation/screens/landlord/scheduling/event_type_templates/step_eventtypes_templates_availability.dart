@@ -47,18 +47,15 @@ class StepEventTypesTemplatesAvailability extends StatefulWidget {
         _callbackSaveandNext = onPressedSave;
 
   @override
-  _StepEventTypesTemplatesAvailabilityState createState() =>
-      _StepEventTypesTemplatesAvailabilityState();
+  _StepEventTypesTemplatesAvailabilityState createState() => _StepEventTypesTemplatesAvailabilityState();
 }
 
-class _StepEventTypesTemplatesAvailabilityState
-    extends State<StepEventTypesTemplatesAvailability> {
+class _StepEventTypesTemplatesAvailabilityState extends State<StepEventTypesTemplatesAvailability> {
   double ssheight = 0, sswidth = 0;
 
   final _store = getIt<AppStore>();
 
-  String formatNumber(String s) =>
-      NumberFormat.decimalPattern('en').format(int.parse(s));
+  String formatNumber(String s) => NumberFormat.decimalPattern('en').format(int.parse(s));
   final controllerSize = TextEditingController();
 
   late OverlayEntry overlayEntry;
@@ -86,8 +83,7 @@ class _StepEventTypesTemplatesAvailabilityState
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.specificationAndRestriction) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.specificationAndRestriction) {
         isGotoBack = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         apiCallAndValication(_store.state!.eventTypesState);
@@ -129,8 +125,7 @@ class _StepEventTypesTemplatesAvailabilityState
                         ),
                         const SizedBox(width: 5.0),
                         Text(
-                          eventtypesState!
-                              .EventTypesName, // este sale de la pantalla anterior: Event Type Name
+                          eventtypesState!.EventTypesName, // este sale de la pantalla anterior: Event Type Name
                           style: MyStyles.Bold(20, myColor.Circle_main),
                         ),
                       ]),
@@ -159,8 +154,7 @@ class _StepEventTypesTemplatesAvailabilityState
                                     key: UniqueKey(),
                                     mode: Mode.MENU,
                                     errorcolor: myColor.errorcolor,
-                                    isError: eventtypesState
-                                        .error_minimumleaseduration,
+                                    isError: eventtypesState.error_minimumleaseduration,
                                     focuscolor: myColor.blue,
                                     focusWidth: 2,
                                     popupBackgroundColor: myColor.white,
@@ -176,8 +170,7 @@ class _StepEventTypesTemplatesAvailabilityState
                                       "Hawai - US"
                                     ],
                                     defultHeight: 170,
-                                    textstyle:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    textstyle: MyStyles.Medium(14, myColor.text_color),
                                     hint: "Select",
                                     showSearchBox: false,
                                     selectedItem: eventtypesState.timezone,
@@ -274,19 +267,15 @@ class _StepEventTypesTemplatesAvailabilityState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const SizedBox(height: 10.0),
-                                  Text(GlobleString.ET_Your_Weekly,
-                                      style: MyStyles.Bold(
-                                          18, myColor.Circle_main)),
+                                  Text(GlobleString.ET_Your_Weekly + "dd", style: MyStyles.Bold(18, myColor.Circle_main)),
                                   const SizedBox(height: 20.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .sun, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.sun, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(UpdateSun(value!));
                                           _changeData();
@@ -294,21 +283,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.SUN,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.SUN, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.sun)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .sunh1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.sunh1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -316,21 +298,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -356,62 +331,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .sunh1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .sunh1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.sunh1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.sunh1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatsunh1(
-                                                                        eventtypesState
-                                                                            .sunh1));
+                                                                _store.dispatch(Updatsunh1(eventtypesState.sunh1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -437,82 +387,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .sunh2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .sunh2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.sunh2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.sunh2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatsunh2(
-                                                                        eventtypesState
-                                                                            .sunh2));
+                                                                _store.dispatch(Updatsunh2(eventtypesState.sunh2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .sunh1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.sunh1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .sunh1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .sunh2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatsunh1(
-                                                                        eventtypesState
-                                                                            .sunh1));
-                                                                _store.dispatch(
-                                                                    Updatsunh2(
-                                                                        eventtypesState
-                                                                            .sunh2));
+                                                                eventtypesState.sunh1.removeAt(i);
+                                                                eventtypesState.sunh2.removeAt(i);
+                                                                _store.dispatch(Updatsunh1(eventtypesState.sunh1));
+                                                                _store.dispatch(Updatsunh2(eventtypesState.sunh2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -520,10 +432,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.sunh1.add("");
                                             eventtypesState.sunh2.add("");
-                                            _store.dispatch(Updatsunh1(
-                                                eventtypesState.sunh1));
-                                            _store.dispatch(Updatsunh2(
-                                                eventtypesState.sunh2));
+                                            _store.dispatch(Updatsunh1(eventtypesState.sunh1));
+                                            _store.dispatch(Updatsunh2(eventtypesState.sunh2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -534,14 +444,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .mon, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.mon, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(UpdateMon(value!));
                                           _changeData();
@@ -549,21 +457,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.MON,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.MON, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.mon)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .monh1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.monh1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -571,21 +472,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -611,62 +505,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .monh1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .monh1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.monh1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.monh1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatmonh1(
-                                                                        eventtypesState
-                                                                            .monh1));
+                                                                _store.dispatch(Updatmonh1(eventtypesState.monh1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -692,82 +561,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .monh2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .monh2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.monh2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.monh2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatmonh2(
-                                                                        eventtypesState
-                                                                            .monh2));
+                                                                _store.dispatch(Updatmonh2(eventtypesState.monh2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .monh1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.monh1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .monh1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .monh2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatmonh1(
-                                                                        eventtypesState
-                                                                            .monh1));
-                                                                _store.dispatch(
-                                                                    Updatmonh2(
-                                                                        eventtypesState
-                                                                            .monh2));
+                                                                eventtypesState.monh1.removeAt(i);
+                                                                eventtypesState.monh2.removeAt(i);
+                                                                _store.dispatch(Updatmonh1(eventtypesState.monh1));
+                                                                _store.dispatch(Updatmonh2(eventtypesState.monh2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -775,10 +606,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.monh1.add("");
                                             eventtypesState.monh2.add("");
-                                            _store.dispatch(Updatmonh1(
-                                                eventtypesState.monh1));
-                                            _store.dispatch(Updatmonh2(
-                                                eventtypesState.monh2));
+                                            _store.dispatch(Updatmonh1(eventtypesState.monh1));
+                                            _store.dispatch(Updatmonh2(eventtypesState.monh2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -789,14 +618,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .tue, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.tue, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(Updatetue(value!));
                                           _changeData();
@@ -804,21 +631,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.TUE,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.TUE, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.tue)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .tueh1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.tueh1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -826,21 +646,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -866,62 +679,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .tueh1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .tueh1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.tueh1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.tueh1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updattueh1(
-                                                                        eventtypesState
-                                                                            .tueh1));
+                                                                _store.dispatch(Updattueh1(eventtypesState.tueh1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -947,82 +735,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .tueh2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .tueh2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.tueh2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.tueh2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updattueh2(
-                                                                        eventtypesState
-                                                                            .tueh2));
+                                                                _store.dispatch(Updattueh2(eventtypesState.tueh2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .tueh1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.tueh1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .tueh1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .tueh2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updattueh1(
-                                                                        eventtypesState
-                                                                            .tueh1));
-                                                                _store.dispatch(
-                                                                    Updattueh2(
-                                                                        eventtypesState
-                                                                            .tueh2));
+                                                                eventtypesState.tueh1.removeAt(i);
+                                                                eventtypesState.tueh2.removeAt(i);
+                                                                _store.dispatch(Updattueh1(eventtypesState.tueh1));
+                                                                _store.dispatch(Updattueh2(eventtypesState.tueh2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -1030,10 +780,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.tueh1.add("");
                                             eventtypesState.tueh2.add("");
-                                            _store.dispatch(Updattueh1(
-                                                eventtypesState.tueh1));
-                                            _store.dispatch(Updattueh2(
-                                                eventtypesState.tueh2));
+                                            _store.dispatch(Updattueh1(eventtypesState.tueh1));
+                                            _store.dispatch(Updattueh2(eventtypesState.tueh2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -1044,14 +792,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .wed, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.wed, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(Updatewed(value!));
                                           _changeData();
@@ -1059,21 +805,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.WED,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.WED, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.wed)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .wedh1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.wedh1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -1081,21 +820,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1121,62 +853,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .wedh1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .wedh1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.wedh1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.wedh1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatwedh1(
-                                                                        eventtypesState
-                                                                            .wedh1));
+                                                                _store.dispatch(Updatwedh1(eventtypesState.wedh1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1202,82 +909,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .wedh2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .wedh2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.wedh2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.wedh2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatwedh2(
-                                                                        eventtypesState
-                                                                            .wedh2));
+                                                                _store.dispatch(Updatwedh2(eventtypesState.wedh2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .wedh1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.wedh1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .wedh1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .wedh2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatwedh1(
-                                                                        eventtypesState
-                                                                            .wedh1));
-                                                                _store.dispatch(
-                                                                    Updatwedh2(
-                                                                        eventtypesState
-                                                                            .wedh2));
+                                                                eventtypesState.wedh1.removeAt(i);
+                                                                eventtypesState.wedh2.removeAt(i);
+                                                                _store.dispatch(Updatwedh1(eventtypesState.wedh1));
+                                                                _store.dispatch(Updatwedh2(eventtypesState.wedh2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -1285,10 +954,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.wedh1.add("");
                                             eventtypesState.wedh2.add("");
-                                            _store.dispatch(Updatwedh1(
-                                                eventtypesState.wedh1));
-                                            _store.dispatch(Updatwedh2(
-                                                eventtypesState.wedh2));
+                                            _store.dispatch(Updatwedh1(eventtypesState.wedh1));
+                                            _store.dispatch(Updatwedh2(eventtypesState.wedh2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -1299,14 +966,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .thu, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.thu, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(Updatethu(value!));
                                           _changeData();
@@ -1314,21 +979,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.THU,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.THU, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.thu)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .thuh1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.thuh1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -1336,21 +994,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1376,62 +1027,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .thuh1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .thuh1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.thuh1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.thuh1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatthuh1(
-                                                                        eventtypesState
-                                                                            .thuh1));
+                                                                _store.dispatch(Updatthuh1(eventtypesState.thuh1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1457,82 +1083,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .thuh2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .thuh2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.thuh2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.thuh2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatthuh2(
-                                                                        eventtypesState
-                                                                            .thuh2));
+                                                                _store.dispatch(Updatthuh2(eventtypesState.thuh2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .thuh1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.thuh1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .thuh1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .thuh2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatthuh1(
-                                                                        eventtypesState
-                                                                            .thuh1));
-                                                                _store.dispatch(
-                                                                    Updatthuh2(
-                                                                        eventtypesState
-                                                                            .thuh2));
+                                                                eventtypesState.thuh1.removeAt(i);
+                                                                eventtypesState.thuh2.removeAt(i);
+                                                                _store.dispatch(Updatthuh1(eventtypesState.thuh1));
+                                                                _store.dispatch(Updatthuh2(eventtypesState.thuh2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -1540,10 +1128,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.thuh1.add("");
                                             eventtypesState.thuh2.add("");
-                                            _store.dispatch(Updatthuh1(
-                                                eventtypesState.thuh1));
-                                            _store.dispatch(Updatthuh2(
-                                                eventtypesState.thuh2));
+                                            _store.dispatch(Updatthuh1(eventtypesState.thuh1));
+                                            _store.dispatch(Updatthuh2(eventtypesState.thuh2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -1554,14 +1140,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .fri, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.fri, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(Updatefri(value!));
                                           _changeData();
@@ -1569,21 +1153,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.FRI,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.FRI, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.fri)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .frih1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.frih1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -1591,21 +1168,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1631,62 +1201,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .frih1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .frih1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.frih1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.frih1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatfrih1(
-                                                                        eventtypesState
-                                                                            .frih1));
+                                                                _store.dispatch(Updatfrih1(eventtypesState.frih1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1712,82 +1257,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .frih2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .frih2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.frih2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.frih2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatfrih2(
-                                                                        eventtypesState
-                                                                            .frih2));
+                                                                _store.dispatch(Updatfrih2(eventtypesState.frih2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .frih1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.frih1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .frih1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .frih2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatfrih1(
-                                                                        eventtypesState
-                                                                            .frih1));
-                                                                _store.dispatch(
-                                                                    Updatfrih2(
-                                                                        eventtypesState
-                                                                            .frih2));
+                                                                eventtypesState.frih1.removeAt(i);
+                                                                eventtypesState.frih2.removeAt(i);
+                                                                _store.dispatch(Updatfrih1(eventtypesState.frih1));
+                                                                _store.dispatch(Updatfrih2(eventtypesState.frih2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -1795,10 +1302,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.frih1.add("");
                                             eventtypesState.frih2.add("");
-                                            _store.dispatch(Updatfrih1(
-                                                eventtypesState.frih1));
-                                            _store.dispatch(Updatfrih2(
-                                                eventtypesState.frih2));
+                                            _store.dispatch(Updatfrih1(eventtypesState.frih1));
+                                            _store.dispatch(Updatfrih2(eventtypesState.frih2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -1809,14 +1314,12 @@ class _StepEventTypesTemplatesAvailabilityState
                                   const Divider(),
                                   const SizedBox(height: 10.0),
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         activeColor: myColor.Circle_main,
                                         checkColor: myColor.white,
-                                        value: eventtypesState
-                                            .sat, //tfAdditionalReferenceState.isAutherize,
+                                        value: eventtypesState.sat, //tfAdditionalReferenceState.isAutherize,
                                         onChanged: (value) {
                                           _store.dispatch(Updatesat(value!));
                                           _changeData();
@@ -1824,21 +1327,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                       const SizedBox(width: 5.0),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(top: 7.0),
+                                          padding: const EdgeInsets.only(top: 7.0),
                                           width: 50.0,
-                                          child: Text(GlobleString.SAT,
-                                              style: MyStyles.Bold(
-                                                  16, myColor.Circle_main))),
+                                          child: Text(GlobleString.SAT, style: MyStyles.Bold(16, myColor.Circle_main))),
                                       const SizedBox(width: 5.0),
                                       (eventtypesState.sat)
                                           ? Column(
                                               children: [
-                                                for (int i = 0;
-                                                    i <
-                                                        eventtypesState
-                                                            .sath1.length;
-                                                    i++)
+                                                for (int i = 0; i < eventtypesState.sath1.length; i++)
                                                   Column(
                                                     children: [
                                                       Row(
@@ -1846,21 +1342,14 @@ class _StepEventTypesTemplatesAvailabilityState
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1886,62 +1375,37 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .sath1[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .sath1[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.sath1[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.sath1[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatsath1(
-                                                                        eventtypesState
-                                                                            .sath1));
+                                                                _store.dispatch(Updatsath1(eventtypesState.sath1));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Icon(Icons.remove),
-                                                          const SizedBox(
-                                                              width: 4.0),
+                                                          const SizedBox(width: 4.0),
                                                           Container(
                                                             width: 130,
                                                             height: 34,
-                                                            child:
-                                                                DropdownSearch<
-                                                                    String>(
+                                                            child: DropdownSearch<String>(
                                                               key: UniqueKey(),
                                                               mode: Mode.MENU,
-                                                              errorcolor: myColor
-                                                                  .errorcolor,
-                                                              isError:
-                                                                  eventtypesState
-                                                                      .error_minimumleaseduration,
-                                                              focuscolor:
-                                                                  myColor.blue,
+                                                              errorcolor: myColor.errorcolor,
+                                                              isError: eventtypesState.error_minimumleaseduration,
+                                                              focuscolor: myColor.blue,
                                                               focusWidth: 2,
-                                                              popupBackgroundColor:
-                                                                  myColor.white,
+                                                              popupBackgroundColor: myColor.white,
                                                               items: [
                                                                 "01:00:00",
                                                                 "02:00:00",
@@ -1967,82 +1431,44 @@ class _StepEventTypesTemplatesAvailabilityState
                                                                 "22:00:00",
                                                                 "23:00:00"
                                                               ],
-                                                              textstyle: MyStyles
-                                                                  .Medium(
-                                                                      14,
-                                                                      myColor
-                                                                          .text_color),
+                                                              textstyle: MyStyles.Medium(14, myColor.text_color),
                                                               hint: "Select",
-                                                              showSearchBox:
-                                                                  false,
-                                                              selectedItem:
-                                                                  eventtypesState
-                                                                      .sath2[i],
-                                                              isFilteredOnline:
-                                                                  true,
-                                                              onChanged:
-                                                                  (value) {
-                                                                eventtypesState
-                                                                        .sath2[
-                                                                    i] = value!;
+                                                              showSearchBox: false,
+                                                              selectedItem: eventtypesState.sath2[i],
+                                                              isFilteredOnline: true,
+                                                              onChanged: (value) {
+                                                                eventtypesState.sath2[i] = value!;
                                                                 _changeData();
-                                                                AddEditEventTypesTemplates
-                                                                        .isValueUpdate =
-                                                                    true;
+                                                                AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                                                _store.dispatch(
-                                                                    Updatsath2(
-                                                                        eventtypesState
-                                                                            .sath2));
+                                                                _store.dispatch(Updatsath2(eventtypesState.sath2));
 
                                                                 // _store.dispatch(
                                                                 //     UpdateErrorMinimumleaseduration(false));
                                                               },
                                                             ),
                                                           ),
-                                                          const SizedBox(
-                                                              width: 10.0),
-                                                          if (eventtypesState
-                                                                  .sath1
-                                                                  .length >
-                                                              1)
+                                                          const SizedBox(width: 10.0),
+                                                          if (eventtypesState.sath1.length > 1)
                                                             GestureDetector(
                                                               onTap: () {
-                                                                eventtypesState
-                                                                    .sath1
-                                                                    .removeAt(
-                                                                        i);
-                                                                eventtypesState
-                                                                    .sath2
-                                                                    .removeAt(
-                                                                        i);
-                                                                _store.dispatch(
-                                                                    Updatsath1(
-                                                                        eventtypesState
-                                                                            .sath1));
-                                                                _store.dispatch(
-                                                                    Updatsath2(
-                                                                        eventtypesState
-                                                                            .sath2));
+                                                                eventtypesState.sath1.removeAt(i);
+                                                                eventtypesState.sath2.removeAt(i);
+                                                                _store.dispatch(Updatsath1(eventtypesState.sath1));
+                                                                _store.dispatch(Updatsath2(eventtypesState.sath2));
                                                               },
-                                                              child: Icon(Icons
-                                                                  .delete_outline),
+                                                              child: Icon(Icons.delete_outline),
                                                             ),
                                                         ],
                                                       ),
-                                                      const SizedBox(
-                                                          height: 5.0),
+                                                      const SizedBox(height: 5.0),
                                                     ],
                                                   ),
                                               ],
                                             )
                                           : Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 7.0),
-                                              child: Text(
-                                                  GlobleString.Unavailable,
-                                                  style: MyStyles.Light(
-                                                      16, myColor.TA_Border)),
+                                              padding: const EdgeInsets.only(top: 7.0),
+                                              child: Text(GlobleString.Unavailable, style: MyStyles.Light(16, myColor.TA_Border)),
                                             ),
                                       Expanded(child: Container()),
                                       GestureDetector(
@@ -2050,10 +1476,8 @@ class _StepEventTypesTemplatesAvailabilityState
                                           onTap: () {
                                             eventtypesState.sath1.add("");
                                             eventtypesState.sath2.add("");
-                                            _store.dispatch(Updatsath1(
-                                                eventtypesState.sath1));
-                                            _store.dispatch(Updatsath2(
-                                                eventtypesState.sath2));
+                                            _store.dispatch(Updatsath1(eventtypesState.sath1));
+                                            _store.dispatch(Updatsath2(eventtypesState.sath2));
                                           }),
                                       const SizedBox(width: 10.0),
                                       Icon(Icons.copy),
@@ -2067,16 +1491,13 @@ class _StepEventTypesTemplatesAvailabilityState
                             const VerticalDivider(),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 10.0),
+                                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(height: 10.0),
-                                    Text(GlobleString.ET_Overrides,
-                                        style: MyStyles.Bold(
-                                            18, myColor.Circle_main)),
+                                    Text(GlobleString.ET_Overrides, style: MyStyles.Bold(18, myColor.Circle_main)),
                                     const SizedBox(height: 10.0),
                                     Text(GlobleString.ET_Overrides_Txt),
                                     const SizedBox(height: 10.0),
@@ -2089,30 +1510,21 @@ class _StepEventTypesTemplatesAvailabilityState
                                     SizedBox(width: 4.0),
                                     SizedBox(width: 4.0),
                                     const SizedBox(height: 10.0),
-                                    for (int i = 0;
-                                        i < eventtypesState.overrrides.length;
-                                        i++)
+                                    for (int i = 0; i < eventtypesState.overrrides.length; i++)
                                       Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               SizedBox(width: 4.0),
-                                              Text(ponerfecha(eventtypesState
-                                                  .overrrides[i])),
+                                              Text(ponerfecha(eventtypesState.overrrides[i])),
                                               SizedBox(width: 10.0),
                                               SizedBox(width: 10.0),
                                               GestureDetector(
-                                                child:
-                                                    Icon(Icons.delete_outline),
+                                                child: Icon(Icons.delete_outline),
                                                 onTap: () {
-                                                  eventtypesState.overrrides
-                                                      .removeAt(i);
-                                                  _store.dispatch(
-                                                      UpdateRentalSpaceList1(
-                                                          eventtypesState
-                                                              .overrrides));
+                                                  eventtypesState.overrrides.removeAt(i);
+                                                  _store.dispatch(UpdateRentalSpaceList1(eventtypesState.overrrides));
                                                 },
                                               )
                                             ],
@@ -2143,8 +1555,7 @@ class _StepEventTypesTemplatesAvailabilityState
                               children: [
                                 Text(
                                   GlobleString.ET_SC_Cant,
-                                  style: MyStyles.Medium(
-                                      14, myColor.CM_Lead_border),
+                                  style: MyStyles.Medium(14, myColor.CM_Lead_border),
                                   textAlign: TextAlign.start,
                                 ),
                                 const SizedBox(height: 10.0),
@@ -2156,34 +1567,23 @@ class _StepEventTypesTemplatesAvailabilityState
                                       height: 32,
                                       child: TextFormField(
                                         initialValue:
-                                            (eventtypesState.timescheduling ==
-                                                    0)
-                                                ? ''
-                                                : eventtypesState.timescheduling
-                                                    .toString(),
+                                            (eventtypesState.timescheduling == 0) ? '' : eventtypesState.timescheduling.toString(),
                                         textAlign: TextAlign.start,
-                                        style: MyStyles.Regular(
-                                            14, myColor.text_color),
+                                        style: MyStyles.Regular(14, myColor.text_color),
                                         keyboardType: TextInputType.phone,
-                                        inputFormatters: [
-                                          MaskedInputFormatter("0000000000")
-                                        ],
+                                        inputFormatters: [MaskedInputFormatter("0000000000")],
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_minimumleasedurationnumber
-                                                      ? myColor.errorcolor
-                                                      : myColor.blue,
+                                                  color:
+                                                      eventtypesState.error_minimumleasedurationnumber ? myColor.errorcolor : myColor.blue,
                                                   width: 2),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: eventtypesState
-                                                          .error_minimumleasedurationnumber
-                                                      ? myColor.errorcolor
-                                                      : myColor.gray,
+                                                  color:
+                                                      eventtypesState.error_minimumleasedurationnumber ? myColor.errorcolor : myColor.gray,
                                                   width: 1.0),
                                             ),
                                             isDense: true,
@@ -2192,11 +1592,9 @@ class _StepEventTypesTemplatesAvailabilityState
                                             filled: true),
                                         onChanged: (value) {
                                           _changeData();
-                                          AddEditEventTypesTemplates
-                                              .isValueUpdate = true;
+                                          AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                          _store.dispatch(Updatetimescheduling(
-                                              int.parse(value)));
+                                          _store.dispatch(Updatetimescheduling(int.parse(value)));
                                         },
                                       ),
                                     ),
@@ -2209,27 +1607,22 @@ class _StepEventTypesTemplatesAvailabilityState
                                         key: UniqueKey(),
                                         mode: Mode.MENU,
                                         errorcolor: myColor.errorcolor,
-                                        isError: eventtypesState
-                                            .error_minimumleaseduration,
+                                        isError: eventtypesState.error_minimumleaseduration,
                                         focuscolor: myColor.blue,
                                         focusWidth: 2,
                                         popupBackgroundColor: myColor.white,
                                         items: ["minutes", "hours"],
                                         defultHeight: 80,
-                                        textstyle: MyStyles.Medium(
-                                            14, myColor.text_color),
+                                        textstyle: MyStyles.Medium(14, myColor.text_color),
                                         hint: "Select",
                                         showSearchBox: false,
-                                        selectedItem:
-                                            eventtypesState.timeschedulingmed,
+                                        selectedItem: eventtypesState.timeschedulingmed,
                                         isFilteredOnline: true,
                                         onChanged: (value) {
                                           _changeData();
-                                          AddEditEventTypesTemplates
-                                              .isValueUpdate = true;
+                                          AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                          _store.dispatch(
-                                              Updatetimeschedulingmed(value!));
+                                          _store.dispatch(Updatetimeschedulingmed(value!));
 
                                           // _store.dispatch(
                                           //     UpdateErrorMinimumleaseduration(false));
@@ -2237,11 +1630,7 @@ class _StepEventTypesTemplatesAvailabilityState
                                       ),
                                     ),
                                     const SizedBox(width: 5.0),
-                                    Container(
-                                        width: 180,
-                                        height: 32,
-                                        child: Text(
-                                            GlobleString.ET_SC_Of_Start_Time)),
+                                    Container(width: 180, height: 32, child: Text(GlobleString.ET_SC_Of_Start_Time)),
                                   ],
                                 ),
                               ],
@@ -2254,8 +1643,7 @@ class _StepEventTypesTemplatesAvailabilityState
                             children: [
                               Text(
                                 GlobleString.ET_SC_Max_Allowed,
-                                style:
-                                    MyStyles.Medium(14, myColor.CM_Lead_border),
+                                style: MyStyles.Medium(14, myColor.CM_Lead_border),
                                 textAlign: TextAlign.start,
                               ),
                               const SizedBox(height: 10.0),
@@ -2263,32 +1651,21 @@ class _StepEventTypesTemplatesAvailabilityState
                                 width: 100,
                                 height: 32,
                                 child: TextFormField(
-                                  initialValue: (eventtypesState.maximum == 0)
-                                      ? ''
-                                      : eventtypesState.maximum.toString(),
+                                  initialValue: (eventtypesState.maximum == 0) ? '' : eventtypesState.maximum.toString(),
                                   textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(14, myColor.text_color),
+                                  style: MyStyles.Regular(14, myColor.text_color),
                                   keyboardType: TextInputType.phone,
-                                  inputFormatters: [
-                                    MaskedInputFormatter("0000000000")
-                                  ],
+                                  inputFormatters: [MaskedInputFormatter("0000000000")],
                                   decoration: InputDecoration(
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_minimumleasedurationnumber
-                                                ? myColor.errorcolor
-                                                : myColor.blue,
+                                            color: eventtypesState.error_minimumleasedurationnumber ? myColor.errorcolor : myColor.blue,
                                             width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: eventtypesState
-                                                    .error_minimumleasedurationnumber
-                                                ? myColor.errorcolor
-                                                : myColor.gray,
+                                            color: eventtypesState.error_minimumleasedurationnumber ? myColor.errorcolor : myColor.gray,
                                             width: 1.0),
                                       ),
                                       isDense: true,
@@ -2297,11 +1674,9 @@ class _StepEventTypesTemplatesAvailabilityState
                                       filled: true),
                                   onChanged: (value) {
                                     _changeData();
-                                    AddEditEventTypesTemplates.isValueUpdate =
-                                        true;
+                                    AddEditEventTypesTemplates.isValueUpdate = true;
 
-                                    _store.dispatch(
-                                        Updatemaximum(int.parse(value)));
+                                    _store.dispatch(Updatemaximum(int.parse(value)));
                                   },
                                 ),
                               ),
@@ -2312,11 +1687,7 @@ class _StepEventTypesTemplatesAvailabilityState
                       const SizedBox(height: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          back(),
-                          const SizedBox(width: 10.0),
-                          saveandnext(eventtypesState)
-                        ],
+                        children: [back(), const SizedBox(width: 10.0), saveandnext(eventtypesState)],
                       ),
                     ],
                   ),
@@ -2369,8 +1740,7 @@ class _StepEventTypesTemplatesAvailabilityState
 
                             myrestrictionlist[Index] = data;
 
-                            _store.dispatch(UpdateRestrictionlist(
-                                List.from(myrestrictionlist)));
+                            _store.dispatch(UpdateRestrictionlist(List.from(myrestrictionlist)));
 
                             //eventtypesState.restrictionlist[Index].ischeck = value;
                             //_store.dispatch(UpdateRestrictionlist(eventtypesState.restrictionlist));
@@ -2421,45 +1791,30 @@ class _StepEventTypesTemplatesAvailabilityState
   void apiCallAndValication(EventTypesState eventtypesState) {
     if (1 == 2) {
       // _store.dispatch(UpdateErrorEventTypesBedrooms(true));
-      ToastUtils.showCustomToast(
-          context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
+      ToastUtils.showCustomToast(context, "GlobleString.PS2_EventTypes_Bedrooms_error", false);
     } else {
       Aviabilitydel currentAvability = new Aviabilitydel();
-      currentAvability.event_type_id =
-          int.parse(Prefs.getString(PrefsName.EventTypesID));
+      currentAvability.event_type_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-      ApiManager().DeleteavailabilityTemplate(context, currentAvability,
-          (status, responce) {
+      ApiManager().DeleteavailabilityTemplate(context, currentAvability, (status, responce) {
         AviabilityTimedel currentAvabilityTime = new AviabilityTimedel();
-        currentAvabilityTime.eventtype =
-            int.parse(Prefs.getString(PrefsName.EventTypesID));
+        currentAvabilityTime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-        ApiManager().DeleteavailabilityTimeTemplate(
-            context, currentAvabilityTime, (status, responce) {
+        ApiManager().DeleteavailabilityTimeTemplate(context, currentAvabilityTime, (status, responce) {
           //sunday
           if (eventtypesState.sun) {
-            EventTypesAvailabilityTemplate eventtypesAvailability =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability.weekday = 1;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.sunh1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.sunh1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.sunh2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.sunh1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.sunh2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2475,28 +1830,18 @@ class _StepEventTypesTemplatesAvailabilityState
           }
           //monday
           if (eventtypesState.mon) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 2;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.monh1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.monh1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.monh2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.monh1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.monh2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2513,28 +1858,18 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //tuesday
           if (eventtypesState.tue) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 3;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.tueh1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.tueh1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.tueh2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.tueh1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.tueh2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2551,28 +1886,18 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //wetday
           if (eventtypesState.wed) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 4;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.wedh1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.wedh1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.wedh2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.wedh1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.wedh2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2589,28 +1914,18 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //thuday
           if (eventtypesState.thu) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 5;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.thuh1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.thuh1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.thuh2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.thuh1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.thuh2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2627,28 +1942,18 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //friday
           if (eventtypesState.fri) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 6;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.frih1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.frih1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.frih2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.frih1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.frih2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2665,28 +1970,18 @@ class _StepEventTypesTemplatesAvailabilityState
 
           //saturday
           if (eventtypesState.sat) {
-            EventTypesAvailabilityTemplate eventtypesAvailability2 =
-                new EventTypesAvailabilityTemplate();
-            eventtypesAvailability2.event_type_template_id =
-                int.parse(Prefs.getString(PrefsName.EventTypesID));
+            EventTypesAvailabilityTemplate eventtypesAvailability2 = new EventTypesAvailabilityTemplate();
+            eventtypesAvailability2.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
             eventtypesAvailability2.weekday = 7;
-            ApiManager().AddEventTypesAvailabilityTemplate(
-                context, eventtypesAvailability2, (error, responce) async {
+            ApiManager().AddEventTypesAvailabilityTemplate(context, eventtypesAvailability2, (error, responce) async {
               if (error) {
                 for (int i = 0; i < eventtypesState.sath1.length; i++) {
-                  EventTypesAvailabilityTime eventtypesAvailabilitytime =
-                      new EventTypesAvailabilityTime();
-                  eventtypesAvailabilitytime.availability_id =
-                      int.parse(responce);
-                  eventtypesAvailabilitytime.start_time =
-                      eventtypesState.sath1[i];
-                  eventtypesAvailabilitytime.end_time =
-                      eventtypesState.sath2[i];
-                  eventtypesAvailabilitytime.eventtype =
-                      int.parse(Prefs.getString(PrefsName.EventTypesID));
-                  ApiManager().AddEventTypesAvailabilityTimeTemplate(
-                      context, eventtypesAvailabilitytime,
-                      (error, responce) async {
+                  EventTypesAvailabilityTime eventtypesAvailabilitytime = new EventTypesAvailabilityTime();
+                  eventtypesAvailabilitytime.availability_id = int.parse(responce);
+                  eventtypesAvailabilitytime.start_time = eventtypesState.sath1[i];
+                  eventtypesAvailabilitytime.end_time = eventtypesState.sath2[i];
+                  eventtypesAvailabilitytime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+                  ApiManager().AddEventTypesAvailabilityTimeTemplate(context, eventtypesAvailabilitytime, (error, responce) async {
                     if (error) {
                     } else {
                       // loader.remove();
@@ -2710,8 +2005,7 @@ class _StepEventTypesTemplatesAvailabilityState
       ceventtypesUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
       EventTypesUpdate1 eventtypesInsert = new EventTypesUpdate1();
       eventtypesInsert.timezondisplay = eventtypesState.displaytz;
-      eventtypesInsert.time_scheduling_medida =
-          eventtypesState.timeschedulingmed;
+      eventtypesInsert.time_scheduling_medida = eventtypesState.timeschedulingmed;
       eventtypesInsert.time_zone = eventtypesState.timezone;
       eventtypesInsert.time_scheduling = eventtypesState.timescheduling;
       eventtypesInsert.max_event_per_day = eventtypesState.maximum;
@@ -2719,17 +2013,14 @@ class _StepEventTypesTemplatesAvailabilityState
 //ee
 
       overiderdelTemplate overdel = new overiderdelTemplate();
-      overdel.event_type_template_id =
-          int.parse(Prefs.getString(PrefsName.EventTypesID));
+      overdel.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
 
       ApiManager().DeleteOveriderTemplate(context, overdel, (status, responce) {
         for (int i = 0; i < eventtypesState.overrrides.length; i++) {
           NewoveridesTemplate newoverides = NewoveridesTemplate();
-          newoverides.event_type_template_id =
-              int.parse(Prefs.getString(PrefsName.EventTypesID));
+          newoverides.event_type_template_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
           newoverides.date_overrides = eventtypesState.overrrides[i];
-          ApiManager().AddOveriderTemplate(context, newoverides,
-              (error, responce) async {
+          ApiManager().AddOveriderTemplate(context, newoverides, (error, responce) async {
             if (error) {
             } else {
               // loader.remove();
@@ -2743,8 +2034,7 @@ class _StepEventTypesTemplatesAvailabilityState
 
 //ee
 
-      ApiManager().UpdateEventTypesDetailsTemplate(
-          context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
+      ApiManager().UpdateEventTypesDetailsTemplate(context, ceventtypesUpdate, eventtypesInsert, (error, respoce) async {
         if (error) {
         } else {}
       });
@@ -2843,20 +2133,13 @@ class _StepEventTypesTemplatesAvailabilityState
   }
 
   void UpdateSummeryData(EventTypesState eventtypesState) {
-    _store.dispatch(
-        UpdateSummeryEventTypesBedrooms(eventtypesState.EventTypesBedrooms));
-    _store.dispatch(
-        UpdateSummeryEventTypesBathrooms(eventtypesState.EventTypesBathrooms));
-    _store.dispatch(UpdateSummeryEventTypesSizeinsquarefeet(
-        eventtypesState.EventTypesSizeinsquarefeet));
-    _store.dispatch(UpdateSummeryEventTypesMaxoccupancy(
-        eventtypesState.EventTypesMaxoccupancy));
-    _store.dispatch(
-        UpdateSummeryFurnishingValue(eventtypesState.furnishingValue));
-    _store.dispatch(UpdateSummeryOtherPartialFurniture(
-        eventtypesState.Other_Partial_Furniture));
-    _store.dispatch(
-        UpdateSummeryRestrictionlist(eventtypesState.restrictionlist));
+    _store.dispatch(UpdateSummeryEventTypesBedrooms(eventtypesState.EventTypesBedrooms));
+    _store.dispatch(UpdateSummeryEventTypesBathrooms(eventtypesState.EventTypesBathrooms));
+    _store.dispatch(UpdateSummeryEventTypesSizeinsquarefeet(eventtypesState.EventTypesSizeinsquarefeet));
+    _store.dispatch(UpdateSummeryEventTypesMaxoccupancy(eventtypesState.EventTypesMaxoccupancy));
+    _store.dispatch(UpdateSummeryFurnishingValue(eventtypesState.furnishingValue));
+    _store.dispatch(UpdateSummeryOtherPartialFurniture(eventtypesState.Other_Partial_Furniture));
+    _store.dispatch(UpdateSummeryRestrictionlist(eventtypesState.restrictionlist));
   }
 
   bool RestrictionValidation(List<SystemEnumDetails> restrictionlist) {
@@ -2874,8 +2157,7 @@ class _StepEventTypesTemplatesAvailabilityState
     return isvehicallist;
   }
 
-  Future<void> _selectDate1(
-      BuildContext context, EventTypesState eventtypesState) async {
+  Future<void> _selectDate1(BuildContext context, EventTypesState eventtypesState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),

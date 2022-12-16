@@ -16,7 +16,7 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 
-import '../_network_image_web.dart';
+import '../internet/_network_image_web.dart';
 
 class TenantForgotPWDialogBox extends StatefulWidget {
   final VoidCallback _callbackSave;
@@ -29,8 +29,7 @@ class TenantForgotPWDialogBox extends StatefulWidget {
         _callbackClose = onPressedClose;
 
   @override
-  _TenantForgotPWDialogBoxState createState() =>
-      _TenantForgotPWDialogBoxState();
+  _TenantForgotPWDialogBoxState createState() => _TenantForgotPWDialogBoxState();
 }
 
 class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
@@ -58,8 +57,7 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
         child: Padding(
           padding: EdgeInsets.all(20),
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-                minWidth: 700, maxWidth: 700, minHeight: 360, maxHeight: 360),
+            constraints: BoxConstraints(minWidth: 700, maxWidth: 700, minHeight: 360, maxHeight: 360),
             child: Container(
               width: 700,
               height: 560,
@@ -86,13 +84,10 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                        top: 40, right: 20, bottom: 20, left: 20),
+                    padding: EdgeInsets.only(top: 40, right: 20, bottom: 20, left: 20),
                     child: Column(
                       children: [
-                        Prefs.getString(PrefsName.BT_CompanyLogoid) != null &&
-                                Prefs.getString(PrefsName.BT_CompanyLogoid)
-                                    .isNotEmpty
+                        Prefs.getString(PrefsName.BT_CompanyLogoid) != null && Prefs.getString(PrefsName.BT_CompanyLogoid).isNotEmpty
                             ? Container(
                                 width: 380,
                                 height: 80,
@@ -102,14 +97,10 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
                                     fit: BoxFit.contain,
                                     alignment: Alignment.center,
                                     image: CustomNetworkImage(
-                                      Weburl.image_API +
-                                          Prefs.getString(
-                                              PrefsName.BT_CompanyLogoid),
+                                      Weburl.image_API + Prefs.getString(PrefsName.BT_CompanyLogoid),
                                       scale: 1.5,
                                       headers: {
-                                        'Authorization': 'bearer ' +
-                                            Prefs.getString(
-                                                PrefsName.userTokan),
+                                        'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                                         'ApplicationCode': Weburl.API_CODE,
                                       },
                                     ),
@@ -173,8 +164,7 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: myColor.blue, width: 2.0),
               ),
-              border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black12, width: 1.0)),
+              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black12, width: 1.0)),
               fillColor: myColor.white,
               hintText: GlobleString.email,
               hintStyle: MyStyles.Regular(16, myColor.Circle_main),
@@ -214,11 +204,9 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
     String email = _textloginEmail.text.toString().trim();
 
     if (email.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.forgot_error_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.forgot_error_email, false);
     } else if (Helper.ValidEmail(email) != true) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.forgot_error_valid_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.forgot_error_valid_email, false);
     } else {
       /*  ForgotPassword forgotPassword = new ForgotPassword();
       forgotPassword.UserName = email;*/
@@ -226,37 +214,27 @@ class _TenantForgotPWDialogBoxState extends State<TenantForgotPWDialogBox> {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      String url = Weburl.Domain_URL +
-          Prefs.getString(PrefsName.BT_CustomerFeatureListingURL) +
-          "/" +
-          RouteNames.TenantResetpassword +
-          "/";
+      String url = Weburl.Domain_URL + Prefs.getString(PrefsName.BT_CustomerFeatureListingURL) + "/" + RouteNames.TenantResetpassword + "/";
 
       String CompanyLogo;
-      if (Prefs.getString(PrefsName.BT_CompanyLogoURL) != null &&
-          Prefs.getString(PrefsName.BT_CompanyLogoURL).isNotEmpty) {
+      if (Prefs.getString(PrefsName.BT_CompanyLogoURL) != null && Prefs.getString(PrefsName.BT_CompanyLogoURL).isNotEmpty) {
         CompanyLogo = Prefs.getString(PrefsName.BT_CompanyLogoURL);
       } else {
-        CompanyLogo =
-            "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
+        CompanyLogo = "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
       }
 
-      ApiManager().Tenant_forgotpassWorkflow(
-          context, email, url, Weburl.API_CODE, CompanyLogo, (error, respoce) {
+      ApiManager().Tenant_forgotpassWorkflow(context, email, url, Weburl.API_CODE, CompanyLogo, (error, respoce) {
         if (error) {
           loader.remove();
           widget._callbackSave();
-          ToastUtils.showCustomToast(
-              context, GlobleString.forgot_emailsend, true);
+          ToastUtils.showCustomToast(context, GlobleString.forgot_emailsend, true);
           //Navigator.pushNamed(context, RouteNames.Login);
         } else {
           loader.remove();
           if (respoce == "1") {
-            ToastUtils.showCustomToast(
-                context, GlobleString.forgot_error_user, false);
+            ToastUtils.showCustomToast(context, GlobleString.forgot_error_user, false);
           } else {
-            ToastUtils.showCustomToast(
-                context, GlobleString.Error_server, false);
+            ToastUtils.showCustomToast(context, GlobleString.Error_server, false);
           }
         }
       });

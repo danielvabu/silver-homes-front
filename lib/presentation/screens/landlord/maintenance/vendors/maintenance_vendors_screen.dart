@@ -22,7 +22,7 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/dsq_query.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/maintenance_dialog/addVendor_dialogbox.dart';
 import 'package:silverhome/widget/landlord/maintenance_vendor_table/vendors_header.dart';
@@ -73,8 +73,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     VendorListReqtokens reqtokens = new VendorListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
@@ -137,9 +136,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     return Container(
       child: Row(
         children: [
-          CustomeWidget.PropertyStutas(
-              landlordVendorState!.status_TotalVendor.toString(),
-              GlobleString.LMV_status_TotalVendors),
+          CustomeWidget.PropertyStutas(landlordVendorState!.status_TotalVendor.toString(), GlobleString.LMV_status_TotalVendors),
           Expanded(child: Container()),
           Expanded(child: Container()),
           Expanded(child: Container()),
@@ -169,8 +166,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
               children: [
                 Row(
                   children: [
-                    if (landlordVendorState.isloding &&
-                        landlordVendorState.SearchText == "")
+                    if (landlordVendorState.isloding && landlordVendorState.SearchText == "")
                       Container(
                         width: 260,
                         height: 30,
@@ -220,12 +216,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                                   if (_timer != null) {
                                     _timer!.cancel();
                                   }
-                                  _timer = Timer.periodic(Duration(seconds: 2),
-                                      (timer) {
-                                    _store.dispatch(
-                                        UpdateLLVendor_isloding(true));
-                                    _store.dispatch(UpdateLL_vendordatalist(
-                                        <VendorData>[]));
+                                  _timer = Timer.periodic(Duration(milliseconds: 400), (timer) {
+                                    _store.dispatch(UpdateLLVendor_isloding(true));
+                                    _store.dispatch(UpdateLL_vendordatalist(<VendorData>[]));
                                     updateState();
                                     apimanager(value, 1, "ID", 0, 0);
                                     _timer!.cancel();
@@ -234,8 +227,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintStyle:
-                                      MyStyles.Medium(14, myColor.hintcolor),
+                                  hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                   contentPadding: const EdgeInsets.all(10),
                                   isDense: true,
                                   hintText: GlobleString.LL_Search,
@@ -277,7 +269,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
         ApiManager().getCountryList(context, (status, responce, errorlist) {
           if (status) {
             _store.dispatch(UpdateADV_countrydatalist(errorlist));
-            openDialodAddVendor();
+            openDialodAddVendor(false);
           }
         });
       },
@@ -309,7 +301,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     _store.dispatch(UpdateADV_rating(0));
   }
 
-  updateVendorStateData(VendorData data) {
+  updateVendorStateData(VendorData data, bool ranking) {
     _store.dispatch(UpdateADV_vid(data.id!));
     _store.dispatch(UpdateADV_personid(data.PersonID!));
     _store.dispatch(UpdateADV_countrydatalist([]));
@@ -338,17 +330,15 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     ApiManager().getCountryList(context, (status, responce, errorlist) {
       if (status) {
         _store.dispatch(UpdateADV_countrydatalist(errorlist));
-        ApiManager().getStateList(context, data.country!.ID.toString(),
-            (status, responce, errorlist) {
+        ApiManager().getStateList(context, data.country!.ID.toString(), (status, responce, errorlist) {
           if (status) {
             _store.dispatch(UpdateADV_statedatalist(errorlist));
 
-            ApiManager().getCityList(context, data.province!.ID.toString(),
-                (status, responce, errorlist) {
+            ApiManager().getCityList(context, data.province!.ID.toString(), (status, responce, errorlist) {
               if (status) {
                 loader.remove();
                 _store.dispatch(UpdateADV_citydatalist(errorlist));
-                openDialodAddVendor();
+                openDialodAddVendor(ranking);
               } else {
                 loader.remove();
               }
@@ -363,14 +353,15 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     });
   }
 
-  openDialodAddVendor() {
+  openDialodAddVendor(bool ranking) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
       useSafeArea: true,
-      barrierDismissible: false,
+      barrierDismissible: ranking,
       builder: (BuildContext context1) {
         return AddVendorDialogBox(
+          rankingPress: ranking,
           onPressedSave: () async {
             Navigator.of(context1).pop();
             init();
@@ -391,14 +382,11 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
         onSelected: (value) async {
           VendorListReqtokens reqtokens = VendorListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-          reqtokens.Name = landlordVendorState.SearchText != null
-              ? landlordVendorState.SearchText
-              : "";
+          reqtokens.Name = landlordVendorState.SearchText != null ? landlordVendorState.SearchText : "";
 
           List<Sort> sortinglist = [];
           Sort sort = new Sort();
-          if (landlordVendorState.SearchText != null &&
-              landlordVendorState.SearchText.isNotEmpty) {
+          if (landlordVendorState.SearchText != null && landlordVendorState.SearchText.isNotEmpty) {
             sort.fieldId = "ID";
             sort.sortSequence = 0;
           } else {
@@ -468,16 +456,13 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       height: height - 167,
       margin: const EdgeInsets.only(top: 10),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(3)),
-          border: Border.all(color: Colors.transparent, width: 1)),
+      decoration:
+          BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(3)), border: Border.all(color: Colors.transparent, width: 1)),
       child: Column(
         children: [
           tableHeader(landlordVendorState),
           tableItem(landlordVendorState),
-          if (landlordVendorState.vendordatalist != null &&
-              landlordVendorState.vendordatalist.length > 0)
-            tablefooter(landlordVendorState),
+          if (landlordVendorState.vendordatalist != null && landlordVendorState.vendordatalist.length > 0) tablefooter(landlordVendorState),
         ],
       ),
     );
@@ -535,18 +520,21 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                   ),
                 ),
               )
-            : landlordVendorState.vendordatalist != null &&
-                    landlordVendorState.vendordatalist.length > 0
+            : landlordVendorState.vendordatalist != null && landlordVendorState.vendordatalist.length > 0
                 ? Expanded(
                     child: VendorsItem(
                       listdata1: landlordVendorState.vendordatalist,
                       onPressView: (VendorData data, int pos) async {
                         await clearVendorStateData();
-                        await updateVendorStateData(data);
+                        await updateVendorStateData(data, false);
                       },
                       onPresseEdit: (VendorData data, int pos) async {
                         await clearVendorStateData();
-                        await updateVendorStateData(data);
+                        await updateVendorStateData(data, false);
+                      },
+                      onPresseRankingEdit: (VendorData data, int pos) async {
+                        await clearVendorStateData();
+                        await updateVendorStateData(data, true);
                       },
                       onPresseDuplicat: (VendorData data, int pos) {
                         showDialog(
@@ -580,10 +568,8 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
                           builder: (BuildContext context1) {
                             return AlertDialogBox(
                               title: GlobleString.LMV_DL_Vendor_Delete,
-                              positiveText:
-                                  GlobleString.LMV_DL_Vendor_btn_Delete,
-                              negativeText:
-                                  GlobleString.LMV_DL_Vendor_btn_Cancel,
+                              positiveText: GlobleString.LMV_DL_Vendor_btn_Delete,
+                              negativeText: GlobleString.LMV_DL_Vendor_btn_Cancel,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
                                 deleteVendor(data, landlordVendorState);
@@ -639,23 +625,16 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
               mode: Mode.MENU,
               textstyle: MyStyles.Medium(14, myColor.black),
               hint: "Select page",
-              defultHeight:
-                  Helper.PagingRecord(landlordVendorState.totalRecord).length *
-                              35 >
-                          350
-                      ? 350
-                      : Helper.PagingRecord(landlordVendorState.totalRecord)
-                              .length *
-                          35,
+              defultHeight: Helper.PagingRecord(landlordVendorState.totalRecord).length * 35 > 350
+                  ? 350
+                  : Helper.PagingRecord(landlordVendorState.totalRecord).length * 35,
               selectedItem: landlordVendorState.pageNo.toString(),
               items: Helper.PagingRecord(landlordVendorState.totalRecord),
               showSearchBox: false,
               isFilteredOnline: true,
               onChanged: (value) {
-                _store.dispatch(
-                    UpdateLLVendor_pageNo(int.parse(value.toString())));
-                paginationCall(
-                    landlordVendorState, int.parse(value.toString()));
+                _store.dispatch(UpdateLLVendor_pageNo(int.parse(value.toString())));
+                paginationCall(landlordVendorState, int.parse(value.toString()));
               },
             ),
           )
@@ -666,26 +645,19 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
 
   paginationCall(LandlordVendorState landlordVendorState, int pageno) {
     if (landlordVendorState.isCompanyNameSort) {
-      apimanager(landlordVendorState.SearchText, pageno, "CompanyName",
-          landlordVendorState.CompanyNameSortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "CompanyName", landlordVendorState.CompanyNameSortAcsDes, 1);
     } else if (landlordVendorState.isCitySort) {
-      apimanager(landlordVendorState.SearchText, pageno, "City.CityName",
-          landlordVendorState.CitySortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "City.CityName", landlordVendorState.CitySortAcsDes, 1);
     } else if (landlordVendorState.isContactNameSort) {
-      apimanager(landlordVendorState.SearchText, pageno, "PersonID.FirstName",
-          landlordVendorState.ContactNameSortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "PersonID.FirstName", landlordVendorState.ContactNameSortAcsDes, 1);
     } else if (landlordVendorState.isEmaiSort) {
-      apimanager(landlordVendorState.SearchText, pageno, "PersonID.Email",
-          landlordVendorState.EmailSortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "PersonID.Email", landlordVendorState.EmailSortAcsDes, 1);
     } else if (landlordVendorState.isPhoneSort) {
-      apimanager(landlordVendorState.SearchText, pageno,
-          "PersonID.MobileNumber", landlordVendorState.PhoneSortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "PersonID.MobileNumber", landlordVendorState.PhoneSortAcsDes, 1);
     } else if (landlordVendorState.isCategorySort) {
-      apimanager(landlordVendorState.SearchText, pageno, "Category",
-          landlordVendorState.CategorySortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "Category", landlordVendorState.CategorySortAcsDes, 1);
     } else if (landlordVendorState.isRatingSort) {
-      apimanager(landlordVendorState.SearchText, pageno, "Rating",
-          landlordVendorState.RatingSortAcsDes, 1);
+      apimanager(landlordVendorState.SearchText, pageno, "Rating", landlordVendorState.RatingSortAcsDes, 1);
     } else {
       apimanager(landlordVendorState.SearchText, pageno, "ID", 0, 1);
     }
@@ -695,8 +667,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(
-          landlordVendorState.CompanyNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(landlordVendorState.CompanyNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_EmailSortAcsDes(0));
@@ -704,11 +675,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "CompanyName",
-          landlordVendorState.CompanyNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "CompanyName", landlordVendorState.CompanyNameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateLLVendor_CitySortAcsDes(
-          landlordVendorState.CitySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_CitySortAcsDes(landlordVendorState.CitySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_EmailSortAcsDes(0));
@@ -716,11 +685,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "City.CityName",
-          landlordVendorState.CitySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "City.CityName", landlordVendorState.CitySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(
-          landlordVendorState.ContactNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(landlordVendorState.ContactNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_EmailSortAcsDes(0));
@@ -728,11 +695,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "PersonID.FirstName",
-          landlordVendorState.ContactNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "PersonID.FirstName", landlordVendorState.ContactNameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateLLVendor_EmailSortAcsDes(
-          landlordVendorState.EmailSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_EmailSortAcsDes(landlordVendorState.EmailSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
@@ -740,11 +705,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "PersonID.Email",
-          landlordVendorState.EmailSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "PersonID.Email", landlordVendorState.EmailSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateLLVendor_PhoneSortAcsDes(
-          landlordVendorState.PhoneSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_PhoneSortAcsDes(landlordVendorState.PhoneSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
@@ -752,11 +715,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "PersonID.MobileNumber",
-          landlordVendorState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "PersonID.MobileNumber", landlordVendorState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdateLLVendor_CategorySortAcsDes(
-          landlordVendorState.CategorySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_CategorySortAcsDes(landlordVendorState.CategorySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
@@ -764,11 +725,9 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_PhoneSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_RatingSortAcsDes(0));
 
-      apimanager("", 1, "Category",
-          landlordVendorState.CategorySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Category", landlordVendorState.CategorySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 7) {
-      _store.dispatch(UpdateLLVendor_RatingSortAcsDes(
-          landlordVendorState.RatingSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLVendor_RatingSortAcsDes(landlordVendorState.RatingSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLVendor_CompanyNameSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CitySortAcsDes(0));
       _store.dispatch(UpdateLLVendor_ContactNameSortAcsDes(0));
@@ -776,8 +735,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       _store.dispatch(UpdateLLVendor_PhoneSortAcsDes(0));
       _store.dispatch(UpdateLLVendor_CategorySortAcsDes(0));
 
-      apimanager("", 1, "Rating",
-          landlordVendorState.RatingSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Rating", landlordVendorState.RatingSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -805,25 +763,21 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
     }
   }
 
-  duplicateVendor(
-      VendorData vendorData, LandlordVendorState landlordVendorState) {
+  duplicateVendor(VendorData vendorData, LandlordVendorState landlordVendorState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().duplicateVendorworkflow(context, vendorData.id.toString(),
-        (error, respoce) {
+    ApiManager().duplicateVendorworkflow(context, vendorData.id.toString(), (error, respoce) {
       if (error) {
         init();
-        ToastUtils.showCustomToast(
-            context, GlobleString.vendor_dupliacate_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.vendor_dupliacate_successfully, true);
 
         if (respoce != null && respoce.isNotEmpty) {
-          ApiManager().getVendorDetails(context, respoce,
-              (status, responce, vendorData) async {
+          ApiManager().getVendorDetails(context, respoce, (status, responce, vendorData) async {
             if (status) {
               loader.remove();
               await clearVendorStateData();
-              await updateVendorStateData(vendorData);
+              await updateVendorStateData(vendorData, false);
             } else {
               loader.remove();
             }
@@ -833,8 +787,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
         }
       } else {
         loader.remove();
-        String errormsg1 =
-            respoce.replaceAll("One or more errors occurred. (", "");
+        String errormsg1 = respoce.replaceAll("One or more errors occurred. (", "");
         String errormsg = errormsg1.replaceAll(")", "");
         ToastUtils.showCustomToast(context, errormsg, false);
       }
@@ -851,8 +804,7 @@ class _MaintenanceVendorsState extends State<MaintenanceVendorsScreen> {
       if (error) {
         loader.remove();
         init();
-        ToastUtils.showCustomToast(
-            context, GlobleString.Vendor_delete_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.Vendor_delete_successfully, true);
       } else {
         loader.remove();
         ToastUtils.showCustomToast(context, respoce, false);

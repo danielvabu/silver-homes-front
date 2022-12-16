@@ -10,10 +10,10 @@ import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager_admin.dart';
-import 'package:silverhome/widget/admin_panel/newjoinee_table/newjoinee_header.dart';
-import 'package:silverhome/widget/admin_panel/newjoinee_table/newjoinee_item.dart';
-import 'package:silverhome/widget/admin_panel/todaytenantinvite_table/tenantinvite_header.dart';
-import 'package:silverhome/widget/admin_panel/todaytenantinvite_table/tenantinvite_item.dart';
+import 'package:silverhome/widget/adminPanel/newjoinee_table/newjoinee_header.dart';
+import 'package:silverhome/widget/adminPanel/newjoinee_table/newjoinee_item.dart';
+import 'package:silverhome/widget/adminPanel/todaytenantinvite_table/tenantinvite_header.dart';
+import 'package:silverhome/widget/adminPanel/todaytenantinvite_table/tenantinvite_item.dart';
 
 class AdminDashBordScreen extends StatefulWidget {
   @override
@@ -290,11 +290,7 @@ class _AdminDashBordScreenState extends State<AdminDashBordScreen> {
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  GlobleString.ADB_TodaysNewJoinee +
-                      " - " +
-                      new DateFormat("yyyy-MM-dd")
-                          .format(DateTime.now())
-                          .toString(),
+                  GlobleString.ADB_TodaysNewJoinee + " - " + new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
                   style: MyStyles.Medium(16, myColor.white),
                 ),
               ),
@@ -334,11 +330,7 @@ class _AdminDashBordScreenState extends State<AdminDashBordScreen> {
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  GlobleString.ADB_TodayTenantInvitation +
-                      " - " +
-                      new DateFormat("yyyy-MM-dd")
-                          .format(DateTime.now())
-                          .toString(),
+                  GlobleString.ADB_TodayTenantInvitation + " - " + new DateFormat("yyyy-MM-dd").format(DateTime.now()).toString(),
                   style: MyStyles.Medium(16, myColor.white),
                 ),
               ),

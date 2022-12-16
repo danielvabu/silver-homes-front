@@ -1,0 +1,342 @@
+
+
+
+{
+  "helloWord": "Hello mundo",
+
+  "signUp": "Sign Up",
+  "complete": "Complete field",
+  "phone": "Celular",
+  "errorFormat": "Incorrect format",
+  "email": "Correo electrónico",
+  "password": "Password",
+  "errorFormatPassword1": "The password must have the following criteria: minimum 8 characters, minimum 15 characters, contain at least one uppercase letter, one lowercase letter, one space character.",
+  "errorFormatPassword2": "Passwords do not match",
+  "errorFormatPassword3": "The password must be greater than 7 digits and less than 15",
+  "repeatPassword": "Repeat Password",
+  "login": "Log in",
+  "calculator": "calculator",
+  "forgotPassword": "Forgot password?",
+  "forgotPassword": "Forgot password?",
+
+ 
+  "home": "Home",
+  "profile": "Profile",
+  "user": "User",
+ 
+  "settings": "Settings",
+  "logout": "Log out",
+
+  "recoverPassword": "Recover Password",
+  "inputyouremail": "input your email",
+  "recoverPasswordMessage": "you will receive an email with a code to reset your password.",
+  "lastlogin": "Last login",
+
+
+ 
+  "pleasecompleteinformation": "Please complete your information",
+  "enteryourpassword": "Enter your password",
+
+ 
+  "comments": "Comments",
+  "accept": "Accept",
+ 
+
+  "next": "Next",
+  "validateCode": "Validate code",
+  "changeLanguage": "Change language",
+  "apply": "Apply",
+ 
+  
+  "inputyournewpassword": "Input your new password",
+  "inputyournewpasswordagain": "Input your new password again",
+  "yourpasswordformat": "Input your new password",
+  "changePassword": "Change password",
+  "guaranteedrate": "Guaranteed rate",
+  "date": "Saturday, October",
+
+  "finished": "Finalizar",
+  "statementsreport": "Statements report",
+  "confirmation": "Confirmation",
+ 
+  "selectImage": "Select image",
+  
+  "termsandconditions": "Terms and coditions",
+  "validateyouremail": "Validate your email",
+  "pleaseentercodeemail": "Please enter the code sent into your email.",
+  "enterthecode": "Enter the code",
+  "validate": "Validate",
+  "confirmyourphonenumber": "Confirm your phone number",
+  "yourphonenumberis": "Your phone number is",
+ 
+  "hello": "Hello!",
+  "selectphotogallery": "Select photo gallery",
+  "takephoto": "Take photo",
+  "cancel": "Cancel",
+  "forgotyourpassword": "Forgot Your password",
+  "itnotyou": "It's not you",
+
+  "manuallyenterthecode": "manually enter the code",
+
+
+  "name": "Name",
+  "lasname": "Last name",
+  "identificationnumber": "Identification number",
+  "address": "Address",
+  "nameAddress": "Name address",
+ 
+  "homeaddres": "Home address",
+  "loading": "Loading",
+  "languageString": "en",
+  "acceptTerms": "Accept terms and conditions",
+ 
+  "city": "City",
+  "state": "State",
+  "google": "Ingresar con Google",
+  "apple": "Ingresar con Apple",
+
+  "helloWord": "Hello mundo",
+ 
+  "signUp": "Sign Up",
+  "complete": "Complete field",
+  "phone": "Celular",
+  "errorFormat": "Incorrect format",
+  "email": "Correo electrónico",
+  "password": "Password",
+  "errorFormatPassword1": "The password must have the following criteria: minimum 8 characters, minimum 15 characters, contain at least one uppercase letter, one lowercase letter, one space character.",
+  "errorFormatPassword2": "Passwords do not match",
+  "errorFormatPassword3": "The password must be greater than 7 digits and less than 15",
+  "repeatPassword": "Repeat Password",
+  "login": "Log in",
+ 
+  "forgotPassword": "Forgot password?",
+  "forgotPassword": "Forgot password?",
+  
+  "yoursend": "Your Send",
+  "show": "Show",
+  "send": "Send",
+  
+  "home": "Home",
+  "profile": "Profile",
+  "user": "User",
+  "partner": "Partner",
+  
+
+
+  "settings": "Settings",
+  "logout": "Log out",
+  "pending": "Pending",
+ 
+
+ 
+  "change": "Change",
+  "favoriteUser": "Favorite User",
+  "completeInformation": "Complete information",
+
+
+  "recoverPassword": "Recover Password",
+  "inputyouremail": "input your email",
+ "lastlogin": "Last login",
+
+
+
+ 
+ 
+ 
+ 
+ 
+  "pleasecompleteinformation": "Please complete your information",
+  "enteryourpassword": "Enter your password",
+  "itsnotyou": "Is not you",
+
+
+  "accept": "Accept",
+ 
+  "step1": "Step 1",
+ 
+  "validateCode": "Validate code",
+  "changeLanguage": "Change language",
+  "apply": "Apply",
+
+
+
+  "saveaccount": "Save account",
+ 
+
+  "inputyournewpassword": "Input your new password",
+  "inputyournewpasswordagain": "Input your new password again",
+  "yourpasswordformat": "Input your new password",
+  "changePassword": "Change password",
+ 
+
+
+
+
+  "selectImage": "Select image",
+
+  "termsandconditions": "Terms and coditions",
+  "validateyouremail": "Validate your email",
+  "pleaseentercodeemail": "Please enter the code sent into your email.",
+  "enterthecode": "Enter the code",
+  "validate": "Validate",
+  "confirmyourphonenumber": "Confirm your phone number",
+  "yourphonenumberis": "Your phone number is",
+  "enterthecode": "Enter the code",
+
+
+
+  "infouser": "Info user",
+  "hello": "Hello!",
+  "selectphotogallery": "Select photo gallery",
+  "takephoto": "Take photo",
+  "cancel": "Cancel",
+  "forgotyourpassword": "Forgot Your password",
+  "itnotyou": "It's not you",
+ 
+  "name": "Name",
+  "lasname": "Last name",
+  "identificationnumber": "Identification number",
+  "address": "Address",
+  "nameAddress": "Name address",
+
+
+  "homeaddres": "Home address",
+  "loading": "Loading",
+  "languageString": "en",
+  "acceptTerms": "Accept terms and conditions",
+
+
+
+
+
+
+
+
+
+  "city": "Ciudad",
+  "state": "State",
+  "google": "Ingresa con Google",
+  "apple": "Ingresa con Apple",
+
+
+
+
+
+
+  "password": "Contraseña",
+  "errorFormatPassword1": "La contraseña debe tener los siguientes criterios: mínimo 8 caracteres, mínimo 15 caracteres, contener al menos una letra mayúscula, una letra minúscula, un carácter de espacio.",
+  "errorFormatPassword2": "Las contraseñas no coinciden",
+  "errorFormatPassword3": "La contraseña debe tener más de 7 dígitos y menos de 15",
+  "repeatPassword": "Repite la contraseña",
+  "login": "Iniciar sesión",
+  "forgotPassword": "¿Se te olvidó tu contraseña?",
+  "home": "Hogar",
+  "profile": "Perfil",
+  "user": "Usuario",
+
+
+  "changeseguritypin": "Cambiar contraseña",
+
+
+  "settings": "Ajustes",
+  "logout": "Cerrar sesión",
+
+
+
+
+  "changeseguritypin": "Cambiar contraseña",
+  "previouspin": "Contraseña actua",
+  "newpin": "Nueva contraseña",
+  "confirmnewpin": "Confirmar contraseña",
+  "change": "Cambiar",
+  "completeInformation": "Completar información",
+  "recoverPassword": "Recuperar contraseña",
+  "inputyouremail": "ingrese su correo electrónico",
+  "recoverPasswordMessage": "recibirá un correo electrónico con un código para restablecer su contraseña.",
+  "lastlogin": "Last login",
+
+
+  "pleasecompleteinformation": "Favor completar información",
+  "enteryourpassword": "Ingresa tu contraseña",
+
+
+  "inputyournewpassword": "Ingresa nueva contraseña",
+  "inputyournewpasswordagain": "Ingresa nuevamente la nueva contraseña",
+  "yourpasswordformat": "Input your new password",
+  "changePassword": "Cambiar contraseña",
+
+
+  "selectImage": "Seleccionar imagen",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "termsandconditions": "Términos y condiciones",
+  "validateyouremail": "Validar email",
+  "pleaseentercodeemail": "Ingrese el código enviado en su correo electrónico.",
+  "enterthecode": "Inserte el código",
+  "validate": "Validar",
+  "confirmyourphonenumber": "Confirmar tu número de teléfono",
+  "yourphonenumberis": "Tú número de teléfono es",
+  "enterthecode": "Inserte el código",
+  "accountype": "Tipo de cuenta",
+  "selectphotogallery": "Seleccionar galería de fotos",
+  "takephoto": "Tomar foto",
+  "cancel": "Cancelar",
+  "forgotyourpassword": "¿Olvidaste tu contraseña?",
+ 
+
+
+
+
+  "address": "Dirección",
+  "nameAddress": "Nombre dirección",
+
+
+  "homeaddres": "Home address",
+  "loading": "Cargando",
+  "languageString": "en",
+  "acceptTerms": "Aceptar términos y condiciones",
+
+  "city": "City",
+  "state": "State",
+  "google": "Ingresa con Google",
+  "apple": "Ingresa con Apple",
+
+
+
+
+
+
+
+
+  "complete": "Campo requerido *",
+  "changeLanguage": "Cambiar lenguaje",
+  "apply": "Aplicar",
+ 
+  "errorFormat": "Formato incorrecto",
+  "email": "Correo electrónico",
+  "lasname": "Apellido",
+  "name": "Nombre",
+  "signUp": "Registrarse",
+  "slideIntro1": "Control y facilidad",
+"questionrequired": "Pregunta requerida",
+  "noresult": "No hay resultados",
+  "errornotification":"Ha ocurrido un error, por favor inténtelo de nuevo más tarde"
+
+  
+
+
+}
