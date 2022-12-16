@@ -132,6 +132,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     );
   }
 
+  String valueHint = "Select Status";
+
   Widget Form() {
     return Container(
       width: 1000,
@@ -200,11 +202,12 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             defultHeight: 210,
                             textstyle: MyStyles.Medium(13, myColor.text_color),
                             itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
-                            hint: "Select Status",
+                            hint: valueHint.toString(),
                             showSearchBox: false,
                             selectedItem: tfEmploymentState.empstatus != null ? tfEmploymentState.empstatus : null,
                             isFilteredOnline: true,
                             onChanged: (data) {
+                              valueHint = data!.displayValue.toString();
                               _store.dispatch(UpdateTFEmploymentempstatus(data));
 
                               _store.dispatch(UpdateTFEmploymentError_empstatus(false));

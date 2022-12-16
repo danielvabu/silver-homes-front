@@ -1825,12 +1825,14 @@ class _StepEventTypesAvailabilityState extends State<StepEventTypesAvailability>
       Aviabilitydel currentAvability = new Aviabilitydel();
       currentAvability.event_type_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-      ApiManager().Deleteavailability(context, currentAvability, (status, responce) {
-        AviabilityTimedel currentAvabilityTime = new AviabilityTimedel();
-        currentAvabilityTime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
+      // ApiManager().Deleteavailability(context, currentAvability, (status, responce) {
+      AviabilityTimedel currentAvabilityTime = new AviabilityTimedel();
+      currentAvabilityTime.eventtype = int.parse(Prefs.getString(PrefsName.EventTypesID));
 
-        //  ApiManager().DeleteavailabilityTime(context, currentAvabilityTime, (status, responce) {
-        //sunday
+      //  ApiManager().DeleteavailabilityTime(context, currentAvabilityTime, (status, responce) {
+      //sunday
+
+      execute() {
         if (eventtypesState.sun) {
           EventTypesAvailability eventtypesAvailability = new EventTypesAvailability();
           eventtypesAvailability.event_type_id = int.parse(Prefs.getString(PrefsName.EventTypesID));
@@ -2024,8 +2026,21 @@ class _StepEventTypesAvailabilityState extends State<StepEventTypesAvailability>
             }
           });
         }
-        salvar = 1;
-      });
+      }
+
+      execute();
+
+      /* final timer = Timer(
+        const Duration(seconds: 1),
+        () {
+          execute();
+          // Navigate to your favorite place
+        },
+      );*/
+
+      salvar = 1;
+      //
+      // });
 
       //gotoNext();
       // });

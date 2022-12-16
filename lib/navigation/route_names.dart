@@ -27,6 +27,7 @@ import 'package:silverhome/presentation/screens/splash/splash_screen.dart';
 import 'package:silverhome/presentation/screens/under_maintenance/under_maintenance.dart';
 import 'package:silverhome/widget/tenantScreening/widget.dart';
 
+import '../presentation/screens/landlord/tenancyform/taf_employment_screen.dart';
 import '../widget/tenantScreening/progress_widget.dart';
 
 class RouteNames {
@@ -61,10 +62,9 @@ class RouteNames {
   static bool isFresh = true;
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    splashScreen:
-        (context) => /* /* LoginScreen(), */
-    
-    SizedBox(
+    splashScreen: (context) => /* LoginScreen(), */
+
+        /* SizedBox(
       height:800,
       width:900,
       child: Scaffold(
@@ -77,7 +77,7 @@ class RouteNames {
             ),
       ),
     ), */
-            SplashScreen(),
+        SplashScreen(),
     Login: (context) => LoginScreen(),
     underMaintenanceScreen: (context) => UnderMaintenanceScreen(),
     ForgotPassword: (context) => ForgotPasswordScreen(),
