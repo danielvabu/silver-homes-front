@@ -10,7 +10,7 @@ import 'package:silverhome/domain/entities/lead_reference.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
-import 'package:silverhome/widget/circular_loading_widget.dart';
+import 'package:silverhome/widget/alert/circular_loading_widget.dart';
 
 import '../../../presentation/models/landlord_models/reference_questionnaire_details_state.dart';
 
@@ -25,12 +25,10 @@ class MultipleReferenceDetailsDialog extends StatefulWidget {
         leadlist = leadlist;
 
   @override
-  _MultipleReferenceDetailsDialogState createState() =>
-      _MultipleReferenceDetailsDialogState();
+  _MultipleReferenceDetailsDialogState createState() => _MultipleReferenceDetailsDialogState();
 }
 
-class _MultipleReferenceDetailsDialogState
-    extends State<MultipleReferenceDetailsDialog> {
+class _MultipleReferenceDetailsDialogState extends State<MultipleReferenceDetailsDialog> {
   int indexpos = 0;
   bool isloading = true;
 
@@ -43,9 +41,7 @@ class _MultipleReferenceDetailsDialogState
   apiManagerCall() async {
     await Prefs.init();
 
-    ApiManager().getReferenceDetailsAPISingle(
-        context, widget.leadlist[indexpos].referenceId.toString(),
-        (status, responce) {
+    ApiManager().getReferenceDetailsAPISingle(context, widget.leadlist[indexpos].referenceId.toString(), (status, responce) {
       if (status) {
         updateMethod();
       } else {
@@ -82,8 +78,7 @@ class _MultipleReferenceDetailsDialogState
                     Radius.circular(10.0),
                   ),
                   color: Colors.white),
-              padding:
-                  EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+              padding: EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
               child: isloading
                   ? Container(
                       width: MediaQuery.of(context).size.width,
@@ -115,8 +110,7 @@ class _MultipleReferenceDetailsDialogState
                                   //margin: EdgeInsets.only(top: 30.0),
                                   child: Text(
                                     GlobleString.DRQ_Reference_Questionnaire,
-                                    style:
-                                        MyStyles.Medium(20, myColor.text_color),
+                                    style: MyStyles.Medium(20, myColor.text_color),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -155,19 +149,16 @@ class _MultipleReferenceDetailsDialogState
                                         child: Container(
                                           child: Text(
                                             GlobleString.TA_PREVIEW,
-                                            style:
-                                                MyStyles.Bold(14, myColor.blue),
+                                            style: MyStyles.Bold(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
                                       )
                                     : Container(),
-                                (widget.leadlist.length - 1) > indexpos &&
-                                        widget.leadlist.length > 1
+                                (widget.leadlist.length - 1) > indexpos && widget.leadlist.length > 1
                                     ? InkWell(
                                         onTap: () {
-                                          if ((widget.leadlist.length - 1) >
-                                              indexpos) {
+                                          if ((widget.leadlist.length - 1) > indexpos) {
                                             setState(() {
                                               isloading = true;
                                             });
@@ -179,8 +170,7 @@ class _MultipleReferenceDetailsDialogState
                                         child: Container(
                                           child: Text(
                                             GlobleString.TA_NEXT,
-                                            style:
-                                                MyStyles.Bold(14, myColor.blue),
+                                            style: MyStyles.Bold(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
@@ -201,13 +191,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Property,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -215,8 +203,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState!.PropertyName,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -225,13 +212,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Reference_Name,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -239,8 +224,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState.ReferenceName,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -249,13 +233,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Phone_Number,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -263,8 +245,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState.ReferencePhone,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -280,13 +261,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Applicant_Name,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -294,8 +273,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState.ApplicantName,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -304,13 +282,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Relationship,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -318,8 +294,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState.ReferenceRelationShip,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -328,13 +303,11 @@ class _MultipleReferenceDetailsDialogState
                                     Container(
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.DRQ_Email,
-                                            style: MyStyles.Medium(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Medium(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -342,8 +315,7 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           Text(
                                             refQueState.ReferenceEmail,
-                                            style: MyStyles.Medium(
-                                                14, myColor.blue),
+                                            style: MyStyles.Medium(14, myColor.blue),
                                             textAlign: TextAlign.center,
                                           ),
                                         ],
@@ -362,29 +334,23 @@ class _MultipleReferenceDetailsDialogState
                                 child: Container(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_Length_of_Tenancy,
-                                            style: MyStyles.SemiBold(
-                                                16, myColor.text_color),
+                                            style: MyStyles.SemiBold(16, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
                                             height: 10,
                                           ),
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 height: 30,
@@ -392,26 +358,14 @@ class _MultipleReferenceDetailsDialogState
                                                 //padding: EdgeInsets.only(left: 15, right: 15),
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(3)),
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: myColor.TA_Border),
-                                                  color: refQueState
-                                                              .lenth_tenancy ==
-                                                          1
-                                                      ? myColor.TA_tab_text
-                                                      : Colors.transparent,
+                                                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                                                  border: Border.all(width: 1, color: myColor.TA_Border),
+                                                  color: refQueState.lenth_tenancy == 1 ? myColor.TA_tab_text : Colors.transparent,
                                                 ),
                                                 child: Text(
                                                   GlobleString.RQ_Under_6_month,
                                                   style: MyStyles.Medium(
-                                                      13,
-                                                      refQueState.lenth_tenancy ==
-                                                              1
-                                                          ? myColor.white
-                                                          : myColor.text_color),
+                                                      13, refQueState.lenth_tenancy == 1 ? myColor.white : myColor.text_color),
                                                 ),
                                               ),
                                               SizedBox(width: 10),
@@ -421,27 +375,14 @@ class _MultipleReferenceDetailsDialogState
                                                 //padding: EdgeInsets.only(left: 15, right: 15),
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(3)),
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: myColor.TA_Border),
-                                                  color: refQueState
-                                                              .lenth_tenancy ==
-                                                          2
-                                                      ? myColor.TA_tab_text
-                                                      : Colors.transparent,
+                                                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                                                  border: Border.all(width: 1, color: myColor.TA_Border),
+                                                  color: refQueState.lenth_tenancy == 2 ? myColor.TA_tab_text : Colors.transparent,
                                                 ),
                                                 child: Text(
-                                                  GlobleString
-                                                      .RQ_6_months_to_1_year,
+                                                  GlobleString.RQ_6_months_to_1_year,
                                                   style: MyStyles.Medium(
-                                                      13,
-                                                      refQueState.lenth_tenancy ==
-                                                              2
-                                                          ? myColor.white
-                                                          : myColor.text_color),
+                                                      13, refQueState.lenth_tenancy == 2 ? myColor.white : myColor.text_color),
                                                 ),
                                               ),
                                               SizedBox(width: 10),
@@ -451,27 +392,14 @@ class _MultipleReferenceDetailsDialogState
                                                 //padding: EdgeInsets.only(left: 15, right: 15),
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(3)),
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: myColor.TA_Border),
-                                                  color: refQueState
-                                                              .lenth_tenancy ==
-                                                          3
-                                                      ? myColor.TA_tab_text
-                                                      : Colors.transparent,
+                                                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                                                  border: Border.all(width: 1, color: myColor.TA_Border),
+                                                  color: refQueState.lenth_tenancy == 3 ? myColor.TA_tab_text : Colors.transparent,
                                                 ),
                                                 child: Text(
-                                                  GlobleString
-                                                      .RQ_1_year_to_2_years,
+                                                  GlobleString.RQ_1_year_to_2_years,
                                                   style: MyStyles.Medium(
-                                                      13,
-                                                      refQueState.lenth_tenancy ==
-                                                              3
-                                                          ? myColor.white
-                                                          : myColor.text_color),
+                                                      13, refQueState.lenth_tenancy == 3 ? myColor.white : myColor.text_color),
                                                 ),
                                               ),
                                               SizedBox(width: 10),
@@ -481,26 +409,14 @@ class _MultipleReferenceDetailsDialogState
                                                 //padding: EdgeInsets.only(left: 15, right: 15),
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(3)),
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: myColor.TA_Border),
-                                                  color: refQueState
-                                                              .lenth_tenancy ==
-                                                          4
-                                                      ? myColor.TA_tab_text
-                                                      : Colors.transparent,
+                                                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                                                  border: Border.all(width: 1, color: myColor.TA_Border),
+                                                  color: refQueState.lenth_tenancy == 4 ? myColor.TA_tab_text : Colors.transparent,
                                                 ),
                                                 child: Text(
                                                   GlobleString.RQ_Over_2_years,
                                                   style: MyStyles.Medium(
-                                                      13,
-                                                      refQueState.lenth_tenancy ==
-                                                              4
-                                                          ? myColor.white
-                                                          : myColor.text_color),
+                                                      13, refQueState.lenth_tenancy == 4 ? myColor.white : myColor.text_color),
                                                 ),
                                               ),
                                             ],
@@ -511,49 +427,34 @@ class _MultipleReferenceDetailsDialogState
                                         height: 40,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            GlobleString
-                                                .RQ_Reason_For_Departure,
-                                            style: MyStyles.SemiBold(
-                                                16, myColor.text_color),
+                                            GlobleString.RQ_Reason_For_Departure,
+                                            style: MyStyles.SemiBold(16, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
                                             height: 10,
                                           ),
                                           TextFormField(
-                                            initialValue:
-                                                refQueState.ReasonDeparture,
+                                            initialValue: refQueState.ReasonDeparture,
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             maxLines: 5,
                                             readOnly: true,
                                             decoration: InputDecoration(
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.TA_Border,
-                                                      width: 1.0),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
                                                 ),
-                                                hintText: GlobleString
-                                                    .RQ_Reason_For_Departure_hint,
-                                                hintStyle: MyStyles.Regular(
-                                                    14, myColor.RQ_hint),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.TA_Border,
-                                                      width: 1.0),
+                                                hintText: GlobleString.RQ_Reason_For_Departure_hint,
+                                                hintStyle: MyStyles.Regular(14, myColor.RQ_hint),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
+                                                contentPadding: EdgeInsets.all(10),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                           ),
@@ -564,31 +465,26 @@ class _MultipleReferenceDetailsDialogState
                                       ),
                                       Text(
                                         GlobleString.RQ_question_title,
-                                        style: MyStyles.SemiBold(
-                                            16, myColor.text_color),
+                                        style: MyStyles.SemiBold(16, myColor.text_color),
                                         textAlign: TextAlign.center,
                                       ),
                                       SizedBox(
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_question1_title,
-                                            style: MyStyles.SemiBold(
-                                                14, myColor.text_color),
+                                            style: MyStyles.SemiBold(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
                                               GlobleString.RQ_question1,
-                                              style: MyStyles.Regular(
-                                                  13, myColor.text_color),
+                                              style: MyStyles.Regular(13, myColor.text_color),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -598,25 +494,20 @@ class _MultipleReferenceDetailsDialogState
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   GlobleString.RQ_Poor,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
                                                 RatingBarIndicator(
-                                                  rating: refQueState
-                                                      .CleanlinessRating,
-                                                  itemBuilder:
-                                                      (context, index) => Icon(
+                                                  rating: refQueState.CleanlinessRating,
+                                                  itemBuilder: (context, index) => Icon(
                                                     Icons.star,
                                                     color: myColor.blue,
                                                   ),
@@ -629,8 +520,7 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_Excellent,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ],
@@ -642,23 +532,19 @@ class _MultipleReferenceDetailsDialogState
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_question2_title,
-                                            style: MyStyles.SemiBold(
-                                                14, myColor.text_color),
+                                            style: MyStyles.SemiBold(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
                                               GlobleString.RQ_question2,
-                                              style: MyStyles.Regular(
-                                                  13, myColor.text_color),
+                                              style: MyStyles.Regular(13, myColor.text_color),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -668,25 +554,20 @@ class _MultipleReferenceDetailsDialogState
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   GlobleString.RQ_Poor,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
                                                 RatingBarIndicator(
-                                                  rating: refQueState
-                                                      .CommunicationRating,
-                                                  itemBuilder:
-                                                      (context, index) => Icon(
+                                                  rating: refQueState.CommunicationRating,
+                                                  itemBuilder: (context, index) => Icon(
                                                     Icons.star,
                                                     color: myColor.blue,
                                                   ),
@@ -699,8 +580,7 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_Excellent,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ],
@@ -712,23 +592,19 @@ class _MultipleReferenceDetailsDialogState
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_question3_title,
-                                            style: MyStyles.SemiBold(
-                                                14, myColor.text_color),
+                                            style: MyStyles.SemiBold(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
                                               GlobleString.RQ_question3,
-                                              style: MyStyles.Regular(
-                                                  13, myColor.text_color),
+                                              style: MyStyles.Regular(13, myColor.text_color),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -738,25 +614,20 @@ class _MultipleReferenceDetailsDialogState
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   GlobleString.RQ_Poor,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
                                                 RatingBarIndicator(
-                                                  rating: refQueState
-                                                      .RespectfulnessRating,
-                                                  itemBuilder:
-                                                      (context, index) => Icon(
+                                                  rating: refQueState.RespectfulnessRating,
+                                                  itemBuilder: (context, index) => Icon(
                                                     Icons.star,
                                                     color: myColor.blue,
                                                   ),
@@ -769,8 +640,7 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_Excellent,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ],
@@ -782,23 +652,19 @@ class _MultipleReferenceDetailsDialogState
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_question4_title,
-                                            style: MyStyles.SemiBold(
-                                                14, myColor.text_color),
+                                            style: MyStyles.SemiBold(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Text(
                                               GlobleString.RQ_question4,
-                                              style: MyStyles.Regular(
-                                                  13, myColor.text_color),
+                                              style: MyStyles.Regular(13, myColor.text_color),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -808,25 +674,20 @@ class _MultipleReferenceDetailsDialogState
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 Text(
                                                   GlobleString.RQ_Poor,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
                                                   width: 10,
                                                 ),
                                                 RatingBarIndicator(
-                                                  rating: refQueState
-                                                      .PaymentPunctualityRating,
-                                                  itemBuilder:
-                                                      (context, index) => Icon(
+                                                  rating: refQueState.PaymentPunctualityRating,
+                                                  itemBuilder: (context, index) => Icon(
                                                     Icons.star,
                                                     color: myColor.blue,
                                                   ),
@@ -839,8 +700,7 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_Excellent,
-                                                  style: MyStyles.Regular(
-                                                      12, myColor.RQ_rating),
+                                                  style: MyStyles.Regular(12, myColor.RQ_rating),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ],
@@ -852,15 +712,12 @@ class _MultipleReferenceDetailsDialogState
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_question5_title,
-                                            style: MyStyles.SemiBold(
-                                                14, myColor.text_color),
+                                            style: MyStyles.SemiBold(14, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -869,8 +726,7 @@ class _MultipleReferenceDetailsDialogState
                                           Padding(
                                             padding: EdgeInsets.only(left: 15),
                                             child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 InkWell(
                                                   onTap: () {},
@@ -878,11 +734,8 @@ class _MultipleReferenceDetailsDialogState
                                                     "assets/images/ic_like.png",
                                                     width: 20,
                                                     height: 20,
-                                                    color: refQueState.yesNo
-                                                        ? myColor.blue
-                                                        : myColor.black,
-                                                    alignment:
-                                                        Alignment.topLeft,
+                                                    color: refQueState.yesNo ? myColor.blue : myColor.black,
+                                                    alignment: Alignment.topLeft,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -890,11 +743,7 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_Yes,
-                                                  style: MyStyles.Medium(
-                                                      14,
-                                                      refQueState.yesNo
-                                                          ? myColor.blue
-                                                          : myColor.text_color),
+                                                  style: MyStyles.Medium(14, refQueState.yesNo ? myColor.blue : myColor.text_color),
                                                   textAlign: TextAlign.center,
                                                 ),
                                                 SizedBox(
@@ -906,12 +755,8 @@ class _MultipleReferenceDetailsDialogState
                                                     "assets/images/ic_unlike.png",
                                                     width: 20,
                                                     height: 20,
-                                                    color: refQueState.yesNo ==
-                                                            false
-                                                        ? myColor.blue
-                                                        : myColor.black,
-                                                    alignment:
-                                                        Alignment.topLeft,
+                                                    color: refQueState.yesNo == false ? myColor.blue : myColor.black,
+                                                    alignment: Alignment.topLeft,
                                                   ),
                                                 ),
                                                 SizedBox(
@@ -919,11 +764,8 @@ class _MultipleReferenceDetailsDialogState
                                                 ),
                                                 Text(
                                                   GlobleString.RQ_No,
-                                                  style: MyStyles.Medium(
-                                                      14,
-                                                      refQueState.yesNo == false
-                                                          ? myColor.blue
-                                                          : myColor.text_color),
+                                                  style:
+                                                      MyStyles.Medium(14, refQueState.yesNo == false ? myColor.blue : myColor.text_color),
                                                   textAlign: TextAlign.center,
                                                 ),
                                               ],
@@ -935,15 +777,12 @@ class _MultipleReferenceDetailsDialogState
                                         height: 20,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.RQ_Other_Comments,
-                                            style: MyStyles.SemiBold(
-                                                16, myColor.text_color),
+                                            style: MyStyles.SemiBold(16, myColor.text_color),
                                             textAlign: TextAlign.center,
                                           ),
                                           SizedBox(
@@ -951,32 +790,21 @@ class _MultipleReferenceDetailsDialogState
                                           ),
                                           TextFormField(
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             maxLines: 5,
                                             readOnly: true,
-                                            initialValue:
-                                                refQueState.OtherComments,
+                                            initialValue: refQueState.OtherComments,
                                             decoration: InputDecoration(
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.TA_Border,
-                                                      width: 1.0),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
                                                 ),
-                                                hintText: GlobleString
-                                                    .RQ_Other_Comments_hint,
-                                                hintStyle: MyStyles.Regular(
-                                                    14, myColor.RQ_hint),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.TA_Border,
-                                                      width: 1.0),
+                                                hintText: GlobleString.RQ_Other_Comments_hint,
+                                                hintStyle: MyStyles.Regular(14, myColor.RQ_hint),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(10),
+                                                contentPadding: EdgeInsets.all(10),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                           ),
@@ -1003,9 +831,7 @@ class _MultipleReferenceDetailsDialogState
   nextdetails(int index) {
     Helper.Log("index", index.toString());
 
-    ApiManager().getReferenceDetailsAPISingle(
-        context, widget.leadlist[index].referenceId.toString(),
-        (status, responce) {
+    ApiManager().getReferenceDetailsAPISingle(context, widget.leadlist[index].referenceId.toString(), (status, responce) {
       if (status) {
         updateMethod();
       } else {

@@ -17,7 +17,7 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 
-import '../_network_image_web.dart';
+import '../internet/_network_image_web.dart';
 
 typedef VoidCallEdit = void Function(String mid);
 
@@ -38,12 +38,10 @@ class MaintenanceRequestDialogBox extends StatefulWidget {
         mID = mID;
 
   @override
-  _MaintenanceRequestDialogBoxState createState() =>
-      _MaintenanceRequestDialogBoxState();
+  _MaintenanceRequestDialogBoxState createState() => _MaintenanceRequestDialogBoxState();
 }
 
-class _MaintenanceRequestDialogBoxState
-    extends State<MaintenanceRequestDialogBox> {
+class _MaintenanceRequestDialogBoxState extends State<MaintenanceRequestDialogBox> {
   late OverlayEntry loader;
   final _store = getIt<AppStore>();
 
@@ -61,24 +59,19 @@ class _MaintenanceRequestDialogBoxState
     await clearMainatenanceDetailsState();
 
     if (widget.mID != null && widget.mID!.isNotEmpty) {
-      ApiManager().maintenanceDetailsApi(context, widget.mID!,
-          (status, responce) {
+      ApiManager().maintenanceDetailsApi(context, widget.mID!, (status, responce) {
         if (status) {
-          ApiManager().MaintenanceImagesApi(context, widget.mID!,
-              (status, responce, maintenanceImageslist) {
+          ApiManager().MaintenanceImagesApi(context, widget.mID!, (status, responce, maintenanceImageslist) {
             if (status) {
-              _store.dispatch(
-                  UpdateMDA_maintenanceImageslist(maintenanceImageslist));
+              _store.dispatch(UpdateMDA_maintenanceImageslist(maintenanceImageslist));
             } else {
               _store.dispatch(UpdateMDA_maintenanceImageslist([]));
             }
           });
 
-          ApiManager().MaintenanceVendorDetailsApi(context, widget.mID!,
-              (status, responce, maintenanceVendorlist) {
+          ApiManager().MaintenanceVendorDetailsApi(context, widget.mID!, (status, responce, maintenanceVendorlist) {
             if (status) {
-              _store.dispatch(
-                  UpdateMDA_maintenanceVendorlist(maintenanceVendorlist));
+              _store.dispatch(UpdateMDA_maintenanceVendorlist(maintenanceVendorlist));
             } else {
               _store.dispatch(UpdateMDA_maintenanceVendorlist([]));
             }
@@ -130,8 +123,7 @@ class _MaintenanceRequestDialogBoxState
     _store.dispatch(UpdateMDA_Company_logo(null));
 
     List<MaintenanceVendor> maintenanceVendorlist = <MaintenanceVendor>[];
-    List<PropertyMaintenanceImages> maintenanceImageslist =
-        <PropertyMaintenanceImages>[];
+    List<PropertyMaintenanceImages> maintenanceImageslist = <PropertyMaintenanceImages>[];
 
     _store.dispatch(UpdateMDA_maintenanceImageslist(maintenanceImageslist));
     _store.dispatch(UpdateMDA_maintenanceVendorlist(maintenanceVendorlist));
@@ -146,8 +138,7 @@ class _MaintenanceRequestDialogBoxState
         child: Padding(
           padding: EdgeInsets.all(30),
           child: ConstrainedBox(
-            constraints:
-                BoxConstraints(minWidth: 905, maxWidth: 905, minHeight: 600),
+            constraints: BoxConstraints(minWidth: 905, maxWidth: 905, minHeight: 600),
             child: Container(
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
@@ -252,21 +243,16 @@ class _MaintenanceRequestDialogBoxState
                                         child: Container(
                                           height: 30,
                                           width: 100,
-                                          padding: EdgeInsets.only(
-                                              left: 25, right: 25),
+                                          padding: EdgeInsets.only(left: 25, right: 25),
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                            border: Border.all(
-                                                color: myColor.Circle_main,
-                                                width: 1),
+                                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                                            border: Border.all(color: myColor.Circle_main, width: 1),
                                             color: myColor.white,
                                           ),
                                           child: Text(
                                             GlobleString.Mant_DL_Cancel,
-                                            style: MyStyles.Medium(
-                                                12, myColor.Circle_main),
+                                            style: MyStyles.Medium(12, myColor.Circle_main),
                                           ),
                                         ),
                                       ),
@@ -302,8 +288,7 @@ class _MaintenanceRequestDialogBoxState
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: mDetailsState.Company_logo != null &&
-                    mDetailsState.Company_logo!.id != null
+            child: mDetailsState.Company_logo != null && mDetailsState.Company_logo!.id != null
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -318,12 +303,10 @@ class _MaintenanceRequestDialogBoxState
                               alignment: Alignment.topLeft,
                               fit: BoxFit.contain,
                               image: CustomNetworkImage(
-                                Weburl.image_API +
-                                    mDetailsState.Company_logo!.id.toString(),
+                                Weburl.image_API + mDetailsState.Company_logo!.id.toString(),
                                 scale: 1.5,
                                 headers: {
-                                  'Authorization': 'bearer ' +
-                                      Prefs.getString(PrefsName.userTokan),
+                                  'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                                   'ApplicationCode': Weburl.API_CODE,
                                 },
                               ),
@@ -403,16 +386,12 @@ class _MaintenanceRequestDialogBoxState
                             width: 150,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.TA_Border, width: 1),
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.TA_Border, width: 1),
                               color: myColor.white,
                             ),
                             child: Text(
-                              mDetailsState.Status != null
-                                  ? mDetailsState.Status!.displayValue
-                                  : "",
+                              mDetailsState.Status != null ? mDetailsState.Status!.displayValue : "",
                               style: MyStyles.Medium(12, myColor.black),
                             ),
                           )
@@ -442,16 +421,12 @@ class _MaintenanceRequestDialogBoxState
                             width: 150,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              border: Border.all(
-                                  color: myColor.Status_border, width: 1),
+                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              border: Border.all(color: myColor.Status_border, width: 1),
                               color: myColor.Status_bg,
                             ),
                             child: Text(
-                              mDetailsState.Priority != null
-                                  ? mDetailsState.Priority!.displayValue
-                                  : "",
+                              mDetailsState.Priority != null ? mDetailsState.Priority!.displayValue : "",
                               style: MyStyles.Medium(12, myColor.Status_border),
                             ),
                           )
@@ -495,9 +470,7 @@ class _MaintenanceRequestDialogBoxState
                       " " +
                       mDetailsState.PropertyName +
                       "" +
-                      (mDetailsState.Suite_Unit.isNotEmpty
-                          ? " - " + mDetailsState.Suite_Unit
-                          : ""),
+                      (mDetailsState.Suite_Unit.isNotEmpty ? " - " + mDetailsState.Suite_Unit : ""),
                   style: MyStyles.Medium(14, myColor.black),
                   textAlign: TextAlign.start,
                 ),
@@ -505,9 +478,7 @@ class _MaintenanceRequestDialogBoxState
                   height: 10,
                 ),
                 Text(
-                  GlobleString.Mant_view_Address +
-                      " " +
-                      mDetailsState.Property_Address,
+                  GlobleString.Mant_view_Address + " " + mDetailsState.Property_Address,
                   style: MyStyles.Medium(14, myColor.black),
                   textAlign: TextAlign.start,
                 ),
@@ -563,9 +534,7 @@ class _MaintenanceRequestDialogBoxState
             height: 15,
           ),
           Text(
-            GlobleString.Mant_view_RequestName +
-                " " +
-                mDetailsState.RequestName,
+            GlobleString.Mant_view_RequestName + " " + mDetailsState.RequestName,
             style: MyStyles.Medium(14, myColor.black),
             textAlign: TextAlign.start,
           ),
@@ -573,11 +542,7 @@ class _MaintenanceRequestDialogBoxState
             height: 15,
           ),
           Text(
-            GlobleString.Mant_view_Category +
-                " " +
-                (mDetailsState.Category != null
-                    ? mDetailsState.Category!.displayValue
-                    : ""),
+            GlobleString.Mant_view_Category + " " + (mDetailsState.Category != null ? mDetailsState.Category!.displayValue : ""),
             style: MyStyles.Medium(14, myColor.black),
             textAlign: TextAlign.start,
           ),
@@ -612,8 +577,7 @@ class _MaintenanceRequestDialogBoxState
             itemCount: mDetailsState.maintenanceImageslist.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              PropertyMaintenanceImages maintenanceimage =
-                  mDetailsState.maintenanceImageslist[index];
+              PropertyMaintenanceImages maintenanceimage = mDetailsState.maintenanceImageslist[index];
 
               return Container(
                 margin: EdgeInsets.only(top: 5, bottom: 5),
@@ -625,16 +589,13 @@ class _MaintenanceRequestDialogBoxState
                         if (maintenanceimage.mediaId != null &&
                             maintenanceimage.mediaId!.url != null &&
                             maintenanceimage.mediaId!.url != "") {
-                          await Helper.launchURL(
-                              maintenanceimage.mediaId!.url!);
+                          await Helper.launchURL(maintenanceimage.mediaId!.url!);
                         }
                       },
                       child: Container(
                         width: 400,
                         child: Text(
-                          maintenanceimage.mediaId != null
-                              ? Helper.FileName(maintenanceimage.mediaId!.url!)
-                              : "",
+                          maintenanceimage.mediaId != null ? Helper.FileName(maintenanceimage.mediaId!.url!) : "",
                           style: MyStyles.Regular(13, myColor.blue1),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -650,13 +611,8 @@ class _MaintenanceRequestDialogBoxState
                         if (maintenanceimage.mediaId != null &&
                             maintenanceimage.mediaId!.url != null &&
                             maintenanceimage.mediaId!.url != "") {
-                          await Helper.download(
-                              context,
-                              maintenanceimage.mediaId!.toString(),
-                              maintenanceimage.mediaId!.id.toString(),
-                              Helper.FileNameWithTime(
-                                  maintenanceimage.mediaId!.url!),
-                              1);
+                          await Helper.download(context, maintenanceimage.mediaId!.toString(), maintenanceimage.mediaId!.id.toString(),
+                              Helper.FileNameWithTime(maintenanceimage.mediaId!.url!), 1);
                         }
                       },
                       child: Container(
@@ -714,11 +670,7 @@ class _MaintenanceRequestDialogBoxState
                       height: 15,
                     ),
                     Text(
-                      GlobleString.Mant_view_FullName +
-                          " " +
-                          mDetailsState.Owner_firstname +
-                          " " +
-                          mDetailsState.Owner_lastname,
+                      GlobleString.Mant_view_FullName + " " + mDetailsState.Owner_firstname + " " + mDetailsState.Owner_lastname,
                       style: MyStyles.Medium(14, myColor.black),
                       textAlign: TextAlign.start,
                     ),
@@ -726,9 +678,7 @@ class _MaintenanceRequestDialogBoxState
                       height: 5,
                     ),
                     Text(
-                      GlobleString.Mant_view_Email +
-                          " " +
-                          mDetailsState.Owner_email,
+                      GlobleString.Mant_view_Email + " " + mDetailsState.Owner_email,
                       style: MyStyles.Medium(14, myColor.black),
                       textAlign: TextAlign.start,
                     ),
@@ -736,9 +686,7 @@ class _MaintenanceRequestDialogBoxState
                       height: 5,
                     ),
                     Text(
-                      GlobleString.Mant_view_Phone +
-                          " " +
-                          mDetailsState.Owner_mobile,
+                      GlobleString.Mant_view_Phone + " " + mDetailsState.Owner_mobile,
                       style: MyStyles.Medium(14, myColor.black),
                       textAlign: TextAlign.start,
                     ),
@@ -788,9 +736,7 @@ class _MaintenanceRequestDialogBoxState
                             height: 5,
                           ),
                           Text(
-                            GlobleString.Mant_view_Email +
-                                " " +
-                                mDetailsState.Applicant_email,
+                            GlobleString.Mant_view_Email + " " + mDetailsState.Applicant_email,
                             style: MyStyles.Medium(14, myColor.black),
                             textAlign: TextAlign.start,
                           ),
@@ -798,9 +744,7 @@ class _MaintenanceRequestDialogBoxState
                             height: 5,
                           ),
                           Text(
-                            GlobleString.Mant_view_Phone +
-                                " " +
-                                mDetailsState.Applicant_mobile,
+                            GlobleString.Mant_view_Phone + " " + mDetailsState.Applicant_mobile,
                             style: MyStyles.Medium(14, myColor.black),
                             textAlign: TextAlign.start,
                           ),
@@ -843,8 +787,7 @@ class _MaintenanceRequestDialogBoxState
                 itemCount: mDetailsState.maintenanceVendorlist.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  MaintenanceVendor vendordata =
-                      mDetailsState.maintenanceVendorlist[index];
+                  MaintenanceVendor vendordata = mDetailsState.maintenanceVendorlist[index];
                   return Container(
                     width: 900,
                     alignment: Alignment.center,
@@ -871,8 +814,7 @@ class _MaintenanceRequestDialogBoxState
                                 child: Text(
                                   vendordata.companyName!,
                                   textAlign: TextAlign.center,
-                                  style: MyStyles.SemiBold(
-                                      12, myColor.Circle_main),
+                                  style: MyStyles.SemiBold(12, myColor.Circle_main),
                                 ),
                               ),
                               Container(
@@ -880,12 +822,9 @@ class _MaintenanceRequestDialogBoxState
                                 padding: EdgeInsets.only(left: 10),
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  vendordata.category != null
-                                      ? vendordata.category!.displayValue
-                                      : "",
+                                  vendordata.category != null ? vendordata.category!.displayValue : "",
                                   textAlign: TextAlign.center,
-                                  style: MyStyles.SemiBold(
-                                      12, myColor.Circle_main),
+                                  style: MyStyles.SemiBold(12, myColor.Circle_main),
                                 ),
                               ),
                               Container(
@@ -895,8 +834,7 @@ class _MaintenanceRequestDialogBoxState
                                 child: Text(
                                   vendordata.email!,
                                   textAlign: TextAlign.center,
-                                  style: MyStyles.SemiBold(
-                                      12, myColor.Circle_main),
+                                  style: MyStyles.SemiBold(12, myColor.Circle_main),
                                 ),
                               ),
                               Container(
@@ -906,8 +844,7 @@ class _MaintenanceRequestDialogBoxState
                                 child: Text(
                                   vendordata.mobileNumber!,
                                   textAlign: TextAlign.center,
-                                  style: MyStyles.SemiBold(
-                                      12, myColor.Circle_main),
+                                  style: MyStyles.SemiBold(12, myColor.Circle_main),
                                 ),
                               ),
                               Expanded(
@@ -917,21 +854,11 @@ class _MaintenanceRequestDialogBoxState
                                     InkWell(
                                       onTap: () {
                                         if (vendordata.showInstruction!) {
-                                          mDetailsState
-                                              .maintenanceVendorlist[index]
-                                              .showInstruction = false;
-                                          _store.dispatch(
-                                              UpdateMDA_maintenanceVendorlist(
-                                                  mDetailsState
-                                                      .maintenanceVendorlist));
+                                          mDetailsState.maintenanceVendorlist[index].showInstruction = false;
+                                          _store.dispatch(UpdateMDA_maintenanceVendorlist(mDetailsState.maintenanceVendorlist));
                                         } else {
-                                          mDetailsState
-                                              .maintenanceVendorlist[index]
-                                              .showInstruction = true;
-                                          _store.dispatch(
-                                              UpdateMDA_maintenanceVendorlist(
-                                                  mDetailsState
-                                                      .maintenanceVendorlist));
+                                          mDetailsState.maintenanceVendorlist[index].showInstruction = true;
+                                          _store.dispatch(UpdateMDA_maintenanceVendorlist(mDetailsState.maintenanceVendorlist));
                                         }
                                       },
                                       child: Container(
@@ -940,28 +867,18 @@ class _MaintenanceRequestDialogBoxState
                                         margin: EdgeInsets.only(left: 20),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: myColor.Circle_main,
-                                              width: 1.0),
+                                          border: Border.all(color: myColor.Circle_main, width: 1.0),
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(5),
                                           ),
-                                          color: vendordata.showInstruction!
-                                              ? myColor.Circle_main
-                                              : myColor.white,
+                                          color: vendordata.showInstruction! ? myColor.Circle_main : myColor.white,
                                         ),
                                         child: Text(
                                           vendordata.showInstruction!
-                                              ? GlobleString
-                                                  .Mant_view_HideInstructions
-                                              : GlobleString
-                                                  .Mant_view_ViewInstructions,
+                                              ? GlobleString.Mant_view_HideInstructions
+                                              : GlobleString.Mant_view_ViewInstructions,
                                           textAlign: TextAlign.center,
-                                          style: MyStyles.Medium(
-                                              12,
-                                              vendordata.showInstruction!
-                                                  ? myColor.white
-                                                  : myColor.Circle_main),
+                                          style: MyStyles.Medium(12, vendordata.showInstruction! ? myColor.white : myColor.Circle_main),
                                         ),
                                       ),
                                     )
@@ -992,8 +909,7 @@ class _MaintenanceRequestDialogBoxState
                                 Text(
                                   GlobleString.Mant_view_Instructions,
                                   textAlign: TextAlign.start,
-                                  style: MyStyles.SemiBold(
-                                      12, myColor.Circle_main),
+                                  style: MyStyles.SemiBold(12, myColor.Circle_main),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -1001,14 +917,12 @@ class _MaintenanceRequestDialogBoxState
                                 Text(
                                   vendordata.Instruction!,
                                   textAlign: TextAlign.start,
-                                  style:
-                                      MyStyles.Regular(13, myColor.Circle_main),
+                                  style: MyStyles.Regular(13, myColor.Circle_main),
                                 ),
                               ],
                             ),
                           ),
-                        if ((mDetailsState.maintenanceVendorlist.length - 1) <
-                            index)
+                        if ((mDetailsState.maintenanceVendorlist.length - 1) < index)
                           Container(
                             height: 0.5,
                             color: myColor.CM_Lead_border,

@@ -17,7 +17,7 @@ import 'package:silverhome/store/store.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -135,8 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
         setState(() {});
       } else {
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS3_Property_Image_error, false);
+        ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Image_error, false);
       }
     }
 
@@ -238,12 +237,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       contentPadding: EdgeInsets.all(8),
                       focusColor: Colors.transparent,
                       focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: myColor.blue, width: 2),
+                        borderSide: const BorderSide(color: myColor.blue, width: 2),
                       ),
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black12, width: 1.0)),
+                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black12, width: 1.0)),
                       fillColor: myColor.white,
                       hintText: GlobleString.fname,
                       hintStyle: MyStyles.Regular(16, myColor.Circle_main),
@@ -268,12 +264,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       contentPadding: EdgeInsets.all(8),
                       focusColor: Colors.transparent,
                       focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: myColor.blue, width: 2),
+                        borderSide: const BorderSide(color: myColor.blue, width: 2),
                       ),
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black12, width: 1.0)),
+                      border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black12, width: 1.0)),
                       fillColor: myColor.white,
                       hintText: GlobleString.lname,
                       hintStyle: MyStyles.Regular(16, myColor.Circle_main),
@@ -299,8 +292,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: myColor.blue, width: 2),
                 ),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black12, width: 1.0)),
+                border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black12, width: 1.0)),
                 fillColor: myColor.white,
                 hintText: GlobleString.email,
                 hintStyle: MyStyles.Regular(16, myColor.Circle_main),
@@ -435,26 +427,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         String password = _textregisPass.text.toString().trim();
 
         if (fname.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_fname, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_fname, false);
         } else if (lname.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_lname, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_lname, false);
         } else if (email.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_email, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_email, false);
         } else if (Helper.ValidEmail(email) != true) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_valid_email, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_valid_email, false);
         } else if (password.isEmpty) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_password, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_password, false);
         } else if (!Helper.isPasswordCompliant(password)) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.password_error, false);
+          ToastUtils.showCustomToast(context, GlobleString.password_error, false);
         } else if (!isTermCond) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.register_error_tmpp, false);
+          ToastUtils.showCustomToast(context, GlobleString.register_error_tmpp, false);
         } else {
           _apiCall(fname, lname, email, password, context);
         }
@@ -503,19 +488,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 
-  _apiCall(String fname, String lname, String email, String password,
-      BuildContext context) {
+  _apiCall(String fname, String lname, String email, String password, BuildContext context) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().RegisterApi(context, email, password, Weburl.Role,
-        (error, respoce) async {
+    ApiManager().RegisterApi(context, email, password, Weburl.Role, (error, respoce) async {
       if (error) {
         String UserID = respoce.toString();
 
         if (companyimage != null) {
-          ApiManager().AddSingleImage(context, companyimage!,
-              (status, responce) {
+          ApiManager().AddSingleImage(context, companyimage!, (status, responce) {
             if (status) {
               final String id = '__file_picker_web-file-input';
               var element = html.document.getElementById(id);
@@ -523,16 +505,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 element.remove();
               }
 
-              inserUserDetails(
-                  fname, lname, email, password, UserID, responce, context);
+              inserUserDetails(fname, lname, email, password, UserID, responce, context);
             } else {
               loader.remove();
               ToastUtils.showCustomToast(context, responce, false);
             }
           });
         } else {
-          inserUserDetails(
-              fname, lname, email, password, UserID, null, context);
+          inserUserDetails(fname, lname, email, password, UserID, null, context);
         }
       } else {
         loader.remove();
@@ -542,8 +522,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     });
   }
 
-  inserUserDetails(String fname, String lname, String email, String password,
-      String UserID, String? mid, BuildContext context) {
+  inserUserDetails(String fname, String lname, String email, String password, String UserID, String? mid, BuildContext context) {
     PersonId personId = new PersonId();
     personId.firstName = fname;
     personId.lastName = lname;
@@ -559,8 +538,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     ApiManager().InsetNewUser(context, userData, (error, respoce) {
       if (error) {
-        ApiManager().welcomeMailWorkflow(context, UserID,
-            (error, respoce) async {
+        ApiManager().welcomeMailWorkflow(context, UserID, (error, respoce) async {
           if (error) {
             loader.remove();
             dailogShow();
@@ -571,8 +549,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         });
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }

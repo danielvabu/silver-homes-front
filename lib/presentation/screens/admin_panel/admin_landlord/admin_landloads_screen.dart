@@ -21,9 +21,9 @@ import 'package:silverhome/tablayer/api_manager_admin.dart';
 import 'package:silverhome/tablayer/dsq_query.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/admin_panel/landlord_table/landord_header.dart';
-import 'package:silverhome/widget/admin_panel/landlord_table/landord_item.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/adminPanel/landlord_table/landord_header.dart';
+import 'package:silverhome/widget/adminPanel/landlord_table/landord_item.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class AdminLandlordsScreen extends StatefulWidget {
@@ -56,8 +56,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
     _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     LanloadListReqtokens reqtokens = new LanloadListReqtokens();
     reqtokens.roles = Weburl.RoleID;
     reqtokens.Name = search != null ? search : "";
@@ -113,8 +112,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                   children: [
                     Row(
                       children: [
-                        if (adminLandlordState!.isloding &&
-                            adminLandlordState.LandlordSearchText == "")
+                        if (adminLandlordState!.isloding && adminLandlordState.LandlordSearchText == "")
                           Container(
                             width: 260,
                             height: 30,
@@ -131,8 +129,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                                 Expanded(
                                   child: Text(
                                     GlobleString.LL_Search,
-                                    style:
-                                        MyStyles.Medium(14, myColor.hintcolor),
+                                    style: MyStyles.Medium(14, myColor.hintcolor),
                                   ),
                                 ),
                                 Padding(
@@ -160,27 +157,21 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                               children: <Widget>[
                                 Expanded(
                                   child: TextFormField(
-                                    initialValue:
-                                        adminLandlordState.LandlordSearchText,
+                                    initialValue: adminLandlordState.LandlordSearchText,
                                     onChanged: (value) async {
-                                      _store.dispatch(
-                                          UpdateAdminLandlord_isloding(true));
-                                      _store.dispatch(
-                                          UpdateAdminLandlord_datalist(
-                                              <LandLordData>[]));
+                                      _store.dispatch(UpdateAdminLandlord_isloding(true));
+                                      _store.dispatch(UpdateAdminLandlord_datalist(<LandLordData>[]));
                                       apimanager(value, 1, "Owner_ID", 1, 0);
                                     },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintStyle: MyStyles.Medium(
-                                          14, myColor.hintcolor),
+                                      hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                       contentPadding: EdgeInsets.all(10),
                                       isDense: true,
                                       hintText: GlobleString.LL_Search,
                                     ),
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                   ),
                                 ),
                                 Padding(
@@ -285,8 +276,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
             },
           ),
           tableItem(adminLandlordState),
-          if (adminLandlordState.landlorddatalist != null &&
-              adminLandlordState.landlorddatalist.length > 0)
+          if (adminLandlordState.landlorddatalist != null && adminLandlordState.landlorddatalist.length > 0)
             Container(
               height: 40,
               color: myColor.TA_table_header,
@@ -308,27 +298,18 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                     alignment: Alignment.center,
                     child: DropdownSearch<String>(
                       mode: Mode.MENU,
-                      defultHeight: Helper.PagingRecord(
-                                          adminLandlordState.totalRecord)
-                                      .length *
-                                  35 >
-                              250
+                      defultHeight: Helper.PagingRecord(adminLandlordState.totalRecord).length * 35 > 250
                           ? 250
-                          : Helper.PagingRecord(adminLandlordState.totalRecord)
-                                  .length *
-                              35,
+                          : Helper.PagingRecord(adminLandlordState.totalRecord).length * 35,
                       textstyle: MyStyles.Medium(14, myColor.black),
                       hint: "Select page",
                       selectedItem: adminLandlordState.pageNo.toString(),
-                      items:
-                          Helper.PagingRecord(adminLandlordState.totalRecord),
+                      items: Helper.PagingRecord(adminLandlordState.totalRecord),
                       showSearchBox: false,
                       isFilteredOnline: true,
                       onChanged: (value) {
-                        _store.dispatch(UpdateAdminLandlord_pageNo(
-                            int.parse(value.toString())));
-                        paginationCall(
-                            adminLandlordState, int.parse(value.toString()));
+                        _store.dispatch(UpdateAdminLandlord_pageNo(int.parse(value.toString())));
+                        paginationCall(adminLandlordState, int.parse(value.toString()));
                       },
                     ),
                   ),
@@ -425,8 +406,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                   ),
                 ),
               )
-            : adminLandlordState.landlorddatalist != null &&
-                    adminLandlordState.landlorddatalist.length > 0
+            : adminLandlordState.landlorddatalist != null && adminLandlordState.landlorddatalist.length > 0
                 ? Expanded(
                     child: LandlordItem(
                       listdata1: adminLandlordState.landlorddatalist,
@@ -436,27 +416,19 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                       onPresseActive: (LandLordData landLordData, int pos) {
                         _dailogAdminActivelandlord(true, 2, landLordData);
                       },
-                      onPresseViewAccount:
-                          (LandLordData landLordData, int pos) async {
-                        await Prefs.setBool(
-                            PrefsName.admin_tenant_Landlord_Back, false);
-                        await Prefs.setString(
-                            PrefsName.OwnerID, landLordData.ownerId.toString());
+                      onPresseViewAccount: (LandLordData landLordData, int pos) async {
+                        await Prefs.setBool(PrefsName.admin_tenant_Landlord_Back, false);
+                        await Prefs.setString(PrefsName.OwnerID, landLordData.ownerId.toString());
                         _store.dispatch(UpdateLandlordDetailsTab(1));
-                        _store.dispatch(UpdateAdminPortalLandlordDetails(
-                            GlobleString.NAV_admin_Landlords));
+                        _store.dispatch(UpdateAdminPortalLandlordDetails(GlobleString.NAV_admin_Landlords));
                       },
                       onPresseName: (LandLordData landLordData, int pos) async {
-                        await Prefs.setString(
-                            PrefsName.OwnerID, landLordData.ownerId.toString());
-                        await Prefs.setBool(
-                            PrefsName.admin_tenant_Landlord_Back, false);
+                        await Prefs.setString(PrefsName.OwnerID, landLordData.ownerId.toString());
+                        await Prefs.setBool(PrefsName.admin_tenant_Landlord_Back, false);
                         _store.dispatch(UpdateLandlordDetailsTab(1));
-                        _store.dispatch(UpdateAdminPortalLandlordDetails(
-                            GlobleString.NAV_admin_Landlords));
+                        _store.dispatch(UpdateAdminPortalLandlordDetails(GlobleString.NAV_admin_Landlords));
                       },
-                      onPresseDeleteAccount:
-                          (LandLordData landLordData, int pos) {
+                      onPresseDeleteAccount: (LandLordData landLordData, int pos) {
                         showDialog(
                           context: context,
                           barrierColor: Colors.black45,
@@ -469,8 +441,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
                               positiveText: GlobleString.Admin_Delete_yes,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                deleteLandlordData(
-                                    landLordData.ownerId.toString());
+                                deleteLandlordData(landLordData.ownerId.toString());
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -501,33 +472,27 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
 
   void paginationCall(AdminLandlordState adminLandlordState, int pageno) {
     if (adminLandlordState.isIDSort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno, "Owner_ID",
-          adminLandlordState.IDSortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "Owner_ID", adminLandlordState.IDSortAcsDes, 1);
     }
 
     if (adminLandlordState.isNameSort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno, "Landlord Name",
-          adminLandlordState.NameSortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "Landlord Name", adminLandlordState.NameSortAcsDes, 1);
     }
 
     if (adminLandlordState.isEmailSort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno, "Email",
-          adminLandlordState.EmailSortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "Email", adminLandlordState.EmailSortAcsDes, 1);
     }
 
     if (adminLandlordState.isPhoneSort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno, "Phone Number",
-          adminLandlordState.PhoneSortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "Phone Number", adminLandlordState.PhoneSortAcsDes, 1);
     }
 
     if (adminLandlordState.isPropertySort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno,
-          "# of Properties", adminLandlordState.PropertySortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "# of Properties", adminLandlordState.PropertySortAcsDes, 1);
     }
 
     if (adminLandlordState.isActiveSort) {
-      apimanager(adminLandlordState.LandlordSearchText, pageno,
-          "Active/Inactive", adminLandlordState.ActiveSortAcsDes, 1);
+      apimanager(adminLandlordState.LandlordSearchText, pageno, "Active/Inactive", adminLandlordState.ActiveSortAcsDes, 1);
     }
   }
 
@@ -535,71 +500,59 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(
-          adminLandlordState.IDSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(adminLandlordState.IDSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
 
-      apimanager(
-          "", 1, "Owner_ID", adminLandlordState.IDSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Owner_ID", adminLandlordState.IDSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(
-          adminLandlordState.NameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(adminLandlordState.NameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
 
-      apimanager("", 1, "Landlord Name",
-          adminLandlordState.NameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Landlord Name", adminLandlordState.NameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(
-          adminLandlordState.EmailSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(adminLandlordState.EmailSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
 
-      apimanager(
-          "", 1, "Email", adminLandlordState.EmailSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Email", adminLandlordState.EmailSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(
-          adminLandlordState.PhoneSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(adminLandlordState.PhoneSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
 
-      apimanager("", 1, "Phone Number",
-          adminLandlordState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Phone Number", adminLandlordState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(
-          adminLandlordState.PropertySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(adminLandlordState.PropertySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(0));
 
-      apimanager("", 1, "# of Properties",
-          adminLandlordState.PropertySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "# of Properties", adminLandlordState.PropertySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(
-          adminLandlordState.ActiveSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminLandlord_ActiveSortAcsDes(adminLandlordState.ActiveSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminLandlord_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminLandlord_PropertySortAcsDes(0));
 
-      apimanager("", 1, "Active/Inactive",
-          adminLandlordState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Active/Inactive", adminLandlordState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -636,9 +589,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return AlertDialogBox(
-          title: flag == 1
-              ? GlobleString.AdminINActiveLandlord_msg
-              : GlobleString.AdminActiveLandlord_msg,
+          title: flag == 1 ? GlobleString.AdminINActiveLandlord_msg : GlobleString.AdminActiveLandlord_msg,
           positiveText: GlobleString.AdminActiveLandlord_yes,
           negativeText: GlobleString.AdminActiveLandlord_NO,
           onPressedYes: () async {
@@ -650,8 +601,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
             AdminsideIsActive update = new AdminsideIsActive();
             update.adminsideIsActive = status;
 
-            ApiManagerAdmin().UpdateLandlordActive(context, commonid, update,
-                (error, respoce) async {
+            ApiManagerAdmin().UpdateLandlordActive(context, commonid, update, (error, respoce) async {
               if (error) {
                 await updateState();
                 await apimanager("", 1, "Owner_ID", 1, 0);
@@ -669,8 +619,7 @@ class _AdminLandlordsScreenState extends State<AdminLandlordsScreen> {
   }
 
   deleteLandlordData(String userid) {
-    ApiManagerAdmin().deleteLandlordData(context, userid,
-        (error, respoce) async {
+    ApiManagerAdmin().deleteLandlordData(context, userid, (error, respoce) async {
       if (error) {
         ToastUtils.showCustomToast(context, GlobleString.User_delete, true);
         await updateState();

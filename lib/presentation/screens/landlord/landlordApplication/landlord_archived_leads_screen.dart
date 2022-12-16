@@ -30,7 +30,7 @@ import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/archivedapplicationtabel/archivedappheader.dart';
 import 'package:silverhome/widget/landlord/archivedapplicationtabel/archivedappitem.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
@@ -38,17 +38,15 @@ import 'package:silverhome/widget/landlord/filterview.dart';
 import 'package:silverhome/widget/landlord/funnelview/funnelviewscreen.dart';
 import 'package:silverhome/widget/landlord/lead_dialog/addnewlead_dialogbox.dart';
 import 'package:silverhome/widget/landlord/propertydropdown.dart';
-import 'package:silverhome/widget/searchboxview.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/search/searchboxview.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 
 class LandlordArchivedLeadsScreen extends StatefulWidget {
   @override
-  _LandlordArchivedLeadsScreenState createState() =>
-      _LandlordArchivedLeadsScreenState();
+  _LandlordArchivedLeadsScreenState createState() => _LandlordArchivedLeadsScreenState();
 }
 
-class _LandlordArchivedLeadsScreenState
-    extends State<LandlordArchivedLeadsScreen> {
+class _LandlordArchivedLeadsScreenState extends State<LandlordArchivedLeadsScreen> {
   final _store = getIt<AppStore>();
   static TextEditingController textsearchvalue = TextEditingController();
   double height = 0, width = 0;
@@ -137,26 +135,16 @@ class _LandlordArchivedLeadsScreenState
                             SearchBoxView(
                               callbackOnChanetext: (String text) {
                                 if (text.isNotEmpty) {
-                                  List<TenancyApplication>
-                                      filtereleadlitemsnew = List.empty();
+                                  List<TenancyApplication> filtereleadlitemsnew = List.empty();
 
-                                  filtereleadlitemsnew = ArchiveState
-                                      .archiveleadlist
-                                      .where((u) => (u.propertyName!
-                                              .toLowerCase()
-                                              .contains(text.toLowerCase()) ||
-                                          u.applicantName!
-                                              .toLowerCase()
-                                              .contains(text.toLowerCase())))
+                                  filtereleadlitemsnew = ArchiveState.archiveleadlist
+                                      .where((u) => (u.propertyName!.toLowerCase().contains(text.toLowerCase()) ||
+                                          u.applicantName!.toLowerCase().contains(text.toLowerCase())))
                                       .toList();
 
-                                  _store.dispatch(
-                                      UpdateArchiveFilterArchiveleadlist(
-                                          filtereleadlitemsnew));
+                                  _store.dispatch(UpdateArchiveFilterArchiveleadlist(filtereleadlitemsnew));
                                 } else {
-                                  _store.dispatch(
-                                      UpdateArchiveFilterArchiveleadlist(
-                                          ArchiveState.archiveleadlist));
+                                  _store.dispatch(UpdateArchiveFilterArchiveleadlist(ArchiveState.archiveleadlist));
                                 }
 
                                 RefreshstartTime();
@@ -165,19 +153,13 @@ class _LandlordArchivedLeadsScreenState
                           else
                             PropertyDropdown(
                               onSelectVal: (item) async {
-                                _store
-                                    .dispatch(UpdateArchivePropertyItem(item));
-                                _store
-                                    .dispatch(UpdateLLTALeadPropertyItem(item));
-                                _store.dispatch(
-                                    UpdateLLVDapplicationPropertyItem(item));
+                                _store.dispatch(UpdateArchivePropertyItem(item));
+                                _store.dispatch(UpdateLLTALeadPropertyItem(item));
+                                _store.dispatch(UpdateLLVDapplicationPropertyItem(item));
                                 _store.dispatch(UpdateLLRCPropertyItem(item));
-                                _store.dispatch(
-                                    UpdateLLTLleasePropertyItem(item));
-                                _store.dispatch(
-                                    UpdateLLTAApplicantPropertyItem(item));
-                                _store.dispatch(
-                                    UpdateLLActiveTenantPropertyItem(item));
+                                _store.dispatch(UpdateLLTLleasePropertyItem(item));
+                                _store.dispatch(UpdateLLTAApplicantPropertyItem(item));
+                                _store.dispatch(UpdateLLActiveTenantPropertyItem(item));
 
                                 await finnleviewcallapi(item!.ID.toString());
                               },
@@ -193,8 +175,7 @@ class _LandlordArchivedLeadsScreenState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                              Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                          if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                             InkWell(
                               onTap: () {
                                 ClearFilter(ArchiveState);
@@ -204,21 +185,17 @@ class _LandlordArchivedLeadsScreenState
                                 padding: EdgeInsets.only(left: 25, right: 25),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  border: Border.all(
-                                      color: myColor.errorcolor, width: 1),
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  border: Border.all(color: myColor.errorcolor, width: 1),
                                   color: myColor.white,
                                 ),
                                 child: Text(
                                   GlobleString.Filter_Clear,
-                                  style:
-                                      MyStyles.Medium(14, myColor.errorcolor),
+                                  style: MyStyles.Medium(14, myColor.errorcolor),
                                 ),
                               ),
                             ),
-                          if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                              Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                          if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                             SizedBox(
                               width: 30,
                             ),
@@ -232,9 +209,7 @@ class _LandlordArchivedLeadsScreenState
                     ],
                   ),
                 ),
-                ArchiveState.selecttoggle == 0
-                    ? _tableview(ArchiveState)
-                    : _funnelview(ArchiveState)
+                ArchiveState.selecttoggle == 0 ? _tableview(ArchiveState) : _funnelview(ArchiveState)
               ],
             );
           }),
@@ -259,8 +234,7 @@ class _LandlordArchivedLeadsScreenState
                       context, Prefs.getString(PrefsName.OwnerID));*/
                 } else {
                   if (ArchiveState.propertyValue != null) {
-                    await finnleviewcallapi(
-                        ArchiveState.propertyValue!.ID.toString());
+                    await finnleviewcallapi(ArchiveState.propertyValue!.ID.toString());
                   }
                 }
               },
@@ -302,8 +276,7 @@ class _LandlordArchivedLeadsScreenState
               archivecallApi();
             } else {
               if (ArchiveState.propertyValue != null) {
-                await finnleviewcallapi(
-                    ArchiveState.propertyValue!.ID.toString());
+                await finnleviewcallapi(ArchiveState.propertyValue!.ID.toString());
               }
             }
             await Prefs.setBool(PrefsName.IsApplyFilterFunnel, false);
@@ -329,26 +302,21 @@ class _LandlordArchivedLeadsScreenState
                 if (ArchiveState.propertyValue != null) {
                   _showFilterOverlayView(context, ArchiveState);
                 } else {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Blank_funnel, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
                 }
               }
             } else if (value == 2) {
               if (ArchiveState.selecttoggle == 0) {
-                if (ArchiveState.filterarchiveleadlist != null &&
-                    ArchiveState.filterarchiveleadlist.length > 0) {
+                if (ArchiveState.filterarchiveleadlist != null && ArchiveState.filterarchiveleadlist.length > 0) {
                   createTableDataCSVFile(ArchiveState);
                 } else {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Blank_export, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Blank_export, false);
                 }
               } else {
                 if (ArchiveState.propertyValue != null) {
-                  CustomeWidget.FunnelDataCSVFile(
-                      context, ArchiveState.propertyValue!.ID.toString());
+                  CustomeWidget.FunnelDataCSVFile(context, ArchiveState.propertyValue!.ID.toString());
                 } else {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Blank_funnel, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
                 }
               }
             } else if (value == 3) {
@@ -356,22 +324,17 @@ class _LandlordArchivedLeadsScreenState
                 loader = Helper.overlayLoader(context);
                 Overlay.of(context)!.insert(loader);
 
-                ApiManager().AllArchivePropertyWise(
-                    context, ArchiveState.propertyValue!.ID.toString(),
-                    (status, responce) async {
+                ApiManager().AllArchivePropertyWise(context, ArchiveState.propertyValue!.ID.toString(), (status, responce) async {
                   if (status) {
-                    await finnleviewcallapi(
-                        ArchiveState.propertyValue!.ID.toString());
+                    await finnleviewcallapi(ArchiveState.propertyValue!.ID.toString());
                     loader.remove();
                   } else {
                     loader.remove();
-                    ToastUtils.showCustomToast(
-                        context, GlobleString.Error1, false);
+                    ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                   }
                 });
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             } else if (value == 4) {
               dailogAllRestore();
@@ -456,99 +419,73 @@ class _LandlordArchivedLeadsScreenState
           ArchivedAppHeader(
             onPressedSortRating: () async {
               await updateOtherSortingValue(3);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
               if (!ArchiveState.isRatingSort) {
-                lalist.sort((a, b) =>
-                    b.rating.toString().compareTo(a.rating.toString()));
+                lalist.sort((a, b) => b.rating.toString().compareTo(a.rating.toString()));
                 _store.dispatch(UpdateArchiveisRatingSort(true));
               } else {
-                lalist.sort((a, b) =>
-                    a.rating.toString().compareTo(b.rating.toString()));
+                lalist.sort((a, b) => a.rating.toString().compareTo(b.rating.toString()));
                 _store.dispatch(UpdateArchiveisRatingSort(false));
               }
               _store.dispatch(UpdateArchiveFilterArchiveleadlist(lalist));
             },
             onPressedSortName: () async {
               await updateOtherSortingValue(1);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
               if (!ArchiveState.isNameSort) {
-                lalist.sort((a, b) => a.applicantName!
-                    .toLowerCase()
-                    .compareTo(b.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => a.applicantName!.toLowerCase().compareTo(b.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisNameSort(true));
               } else {
-                lalist.sort((a, b) => b.applicantName!
-                    .toLowerCase()
-                    .compareTo(a.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => b.applicantName!.toLowerCase().compareTo(a.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisNameSort(false));
               }
               _store.dispatch(UpdateArchiveFilterArchiveleadlist(lalist));
             },
             onPressedSortProperty: () async {
               await updateOtherSortingValue(2);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
               if (!ArchiveState.isPropertySort) {
-                lalist.sort((a, b) => a.propertyName!
-                    .toLowerCase()
-                    .compareTo(b.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => a.propertyName!.toLowerCase().compareTo(b.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisPropertySort(true));
               } else {
-                lalist.sort((a, b) => b.propertyName!
-                    .toLowerCase()
-                    .compareTo(a.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => b.propertyName!.toLowerCase().compareTo(a.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisPropertySort(false));
               }
               _store.dispatch(UpdateArchiveFilterArchiveleadlist(lalist));
             },
             onPressedSortSent: () async {
               await updateOtherSortingValue(4);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
               if (!ArchiveState.isDateSentSort) {
-                lalist.sort((a, b) => b.applicationSentDate!
-                    .toLowerCase()
-                    .compareTo(a.applicationSentDate!.toLowerCase()));
+                lalist.sort((a, b) => b.applicationSentDate!.toLowerCase().compareTo(a.applicationSentDate!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisDateSentSort(true));
               } else {
-                lalist.sort((a, b) => a.applicationSentDate!
-                    .toLowerCase()
-                    .compareTo(b.applicationSentDate!.toLowerCase()));
+                lalist.sort((a, b) => a.applicationSentDate!.toLowerCase().compareTo(b.applicationSentDate!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisDateSentSort(false));
               }
               _store.dispatch(UpdateArchiveFilterArchiveleadlist(lalist));
             },
             onPressedSortReceive: () async {
               await updateOtherSortingValue(5);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
               if (!ArchiveState.isDateReceiveSort) {
-                lalist.sort((a, b) => b.applicationReceivedDate!
-                    .toLowerCase()
-                    .compareTo(a.applicationReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => b.applicationReceivedDate!.toLowerCase().compareTo(a.applicationReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisDateReceiveSort(true));
               } else {
-                lalist.sort((a, b) => a.applicationReceivedDate!
-                    .toLowerCase()
-                    .compareTo(b.applicationReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => a.applicationReceivedDate!.toLowerCase().compareTo(b.applicationReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateArchiveisDateReceiveSort(false));
               }
               _store.dispatch(UpdateArchiveFilterArchiveleadlist(lalist));
             },
             onPressedSortAppStatus: () async {
               await updateOtherSortingValue(6);
-              List<TenancyApplication> lalist =
-                  ArchiveState.filterarchiveleadlist;
+              List<TenancyApplication> lalist = ArchiveState.filterarchiveleadlist;
 
               if (!ArchiveState.isAppStatusSort) {
-                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID
-                    .compareTo(b.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID.compareTo(b.applicationStatus!.EnumDetailID));
                 _store.dispatch(UpdateArchiveisAppStatusSort(true));
               } else {
-                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID
-                    .compareTo(a.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID.compareTo(a.applicationStatus!.EnumDetailID));
 
                 //lalist.reversed.toList();
                 _store.dispatch(UpdateArchiveisAppStatusSort(false));
@@ -582,8 +519,7 @@ class _LandlordArchivedLeadsScreenState
                   ),
                 ),
               )
-            : ArchiveState.filterarchiveleadlist != null &&
-                    ArchiveState.filterarchiveleadlist.length > 0
+            : ArchiveState.filterarchiveleadlist != null && ArchiveState.filterarchiveleadlist.length > 0
                 ? Expanded(
                     child: ArchivedAppItem(
                       OnRefresh: () {},
@@ -642,9 +578,7 @@ class _LandlordArchivedLeadsScreenState
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager()
-                .AllArchiveRestore(context, Prefs.getString(PrefsName.OwnerID),
-                    (status, responce) async {
+            ApiManager().AllArchiveRestore(context, Prefs.getString(PrefsName.OwnerID), (status, responce) async {
               if (status) {
                 await archivecallApi();
                 loader.remove();
@@ -695,8 +629,7 @@ class _LandlordArchivedLeadsScreenState
     _store.dispatch(UpdateArchiveisloding(false));
   }
 
-  _showFilterOverlayView(
-      BuildContext context, LandLordTenancyArchiveState ArchiveState) {
+  _showFilterOverlayView(BuildContext context, LandLordTenancyArchiveState ArchiveState) {
     OverlayState overlayState = Overlay.of(context)!;
     overlayEntry = OverlayEntry(builder: (context) {
       return Container(
@@ -733,38 +666,30 @@ class _LandlordArchivedLeadsScreenState
                   } else {
                     if (isclear) {
                       if (ArchiveState.propertyValue != null) {
-                        await finnleviewcallapi(
-                            ArchiveState.propertyValue!.ID.toString());
+                        await finnleviewcallapi(ArchiveState.propertyValue!.ID.toString());
                       }
                     } else {
                       _store.dispatch(UpdateArchiveToggle(1));
 
-                      _store.dispatch(
-                          UpdateFunnelAllListData(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelAllListData(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeadCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeadList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeadList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelApplicantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelApplicantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelApplicantList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelDocumentVarifyCount(0));
-                      _store.dispatch(UpdateFunnelDocumentVarifyList(
-                          <TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelDocumentVarifyList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelReferenceCheckCount(0));
-                      _store.dispatch(
-                          UpdateFunnelReferenceList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelReferenceList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeaseCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeassentList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeassentList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelActiveTenantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelActiveTenantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelActiveTenantList(<TenancyApplication>[]));
 
                       await ApiManager().getPropertyWiseFunnel(context, json);
                     }
@@ -805,18 +730,14 @@ class _LandlordArchivedLeadsScreenState
       row.add(data.rating.toString());
       row.add(data.applicationSentDate);
       row.add(data.applicationReceivedDate);
-      row.add(data.applicationStatus != null
-          ? data.applicationStatus!.displayValue.toString()
-          : "");
+      row.add(data.applicationStatus != null ? data.applicationStatus!.displayValue.toString() : "");
 
       csvList.add(row);
     }
 
     csv = const ListToCsvConverter().convert(csvList);
 
-    String filename = "ArchiveLeads_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".csv";
+    String filename = "ArchiveLeads_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
 
     // prepare
     final bytes = utf8.encode(csv);

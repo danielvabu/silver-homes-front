@@ -29,7 +29,7 @@ import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_documentverifi
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_leaseagreementstatus.dart';
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_referencechecksstatus.dart';
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_tenancyapplicationstatus.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 import '../../searchdropdown/dropdown_search.dart';
 import '../customewidget.dart';

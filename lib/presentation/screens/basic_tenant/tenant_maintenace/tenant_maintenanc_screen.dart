@@ -30,7 +30,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/basic_tenant/addnewrequest_dialogbox.dart';
 import 'package:silverhome/widget/basic_tenant/maintenace_dialogbox.dart';
 import 'package:silverhome/widget/basic_tenant/tenant_maintenance/tenant_maintenance_header.dart';

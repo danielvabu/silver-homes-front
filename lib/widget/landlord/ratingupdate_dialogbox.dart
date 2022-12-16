@@ -5,7 +5,7 @@ import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 
-import '../alert_dialogbox.dart';
+import '../alert/alert_dialogbox.dart';
 
 typedef SaveCallback = void Function(double rating, String ratingraview);
 

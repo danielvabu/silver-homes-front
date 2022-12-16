@@ -23,6 +23,8 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
+import 'package:silverhome/widget/tenantScreening/widget.dart';
+import 'package:sizer/sizer.dart';
 
 typedef VoidCallbackRecordStep = void Function(int stepper);
 
@@ -68,21 +70,17 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       _store.dispatch(UpdateTFPersonFirstname(tfPersonalState.FNLperFirstname));
       _store.dispatch(UpdateTFPersonLastname(tfPersonalState.FNLperLastname));
       _store.dispatch(UpdateTFPersonEmail(tfPersonalState.FNLperEmail));
-      _store.dispatch(
-          UpdateTFPersonPhoneNumber(tfPersonalState.FNLperPhoneNumber));
-      _store.dispatch(
-          UpdateTFPersonCountryCode(tfPersonalState.FNLperCountryCode));
+      _store.dispatch(UpdateTFPersonPhoneNumber(tfPersonalState.FNLperPhoneNumber));
+      _store.dispatch(UpdateTFPersonCountryCode(tfPersonalState.FNLperCountryCode));
       _store.dispatch(UpdateTFPersonDialCode(tfPersonalState.FNLperDialCode));
       _store.dispatch(UpdateTFPersonStory(tfPersonalState.FNLperStory));
-      _store
-          .dispatch(UpdateTFPersonDateofBirth(tfPersonalState.FNLdateofbirth));
+      _store.dispatch(UpdateTFPersonDateofBirth(tfPersonalState.FNLdateofbirth));
     }
   }
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.tenancyPersonal) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.tenancyPersonal) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         _saveDataAndNext(_store.state!.tfPersonalState);
@@ -97,6 +95,22 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     }
   }
 
+  List stepsList = [
+    "Step1",
+    "Step1",
+    "Step1",
+    "Step1",
+    "Step1",
+  ];
+
+  List stepsListFunction = [
+    "Step1",
+    "Step1",
+    "Step1",
+    "Step1",
+    "Step1",
+  ];
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -110,6 +124,10 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            AppWidgetTenant().indicatorStepsList(steps: stepsList),
+            SizedBox(
+              height: 10.sp,
+            ),
             _form(),
           ],
         ),
@@ -117,8 +135,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     );
   }
 
-  Future<void> _selectDate(
-      BuildContext context, TFPersonalState tenancyFormState) async {
+  Future<void> _selectDate(BuildContext context, TFPersonalState tenancyFormState) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -135,8 +152,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       },
     );
 
-    if (pickedDate != null && pickedDate != tenancyFormState.dateofbirth)
-      _store.dispatch(UpdateTFPersonDateofBirth(pickedDate));
+    if (pickedDate != null && pickedDate != tenancyFormState.dateofbirth) _store.dispatch(UpdateTFPersonDateofBirth(pickedDate));
     _store.dispatch(UpdateTFPersonError_dateofbirth(false));
     _changeData();
   }
@@ -203,19 +219,11 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perFirstname
-                                                  ? myColor.errorcolor
-                                                  : myColor.blue,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perFirstname ? myColor.errorcolor : myColor.blue, width: 1.0),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perFirstname
-                                                  ? myColor.errorcolor
-                                                  : myColor.gray,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perFirstname ? myColor.errorcolor : myColor.gray, width: 1.0),
                                     ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.all(10),
@@ -223,10 +231,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                     filled: true),
                                 onChanged: (value) {
                                   Helper.Log("Firstname onChanged", "Calll");
-                                  _store.dispatch(UpdateTFPersonFirstname(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perFirstname(false));
+                                  _store.dispatch(UpdateTFPersonFirstname(value.toString().trim()));
+                                  _store.dispatch(UpdateTFPersonError_perFirstname(false));
                                   _changeData();
                                 },
                               ),
@@ -257,29 +263,19 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perLastname
-                                                  ? myColor.errorcolor
-                                                  : myColor.blue,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perLastname ? myColor.errorcolor : myColor.blue, width: 1.0),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perLastname
-                                                  ? myColor.errorcolor
-                                                  : myColor.gray,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perLastname ? myColor.errorcolor : myColor.gray, width: 1.0),
                                     ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.all(10),
                                     fillColor: myColor.white,
                                     filled: true),
                                 onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonLastname(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perLastname(false));
+                                  _store.dispatch(UpdateTFPersonLastname(value.toString().trim()));
+                                  _store.dispatch(UpdateTFPersonError_perLastname(false));
                                   _changeData();
                                 },
                               ),
@@ -310,9 +306,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                   height: 30,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: tfPersonalState.error_dateofbirth
-                                          ? myColor.errorcolor
-                                          : myColor.gray,
+                                      color: tfPersonalState.error_dateofbirth ? myColor.errorcolor : myColor.gray,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(4.0),
@@ -325,18 +319,13 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                           child: Text(
                                             tfPersonalState.dateofbirth == null
                                                 ? ""
-                                                : new DateFormat("dd-MMM-yyyy")
-                                                    .format(tfPersonalState
-                                                        .dateofbirth!)
-                                                    .toString(),
-                                            style: MyStyles.Medium(
-                                                13, myColor.text_color),
+                                                : new DateFormat("dd-MMM-yyyy").format(tfPersonalState.dateofbirth!).toString(),
+                                            style: MyStyles.Medium(13, myColor.text_color),
                                           ),
                                         ),
                                       ),
                                       const Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 8, right: 5),
+                                        padding: EdgeInsets.only(left: 8, right: 5),
                                         child: Icon(
                                           Icons.calendar_today_outlined,
                                           color: Colors.grey,
@@ -363,8 +352,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                             children: [
                               Text(
                                 GlobleString.TAF_Personal_email,
-                                style:
-                                    MyStyles.Medium(13, myColor.disablecolor),
+                                style: MyStyles.Medium(13, myColor.disablecolor),
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
@@ -374,33 +362,24 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 readOnly: true,
                                 initialValue: tfPersonalState.perEmail,
                                 textAlign: TextAlign.start,
-                                style:
-                                    MyStyles.Medium(13, myColor.disablecolor),
+                                style: MyStyles.Medium(13, myColor.disablecolor),
                                 decoration: InputDecoration(
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: tfPersonalState.error_perEmail
-                                              ? myColor.errorcolor
-                                              : myColor.disablecolor,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perEmail ? myColor.errorcolor : myColor.disablecolor, width: 1.0),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: tfPersonalState.error_perEmail
-                                              ? myColor.errorcolor
-                                              : myColor.disablecolor,
-                                          width: 1.0),
+                                          color: tfPersonalState.error_perEmail ? myColor.errorcolor : myColor.disablecolor, width: 1.0),
                                     ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.all(10),
                                     fillColor: myColor.white,
                                     filled: true),
                                 onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonEmail(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perEmail(false));
+                                  _store.dispatch(UpdateTFPersonEmail(value.toString().trim()));
+                                  _store.dispatch(UpdateTFPersonError_perEmail(false));
                                   _changeData();
                                 },
                               ),
@@ -429,9 +408,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 height: 30,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: tfPersonalState.error_perPhoneNumber
-                                        ? myColor.errorcolor
-                                        : myColor.gray,
+                                    color: tfPersonalState.error_perPhoneNumber ? myColor.errorcolor : myColor.gray,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(4.0),
@@ -441,50 +418,35 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                   children: <Widget>[
                                     CountryCodePicker(
                                       onChanged: (value) {
-                                        _store.dispatch(
-                                            UpdateTFPersonCountryCode(
-                                                value.code.toString()));
+                                        _store.dispatch(UpdateTFPersonCountryCode(value.code.toString()));
 
-                                        _store.dispatch(UpdateTFPersonDialCode(
-                                            value.dialCode.toString()));
+                                        _store.dispatch(UpdateTFPersonDialCode(value.dialCode.toString()));
 
                                         setState(() {});
                                         _changeData();
                                       },
                                       // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                      initialSelection:
-                                          tfPersonalState.perCountryCode,
+                                      initialSelection: tfPersonalState.perCountryCode,
                                       showFlag: true,
-                                      textStyle: MyStyles.Medium(
-                                          13, myColor.text_color),
-                                      dialogTextStyle: MyStyles.Medium(
-                                          13, myColor.text_color),
+                                      textStyle: MyStyles.Medium(13, myColor.text_color),
+                                      dialogTextStyle: MyStyles.Medium(13, myColor.text_color),
                                       //showDropDownButton: true,
                                     ),
                                     Expanded(
                                       child: TextFormField(
-                                        initialValue:
-                                            tfPersonalState.perPhoneNumber,
+                                        initialValue: tfPersonalState.perPhoneNumber,
                                         keyboardType: TextInputType.phone,
-                                        inputFormatters: [
-                                          MaskedInputFormatter("(000) 000 0000")
-                                        ],
+                                        inputFormatters: [MaskedInputFormatter("(000) 000 0000")],
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
+                                          hintStyle: TextStyle(color: Colors.grey),
                                           contentPadding: EdgeInsets.all(10),
                                           isDense: true,
                                         ),
-                                        style: MyStyles.Medium(
-                                            13, myColor.text_color),
+                                        style: MyStyles.Medium(13, myColor.text_color),
                                         onChanged: (value) {
-                                          _store.dispatch(
-                                              UpdateTFPersonPhoneNumber(
-                                                  value.toString().trim()));
-                                          _store.dispatch(
-                                              UpdateTFPersonError_perPhoneNumber(
-                                                  false));
+                                          _store.dispatch(UpdateTFPersonPhoneNumber(value.toString().trim()));
+                                          _store.dispatch(UpdateTFPersonError_perPhoneNumber(false));
                                           _changeData();
                                         },
                                       ),
@@ -525,8 +487,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 children: [
                                   Text(
                                     GlobleString.TAF_Personal_yourstory,
-                                    style:
-                                        MyStyles.Medium(13, myColor.text_color),
+                                    style: MyStyles.Medium(13, myColor.text_color),
                                     textAlign: TextAlign.start,
                                   ),
                                   SizedBox(
@@ -534,8 +495,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                   ),
                                   Text(
                                     GlobleString.Optional,
-                                    style:
-                                        MyStyles.Medium(10, myColor.optional),
+                                    style: MyStyles.Medium(10, myColor.optional),
                                     textAlign: TextAlign.start,
                                   ),
                                 ],
@@ -552,20 +512,17 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 decoration: InputDecoration(
                                     //border: InputBorder.none,
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: myColor.blue, width: 1.0),
+                                      borderSide: BorderSide(color: myColor.blue, width: 1.0),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: myColor.gray, width: 1.0),
+                                      borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                     ),
                                     isDense: true,
                                     contentPadding: EdgeInsets.all(10),
                                     fillColor: myColor.white,
                                     filled: true),
                                 onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonStory(
-                                      value.toString().trim()));
+                                  _store.dispatch(UpdateTFPersonStory(value.toString().trim()));
                                   _changeData();
                                 },
                               ),
@@ -596,40 +553,31 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
   void _saveDataAndNext(TFPersonalState tfPersonalState) {
     if (tfPersonalState.perFirstname == "") {
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_first_name, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_first_name, false);
       _store.dispatch(UpdateTFPersonError_perFirstname(true));
     } else if (tfPersonalState.perLastname == "") {
       _store.dispatch(UpdateTFPersonError_perLastname(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_last_name, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_last_name, false);
     } else if (tfPersonalState.dateofbirth == null) {
       _store.dispatch(UpdateTFPersonError_dateofbirth(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_dateofbarth, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_dateofbarth, false);
     } else if (!Helper.isAdult2(tfPersonalState.dateofbirth.toString())) {
       _store.dispatch(UpdateTFPersonError_dateofbirth(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_dateofbarth1, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_dateofbarth1, false);
     } else if (tfPersonalState.perEmail == "") {
       _store.dispatch(UpdateTFPersonError_perEmail(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_email, false);
     } else if (Helper.ValidEmail(tfPersonalState.perEmail) != true) {
       _store.dispatch(UpdateTFPersonError_perEmail(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_valid_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_valid_email, false);
     } else if (tfPersonalState.perPhoneNumber == "") {
       _store.dispatch(UpdateTFPersonError_perPhoneNumber(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_mobile, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_mobile, false);
     } else if (Helper.ValidPhonenumber(tfPersonalState.perPhoneNumber)) {
       _store.dispatch(UpdateTFPersonError_perPhoneNumber(true));
-      ToastUtils.showCustomToast(
-          context, GlobleString.taf_person_error_validmobile, false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_validmobile, false);
     } else {
-      String dob =
-          new DateFormat("yyyy-MM-dd").format(tfPersonalState.dateofbirth!);
+      String dob = new DateFormat("yyyy-MM-dd").format(tfPersonalState.dateofbirth!);
 
       PersonIdInfo personIdInfo = new PersonIdInfo();
       personIdInfo.ID = tfPersonalState.Person_ID;
@@ -651,8 +599,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      ApiManager().UpdateTFPersonalInfo(context, commonID, upersonInfo,
-          (status, responce) {
+      ApiManager().UpdateTFPersonalInfo(context, commonID, upersonInfo, (status, responce) {
         if (status) {
           loader.remove();
           if (!isGotoback) {

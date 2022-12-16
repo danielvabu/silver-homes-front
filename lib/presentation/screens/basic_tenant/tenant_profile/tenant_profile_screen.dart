@@ -23,7 +23,7 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 
 class TenantProfileScreen extends StatefulWidget {
   @override
@@ -105,58 +105,41 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.BT_Profile_Firstname,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           SizedBox(
                                             height: 5,
                                           ),
                                           TextFormField(
-                                            initialValue: tenantPersonalState
-                                                .perFirstname,
+                                            initialValue: tenantPersonalState.perFirstname,
                                             textAlign: TextAlign.start,
                                             readOnly: true,
-                                            style: MyStyles.Regular(
-                                                14, myColor.disablecolor),
+                                            style: MyStyles.Regular(14, myColor.disablecolor),
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  25),
+                                              LengthLimitingTextInputFormatter(25),
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
                                             decoration: InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateTenantPersonal_perFirstname(
-                                                      value));
+                                              _store.dispatch(UpdateTenantPersonal_perFirstname(value));
                                             },
                                           ),
                                         ],
@@ -167,52 +150,36 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                     ),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.BT_Profile_Lastname,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           SizedBox(
                                             height: 5,
                                           ),
                                           TextFormField(
-                                            initialValue:
-                                                tenantPersonalState.perLastname,
+                                            initialValue: tenantPersonalState.perLastname,
                                             textAlign: TextAlign.start,
                                             readOnly: true,
-                                            style: MyStyles.Regular(
-                                                14, myColor.disablecolor),
+                                            style: MyStyles.Regular(14, myColor.disablecolor),
                                             decoration: InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateTenantPersonal_perLastname(
-                                                      value));
+                                              _store.dispatch(UpdateTenantPersonal_perLastname(value));
                                             },
                                           ),
                                         ],
@@ -228,58 +195,41 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.BT_Profile_Email,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           SizedBox(
                                             height: 5,
                                           ),
                                           TextFormField(
-                                            initialValue:
-                                                tenantPersonalState.perEmail,
+                                            initialValue: tenantPersonalState.perEmail,
                                             textAlign: TextAlign.start,
                                             readOnly: true,
-                                            style: MyStyles.Regular(
-                                                14, myColor.disablecolor),
+                                            style: MyStyles.Regular(14, myColor.disablecolor),
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  50),
+                                              LengthLimitingTextInputFormatter(50),
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
                                             decoration: InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateTenantPersonal_perEmail(
-                                                      value));
+                                              _store.dispatch(UpdateTenantPersonal_perEmail(value));
                                             },
                                           ),
                                         ],
@@ -290,18 +240,14 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                     ),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
                                               Text(
-                                                GlobleString
-                                                    .BT_Profile_Phonenumber,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                GlobleString.BT_Profile_Phonenumber,
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
                                               SizedBox(
@@ -309,8 +255,7 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                               ),
                                               Text(
                                                 GlobleString.Optional,
-                                                style: MyStyles.Regular(
-                                                    12, myColor.optional),
+                                                style: MyStyles.Regular(12, myColor.optional),
                                                 textAlign: TextAlign.start,
                                               ),
                                             ],
@@ -325,64 +270,39 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                                 color: myColor.black,
                                                 width: 1.0,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(4.0),
+                                              borderRadius: BorderRadius.circular(4.0),
                                             ),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: <Widget>[
                                                 CountryCodePicker(
                                                   onChanged: (value) {
                                                     //widget.newleadlist.insert(widget.pos, widget.dmodel);
 
-                                                    _store.dispatch(
-                                                        UpdateTenantPersonal_perDialCode(
-                                                            value.dialCode
-                                                                .toString()));
-                                                    _store.dispatch(
-                                                        UpdateTenantPersonal_perCountryCode(
-                                                            value.code
-                                                                .toString()));
+                                                    _store.dispatch(UpdateTenantPersonal_perDialCode(value.dialCode.toString()));
+                                                    _store.dispatch(UpdateTenantPersonal_perCountryCode(value.code.toString()));
                                                   },
-                                                  initialSelection:
-                                                      tenantPersonalState
-                                                          .perCountryCode,
+                                                  initialSelection: tenantPersonalState.perCountryCode,
                                                   showFlag: true,
-                                                  textStyle: MyStyles.Medium(
-                                                      14, myColor.text_color),
+                                                  textStyle: MyStyles.Medium(14, myColor.text_color),
                                                   enabled: true,
-                                                  dialogTextStyle:
-                                                      MyStyles.Medium(14,
-                                                          myColor.text_color),
+                                                  dialogTextStyle: MyStyles.Medium(14, myColor.text_color),
                                                   //showDropDownButton: true,
                                                 ),
                                                 Expanded(
                                                   child: TextFormField(
-                                                    initialValue:
-                                                        tenantPersonalState
-                                                            .perPhoneNumber,
-                                                    keyboardType:
-                                                        TextInputType.phone,
-                                                    inputFormatters: [
-                                                      MaskedInputFormatter(
-                                                          "(000) 000 0000")
-                                                    ],
+                                                    initialValue: tenantPersonalState.perPhoneNumber,
+                                                    keyboardType: TextInputType.phone,
+                                                    inputFormatters: [MaskedInputFormatter("(000) 000 0000")],
                                                     decoration: InputDecoration(
                                                       border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          color: myColor
-                                                              .disablecolor),
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
+                                                      hintStyle: TextStyle(color: myColor.disablecolor),
+                                                      contentPadding: EdgeInsets.all(10),
                                                       isDense: true,
                                                     ),
-                                                    style: MyStyles.Medium(
-                                                        14, myColor.black),
+                                                    style: MyStyles.Medium(14, myColor.black),
                                                     onChanged: (value) {
-                                                      _store.dispatch(
-                                                          UpdateTenantPersonal_perPhoneNumber(
-                                                              value));
+                                                      _store.dispatch(UpdateTenantPersonal_perPhoneNumber(value));
                                                     },
                                                   ),
                                                 ),
@@ -408,18 +328,15 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                       child: Container(
                                         height: 35,
                                         width: 100,
-                                        padding: EdgeInsets.only(
-                                            left: 15, right: 15),
+                                        padding: EdgeInsets.only(left: 15, right: 15),
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
                                           color: myColor.Circle_main,
                                         ),
                                         child: Text(
                                           GlobleString.BT_Profile_Save,
-                                          style: MyStyles.Medium(
-                                              14, myColor.white),
+                                          style: MyStyles.Medium(14, myColor.white),
                                         ),
                                       ),
                                     )
@@ -434,28 +351,23 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                   children: [
                                     Text(
                                       GlobleString.BT_Change_Password,
-                                      style: MyStyles.Medium(
-                                          20, myColor.Circle_main),
+                                      style: MyStyles.Medium(20, myColor.Circle_main),
                                       textAlign: TextAlign.center,
                                     ),
                                     SizedBox(
                                       height: 20,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 GlobleString.BT_old_Password,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
                                               SizedBox(
@@ -464,42 +376,29 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                               TextField(
                                                 controller: _textCurrentPwd,
                                                 textAlign: TextAlign.start,
-                                                style: MyStyles.Regular(
-                                                    14, myColor.Circle_main),
+                                                style: MyStyles.Regular(14, myColor.Circle_main),
                                                 obscureText: CpasswordVisible,
                                                 decoration: InputDecoration(
                                                     //border: InputBorder.none,
                                                     suffixIcon: IconButton(
                                                       icon: Icon(
-                                                        CpasswordVisible
-                                                            ? Icons
-                                                                .visibility_off
-                                                            : Icons.visibility,
+                                                        CpasswordVisible ? Icons.visibility_off : Icons.visibility,
                                                         color: Colors.black38,
                                                       ),
                                                       onPressed: () {
                                                         setState(() {
-                                                          CpasswordVisible =
-                                                              !CpasswordVisible;
+                                                          CpasswordVisible = !CpasswordVisible;
                                                         });
                                                       },
                                                     ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor.blue,
-                                                          width: 2),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.blue, width: 2),
                                                     ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor
-                                                              .disablecolor,
-                                                          width: 1.0),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                     ),
                                                     isDense: true,
-                                                    contentPadding:
-                                                        EdgeInsets.all(12),
+                                                    contentPadding: EdgeInsets.all(12),
                                                     fillColor: myColor.white,
                                                     filled: true),
                                               ),
@@ -518,20 +417,16 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                       height: 10,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 GlobleString.BT_new_Password,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
                                               SizedBox(
@@ -540,42 +435,29 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                               TextField(
                                                 controller: _textNewPwd,
                                                 textAlign: TextAlign.start,
-                                                style: MyStyles.Regular(
-                                                    14, myColor.Circle_main),
+                                                style: MyStyles.Regular(14, myColor.Circle_main),
                                                 obscureText: NpasswordVisible,
                                                 decoration: InputDecoration(
                                                     //border: InputBorder.none,
                                                     suffixIcon: IconButton(
                                                       icon: Icon(
-                                                        NpasswordVisible
-                                                            ? Icons
-                                                                .visibility_off
-                                                            : Icons.visibility,
+                                                        NpasswordVisible ? Icons.visibility_off : Icons.visibility,
                                                         color: Colors.black38,
                                                       ),
                                                       onPressed: () {
                                                         setState(() {
-                                                          NpasswordVisible =
-                                                              !NpasswordVisible;
+                                                          NpasswordVisible = !NpasswordVisible;
                                                         });
                                                       },
                                                     ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor.blue,
-                                                          width: 2),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.blue, width: 2),
                                                     ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor
-                                                              .disablecolor,
-                                                          width: 1.0),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                     ),
                                                     isDense: true,
-                                                    contentPadding:
-                                                        EdgeInsets.all(12),
+                                                    contentPadding: EdgeInsets.all(12),
                                                     fillColor: myColor.white,
                                                     filled: true),
                                               ),
@@ -594,21 +476,16 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                       height: 10,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                GlobleString
-                                                    .BT_confirm_Password,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                GlobleString.BT_confirm_Password,
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
                                               SizedBox(
@@ -617,42 +494,29 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                               TextField(
                                                 controller: _textConfirmPwd,
                                                 textAlign: TextAlign.start,
-                                                style: MyStyles.Regular(
-                                                    14, myColor.Circle_main),
+                                                style: MyStyles.Regular(14, myColor.Circle_main),
                                                 obscureText: NCpasswordVisible,
                                                 decoration: InputDecoration(
                                                     //border: InputBorder.none,
                                                     suffixIcon: IconButton(
                                                       icon: Icon(
-                                                        NCpasswordVisible
-                                                            ? Icons
-                                                                .visibility_off
-                                                            : Icons.visibility,
+                                                        NCpasswordVisible ? Icons.visibility_off : Icons.visibility,
                                                         color: Colors.black38,
                                                       ),
                                                       onPressed: () {
                                                         setState(() {
-                                                          NCpasswordVisible =
-                                                              !NCpasswordVisible;
+                                                          NCpasswordVisible = !NCpasswordVisible;
                                                         });
                                                       },
                                                     ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor.blue,
-                                                          width: 2),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.blue, width: 2),
                                                     ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: myColor
-                                                              .disablecolor,
-                                                          width: 1.0),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                     ),
                                                     isDense: true,
-                                                    contentPadding:
-                                                        EdgeInsets.all(12),
+                                                    contentPadding: EdgeInsets.all(12),
                                                     fillColor: myColor.white,
                                                     filled: true),
                                               ),
@@ -679,14 +543,12 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                                         width: 90,
                                         alignment: Alignment.center,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(7)),
+                                          borderRadius: BorderRadius.all(Radius.circular(7)),
                                           color: myColor.Circle_main,
                                         ),
                                         child: Text(
                                           GlobleString.BT_Submitpassword,
-                                          style: MyStyles.Medium(
-                                              14, myColor.white),
+                                          style: MyStyles.Medium(14, myColor.white),
                                         ),
                                       ),
                                     ),
@@ -733,8 +595,7 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
         SizedBox(
           height: 15,
         ),
-        tenantPersonalState.propertyImage != null &&
-                tenantPersonalState.propertyImage!.id != null
+        tenantPersonalState.propertyImage != null && tenantPersonalState.propertyImage!.id != null
             ? Container(
                 width: 150.0,
                 height: 150.0,
@@ -744,15 +605,10 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
                   border: Border.all(width: 2, color: myColor.blue),
                   image: new DecorationImage(
                     fit: BoxFit.fill,
-                    image: CustomNetworkImage(
-                        Weburl.image_API +
-                            tenantPersonalState.propertyImage!.id.toString(),
-                        scale: 1,
-                        headers: {
-                          'Authorization':
-                              'bearer ' + Prefs.getString(PrefsName.userTokan),
-                          'ApplicationCode': Weburl.API_CODE,
-                        }),
+                    image: CustomNetworkImage(Weburl.image_API + tenantPersonalState.propertyImage!.id.toString(), scale: 1, headers: {
+                      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+                      'ApplicationCode': Weburl.API_CODE,
+                    }),
                   ),
                 ),
               )
@@ -843,8 +699,7 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
           element.remove();
         }
       } else {
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS3_Property_Image_error, false);
+        ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Image_error, false);
       }
     }
     final String id = '__file_picker_web-file-input';
@@ -855,24 +710,16 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
   }
 
   void savePersonDetails(TenantPersonalState tenantPersonalState) {
-    if (tenantPersonalState.perFirstname == null ||
-        tenantPersonalState.perFirstname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_firstname, false);
-    } else if (tenantPersonalState.perLastname == null ||
-        tenantPersonalState.perLastname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_lastname, false);
-    } else if (tenantPersonalState.perEmail == null ||
-        tenantPersonalState.perEmail.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_email, false);
+    if (tenantPersonalState.perFirstname == null || tenantPersonalState.perFirstname.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_firstname, false);
+    } else if (tenantPersonalState.perLastname == null || tenantPersonalState.perLastname.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_lastname, false);
+    } else if (tenantPersonalState.perEmail == null || tenantPersonalState.perEmail.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_email, false);
     } else if (tenantPersonalState.perPhoneNumber != null &&
         tenantPersonalState.perPhoneNumber.isNotEmpty &&
-        Helper.ValidPhonenumber(
-            tenantPersonalState.perPhoneNumber.toString())) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_validphone, false);
+        Helper.ValidPhonenumber(tenantPersonalState.perPhoneNumber.toString())) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_validphone, false);
     } else {
       _addSaveAndFinishCall(tenantPersonalState);
     }
@@ -883,8 +730,7 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
     Overlay.of(context)!.insert(loader);
 
     if (tenantPersonalState.appimage != null) {
-      ApiManager().AddSingleImage(context, tenantPersonalState.appimage!,
-          (status, responce) {
+      ApiManager().AddSingleImage(context, tenantPersonalState.appimage!, (status, responce) {
         if (status) {
           final String id = '__file_picker_web-file-input';
           var element = html.document.getElementById(id);
@@ -925,8 +771,7 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
     CommonID cPojo = new CommonID();
     cPojo.ID = Prefs.getString(PrefsName.BT_ApplicantID);
 
-    ApiManager().UpdateTenantProfileData(context, cPojo, uPojo,
-        (error, respoce) async {
+    ApiManager().UpdateTenantProfileData(context, cPojo, uPojo, (error, respoce) async {
       if (error) {
         var myjson = {
           "DSQID": Weburl.DSQ_tenant_Details.toString(),
@@ -939,10 +784,8 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
         ApiManager().tenant_Details_DSQCall(context, json, (error, respoce2) {
           if (error) {
             loader.remove();
-            ToastUtils.showCustomToast(
-                context, GlobleString.LL_Profile_success, true);
-            _store.dispatch(UpdateTenantPortalPage(
-                0, GlobleString.NAV_tenant_LeaseDetails));
+            ToastUtils.showCustomToast(context, GlobleString.LL_Profile_success, true);
+            _store.dispatch(UpdateTenantPortalPage(0, GlobleString.NAV_tenant_LeaseDetails));
           } else {
             loader.remove();
             ToastUtils.showCustomToast(context, respoce2, false);
@@ -961,38 +804,29 @@ class _TenantProfileScreenState extends State<TenantProfileScreen> {
     String confirmpass = _textConfirmPwd.text.toString().trim();
 
     if (curpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_cuurent_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_cuurent_error, false);
     } else if (newpass.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.tenant_new_error, false);
     } else if (newpass == curpass) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_password_same_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_password_same_error, false);
     } else if (!Helper.isPasswordCompliant(newpass)) {
       ToastUtils.showCustomToast(context, GlobleString.password_error, false);
     } else if (confirmpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_newconfirm_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_newconfirm_error, false);
     } else if (newpass != confirmpass) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_confirm_password_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_confirm_password_error, false);
     } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      ApiManager().ChangePasswordAPI(
-          context, Prefs.getString(PrefsName.BT_Email), curpass, newpass,
-          (error, respoce) {
+      ApiManager().ChangePasswordAPI(context, Prefs.getString(PrefsName.BT_Email), curpass, newpass, (error, respoce) {
         if (error) {
           loader.remove();
-          ToastUtils.showCustomToast(
-              context, GlobleString.tenant_password_success, true);
-          _store.dispatch(
-              UpdateTenantPortalPage(0, GlobleString.NAV_tenant_LeaseDetails));
+          ToastUtils.showCustomToast(context, GlobleString.tenant_password_success, true);
+          _store.dispatch(UpdateTenantPortalPage(0, GlobleString.NAV_tenant_LeaseDetails));
         } else {
           loader.remove();
-          ToastUtils.showCustomToast(
-              context, GlobleString.tenant_password_error, false);
+          ToastUtils.showCustomToast(context, GlobleString.tenant_password_error, false);
         }
       });
     }

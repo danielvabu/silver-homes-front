@@ -30,7 +30,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/property_images.dart';
 import 'package:silverhome/widget/landlord/propertyfeature/property_amenities_header.dart';
@@ -86,8 +86,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.featuresAndPhotos) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.featuresAndPhotos) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         apiCallAndValidation(_store.state!.propertyState);
@@ -106,25 +105,20 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
     AddEditProperty.isValueUpdate = false;
 
     if (_store.state!.propertySummeryState != null) {
-      PropertySummeryState propertySummeryState =
-          _store.state!.propertySummeryState;
+      PropertySummeryState propertySummeryState = _store.state!.propertySummeryState;
 
-      _store.dispatch(UpdatePropertyImageList(
-          propertySummeryState.SummerypropertyImagelist));
+      _store.dispatch(UpdatePropertyImageList(propertySummeryState.SummerypropertyImagelist));
 
       List<PropertyAmenitiesUtility> secondAmenityList =
-          propertySummeryState.Summerypropertyamenitieslist.map(
-              (item) => new PropertyAmenitiesUtility.clone(item)).toList();
+          propertySummeryState.Summerypropertyamenitieslist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
 
       List<PropertyAmenitiesUtility> secondUtilityList =
-          propertySummeryState.Summerypropertyutilitieslist.map(
-              (item) => new PropertyAmenitiesUtility.clone(item)).toList();
+          propertySummeryState.Summerypropertyutilitieslist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
 
       _store.dispatch(UpdatePropertyAmenitiesList(secondAmenityList));
       _store.dispatch(UpdatePropertyUtilitiesList(secondUtilityList));
       _store.dispatch(UpdateParkingstalls(propertySummeryState.Parkingstalls));
-      _store.dispatch(UpdateStorageAvailableValue(
-          propertySummeryState.storageavailableValue));
+      _store.dispatch(UpdateStorageAvailableValue(propertySummeryState.storageavailableValue));
     }
   }
 
@@ -228,18 +222,12 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                               decoration: InputDecoration(
                                   //border: InputBorder.none,
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: propertyState.error_Parkingstalls
-                                            ? myColor.errorcolor
-                                            : myColor.blue,
-                                        width: 2),
+                                    borderSide:
+                                        BorderSide(color: propertyState.error_Parkingstalls ? myColor.errorcolor : myColor.blue, width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: propertyState.error_Parkingstalls
-                                            ? myColor.errorcolor
-                                            : myColor.gray,
-                                        width: 1.0),
+                                        color: propertyState.error_Parkingstalls ? myColor.errorcolor : myColor.gray, width: 1.0),
                                   ),
                                   isDense: true,
                                   contentPadding: EdgeInsets.all(12),
@@ -248,8 +236,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                               onChanged: (value) {
                                 _changeData();
                                 _store.dispatch(UpdateParkingstalls(value));
-                                _store
-                                    .dispatch(UpdateErrorParkingstalls(false));
+                                _store.dispatch(UpdateErrorParkingstalls(false));
                               },
                             ),
                           ],
@@ -265,8 +252,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              GlobleString
-                                  .PS3_Property_Features_StorageAvailable,
+                              GlobleString.PS3_Property_Features_StorageAvailable,
                               style: MyStyles.Medium(14, myColor.black),
                               textAlign: TextAlign.start,
                             ),
@@ -284,27 +270,17 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                                 isError: propertyState.error_storageavailable,
                                 popupBackgroundColor: myColor.white,
                                 items: propertyState.storageavailablelist,
-                                defultHeight: double.parse(
-                                    (propertyState.storageavailablelist.length *
-                                            35)
-                                        .toString()),
-                                textstyle:
-                                    MyStyles.Medium(14, myColor.text_color),
-                                itemAsString: (SystemEnumDetails? u) =>
-                                    u != null ? u.displayValue : "",
+                                defultHeight: double.parse((propertyState.storageavailablelist.length * 35).toString()),
+                                textstyle: MyStyles.Medium(14, myColor.text_color),
+                                itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
                                 hint: GlobleString.storage_availability,
                                 showSearchBox: false,
-                                selectedItem:
-                                    propertyState.storageavailableValue != null
-                                        ? propertyState.storageavailableValue
-                                        : null,
+                                selectedItem: propertyState.storageavailableValue != null ? propertyState.storageavailableValue : null,
                                 isFilteredOnline: true,
                                 onChanged: (value) {
                                   _changeData();
-                                  _store.dispatch(
-                                      UpdateStorageAvailableValue(value!));
-                                  _store.dispatch(
-                                      UpdateErrorStorageavailable(false));
+                                  _store.dispatch(UpdateStorageAvailableValue(value!));
+                                  _store.dispatch(UpdateErrorStorageavailable(false));
                                 },
                               ),
                             ),
@@ -320,11 +296,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          back(),
-                          SizedBox(width: 10),
-                          saveandnext(propertyState)
-                        ],
+                        children: [back(), SizedBox(width: 10), saveandnext(propertyState)],
                       ),
                     ],
                   ),
@@ -465,8 +437,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
                           color: myColor.Circle_main,
-                          border:
-                              Border.all(width: 2, color: myColor.Circle_main),
+                          border: Border.all(width: 2, color: myColor.Circle_main),
                         ),
                         padding: EdgeInsets.all(10),
                         child: Icon(
@@ -493,19 +464,13 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                         ) {
                           return PropertyImagesCard(
                             callbackOnItemDelete: () {
-                              deleteimage_dailogShow(
-                                  propertyState,
-                                  propertyState.propertyImagelist[index],
-                                  index);
+                              deleteimage_dailogShow(propertyState, propertyState.propertyImagelist[index], index);
                             },
                             pos: index,
                             modelclass: propertyState.propertyImagelist[index],
                             callbackOnFeatured: (bool flag) {
                               if (flag) {
-                                feature_dailogShow(
-                                    propertyState,
-                                    propertyState.propertyImagelist[index],
-                                    index);
+                                feature_dailogShow(propertyState, propertyState.propertyImagelist[index], index);
                               } else {}
                             },
                           );
@@ -522,8 +487,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
     );
   }
 
-  deleteimage_dailogShow(PropertyState propertyState,
-      PropertyImageMediaInfo propertyImageMediaInfo, int pos) {
+  deleteimage_dailogShow(PropertyState propertyState, PropertyImageMediaInfo propertyImageMediaInfo, int pos) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
@@ -548,29 +512,22 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
               loader = Helper.overlayLoader(context);
               Overlay.of(context)!.insert(loader);
 
-              ApiManager()
-                  .deletePropertyImage(context, propertyImageId, mediaInfoId,
-                      (error, responce) async {
+              ApiManager().deletePropertyImage(context, propertyImageId, mediaInfoId, (error, responce) async {
                 if (error) {
                   loader.remove();
-                  List<PropertyImageMediaInfo> PropertyImageMediaInfolist =
-                      propertyState.propertyImagelist;
+                  List<PropertyImageMediaInfo> PropertyImageMediaInfolist = propertyState.propertyImagelist;
                   PropertyImageMediaInfolist.removeAt(pos);
-                  _store.dispatch(
-                      UpdatePropertyImageList(PropertyImageMediaInfolist));
-                  _store.dispatch(UpdateSummeryPropertyImageList(
-                      PropertyImageMediaInfolist));
+                  _store.dispatch(UpdatePropertyImageList(PropertyImageMediaInfolist));
+                  _store.dispatch(UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
                 } else {
                   loader.remove();
                   ToastUtils.showCustomToast(context, responce, false);
                 }
               });
             } else {
-              List<PropertyImageMediaInfo> PropertyImageMediaInfolist =
-                  propertyState.propertyImagelist;
+              List<PropertyImageMediaInfo> PropertyImageMediaInfolist = propertyState.propertyImagelist;
               PropertyImageMediaInfolist.removeAt(pos);
-              _store.dispatch(
-                  UpdatePropertyImageList(PropertyImageMediaInfolist));
+              _store.dispatch(UpdatePropertyImageList(PropertyImageMediaInfolist));
             }
           },
           onPressedNo: () {
@@ -581,8 +538,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
     );
   }
 
-  feature_dailogShow(PropertyState propertyState,
-      PropertyImageMediaInfo propertyImageMediaInfo, int pos) {
+  feature_dailogShow(PropertyState propertyState, PropertyImageMediaInfo propertyImageMediaInfo, int pos) {
     showDialog(
       context: context,
       barrierColor: Colors.black45,
@@ -600,22 +556,17 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().setFeaturedImage(
-                context,
-                Prefs.getString(PrefsName.PropertyID),
-                propertyImageMediaInfo.id.toString(), (error, responce) async {
+            ApiManager().setFeaturedImage(context, Prefs.getString(PrefsName.PropertyID), propertyImageMediaInfo.id.toString(),
+                (error, responce) async {
               if (error) {
                 loader.remove();
-                List<PropertyImageMediaInfo> PropertyImageMediaInfolist =
-                    propertyState.propertyImagelist;
+                List<PropertyImageMediaInfo> PropertyImageMediaInfolist = propertyState.propertyImagelist;
                 for (int i = 0; i < PropertyImageMediaInfolist.length; i++) {
                   PropertyImageMediaInfolist[i].IsFavorite = false;
                 }
                 PropertyImageMediaInfolist[pos].IsFavorite = true;
-                _store.dispatch(
-                    UpdatePropertyImageList(PropertyImageMediaInfolist));
-                _store.dispatch(
-                    UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
+                _store.dispatch(UpdatePropertyImageList(PropertyImageMediaInfolist));
+                _store.dispatch(UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
               } else {
                 loader.remove();
                 ToastUtils.showCustomToast(context, responce, false);
@@ -659,8 +610,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
               (file.name.split('.').last).contains("JPEG") ||
               (file.name.split('.').last).contains("heif") ||
               (file.name.split('.').last).contains("HEIF")) {
-            PropertyImageMediaInfo propertyImageMediaInfo =
-                new PropertyImageMediaInfo();
+            PropertyImageMediaInfo propertyImageMediaInfo = new PropertyImageMediaInfo();
 
             propertyImageMediaInfo.id = 0;
             propertyImageMediaInfo.fileType = 0;
@@ -677,22 +627,19 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
             PropertyImageMediaInfolist.add(propertyImageMediaInfo);
 
             if (files.length - 1 == i) {
-              List<PropertyImageMediaInfo> mylist =
-                  propertyState.propertyImagelist;
+              List<PropertyImageMediaInfo> mylist = propertyState.propertyImagelist;
               mylist.addAll(PropertyImageMediaInfolist);
 
               _store.dispatch(UpdatePropertyImageList(mylist));
             }
           } else {
-            ToastUtils.showCustomToast(
-                context, GlobleString.PS3_Property_Image_error1, false);
+            ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Image_error1, false);
             break;
           }
         }
       } else {
         int length = 10 - propertyState.propertyImagelist.length;
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS3_Property_Image_maximum, false);
+        ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Image_maximum, false);
       }
     }
 
@@ -725,12 +672,10 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
   apiCallAndValidation(PropertyState propertyState) {
     if (propertyState.Parkingstalls.isEmpty) {
       _store.dispatch(UpdateErrorParkingstalls(true));
-      ToastUtils.showCustomToast(context,
-          GlobleString.PS3_Property_Features_Parkingstalls_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Features_Parkingstalls_error, false);
     } else if (propertyState.storageavailableValue == null) {
       _store.dispatch(UpdateErrorStorageavailable(true));
-      ToastUtils.showCustomToast(context,
-          GlobleString.PS3_Property_Features_StorageAvailable_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Features_StorageAvailable_error, false);
     }
     /*else if (propertyState.propertyImagelist.length == 0) {
       ToastUtils.showCustomToast(context,
@@ -740,44 +685,35 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      List<PropertyAminityUtility> aminityutilitylist =
-          <PropertyAminityUtility>[];
+      List<PropertyAminityUtility> aminityutilitylist = <PropertyAminityUtility>[];
 
       for (int i = 0; i < propertyState.propertyamenitieslist.length; i++) {
-        PropertyAmenitiesUtility amenitiesUtility =
-            propertyState.propertyamenitieslist[i];
+        PropertyAmenitiesUtility amenitiesUtility = propertyState.propertyamenitieslist[i];
 
-        PropertyAminityUtility propertyAminityUtility =
-            new PropertyAminityUtility();
+        PropertyAminityUtility propertyAminityUtility = new PropertyAminityUtility();
 
         propertyAminityUtility.Prop_ID = Prefs.getString(PrefsName.PropertyID);
         propertyAminityUtility.Feature_ID = amenitiesUtility.id.toString();
-        propertyAminityUtility.Feature_Value =
-            amenitiesUtility.value.toString();
+        propertyAminityUtility.Feature_Value = amenitiesUtility.value.toString();
 
         aminityutilitylist.add(propertyAminityUtility);
       }
 
       for (int i = 0; i < propertyState.propertyutilitieslist.length; i++) {
-        PropertyAmenitiesUtility amenitiesUtility =
-            propertyState.propertyutilitieslist[i];
+        PropertyAmenitiesUtility amenitiesUtility = propertyState.propertyutilitieslist[i];
 
-        PropertyAminityUtility propertyAminityUtility =
-            new PropertyAminityUtility();
+        PropertyAminityUtility propertyAminityUtility = new PropertyAminityUtility();
 
         propertyAminityUtility.Prop_ID = Prefs.getString(PrefsName.PropertyID);
         propertyAminityUtility.Feature_ID = amenitiesUtility.id.toString();
-        propertyAminityUtility.Feature_Value =
-            amenitiesUtility.value.toString();
+        propertyAminityUtility.Feature_Value = amenitiesUtility.value.toString();
 
         aminityutilitylist.add(propertyAminityUtility);
       }
 
       PropertyFeature propertyFeature = new PropertyFeature();
-      propertyFeature.Parking_Stalls =
-          propertyState.Parkingstalls.toString().trim();
-      propertyFeature.StorageAvailable =
-          propertyState.storageavailableValue!.EnumDetailID.toString().trim();
+      propertyFeature.Parking_Stalls = propertyState.Parkingstalls.toString().trim();
+      propertyFeature.StorageAvailable = propertyState.storageavailableValue!.EnumDetailID.toString().trim();
 
       if (propertyState.PropDrafting >= 2 && propertyState.PropDrafting <= 3) {
         propertyFeature.PropDrafting = 3;
@@ -789,40 +725,31 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
       propertyUpdate.ID = Prefs.getString(PrefsName.PropertyID);
       propertyUpdate.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-      PropID propID =
-          new PropID(Prop_ID: Prefs.getString(PrefsName.PropertyID));
+      PropID propID = new PropID(Prop_ID: Prefs.getString(PrefsName.PropertyID));
 
       List<PropertyImageMediaInfo> propertyimagelist = [];
 
       for (int i = 0; i < propertyState.propertyImagelist.length; i++) {
-        PropertyImageMediaInfo propertyImageMediaInfo =
-            propertyState.propertyImagelist[i];
+        PropertyImageMediaInfo propertyImageMediaInfo = propertyState.propertyImagelist[i];
         if (propertyImageMediaInfo.appImage != null) {
           propertyimagelist.add(propertyImageMediaInfo);
         }
       }
 
-      ApiManager().deleteAllAmenitiesUtilities(context, propID,
-          (error, respoce) async {
+      ApiManager().deleteAllAmenitiesUtilities(context, propID, (error, respoce) async {
         if (error) {
-          ApiManager().AddPropertyFeature(
-              context, aminityutilitylist, propertyUpdate, propertyFeature,
-              (error, responce) async {
+          ApiManager().AddPropertyFeature(context, aminityutilitylist, propertyUpdate, propertyFeature, (error, responce) async {
             if (error) {
               if (propertyimagelist.length > 0) {
-                insertPropertyImageCall(
-                    propertyimagelist, propertyState, propertyFeature);
+                insertPropertyImageCall(propertyimagelist, propertyState, propertyFeature);
               } else {
                 await Prefs.setBool(PrefsName.PropertyStep3, true);
                 loader.remove();
                 UpdateSummeryData(propertyState);
-                _store.dispatch(
-                    UpdatePropertyDrafting(propertyFeature.PropDrafting!));
-                _store.dispatch(UpdateSummeryPropertyDrafting(
-                    propertyFeature.PropDrafting!));
+                _store.dispatch(UpdatePropertyDrafting(propertyFeature.PropDrafting!));
+                _store.dispatch(UpdateSummeryPropertyDrafting(propertyFeature.PropDrafting!));
 
-                ToastUtils.showCustomToast(
-                    context, GlobleString.PS_Save_Propertyse, true);
+                ToastUtils.showCustomToast(context, GlobleString.PS_Save_Propertyse, true);
 
                 if (!isGotoback) {
                   if (stepper == 0)
@@ -830,8 +757,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
                   else
                     _store.dispatch(UpdatePropertyForm(stepper));
                 } else {
-                  _store.dispatch(
-                      UpdatePortalPage(1, GlobleString.NAV_Properties));
+                  _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
                 }
               }
             } else {
@@ -850,21 +776,16 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
 
   void UpdateSummeryData(PropertyState propertyState) {
     _store.dispatch(UpdateSummeryParkingstalls(propertyState.Parkingstalls));
-    _store.dispatch(UpdateSummeryStorageAvailableValue(
-        propertyState.storageavailableValue));
-    _store.dispatch(UpdateSummeryPropertyAmenitiesList(
-        propertyState.propertyamenitieslist));
-    _store.dispatch(UpdateSummeryPropertyUtilitiesList(
-        propertyState.propertyutilitieslist));
+    _store.dispatch(UpdateSummeryStorageAvailableValue(propertyState.storageavailableValue));
+    _store.dispatch(UpdateSummeryPropertyAmenitiesList(propertyState.propertyamenitieslist));
+    _store.dispatch(UpdateSummeryPropertyUtilitiesList(propertyState.propertyutilitieslist));
   }
 
-  insertPropertyImageCall(List<PropertyImageMediaInfo> propertyimagelist,
-      PropertyState propertyState, PropertyFeature propertyFeature) {
+  insertPropertyImageCall(List<PropertyImageMediaInfo> propertyimagelist, PropertyState propertyState, PropertyFeature propertyFeature) {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
-    ApiManager().PropertyImagesUpload(context, propertyimagelist,
-        (status, listString, responce) {
+    ApiManager().PropertyImagesUpload(context, propertyimagelist, (status, listString, responce) {
       if (status) {
         if (listString.length > 0) {
           List<InsertPropertyImage> imagelist = <InsertPropertyImage>[];
@@ -877,8 +798,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
             ));
           }
 
-          ApiManager().InsetPropertyImages(context, imagelist,
-              (status, responce) async {
+          ApiManager().InsetPropertyImages(context, imagelist, (status, responce) async {
             if (status) {
               getPropertyImages(propertyState, propertyFeature);
             } else {
@@ -894,8 +814,7 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
     });
   }
 
-  getPropertyImages(
-      PropertyState propertyState, PropertyFeature propertyFeature) {
+  getPropertyImages(PropertyState propertyState, PropertyFeature propertyFeature) {
     SelectPropertyImage check = new SelectPropertyImage();
     check.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     check.Property_ID = Prefs.getString(PrefsName.PropertyID);
@@ -906,11 +825,9 @@ class _StepPropertyFeatureState extends State<StepPropertyFeature> {
         loader.remove();
         UpdateSummeryData(propertyState);
         _store.dispatch(UpdatePropertyDrafting(propertyFeature.PropDrafting!));
-        _store.dispatch(
-            UpdateSummeryPropertyDrafting(propertyFeature.PropDrafting!));
+        _store.dispatch(UpdateSummeryPropertyDrafting(propertyFeature.PropDrafting!));
 
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS_Save_Propertyse, true);
+        ToastUtils.showCustomToast(context, GlobleString.PS_Save_Propertyse, true);
 
         if (!isGotoback) {
           if (stepper == 0)
