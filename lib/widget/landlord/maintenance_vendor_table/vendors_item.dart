@@ -18,6 +18,7 @@ typedef VoidCallArchive = void Function(VendorData data, int pos);
 class VendorsItem extends StatefulWidget {
   final VoidCallView _callbackView;
   final VoidCallEdit _callbackEdit;
+  final VoidCallEdit _callbackRankingEdit;
   final VoidCallDuplicat _callbackDuplicat;
   final VoidCallDelete _callbackDelete;
   final VoidCallArchive _callbackArchive;
@@ -27,12 +28,14 @@ class VendorsItem extends StatefulWidget {
     required List<VendorData> listdata1,
     required VoidCallView onPressView,
     required VoidCallEdit onPresseEdit,
+    required VoidCallEdit onPresseRankingEdit,
     required VoidCallDuplicat onPresseDuplicat,
     required VoidCallDelete onPresseDelete,
     required VoidCallArchive onPresseArchive,
   })  : listdata = listdata1,
         _callbackView = onPressView,
         _callbackEdit = onPresseEdit,
+        _callbackRankingEdit = onPresseRankingEdit,
         _callbackDuplicat = onPresseDuplicat,
         _callbackDelete = onPresseDelete,
         _callbackArchive = onPresseArchive;
@@ -95,7 +98,7 @@ class _VendorsItemState extends State<VendorsItem> {
     result.add(_datavalueEmail(model));
     result.add(_datavaluePhone(model));
     result.add(_datavalueCategory(model));
-    result.add(_datavalueRating(model));
+    result.add(_datavalueRating(model, index));
     result.add(_actionPopup(model, index));
     return result;
   }
@@ -201,23 +204,27 @@ class _VendorsItemState extends State<VendorsItem> {
     );
   }
 
-  Widget _datavalueRating(VendorData model) {
-    return Container(
-      height: 40,
-      width: width / 12,
-      padding: EdgeInsets.only(left: 10),
-      alignment: Alignment.centerLeft,
-      child: RatingBarIndicator(
-        rating: model.rating!,
-        itemBuilder: (context, index) => Icon(
-          Icons.star,
-          color: myColor.blue,
-        ),
-        itemCount: 5,
-        itemSize: 15.0,
-        direction: Axis.horizontal,
-      ),
-    );
+  Widget _datavalueRating(VendorData model, int index) {
+    return GestureDetector(
+        onTap: () {
+          widget._callbackRankingEdit(model, index);
+        },
+        child: Container(
+          height: 40,
+          width: width / 12,
+          padding: EdgeInsets.only(left: 10),
+          alignment: Alignment.centerLeft,
+          child: RatingBarIndicator(
+            rating: model.rating!,
+            itemBuilder: (context, index) => Icon(
+              Icons.star,
+              color: myColor.blue,
+            ),
+            itemCount: 5,
+            itemSize: 15.0,
+            direction: Axis.horizontal,
+          ),
+        ));
   }
 
   Widget _actionPopup(VendorData model, int index) {

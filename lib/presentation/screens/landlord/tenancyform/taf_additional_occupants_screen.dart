@@ -19,7 +19,7 @@ import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 
 typedef VoidCallbackRecordStep = void Function(int stepper);
@@ -41,12 +41,10 @@ class TAFAdditionalOccupantsScreen extends StatefulWidget {
         _callbackRecordStep = onPressedRecordStep;
 
   @override
-  _TAFAdditionalOccupantsScreenState createState() =>
-      _TAFAdditionalOccupantsScreenState();
+  _TAFAdditionalOccupantsScreenState createState() => _TAFAdditionalOccupantsScreenState();
 }
 
-class _TAFAdditionalOccupantsScreenState
-    extends State<TAFAdditionalOccupantsScreen> {
+class _TAFAdditionalOccupantsScreenState extends State<TAFAdditionalOccupantsScreen> {
   double height = 0, width = 0;
 
   final _store = getIt<AppStore>();
@@ -66,26 +64,22 @@ class _TAFAdditionalOccupantsScreenState
 
   initilizedata() {
     if (_store.state!.tfAdditionalOccupantState != null) {
-      TFAdditionalOccupantState tfAdditionalOccupantState =
-          _store.state!.tfAdditionalOccupantState;
+      TFAdditionalOccupantState tfAdditionalOccupantState = _store.state!.tfAdditionalOccupantState;
 
       _store.dispatch(UpdateTFAddOccupantlist([]));
       List<TenancyAdditionalOccupant> secondList =
-          tfAdditionalOccupantState.FNLliveserveroccupantlist.map(
-              (item) => new TenancyAdditionalOccupant.clone(item)).toList();
+          tfAdditionalOccupantState.FNLliveserveroccupantlist.map((item) => new TenancyAdditionalOccupant.clone(item)).toList();
 
       _store.dispatch(UpdateTFAddOccupantlist(secondList));
       _store.dispatch(UpdateTFAddLiveServerOccupantlist(secondList));
 
-      _store.dispatch(UpdateTFAddOccupantNotApplicable(
-          tfAdditionalOccupantState.FNLnotapplicable));
+      _store.dispatch(UpdateTFAddOccupantNotApplicable(tfAdditionalOccupantState.FNLnotapplicable));
     }
   }
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.tenancyotherApplicant) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.tenancyotherApplicant) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         Helper.Log("back", navigationNotifier.backScreen);
@@ -130,8 +124,7 @@ class _TAFAdditionalOccupantsScreenState
           builder: (tfAdditionalOccupantState) {
             if (tfAdditionalOccupantState!.occupantlist.length == 0) {
               List<TenancyAdditionalOccupant> listoccupation = [];
-              TenancyAdditionalOccupant oocupinfo =
-                  new TenancyAdditionalOccupant();
+              TenancyAdditionalOccupant oocupinfo = new TenancyAdditionalOccupant();
               oocupinfo.id = "1";
               oocupinfo.firstname = "";
               oocupinfo.lastname = "";
@@ -174,8 +167,7 @@ class _TAFAdditionalOccupantsScreenState
                       key: UniqueKey(),
                       itemCount: tfAdditionalOccupantState.occupantlist.length,
                       itemBuilder: (BuildContext ctxt, int Index) {
-                        TenancyAdditionalOccupant oocupinfo =
-                            tfAdditionalOccupantState.occupantlist[Index];
+                        TenancyAdditionalOccupant oocupinfo = tfAdditionalOccupantState.occupantlist[Index];
                         /*return FocusScope(
                         node: FocusScopeNode(),
                         onFocusChange: (value) {
@@ -194,17 +186,12 @@ class _TAFAdditionalOccupantsScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AO_first_name,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -214,32 +201,21 @@ class _TAFAdditionalOccupantsScreenState
                                         initialValue: oocupinfo.firstname,
                                         textAlign: TextAlign.start,
                                         autofocus: true,
-                                        readOnly: tfAdditionalOccupantState
-                                            .notapplicable,
+                                        readOnly: tfAdditionalOccupantState.notapplicable,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      tfAdditionalOccupantState
-                                                              .notapplicable
-                                                          ? myColor.disablecolor
-                                                          : myColor.blue,
+                                                  color: tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.blue,
                                                   width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: tfAdditionalOccupantState
-                                                          .notapplicable
+                                                  color: tfAdditionalOccupantState.notapplicable
                                                       ? myColor.disablecolor
-                                                      : oocupinfo
-                                                              .errro_firstname!
+                                                      : oocupinfo.errro_firstname!
                                                           ? myColor.errorcolor
                                                           : myColor.gray,
                                                   width: 1.0),
@@ -249,13 +225,9 @@ class _TAFAdditionalOccupantsScreenState
                                             fillColor: myColor.white,
                                             filled: true),
                                         onChanged: (value) {
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .firstname = value.toString();
+                                          tfAdditionalOccupantState.occupantlist[Index].firstname = value.toString();
 
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .errro_firstname = false;
+                                          tfAdditionalOccupantState.occupantlist[Index].errro_firstname = false;
                                           _changeData();
                                         },
                                       ),
@@ -268,17 +240,12 @@ class _TAFAdditionalOccupantsScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         GlobleString.TAF_AO_Last_name,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
@@ -287,32 +254,21 @@ class _TAFAdditionalOccupantsScreenState
                                       TextFormField(
                                         initialValue: oocupinfo.lastname,
                                         textAlign: TextAlign.start,
-                                        readOnly: tfAdditionalOccupantState
-                                            .notapplicable,
+                                        readOnly: tfAdditionalOccupantState.notapplicable,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      tfAdditionalOccupantState
-                                                              .notapplicable
-                                                          ? myColor.disablecolor
-                                                          : myColor.blue,
+                                                  color: tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.blue,
                                                   width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: tfAdditionalOccupantState
-                                                          .notapplicable
+                                                  color: tfAdditionalOccupantState.notapplicable
                                                       ? myColor.disablecolor
-                                                      : oocupinfo
-                                                              .errro_lastname!
+                                                      : oocupinfo.errro_lastname!
                                                           ? myColor.errorcolor
                                                           : myColor.gray,
                                                   width: 1.0),
@@ -322,13 +278,9 @@ class _TAFAdditionalOccupantsScreenState
                                             fillColor: myColor.white,
                                             filled: true),
                                         onChanged: (value) {
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .lastname = value.toString();
+                                          tfAdditionalOccupantState.occupantlist[Index].lastname = value.toString();
 
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .errro_lastname = false;
+                                          tfAdditionalOccupantState.occupantlist[Index].errro_lastname = false;
                                           _changeData();
                                         },
                                       ),
@@ -341,53 +293,35 @@ class _TAFAdditionalOccupantsScreenState
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        GlobleString
-                                            .TAF_AO_Relationship_applicant,
+                                        GlobleString.TAF_AO_Relationship_applicant,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         textAlign: TextAlign.start,
                                       ),
                                       SizedBox(
                                         height: 5,
                                       ),
                                       TextFormField(
-                                        initialValue:
-                                            oocupinfo.primaryApplicant,
+                                        initialValue: oocupinfo.primaryApplicant,
                                         textAlign: TextAlign.start,
-                                        readOnly: tfAdditionalOccupantState
-                                            .notapplicable,
+                                        readOnly: tfAdditionalOccupantState.notapplicable,
                                         style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
+                                            13, tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.text_color),
                                         decoration: InputDecoration(
                                             //border: InputBorder.none,
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      tfAdditionalOccupantState
-                                                              .notapplicable
-                                                          ? myColor.disablecolor
-                                                          : myColor.blue,
+                                                  color: tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.blue,
                                                   width: 1.0),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: tfAdditionalOccupantState
-                                                          .notapplicable
+                                                  color: tfAdditionalOccupantState.notapplicable
                                                       ? myColor.disablecolor
-                                                      : oocupinfo
-                                                              .errro_primaryApplicant!
+                                                      : oocupinfo.errro_primaryApplicant!
                                                           ? myColor.errorcolor
                                                           : myColor.gray,
                                                   width: 1.0),
@@ -397,14 +331,9 @@ class _TAFAdditionalOccupantsScreenState
                                             fillColor: myColor.white,
                                             filled: true),
                                         onChanged: (value) {
-                                          tfAdditionalOccupantState
-                                                  .occupantlist[Index]
-                                                  .primaryApplicant =
-                                              value.toString();
+                                          tfAdditionalOccupantState.occupantlist[Index].primaryApplicant = value.toString();
 
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .errro_primaryApplicant = false;
+                                          tfAdditionalOccupantState.occupantlist[Index].errro_primaryApplicant = false;
                                           _changeData();
                                         },
                                       ),
@@ -414,8 +343,7 @@ class _TAFAdditionalOccupantsScreenState
                                 SizedBox(
                                   width: 15,
                                 ),
-                                tfAdditionalOccupantState.occupantlist.length >
-                                        1
+                                tfAdditionalOccupantState.occupantlist.length > 1
                                     ? !tfAdditionalOccupantState.notapplicable
                                         ? InkWell(
                                             onTap: () {
@@ -424,30 +352,19 @@ class _TAFAdditionalOccupantsScreenState
                                                 barrierColor: Colors.black45,
                                                 useSafeArea: true,
                                                 barrierDismissible: false,
-                                                builder:
-                                                    (BuildContext context1) {
+                                                builder: (BuildContext context1) {
                                                   return AlertDialogBox(
-                                                    title: GlobleString
-                                                        .TAF_Additional_Occupants_dailog_remove_msg,
-                                                    positiveText: GlobleString
-                                                        .TAF_Additional_Occupants_dailog_yes,
-                                                    negativeText: GlobleString
-                                                        .TAF_Additional_Occupants_dailog_no,
+                                                    title: GlobleString.TAF_Additional_Occupants_dailog_remove_msg,
+                                                    positiveText: GlobleString.TAF_Additional_Occupants_dailog_yes,
+                                                    negativeText: GlobleString.TAF_Additional_Occupants_dailog_no,
                                                     onPressedYes: () {
-                                                      Navigator.of(context1)
-                                                          .pop();
-                                                      tfAdditionalOccupantState
-                                                          .occupantlist
-                                                          .removeAt(Index);
-                                                      _store.dispatch(
-                                                          UpdateTFAddOccupantlist(
-                                                              tfAdditionalOccupantState
-                                                                  .occupantlist));
+                                                      Navigator.of(context1).pop();
+                                                      tfAdditionalOccupantState.occupantlist.removeAt(Index);
+                                                      _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));
                                                       _changeData();
                                                     },
                                                     onPressedNo: () {
-                                                      Navigator.of(context1)
-                                                          .pop();
+                                                      Navigator.of(context1).pop();
                                                     },
                                                   );
                                                 },
@@ -461,8 +378,7 @@ class _TAFAdditionalOccupantsScreenState
                                             child: Container(
                                               height: 30,
                                               width: 50,
-                                              padding: EdgeInsets.only(
-                                                  left: 15, right: 15),
+                                              padding: EdgeInsets.only(left: 15, right: 15),
                                               margin: EdgeInsets.only(top: 20),
                                               alignment: Alignment.center,
                                               child: Image.asset(
@@ -483,8 +399,7 @@ class _TAFAdditionalOccupantsScreenState
                                             child: Container(
                                               height: 30,
                                               width: 50,
-                                              padding: EdgeInsets.only(
-                                                  left: 15, right: 15),
+                                              padding: EdgeInsets.only(left: 15, right: 15),
                                               margin: EdgeInsets.only(top: 20),
                                               alignment: Alignment.center,
                                               child: Image.asset(
@@ -507,14 +422,12 @@ class _TAFAdditionalOccupantsScreenState
                                         child: Container(
                                           height: 30,
                                           width: 50,
-                                          padding: EdgeInsets.only(
-                                              left: 15, right: 15),
+                                          padding: EdgeInsets.only(left: 15, right: 15),
                                           margin: EdgeInsets.only(top: 20),
                                           alignment: Alignment.center,
                                           child: Text(
                                             "",
-                                            style: MyStyles.Medium(
-                                                12, myColor.white),
+                                            style: MyStyles.Medium(12, myColor.white),
                                           ),
                                         ),
                                       )
@@ -546,8 +459,7 @@ class _TAFAdditionalOccupantsScreenState
                               checkColor: myColor.white,
                               value: tfAdditionalOccupantState.notapplicable,
                               onChanged: (value) {
-                                _store.dispatch(
-                                    UpdateTFAddOccupantNotApplicable(value!));
+                                _store.dispatch(UpdateTFAddOccupantNotApplicable(value!));
                                 _changeData();
                               },
                             ),
@@ -584,9 +496,7 @@ class _TAFAdditionalOccupantsScreenState
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: tfAdditionalOccupantState.notapplicable
-              ? myColor.disablecolor
-              : myColor.Circle_main,
+          color: tfAdditionalOccupantState.notapplicable ? myColor.disablecolor : myColor.Circle_main,
         ),
         child: Row(
           children: <Widget>[
@@ -612,28 +522,24 @@ class _TAFAdditionalOccupantsScreenState
     bool isAdd = false;
 
     for (int i = 0; i < tfAdditionalOccupantState.occupantlist.length; i++) {
-      TenancyAdditionalOccupant empinfo =
-          tfAdditionalOccupantState.occupantlist[i];
+      TenancyAdditionalOccupant empinfo = tfAdditionalOccupantState.occupantlist[i];
 
       if (empinfo.firstname == "") {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_occupant_error_firstname, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_firstname, false);
 
         /*tfAdditionalOccupantState.occupantlist[i].errro_firstname = true;
         _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
         break;
       } else if (empinfo.lastname == "") {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_occupant_error_lastname, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_lastname, false);
         /*tfAdditionalOccupantState.occupantlist[i].errro_lastname = true;
        _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
         break;
       } else if (empinfo.primaryApplicant == "") {
         isAdd = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_occupant_error_primaryApplicant, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_primaryApplicant, false);
         /* tfAdditionalOccupantState.occupantlist[i].errro_primaryApplicant = true;
         _store.dispatch(
             UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
@@ -641,20 +547,17 @@ class _TAFAdditionalOccupantsScreenState
       }
 
       if ((tfAdditionalOccupantState.occupantlist.length - 1) == i && !isAdd) {
-        tfAdditionalOccupantState.occupantlist.add(
-            new TenancyAdditionalOccupant(
-                id: (tfAdditionalOccupantState.occupantlist.length + 1)
-                    .toString(),
-                firstname: "",
-                lastname: "",
-                primaryApplicant: "",
-                OccupantID: "",
-                errro_firstname: false,
-                errro_lastname: false,
-                errro_primaryApplicant: false));
+        tfAdditionalOccupantState.occupantlist.add(new TenancyAdditionalOccupant(
+            id: (tfAdditionalOccupantState.occupantlist.length + 1).toString(),
+            firstname: "",
+            lastname: "",
+            primaryApplicant: "",
+            OccupantID: "",
+            errro_firstname: false,
+            errro_lastname: false,
+            errro_primaryApplicant: false));
 
-        _store.dispatch(
-            UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));
+        _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));
         break;
       }
     }
@@ -684,33 +587,27 @@ class _TAFAdditionalOccupantsScreenState
       for (int i = 0; i < tfAddOState.occupantlist.length; i++) {
         TenancyAdditionalOccupant empinfo = tfAddOState.occupantlist[i];
 
-        if (empinfo.firstname == "" &&
-            empinfo.lastname == "" &&
-            empinfo.primaryApplicant == "") {
+        if (empinfo.firstname == "" && empinfo.lastname == "" && empinfo.primaryApplicant == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_occupant_error_mandatory, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_mandatory, false);
           break;
         } else if (empinfo.firstname == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_occupant_error_firstname, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_firstname, false);
           /* tfAddOState.occupantlist[i].errro_firstname = true;
               _store
                   .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
           break;
         } else if (empinfo.lastname == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_occupant_error_lastname, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_lastname, false);
           /* tfAddOState.occupantlist[i].errro_lastname = true;
               _store
                   .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
           break;
         } else if (empinfo.primaryApplicant == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(
-              context, GlobleString.taf_occupant_error_primaryApplicant, false);
+          ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_primaryApplicant, false);
           /* tfAddOState.occupantlist[i].errro_primaryApplicant = true;
               _store
                   .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
@@ -731,8 +628,7 @@ class _TAFAdditionalOccupantsScreenState
     List<CommonID> CommonIDlist = <CommonID>[];
 
     for (int i = 0; i < tfAddOccState.liveserveroccupantlist.length; i++) {
-      TenancyAdditionalOccupant taoccupant =
-          tfAddOccState.liveserveroccupantlist[i];
+      TenancyAdditionalOccupant taoccupant = tfAddOccState.liveserveroccupantlist[i];
 
       if (taoccupant.OccupantID != "") {
         CommonIDlist.add(new CommonID(ID: taoccupant.OccupantID));
@@ -740,11 +636,9 @@ class _TAFAdditionalOccupantsScreenState
     }
 
     if (CommonIDlist.length > 0) {
-      DeleteAdditionalOccupant deleteOccupant = new DeleteAdditionalOccupant(
-          Applicantion_ID: Prefs.getString(PrefsName.TCF_ApplicationID));
+      DeleteAdditionalOccupant deleteOccupant = new DeleteAdditionalOccupant(Applicantion_ID: Prefs.getString(PrefsName.TCF_ApplicationID));
 
-      ApiManager().TFAdditionalOCcupantDelete(
-          context, CommonIDlist, deleteOccupant, (status, responce) {
+      ApiManager().TFAdditionalOCcupantDelete(context, CommonIDlist, deleteOccupant, (status, responce) {
         if (status) {
           InserData(tfAddOccState);
         } else {
@@ -762,21 +656,16 @@ class _TAFAdditionalOccupantsScreenState
 
     if (!tfAdditionalOccupantState.notapplicable) {
       for (int j = 0; j < tfAdditionalOccupantState.occupantlist.length; j++) {
-        TenancyAdditionalOccupant taoccupant1 =
-            tfAdditionalOccupantState.occupantlist[j];
+        TenancyAdditionalOccupant taoccupant1 = tfAdditionalOccupantState.occupantlist[j];
 
-        if (taoccupant1.firstname != "" &&
-            taoccupant1.lastname != "" &&
-            taoccupant1.primaryApplicant != "") {
+        if (taoccupant1.firstname != "" && taoccupant1.lastname != "" && taoccupant1.primaryApplicant != "") {
           Occupant occupant = new Occupant();
           occupant.FirstName = taoccupant1.firstname;
           occupant.LastName = taoccupant1.lastname;
 
           AdditionalOccupants additionalOccupants = new AdditionalOccupants();
-          additionalOccupants.Applicantion_ID =
-              Prefs.getString(PrefsName.TCF_ApplicationID);
-          additionalOccupants.relationWithApplicant =
-              taoccupant1.primaryApplicant;
+          additionalOccupants.Applicantion_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
+          additionalOccupants.relationWithApplicant = taoccupant1.primaryApplicant;
           additionalOccupants.occupant = occupant;
 
           additionalOccupantslist.add(additionalOccupants);
@@ -784,14 +673,11 @@ class _TAFAdditionalOccupantsScreenState
       }
     }
 
-    UpdateAdditionalOccupants upojo = new UpdateAdditionalOccupants(
-        IsNotApplicableAddOccupant: tfAdditionalOccupantState.notapplicable);
+    UpdateAdditionalOccupants upojo = new UpdateAdditionalOccupants(IsNotApplicableAddOccupant: tfAdditionalOccupantState.notapplicable);
 
-    CommonID cpojo =
-        new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicationID));
+    CommonID cpojo = new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicationID));
 
-    ApiManager().InsetTFAdditionalOCcupant(
-        context, additionalOccupantslist, cpojo, upojo, (status, responce) {
+    ApiManager().InsetTFAdditionalOCcupant(context, additionalOccupantslist, cpojo, upojo, (status, responce) {
       if (status) {
         loader.remove();
         if (!isGotoback) {

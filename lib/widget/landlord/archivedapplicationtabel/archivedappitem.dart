@@ -27,9 +27,8 @@ import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_documentverifi
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_leaseagreementstatus.dart';
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_referencechecksstatus.dart';
 import 'package:silverhome/widget/Landlord/listviewitemstatus/tbl_tenancyapplicationstatus.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
-
-import '../../message_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import '../../searchdropdown/dropdown_search.dart';
 import '../customewidget.dart';
 import '../preview_Lease_dialogbox.dart';
@@ -117,15 +116,12 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(
-                        left: 20, right: 20, top: 15, bottom: 15),
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
                         TBLTenancyApplicationStatus(
                           onPressedIcon: () {
-                            if (listdata[Index].applicationReceivedDate !=
-                                    null &&
-                                listdata[Index].applicationReceivedDate != "") {
+                            if (listdata[Index].applicationReceivedDate != null && listdata[Index].applicationReceivedDate != "") {
                               openTenancyApplicationDetails(Index);
                             }
                           },
@@ -148,15 +144,11 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
                         SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[Index].referenceRequestSentDate!,
-                          receivedate:
-                              listdata[Index].referenceRequestReceivedDate!,
+                          receivedate: listdata[Index].referenceRequestReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].referenceRequestReceivedDate !=
-                                    null &&
-                                listdata[Index].referenceRequestReceivedDate !=
-                                    "") {
-                              CustomeWidget.ReferencePreview(
-                                  context, listdata[Index].id.toString());
+                            if (listdata[Index].referenceRequestReceivedDate != null &&
+                                listdata[Index].referenceRequestReceivedDate != "") {
+                              CustomeWidget.ReferencePreview(context, listdata[Index].id.toString());
                             }
                           },
                         ),
@@ -165,8 +157,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
                           sentdate: listdata[Index].agreementSentDate!,
                           receivedate: listdata[Index].agreementReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].agreementReceivedDate != null &&
-                                listdata[Index].agreementReceivedDate != "") {
+                            if (listdata[Index].agreementReceivedDate != null && listdata[Index].agreementReceivedDate != "") {
                               _dailogPreviewLease(listdata[Index]);
                             }
                           },
@@ -191,13 +182,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
     result.add(_datavalueDateReceive(model.applicationReceivedDate!));
     result.add(_statusdropdown(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(
-        model.isexpand!
-            ? "assets/images/circle_up.png"
-            : "assets/images/circle_down.png",
-        30,
-        model,
-        Index));
+    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, Index));
 
     return result;
   }
@@ -283,13 +268,11 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
                 TenancyApplicationID updateid = new TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating =
-                    new TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(
-                    context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     await archivecallApi();
                   }
@@ -327,11 +310,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != ""
-            ? new DateFormat("dd-MMM-yyyy")
-                .format(DateTime.parse(text))
-                .toString()
-            : "",
+        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
         textAlign: TextAlign.start,
         style: MyStyles.Medium(12, myColor.Circle_main),
       ),
@@ -345,11 +324,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != ""
-            ? new DateFormat("dd-MMM-yyyy")
-                .format(DateTime.parse(text))
-                .toString()
-            : "",
+        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
         textAlign: TextAlign.start,
         style: MyStyles.Medium(12, myColor.Circle_main),
       ),
@@ -368,27 +343,22 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
-        defultHeight:
-            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem:
-            model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: true,
         onChanged: (data) {
-          if (data!.EnumDetailID.toString() !=
-              eApplicationStatus().ActiveTenent.toString()) {
+          if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus =
-                new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(
-                context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 await archivecallApi();
 
@@ -416,8 +386,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
             if (value == 1) {
               _dailogSetRestoreArchive(model);
             } else if (value == 2) {
-              CustomeWidget.EditApplicant(
-                  context, model.applicantId.toString());
+              CustomeWidget.EditApplicant(context, model.applicantId.toString());
             }
           },
           child: Container(
@@ -449,8 +418,7 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
     );
   }
 
-  Widget _datavalueExpand(
-      String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () {
         if (model.isexpand!) {
@@ -549,12 +517,10 @@ class _ArchivedAppItemState extends State<ArchivedAppItem> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive =
-                new TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive = new TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "0";
 
-            await ApiManager().UpdateArchiveApplication(
-                context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 await archivecallApi();
               }

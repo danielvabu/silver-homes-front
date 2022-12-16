@@ -26,7 +26,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
@@ -51,12 +51,10 @@ class TAFAdditionalInformationScreen extends StatefulWidget {
         _callbackRecordStep = onPressedRecordStep;
 
   @override
-  _TAFAdditionalInformationScreenState createState() =>
-      _TAFAdditionalInformationScreenState();
+  _TAFAdditionalInformationScreenState createState() => _TAFAdditionalInformationScreenState();
 }
 
-class _TAFAdditionalInformationScreenState
-    extends State<TAFAdditionalInformationScreen> {
+class _TAFAdditionalInformationScreenState extends State<TAFAdditionalInformationScreen> {
   final _store = getIt<AppStore>();
   double height = 0, width = 0;
 
@@ -72,8 +70,7 @@ class _TAFAdditionalInformationScreenState
 
     List<SystemEnumDetails> tenancylengthlist = [];
     tenancylengthlist = QueryFilter().PlainValues(eSystemEnums().TenancyLength);
-    _store
-        .dispatch(UpdateTFAdditionalInfoLenthOfTenancyList(tenancylengthlist));
+    _store.dispatch(UpdateTFAdditionalInfoLenthOfTenancyList(tenancylengthlist));
 
     List<SystemEnumDetails> Periodlist = [];
     Periodlist = QueryFilter().PlainValues(eSystemEnums().MinLeaseDuration);
@@ -85,40 +82,27 @@ class _TAFAdditionalInformationScreenState
 
   initilizedata() {
     if (_store.state!.tfAdditionalInfoState != null) {
-      TFAdditionalInfoState tfAdditionalInfoState =
-          _store.state!.tfAdditionalInfoState;
+      TFAdditionalInfoState tfAdditionalInfoState = _store.state!.tfAdditionalInfoState;
 
-      _store.dispatch(UpdateTFAdditionalInfoTenancyStartDate(
-          tfAdditionalInfoState.FNLtenancystartdate));
+      _store.dispatch(UpdateTFAdditionalInfoTenancyStartDate(tfAdditionalInfoState.FNLtenancystartdate));
 
-      _store.dispatch(
-          UpdateTFAdditionalInfoisSmoking(tfAdditionalInfoState.FNLisSmoking));
-      _store.dispatch(
-          UpdateTFAdditionalInfoIspets(tfAdditionalInfoState.FNLisPets));
-      _store.dispatch(
-          UpdateTFAdditionalInfoisVehical(tfAdditionalInfoState.FNLisVehical));
-      _store.dispatch(
-          UpdateTFAdditionalInfoComment(tfAdditionalInfoState.FNLComment));
-      _store.dispatch(UpdateTFAdditionalInfoLenthOfTenancy(
-          tfAdditionalInfoState.FNLlenthoftenancy));
-      _store.dispatch(UpdateTFAdditionalInfoPeriodValue(
-          tfAdditionalInfoState.FNLPeriodValue));
-      _store.dispatch(UpdateTFAdditionalInfolenthoftenancynumber(
-          tfAdditionalInfoState.FNLlenthoftenancynumber));
+      _store.dispatch(UpdateTFAdditionalInfoisSmoking(tfAdditionalInfoState.FNLisSmoking));
+      _store.dispatch(UpdateTFAdditionalInfoIspets(tfAdditionalInfoState.FNLisPets));
+      _store.dispatch(UpdateTFAdditionalInfoisVehical(tfAdditionalInfoState.FNLisVehical));
+      _store.dispatch(UpdateTFAdditionalInfoComment(tfAdditionalInfoState.FNLComment));
+      _store.dispatch(UpdateTFAdditionalInfoLenthOfTenancy(tfAdditionalInfoState.FNLlenthoftenancy));
+      _store.dispatch(UpdateTFAdditionalInfoPeriodValue(tfAdditionalInfoState.FNLPeriodValue));
+      _store.dispatch(UpdateTFAdditionalInfolenthoftenancynumber(tfAdditionalInfoState.FNLlenthoftenancynumber));
 
       _store.dispatch(UpdateTFAdditionalInfoPetslist([]));
 
-      List<Pets> secondList =
-          tfAdditionalInfoState.FNLpetslist.map((item) => new Pets.clone(item))
-              .toList();
+      List<Pets> secondList = tfAdditionalInfoState.FNLpetslist.map((item) => new Pets.clone(item)).toList();
 
       _store.dispatch(UpdateTFAdditionalInfoPetslist(secondList));
 
       _store.dispatch(UpdateTFAdditionalInfoVehicallist([]));
 
-      List<Vehical> secondVehicalList =
-          tfAdditionalInfoState.FNLvehicallist.map(
-              (item) => new Vehical.clone(item)).toList();
+      List<Vehical> secondVehicalList = tfAdditionalInfoState.FNLvehicallist.map((item) => new Vehical.clone(item)).toList();
 
       _store.dispatch(UpdateTFAdditionalInfoVehicallist(secondVehicalList));
     }
@@ -126,8 +110,7 @@ class _TAFAdditionalInformationScreenState
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen ==
-          NavigationConstant.tenancyAdditionalInfo) {
+      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.tenancyAdditionalInfo) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         Helper.Log("back", navigationNotifier.backScreen);
@@ -180,8 +163,7 @@ class _TAFAdditionalInformationScreenState
       },
     );
 
-    if (pickedDate != null &&
-        pickedDate != tfAdditionalInfoState.tenancystartdate)
+    if (pickedDate != null && pickedDate != tfAdditionalInfoState.tenancystartdate)
       _store.dispatch(UpdateTFAdditionalInfoTenancyStartDate(pickedDate));
     _store.dispatch(UpdateTFAdditionalInfoError_tenancystartdate(false));
     _changeData();
@@ -250,8 +232,7 @@ class _TAFAdditionalInformationScreenState
                                   inactiveTextColor: myColor.white,
                                   showOnOff: true,
                                   onToggle: (val) {
-                                    _store.dispatch(
-                                        UpdateTFAdditionalInfoIspets(val));
+                                    _store.dispatch(UpdateTFAdditionalInfoIspets(val));
 
                                     if (val) {
                                       List<Pets> petslist = [];
@@ -266,13 +247,9 @@ class _TAFAdditionalInformationScreenState
                                       pet.error_age = false;
                                       petslist.add(pet);
 
-                                      _store.dispatch(
-                                          UpdateTFAdditionalInfoPetslist(
-                                              petslist));
+                                      _store.dispatch(UpdateTFAdditionalInfoPetslist(petslist));
                                     } else {
-                                      _store.dispatch(
-                                          UpdateTFAdditionalInfoPetslist(
-                                              List.empty()));
+                                      _store.dispatch(UpdateTFAdditionalInfoPetslist(List.empty()));
                                     }
                                     _changeData();
                                   },
@@ -293,18 +270,13 @@ class _TAFAdditionalInformationScreenState
                                         children: [
                                           ListView.builder(
                                             shrinkWrap: true,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
+                                            physics: NeverScrollableScrollPhysics(),
                                             key: UniqueKey(),
-                                            itemCount: tfAdditionalInfoState
-                                                .petslist.length,
-                                            itemBuilder:
-                                                (BuildContext ctxt, int Index) {
-                                              Pets pets = tfAdditionalInfoState
-                                                  .petslist[Index];
+                                            itemCount: tfAdditionalInfoState.petslist.length,
+                                            itemBuilder: (BuildContext ctxt, int Index) {
+                                              Pets pets = tfAdditionalInfoState.petslist[Index];
                                               return Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 10),
+                                                margin: EdgeInsets.only(bottom: 10),
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
@@ -312,85 +284,43 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_Type_Pets,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_Type_Pets,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
                                                             autofocus: true,
-                                                            initialValue:
-                                                                pets.typeofpets,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .text,
-                                                            textCapitalization:
-                                                                TextCapitalization
-                                                                    .sentences,
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
+                                                            initialValue: pets.typeofpets,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            keyboardType: TextInputType.text,
+                                                            textCapitalization: TextCapitalization.sentences,
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
 
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: pets.error_typeofpets!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: pets.error_typeofpets! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .typeofpets =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.petslist[Index].typeofpets = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .error_typeofpets =
-                                                                  false;
+                                                              tfAdditionalInfoState.petslist[Index].error_typeofpets = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -402,82 +332,42 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_pets_size,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_pets_size,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
-                                                            initialValue:
-                                                                pets.size,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
+                                                            initialValue: pets.size,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
                                                             inputFormatters: [
-                                                              FilteringTextInputFormatter
-                                                                  .allow(RegExp(
-                                                                      "[0-9 .]")),
+                                                              FilteringTextInputFormatter.allow(RegExp("[0-9 .]")),
                                                             ],
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: pets.error_size!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: pets.error_size! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .size =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.petslist[Index].size = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .error_size =
-                                                                  false;
+                                                              tfAdditionalInfoState.petslist[Index].error_size = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -489,82 +379,42 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_pets_age,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_pets_age,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
-                                                            initialValue:
-                                                                pets.age,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
+                                                            initialValue: pets.age,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
                                                             inputFormatters: [
-                                                              FilteringTextInputFormatter
-                                                                  .allow(RegExp(
-                                                                      "[0-9]")),
+                                                              FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                                                             ],
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: pets.error_age!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: pets.error_age! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .age =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.petslist[Index].age = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                      .petslist[
-                                                                          Index]
-                                                                      .error_age =
-                                                                  false;
+                                                              tfAdditionalInfoState.petslist[Index].error_age = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -574,101 +424,55 @@ class _TAFAdditionalInformationScreenState
                                                     SizedBox(
                                                       width: 15,
                                                     ),
-                                                    tfAdditionalInfoState
-                                                                .petslist
-                                                                .length >
-                                                            1
+                                                    tfAdditionalInfoState.petslist.length > 1
                                                         ? InkWell(
                                                             onTap: () {
                                                               showDialog(
-                                                                context:
-                                                                    context,
-                                                                barrierColor:
-                                                                    Colors
-                                                                        .black45,
-                                                                useSafeArea:
-                                                                    true,
-                                                                barrierDismissible:
-                                                                    false,
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context1) {
+                                                                context: context,
+                                                                barrierColor: Colors.black45,
+                                                                useSafeArea: true,
+                                                                barrierDismissible: false,
+                                                                builder: (BuildContext context1) {
                                                                   return AlertDialogBox(
-                                                                    title: GlobleString
-                                                                        .dailog_remove_msg,
-                                                                    positiveText:
-                                                                        GlobleString
-                                                                            .dailog_yes,
-                                                                    negativeText:
-                                                                        GlobleString
-                                                                            .dailog_no,
-                                                                    onPressedYes:
-                                                                        () {
-                                                                      Navigator.of(
-                                                                              context1)
-                                                                          .pop();
-                                                                      tfAdditionalInfoState
-                                                                          .petslist
-                                                                          .removeAt(
-                                                                              Index);
+                                                                    title: GlobleString.dailog_remove_msg,
+                                                                    positiveText: GlobleString.dailog_yes,
+                                                                    negativeText: GlobleString.dailog_no,
+                                                                    onPressedYes: () {
+                                                                      Navigator.of(context1).pop();
+                                                                      tfAdditionalInfoState.petslist.removeAt(Index);
                                                                       _store.dispatch(
-                                                                          UpdateTFAdditionalInfoPetslist(
-                                                                              tfAdditionalInfoState.petslist));
+                                                                          UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));
                                                                       _changeData();
                                                                     },
-                                                                    onPressedNo:
-                                                                        () {
-                                                                      Navigator.of(
-                                                                              context1)
-                                                                          .pop();
+                                                                    onPressedNo: () {
+                                                                      Navigator.of(context1).pop();
                                                                     },
                                                                   );
                                                                 },
                                                               );
                                                             },
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
+                                                            hoverColor: Colors.transparent,
+                                                            focusColor: Colors.transparent,
+                                                            splashColor: Colors.transparent,
+                                                            highlightColor: Colors.transparent,
                                                             child: Container(
                                                               height: 30,
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 10,
-                                                                      right:
-                                                                          10),
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      top: 20),
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child:
-                                                                  Image.asset(
+                                                              padding: EdgeInsets.only(left: 10, right: 10),
+                                                              margin: EdgeInsets.only(top: 20),
+                                                              alignment: Alignment.center,
+                                                              child: Image.asset(
                                                                 "assets/images/ic_delete.png",
                                                                 height: 22,
                                                                 //width: 20,
-                                                                alignment: Alignment
-                                                                    .centerLeft,
+                                                                alignment: Alignment.centerLeft,
                                                               ),
                                                             ),
                                                           )
                                                         : Container(
                                                             height: 30,
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 10,
-                                                                    right: 10),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top: 20),
-                                                            alignment: Alignment
-                                                                .center,
+                                                            padding: EdgeInsets.only(left: 10, right: 10),
+                                                            margin: EdgeInsets.only(top: 20),
+                                                            alignment: Alignment.center,
                                                           )
                                                   ],
                                                 ),
@@ -724,8 +528,7 @@ class _TAFAdditionalInformationScreenState
                                   inactiveTextColor: myColor.white,
                                   showOnOff: true,
                                   onToggle: (val) {
-                                    _store.dispatch(
-                                        UpdateTFAdditionalInfoisSmoking(val));
+                                    _store.dispatch(UpdateTFAdditionalInfoisSmoking(val));
                                     _changeData();
                                   },
                                 ),
@@ -747,8 +550,7 @@ class _TAFAdditionalInformationScreenState
                                       children: [
                                         Text(
                                           GlobleString.TAF_AI_Smoking_comments,
-                                          style: MyStyles.Medium(
-                                              13, myColor.text_color),
+                                          style: MyStyles.Medium(13, myColor.text_color),
                                           textAlign: TextAlign.start,
                                         ),
                                         SizedBox(
@@ -756,8 +558,7 @@ class _TAFAdditionalInformationScreenState
                                         ),
                                         Text(
                                           GlobleString.Optional,
-                                          style: MyStyles.Regular(
-                                              12, myColor.optional),
+                                          style: MyStyles.Regular(12, myColor.optional),
                                           textAlign: TextAlign.start,
                                         ),
                                       ],
@@ -766,31 +567,23 @@ class _TAFAdditionalInformationScreenState
                                       height: 5,
                                     ),
                                     TextFormField(
-                                      initialValue:
-                                          tfAdditionalInfoState.Comment,
+                                      initialValue: tfAdditionalInfoState.Comment,
                                       textAlign: TextAlign.start,
-                                      style: MyStyles.Medium(
-                                          13, myColor.text_color),
+                                      style: MyStyles.Medium(13, myColor.text_color),
                                       decoration: InputDecoration(
                                           //border: InputBorder.none,
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: myColor.gray,
-                                                width: 1.0),
+                                            borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                           ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: myColor.gray,
-                                                width: 1.0),
+                                            borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                           ),
                                           isDense: true,
                                           contentPadding: EdgeInsets.all(10),
                                           fillColor: myColor.white,
                                           filled: true),
                                       onChanged: (value) {
-                                        _store.dispatch(
-                                            UpdateTFAdditionalInfoComment(
-                                                value.toString()));
+                                        _store.dispatch(UpdateTFAdditionalInfoComment(value.toString()));
                                         _changeData();
                                       },
                                     ),
@@ -837,8 +630,7 @@ class _TAFAdditionalInformationScreenState
                                   inactiveTextColor: myColor.white,
                                   showOnOff: true,
                                   onToggle: (val) {
-                                    _store.dispatch(
-                                        UpdateTFAdditionalInfoisVehical(val));
+                                    _store.dispatch(UpdateTFAdditionalInfoisVehical(val));
 
                                     if (val) {
                                       List<Vehical> vehicallist = [];
@@ -853,13 +645,9 @@ class _TAFAdditionalInformationScreenState
                                       vehical.error_year = false;
                                       vehicallist.add(vehical);
 
-                                      _store.dispatch(
-                                          UpdateTFAdditionalInfoVehicallist(
-                                              vehicallist));
+                                      _store.dispatch(UpdateTFAdditionalInfoVehicallist(vehicallist));
                                     } else {
-                                      _store.dispatch(
-                                          UpdateTFAdditionalInfoVehicallist(
-                                              List.empty()));
+                                      _store.dispatch(UpdateTFAdditionalInfoVehicallist(List.empty()));
                                     }
                                     _changeData();
                                   },
@@ -880,19 +668,13 @@ class _TAFAdditionalInformationScreenState
                                         children: [
                                           ListView.builder(
                                             shrinkWrap: true,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
+                                            physics: NeverScrollableScrollPhysics(),
                                             key: UniqueKey(),
-                                            itemCount: tfAdditionalInfoState
-                                                .vehicallist.length,
-                                            itemBuilder:
-                                                (BuildContext ctxt, int Index) {
-                                              Vehical vehical =
-                                                  tfAdditionalInfoState
-                                                      .vehicallist[Index];
+                                            itemCount: tfAdditionalInfoState.vehicallist.length,
+                                            itemBuilder: (BuildContext ctxt, int Index) {
+                                              Vehical vehical = tfAdditionalInfoState.vehicallist[Index];
                                               return Container(
-                                                margin:
-                                                    EdgeInsets.only(bottom: 10),
+                                                margin: EdgeInsets.only(bottom: 10),
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
@@ -900,77 +682,40 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_Vehicle_make,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_Vehicle_make,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
                                                             autofocus: true,
-                                                            initialValue:
-                                                                vehical.make,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: vehical.error_make!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                            initialValue: vehical.make,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: vehical.error_make! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .vehicallist[
-                                                                          Index]
-                                                                      .make =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.vehicallist[Index].make = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                  .vehicallist[
-                                                                      Index]
-                                                                  .error_make = false;
+                                                              tfAdditionalInfoState.vehicallist[Index].error_make = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -982,76 +727,39 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_Vehicle_model,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_Vehicle_model,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
-                                                            initialValue:
-                                                                vehical.model,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: vehical.error_model!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                            initialValue: vehical.model,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: vehical.error_model! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .vehicallist[
-                                                                          Index]
-                                                                      .model =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.vehicallist[Index].model = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                  .vehicallist[
-                                                                      Index]
-                                                                  .error_model = false;
+                                                              tfAdditionalInfoState.vehicallist[Index].error_model = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -1063,80 +771,40 @@ class _TAFAdditionalInformationScreenState
                                                     ),
                                                     Expanded(
                                                       child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            GlobleString
-                                                                .TAF_AI_Vehicle_year,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            textAlign:
-                                                                TextAlign.start,
+                                                            GlobleString.TAF_AI_Vehicle_year,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            textAlign: TextAlign.start,
                                                           ),
                                                           SizedBox(
                                                             height: 5,
                                                           ),
                                                           TextFormField(
-                                                            initialValue:
-                                                                vehical.year,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: MyStyles.Medium(
-                                                                13,
-                                                                myColor
-                                                                    .text_color),
-                                                            inputFormatters: [
-                                                              MaskedInputFormatter(
-                                                                  "0000")
-                                                            ],
-                                                            decoration:
-                                                                InputDecoration(
-                                                                    //border: InputBorder.none,
-                                                                    focusedBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: myColor
-                                                                              .blue,
-                                                                          width:
-                                                                              1.0),
-                                                                    ),
-                                                                    enabledBorder:
-                                                                        OutlineInputBorder(
-                                                                      borderSide: BorderSide(
-                                                                          color: vehical.error_year!
-                                                                              ? myColor.errorcolor
-                                                                              : myColor.gray,
-                                                                          width: 1.0),
-                                                                    ),
-                                                                    isDense:
-                                                                        true,
-                                                                    contentPadding:
-                                                                        EdgeInsets.all(
-                                                                            10),
-                                                                    fillColor:
-                                                                        myColor
-                                                                            .white,
-                                                                    filled:
-                                                                        true),
+                                                            initialValue: vehical.year,
+                                                            textAlign: TextAlign.start,
+                                                            style: MyStyles.Medium(13, myColor.text_color),
+                                                            inputFormatters: [MaskedInputFormatter("0000")],
+                                                            decoration: InputDecoration(
+                                                                //border: InputBorder.none,
+                                                                focusedBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                                                                ),
+                                                                enabledBorder: OutlineInputBorder(
+                                                                  borderSide: BorderSide(
+                                                                      color: vehical.error_year! ? myColor.errorcolor : myColor.gray,
+                                                                      width: 1.0),
+                                                                ),
+                                                                isDense: true,
+                                                                contentPadding: EdgeInsets.all(10),
+                                                                fillColor: myColor.white,
+                                                                filled: true),
                                                             onChanged: (value) {
-                                                              tfAdditionalInfoState
-                                                                      .vehicallist[
-                                                                          Index]
-                                                                      .year =
-                                                                  value
-                                                                      .toString();
+                                                              tfAdditionalInfoState.vehicallist[Index].year = value.toString();
 
-                                                              tfAdditionalInfoState
-                                                                  .vehicallist[
-                                                                      Index]
-                                                                  .error_year = false;
+                                                              tfAdditionalInfoState.vehicallist[Index].error_year = false;
                                                               _changeData();
                                                             },
                                                           ),
@@ -1146,101 +814,55 @@ class _TAFAdditionalInformationScreenState
                                                     SizedBox(
                                                       width: 15,
                                                     ),
-                                                    tfAdditionalInfoState
-                                                                .vehicallist
-                                                                .length >
-                                                            1
+                                                    tfAdditionalInfoState.vehicallist.length > 1
                                                         ? InkWell(
                                                             onTap: () {
                                                               showDialog(
-                                                                context:
-                                                                    context,
-                                                                barrierColor:
-                                                                    Colors
-                                                                        .black45,
-                                                                useSafeArea:
-                                                                    true,
-                                                                barrierDismissible:
-                                                                    false,
-                                                                builder:
-                                                                    (BuildContext
-                                                                        context1) {
+                                                                context: context,
+                                                                barrierColor: Colors.black45,
+                                                                useSafeArea: true,
+                                                                barrierDismissible: false,
+                                                                builder: (BuildContext context1) {
                                                                   return AlertDialogBox(
-                                                                    title: GlobleString
-                                                                        .dailog_remove_msg,
-                                                                    positiveText:
-                                                                        GlobleString
-                                                                            .dailog_yes,
-                                                                    negativeText:
-                                                                        GlobleString
-                                                                            .dailog_no,
-                                                                    onPressedYes:
-                                                                        () {
-                                                                      Navigator.of(
-                                                                              context1)
-                                                                          .pop();
-                                                                      tfAdditionalInfoState
-                                                                          .vehicallist
-                                                                          .removeAt(
-                                                                              Index);
-                                                                      _store.dispatch(
-                                                                          UpdateTFAdditionalInfoVehicallist(
-                                                                              tfAdditionalInfoState.vehicallist));
+                                                                    title: GlobleString.dailog_remove_msg,
+                                                                    positiveText: GlobleString.dailog_yes,
+                                                                    negativeText: GlobleString.dailog_no,
+                                                                    onPressedYes: () {
+                                                                      Navigator.of(context1).pop();
+                                                                      tfAdditionalInfoState.vehicallist.removeAt(Index);
+                                                                      _store.dispatch(UpdateTFAdditionalInfoVehicallist(
+                                                                          tfAdditionalInfoState.vehicallist));
                                                                       _changeData();
                                                                     },
-                                                                    onPressedNo:
-                                                                        () {
-                                                                      Navigator.of(
-                                                                              context1)
-                                                                          .pop();
+                                                                    onPressedNo: () {
+                                                                      Navigator.of(context1).pop();
                                                                     },
                                                                   );
                                                                 },
                                                               );
                                                             },
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
+                                                            hoverColor: Colors.transparent,
+                                                            focusColor: Colors.transparent,
+                                                            splashColor: Colors.transparent,
+                                                            highlightColor: Colors.transparent,
                                                             child: Container(
                                                               height: 30,
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 10,
-                                                                      right:
-                                                                          10),
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      top: 20),
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child:
-                                                                  Image.asset(
+                                                              padding: EdgeInsets.only(left: 10, right: 10),
+                                                              margin: EdgeInsets.only(top: 20),
+                                                              alignment: Alignment.center,
+                                                              child: Image.asset(
                                                                 "assets/images/ic_delete.png",
                                                                 height: 22,
                                                                 //width: 20,
-                                                                alignment: Alignment
-                                                                    .centerLeft,
+                                                                alignment: Alignment.centerLeft,
                                                               ),
                                                             ),
                                                           )
                                                         : Container(
                                                             height: 30,
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 10,
-                                                                    right: 10),
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    top: 20),
-                                                            alignment: Alignment
-                                                                .center,
+                                                            padding: EdgeInsets.only(left: 10, right: 10),
+                                                            margin: EdgeInsets.only(top: 20),
+                                                            alignment: Alignment.center,
                                                           )
                                                   ],
                                                 ),
@@ -1289,10 +911,7 @@ class _TAFAdditionalInformationScreenState
                                   height: 30,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: tfAdditionalInfoState
-                                              .error_tenancystartdate
-                                          ? myColor.errorcolor
-                                          : myColor.gray,
+                                      color: tfAdditionalInfoState.error_tenancystartdate ? myColor.errorcolor : myColor.gray,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(4.0),
@@ -1303,23 +922,15 @@ class _TAFAdditionalInformationScreenState
                                         child: Padding(
                                           padding: EdgeInsets.only(left: 8),
                                           child: Text(
-                                            tfAdditionalInfoState
-                                                        .tenancystartdate ==
-                                                    null
+                                            tfAdditionalInfoState.tenancystartdate == null
                                                 ? ""
-                                                : new DateFormat("dd-MMM-yyyy")
-                                                    .format(
-                                                        tfAdditionalInfoState
-                                                            .tenancystartdate!)
-                                                    .toString(),
-                                            style: MyStyles.Medium(
-                                                13, myColor.text_color),
+                                                : new DateFormat("dd-MMM-yyyy").format(tfAdditionalInfoState.tenancystartdate!).toString(),
+                                            style: MyStyles.Medium(13, myColor.text_color),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 8, right: 5),
+                                        padding: EdgeInsets.only(left: 8, right: 5),
                                         child: Icon(
                                           Icons.calendar_today_outlined,
                                           color: Colors.grey,
@@ -1407,35 +1018,26 @@ class _TAFAdditionalInformationScreenState
                                   children: [
                                     Text(
                                       GlobleString.TAF_AI_Number,
-                                      style: MyStyles.Medium(
-                                          13, myColor.text_color),
+                                      style: MyStyles.Medium(13, myColor.text_color),
                                       textAlign: TextAlign.start,
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     TextFormField(
-                                      initialValue: tfAdditionalInfoState
-                                          .lenthoftenancynumber,
+                                      initialValue: tfAdditionalInfoState.lenthoftenancynumber,
                                       textAlign: TextAlign.start,
-                                      style: MyStyles.Medium(
-                                          13, myColor.text_color),
+                                      style: MyStyles.Medium(13, myColor.text_color),
                                       keyboardType: TextInputType.phone,
-                                      inputFormatters: [
-                                        MaskedInputFormatter("0000000000")
-                                      ],
+                                      inputFormatters: [MaskedInputFormatter("0000000000")],
                                       decoration: InputDecoration(
                                           //border: InputBorder.none,
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: myColor.gray, width: 2),
+                                            borderSide: BorderSide(color: myColor.gray, width: 2),
                                           ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: tfAdditionalInfoState
-                                                        .error_lenthoftenancynumber
-                                                    ? myColor.errorcolor
-                                                    : myColor.gray,
+                                                color: tfAdditionalInfoState.error_lenthoftenancynumber ? myColor.errorcolor : myColor.gray,
                                                 width: 1.0),
                                           ),
                                           isDense: true,
@@ -1443,12 +1045,8 @@ class _TAFAdditionalInformationScreenState
                                           fillColor: myColor.white,
                                           filled: true),
                                       onChanged: (value) {
-                                        _store.dispatch(
-                                            UpdateTFAdditionalInfolenthoftenancynumber(
-                                                value));
-                                        _store.dispatch(
-                                            UpdateTFAdditionalInfoError_lenthoftenancynumber(
-                                                false));
+                                        _store.dispatch(UpdateTFAdditionalInfolenthoftenancynumber(value));
+                                        _store.dispatch(UpdateTFAdditionalInfoError_lenthoftenancynumber(false));
                                         _changeData();
                                       },
                                     ),
@@ -1466,8 +1064,7 @@ class _TAFAdditionalInformationScreenState
                                   children: [
                                     Text(
                                       GlobleString.TAF_AI_Period,
-                                      style: MyStyles.Medium(
-                                          13, myColor.text_color),
+                                      style: MyStyles.Medium(13, myColor.text_color),
                                       textAlign: TextAlign.start,
                                     ),
                                     SizedBox(
@@ -1482,37 +1079,21 @@ class _TAFAdditionalInformationScreenState
                                         focuscolor: myColor.blue,
                                         focusWidth: 1,
                                         errorcolor: myColor.errorcolor,
-                                        isError: tfAdditionalInfoState
-                                            .error_PeriodValue,
+                                        isError: tfAdditionalInfoState.error_PeriodValue,
                                         popupBackgroundColor: myColor.white,
                                         items: tfAdditionalInfoState.Periodlist,
-                                        defultHeight: tfAdditionalInfoState
-                                                        .Periodlist.length *
-                                                    35 >
-                                                250
+                                        defultHeight: tfAdditionalInfoState.Periodlist.length * 35 > 250
                                             ? 250
-                                            : tfAdditionalInfoState
-                                                    .Periodlist.length *
-                                                35,
-                                        textstyle: MyStyles.Medium(
-                                            13, myColor.text_color),
-                                        itemAsString: (SystemEnumDetails? u) =>
-                                            u!.displayValue,
+                                            : tfAdditionalInfoState.Periodlist.length * 35,
+                                        textstyle: MyStyles.Medium(13, myColor.text_color),
+                                        itemAsString: (SystemEnumDetails? u) => u!.displayValue,
                                         hint: "Select Period",
                                         showSearchBox: false,
-                                        selectedItem: tfAdditionalInfoState
-                                                    .PeriodValue !=
-                                                null
-                                            ? tfAdditionalInfoState.PeriodValue
-                                            : null,
+                                        selectedItem: tfAdditionalInfoState.PeriodValue != null ? tfAdditionalInfoState.PeriodValue : null,
                                         isFilteredOnline: true,
                                         onChanged: (value) {
-                                          _store.dispatch(
-                                              UpdateTFAdditionalInfoPeriodValue(
-                                                  value));
-                                          _store.dispatch(
-                                              UpdateTFAdditionalInfoError_PeriodValue(
-                                                  false));
+                                          _store.dispatch(UpdateTFAdditionalInfoPeriodValue(value));
+                                          _store.dispatch(UpdateTFAdditionalInfoError_PeriodValue(false));
                                           _changeData();
                                         },
                                       ),
@@ -1530,11 +1111,7 @@ class _TAFAdditionalInformationScreenState
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        back(),
-                        SizedBox(width: 10),
-                        saveandnext(tfAdditionalInfoState)
-                      ],
+                      children: [back(), SizedBox(width: 10), saveandnext(tfAdditionalInfoState)],
                     ),
                   ],
                 ));
@@ -1552,22 +1129,19 @@ class _TAFAdditionalInformationScreenState
 
           if (pets.typeofpets!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_AdditionalInfo_error_pets_typeofpets, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_typeofpets, false);
             /*tfAdditionalInfoState.petslist[i].error_typeofpets = true;
             _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
             break;
           } else if (pets.size!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_AdditionalInfo_error_pets_size, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_size, false);
             /*tfAdditionalInfoState.petslist[i].error_size = true;
             _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
             break;
           } else if (pets.age!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(
-                context, GlobleString.taf_AdditionalInfo_error_pets_age, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_age, false);
             /* tfAdditionalInfoState.petslist[i].error_age = true;
             _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
             break;
@@ -1584,8 +1158,7 @@ class _TAFAdditionalInformationScreenState
               error_age: false,
             ));
 
-            _store.dispatch(
-                UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));
+            _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));
             _changeData();
             break;
           }
@@ -1634,22 +1207,19 @@ class _TAFAdditionalInformationScreenState
 
           if (vehical.make!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_AdditionalInfo_error_vahical_make, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_make, false);
             /*tfAdditionalInfoState.vehicallist[i].error_make = true;
             _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
             break;
           } else if (vehical.model!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_AdditionalInfo_error_vahical_model, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_model, false);
             /* tfAdditionalInfoState.vehicallist[i].error_model = true;
             _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
             break;
           } else if (vehical.year!.isEmpty) {
             isAdd = true;
-            ToastUtils.showCustomToast(context,
-                GlobleString.taf_AdditionalInfo_error_vahical_year, false);
+            ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_year, false);
             /*tfAdditionalInfoState.vehicallist[i].error_year = true;
             _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
             break;
@@ -1666,8 +1236,7 @@ class _TAFAdditionalInformationScreenState
               error_year: false,
             ));
 
-            _store.dispatch(UpdateTFAdditionalInfoVehicallist(
-                tfAdditionalInfoState.vehicallist));
+            _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));
             _changeData();
             break;
           }
@@ -1723,22 +1292,17 @@ class _TAFAdditionalInformationScreenState
   }
 
   void _saveDataAndNext(TFAdditionalInfoState tfAdditionalInfoState) {
-    if (tfAdditionalInfoState.isPets &&
-        petslistValidation(tfAdditionalInfoState)) {
+    if (tfAdditionalInfoState.isPets && petslistValidation(tfAdditionalInfoState)) {
       return;
     }
     /*else if (tfAdditionalInfoState.isSmoking && tfAdditionalInfoState.Comment.toString().trim().isEmpty) {
           ToastUtils.showCustomToast(context,
               GlobleString.taf_AdditionalInfo_error_smoke_comment, false);
         }*/
-    else if (tfAdditionalInfoState.isVehical &&
-        vehicallistValidation(tfAdditionalInfoState)) {
+    else if (tfAdditionalInfoState.isVehical && vehicallistValidation(tfAdditionalInfoState)) {
       return;
     } else if (tfAdditionalInfoState.tenancystartdate == null) {
-      ToastUtils.showCustomToast(
-          context,
-          GlobleString.taf_AdditionalInfo_error_intend_tenancy_start_date,
-          false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_intend_tenancy_start_date, false);
       _store.dispatch(UpdateTFAdditionalInfoError_tenancystartdate(true));
     }
     /*else if (tfAdditionalInfoState.lenthoftenancy == null) {
@@ -1747,18 +1311,11 @@ class _TAFAdditionalInformationScreenState
               GlobleString.taf_AdditionalInfo_error_intend_length_of_tenancy,
               false);
         }*/
-    else if (tfAdditionalInfoState.lenthoftenancynumber == null ||
-        tfAdditionalInfoState.lenthoftenancynumber == "") {
-      ToastUtils.showCustomToast(
-          context,
-          GlobleString.taf_AdditionalInfo_error_intend_length_of_tenancy_number,
-          false);
+    else if (tfAdditionalInfoState.lenthoftenancynumber == null || tfAdditionalInfoState.lenthoftenancynumber == "") {
+      ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_intend_length_of_tenancy_number, false);
       _store.dispatch(UpdateTFAdditionalInfoError_lenthoftenancynumber(true));
     } else if (tfAdditionalInfoState.PeriodValue == null) {
-      ToastUtils.showCustomToast(
-          context,
-          GlobleString.taf_AdditionalInfo_error_intend_length_of_tenancy_period,
-          false);
+      ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_intend_length_of_tenancy_period, false);
       _store.dispatch(UpdateTFAdditionalInfoError_PeriodValue(true));
     } else {
       //ToastUtils.showCustomToast(context, "Success", true);
@@ -1775,22 +1332,19 @@ class _TAFAdditionalInformationScreenState
 
       if (pets.typeofpets == "") {
         ispetslist = true;
-        ToastUtils.showCustomToast(context,
-            GlobleString.taf_AdditionalInfo_error_pets_typeofpets, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_typeofpets, false);
         /*tfAdditionalInfoState.petslist[i].error_typeofpets = true;
         _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
         break;
       } else if (pets.size == "") {
         ispetslist = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_AdditionalInfo_error_pets_size, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_size, false);
         /*tfAdditionalInfoState.petslist[i].error_size = true;
         _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
         break;
       } else if (pets.age == "") {
         ispetslist = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_AdditionalInfo_error_pets_age, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_pets_age, false);
         /* tfAdditionalInfoState.petslist[i].error_age = true;
         _store.dispatch(UpdateTFAdditionalInfoPetslist(tfAdditionalInfoState.petslist));*/
         break;
@@ -1808,22 +1362,19 @@ class _TAFAdditionalInformationScreenState
 
       if (vehical.make == "") {
         isvehicallist = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_AdditionalInfo_error_vahical_make, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_make, false);
         /* tfAdditionalInfoState.vehicallist[i].error_make = true;
         _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
         break;
       } else if (vehical.model == "") {
         isvehicallist = true;
-        ToastUtils.showCustomToast(context,
-            GlobleString.taf_AdditionalInfo_error_vahical_model, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_model, false);
         /* tfAdditionalInfoState.vehicallist[i].error_model = true;
         _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
         break;
       } else if (vehical.year == "") {
         isvehicallist = true;
-        ToastUtils.showCustomToast(
-            context, GlobleString.taf_AdditionalInfo_error_vahical_year, false);
+        ToastUtils.showCustomToast(context, GlobleString.taf_AdditionalInfo_error_vahical_year, false);
         /* tfAdditionalInfoState.vehicallist[i].error_year = true;
         _store.dispatch(UpdateTFAdditionalInfoVehicallist(tfAdditionalInfoState.vehicallist));*/
         break;
@@ -1837,11 +1388,9 @@ class _TAFAdditionalInformationScreenState
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    DeletePetVehicle petVehicle = new DeletePetVehicle(
-        Applicant_ID: Prefs.getString(PrefsName.TCF_ApplicantID));
+    DeletePetVehicle petVehicle = new DeletePetVehicle(Applicant_ID: Prefs.getString(PrefsName.TCF_ApplicantID));
 
-    ApiManager().TFAdditionalInfoDelete(context, petVehicle, petVehicle,
-        (status, responce) {
+    ApiManager().TFAdditionalInfoDelete(context, petVehicle, petVehicle, (status, responce) {
       if (status) {
         InserData(tfAdditionalInfoState);
       } else {
@@ -1884,26 +1433,20 @@ class _TAFAdditionalInformationScreenState
       }
     }
 
-    String dd_startdate = new DateFormat("yyyy-MM-dd")
-        .format(tfAdditionalInfoState.tenancystartdate!);
+    String dd_startdate = new DateFormat("yyyy-MM-dd").format(tfAdditionalInfoState.tenancystartdate!);
 
     AdditionalInfo additionalInfo = new AdditionalInfo();
-    additionalInfo.IntendedPeriod =
-        tfAdditionalInfoState.PeriodValue!.EnumDetailID.toString();
-    additionalInfo.IntendedPeriodNo =
-        tfAdditionalInfoState.lenthoftenancynumber;
+    additionalInfo.IntendedPeriod = tfAdditionalInfoState.PeriodValue!.EnumDetailID.toString();
+    additionalInfo.IntendedPeriodNo = tfAdditionalInfoState.lenthoftenancynumber;
     additionalInfo.IntendedTenancyStartDate = dd_startdate;
     additionalInfo.IsPet = tfAdditionalInfoState.isPets;
     additionalInfo.IsSmoking = tfAdditionalInfoState.isSmoking;
     additionalInfo.IsVehicle = tfAdditionalInfoState.isVehical;
     additionalInfo.SmokingDesc = tfAdditionalInfoState.Comment;
 
-    CommonID cpojo =
-        new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicantID));
+    CommonID cpojo = new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicantID));
 
-    ApiManager().InsetTFAdditionalInfo(
-        context, petinfolist, vehicleinfolist, cpojo, additionalInfo,
-        (status, responce) {
+    ApiManager().InsetTFAdditionalInfo(context, petinfolist, vehicleinfolist, cpojo, additionalInfo, (status, responce) {
       if (status) {
         loader.remove();
         if (!isGotoback) {

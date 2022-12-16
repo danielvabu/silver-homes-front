@@ -21,8 +21,8 @@ import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/ImageDialog.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/alert/ImageDialog.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");

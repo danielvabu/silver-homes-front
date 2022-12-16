@@ -30,7 +30,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/basic_tenant/maintenace_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/maintenance_dialog/maintenace_addnewrequest_dialogbox.dart';
@@ -88,8 +88,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     MaintenanceListReqtokens reqtokens = MaintenanceListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search ?? "";
@@ -152,21 +151,11 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     return Container(
       child: Row(
         children: [
-          CustomeWidget.PropertyStutas(
-              landlordMaintenanceState.status_New.toString(),
-              GlobleString.LMR_status_New),
-          CustomeWidget.PropertyStutas(
-              landlordMaintenanceState.status_Approved.toString(),
-              GlobleString.LMR_status_Approved),
-          CustomeWidget.PropertyStutas(
-              landlordMaintenanceState.status_WorkinProgress.toString(),
-              GlobleString.LMR_status_WorkinProgress),
-          CustomeWidget.PropertyStutas(
-              landlordMaintenanceState.status_Resolved.toString(),
-              GlobleString.LMR_status_Resolved),
-          CustomeWidget.PropertyStutas(
-              landlordMaintenanceState.status_Paid.toString(),
-              GlobleString.LMR_status_Paid),
+          CustomeWidget.PropertyStutas(landlordMaintenanceState.status_New.toString(), GlobleString.LMR_status_New),
+          CustomeWidget.PropertyStutas(landlordMaintenanceState.status_Approved.toString(), GlobleString.LMR_status_Approved),
+          CustomeWidget.PropertyStutas(landlordMaintenanceState.status_WorkinProgress.toString(), GlobleString.LMR_status_WorkinProgress),
+          CustomeWidget.PropertyStutas(landlordMaintenanceState.status_Resolved.toString(), GlobleString.LMR_status_Resolved),
+          CustomeWidget.PropertyStutas(landlordMaintenanceState.status_Paid.toString(), GlobleString.LMR_status_Paid),
         ],
       ),
     );
@@ -192,8 +181,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
               children: [
                 Row(
                   children: [
-                    if (landlordMaintenanceState.isloding &&
-                        landlordMaintenanceState.SearchText == "")
+                    if (landlordMaintenanceState.isloding && landlordMaintenanceState.SearchText == "")
                       Container(
                         width: 260,
                         height: 30,
@@ -238,19 +226,14 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           children: <Widget>[
                             Expanded(
                               child: TextFormField(
-                                initialValue:
-                                    landlordMaintenanceState.SearchText,
+                                initialValue: landlordMaintenanceState.SearchText,
                                 onChanged: (value) async {
                                   if (_timer != null) {
                                     _timer!.cancel();
                                   }
-                                  _timer = Timer.periodic(
-                                      const Duration(seconds: 2), (timer) {
-                                    _store.dispatch(
-                                        UpdateLLMaintenance_isloding(true));
-                                    _store.dispatch(
-                                        UpdateLL_maintenancedatalist(
-                                            <MaintenanceData>[]));
+                                  _timer = Timer.periodic(const Duration(milliseconds: 400), (timer) {
+                                    _store.dispatch(UpdateLLMaintenance_isloding(true));
+                                    _store.dispatch(UpdateLL_maintenancedatalist(<MaintenanceData>[]));
                                     updateState();
                                     apimanager(value, 1, "ID", 0, 0);
                                     _timer!.cancel();
@@ -259,8 +242,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintStyle:
-                                      MyStyles.Medium(14, myColor.hintcolor),
+                                  hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                   contentPadding: const EdgeInsets.all(10),
                                   isDense: true,
                                   hintText: GlobleString.LL_Search,
@@ -312,25 +294,20 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
         onSelected: (value) async {
           MaintenanceListReqtokens reqtokens = MaintenanceListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-          reqtokens.Name = landlordMaintenanceState.SearchText != null
-              ? landlordMaintenanceState.SearchText
-              : "";
+          reqtokens.Name = landlordMaintenanceState.SearchText != null ? landlordMaintenanceState.SearchText : "";
 
           List<Sort> sortinglist = [];
           Sort sort = Sort();
-          if (landlordMaintenanceState.SearchText != null &&
-              landlordMaintenanceState.SearchText.isNotEmpty) {
+          if (landlordMaintenanceState.SearchText != null && landlordMaintenanceState.SearchText.isNotEmpty) {
             sort.fieldId = "ID";
             sort.sortSequence = 0;
           } else {
             if (landlordMaintenanceState.isPropertyNameSort) {
               sort.fieldId = "Prop_ID.PropertyName";
-              sort.sortSequence =
-                  landlordMaintenanceState.PropertyNameSortAcsDes;
+              sort.sortSequence = landlordMaintenanceState.PropertyNameSortAcsDes;
             } else if (landlordMaintenanceState.isRequestNameSort) {
               sort.fieldId = "RequestName";
-              sort.sortSequence =
-                  landlordMaintenanceState.RequestNameSortAcsDes;
+              sort.sortSequence = landlordMaintenanceState.RequestNameSortAcsDes;
             } else if (landlordMaintenanceState.isCategorySort) {
               sort.fieldId = "Category";
               sort.sortSequence = landlordMaintenanceState.CategorySortAcsDes;
@@ -339,8 +316,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
               sort.sortSequence = landlordMaintenanceState.PrioritySortAcsDes;
             } else if (landlordMaintenanceState.isDateCreatedSort) {
               sort.fieldId = "Date_Created";
-              sort.sortSequence =
-                  landlordMaintenanceState.DateCreatedSortAcsDes;
+              sort.sortSequence = landlordMaintenanceState.DateCreatedSortAcsDes;
             } else if (landlordMaintenanceState.isCreatedBySort) {
               sort.fieldId = "CreatedBy";
               sort.sortSequence = landlordMaintenanceState.CreatedBySortAcsDes;
@@ -404,8 +380,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
         children: [
           tableHeader(landlordMaintenanceState),
           tableItem(landlordMaintenanceState),
-          if (landlordMaintenanceState.maintenancedatalist != null &&
-              landlordMaintenanceState.maintenancedatalist.length > 0)
+          if (landlordMaintenanceState.maintenancedatalist != null && landlordMaintenanceState.maintenancedatalist.length > 0)
             tablefooter(landlordMaintenanceState)
         ],
       ),
@@ -468,8 +443,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                   ),
                 ),
               )
-            : landlordMaintenanceState.maintenancedatalist != null &&
-                    landlordMaintenanceState.maintenancedatalist.length > 0
+            : landlordMaintenanceState.maintenancedatalist != null && landlordMaintenanceState.maintenancedatalist.length > 0
                 ? Expanded(
                     child: RequestsItem(
                       listdata1: landlordMaintenanceState.maintenancedatalist,
@@ -491,9 +465,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                                 Overlay.of(context)!.insert(loader);
                                 await clearEditMaintenanceStateData();
 
-                                ApiManager().maintenanceDetailsApiCallback(
-                                    context, mid, 1,
-                                    (status, responce, details) async {
+                                ApiManager().maintenanceDetailsApiCallback(context, mid, 1, (status, responce, details) async {
                                   if (status) {
                                     loader.remove();
                                     editRequest(details!);
@@ -525,15 +497,12 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           },
                         );
                       },
-                      onPresseEdit:
-                          (MaintenanceData maintenanceData, int pos) async {
+                      onPresseEdit: (MaintenanceData maintenanceData, int pos) async {
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
                         await clearEditMaintenanceStateData();
 
-                        ApiManager().maintenanceDetailsApiCallback(
-                            context, maintenanceData.ID!, 1,
-                            (status, responce, details) async {
+                        ApiManager().maintenanceDetailsApiCallback(context, maintenanceData.ID!, 1, (status, responce, details) async {
                           if (status) {
                             loader.remove();
                             editRequest(details!);
@@ -543,16 +512,12 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           }
                         });
                       },
-                      onPresseExport:
-                          (MaintenanceData maintenanceData, int pos) {
+                      onPresseExport: (MaintenanceData maintenanceData, int pos) {
                         loader = Helper.overlayLoader(context);
                         Overlay.of(context)!.insert(loader);
-                        ApiManager().maintenanceDetailsApiCallback(
-                            context, maintenanceData.ID!, 0,
-                            (status, responce, details) async {
+                        ApiManager().maintenanceDetailsApiCallback(context, maintenanceData.ID!, 0, (status, responce, details) async {
                           if (status) {
-                            await CustomeWidget.MaintenancePdfgenerate(
-                                context, details!);
+                            await CustomeWidget.MaintenancePdfgenerate(context, details!);
                             loader.remove();
                           } else {
                             loader.remove();
@@ -560,8 +525,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           }
                         });
                       },
-                      onPresseDuplicat:
-                          (MaintenanceData maintenanceData, int pos) {
+                      onPresseDuplicat: (MaintenanceData maintenanceData, int pos) {
                         showDialog(
                           context: context,
                           barrierColor: Colors.black45,
@@ -570,14 +534,11 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                           builder: (BuildContext context1) {
                             return AlertDialogBox(
                               title: GlobleString.maintenace_dupliacate_title,
-                              negativeText:
-                                  GlobleString.maintenace_dupliacate_NO,
-                              positiveText:
-                                  GlobleString.maintenace_dupliacate_yes,
+                              negativeText: GlobleString.maintenace_dupliacate_NO,
+                              positiveText: GlobleString.maintenace_dupliacate_yes,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                duplicateMaintenance(
-                                    maintenanceData, landlordMaintenanceState);
+                                duplicateMaintenance(maintenanceData, landlordMaintenanceState);
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -590,8 +551,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                         init();
                         //paginationCall(landlordMaintenanceState, landlordMaintenanceState.pageNo);
                       },
-                      onPresseDelete:
-                          (MaintenanceData maintenanceData, int pos) {
+                      onPresseDelete: (MaintenanceData maintenanceData, int pos) {
                         showDialog(
                           context: context,
                           barrierColor: Colors.black45,
@@ -604,8 +564,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
                               positiveText: GlobleString.maintenace_delete_yes,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                deleteMaintenance(
-                                    maintenanceData, landlordMaintenanceState);
+                                deleteMaintenance(maintenanceData, landlordMaintenanceState);
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -658,24 +617,16 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
               mode: Mode.MENU,
               textstyle: MyStyles.Medium(14, myColor.black),
               hint: "Select page",
-              defultHeight: Helper.PagingRecord(
-                                  landlordMaintenanceState.totalRecord)
-                              .length *
-                          35 >
-                      250
+              defultHeight: Helper.PagingRecord(landlordMaintenanceState.totalRecord).length * 35 > 250
                   ? 250
-                  : Helper.PagingRecord(landlordMaintenanceState.totalRecord)
-                          .length *
-                      35,
+                  : Helper.PagingRecord(landlordMaintenanceState.totalRecord).length * 35,
               selectedItem: landlordMaintenanceState.pageNo.toString(),
               items: Helper.PagingRecord(landlordMaintenanceState.totalRecord),
               showSearchBox: false,
               isFilteredOnline: true,
               onChanged: (value) {
-                _store.dispatch(
-                    UpdateLLMaintenance_pageNo(int.parse(value.toString())));
-                paginationCall(
-                    landlordMaintenanceState, int.parse(value.toString()));
+                _store.dispatch(UpdateLLMaintenance_pageNo(int.parse(value.toString())));
+                paginationCall(landlordMaintenanceState, int.parse(value.toString()));
               },
             ),
           )
@@ -687,18 +638,14 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
   addnewRequets() async {
     clearAddMaintenanceStateData();
 
-    List<SystemEnumDetails> MaintenanceStatuslist =
-        QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
-    List<SystemEnumDetails> MaintenanceCategorylist =
-        QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
+    List<SystemEnumDetails> MaintenanceStatuslist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
+    List<SystemEnumDetails> MaintenanceCategorylist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
 
     _store.dispatch(UpdateMAR_MaintenanceStatuslist(MaintenanceStatuslist));
     _store.dispatch(UpdateMAR_MaintenanceCategorylist(MaintenanceCategorylist));
 
     _store.dispatch(UpdateMER_PropertyDropDatalist([]));
-    await ApiManager()
-        .getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID),
-            (status, responce, errorlist) {
+    await ApiManager().getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID), (status, responce, errorlist) {
       if (status) {
         _store.dispatch(UpdateMAR_PropertyDropDatalist(errorlist));
       } else {
@@ -800,48 +747,33 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     );
   }
 
-  paginationCall(
-      LandlordMaintenanceState landlordMaintenanceState, int pageno) {
+  paginationCall(LandlordMaintenanceState landlordMaintenanceState, int pageno) {
     if (landlordMaintenanceState.isPropertyNameSort) {
-      apimanager(
-          landlordMaintenanceState.SearchText,
-          pageno,
-          "Prop_ID.PropertyName",
-          landlordMaintenanceState.PropertyNameSortAcsDes,
-          1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "Prop_ID.PropertyName", landlordMaintenanceState.PropertyNameSortAcsDes, 1);
     } else if (landlordMaintenanceState.isRequestNameSort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "RequestName",
-          landlordMaintenanceState.RequestNameSortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "RequestName", landlordMaintenanceState.RequestNameSortAcsDes, 1);
     } else if (landlordMaintenanceState.isCategorySort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "Category",
-          landlordMaintenanceState.CategorySortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "Category", landlordMaintenanceState.CategorySortAcsDes, 1);
     } else if (landlordMaintenanceState.isPrioritySort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "Priority",
-          landlordMaintenanceState.PrioritySortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "Priority", landlordMaintenanceState.PrioritySortAcsDes, 1);
     } else if (landlordMaintenanceState.isDateCreatedSort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "Date_Created",
-          landlordMaintenanceState.DateCreatedSortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "Date_Created", landlordMaintenanceState.DateCreatedSortAcsDes, 1);
     } else if (landlordMaintenanceState.isCreatedBySort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "CreatedBy",
-          landlordMaintenanceState.CreatedBySortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "CreatedBy", landlordMaintenanceState.CreatedBySortAcsDes, 1);
     } else if (landlordMaintenanceState.isStatusSort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "Status",
-          landlordMaintenanceState.StatusSortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "Status", landlordMaintenanceState.StatusSortAcsDes, 1);
     } else if (landlordMaintenanceState.isEditRightsSort) {
-      apimanager(landlordMaintenanceState.SearchText, pageno, "IsLock",
-          landlordMaintenanceState.EditRightsSortAcsDes, 1);
+      apimanager(landlordMaintenanceState.SearchText, pageno, "IsLock", landlordMaintenanceState.EditRightsSortAcsDes, 1);
     } else {
       apimanager(landlordMaintenanceState.SearchText, pageno, "ID", 0, 1);
     }
   }
 
-  updateOtherSortingValue(
-      int flag, LandlordMaintenanceState landlordMaintenanceState) {
+  updateOtherSortingValue(int flag, LandlordMaintenanceState landlordMaintenanceState) {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(
-          landlordMaintenanceState.PropertyNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(landlordMaintenanceState.PropertyNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_PrioritySortAcsDes(0));
@@ -850,11 +782,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "Prop_ID.PropertyName",
-          landlordMaintenanceState.PropertyNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Prop_ID.PropertyName", landlordMaintenanceState.PropertyNameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(
-          landlordMaintenanceState.RequestNameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(landlordMaintenanceState.RequestNameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_PrioritySortAcsDes(0));
@@ -863,11 +793,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "RequestName",
-          landlordMaintenanceState.RequestNameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "RequestName", landlordMaintenanceState.RequestNameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(
-          landlordMaintenanceState.CategorySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(landlordMaintenanceState.CategorySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_PrioritySortAcsDes(0));
@@ -876,11 +804,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "Category",
-          landlordMaintenanceState.CategorySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Category", landlordMaintenanceState.CategorySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateLLMaintenance_PrioritySortAcsDes(
-          landlordMaintenanceState.PrioritySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_PrioritySortAcsDes(landlordMaintenanceState.PrioritySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
@@ -889,11 +815,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "Priority",
-          landlordMaintenanceState.PrioritySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Priority", landlordMaintenanceState.PrioritySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateLLMaintenance_DateCreatedSortAcsDes(
-          landlordMaintenanceState.DateCreatedSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_DateCreatedSortAcsDes(landlordMaintenanceState.DateCreatedSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
@@ -902,11 +826,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "Date_Created",
-          landlordMaintenanceState.DateCreatedSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Date_Created", landlordMaintenanceState.DateCreatedSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdateLLMaintenance_CreatedBySortAcsDes(
-          landlordMaintenanceState.CreatedBySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_CreatedBySortAcsDes(landlordMaintenanceState.CreatedBySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
@@ -915,11 +837,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "CreatedBy",
-          landlordMaintenanceState.CreatedBySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "CreatedBy", landlordMaintenanceState.CreatedBySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 7) {
-      _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(
-          landlordMaintenanceState.StatusSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(landlordMaintenanceState.StatusSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
@@ -928,11 +848,9 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_CreatedBySortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(0));
 
-      apimanager("", 1, "Status",
-          landlordMaintenanceState.StatusSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Status", landlordMaintenanceState.StatusSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 8) {
-      _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(
-          landlordMaintenanceState.EditRightsSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateLLMaintenance_EditRightsSortAcsDes(landlordMaintenanceState.EditRightsSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateLLMaintenance_PropertyNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_RequestNameSortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_CategorySortAcsDes(0));
@@ -941,8 +859,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
       _store.dispatch(UpdateLLMaintenance_CreatedBySortAcsDes(0));
       _store.dispatch(UpdateLLMaintenance_StatusSortAcsDes(0));
 
-      apimanager("", 1, "IsLock",
-          landlordMaintenanceState.EditRightsSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsLock", landlordMaintenanceState.EditRightsSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -973,23 +890,19 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     }
   }
 
-  duplicateMaintenance(MaintenanceData maintenanceData,
-      LandlordMaintenanceState llMaintenanceState) {
+  duplicateMaintenance(MaintenanceData maintenanceData, LandlordMaintenanceState llMaintenanceState) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().duplicateMaintenaceworkflow(
-        context, maintenanceData.ID.toString(), "1", (error, respoce) async {
+    ApiManager().duplicateMaintenaceworkflow(context, maintenanceData.ID.toString(), "1", (error, respoce) async {
       if (error) {
         init();
-        ToastUtils.showCustomToast(
-            context, GlobleString.maintenace_dupliacate_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.maintenace_dupliacate_successfully, true);
 
         if (respoce != null && respoce.isNotEmpty) {
           await clearEditMaintenanceStateData();
 
-          ApiManager().maintenanceDetailsApiCallback(context, respoce, 1,
-              (status, responce, details) async {
+          ApiManager().maintenanceDetailsApiCallback(context, respoce, 1, (status, responce, details) async {
             if (status) {
               insertNotification_newRequest(details!);
               editRequest(details);
@@ -1003,8 +916,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
         }
       } else {
         loader.remove();
-        String errormsg1 =
-            respoce.replaceAll("One or more errors occurred. (", "");
+        String errormsg1 = respoce.replaceAll("One or more errors occurred. (", "");
         String errormsg = errormsg1.replaceAll(")", "");
         ToastUtils.showCustomToast(context, errormsg, false);
       }
@@ -1018,37 +930,27 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     mn.applicantName = "";
     mn.mid = maintenanceDetails.mID;
     mn.propid = maintenanceDetails.Prop_ID;
-    mn.applicantId = maintenanceDetails.Applicant_ID != null &&
-            maintenanceDetails.Applicant_ID!.isNotEmpty
-        ? maintenanceDetails.Applicant_ID
-        : "";
+    mn.applicantId =
+        maintenanceDetails.Applicant_ID != null && maintenanceDetails.Applicant_ID!.isNotEmpty ? maintenanceDetails.Applicant_ID : "";
     mn.applicationId = "";
     mn.ownerId = Prefs.getString(PrefsName.OwnerID);
-    mn.notificationDate =
-        new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
-    mn.typeOfNotification = NotificationType()
-        .getNotificationType(NotificationName.Owner_Maintenance_Requests);
+    mn.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+    mn.typeOfNotification = NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Requests);
     mn.isRead = false;
 
     notificationlist.add(mn);
 
-    if (maintenanceDetails.Applicant_ID != null &&
-        maintenanceDetails.Applicant_ID!.isNotEmpty) {
+    if (maintenanceDetails.Applicant_ID != null && maintenanceDetails.Applicant_ID!.isNotEmpty) {
       MaintenanceNotificationData mn2 = new MaintenanceNotificationData();
       mn2.applicantName = "";
       mn2.mid = maintenanceDetails.mID;
       mn2.propid = maintenanceDetails.Prop_ID;
-      mn2.applicantId = maintenanceDetails.Applicant_ID != null &&
-              maintenanceDetails.Applicant_ID!.isNotEmpty
-          ? maintenanceDetails.Applicant_ID
-          : "";
+      mn2.applicantId =
+          maintenanceDetails.Applicant_ID != null && maintenanceDetails.Applicant_ID!.isNotEmpty ? maintenanceDetails.Applicant_ID : "";
       mn2.applicationId = "";
       mn2.ownerId = Prefs.getString(PrefsName.OwnerID);
-      mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-          .format(DateTime.now())
-          .toString();
-      mn2.typeOfNotification = NotificationType()
-          .getNotificationType(NotificationName.Tenant_Maintenance_Requests);
+      mn2.notificationDate = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+      mn2.typeOfNotification = NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Requests);
       mn2.isRead = false;
 
       notificationlist.add(mn2);
@@ -1058,8 +960,7 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
   }
 
   insertNotificationCall(List<MaintenanceNotificationData> notificationlist) {
-    ApiManager().AddMaintenaceNotification(context, notificationlist,
-        (error, responce) async {
+    ApiManager().AddMaintenaceNotification(context, notificationlist, (error, responce) async {
       if (error) {
         loader.remove();
       } else {
@@ -1068,14 +969,11 @@ class _MaintenanceRequestsState extends State<MaintenanceRequestsScreen> {
     });
   }
 
-  deleteMaintenance(MaintenanceData maintenanceData,
-      LandlordMaintenanceState llMaintenanceState) {
-    ApiManager().deleteMaintenace(context, maintenanceData.ID!,
-        (error, respoce) async {
+  deleteMaintenance(MaintenanceData maintenanceData, LandlordMaintenanceState llMaintenanceState) {
+    ApiManager().deleteMaintenace(context, maintenanceData.ID!, (error, respoce) async {
       if (error) {
         init();
-        ToastUtils.showCustomToast(
-            context, GlobleString.maintenace_delete_successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.maintenace_delete_successfully, true);
       } else {
         ToastUtils.showCustomToast(context, respoce, false);
       }

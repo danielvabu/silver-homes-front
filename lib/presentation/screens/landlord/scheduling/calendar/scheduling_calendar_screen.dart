@@ -34,10 +34,10 @@ import 'package:silverhome/tablayer/dsq_query.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/scheduling/addEvent_dialogbox.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class SchedulingCalendarScreen extends StatefulWidget {

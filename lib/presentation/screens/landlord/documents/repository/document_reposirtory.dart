@@ -48,14 +48,11 @@ class DocumentsService {
   }
 
 /*  static var Create_Folder_Api = base_url + "documents/create/folder"; */
-  Future<bool?> createFolder(BuildContext context, String folderName,
-      String fatherUUID, String currenTab,
+  Future<bool?> createFolder(BuildContext context, String folderName, String fatherUUID, String currenTab,
       [String propertyUUID = ""]) async {
     try {
       /*     */
-      var response = await _client?.post(
-          Uri.parse(
-              /* Weburl.Create_Document_Api */ "https://api.ren-hogar.com/documentsnewfolder"),
+      var response = await _client?.post(Uri.parse(/* Weburl.Create_Document_Api */ "https://api.ren-hogar.com/documentsnewfolder"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestCreateFolder(
                   fatherUUID: fatherUUID,
@@ -89,17 +86,11 @@ class DocumentsService {
   }
 
   /*   static var Restore_File_Api = base_url + "documents/restore"; */
-  Future<bool?> restoreDocument(BuildContext context, String documentUUID,
-      String documentFatherUUID) async {
+  Future<bool?> restoreDocument(BuildContext context, String documentUUID, String documentFatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              "https://api.ren-hogar.com/documentsrestore" /* Weburl.Restore_Document_Api */),
+      var response = await _client?.post(Uri.parse("https://api.ren-hogar.com/documentsrestore" /*Weburl.Restore_Document_Api*/),
           headers: getHeadersJson(),
-          body: jsonEncode(RequestRestoreDocument(
-                  documentUUID: documentUUID,
-                  documentFatherUUID: documentFatherUUID)
-              .toJson()));
+          body: jsonEncode(RequestRestoreDocument(documentUUID: documentUUID, documentFatherUUID: documentFatherUUID).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
@@ -123,16 +114,10 @@ class DocumentsService {
   }
 
   /* static var Rename_Api = base_url + "documents/remane"; */
-  Future<bool?> renameDocument(BuildContext context, String documentUUID,
-      String documentName, String documentFatherUUID) async {
+  Future<bool?> renameDocument(BuildContext context, String documentUUID, String documentName, String documentFatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              /* Weburl.Rename_Document_Api */ "https://api.ren-hogar.com/documentsrename"),
-          headers: getHeadersJson(),
-          body: jsonEncode(RequestRenameDocument(
-                  documentUUID: documentUUID, name: documentName)
-              .toJson()));
+      var response = await _client?.post(Uri.parse(/* Weburl.Rename_Document_Api */ "https://api.ren-hogar.com/documentsrename"),
+          headers: getHeadersJson(), body: jsonEncode(RequestRenameDocument(documentUUID: documentUUID, name: documentName).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
@@ -156,17 +141,11 @@ class DocumentsService {
   }
 
   /*   static var Duplicate_File_Api = base_url + "documents/duplicate"; */
-  Future<bool?> duplicateDocument(BuildContext context, String documentUUID,
-      String documentFatherUUID) async {
+  Future<bool?> duplicateDocument(BuildContext context, String documentUUID, String documentFatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              /* Weburl.Duplicate_Document_Api */ "https://api.ren-hogar.com/documentsduplicate/"),
+      var response = await _client?.post(Uri.parse(/* Weburl.Duplicate_Document_Api */ "https://api.ren-hogar.com/documentsduplicate/"),
           headers: getHeadersJson(),
-          body: jsonEncode(RequestDuplicateDocument(
-                  documentUUID: documentUUID,
-                  documentFatherUUID: documentFatherUUID)
-              .toJson()));
+          body: jsonEncode(RequestDuplicateDocument(documentUUID: documentUUID, documentFatherUUID: documentFatherUUID).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
@@ -190,12 +169,9 @@ class DocumentsService {
   }
 
   /*   static var Delete_Document_Api = base_url + "documents/delete"; */
-  Future<bool?> deleteDocument(BuildContext context, String documentUUID,
-      String documentFatherUUID) async {
+  Future<bool?> deleteDocument(BuildContext context, String documentUUID, String documentFatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              /* Weburl.Delete_Document_Api */ "https://api.ren-hogar.com/documentsdelete"),
+      var response = await _client?.post(Uri.parse(/* Weburl.Delete_Document_Api */ "https://api.ren-hogar.com/documentsdelete"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestDeleteDocument(
             documentUUID: documentUUID,
@@ -223,12 +199,9 @@ class DocumentsService {
   }
 
   /*   static var Move_To_Folder_Api = base_url + "documents/move";*/
-  Future<bool?> moveDocument(BuildContext context, String documentUUID,
-      String fatherUUID, String newFatherUUID) async {
+  Future<bool?> moveDocument(BuildContext context, String documentUUID, String fatherUUID, String newFatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              /* Weburl.Move_Document_Api */ "https://api.ren-hogar.com/documentsmove"),
+      var response = await _client?.post(Uri.parse(/* Weburl.Move_Document_Api */ "https://api.ren-hogar.com/documentsmove"),
           headers: getHeadersJson(),
           body: jsonEncode(RequestMoveDocument(
             documentUUID: documentUUID,
@@ -260,22 +233,14 @@ class DocumentsService {
   /*  static var Upload_File_Api = base_url + "documents/upload"; */
 
   Future<DocumentModel?> uploadDocument(
-      BuildContext context,
-      Uint8List data,
-      String extension,
-      String type,
-      String propertyId,
-      String fatherId,
-      String name) async {
+      BuildContext context, Uint8List data, String extension, String type, String propertyId, String fatherId, String name) async {
     try {
       List<int> _selectedFile = data;
 
       String filepath = '$name.$extension';
 
-      var multipartRequest = new http.MultipartRequest(
-          "POST",
-          Uri.parse(
-              /* Weburl.Upload_Document_Api */ "https://www.ren-hogar.com/documentupload/"));
+      var multipartRequest =
+          new http.MultipartRequest("POST", Uri.parse(/* Weburl.Upload_Document_Api */ "https://www.ren-hogar.com/documentupload/"));
 
       multipartRequest.headers.addAll(getHeadersMultipart());
       multipartRequest.fields["property_id"] = propertyId;
@@ -283,10 +248,8 @@ class DocumentsService {
       multipartRequest.fields["type"] = type;
       multipartRequest.fields["owner_id"] = Prefs.getString(PrefsName.OwnerID);
       multipartRequest.fields["name"] = name;
-      multipartRequest.files.add(await http.MultipartFile.fromBytes(
-          'file', _selectedFile,
-          contentType: new MediaType('application', extension),
-          filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes('file', _selectedFile,
+          contentType: new MediaType('application', extension), filename: filepath));
 
       await multipartRequest.send().then((result) {
         //print('admin');
@@ -302,8 +265,7 @@ class DocumentsService {
                 if (data != null && data['Result'] != null) {
                   return DocumentModel.fromJson(data['Result'][0]);
                 } else {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Error, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Error, false);
                   return null;
                 }
               } else {
@@ -311,8 +273,7 @@ class DocumentsService {
                 return null;
               }
             } else if (response.statusCode == 401) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Error_401, false);
+              ToastUtils.showCustomToast(context, GlobleString.Error_401, false);
               return null;
             } else {
               ToastUtils.showCustomToast(context, GlobleString.Error, false);
@@ -337,19 +298,13 @@ class DocumentsService {
 
   /*  static var Get_Filters_Api = base_url + "documents/filters"; */
 
-  Future<List<FilterDocumentModel>?> getDocumentsFilter(
-      BuildContext context, String type) async {
+  Future<List<FilterDocumentModel>?> getDocumentsFilter(BuildContext context, String type) async {
     try {
-      var response = await _client?.get(
-          Uri.parse(Weburl.Get_Document_Filters_Api + "/" + type),
-          headers: getHeadersJson());
+      var response = await _client?.get(Uri.parse(Weburl.Get_Document_Filters_Api + "/" + type), headers: getHeadersJson());
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
           if (jsonDecode(response.body)['Result'] != null) {
-            return jsonDecode(response.body)['Result']
-                .map<FilterDocumentModel>(
-                    (data) => FilterDocumentModel.fromJson(data))
-                .toList();
+            return jsonDecode(response.body)['Result'].map<FilterDocumentModel>((data) => FilterDocumentModel.fromJson(data)).toList();
           } else {
             ToastUtils.showCustomToast(context, GlobleString.Error, false);
             return null;
@@ -372,8 +327,7 @@ class DocumentsService {
   }
 
 /*   static var Get_List_Documents = base_url + "documents/list"; */
-  Future<DocumentsListScreenModel?> getDocumentListByUUID(
-      BuildContext context, String folderUUID, String type,
+  Future<DocumentsListScreenModel?> getDocumentListByUUID(BuildContext context, String folderUUID, String type,
       [String search = "", String? filter = ""]) async {
     try {
       /*    var urlParams = Weburl.Get_Documents_List;=
@@ -383,8 +337,7 @@ class DocumentsService {
       urlParams =
           (type == "" || type == null) ? urlParams : urlParams + "type=$type";
  */
-      var response = await _client?.post(
-          Uri.parse("https://api.ren-hogar.com/documentslist"),
+      var response = await _client?.post(Uri.parse("https://api.ren-hogar.com/documentslist"),
           headers: getHeadersJson(),
           body: jsonEncode({
             "type": type.toUpperCase(),
@@ -414,16 +367,11 @@ class DocumentsService {
   }
 
   /*   static var Change_Restric_Api = base_url + "documents/restric";*/
-  Future<bool?> changeRestrictEditing(BuildContext context, String documentUUID,
-      bool newValue, String fatherUUID) async {
+  Future<bool?> changeRestrictEditing(BuildContext context, String documentUUID, bool newValue, String fatherUUID) async {
     try {
-      var response = await _client?.post(
-          Uri.parse(
-              /*Weburl.Change_Restrict_Editing */ "https://api.ren-hogar.com/documentsrestrict"),
+      var response = await _client?.post(Uri.parse(/*Weburl.Change_Restrict_Editing */ "https://api.ren-hogar.com/documentsrestrict"),
           headers: getHeadersJson(),
-          body: jsonEncode(RequestChangeRestrictDocument(
-                  documentUUID: documentUUID, isRestricted: newValue)
-              .toJson()));
+          body: jsonEncode(RequestChangeRestrictDocument(documentUUID: documentUUID, isRestricted: newValue).toJson()));
 
       if (response!.statusCode == 200) {
         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {

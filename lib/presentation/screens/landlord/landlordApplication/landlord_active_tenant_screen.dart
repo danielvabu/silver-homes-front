@@ -38,17 +38,15 @@ import 'package:silverhome/widget/landlord/filterview.dart';
 import 'package:silverhome/widget/landlord/funnelview/funnelviewscreen.dart';
 import 'package:silverhome/widget/landlord/lead_dialog/addnewlead_dialogbox.dart';
 import 'package:silverhome/widget/landlord/propertydropdown.dart';
-import 'package:silverhome/widget/searchboxview.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/search/searchboxview.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 
 class LandlordActiveTenantScreen extends StatefulWidget {
   @override
-  _LandlordActiveTenantScreenState createState() =>
-      _LandlordActiveTenantScreenState();
+  _LandlordActiveTenantScreenState createState() => _LandlordActiveTenantScreenState();
 }
 
-class _LandlordActiveTenantScreenState
-    extends State<LandlordActiveTenantScreen> {
+class _LandlordActiveTenantScreenState extends State<LandlordActiveTenantScreen> {
   List<ActiveLead> leadlitems = [];
   double height = 0, width = 0;
   static TextEditingController textsearchvalue = TextEditingController();
@@ -144,27 +142,16 @@ class _LandlordActiveTenantScreenState
                             ? SearchBoxView(
                                 callbackOnChanetext: (String text) {
                                   if (text.isNotEmpty) {
-                                    List<TenancyApplication>
-                                        filterleaseleadlist = List.empty();
+                                    List<TenancyApplication> filterleaseleadlist = List.empty();
 
-                                    filterleaseleadlist = activeTenantState
-                                        .activetenantleadlist
-                                        .where((u) => (u.propertyName!
-                                                .toLowerCase()
-                                                .contains(text.toLowerCase()) ||
-                                            u.applicantName!
-                                                .toLowerCase()
-                                                .contains(text.toLowerCase())))
+                                    filterleaseleadlist = activeTenantState.activetenantleadlist
+                                        .where((u) => (u.propertyName!.toLowerCase().contains(text.toLowerCase()) ||
+                                            u.applicantName!.toLowerCase().contains(text.toLowerCase())))
                                         .toList();
 
-                                    _store.dispatch(
-                                        UpdateLLActiveTenantfilterleadlist(
-                                            filterleaseleadlist));
+                                    _store.dispatch(UpdateLLActiveTenantfilterleadlist(filterleaseleadlist));
                                   } else {
-                                    _store.dispatch(
-                                        UpdateLLActiveTenantfilterleadlist(
-                                            activeTenantState
-                                                .activetenantleadlist));
+                                    _store.dispatch(UpdateLLActiveTenantfilterleadlist(activeTenantState.activetenantleadlist));
                                   }
 
                                   RefereshstartTime();
@@ -172,19 +159,13 @@ class _LandlordActiveTenantScreenState
                               )
                             : PropertyDropdown(
                                 onSelectVal: (item) async {
-                                  _store.dispatch(
-                                      UpdateLLActiveTenantPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTLleasePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateArchivePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTALeadPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLVDapplicationPropertyItem(item));
+                                  _store.dispatch(UpdateLLActiveTenantPropertyItem(item));
+                                  _store.dispatch(UpdateLLTLleasePropertyItem(item));
+                                  _store.dispatch(UpdateArchivePropertyItem(item));
+                                  _store.dispatch(UpdateLLTALeadPropertyItem(item));
+                                  _store.dispatch(UpdateLLVDapplicationPropertyItem(item));
                                   _store.dispatch(UpdateLLRCPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTAApplicantPropertyItem(item));
+                                  _store.dispatch(UpdateLLTAApplicantPropertyItem(item));
 
                                   await finnleviewcallapi(item!.ID.toString());
                                 },
@@ -199,8 +180,7 @@ class _LandlordActiveTenantScreenState
                     ),
                     Row(
                       children: [
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                           InkWell(
                             onTap: () {
                               ClearFilter(activeTenantState);
@@ -210,10 +190,8 @@ class _LandlordActiveTenantScreenState
                               padding: EdgeInsets.only(left: 25, right: 25),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                    color: myColor.errorcolor, width: 1),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(color: myColor.errorcolor, width: 1),
                                 color: myColor.white,
                               ),
                               child: Text(
@@ -222,9 +200,7 @@ class _LandlordActiveTenantScreenState
                               ),
                             ),
                           ),
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
-                          SizedBox(width: 30),
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel)) SizedBox(width: 30),
                         _togglebutton(activeTenantState),
                         SizedBox(width: 10),
                         _actionPopup(activeTenantState)
@@ -233,9 +209,7 @@ class _LandlordActiveTenantScreenState
                   ],
                 ),
               ),
-              activeTenantState.selecttoggle == 0
-                  ? _tableview(activeTenantState)
-                  : _funnelview(activeTenantState)
+              activeTenantState.selecttoggle == 0 ? _tableview(activeTenantState) : _funnelview(activeTenantState)
             ],
           );
         },
@@ -260,8 +234,7 @@ class _LandlordActiveTenantScreenState
                   await activetenantcallApi();
                 } else {
                   if (activeTenantState.propertyValue != null) {
-                    await finnleviewcallapi(
-                        activeTenantState.propertyValue!.ID.toString());
+                    await finnleviewcallapi(activeTenantState.propertyValue!.ID.toString());
                   }
                 }
               },
@@ -303,8 +276,7 @@ class _LandlordActiveTenantScreenState
               activetenantcallApi();
             } else {
               if (activeTenantState.propertyValue != null) {
-                await finnleviewcallapi(
-                    activeTenantState.propertyValue!.ID.toString());
+                await finnleviewcallapi(activeTenantState.propertyValue!.ID.toString());
               }
             }
             await Prefs.setBool(PrefsName.IsApplyFilterFunnel, false);
@@ -330,26 +302,21 @@ class _LandlordActiveTenantScreenState
               if (activeTenantState.propertyValue != null) {
                 _showFilterOverlayView(context, activeTenantState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 2) {
             if (activeTenantState.selecttoggle == 0) {
-              if (activeTenantState.filteractivetenantleadlist != null &&
-                  activeTenantState.filteractivetenantleadlist.length > 0) {
+              if (activeTenantState.filteractivetenantleadlist != null && activeTenantState.filteractivetenantleadlist.length > 0) {
                 createTableDataCSVFile(activeTenantState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_export, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_export, false);
               }
             } else {
               if (activeTenantState.propertyValue != null) {
-                CustomeWidget.FunnelDataCSVFile(
-                    context, activeTenantState.propertyValue!.ID.toString());
+                CustomeWidget.FunnelDataCSVFile(context, activeTenantState.propertyValue!.ID.toString());
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 3) {
@@ -357,22 +324,17 @@ class _LandlordActiveTenantScreenState
               loader = Helper.overlayLoader(context);
               Overlay.of(context)!.insert(loader);
 
-              ApiManager().AllArchivePropertyWise(
-                  context, activeTenantState.propertyValue!.ID.toString(),
-                  (status, responce) async {
+              ApiManager().AllArchivePropertyWise(context, activeTenantState.propertyValue!.ID.toString(), (status, responce) async {
                 if (status) {
-                  await finnleviewcallapi(
-                      activeTenantState.propertyValue!.ID.toString());
+                  await finnleviewcallapi(activeTenantState.propertyValue!.ID.toString());
                   loader.remove();
                 } else {
                   loader.remove();
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Error1, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                 }
               });
             } else {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Blank_funnel, false);
+              ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
             }
           }
         },
@@ -448,35 +410,25 @@ class _LandlordActiveTenantScreenState
           ActiveTenantHeader(
             onPressedSortName: () async {
               await updateOtherSortingValue(1);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
               if (!activeTenantState.isNameSort) {
-                lalist.sort((a, b) => a.applicantName!
-                    .toLowerCase()
-                    .compareTo(b.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => a.applicantName!.toLowerCase().compareTo(b.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisNameSort(true));
               } else {
-                lalist.sort((a, b) => b.applicantName!
-                    .toLowerCase()
-                    .compareTo(a.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => b.applicantName!.toLowerCase().compareTo(a.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisNameSort(false));
               }
               _store.dispatch(UpdateLLActiveTenantfilterleadlist(lalist));
             },
             onPressedSortProperty: () async {
               await updateOtherSortingValue(2);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
 
               if (!activeTenantState.isPropertySort) {
-                lalist.sort((a, b) => a.propertyName!
-                    .toLowerCase()
-                    .compareTo(b.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => a.propertyName!.toLowerCase().compareTo(b.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisPropertySort(true));
               } else {
-                lalist.sort((a, b) => b.propertyName!
-                    .toLowerCase()
-                    .compareTo(a.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => b.propertyName!.toLowerCase().compareTo(a.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisPropertySort(false));
               }
 
@@ -484,65 +436,49 @@ class _LandlordActiveTenantScreenState
             },
             onPressedSortRating: () async {
               await updateOtherSortingValue(3);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
               if (!activeTenantState.isRatingSort) {
-                lalist.sort((a, b) =>
-                    b.rating.toString().compareTo(a.rating.toString()));
+                lalist.sort((a, b) => b.rating.toString().compareTo(a.rating.toString()));
                 _store.dispatch(UpdateLLActiveTenantisRatingSort(true));
               } else {
-                lalist.sort((a, b) =>
-                    a.rating.toString().compareTo(b.rating.toString()));
+                lalist.sort((a, b) => a.rating.toString().compareTo(b.rating.toString()));
                 _store.dispatch(UpdateLLActiveTenantisRatingSort(false));
               }
               _store.dispatch(UpdateLLActiveTenantfilterleadlist(lalist));
             },
             onPressedSortLeaseStartDate: () async {
               await updateOtherSortingValue(4);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
               if (!activeTenantState.isLeasStartDateSort) {
-                lalist.sort((a, b) => b.agreementSentDate!
-                    .toLowerCase()
-                    .compareTo(a.agreementSentDate!.toLowerCase()));
+                lalist.sort((a, b) => b.agreementSentDate!.toLowerCase().compareTo(a.agreementSentDate!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisLeasStartDateSort(true));
               } else {
-                lalist.sort((a, b) => a.agreementSentDate!
-                    .toLowerCase()
-                    .compareTo(b.agreementSentDate!.toLowerCase()));
+                lalist.sort((a, b) => a.agreementSentDate!.toLowerCase().compareTo(b.agreementSentDate!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisLeasStartDateSort(false));
               }
               _store.dispatch(UpdateLLActiveTenantfilterleadlist(lalist));
             },
             onPressedSortLeaseDuration: () async {
               await updateOtherSortingValue(5);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
               if (!activeTenantState.isLeaseDurationSort) {
-                lalist.sort((a, b) => b.agreementReceivedDate!
-                    .toLowerCase()
-                    .compareTo(a.agreementReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => b.agreementReceivedDate!.toLowerCase().compareTo(a.agreementReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisLeaseDurationSort(true));
               } else {
-                lalist.sort((a, b) => a.agreementReceivedDate!
-                    .toLowerCase()
-                    .compareTo(b.agreementReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => a.agreementReceivedDate!.toLowerCase().compareTo(b.agreementReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateLLActiveTenantisLeaseDurationSort(false));
               }
               _store.dispatch(UpdateLLActiveTenantfilterleadlist(lalist));
             },
             onPressedSortAppStatus: () async {
               await updateOtherSortingValue(6);
-              List<TenancyApplication> lalist =
-                  activeTenantState.filteractivetenantleadlist;
+              List<TenancyApplication> lalist = activeTenantState.filteractivetenantleadlist;
 
               if (!activeTenantState.isAppStatusSort) {
-                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID
-                    .compareTo(b.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID.compareTo(b.applicationStatus!.EnumDetailID));
                 _store.dispatch(UpdateLLActiveTenantisAppStatusSort(true));
               } else {
-                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID
-                    .compareTo(a.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID.compareTo(a.applicationStatus!.EnumDetailID));
                 //lalist.reversed.toList();
                 _store.dispatch(UpdateLLActiveTenantisAppStatusSort(false));
               }
@@ -575,8 +511,7 @@ class _LandlordActiveTenantScreenState
                   ),
                 ),
               )
-            : activeTenantState.filteractivetenantleadlist != null &&
-                    activeTenantState.filteractivetenantleadlist.length > 0
+            : activeTenantState.filteractivetenantleadlist != null && activeTenantState.filteractivetenantleadlist.length > 0
                 ? Expanded(
                     child: ActiveTenantItem(
                       OnRefresh: () {},
@@ -618,8 +553,7 @@ class _LandlordActiveTenantScreenState
     _store.dispatch(UpdateLLActiveTenantToggle(activeTenantState.selecttoggle));
   }
 
-  _showFilterOverlayView(
-      BuildContext context, LandLordActiveTenantState activeTenantState) {
+  _showFilterOverlayView(BuildContext context, LandLordActiveTenantState activeTenantState) {
     OverlayState overlayState = Overlay.of(context)!;
     overlayEntry = OverlayEntry(builder: (context) {
       return Container(
@@ -656,38 +590,30 @@ class _LandlordActiveTenantScreenState
                   } else {
                     if (isclear) {
                       if (activeTenantState.propertyValue != null) {
-                        await finnleviewcallapi(
-                            activeTenantState.propertyValue!.ID.toString());
+                        await finnleviewcallapi(activeTenantState.propertyValue!.ID.toString());
                       }
                     } else {
                       _store.dispatch(UpdateLLActiveTenantToggle(1));
 
-                      _store.dispatch(
-                          UpdateFunnelAllListData(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelAllListData(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeadCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeadList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeadList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelApplicantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelApplicantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelApplicantList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelDocumentVarifyCount(0));
-                      _store.dispatch(UpdateFunnelDocumentVarifyList(
-                          <TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelDocumentVarifyList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelReferenceCheckCount(0));
-                      _store.dispatch(
-                          UpdateFunnelReferenceList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelReferenceList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeaseCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeassentList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeassentList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelActiveTenantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelActiveTenantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelActiveTenantList(<TenancyApplication>[]));
 
                       await ApiManager().getPropertyWiseFunnel(context, json);
                     }
@@ -761,18 +687,14 @@ class _LandlordActiveTenantScreenState
       row.add(data.rating.toString());
       row.add(data.agreementSentDate);
       row.add(data.agreementReceivedDate);
-      row.add(data.applicationStatus != null
-          ? data.applicationStatus!.displayValue.toString()
-          : "");
+      row.add(data.applicationStatus != null ? data.applicationStatus!.displayValue.toString() : "");
 
       csvList.add(row);
     }
 
     csv = const ListToCsvConverter().convert(csvList);
 
-    String filename = "LeaseLead_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".csv";
+    String filename = "LeaseLead_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
 
     // prepare
     final bytes = utf8.encode(csv);

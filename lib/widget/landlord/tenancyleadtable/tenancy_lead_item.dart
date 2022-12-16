@@ -26,7 +26,8 @@ import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/action_popup/lead_popupmenu.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/invitetoapply_dialogbox.dart';
 import 'package:silverhome/widget/landlord/lead_dialog/editlead_dialogbox.dart';
@@ -38,11 +39,10 @@ import 'package:silverhome/widget/landlord/listviewitemstatus/tbl_tenancyapplica
 import 'package:silverhome/widget/landlord/preview_Lease_dialogbox.dart';
 import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
 import 'package:silverhome/widget/landlord/ratingupdate_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-typedef CallbackInvite = void Function(
-    TenancyApplication tenancyApplicationLead);
+typedef CallbackInvite = void Function(TenancyApplication tenancyApplicationLead);
 
 class TenancyLeadItem extends StatefulWidget {
   List<TenancyApplication> listdata;
@@ -124,15 +124,12 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                         ),
                       ],
                     ),
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20, top: 15, bottom: 15),
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
                         TBLTenancyApplicationStatus(
                           onPressedIcon: () {
-                            if (listdata[Index].applicationReceivedDate !=
-                                    null &&
-                                listdata[Index].applicationReceivedDate != "") {
+                            if (listdata[Index].applicationReceivedDate != null && listdata[Index].applicationReceivedDate != "") {
                               openTenancyApplicationDetails(Index);
                             }
                           },
@@ -155,15 +152,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                         const SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[Index].referenceRequestSentDate!,
-                          receivedate:
-                              listdata[Index].referenceRequestReceivedDate!,
+                          receivedate: listdata[Index].referenceRequestReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].referenceRequestReceivedDate !=
-                                    null &&
-                                listdata[Index].referenceRequestReceivedDate !=
-                                    "") {
-                              CustomeWidget.ReferencePreview(
-                                  context, listdata[Index].id.toString());
+                            if (listdata[Index].referenceRequestReceivedDate != null &&
+                                listdata[Index].referenceRequestReceivedDate != "") {
+                              CustomeWidget.ReferencePreview(context, listdata[Index].id.toString());
                             }
                           },
                         ),
@@ -172,8 +165,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                           sentdate: listdata[Index].agreementSentDate!,
                           receivedate: listdata[Index].agreementReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].agreementReceivedDate != null &&
-                                listdata[Index].agreementReceivedDate != "") {
+                            if (listdata[Index].agreementReceivedDate != null && listdata[Index].agreementReceivedDate != "") {
                               _dailogPreviewLease(listdata[Index]);
                             }
                           },
@@ -198,13 +190,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     result.add(_datavalueTitleDateCreate(model.CreatedOn!));
     result.add(_statusdropdown(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(
-        model.isexpand!
-            ? "assets/images/circle_up.png"
-            : "assets/images/circle_down.png",
-        30,
-        model,
-        Index));
+    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, Index));
 
     return result;
   }
@@ -278,13 +264,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
                 TenancyApplicationID updateid = TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating =
-                    TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating = TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(
-                    context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     leadcallApi();
                   }
@@ -352,9 +336,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
       padding: const EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != "0" && text != ""
-            ? DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString()
-            : "",
+        text != null && text != "0" && text != "" ? DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -373,27 +355,22 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
-        defultHeight:
-            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem:
-            model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: false,
         onChanged: (data) {
-          if (data!.EnumDetailID.toString() !=
-              eApplicationStatus().ActiveTenent.toString()) {
+          if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus =
-                TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus = TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(
-                context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 leadcallApi();
                 loader.remove();
@@ -447,8 +424,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     );
   }
 
-  Widget _datavalueExpand(
-      String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () async {
         if (model.isexpand!) {
@@ -525,12 +501,10 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
             TenancyApplicationID updateid = TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive =
-                TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive = TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
-            await ApiManager().UpdateArchiveApplication(
-                context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 leadcallApi();
               }
@@ -605,13 +579,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(),
-        (status, responce) {
+    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(), (status, responce) {
       if (status) {
         _store.dispatch(UpdateEditLeadApplicantionId(model.id.toString()));
 
-        ApiManager().getPropertyDetails(context, model.propId!,
-            (status, responce, propertyData) async {
+        ApiManager().getPropertyDetails(context, model.propId!, (status, responce, propertyData) async {
           if (status) {
             loader.remove();
 
@@ -664,13 +636,11 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(),
-        (status, responce) {
+    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(), (status, responce) {
       if (status) {
         _store.dispatch(UpdateEditLeadApplicantionId(model.id.toString()));
 
-        ApiManager().getPropertyDetails(context, model.propId!,
-            (status, responce, propertyData) async {
+        ApiManager().getPropertyDetails(context, model.propId!, (status, responce, propertyData) async {
           if (status) {
             loader.remove();
 
@@ -794,16 +764,14 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
           onPressedYes: () async {
             Navigator.of(context1).pop();
 
-            await ApiManager().CheckTenantActiveOrNot(
-                context, model.propId.toString(), model.applicantId.toString(),
+            await ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(),
                 (status, responce) async {
               if (status) {
                 await leadcallApi();
                 ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }
