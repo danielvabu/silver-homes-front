@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/fontname.dart';
+import 'package:webviewx/webviewx.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
+import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
+import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -18,12 +21,13 @@ import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/customewidget.dart';
 import 'package:silverhome/widget/Landlord/inviteapplytable/dialog_invite_apply_header.dart';
 import 'package:silverhome/widget/Landlord/inviteapplytable/dialog_invite_apply_item.dart';
+import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class InviteToApplyDialogbox extends StatefulWidget {
   final List<TenancyApplication> _tenancyleadlist;
   final VoidCallback _callbackSave;
   final VoidCallback _callbackClose;
-  List<Map> fields = [];
+  List<RequestDocuments> fields = [];
 
   InviteToApplyDialogbox({
     required List<TenancyApplication> tenancyleadlist,
@@ -39,15 +43,64 @@ class InviteToApplyDialogbox extends StatefulWidget {
 
 class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
   final _store = getIt<AppStore>();
+  bool verlista = false;
+  bool guardarlista = false;
+  String listname = "";
+  String idlista = '0';
+  List<Map<String, dynamic>> items = [];
+  List<TextEditingController> _controller = [];
+  var selectvalue;
+  late WebViewXController webviewController;
   HtmlEditorController controller = HtmlEditorController();
   @override
   void initState() {
     apiManager();
+    traerlistas();
     super.initState();
   }
 
   apiManager() async {
     await Prefs.init();
+  }
+
+  traerlistas() async {
+    GetListDocuments querylist =
+        GetListDocuments(Prefs.getString(PrefsName.OwnerID));
+    // _store.dispatch(UpdateProperTytypeValue1([]));
+    await ApiManager().getDocumentList(context, querylist, (status, errorlist) {
+      if (status) {
+        for (int i = 0; i < errorlist.length; i++) {
+          items.add({"name": errorlist[i]["name"], "id": errorlist[i]["id"]});
+        }
+      } else {
+        //  _store.dispatch(UpdateProperTytypeValue1([]));
+      }
+    });
+  }
+
+  traerlistasfields(String id) async {
+    GetListDocumentsFields querylistfields = GetListDocumentsFields(id);
+    // _store.dispatch(UpdateProperTytypeValue1([]));
+    await ApiManager().getDocumentListFields(context, querylistfields,
+        (status, errorlist) {
+      if (status) {
+        widget.fields.clear();
+        _controller.clear();
+        for (int i = 0; i < errorlist.length; i++) {
+          RequestDocuments doc1 = RequestDocuments(
+              name: errorlist[i]["name"],
+              required: errorlist[i]["required"],
+              application_id: widget._tenancyleadlist[0].id.toString(),
+              owner_id: Prefs.getString(PrefsName.OwnerID));
+          _controller.add(TextEditingController());
+          widget.fields.add(doc1);
+          _controller[i].text = errorlist[i]["name"];
+        }
+        setState(() {});
+      } else {
+        //  _store.dispatch(UpdateProperTytypeValue1([]));
+      }
+    });
   }
 
   @override
@@ -155,6 +208,59 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      activeColor: myColor.Circle_main,
+                                      checkColor: myColor.white,
+                                      value:
+                                          verlista, //tfAdditionalReferenceState.isAutherize,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          verlista = value!;
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      GlobleString.DIA_Invite_to_Apply_ListDco,
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (verlista == true)
+                                Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: SizedBox(
+                                      width: 400,
+                                      child:
+                                          DropdownButton<Map<String, dynamic>>(
+                                        value: selectvalue,
+                                        hint: Text(
+                                            "Select documents request list"),
+                                        items: items.map((item) {
+                                          return DropdownMenuItem(
+                                            value: item,
+                                            child: Text(item['name']),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            selectvalue = value!;
+                                          });
+                                          traerlistasfields(
+                                              value!["id"].toString());
+                                          // Do something with the selected value
+                                        },
+                                      ),
+                                    )),
                               for (int i = 0; i < widget.fields.length; i++)
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -174,6 +280,10 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                         SizedBox(
                                           width: 500,
                                           child: TextFormField(
+                                            controller: _controller[i],
+                                            onChanged: (value) {
+                                              widget.fields[i].name = value;
+                                            },
                                             textAlign: TextAlign.start,
                                             style: MyStyles.Regular(
                                                 14, myColor.text_color),
@@ -201,10 +311,13 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                                 activeColor:
                                                     myColor.Circle_main,
                                                 checkColor: myColor.white,
-                                                value:
-                                                    true, //tfAdditionalReferenceState.isAutherize,
+                                                value: widget.fields[i]
+                                                    .required, //tfAdditionalReferenceState.isAutherize,
                                                 onChanged: (value) {
-                                                  if (value == true) {}
+                                                  setState(() {
+                                                    widget.fields[i].required =
+                                                        value!;
+                                                  });
                                                 },
                                               ),
                                               const Text(GlobleString.Required),
@@ -238,14 +351,92 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    Map doc1 = {"name": "", "required": true};
+                                    RequestDocuments doc1 = RequestDocuments(
+                                        name: "",
+                                        required: false,
+                                        application_id: widget
+                                            ._tenancyleadlist[0].id
+                                            .toString(),
+                                        owner_id:
+                                            Prefs.getString(PrefsName.OwnerID));
                                     widget.fields.add(doc1);
+                                    _controller.add(TextEditingController());
                                   });
 
                                   //_selectDate1(context, eventtypesState);
                                 },
                                 child: CustomeWidget.NewDoc(),
                               ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    Checkbox(
+                                      activeColor: myColor.Circle_main,
+                                      checkColor: myColor.white,
+                                      value:
+                                          guardarlista, //tfAdditionalReferenceState.isAutherize,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          guardarlista = value!;
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      GlobleString.DIA_Invite_to_save_ListDco,
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (guardarlista == true)
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString
+                                            .DIA_Invite_to_save_ListDcore,
+                                        style:
+                                            MyStyles.Medium(14, myColor.black),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      const SizedBox(height: 5.0),
+                                      SizedBox(
+                                        width: 500,
+                                        child: TextFormField(
+                                          onChanged: (value) {
+                                            listname = value;
+                                          },
+                                          textAlign: TextAlign.start,
+                                          style: MyStyles.Regular(
+                                              14, myColor.text_color),
+                                          decoration: InputDecoration(
+                                              //border: InputBorder.none,
+                                              focusedBorder:
+                                                  OutlineInputBorder(),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide:
+                                                    BorderSide(width: 1.0),
+                                              ),
+                                              isDense: true,
+                                              contentPadding:
+                                                  const EdgeInsets.all(12),
+                                              fillColor: myColor.white,
+                                              filled: true),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               SizedBox(
                                 height: 20,
                               ),
@@ -326,11 +517,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                               List<String> mentions = [
                                                 'NameApplicant',
                                                 'PropertyName',
-                                                'PropertyAddress',
-                                                'LandlordFirstName',
-                                                'LandlordLastName',
-                                                'City',
-                                                'CompanyName'
+                                                'City'
                                               ];
                                               return mentions
                                                   .where((element) =>
@@ -341,11 +528,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                             mentionsWeb: [
                                               'NameApplicant',
                                               'PropertyName',
-                                              'PropertyAddress',
-                                              'LandlordFirstName',
-                                              'LandlordLastName',
-                                              'City',
-                                              'CompanyName'
+                                              'City'
                                             ],
                                             onSelect: (String value) {
                                               print(value);
@@ -549,8 +732,10 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       InkWell(
-                                        onTap: () {
-                                          previewEmailTemplate();
+                                        onTap: () async {
+                                          String html =
+                                              await controller.getText();
+                                          previewEmailTemplate(html);
                                         },
                                         child: Container(
                                           height: 35,
@@ -660,7 +845,49 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     inviteWorkFlow.reqtokens = reqtokens;
 
     String jsondata = jsonEncode(inviteWorkFlow);
+    ListDocuments listaobj = ListDocuments(
+        name: listname, owner_id: Prefs.getString(PrefsName.OwnerID));
+    //guardamos el nombre de la lista y retornamos el id
+    if (guardarlista == true) {
+      ApiManager().AddRequestDocumentList(context, listaobj,
+          (error, responce) async {
+        if (error) {
+        } else {
+          // loader.remove();
+          ToastUtils.showCustomToast(context, responce, false);
+        }
 
+        idlista = responce;
+
+// insertar fields
+        for (int i = 0; i < widget.fields.length; i++) {
+          RequestDocumentsFields fieldsguardarobj = RequestDocumentsFields(
+              listdocument_id: idlista,
+              name: widget.fields[i].name,
+              required: widget.fields[i].required,
+              owner_id: Prefs.getString(PrefsName.OwnerID));
+          ApiManager().AddRequestDocumentFields(context, fieldsguardarobj,
+              (error, responce) async {
+            if (error) {
+            } else {
+              // loader.remove();
+              ToastUtils.showCustomToast(context, responce, false);
+            }
+          });
+        }
+      });
+    }
+    //guardamos los campos de documentos a solicitar
+    for (int i = 0; i < widget.fields.length; i++) {
+      ApiManager().AddRequestDocument(context, widget.fields[i],
+          (error, responce) async {
+        if (error) {
+        } else {
+          // loader.remove();
+          ToastUtils.showCustomToast(context, responce, false);
+        }
+      });
+    }
     ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
       if (error) {
         widget._callbackSave();
@@ -668,7 +895,17 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     });
   }
 
-  void previewEmailTemplate() {
+  void previewEmailTemplate(String html) {
+    String html1 = html.replaceAll(
+        '@NameApplicant', widget._tenancyleadlist[0].applicantName!);
+    html1 = html1.replaceAll(
+        '@PropertyName', widget._tenancyleadlist[0].propertyName!);
+    html1 = html1.replaceAll('@City', widget._tenancyleadlist[0].city!);
+
+    String html2 =
+        '<br><p style="margin:15px;"><a href="https://www.ren-hogar.com/#/tenancy_application_form/" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
+    String html0 =
+        '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -733,10 +970,18 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                         width: 680,
                         padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                         alignment: Alignment.topLeft,
-                        child: Image.asset(
-                          "assets/sample_invitetoapply.jpg",
-                          height: 440,
+                        child: WebViewX(
+                          initialContent: html0 + html1 + html2,
+                          initialSourceType: SourceType.html,
+                          onWebViewCreated: (controller) =>
+                              webviewController = controller,
+                          height: 400,
+                          width: 680,
                         ),
+                        // child: Image.asset(
+                        //   "assets/sample_invitetoapply.jpg",
+                        //   height: 440,
+                        // ),
                       ),
                     ],
                   ),

@@ -61,6 +61,7 @@ dependencies:
   flutter_custom_clippers: ^2.0.0
   assorted_layout_widgets: ^1.0.15
   html_editor_enhanced: ^2.5.0
+  webviewx: ^0.2.1
 
 dev_dependencies:
   flutter_test:

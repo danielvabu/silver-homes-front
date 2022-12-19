@@ -25,7 +25,7 @@ class Weburl {
           ? "http://161.97.104.204:8090/#/"
           : Domain_CR
               ? "http://161.97.104.204:8091/#/"
-              : "https://www.ren-hogar.com/#/";
+              : "https://danivargas.co/#/";
 
   static var Email_URL = Domain_PROD
       ? "https://app.silverhomes.ai/"
@@ -33,14 +33,15 @@ class Weburl {
           ? "http://161.97.104.204:8090"
           : Domain_CR
               ? "http://161.97.104.204:8091"
-              : "https://www.ren-hogar.com/";
+              : "https://danivargas.co/";
 
   static var CustomerFeaturedPage = Domain_URL;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
-  static var API_Server = 
-      isPROD_API ? "https://api.silverhomes.ai" : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";
+  static var API_Server = isPROD_API
+      ? "https://api.silverhomes.ai"
+      : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";
 
 //      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 

@@ -834,6 +834,12 @@ class GlobleString {
       "Below is a preview of the message that will be sent to the applicants including the application link. ";
   static const String DIA_Invite_to_Apply_List =
       "List the documents that the applicant should upload. ";
+  static const String DIA_Invite_to_Apply_ListDco =
+      "Apply saved documents list";
+  static const String DIA_Invite_to_save_ListDco =
+      "Save documents request list";
+  static const String DIA_Invite_to_save_ListDcore =
+      "Documents Request List Name";
   static const String DIA_Send = "Send";
   static const String DIA_Back = "Back";
   static const String DIA_Close = "Close";
