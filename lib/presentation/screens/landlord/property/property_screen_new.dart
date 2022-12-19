@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
@@ -20,6 +21,7 @@ import 'package:silverhome/domain/actions/landlord_action/propertyform_actions.d
 import 'package:silverhome/domain/actions/landlord_action/propertylist_actions.dart';
 import 'package:silverhome/domain/entities/property_amenities.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/presentation/models/landlord_models/landlord_profile_state.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -54,6 +56,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   @override
   void initState() {
+    
     updateCount();
     init();
     super.initState();
@@ -65,7 +68,14 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   void init() async {
     await Prefs.init();
+    //ApiManager().getUserProfile(context);
+    //Navigator.pop(context);
 
+    await ApiManager().userProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+        (error, respoce2) {
+      
+    });
+    
     ApiManager().updatePropertyStatusCount(context);
     updateState();
     apimanager("", 1, "PropertyName", 1, 0);
@@ -135,7 +145,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                 return Column(
                   children: [
                     _statusView(propertyListState!),
-                    _centerView(propertyListState),
+                    _centerView(propertyListState!),
                   ],
                 );
               }),
@@ -283,7 +293,24 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                   ],
                 ),
                 Row(
-                  children: [_actionPopup(propertyListState)],
+                  children: [
+                    ConnectState<LandlordProfileState>(
+                      map: (state) => state.profileState,
+                      where: notIdentical,
+                      builder: (profileState) {
+                        return Row(
+                          children: [
+                            listingPageLink(profileState!),
+                            const SizedBox(width:5),
+                            copyIconButton(profileState),
+                          ],
+                        );
+                      },
+                    ),
+                    
+                    //copyListLink(),
+                    _actionPopup(propertyListState)
+                  ],
                 ),
               ],
             ),
@@ -1217,5 +1244,80 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         loader.remove();
       }
     });
+  }
+
+  Listener listingPageLink(LandlordProfileState profileState) {
+    return Listener(
+      child: Text(
+        Weburl.CustomerFeaturedPage + profileState.CustomerFeatureListingURL,
+        style: MyStyles.Medium(14, myColor.blue),
+        textAlign: TextAlign.center,
+      ),
+      onPointerDown: (event) async {
+        if (event.kind == PointerDeviceKind.mouse &&
+            event.buttons == kSecondaryMouseButton) {
+          final overlay =
+              Overlay.of(context)!.context.findRenderObject() as RenderBox;
+          final menuItem = await showMenu<int>(
+              context: context,
+              items: [
+                PopupMenuItem(
+                  height: 30,
+                  child: Text(
+                    'Copy link',
+                    style: MyStyles.Regular(12, myColor.black),
+                  ),
+                  value: 1,
+                ),
+              ],
+              position: RelativeRect.fromSize(
+                  event.position & Size(48.0, 48.0), overlay.size));
+          // Check if menu item clicked
+          switch (menuItem) {
+            case 1:
+              String url = Weburl.CustomerFeaturedPage +
+                  "" +
+                  profileState.CustomerFeatureListingURL;
+
+              Helper.copyToClipboardHack(context, url);
+              break;
+            default:
+          }
+        }
+      },
+    );
+  }
+
+  InkWell copyIconButton(LandlordProfileState profileState) {
+    return InkWell(
+      onTap: () async {
+        String url = Weburl.CustomerFeaturedPage +
+            "" +
+            profileState.CustomerFeatureListingURL;
+
+        print("CustomerFeaturedPage" + url);
+
+        Helper.copyToClipboardHack(context, url);
+      },
+      child: Tooltip(
+        message: "Click to copy link",
+        child: Container(
+          decoration: BoxDecoration(
+            color: myColor.pf_available,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          padding: EdgeInsets.all(7),
+          child: Icon(
+            Icons.copy,
+            color: myColor.black,
+            size: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+  copyListLink() {
+    return IconButton(onPressed: () {}, icon: const Icon(Icons.copy));
   }
 }

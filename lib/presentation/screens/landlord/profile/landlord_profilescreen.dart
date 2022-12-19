@@ -598,74 +598,9 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               textAlign: TextAlign.start,
             ),
             const SizedBox(width: 10.0),
-            Listener(
-              child: Text(
-                Weburl.CustomerFeaturedPage +
-                    profileState.CustomerFeatureListingURL,
-                style: MyStyles.Medium(14, myColor.blue),
-                textAlign: TextAlign.center,
-              ),
-              onPointerDown: (event) async {
-                if (event.kind == PointerDeviceKind.mouse &&
-                    event.buttons == kSecondaryMouseButton) {
-                  final overlay = Overlay.of(context)!
-                      .context
-                      .findRenderObject() as RenderBox;
-                  final menuItem = await showMenu<int>(
-                      context: context,
-                      items: [
-                        PopupMenuItem(
-                          height: 30,
-                          child: Text(
-                            'Copy link',
-                            style: MyStyles.Regular(12, myColor.black),
-                          ),
-                          value: 1,
-                        ),
-                      ],
-                      position: RelativeRect.fromSize(
-                          event.position & Size(48.0, 48.0), overlay.size));
-                  // Check if menu item clicked
-                  switch (menuItem) {
-                    case 1:
-                      String url = Weburl.CustomerFeaturedPage +
-                          "" +
-                          profileState.CustomerFeatureListingURL;
-
-                      Helper.copyToClipboardHack(context, url);
-                      break;
-                    default:
-                  }
-                }
-              },
-            ),
+            listingPageLink(profileState),
             const SizedBox(width: 10.0),
-            InkWell(
-              onTap: () async {
-                String url = Weburl.CustomerFeaturedPage +
-                    "" +
-                    profileState.CustomerFeatureListingURL;
-
-                print("CustomerFeaturedPage" + url);
-
-                Helper.copyToClipboardHack(context, url);
-              },
-              child: Tooltip(
-                message: "Click to copy link",
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: myColor.pf_available,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  padding: EdgeInsets.all(7),
-                  child: Icon(
-                    Icons.copy,
-                    color: myColor.black,
-                    size: 17,
-                  ),
-                ),
-              ),
-            )
+            copyIconButton(profileState)
           ],
         ),
         const SizedBox(height: 5.0),
@@ -726,6 +661,79 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
         const SizedBox(height: 20.0),
       ],
     );
+  }
+
+  Listener listingPageLink(LandlordProfileState profileState){
+    return Listener(
+            child: Text(
+              Weburl.CustomerFeaturedPage +
+                  profileState.CustomerFeatureListingURL,
+              style: MyStyles.Medium(14, myColor.blue),
+              textAlign: TextAlign.center,
+            ),
+            onPointerDown: (event) async {
+              if (event.kind == PointerDeviceKind.mouse &&
+                  event.buttons == kSecondaryMouseButton) {
+                final overlay = Overlay.of(context)!
+                    .context
+                    .findRenderObject() as RenderBox;
+                final menuItem = await showMenu<int>(
+                    context: context,
+                    items: [
+                      PopupMenuItem(
+                        height: 30,
+                        child: Text(
+                          'Copy link',
+                          style: MyStyles.Regular(12, myColor.black),
+                        ),
+                        value: 1,
+                      ),
+                    ],
+                    position: RelativeRect.fromSize(
+                        event.position & Size(48.0, 48.0), overlay.size));
+                // Check if menu item clicked
+                switch (menuItem) {
+                  case 1:
+                    String url = Weburl.CustomerFeaturedPage +
+                        "" +
+                        profileState.CustomerFeatureListingURL;
+
+                    Helper.copyToClipboardHack(context, url);
+                    break;
+                  default:
+                }
+              }
+            },
+          );
+  }
+
+  InkWell copyIconButton(LandlordProfileState profileState) {
+    return InkWell(
+            onTap: () async {
+              String url = Weburl.CustomerFeaturedPage +
+                  "" +
+                  profileState.CustomerFeatureListingURL;
+
+              print("CustomerFeaturedPage" + url);
+
+              Helper.copyToClipboardHack(context, url);
+            },
+            child: Tooltip(
+              message: "Click to copy link",
+              child: Container(
+                decoration: BoxDecoration(
+                  color: myColor.pf_available,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                padding: EdgeInsets.all(7),
+                child: Icon(
+                  Icons.copy,
+                  color: myColor.black,
+                  size: 17,
+                ),
+              ),
+            ),
+          );
   }
 
   Widget companylogo(LandlordProfileState profileState) {
