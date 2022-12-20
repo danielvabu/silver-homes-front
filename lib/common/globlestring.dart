@@ -1507,7 +1507,7 @@ class GlobleString {
   static const String LMV_status_TotalVendors = "Vendors";
   static const String LMV_Add_New_Vendor = "Add New Vendor";
   static const String LMV_Edit_Vendor = "Edit Vendor";
-
+//commet
   /*Add New Vendor*/
   static const String LMV_AV_Rating = "Rating";
   static const String LMV_AV_ContactInformation = "Contact Information";
