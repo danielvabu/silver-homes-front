@@ -883,7 +883,7 @@ class TenancyApplicationFormScreenState
                 color: myColor.black,
                 height: 2,
               ),
-              /*   _indicator(tenancyFormState), */
+              _indicator(tenancyFormState)
             ],
           ),
         )
