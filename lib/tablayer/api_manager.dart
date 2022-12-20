@@ -1041,6 +1041,69 @@ class ApiManager {
     });
   }
 
+  AddRequestDocument(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(POJO, etableName.request_documents,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  AddRequestDocumentList(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(POJO, etableName.list_documents,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  AddRequestDocumentFields(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(POJO, etableName.documentsfields,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   AddOveriderTemplate(
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
@@ -15013,6 +15076,52 @@ class ApiManager {
         }
       } else {
         CallBackQuesy(false, "");
+      }
+    });
+  }
+
+//getdocumentsList
+  getDocumentList(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.list_documents,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
+
+    HttpClientCall().selectAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        var rest = data["Result"] as List;
+
+        CallBackQuesy(true, rest);
+      } else {
+        CallBackQuesy(false, []);
+      }
+    });
+  }
+
+  //getfieldsList
+  getDocumentListFields(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.documentsfields,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
+
+    HttpClientCall().selectAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        var rest = data["Result"] as List;
+
+        CallBackQuesy(true, rest);
+      } else {
+        CallBackQuesy(false, []);
       }
     });
   }

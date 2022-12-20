@@ -14,6 +14,8 @@ import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/actions/landlord_action/landlord_tenancy_applicant_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/portal_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/reference_check_dialog_actions.dart';
+import 'package:silverhome/domain/actions/landlord_action/varification_document_actions.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
 import 'package:silverhome/store/app_store.dart';
@@ -24,8 +26,11 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/Landlord/action_popup/applicant_popupmenu.dart';
+import 'package:silverhome/widget/Landlord/action_popup/document_popupmenu.dart';
+import 'package:silverhome/widget/Landlord/emailtemplet/referencerequest_dialogbox.dart';
+import 'package:silverhome/widget/Landlord/reference_dialog/check_reference_list_dialog.dart';
 import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/documentrequest_dialogbox.dart';
 import 'package:silverhome/widget/landlord/listviewitemstatus/tbl_documentverificationstatus.dart';
@@ -35,10 +40,11 @@ import 'package:silverhome/widget/landlord/listviewitemstatus/tbl_tenancyapplica
 import 'package:silverhome/widget/landlord/preview_Lease_dialogbox.dart';
 import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
 import 'package:silverhome/widget/landlord/ratingupdate_dialogbox.dart';
-import 'package:silverhome/widget/alert/message_dialogbox.dart';
+import 'package:silverhome/widget/landlord/reference_dialog/check_reference_confirm_dialog.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-typedef CallbackInvite = void Function(TenancyApplication tenancyApplicationLead);
+typedef CallbackInvite = void Function(
+    TenancyApplication tenancyApplicationLead);
 
 class TenancyApplicationItem extends StatefulWidget {
   List<TenancyApplication> listdata;
@@ -61,11 +67,14 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
   late OverlayEntry loader;
   final _store = getIt<AppStore>();
   static List<SystemEnumDetails> statuslist = [];
-
+  static List<SystemEnumDetails> reviewstatuslist = [];
   @override
   void initState() {
     statuslist.clear();
     statuslist = QueryFilter().PlainValues(eSystemEnums().ApplicationStatus);
+    reviewstatuslist.clear();
+    reviewstatuslist =
+        QueryFilter().PlainValuesWithSorting(eSystemEnums().DocReviewStatus);
     super.initState();
   }
 
@@ -121,12 +130,15 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
                         TBLTenancyApplicationStatus(
                           onPressedIcon: () {
-                            if (listdata[Index].applicationReceivedDate != null && listdata[Index].applicationReceivedDate != "") {
+                            if (listdata[Index].applicationReceivedDate !=
+                                    null &&
+                                listdata[Index].applicationReceivedDate != "") {
                               openTenancyApplicationDetails(Index);
                             }
                           },
@@ -149,11 +161,15 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
                         SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[Index].referenceRequestSentDate!,
-                          receivedate: listdata[Index].referenceRequestReceivedDate!,
+                          receivedate:
+                              listdata[Index].referenceRequestReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].referenceRequestReceivedDate != null &&
-                                listdata[Index].referenceRequestReceivedDate != "") {
-                              CustomeWidget.ReferencePreview(context, listdata[Index].id.toString());
+                            if (listdata[Index].referenceRequestReceivedDate !=
+                                    null &&
+                                listdata[Index].referenceRequestReceivedDate !=
+                                    "") {
+                              CustomeWidget.ReferencePreview(
+                                  context, listdata[Index].id.toString());
                             }
                           },
                         ),
@@ -162,7 +178,8 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
                           sentdate: listdata[Index].agreementSentDate!,
                           receivedate: listdata[Index].agreementReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].agreementReceivedDate != null && listdata[Index].agreementReceivedDate != "") {
+                            if (listdata[Index].agreementReceivedDate != null &&
+                                listdata[Index].agreementReceivedDate != "") {
                               _dailogPreviewLease(listdata[Index]);
                             }
                           },
@@ -185,8 +202,16 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     result.add(_datavalueTitleDataSent(model.applicationSentDate!));
     result.add(_datavalueTitleDataReceive(model.applicationReceivedDate!));
     result.add(_statusdropdown(model));
+    result.add(_reviewstatusdropdown(model));
+    result.add(_priviewdocs(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, Index));
+    result.add(_datavalueExpand(
+        model.isexpand!
+            ? "assets/images/circle_up.png"
+            : "assets/images/circle_down.png",
+        30,
+        model,
+        Index));
 
     return result;
   }
@@ -259,11 +284,13 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
                 TenancyApplicationID updateid = new TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating =
+                    new TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(
+                    context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     ApplicantcallApi();
                   }
@@ -301,7 +328,11 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
+        text != null && text != ""
+            ? new DateFormat("dd-MMM-yyyy")
+                .format(DateTime.parse(text))
+                .toString()
+            : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -316,7 +347,11 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
+        text != null && text != ""
+            ? new DateFormat("dd-MMM-yyyy")
+                .format(DateTime.parse(text))
+                .toString()
+            : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -335,22 +370,27 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
-        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem:
+            model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: false,
         onChanged: (data) {
-          if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
+          if (data!.EnumDetailID.toString() !=
+              eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus =
+                new TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(
+                context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 ApplicantcallApi();
                 loader.remove();
@@ -378,16 +418,38 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     );
   }
 
+  // Widget _actionPopup(TenancyApplication model) {
+  //   return Expanded(
+  //     flex: 1,
+  //     child: Container(
+  //       height: 28,
+  //       //width: width / 17,
+  //       alignment: Alignment.centerRight,
+  //       child: ApplicantPopupMenu(
+  //         onPressedRequestdocuments: () {
+  //           _dailogRequestDocument(model);
+  //         },
+  //         onPressedEditapplicant: () {
+  //           CustomeWidget.EditApplicant(context, model.applicantId.toString());
+  //         },
+  //         onPressedArchive: () {
+  //           _dailogSetArchive(model);
+  //         },
+  //         isListView: true,
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _actionPopup(TenancyApplication model) {
     return Expanded(
       flex: 1,
       child: Container(
         height: 28,
-        //width: width / 17,
         alignment: Alignment.centerRight,
-        child: ApplicantPopupMenu(
-          onPressedRequestdocuments: () {
-            _dailogRequestDocument(model);
+        child: DocumentvarifyPopupMenu(
+          onPressedCheckReferences: () {
+            _dailogReferenceConfirmDialog(model);
           },
           onPressedEditapplicant: () {
             CustomeWidget.EditApplicant(context, model.applicantId.toString());
@@ -401,7 +463,8 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     );
   }
 
-  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(
+      String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () async {
         if (model.isexpand!) {
@@ -478,10 +541,12 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive = new TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive =
+                new TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
-            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(
+                context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 ApplicantcallApi();
               }
@@ -628,14 +693,16 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
           onPressedYes: () async {
             Navigator.of(context1).pop();
 
-            await ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(),
+            await ApiManager().CheckTenantActiveOrNot(
+                context, model.propId.toString(), model.applicantId.toString(),
                 (status, responce) async {
               if (status) {
                 await ApplicantcallApi();
                 ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(
+                      context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }
@@ -655,6 +722,152 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
         );
       },
     );
+  }
+
+  _dailogReferenceConfirmDialog(TenancyApplication model) async {
+    showDialog(
+      barrierColor: Colors.black45,
+      context: context,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return CheckReferenceConfirmDialog(
+          onPressedClose: () {
+            Navigator.of(context).pop();
+          },
+          onPressedFillOutManually: () {
+            Navigator.of(context).pop();
+            _dailogCheckReferenceFillOutManiual(model);
+          },
+          onPressedSendQuestionnaire: () {
+            Navigator.of(context).pop();
+            _dailogRequestReference(model);
+          },
+        );
+      },
+    );
+  }
+
+  _dailogCheckReferenceFillOutManiual(TenancyApplication model) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
+      if (status) {
+        loader.remove();
+        if (responce.length > 0) {
+          showDialog(
+            barrierColor: Colors.black45,
+            context: context,
+            useSafeArea: true,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return CheckReferenceListDialog(
+                onPressedClose: () {
+                  Navigator.of(context).pop();
+                },
+                applicantionname: model.applicantName.toString(),
+                referencelist: responce,
+              );
+            },
+          );
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
+        }
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
+      }
+    });
+  }
+
+  _dailogRequestReference(TenancyApplication model) async {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    _store.dispatch(UpdateRCDisAllCheck(false));
+
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
+      if (status) {
+        loader.remove();
+        if (responce.length > 0) {
+          showDialog(
+            barrierColor: Colors.black45,
+            context: context,
+            useSafeArea: true,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return ReferenceRequestDialogbox(
+                onPressedClose: () {
+                  Navigator.of(context).pop();
+                },
+                onPressedSave: () {
+                  Navigator.of(context).pop();
+                  _showSuceessReferenceRequest();
+                },
+                leadReferenceitems: responce,
+                applicantionId: model.id.toString(),
+                applicantionname: model.applicantName.toString(),
+              );
+            },
+          );
+        } else {
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
+        }
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
+      }
+    });
+  }
+
+  _showSuceessReferenceRequest() {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black45,
+      useSafeArea: true,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return MessageDialogBox(
+          title: GlobleString.DCR_success,
+          onPressed: () async {
+            Navigator.of(context).pop();
+
+            await varificationDocCallApi();
+          },
+          buttontitle: GlobleString.DCR_success_close,
+        );
+      },
+    );
+  }
+
+  varificationDocCallApi() async {
+    await Prefs.setBool(PrefsName.IsApplyFilterList, false);
+    _store.dispatch(UpdateLLVDapplicationisloding(true));
+    _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
+    _store
+        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+
+    FilterReqtokens reqtokens = new FilterReqtokens();
+    reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+    reqtokens.IsArchived = "0";
+    reqtokens.ApplicationStatus = "3";
+
+    FilterData filterData = new FilterData();
+    filterData.DSQID = Weburl.DSQ_CommonView;
+    filterData.LoadLookupValues = true;
+    filterData.LoadRecordInfo = true;
+    filterData.Reqtokens = reqtokens;
+
+    String filterjson = jsonEncode(filterData);
+
+    await ApiManager().getVarificationDocumentList(context, filterjson);
   }
 
   ApplicantcallApi() async {
@@ -678,5 +891,66 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
     String filterjson = jsonEncode(filterData);
 
     await ApiManager().getCommonApplicantList(context, filterjson);
+  }
+
+  Widget _reviewstatusdropdown(TenancyApplication model) {
+    return Container(
+        height: 28,
+        width: width / 8.5,
+        padding: EdgeInsets.only(left: 12),
+        // ignore: missing_required_param
+        child: DropdownSearch<SystemEnumDetails>(
+          mode: Mode.MENU,
+          items: reviewstatuslist,
+          textstyle: MyStyles.Medium(12, myColor.text_color),
+          itemAsString: (SystemEnumDetails? u) => u!.displayValue,
+          hint: "Action",
+          defultHeight: reviewstatuslist.length * 33 > 250
+              ? 250
+              : reviewstatuslist.length * 33,
+          showSearchBox: false,
+          selectedItem:
+              model.docReviewStatus != null ? model.docReviewStatus : null,
+          isFilteredOnline: true,
+          onChanged: (data) {
+            TenancyApplicationID updateid = new TenancyApplicationID();
+            updateid.ID = model.id.toString();
+
+            DocumentReviewUpdateStatus updatestatus =
+                new DocumentReviewUpdateStatus();
+            updatestatus.DocReviewStatus = data!.EnumDetailID.toString();
+
+            ApiManager().UpdateReviewstatusVarificationDocumentList(
+                context, updateid, updatestatus, (status, responce) {
+              if (status) {}
+            });
+          },
+        ));
+  }
+
+  Widget _priviewdocs(TenancyApplication model) {
+    return (model.docReceivedDate != null && model.docReceivedDate != "")
+        ? InkWell(
+            onTap: () {
+              _dailogPreviewDoc(model);
+            },
+            child: Container(
+              height: 28,
+              width: width / 11.5,
+              padding: EdgeInsets.only(left: 10),
+              alignment: Alignment.center,
+              child: Text(
+                "Preview Docs",
+                textAlign: TextAlign.center,
+                style: MyStyles.Medium(12, myColor.blue),
+              ),
+            ),
+          )
+        : Container(
+            height: 28,
+            width: width / 11.5,
+            padding: EdgeInsets.only(left: 10),
+            alignment: Alignment.center,
+          );
   }
 }

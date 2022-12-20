@@ -473,8 +473,8 @@ class GlobleString {
   static const String VDH_Applicant_Name = "Applicant Name";
   static const String VDH_Property_Name = "Property Name";
   static const String VDH_Rating = "Rating";
-  static const String VDH_Date_Sent = "Doc. Request Sent";
-  static const String VDH_Date_Received = "Documents Received";
+  static const String VDH_Date_Sent = "Application Sent";
+  static const String VDH_Date_Received = "Application Received";
   static const String VDH_Review_Status = "Docs Review Status";
   static const String VDH_Application_Status = "Applicant Status";
   static const String VDH_Filter = "Filter";
@@ -708,8 +708,13 @@ class GlobleString {
   static const String DIA_Recipient_Name = "Recipient Name";
   static const String DIA_Email = "Email";
   static const String DIA_Phone_Number = "Phone Number";
+  static const String DIA_R_Documents = "Request Documents";
   static const String DIA_Invite_to_Apply_title =
       "Below is a preview of the message that will be sent to the applicants including the application link. ";
+  static const String DIA_Invite_to_Apply_List = "List the documents that the applicant should upload. ";
+  static const String DIA_Invite_to_Apply_ListDco = "Apply saved documents list";
+  static const String DIA_Invite_to_save_ListDco = "Save documents request list";
+  static const String DIA_Invite_to_save_ListDcore = "Documents Request List Name";
   static const String DIA_Send = "Send";
   static const String DIA_Back = "Back";
   static const String DIA_Close = "Close";
@@ -1496,13 +1501,13 @@ class GlobleString {
   static const String LMR_DateCreated = "Date Created";
   static const String LMR_CreatedBy = "Created By";
   static const String LMR_Status = "Status";
-  static const String LMR_Lock = "Private";
+  static const String LMR_Lock = "Make Private";
 
   /*Vendor*/
   static const String LMV_status_TotalVendors = "Vendors";
   static const String LMV_Add_New_Vendor = "Add New Vendor";
   static const String LMV_Edit_Vendor = "Edit Vendor";
-
+//commet
   /*Add New Vendor*/
   static const String LMV_AV_Rating = "Rating";
   static const String LMV_AV_ContactInformation = "Contact Information";
@@ -1635,6 +1640,7 @@ class GlobleString {
   static const String ET_Is_Showing = 'Is this event a showing?';
   static const String ET_Yes = 'Yes';
   static const String ET_No = 'No';
+  static const String Required = 'Required';
   static const String ET_Property_Name = 'Property name';
   static const String ET_Select_Property = 'Select property';
   static const String ET_Not_Applicable = 'Not applicable';
@@ -1840,7 +1846,7 @@ class GlobleString {
   static const String Table_Header_Document_tpye = "Document Type";
   static const String Table_Header_Document_date_created = "Date Created";
   static const String Table_Header_Document_created_by = "Created by";
-  static const String Table_Header_Document_private_editing = "Private Editing";
+  static const String Table_Header_Document_private_editing = "Make Private";
   static const String Pop_Menu_documents_table_view = "View";
   static const String Pop_Menu_documents_table_rename = "Rename";
   static const String Pop_Menu_documents_table_download = "Download";

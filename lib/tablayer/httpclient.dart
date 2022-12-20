@@ -136,6 +136,7 @@ typedef CallBackMaintenanceImageslist = void Function(bool status,
     String responce, List<PropertyMaintenanceImages> maintenanceImageslist);
 
 typedef CallBackCheckUserExist = void Function(bool status, String response);
+typedef CallBackListDocuments = void Function(bool status, List allListData);
 
 class HttpClientCall {
   callNavigateLogin(BuildContext context) {

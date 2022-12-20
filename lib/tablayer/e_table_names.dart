@@ -34,6 +34,9 @@ enum etableName {
   AvailabilityTime,
   Slots,
   availability_overrides,
+  request_documents,
+  list_documents,
+  documentsfields,
   Events_type_templates,
   AvailabilityTemplate,
   AvailabilityTimeTemplate,
@@ -162,6 +165,16 @@ class TableNames {
       case etableName.availability_overridesTemplate:
         name = "availability_overrides_template";
         break;
+      case etableName.request_documents:
+        name = "requestdocuments";
+        break;
+      case etableName.list_documents:
+        name = "listdocuments";
+        break;
+      case etableName.documentsfields:
+        name = "documentsfields";
+        break;
+
       default:
         name = "";
     }

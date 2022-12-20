@@ -130,9 +130,9 @@ class _LandlordApplicationScreenState extends State<LandlordApplicationScreen> {
           CustomeWidget.TenantsStutas(
               landLordApplicationState.applications_count.toString(),
               GlobleString.LL_status_Applications),
-          CustomeWidget.TenantsStutas(
-              landLordApplicationState.varfy_documents_count.toString(),
-              GlobleString.LL_status_Documents),
+          // CustomeWidget.TenantsStutas(
+          //     landLordApplicationState.varfy_documents_count.toString(),
+          //     GlobleString.LL_status_Documents),
           CustomeWidget.TenantsStutas(
               landLordApplicationState.references_check_count.toString(),
               GlobleString.LL_status_References),
@@ -202,26 +202,26 @@ class _LandlordApplicationScreenState extends State<LandlordApplicationScreen> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    height: 45,
-                    child: InkWell(
-                      onTap: () async {
-                        if (Prefs.getBool(PrefsName.IsApplyFilterFunnel)) {
-                          await Prefs.setBool(
-                              PrefsName.IsApplyFilterFunnel, false);
-                        }
-                        _store.dispatch(UpdateLLVDToggle(0));
-                        _store.dispatch(UpdateLandlordApplicationTab(3));
-                        _store.dispatch(UpdateTenantTabIndex(3));
-                      },
-                      child: CustomeWidget.TenantsTabWidget(
-                          GlobleString.LL_TAB_Verification_Documents,
-                          landLordApplicationState.selecttab,
-                          3),
-                    ),
-                  ),
-                ),
+                // Expanded(
+                //   child: Container(
+                //     height: 45,
+                //     child: InkWell(
+                //       onTap: () async {
+                //         if (Prefs.getBool(PrefsName.IsApplyFilterFunnel)) {
+                //           await Prefs.setBool(
+                //               PrefsName.IsApplyFilterFunnel, false);
+                //         }
+                //         _store.dispatch(UpdateLLVDToggle(0));
+                //         _store.dispatch(UpdateLandlordApplicationTab(3));
+                //         _store.dispatch(UpdateTenantTabIndex(3));
+                //       },
+                //       child: CustomeWidget.TenantsTabWidget(
+                //           GlobleString.LL_TAB_Verification_Documents,
+                //           landLordApplicationState.selecttab,
+                //           3),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                   child: Container(
                     height: 45,
@@ -319,7 +319,8 @@ class _LandlordApplicationScreenState extends State<LandlordApplicationScreen> {
         }
       case 2:
         {
-          return LandlordTenancyApplicantScreen();
+          //  return LandlordTenancyApplicantScreen();
+          return LandlordVarificationDocumentScreen();
         }
       case 3:
         {

@@ -5,6 +5,7 @@ import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
 import 'package:silverhome/widget/Landlord/action_popup/applicant_popupmenu.dart';
+import 'package:silverhome/widget/Landlord/action_popup/document_popupmenu.dart';
 import 'package:silverhome/widget/Landlord/funnelitemstatus/fnl_documentverificationstatus.dart';
 import 'package:silverhome/widget/Landlord/funnelitemstatus/fnl_leaseagreementstatus.dart';
 import 'package:silverhome/widget/Landlord/funnelitemstatus/fnl_referencechecksstatus.dart';
@@ -13,7 +14,7 @@ import 'package:silverhome/widget/Landlord/funnelitemstatus/fnl_tenancyapplicati
 typedef CallbackOnNext = void Function(int index);
 typedef CallbackOnPrevious = void Function(int index);
 typedef CallbackOnRating = void Function(int index);
-typedef CallbackRequestdocuments = void Function();
+typedef CallbackCheckReferences = void Function();
 typedef CallbackArchive = void Function();
 typedef CallbackEditapplicant = void Function();
 typedef CallbackTenancyApplicationIcon = void Function();
@@ -28,7 +29,7 @@ class ApplicantCardViewWidget extends StatefulWidget {
   final CallbackOnNext _callbackOnNext;
   final CallbackOnPrevious _callbackOnPrevious;
   final CallbackOnRating _callbackOnRating;
-  final CallbackRequestdocuments _callbackRequestdocuments;
+  final CallbackCheckReferences _callbackCheckReferences;
   final CallbackEditapplicant _callbackEditapplicant;
   final CallbackArchive _callbackArchive;
   final CallbackTenancyApplicationIcon _callbackTenancyApplicationIcon;
@@ -40,7 +41,7 @@ class ApplicantCardViewWidget extends StatefulWidget {
     required CallbackOnNext onNext,
     required CallbackOnPrevious onPrevious,
     required CallbackOnRating onRating,
-    required CallbackRequestdocuments onPressedRequestdocuments,
+    required CallbackCheckReferences onPressedCheckReferences,
     required CallbackEditapplicant onPressedEditapplicant,
     required CallbackArchive onPressedArchive,
     required CallbackTenancyApplicationIcon callbackTenancyApplicationIcon,
@@ -56,7 +57,7 @@ class ApplicantCardViewWidget extends StatefulWidget {
         this._callbackOnNext = onNext,
         this._callbackOnPrevious = onPrevious,
         this._callbackOnRating = onRating,
-        this._callbackRequestdocuments = onPressedRequestdocuments,
+        this._callbackCheckReferences = onPressedCheckReferences,
         this._callbackEditapplicant = onPressedEditapplicant,
         this._callbackArchive = onPressedArchive,
         this._callbackTenancyApplicationIcon = callbackTenancyApplicationIcon,
@@ -186,10 +187,22 @@ class _ApplicantCardViewWidgetState extends State<ApplicantCardViewWidget> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ApplicantPopupMenu(
+                      // ApplicantPopupMenu(
+                      //   isListView: false,
+                      //   onPressedRequestdocuments: () {
+                      //     widget._callbackRequestdocuments();
+                      //   },
+                      //   onPressedEditapplicant: () {
+                      //     widget._callbackEditapplicant();
+                      //   },
+                      //   onPressedArchive: () {
+                      //     widget._callbackArchive();
+                      //   },
+                      // ),
+                      DocumentvarifyPopupMenu(
                         isListView: false,
-                        onPressedRequestdocuments: () {
-                          widget._callbackRequestdocuments();
+                        onPressedCheckReferences: () {
+                          widget._callbackCheckReferences();
                         },
                         onPressedEditapplicant: () {
                           widget._callbackEditapplicant();

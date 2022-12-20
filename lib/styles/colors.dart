@@ -1,4 +1,4 @@
-import 'package:cocemfe/redux/settingApp/store.dart';
+//import 'package:cocemfe/redux/settingApp/store.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -15,5 +15,8 @@ class AppColors {
 
   static Color boxAlternativeColor = Color(0xff34495e);
 
-  static Color textColor = ReduxHome.store.state.postsState.changeContrast == true ? Colors.black : Color(0xff5555555);
+  // static Color textColor =
+  //     ReduxHome.store.state.postsState.changeContrast == true
+  //         ? Colors.black
+  //         : Color(0xff5555555);
 }

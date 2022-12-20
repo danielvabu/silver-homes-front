@@ -106,8 +106,9 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
       height: height - 222,
       margin: EdgeInsets.only(top: 10),
       alignment: Alignment.centerLeft,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(3)), border: Border.all(color: Colors.transparent, width: 1)),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+          border: Border.all(color: Colors.transparent, width: 1)),
       child: widget.selectpropertyValue != null
           ? Container(
               width: width,
@@ -121,7 +122,7 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     children: [
                       _leadView(),
                       _applicantView(),
-                      _docmentvarifyView(),
+                      //  _docmentvarifyView(),
                       _referencescheckedView(),
                       _leasesentView(),
                       _activetenantView(),
@@ -161,12 +162,16 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient1, myColor.linear_gradient2],
+                      colors: [
+                        myColor.linear_gradient1,
+                        myColor.linear_gradient2
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_Lead, funnelviewstate!.lead_count.toString()),
+                CustomeWidget.FunnelCountBox(GlobleString.FVH_Lead,
+                    funnelviewstate!.lead_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -182,17 +187,22 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         pos: Index,
                         dmodel1: funnelviewstate.leadlist[Index],
                         onNext: (int index) {
-                          TenancyApplication lead = funnelviewstate.leadlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leadlist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().Applicant.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().Applicant.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onPrevious: (int index) {},
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.leadlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leadlist[Index];
 
                           OpenRetingDialog(lead);
                         },
@@ -209,29 +219,51 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                           _dailogSetArchive(funnelviewstate.leadlist[Index]);
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.leadlist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.leadlist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.leadlist[Index], funnelviewstate);
+                          if (funnelviewstate.leadlist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.leadlist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.leadlist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.leadlist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.leadlist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.leadlist[Index]);
+                          if (funnelviewstate
+                                      .leadlist[Index].agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate
+                                      .leadlist[Index].agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.leadlist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.leadlist[Index].docRequestSentDate != null &&
-                              funnelviewstate.leadlist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.leadlist[Index].docReceivedDate != null &&
-                              funnelviewstate.leadlist[Index].docReceivedDate != "") {
+                          if (funnelviewstate
+                                      .leadlist[Index].docRequestSentDate !=
+                                  null &&
+                              funnelviewstate
+                                      .leadlist[Index].docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate.leadlist[Index].docReceivedDate !=
+                                  null &&
+                              funnelviewstate.leadlist[Index].docReceivedDate !=
+                                  "") {
                             _dailogPreviewDoc(funnelviewstate.leadlist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.leadlist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.leadlist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.leadlist[Index].id.toString());
+                          if (funnelviewstate.leadlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.leadlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(context,
+                                funnelviewstate.leadlist[Index].id.toString());
                           }
                         },
                       );
@@ -261,12 +293,16 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient2, myColor.linear_gradient3],
+                      colors: [
+                        myColor.linear_gradient2,
+                        myColor.linear_gradient3
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_Applicants, funnelviewstate!.applicant_count.toString()),
+                CustomeWidget.FunnelCountBox(GlobleString.FVH_Applicants,
+                    funnelviewstate!.applicant_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -282,61 +318,108 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         pos: Index,
                         dmodel1: funnelviewstate.applicantlist[Index],
                         onNext: (int index) {
-                          TenancyApplication lead = funnelviewstate.applicantlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.applicantlist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().DocVarify.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().ReferenceCheck.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onPrevious: (int index) {
-                          TenancyApplication lead = funnelviewstate.applicantlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.applicantlist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().Lead.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().Lead.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.applicantlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.applicantlist[Index];
 
                           OpenRetingDialog(lead);
                         },
-                        onPressedRequestdocuments: () {
-                          _dailogRequestDocument(funnelviewstate.applicantlist[Index]);
+                        // onPressedRequestdocuments: () {
+                        //   _dailogRequestDocument(
+                        //       funnelviewstate.applicantlist[Index]);
+                        // },
+                        onPressedCheckReferences: () {
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
+
+                          _dailogReferenceConfirmDialog(lead);
                         },
                         onPressedEditapplicant: () {
-                          CustomeWidget.EditApplicant(context, funnelviewstate.applicantlist[Index].applicantId.toString());
+                          CustomeWidget.EditApplicant(
+                              context,
+                              funnelviewstate.applicantlist[Index].applicantId
+                                  .toString());
                         },
                         onPressedArchive: () {
-                          _dailogSetArchive(funnelviewstate.applicantlist[Index]);
+                          _dailogSetArchive(
+                              funnelviewstate.applicantlist[Index]);
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.applicantlist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.applicantlist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.applicantlist[Index], funnelviewstate);
+                          if (funnelviewstate.applicantlist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.applicantlist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.applicantlist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.applicantlist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.applicantlist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.applicantlist[Index]);
+                          if (funnelviewstate.applicantlist[Index]
+                                      .agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate.applicantlist[Index]
+                                      .agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.applicantlist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.applicantlist[Index].docRequestSentDate != null &&
-                              funnelviewstate.applicantlist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.applicantlist[Index].docReceivedDate != null &&
-                              funnelviewstate.applicantlist[Index].docReceivedDate != "") {
-                            _dailogPreviewDoc(funnelviewstate.applicantlist[Index]);
+                          if (funnelviewstate.applicantlist[Index]
+                                      .docRequestSentDate !=
+                                  null &&
+                              funnelviewstate.applicantlist[Index]
+                                      .docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate
+                                      .applicantlist[Index].docReceivedDate !=
+                                  null &&
+                              funnelviewstate
+                                      .applicantlist[Index].docReceivedDate !=
+                                  "") {
+                            _dailogPreviewDoc(
+                                funnelviewstate.applicantlist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.applicantlist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.applicantlist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.applicantlist[Index].id.toString());
+                          if (funnelviewstate.applicantlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.applicantlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(
+                                context,
+                                funnelviewstate.applicantlist[Index].id
+                                    .toString());
                           }
                         },
                       );
@@ -366,12 +449,17 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient3, myColor.linear_gradient4],
+                      colors: [
+                        myColor.linear_gradient3,
+                        myColor.linear_gradient4
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_Documents_Varified, funnelviewstate!.documentvarify_count.toString()),
+                CustomeWidget.FunnelCountBox(
+                    GlobleString.FVH_Documents_Varified,
+                    funnelviewstate!.documentvarify_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -387,63 +475,105 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         pos: Index,
                         dmodel1: funnelviewstate.documentvarifylist[Index],
                         onNext: (int index) {
-                          TenancyApplication lead = funnelviewstate.documentvarifylist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().ReferenceCheck.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().ReferenceCheck.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onPrevious: (int index) {
-                          TenancyApplication lead = funnelviewstate.documentvarifylist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().Applicant.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().Applicant.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.documentvarifylist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
 
                           OpenRetingDialog(lead);
                         },
                         onPressedCheckReferences: () {
-                          TenancyApplication lead = funnelviewstate.documentvarifylist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.documentvarifylist[Index];
 
                           _dailogReferenceConfirmDialog(lead);
                         },
                         onPressedEditapplicant: () {
-                          CustomeWidget.EditApplicant(context, funnelviewstate.documentvarifylist[Index].applicantId.toString());
+                          CustomeWidget.EditApplicant(
+                              context,
+                              funnelviewstate
+                                  .documentvarifylist[Index].applicantId
+                                  .toString());
                         },
                         onPressedArchive: () {
-                          _dailogSetArchive(funnelviewstate.documentvarifylist[Index]);
+                          _dailogSetArchive(
+                              funnelviewstate.documentvarifylist[Index]);
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.documentvarifylist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.documentvarifylist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.documentvarifylist[Index], funnelviewstate);
+                          if (funnelviewstate.documentvarifylist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.documentvarifylist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.documentvarifylist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.documentvarifylist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.documentvarifylist[Index]);
+                          if (funnelviewstate.documentvarifylist[Index]
+                                      .agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.documentvarifylist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.documentvarifylist[Index].docRequestSentDate != null &&
-                              funnelviewstate.documentvarifylist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.documentvarifylist[Index].docReceivedDate != null &&
-                              funnelviewstate.documentvarifylist[Index].docReceivedDate != "") {
-                            _dailogPreviewDoc(funnelviewstate.documentvarifylist[Index]);
+                          if (funnelviewstate.documentvarifylist[Index]
+                                      .docRequestSentDate !=
+                                  null &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .docReceivedDate !=
+                                  null &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .docReceivedDate !=
+                                  "") {
+                            _dailogPreviewDoc(
+                                funnelviewstate.documentvarifylist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.documentvarifylist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.documentvarifylist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.documentvarifylist[Index].id.toString());
+                          if (funnelviewstate.documentvarifylist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.documentvarifylist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(
+                                context,
+                                funnelviewstate.documentvarifylist[Index].id
+                                    .toString());
                           }
                         },
                       );
@@ -473,12 +603,17 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient4, myColor.linear_gradient5],
+                      colors: [
+                        myColor.linear_gradient4,
+                        myColor.linear_gradient5
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_References_Checked, funnelviewstate!.referencecheck_count.toString()),
+                CustomeWidget.FunnelCountBox(
+                    GlobleString.FVH_References_Checked,
+                    funnelviewstate!.referencecheck_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -494,61 +629,103 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         pos: Index,
                         dmodel1: funnelviewstate.referencechecklist[Index],
                         onNext: (int index) {
-                          TenancyApplication lead = funnelviewstate.referencechecklist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.referencechecklist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().LeaseSent.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().LeaseSent.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onPrevious: (int index) {
-                          TenancyApplication lead = funnelviewstate.referencechecklist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.referencechecklist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().DocVarify.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().DocVarify.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.referencechecklist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.referencechecklist[Index];
 
                           OpenRetingDialog(lead);
                         },
                         onPressedSendLease: () {
-                          _dialogSendLeaseRequest(funnelviewstate.referencechecklist[Index]);
+                          _dialogSendLeaseRequest(
+                              funnelviewstate.referencechecklist[Index]);
                         },
                         onPressedEditapplicant: () {
-                          CustomeWidget.EditApplicant(context, funnelviewstate.referencechecklist[Index].applicantId.toString());
+                          CustomeWidget.EditApplicant(
+                              context,
+                              funnelviewstate
+                                  .referencechecklist[Index].applicantId
+                                  .toString());
                         },
                         onPressedArchive: () {
-                          _dailogSetArchive(funnelviewstate.referencechecklist[Index]);
+                          _dailogSetArchive(
+                              funnelviewstate.referencechecklist[Index]);
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.referencechecklist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.referencechecklist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.referencechecklist[Index], funnelviewstate);
+                          if (funnelviewstate.referencechecklist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.referencechecklist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.referencechecklist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.referencechecklist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.referencechecklist[Index]);
+                          if (funnelviewstate.referencechecklist[Index]
+                                      .agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.referencechecklist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.referencechecklist[Index].docRequestSentDate != null &&
-                              funnelviewstate.referencechecklist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.referencechecklist[Index].docReceivedDate != null &&
-                              funnelviewstate.referencechecklist[Index].docReceivedDate != "") {
-                            _dailogPreviewDoc(funnelviewstate.referencechecklist[Index]);
+                          if (funnelviewstate.referencechecklist[Index]
+                                      .docRequestSentDate !=
+                                  null &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .docReceivedDate !=
+                                  null &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .docReceivedDate !=
+                                  "") {
+                            _dailogPreviewDoc(
+                                funnelviewstate.referencechecklist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.referencechecklist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.referencechecklist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.referencechecklist[Index].id.toString());
+                          if (funnelviewstate.referencechecklist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.referencechecklist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(
+                                context,
+                                funnelviewstate.referencechecklist[Index].id
+                                    .toString());
                           }
                         },
                       );
@@ -578,12 +755,16 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient5, myColor.linear_gradient6],
+                      colors: [
+                        myColor.linear_gradient5,
+                        myColor.linear_gradient6
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_Lease_Sent, funnelviewstate!.leasesent_count.toString()),
+                CustomeWidget.FunnelCountBox(GlobleString.FVH_Lease_Sent,
+                    funnelviewstate!.leasesent_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -599,65 +780,106 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         pos: Index,
                         dmodel1: funnelviewstate.leasesentlist[Index],
                         onNext: (int index) {
-                          TenancyApplication lead = funnelviewstate.leasesentlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leasesentlist[Index];
                           _dailogSetActiveTenant(lead);
                         },
                         onPrevious: (int index) {
-                          TenancyApplication lead = funnelviewstate.leasesentlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leasesentlist[Index];
 
                           ApiManager().funUpdateStatus(
-                              context, lead.id.toString(), eApplicationStatus().ReferenceCheck.toString(), widget.selectpropertyValue!.ID!,
+                              context,
+                              lead.id.toString(),
+                              eApplicationStatus().ReferenceCheck.toString(),
+                              widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}
                           });
                         },
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.leasesentlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leasesentlist[Index];
 
                           OpenRetingDialog(lead);
                         },
                         onPressedActivateTenant: () {
-                          TenancyApplication lead = funnelviewstate.leasesentlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.leasesentlist[Index];
                           _dailogSetActiveTenant(lead);
                         },
                         onPressedEditapplicant: () {
-                          CustomeWidget.EditApplicant(context, funnelviewstate.leasesentlist[Index].applicantId.toString());
+                          CustomeWidget.EditApplicant(
+                              context,
+                              funnelviewstate.leasesentlist[Index].applicantId
+                                  .toString());
                         },
                         onPressedArchive: () {
-                          _dailogSetArchive(funnelviewstate.leasesentlist[Index]);
+                          _dailogSetArchive(
+                              funnelviewstate.leasesentlist[Index]);
                         },
                         onPressedPreviewLease: () {
-                          TenancyApplication model = funnelviewstate.leasesentlist[Index];
-                          if (model.agreementReceivedDate != null && model.agreementReceivedDate != "") {
+                          TenancyApplication model =
+                              funnelviewstate.leasesentlist[Index];
+                          if (model.agreementReceivedDate != null &&
+                              model.agreementReceivedDate != "") {
                             _dailogPreviewLease(model);
                           } else {
-                            ToastUtils.showCustomToast(context, GlobleString.lease_not_available, false);
+                            ToastUtils.showCustomToast(context,
+                                GlobleString.lease_not_available, false);
                           }
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.leasesentlist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.leasesentlist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.leasesentlist[Index], funnelviewstate);
+                          if (funnelviewstate.leasesentlist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.leasesentlist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.leasesentlist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.leasesentlist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.leasesentlist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.leasesentlist[Index]);
+                          if (funnelviewstate.leasesentlist[Index]
+                                      .agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate.leasesentlist[Index]
+                                      .agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.leasesentlist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.leasesentlist[Index].docRequestSentDate != null &&
-                              funnelviewstate.leasesentlist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.leasesentlist[Index].docReceivedDate != null &&
-                              funnelviewstate.leasesentlist[Index].docReceivedDate != "") {
-                            _dailogPreviewDoc(funnelviewstate.leasesentlist[Index]);
+                          if (funnelviewstate.leasesentlist[Index]
+                                      .docRequestSentDate !=
+                                  null &&
+                              funnelviewstate.leasesentlist[Index]
+                                      .docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate
+                                      .leasesentlist[Index].docReceivedDate !=
+                                  null &&
+                              funnelviewstate
+                                      .leasesentlist[Index].docReceivedDate !=
+                                  "") {
+                            _dailogPreviewDoc(
+                                funnelviewstate.leasesentlist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.leasesentlist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.leasesentlist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.leasesentlist[Index].id.toString());
+                          if (funnelviewstate.leasesentlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.leasesentlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(
+                                context,
+                                funnelviewstate.leasesentlist[Index].id
+                                    .toString());
                           }
                         },
                       );
@@ -687,12 +909,16 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.topRight,
-                      colors: [myColor.linear_gradient6, myColor.linear_gradient7],
+                      colors: [
+                        myColor.linear_gradient6,
+                        myColor.linear_gradient7
+                      ],
                       //tileMode: TileMode.repeated,
                     ),
                   ),
                 ),
-                CustomeWidget.FunnelCountBox(GlobleString.FVH_Active_Tenant, funnelviewstate!.activetenent_count.toString()),
+                CustomeWidget.FunnelCountBox(GlobleString.FVH_Active_Tenant,
+                    funnelviewstate!.activetenent_count.toString()),
                 Container(
                   height: height - 268,
                   margin: EdgeInsets.only(top: 5),
@@ -709,7 +935,8 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                         dmodel1: funnelviewstate.activetenantlist[Index],
                         onNext: (int index) {},
                         onPrevious: (int index) {
-                          TenancyApplication lead = funnelviewstate.activetenantlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.activetenantlist[Index];
 
                           _dailogRemoveActiveTenant(lead);
 
@@ -725,44 +952,78 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                               });*/
                         },
                         onRating: (int index) {
-                          TenancyApplication lead = funnelviewstate.activetenantlist[Index];
+                          TenancyApplication lead =
+                              funnelviewstate.activetenantlist[Index];
 
                           OpenRetingDialog(lead);
                         },
                         onPressedACArchive: () {
                           //_dailogSetArchiveActiveTenant(funnelviewstate.activetenantlist[Index]);
-                          _dailogTerminanteTenant(funnelviewstate.activetenantlist[Index]);
+                          _dailogTerminanteTenant(
+                              funnelviewstate.activetenantlist[Index]);
                         },
                         onPressedInviteTenant: () {
-                          _dailogTenantInvite(funnelviewstate.activetenantlist[Index]);
+                          _dailogTenantInvite(
+                              funnelviewstate.activetenantlist[Index]);
                         },
                         onPressedACEditTenet: () {
-                          CustomeWidget.EditApplicant(context, funnelviewstate.activetenantlist[Index].applicantId.toString());
+                          CustomeWidget.EditApplicant(
+                              context,
+                              funnelviewstate
+                                  .activetenantlist[Index].applicantId
+                                  .toString());
                         },
                         callbackTenancyApplicationIcon: () {
-                          if (funnelviewstate.activetenantlist[Index].applicationReceivedDate != null &&
-                              funnelviewstate.activetenantlist[Index].applicationReceivedDate != "") {
-                            openTenancyApplicationDetails(funnelviewstate.activetenantlist[Index], funnelviewstate);
+                          if (funnelviewstate.activetenantlist[Index]
+                                      .applicationReceivedDate !=
+                                  null &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .applicationReceivedDate !=
+                                  "") {
+                            openTenancyApplicationDetails(
+                                funnelviewstate.activetenantlist[Index],
+                                funnelviewstate);
                           }
                         },
                         callbackLeaseAgreementIcon: () {
-                          if (funnelviewstate.activetenantlist[Index].agreementReceivedDate != null &&
-                              funnelviewstate.activetenantlist[Index].agreementReceivedDate != "") {
-                            _dailogPreviewLease(funnelviewstate.activetenantlist[Index]);
+                          if (funnelviewstate.activetenantlist[Index]
+                                      .agreementReceivedDate !=
+                                  null &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .agreementReceivedDate !=
+                                  "") {
+                            _dailogPreviewLease(
+                                funnelviewstate.activetenantlist[Index]);
                           }
                         },
                         callbackDocumentVerificationIcon: () {
-                          if (funnelviewstate.activetenantlist[Index].docRequestSentDate != null &&
-                              funnelviewstate.activetenantlist[Index].docRequestSentDate != "" &&
-                              funnelviewstate.activetenantlist[Index].docReceivedDate != null &&
-                              funnelviewstate.activetenantlist[Index].docReceivedDate != "") {
-                            _dailogPreviewDoc(funnelviewstate.activetenantlist[Index]);
+                          if (funnelviewstate.activetenantlist[Index]
+                                      .docRequestSentDate !=
+                                  null &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .docRequestSentDate !=
+                                  "" &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .docReceivedDate !=
+                                  null &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .docReceivedDate !=
+                                  "") {
+                            _dailogPreviewDoc(
+                                funnelviewstate.activetenantlist[Index]);
                           }
                         },
                         callbackReferenceChecksIcon: () {
-                          if (funnelviewstate.activetenantlist[Index].referenceRequestReceivedDate != null &&
-                              funnelviewstate.activetenantlist[Index].referenceRequestReceivedDate != "") {
-                            CustomeWidget.ReferencePreview(context, funnelviewstate.activetenantlist[Index].id.toString());
+                          if (funnelviewstate.activetenantlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  null &&
+                              funnelviewstate.activetenantlist[Index]
+                                      .referenceRequestReceivedDate !=
+                                  "") {
+                            CustomeWidget.ReferencePreview(
+                                context,
+                                funnelviewstate.activetenantlist[Index].id
+                                    .toString());
                           }
                         },
                       );
@@ -794,11 +1055,13 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = lead.applicantId.toString();
 
-            TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
+            TenancyApplicationUpdateRating updaterating =
+                new TenancyApplicationUpdateRating();
             updaterating.Rating = rating;
             updaterating.Note = ratingraview;
 
-            await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
+            await ApiManager().UpdateRatingApplication(
+                context, updateid, updaterating, (status, responce) async {
               if (status) {
                 if (widget.selectpropertyValue != null) {
                   await finnleviewcallapi();
@@ -830,10 +1093,12 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive = new TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive =
+                new TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
-            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(
+                context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 if (widget.selectpropertyValue != null) {
                   await finnleviewcallapi();
@@ -894,7 +1159,8 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().terminateTenancyWorkflow(context, model.applicantId.toString(), (status, responce) async {
+    ApiManager().terminateTenancyWorkflow(context, model.applicantId.toString(),
+        (status, responce) async {
       if (status) {
         loader.remove();
         await finnleviewcallapi();
@@ -905,7 +1171,8 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     });
   }
 
-  openTenancyApplicationDetails(TenancyApplication lead, FunnelViewState funnelViewState) {
+  openTenancyApplicationDetails(
+      TenancyApplication lead, FunnelViewState funnelViewState) {
     List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
 
     for (int i = 0; i < funnelViewState.alllistdata.length; i++) {
@@ -1074,9 +1341,11 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(), (status, responce) {
+    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(),
+        (status, responce) {
       if (status) {
-        ApiManager().getPropertyDetails(context, model.propId!, (status, responce, propertyData) async {
+        ApiManager().getPropertyDetails(context, model.propId!,
+            (status, responce, propertyData) async {
           if (status) {
             loader.remove();
 
@@ -1130,9 +1399,11 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(), (status, responce) {
+    ApiManager().getEditLeadDataAPI(context, model.applicantId.toString(),
+        (status, responce) {
       if (status) {
-        ApiManager().getPropertyDetails(context, model.propId!, (status, responce, propertyData) async {
+        ApiManager().getPropertyDetails(context, model.propId!,
+            (status, responce, propertyData) async {
           if (status) {
             loader.remove();
 
@@ -1195,7 +1466,8 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getReferenceListApplicantWise(context, model.id.toString(), (status, responce, messege) async {
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
       if (status) {
         loader.remove();
         if (responce.length > 0) {
@@ -1215,11 +1487,13 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             },
           );
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
       }
     });
   }
@@ -1228,7 +1502,8 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getReferenceListApplicantWise(context, model.id.toString(), (status, responce, messege) async {
+    await ApiManager().getReferenceListApplicantWise(
+        context, model.id.toString(), (status, responce, messege) async {
       if (status) {
         loader.remove();
         if (responce.length > 0) {
@@ -1253,11 +1528,13 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             },
           );
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
       }
     });
   }
@@ -1348,14 +1625,16 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
 
             }*/
 
-            await ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(),
+            await ApiManager().CheckTenantActiveOrNot(
+                context, model.propId.toString(), model.applicantId.toString(),
                 (status, responce) async {
               if (status) {
                 await finnleviewcallapi();
                 await ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(
+                      context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }
@@ -1393,10 +1672,14 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             TenancyApplicationID cpojo2 = new TenancyApplicationID();
             cpojo2.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus upojo2 = new TenancyApplicationUpdateStatus();
-            upojo2.ApplicationStatus = eApplicationStatus().LeaseSent.toString();
+            TenancyApplicationUpdateStatus upojo2 =
+                new TenancyApplicationUpdateStatus();
+            upojo2.ApplicationStatus =
+                eApplicationStatus().LeaseSent.toString();
 
-            await ApiManager().RemoveActiveTenant(context, cpojo1, upojo1, cpojo2, upojo2, (status, responce) async {
+            await ApiManager()
+                .RemoveActiveTenant(context, cpojo1, upojo1, cpojo2, upojo2,
+                    (status, responce) async {
               if (status) {
                 await finnleviewcallapi();
                 await ApiManager().updateTenancyStatusCount(context);
@@ -1440,7 +1723,9 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID), (error, respoce2, landlordProfile) {
+    ApiManager()
+        .landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+            (error, respoce2, landlordProfile) {
       if (error) {
         String url = Weburl.CustomerFeaturedPage +
             landlordProfile!.CustomerFeatureListingURL! +
@@ -1455,17 +1740,28 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
             landlordProfile.companylogo!.url!.isNotEmpty) {
           CompanyLogo = landlordProfile.companylogo!.url.toString();
         } else {
-          CompanyLogo = "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
+          CompanyLogo =
+              "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
         }
 
-        ApiManager().tenantRegisterWorkflow(context, model.email!, model.personId.toString(), CompanyLogo, url, model.applicantName!,
-            landlordProfile.firstname!, landlordProfile.lastname!, landlordProfile.companyname!, (status, responce) async {
+        ApiManager().tenantRegisterWorkflow(
+            context,
+            model.email!,
+            model.personId.toString(),
+            CompanyLogo,
+            url,
+            model.applicantName!,
+            landlordProfile.firstname!,
+            landlordProfile.lastname!,
+            landlordProfile.companyname!, (status, responce) async {
           if (status) {
             loader.remove();
-            ToastUtils.showCustomToast(context, GlobleString.ARC_Tenant_Invite_successfully, true);
+            ToastUtils.showCustomToast(
+                context, GlobleString.ARC_Tenant_Invite_successfully, true);
           } else {
             loader.remove();
-            ToastUtils.showCustomToast(context, GlobleString.ARC_Tenant_Invite_Error, false);
+            ToastUtils.showCustomToast(
+                context, GlobleString.ARC_Tenant_Invite_Error, false);
           }
         });
       } else {

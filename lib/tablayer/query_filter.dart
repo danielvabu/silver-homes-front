@@ -413,7 +413,8 @@ class QueryFilter {
     if (hashMap[id] != null) {
       enumDetailslist = hashMap[id];
     }
-
+    enumDetailslist.removeWhere(
+        (element) => element.displayValue == "Verifying Documents");
     return enumDetailslist;
   }
 

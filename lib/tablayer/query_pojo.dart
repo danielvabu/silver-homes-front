@@ -1762,6 +1762,102 @@ class NewoveridesTemplate {
       };
 }
 
+class ListDocuments {
+  String name;
+
+  String? owner_id;
+
+  ListDocuments({required this.name, this.owner_id});
+
+  factory ListDocuments.fromJson(Map<String, dynamic> json) =>
+      ListDocuments(name: json["name"], owner_id: json["owner_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "owner_id": owner_id,
+      };
+}
+
+class GetListDocuments {
+  String? owner_id;
+
+  GetListDocuments(this.owner_id);
+
+  factory GetListDocuments.fromJson(Map<String, dynamic> json) =>
+      GetListDocuments(json["owner_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "owner_id": owner_id,
+      };
+}
+
+class GetListDocumentsFields {
+  String? listdocument_id;
+
+  GetListDocumentsFields(this.listdocument_id);
+
+  factory GetListDocumentsFields.fromJson(Map<String, dynamic> json) =>
+      GetListDocumentsFields(json["listdocument_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "listdocument_id": listdocument_id,
+      };
+}
+
+class RequestDocuments {
+  String? application_id;
+  String name;
+  bool required;
+  String? owner_id;
+
+  RequestDocuments(
+      {this.application_id,
+      required this.name,
+      required this.required,
+      this.owner_id});
+
+  factory RequestDocuments.fromJson(Map<String, dynamic> json) =>
+      RequestDocuments(
+          application_id: json["application_id"],
+          name: json["name"],
+          required: json["required"],
+          owner_id: json["owner_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "application_id": application_id,
+        "name": name,
+        "required": required,
+        "owner_id": owner_id,
+      };
+}
+
+class RequestDocumentsFields {
+  String? listdocument_id;
+  String name;
+  bool required;
+  String? owner_id;
+
+  RequestDocumentsFields(
+      {this.listdocument_id,
+      required this.name,
+      required this.required,
+      this.owner_id});
+
+  factory RequestDocumentsFields.fromJson(Map<String, dynamic> json) =>
+      RequestDocumentsFields(
+          listdocument_id: json["listdocument_id"],
+          name: json["name"],
+          required: json["required"],
+          owner_id: json["owner_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "listdocument_id": listdocument_id,
+        "name": name,
+        "required": required,
+        "owner_id": owner_id,
+      };
+}
+
 class PropertyUpdate {
   String? ID;
   String? Owner_ID;
