@@ -95,6 +95,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     }
   }
 
+/*
   List stepsList = [
     "Step1",
     "Step1",
@@ -110,7 +111,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     "Step1",
     "Step1",
   ];
-
+*/
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -124,7 +125,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            AppWidgetTenant().indicatorStepsList(steps: stepsList),
+            // AppWidgetTenant().indicatorStepsList(steps: stepsList),
             SizedBox(
               height: 10.sp,
             ),
