@@ -8,7 +8,7 @@ import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/domain/entities/propertydata.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
 
 typedef CallbackOnItem = void Function();
 
@@ -73,16 +73,13 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
     String rentAmount = "";
     String sqrft = "";
 
-    if (widget.propertyData.rentAmount != null &&
-        widget.propertyData.rentAmount != "") {
-      String amount =
-          '${formatCurrency.format(int.parse(widget.propertyData.rentAmount!.replaceAll(",", "").toString()))}';
+    if (widget.propertyData.rentAmount != null && widget.propertyData.rentAmount != "") {
+      String amount = '${formatCurrency.format(int.parse(widget.propertyData.rentAmount!.replaceAll(",", "").toString()))}';
       rentAmount = amount.replaceAll(".00", "");
     }
 
     if (widget.propertyData.size != null && widget.propertyData.size != "") {
-      String squareft = format1.format(int.parse(
-          widget.propertyData.size.toString().replaceAll(",", "").toString()));
+      String squareft = format1.format(int.parse(widget.propertyData.size.toString().replaceAll(",", "").toString()));
       sqrft = squareft.replaceAll(".00", "");
     }
 
@@ -93,8 +90,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
       hoverColor: Colors.transparent,
       child: Column(
         children: [
-          if (widget.propertyData.Media_ID != null &&
-              widget.propertyData.Media_ID!.isNotEmpty)
+          if (widget.propertyData.Media_ID != null && widget.propertyData.Media_ID!.isNotEmpty)
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
@@ -120,8 +116,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                   Weburl.image_API + widget.propertyData.Media_ID.toString(),
                   scale: 1.5,
                   headers: {
-                    'Authorization':
-                        'bearer ' + Prefs.getString(PrefsName.userTokan),
+                    'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                     'ApplicationCode': Weburl.API_CODE,
                   },
                 ),
@@ -188,9 +183,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                         height: 5,
                       ),
                       Text(
-                        widget.propertyData.furnishing != null
-                            ? widget.propertyData.furnishing!.displayValue
-                            : "",
+                        widget.propertyData.furnishing != null ? widget.propertyData.furnishing!.displayValue : "",
                         style: MyStyles.Medium(11, myColor.CM_Prop_card_text2),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
@@ -211,12 +204,8 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                         height: 5,
                       ),
                       Text(
-                        widget.propertyData.dateAvailable != null &&
-                                widget.propertyData.dateAvailable != ""
-                            ? new DateFormat("MMM dd")
-                                .format(DateTime.parse(
-                                    widget.propertyData.dateAvailable!))
-                                .toString()
+                        widget.propertyData.dateAvailable != null && widget.propertyData.dateAvailable != ""
+                            ? new DateFormat("MMM dd").format(DateTime.parse(widget.propertyData.dateAvailable!)).toString()
                             : "",
                         style: MyStyles.Medium(11, myColor.CM_Prop_card_text2),
                       ),
@@ -234,10 +223,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
               padding: EdgeInsets.only(left: 5, right: 5),
               child: Text(
                 widget.propertyData.suiteUnit! +
-                    ((widget.propertyData.suiteUnit != null &&
-                            widget.propertyData.suiteUnit!.trim().isNotEmpty)
-                        ? "-"
-                        : "") +
+                    ((widget.propertyData.suiteUnit != null && widget.propertyData.suiteUnit!.trim().isNotEmpty) ? "-" : "") +
                     widget.propertyData.propertyAddress! +
                     ",\n" +
                     widget.propertyData.city! +
@@ -271,9 +257,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                   child: Column(
                     children: [
                       Text(
-                        widget.propertyData.bedrooms.toString() +
-                            " " +
-                            GlobleString.CSM_Bedroom,
+                        widget.propertyData.bedrooms.toString() + " " + GlobleString.CSM_Bedroom,
                         style: MyStyles.Medium(11, myColor.CM_Prop_card_text2),
                       ),
                       SizedBox(
@@ -297,9 +281,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                   child: Column(
                     children: [
                       Text(
-                        widget.propertyData.bathrooms.toString() +
-                            " " +
-                            GlobleString.CSM_Bathroom,
+                        widget.propertyData.bathrooms.toString() + " " + GlobleString.CSM_Bathroom,
                         style: MyStyles.Medium(11, myColor.CM_Prop_card_text2),
                       ),
                       SizedBox(
@@ -347,9 +329,7 @@ class _CSM_PropertyCardState extends State<CSM_PropertyCard> {
                   child: Column(
                     children: [
                       Text(
-                        widget.propertyData.parkingStalls.toString() +
-                            " " +
-                            GlobleString.CSM_Parking,
+                        widget.propertyData.parkingStalls.toString() + " " + GlobleString.CSM_Parking,
                         style: MyStyles.Medium(11, myColor.CM_Prop_card_text2),
                       ),
                       SizedBox(

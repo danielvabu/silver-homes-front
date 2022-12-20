@@ -43,7 +43,7 @@ import 'package:silverhome/tablayer/query_filter.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 final formatCurrency = new NumberFormat.currency(locale: "en_US", symbol: "\$");
 final formatSize = new NumberFormat.currency(locale: "en_US", symbol: "");
@@ -52,12 +52,10 @@ class AddEditEventTypesTemplates extends StatefulWidget {
   static bool isValueUpdate = false;
 
   @override
-  _AddEditEventTypesTemplatesState createState() =>
-      _AddEditEventTypesTemplatesState();
+  _AddEditEventTypesTemplatesState createState() => _AddEditEventTypesTemplatesState();
 }
 
-class _AddEditEventTypesTemplatesState
-    extends State<AddEditEventTypesTemplates> {
+class _AddEditEventTypesTemplatesState extends State<AddEditEventTypesTemplates> {
   final _store = getIt<AppStore>();
 
   double ssheight = 0, sswidth = 0;
@@ -102,11 +100,7 @@ class _AddEditEventTypesTemplatesState
     ssheight = MediaQuery.of(context).size.height - 70;
     sswidth = MediaQuery.of(context).size.width - 230;
 
-    return Container(
-        height: ssheight,
-        width: sswidth,
-        color: myColor.bg_color1,
-        child: _initialview());
+    return Container(height: ssheight, width: sswidth, color: myColor.bg_color1, child: _initialview());
   }
 
   Widget _initialview() {
@@ -129,8 +123,7 @@ class _AddEditEventTypesTemplatesState
                     decoration: BoxDecoration(
                       color: myColor.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                          color: myColor.application_boreder, width: 1),
+                      border: Border.all(color: myColor.application_boreder, width: 1),
                     ),
                     padding: EdgeInsets.all(20),
                     child: Column(
@@ -143,8 +136,7 @@ class _AddEditEventTypesTemplatesState
                                 ? Expanded(
                                     child: Text(
                                       eventtypesFormState.eventtypes_address,
-                                      style:
-                                          MyStyles.SemiBold(14, myColor.black),
+                                      style: MyStyles.SemiBold(14, myColor.black),
                                       textAlign: TextAlign.start,
                                     ),
                                   )
@@ -161,29 +153,24 @@ class _AddEditEventTypesTemplatesState
                                 : Container(
                                     width: 100,
                                     child: ConnectState<EventTypesSummeryState>(
-                                        map: (state) =>
-                                            state.eventTypesSummeryState,
+                                        map: (state) => state.eventTypesSummeryState,
                                         where: notIdentical,
                                         builder: (eventtypesSummeryState) {
                                           return InkWell(
                                             onTap: () async {
-                                              var loader =
-                                                  Helper.overlayLoader(context);
-                                              Overlay.of(context)!
-                                                  .insert(loader);
+                                              var loader = Helper.overlayLoader(context);
+                                              Overlay.of(context)!.insert(loader);
                                               //await Pdfgenerate(eventtypesSummeryState!);
                                               loader.remove();
                                             },
                                             child: Container(
                                               width: 100,
-                                              margin:
-                                                  EdgeInsets.only(right: 10),
+                                              margin: EdgeInsets.only(right: 10),
                                               alignment: Alignment.centerRight,
                                               child: Text(
                                                 'Export',
                                                 //GlobleString.PS_EventTypes_Export,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.end,
                                               ),
                                             ),
@@ -192,8 +179,7 @@ class _AddEditEventTypesTemplatesState
                                   ),
                           ],
                         ),
-                        _centerView(eventtypesFormState.selectView,
-                            eventtypesFormState),
+                        _centerView(eventtypesFormState.selectView, eventtypesFormState),
                       ],
                     ),
                   ),
@@ -229,8 +215,7 @@ class _AddEditEventTypesTemplatesState
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(
-                          left: 30, right: 30, bottom: 20),
+                      margin: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
                       alignment: Alignment.topCenter,
                       color: myColor.black,
                       height: 2,
@@ -247,8 +232,7 @@ class _AddEditEventTypesTemplatesState
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
                                 if (AddEditEventTypesTemplates.isValueUpdate)
-                                  showBackDialog(eventtypesFormState, false,
-                                      stepper: 1);
+                                  showBackDialog(eventtypesFormState, false, stepper: 1);
                                 else
                                   _store.dispatch(UpdateEventTypesForm(1));
 
@@ -271,8 +255,7 @@ class _AddEditEventTypesTemplatesState
                                 const SizedBox(height: 5.0),
                                 Text(
                                   GlobleString.ET_Event_Setup,
-                                  style:
-                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  style: MyStyles.SemiBold(13, myColor.text_color),
                                   textAlign: TextAlign.center,
                                 )
                               ],
@@ -283,8 +266,7 @@ class _AddEditEventTypesTemplatesState
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
                                 if (AddEditEventTypesTemplates.isValueUpdate)
-                                  showBackDialog(eventtypesFormState, false,
-                                      stepper: 2);
+                                  showBackDialog(eventtypesFormState, false, stepper: 2);
                                 else
                                   _store.dispatch(UpdateEventTypesForm(2));
 
@@ -309,8 +291,7 @@ class _AddEditEventTypesTemplatesState
                                 const SizedBox(height: 5.0),
                                 Text(
                                   GlobleString.ET_Availability,
-                                  style:
-                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  style: MyStyles.SemiBold(13, myColor.text_color),
                                   textAlign: TextAlign.center,
                                 )
                               ],
@@ -321,8 +302,7 @@ class _AddEditEventTypesTemplatesState
                             onTap: () {
                               if (Prefs.getBool(PrefsName.EventTypesEditMode)) {
                                 if (AddEditEventTypesTemplates.isValueUpdate)
-                                  showBackDialog(eventtypesFormState, false,
-                                      stepper: 3);
+                                  showBackDialog(eventtypesFormState, false, stepper: 3);
                                 else
                                   _store.dispatch(UpdateEventTypesForm(3));
 
@@ -347,8 +327,7 @@ class _AddEditEventTypesTemplatesState
                                 const SizedBox(height: 5.0),
                                 Text(
                                   GlobleString.ET_Invitee_Questions,
-                                  style:
-                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  style: MyStyles.SemiBold(13, myColor.text_color),
                                   textAlign: TextAlign.center,
                                 )
                               ],
@@ -361,8 +340,7 @@ class _AddEditEventTypesTemplatesState
                                 // _store.dispatch(UpdateEventTypesForm(4));
 
                                 if (AddEditEventTypesTemplates.isValueUpdate)
-                                  showBackDialog(eventtypesFormState, false,
-                                      stepper: 4);
+                                  showBackDialog(eventtypesFormState, false, stepper: 4);
                                 else
                                   _store.dispatch(UpdateEventTypesForm(4));
                               }
@@ -372,14 +350,10 @@ class _AddEditEventTypesTemplatesState
                                 Container(
                                   alignment: Alignment.center,
                                   child: Image.asset(
-                                    Prefs.getBool(
-                                                PrefsName.EventTypesAgreeTC) &&
-                                            Prefs.getBool(
-                                                PrefsName.EventTypesStep1) &&
-                                            Prefs.getBool(
-                                                PrefsName.EventTypesStep2) &&
-                                            Prefs.getBool(
-                                                PrefsName.EventTypesStep3)
+                                    Prefs.getBool(PrefsName.EventTypesAgreeTC) &&
+                                            Prefs.getBool(PrefsName.EventTypesStep1) &&
+                                            Prefs.getBool(PrefsName.EventTypesStep2) &&
+                                            Prefs.getBool(PrefsName.EventTypesStep3)
                                         ? "assets/images/ic_circle_check.png"
                                         : eventtypesFormState.selectView > 4
                                             ? "assets/images/ic_circle_fill.png"
@@ -392,8 +366,7 @@ class _AddEditEventTypesTemplatesState
                                 const SizedBox(height: 5.0),
                                 Text(
                                   GlobleString.ET_Notifications,
-                                  style:
-                                      MyStyles.SemiBold(13, myColor.text_color),
+                                  style: MyStyles.SemiBold(13, myColor.text_color),
                                   textAlign: TextAlign.center,
                                 )
                               ],
@@ -412,8 +385,7 @@ class _AddEditEventTypesTemplatesState
     );
   }
 
-  void showBackDialog(EventTypesFormState eventtypesFormState, bool goback,
-      {int stepper = 0}) {
+  void showBackDialog(EventTypesFormState eventtypesFormState, bool goback, {int stepper = 0}) {
     if (stepper == eventtypesFormState.selectView) return;
     showDialog(
       context: context,
@@ -435,28 +407,16 @@ class _AddEditEventTypesTemplatesState
           onPressedYes: () {
             switch (eventtypesFormState.selectView) {
               case 1:
-                navigationNotifier.change(
-                    back: NavigationConstant.eventtypesDetails,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.eventtypesDetails, goBack: goback, step: stepper);
                 break;
               case 2:
-                navigationNotifier.change(
-                    back: NavigationConstant.specificationAndRestriction,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.specificationAndRestriction, goBack: goback, step: stepper);
                 break;
               case 3:
-                navigationNotifier.change(
-                    back: NavigationConstant.featuresAndPhotos,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.featuresAndPhotos, goBack: goback, step: stepper);
                 break;
               case 4:
-                navigationNotifier.change(
-                    back: NavigationConstant.eventTypesSummary,
-                    goBack: goback,
-                    step: stepper);
+                navigationNotifier.change(back: NavigationConstant.eventTypesSummary, goBack: goback, step: stepper);
                 break;
             }
             Navigator.of(context1).pop();
@@ -513,8 +473,7 @@ class _AddEditEventTypesTemplatesState
               await Prefs.setBool(PrefsName.EventTypesEditMode, false);
               await Prefs.setBool(PrefsName.EventTypesAgreeTC, false);
               await Prefs.setString(PrefsName.EventTypesID, "");
-              _store.dispatch(
-                  UpdatePortalPage(8, GlobleString.NAV_Scheduling_event_types));
+              _store.dispatch(UpdatePortalPage(8, GlobleString.NAV_Scheduling_event_types));
             },
             onPressedBack: () {
               if (AddEditEventTypesTemplates.isValueUpdate)

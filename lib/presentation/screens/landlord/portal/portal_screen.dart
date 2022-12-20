@@ -51,12 +51,12 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/basic_tenant/maintenace_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/preview_Lease_dialogbox.dart';
 import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/notification/notification_item.dart';
 
 class PortalScreen extends BasePage {
@@ -1257,28 +1257,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
               SizedBox(
                 width: 20,
               ),
-              profileButton(portalState),
+              InkWell(
+                onTap: () {
+                  MenuPopup(portalState);
+                },
+                child: Image.asset(
+                  'assets/images/ic_header_profile.png',
+                  color: Colors.black,
+                  width: 26,
+                  height: 26,
+                  fit: BoxFit.contain,
+                ),
+              ),
               SizedBox(
                 width: 20,
               ),
             ],
           )
         ],
-      ),
-    );
-  }
-
-  InkWell profileButton(PortalState portalState) {
-    return InkWell(
-      onTap: () {
-        MenuPopup(portalState);
-      },
-      child: Image.asset(
-        'assets/images/ic_header_profile.png',
-        color: Colors.black,
-        width: 26,
-        height: 26,
-        fit: BoxFit.contain,
       ),
     );
   }
@@ -1538,121 +1534,111 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
       Navigator.of(context).pop();
     } else {
       _store.dispatch(UpdateisMenuDialogshow(false));
-      showMenu();
-    }
-  }
-
-  Future<dynamic> showMenu() {
-    return showDialog(
-        context: context,
-        useSafeArea: false,
-        barrierDismissible: true,
-        barrierColor: Colors.black45,
-        builder: (BuildContext context) {
-          return WillPopScope(
-            onWillPop: () async {
-              _store.dispatch(UpdateisMenuDialogshow(false));
-              return true;
-            },
-            child: Align(
-              alignment: const Alignment(1.0, -1.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 2.0,
-                    ),
-                  ],
-                ),
-                height: 90,
-                width: 120,
-                margin: const EdgeInsets.only(top: 50, right: 40),
-                child: Card(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        profileOption(context),
-                        logoutOption(context),
-                      ],
+      showDialog(
+          context: context,
+          useSafeArea: false,
+          barrierDismissible: true,
+          barrierColor: Colors.black45,
+          builder: (BuildContext context) {
+            return WillPopScope(
+              onWillPop: () async {
+                _store.dispatch(UpdateisMenuDialogshow(false));
+                return true;
+              },
+              child: Align(
+                alignment: Alignment(1.0, -1.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 2.0,
+                      ),
+                    ],
+                  ),
+                  height: 90,
+                  width: 120,
+                  margin: EdgeInsets.only(top: 50, right: 40),
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              ApiManager().getUserProfile(context);
+                            },
+                            splashColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            child: Container(
+                              height: 30,
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/ic_header_profile.png',
+                                    color: Colors.black,
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    GlobleString.Menu_Profile,
+                                    style:
+                                        MyStyles.Medium(16, myColor.text_color),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              Prefs.clear();
+                              navigateTo(context, RouteNames.Login);
+                            },
+                            splashColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            child: Container(
+                              height: 30,
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/ic_logout.png',
+                                    color: Colors.black,
+                                    width: 20,
+                                    height: 20,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    GlobleString.Menu_Logout,
+                                    style:
+                                        MyStyles.Medium(16, myColor.text_color),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        });
-  }
-
-  InkWell logoutOption(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).pop();
-        Prefs.clear();
-        navigateTo(context, RouteNames.Login);
-      },
-      splashColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      child: Container(
-        height: 30,
-        alignment: Alignment.centerLeft,
-        child: Row(
-          children: [
-            Image.asset(
-              'assets/images/ic_logout.png',
-              color: Colors.black,
-              width: 20,
-              height: 20,
-              fit: BoxFit.contain,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              GlobleString.Menu_Logout,
-              style: MyStyles.Medium(16, myColor.text_color),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  InkWell profileOption(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).pop();
-        ApiManager().getUserProfile(context);
-      },
-      splashColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      child: Container(
-        height: 30,
-        alignment: Alignment.centerLeft,
-        child: Row(
-          children: [
-            Image.asset(
-              'assets/images/ic_header_profile.png',
-              color: Colors.black,
-              width: 20,
-              height: 20,
-              fit: BoxFit.contain,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              GlobleString.Menu_Profile,
-              style: MyStyles.Medium(16, myColor.text_color),
-            ),
-          ],
-        ),
-      ),
-    );
+            );
+          });
+    }
   }
 
   void _tapNotificationItem(

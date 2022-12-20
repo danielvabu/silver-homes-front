@@ -33,7 +33,7 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/propertytable/property_header.dart';
 import 'package:silverhome/widget/landlord/propertytable/property_item.dart';
@@ -95,8 +95,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     PropertyListReqtokens reqtokens = PropertyListReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
     reqtokens.Name = search != null ? search : "";
@@ -158,15 +157,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     return Container(
       child: Row(
         children: [
-          CustomeWidget.PropertyStutas(
-              propertyListState.status_UnitsHeld.toString(),
-              GlobleString.PP_status_UnitsHeld),
-          CustomeWidget.PropertyStutas(
-              propertyListState.status_UnitsRented.toString(),
-              GlobleString.PP_status_UnitsRented),
-          CustomeWidget.PropertyStutas(
-              propertyListState.status_VacantUnits.toString(),
-              GlobleString.PP_status_VacantUnits),
+          CustomeWidget.PropertyStutas(propertyListState.status_UnitsHeld.toString(), GlobleString.PP_status_UnitsHeld),
+          CustomeWidget.PropertyStutas(propertyListState.status_UnitsRented.toString(), GlobleString.PP_status_UnitsRented),
+          CustomeWidget.PropertyStutas(propertyListState.status_VacantUnits.toString(), GlobleString.PP_status_VacantUnits),
           Expanded(child: Container()),
           Expanded(child: Container()),
         ],
@@ -196,8 +189,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                   children: [
                     Row(
                       children: [
-                        if (propertyListState.isloding &&
-                            propertyListState.PropertySearchText == "")
+                        if (propertyListState.isloding && propertyListState.PropertySearchText == "")
                           Container(
                             width: 260,
                             height: 30,
@@ -214,8 +206,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                                 Expanded(
                                   child: Text(
                                     GlobleString.LL_Search,
-                                    style:
-                                        MyStyles.Medium(14, myColor.hintcolor),
+                                    style: MyStyles.Medium(14, myColor.hintcolor),
                                   ),
                                 ),
                                 Padding(
@@ -243,34 +234,28 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                               children: <Widget>[
                                 new Expanded(
                                   child: TextFormField(
-                                    initialValue:
-                                        propertyListState.PropertySearchText,
+                                    initialValue: propertyListState.PropertySearchText,
                                     onChanged: (value) async {
                                       if (_timer != null) {
                                         _timer!.cancel();
                                       }
-                                      _timer = new Timer.periodic(
-                                          Duration(seconds: 2), (timer) {
-                                        _store.dispatch(
-                                            UpdatePropertyListIsloding(true));
-                                        _store.dispatch(UpdatePropertyList(
-                                            <PropertyDataList>[]));
-                                        apimanager(
-                                            value, 1, "PropertyName", 1, 0);
+                                      _timer = new Timer.periodic(Duration(milliseconds: 400), (timer) {
+                                        _store.dispatch(UpdatePropertyListIsloding(true));
+                                        _store.dispatch(UpdatePropertyList(<PropertyDataList>[]));
+                                        apimanager(value, 1, "PropertyName", 1, 0);
                                         _timer!.cancel();
                                       });
+                                      //  apimanager(value, 1, "PropertyName", propertyListState.NameSortAcsDes, 1);
                                     },
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintStyle: MyStyles.Medium(
-                                          14, myColor.hintcolor),
+                                      hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                       contentPadding: EdgeInsets.all(10),
                                       isDense: true,
                                       hintText: GlobleString.LL_Search,
                                     ),
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                   ),
                                 ),
                                 Padding(
@@ -339,12 +324,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         await clearpropertySummerydetails();
 
         List<SystemEnumDetails> restrictionlist = [];
-        restrictionlist =
-            QueryFilter().PlainValues(eSystemEnums().Restrictions);
+        restrictionlist = QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
-        List<SystemEnumDetails> secondrestrictionlist = restrictionlist
-            .map((item) => new SystemEnumDetails.clone(item))
-            .toList();
+        List<SystemEnumDetails> secondrestrictionlist = restrictionlist.map((item) => new SystemEnumDetails.clone(item)).toList();
 
         _store.dispatch(UpdateSummeryRestrictionlist(secondrestrictionlist));
 
@@ -460,14 +442,11 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         onSelected: (value) async {
           PropertyListReqtokens reqtokens = new PropertyListReqtokens();
           reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-          reqtokens.Name = propertyListState.PropertySearchText != null
-              ? propertyListState.PropertySearchText
-              : "";
+          reqtokens.Name = propertyListState.PropertySearchText != null ? propertyListState.PropertySearchText : "";
 
           List<Sort> sortinglist = [];
           Sort sort = new Sort();
-          if (propertyListState.PropertySearchText != null &&
-              propertyListState.PropertySearchText.isNotEmpty) {
+          if (propertyListState.PropertySearchText != null && propertyListState.PropertySearchText.isNotEmpty) {
             sort.fieldId = "ID";
             sort.sortSequence = 0;
           } else {
@@ -512,8 +491,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
           String filterjson = jsonEncode(dsqQuery);
 
-          await ApiManager()
-              .getAllPropertyOnboadingListCSV(context, filterjson);
+          await ApiManager().getAllPropertyOnboadingListCSV(context, filterjson);
         },
         child: Container(
           height: 40,
@@ -582,9 +560,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
             },
           ),
           tableItem(propertyListState),
-          if (propertyListState.propertylist != null &&
-              propertyListState.propertylist.length > 0)
-            tablefooter(propertyListState)
+          if (propertyListState.propertylist != null && propertyListState.propertylist.length > 0) tablefooter(propertyListState)
         ],
       ),
     );
@@ -609,44 +585,33 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                   ),
                 ),
               )
-            : propertyListState.propertylist != null &&
-                    propertyListState.propertylist.length > 0
+            : propertyListState.propertylist != null && propertyListState.propertylist.length > 0
                 ? Expanded(
                     child: PropertyItem(
                       listdata1: propertyListState.propertylist,
                       onPresseEdit: (PropertyDataList propertyData) {
-                        getPropertyDetails(
-                            propertyData, 2, propertyData.propDrafting!);
+                        getPropertyDetails(propertyData, 2, propertyData.propDrafting!);
                       },
                       onPresseDuplicat: (PropertyDataList propertyData) {
-                        ApiManager()
-                            .DuplicatPropertyGenerate(context, propertyData.id!,
-                                (status, responce) async {
+                        ApiManager().DuplicatPropertyGenerate(context, propertyData.id!, (status, responce) async {
                           if (status) {
                             _store.dispatch(UpdatePropertyListIsloding(true));
-                            _store.dispatch(
-                                UpdatePropertyList(<PropertyDataList>[]));
+                            _store.dispatch(UpdatePropertyList(<PropertyDataList>[]));
                             apimanager("", 1, "PropertyName", 1, 0);
                           } else {
-                            ToastUtils.showCustomToast(
-                                context, GlobleString.Error1, false);
+                            ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                           }
                         });
                       },
                       onPressDetails: (PropertyDataList propertyData) {
-                        getPropertyDetails(
-                            propertyData, 1, propertyData.propDrafting!);
+                        getPropertyDetails(propertyData, 1, propertyData.propDrafting!);
                       },
                       onPressName: (PropertyDataList propertyData) {
-                        getPropertyDetails(
-                            propertyData, 1, propertyData.propDrafting!);
+                        getPropertyDetails(propertyData, 1, propertyData.propDrafting!);
                       },
-                      onPresseInActive:
-                          (PropertyDataList propertyData, int pos) {
-                        ApiManager().TenantAvailableInProperty(
-                            context,
-                            Prefs.getString(PrefsName.OwnerID),
-                            propertyData.id!, (status, responce) {
+                      onPresseInActive: (PropertyDataList propertyData, int pos) {
+                        ApiManager().TenantAvailableInProperty(context, Prefs.getString(PrefsName.OwnerID), propertyData.id!,
+                            (status, responce) {
                           if (status) {
                             if (responce == "1") {
                               showDialog(
@@ -661,10 +626,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                                     negativeText: GlobleString.Prop_btn_cancel,
                                     onPressedYes: () {
                                       Navigator.of(context1).pop();
-                                      propertyActive_InAction_call(
-                                          propertyListState,
-                                          false,
-                                          propertyData.id!);
+                                      propertyActive_InAction_call(propertyListState, false, propertyData.id!);
                                     },
                                     onPressedNo: () {
                                       Navigator.of(context1).pop();
@@ -673,32 +635,25 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                                 },
                               );
                             } else {
-                              propertyActive_InAction_call(
-                                  propertyListState, false, propertyData.id!);
+                              propertyActive_InAction_call(propertyListState, false, propertyData.id!);
                             }
                           } else {
-                            propertyActive_InAction_call(
-                                propertyListState, false, propertyData.id!);
+                            propertyActive_InAction_call(propertyListState, false, propertyData.id!);
                           }
                         });
                       },
                       onPresseActive: (PropertyDataList propertyData, int pos) {
                         if (propertyData.propDrafting != 3) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_Property_all_details, false);
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_all_details, false);
                         } else if (!propertyData.isAgreedTandC!) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_Property_Disclosures, false);
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Disclosures, false);
                         } else {
-                          propertyActive_InAction_call(
-                              propertyListState, true, propertyData.id!);
+                          propertyActive_InAction_call(propertyListState, true, propertyData.id!);
                         }
                       },
-                      onPresseIsPublish:
-                          (PropertyDataList propertyData, int pos, bool flag) {
+                      onPresseIsPublish: (PropertyDataList propertyData, int pos, bool flag) {
                         if (!propertyData.isActive!) {
-                          ToastUtils.showCustomToast(context,
-                              GlobleString.PS3_Property_Active_publish, false);
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Active_publish, false);
                         } else {
                           showDialog(
                             context: context,
@@ -707,15 +662,12 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                             barrierDismissible: false,
                             builder: (BuildContext context1) {
                               return AlertDialogBox(
-                                title: flag
-                                    ? GlobleString.Prop_Publish
-                                    : GlobleString.Prop_UnPublish,
+                                title: flag ? GlobleString.Prop_Publish : GlobleString.Prop_UnPublish,
                                 positiveText: GlobleString.Prop_btn_yes,
                                 negativeText: GlobleString.Prop_btn_cancel,
                                 onPressedYes: () {
                                   Navigator.of(context1).pop();
-                                  propertyIsPublished_call(propertyListState,
-                                      flag, propertyData.id!);
+                                  propertyIsPublished_call(propertyListState, flag, propertyData.id!);
                                 },
                                 onPressedNo: () {
                                   Navigator.of(context1).pop();
@@ -769,20 +721,15 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
               mode: Mode.MENU,
               textstyle: MyStyles.Medium(14, myColor.black),
               hint: "Select page",
-              defultHeight: Helper.PagingRecord(propertyListState.totalRecord)
-                              .length *
-                          35 >
-                      350
+              defultHeight: Helper.PagingRecord(propertyListState.totalRecord).length * 35 > 350
                   ? 350
-                  : Helper.PagingRecord(propertyListState.totalRecord).length *
-                      35,
+                  : Helper.PagingRecord(propertyListState.totalRecord).length * 35,
               selectedItem: propertyListState.pageNo.toString(),
               items: Helper.PagingRecord(propertyListState.totalRecord),
               showSearchBox: false,
               isFilteredOnline: true,
               onChanged: (value) {
-                _store.dispatch(
-                    UpdatePropertyListPageNo(int.parse(value.toString())));
+                _store.dispatch(UpdatePropertyListPageNo(int.parse(value.toString())));
                 paginationCall(propertyListState, int.parse(value.toString()));
               },
             ),
@@ -860,43 +807,35 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   void paginationCall(PropertyListState propertyListState, int pageno) {
     if (propertyListState.isPropertyNameSort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "PropertyName",
-          propertyListState.NameSortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "PropertyName", propertyListState.NameSortAcsDes, 1);
     }
 
     if (propertyListState.isPropertyUnitSort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "Suite_Unit",
-          propertyListState.UnitSortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "Suite_Unit", propertyListState.UnitSortAcsDes, 1);
     }
 
     if (propertyListState.isCitySort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "City",
-          propertyListState.CitySortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "City", propertyListState.CitySortAcsDes, 1);
     }
 
     if (propertyListState.isCountrySort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "Country",
-          propertyListState.CountrySortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "Country", propertyListState.CountrySortAcsDes, 1);
     }
 
     if (propertyListState.isPropertyTypeSort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "Property_Type",
-          propertyListState.PropertyTypeSortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "Property_Type", propertyListState.PropertyTypeSortAcsDes, 1);
     }
 
     if (propertyListState.isvacancySort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "Vacancy",
-          propertyListState.VacancySortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "Vacancy", propertyListState.VacancySortAcsDes, 1);
     }
 
     if (propertyListState.isActiveInactiveSort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "IsActive",
-          propertyListState.ActiveSortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "IsActive", propertyListState.ActiveSortAcsDes, 1);
     }
 
     if (propertyListState.isPublishedSort) {
-      apimanager(propertyListState.PropertySearchText, pageno, "IsPublished",
-          propertyListState.PublishedSortAcsDes, 1);
+      apimanager(propertyListState.PropertySearchText, pageno, "IsPublished", propertyListState.PublishedSortAcsDes, 1);
     }
   }
 
@@ -904,8 +843,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdatePropertyListNameSortAcsDes(
-          propertyListState.NameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListNameSortAcsDes(propertyListState.NameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
       _store.dispatch(UpdatePropertyListCountrySortAcsDes(0));
@@ -914,11 +852,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "PropertyName",
-          propertyListState.NameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "PropertyName", propertyListState.NameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdatePropertyListUnitSortAcsDes(
-          propertyListState.UnitSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListUnitSortAcsDes(propertyListState.UnitSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
       _store.dispatch(UpdatePropertyListCountrySortAcsDes(0));
@@ -927,11 +863,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Suite_Unit",
-          propertyListState.UnitSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Suite_Unit", propertyListState.UnitSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdatePropertyListCitySortAcsDes(
-          propertyListState.CitySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListCitySortAcsDes(propertyListState.CitySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCountrySortAcsDes(0));
@@ -940,11 +874,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager(
-          "", 1, "City", propertyListState.CitySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "City", propertyListState.CitySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdatePropertyListCountrySortAcsDes(
-          propertyListState.CountrySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListCountrySortAcsDes(propertyListState.CountrySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
@@ -953,11 +885,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Country",
-          propertyListState.CountrySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Country", propertyListState.CountrySortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdatePropertyListPropertyTypeSortAcsDes(
-          propertyListState.PropertyTypeSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListPropertyTypeSortAcsDes(propertyListState.PropertyTypeSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
@@ -966,11 +896,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Property_Type",
-          propertyListState.PropertyTypeSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Property_Type", propertyListState.PropertyTypeSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 6) {
-      _store.dispatch(UpdatePropertyListVacancySortAcsDes(
-          propertyListState.VacancySortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListVacancySortAcsDes(propertyListState.VacancySortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
@@ -979,13 +907,11 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "Vacancy",
-          propertyListState.VacancySortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Vacancy", propertyListState.VacancySortAcsDes == 1 ? 0 : 1, 0);
     }
 
     if (flag == 7) {
-      _store.dispatch(UpdatePropertyListActiveSortAcsDes(
-          propertyListState.ActiveSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListActiveSortAcsDes(propertyListState.ActiveSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
@@ -994,13 +920,11 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListVacancySortAcsDes(0));
       _store.dispatch(UpdatePropertyListPublishedSortAcsDes(0));
 
-      apimanager("", 1, "IsActive",
-          propertyListState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsActive", propertyListState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
     }
 
     if (flag == 8) {
-      _store.dispatch(UpdatePropertyListPublishedSortAcsDes(
-          propertyListState.PublishedSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdatePropertyListPublishedSortAcsDes(propertyListState.PublishedSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdatePropertyListNameSortAcsDes(0));
       _store.dispatch(UpdatePropertyListUnitSortAcsDes(0));
       _store.dispatch(UpdatePropertyListCitySortAcsDes(0));
@@ -1009,8 +933,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       _store.dispatch(UpdatePropertyListVacancySortAcsDes(0));
       _store.dispatch(UpdatePropertyListActiveSortAcsDes(0));
 
-      apimanager("", 1, "IsPublished",
-          propertyListState.PublishedSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "IsPublished", propertyListState.PublishedSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -1041,8 +964,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     }
   }
 
-  propertyActive_InAction_call(
-      PropertyListState propertyListState, bool isAct, String propertyid) {
+  propertyActive_InAction_call(PropertyListState propertyListState, bool isAct, String propertyid) {
     PropertyActive proactive = PropertyActive();
     proactive.IsActive = isAct;
     proactive.IsPublished = false;
@@ -1054,18 +976,15 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().UpdatePropertyActive(context, propertyUpdate, proactive,
-        (error, responce) async {
+    ApiManager().UpdatePropertyActive(context, propertyUpdate, proactive, (error, responce) async {
       if (error) {
         if (isAct) {
           /*  await ApiManager().getPropertyOnboadingList(
               context, Prefs.getString(PrefsName.OwnerID));
           loader.remove();*/
-          ApiManager().ArchiveLeadRestoreInProperty(context, propertyid,
-              (status, responce) async {
+          ApiManager().ArchiveLeadRestoreInProperty(context, propertyid, (status, responce) async {
             if (status) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Prop_activated_success, true);
+              ToastUtils.showCustomToast(context, GlobleString.Prop_activated_success, true);
               paginationCall(propertyListState, propertyListState.pageNo);
               loader.remove();
             } else {
@@ -1078,11 +997,9 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
               context, Prefs.getString(PrefsName.OwnerID));
           loader.remove();*/
 
-          ApiManager().ArchiveLeadInProperty(context, propertyid,
-              (status, responce) async {
+          ApiManager().ArchiveLeadInProperty(context, propertyid, (status, responce) async {
             if (status) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Prop_deactivated_success, true);
+              ToastUtils.showCustomToast(context, GlobleString.Prop_deactivated_success, true);
               paginationCall(propertyListState, propertyListState.pageNo);
               loader.remove();
             } else {
@@ -1098,8 +1015,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     });
   }
 
-  propertyIsPublished_call(
-      PropertyListState propertyListState, bool isAct, String propertyid) {
+  propertyIsPublished_call(PropertyListState propertyListState, bool isAct, String propertyid) {
     PropertyIsPublished proactive = PropertyIsPublished();
     proactive.IsPublished = isAct;
 
@@ -1110,15 +1026,12 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().UpdatePropertyActive(context, propertyUpdate, proactive,
-        (error, responce) async {
+    ApiManager().UpdatePropertyActive(context, propertyUpdate, proactive, (error, responce) async {
       if (error) {
         if (isAct) {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Prop_published_success, true);
+          ToastUtils.showCustomToast(context, GlobleString.Prop_published_success, true);
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.Prop_unpublished_success, true);
+          ToastUtils.showCustomToast(context, GlobleString.Prop_unpublished_success, true);
         }
         paginationCall(propertyListState, propertyListState.pageNo);
         loader.remove();
@@ -1129,21 +1042,17 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     });
   }
 
-  getPropertyDetails(
-      PropertyDataList propertyData1, int flag, int PropDrafting) async {
+  getPropertyDetails(PropertyDataList propertyData1, int flag, int PropDrafting) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
     String propId = propertyData1.id.toString();
 
-    ApiManager().getPropertyRestriction(context, propId,
-        (status, responce, restrictionlist) {
+    ApiManager().getPropertyRestriction(context, propId, (status, responce, restrictionlist) {
       if (status) {
         _store.dispatch(UpdateRestrictionlist(List.from(restrictionlist)));
 
-        List<SystemEnumDetails> secondList = restrictionlist
-            .map((item) => new SystemEnumDetails.clone(item))
-            .toList();
+        List<SystemEnumDetails> secondList = restrictionlist.map((item) => new SystemEnumDetails.clone(item)).toList();
 
         _store.dispatch(UpdateSummeryRestrictionlist(secondList));
       } else {
@@ -1152,21 +1061,17 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       }
     });
 
-    ApiManager().getPropertyImagesDSQ(context, propId,
-        (status, responce, PropertyImageMediaInfolist) {
+    ApiManager().getPropertyImagesDSQ(context, propId, (status, responce, PropertyImageMediaInfolist) {
       if (status) {
-        _store.dispatch(
-            UpdatePropertyImageList(List.from(PropertyImageMediaInfolist)));
-        _store.dispatch(UpdateSummeryPropertyImageList(
-            List.from(PropertyImageMediaInfolist)));
+        _store.dispatch(UpdatePropertyImageList(List.from(PropertyImageMediaInfolist)));
+        _store.dispatch(UpdateSummeryPropertyImageList(List.from(PropertyImageMediaInfolist)));
       } else {
         _store.dispatch(UpdatePropertyImageList([]));
         _store.dispatch(UpdateSummeryPropertyImageList([]));
       }
     });
 
-    ApiManager().getPropertyAmanityUtility(context, propId,
-        (status, responce, amenitieslist, utilitylist) async {
+    ApiManager().getPropertyAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
@@ -1174,19 +1079,13 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         _store.dispatch(UpdatePropertyAmenitiesList(List.from(amenitieslist)));
         _store.dispatch(UpdatePropertyUtilitiesList(List.from(utilitylist)));
 
-        List<PropertyAmenitiesUtility> secondAmenityList = amenitieslist
-            .map((item) => new PropertyAmenitiesUtility.clone(item))
-            .toList();
+        List<PropertyAmenitiesUtility> secondAmenityList = amenitieslist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
 
-        _store.dispatch(
-            UpdateSummeryPropertyAmenitiesList(List.from(secondAmenityList)));
+        _store.dispatch(UpdateSummeryPropertyAmenitiesList(List.from(secondAmenityList)));
 
-        List<PropertyAmenitiesUtility> secondUtilityList = utilitylist
-            .map((item) => new PropertyAmenitiesUtility.clone(item))
-            .toList();
+        List<PropertyAmenitiesUtility> secondUtilityList = utilitylist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
 
-        _store.dispatch(
-            UpdateSummeryPropertyUtilitiesList(List.from(secondUtilityList)));
+        _store.dispatch(UpdateSummeryPropertyUtilitiesList(List.from(secondUtilityList)));
       } else {
         _store.dispatch(UpdatePropertyAmenitiesList([]));
         _store.dispatch(UpdatePropertyUtilitiesList([]));
@@ -1196,8 +1095,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
       }
     });
 
-    await ApiManager().getPropertyDetails(context, propId,
-        (status, responce, propertyData) async {
+    await ApiManager().getPropertyDetails(context, propId, (status, responce, propertyData) async {
       if (status) {
         await ApiManager().bindPropertyData(propertyData!);
 
@@ -1207,8 +1105,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         await Prefs.setBool(PrefsName.PropertyEdit, true);
         await Prefs.setBool(PrefsName.PropertyEditMode, true);
         await Prefs.setString(PrefsName.PropertyID, propertyData.ID!);
-        await Prefs.setBool(
-            PrefsName.PropertyAgreeTC, propertyData.isAgreedTandC!);
+        await Prefs.setBool(PrefsName.PropertyAgreeTC, propertyData.isAgreedTandC!);
         // await Prefs.setBool(PrefsName.PropertyAgreeTC, true);
 
         if (PropDrafting == 3) {

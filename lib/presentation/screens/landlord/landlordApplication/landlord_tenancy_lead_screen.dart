@@ -37,8 +37,8 @@ import 'package:silverhome/widget/landlord/lead_dialog/addnewlead_dialogbox.dart
 import 'package:silverhome/widget/landlord/propertydropdown.dart';
 import 'package:silverhome/widget/landlord/tenancyleadtable/tenancy_lead_header.dart';
 import 'package:silverhome/widget/landlord/tenancyleadtable/tenancy_lead_item.dart';
-import 'package:silverhome/widget/searchboxview.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/search/searchboxview.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 
 class LandlordTenancyLeadScreen extends StatefulWidget {
   @override

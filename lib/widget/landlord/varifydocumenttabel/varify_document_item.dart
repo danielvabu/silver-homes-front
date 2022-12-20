@@ -25,7 +25,7 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/action_popup/document_popupmenu.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/referencerequest_dialogbox.dart';
@@ -38,7 +38,7 @@ import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
 import 'package:silverhome/widget/landlord/ratingupdate_dialogbox.dart';
 import 'package:silverhome/widget/landlord/reference_dialog/check_reference_confirm_dialog.dart';
 import 'package:silverhome/widget/landlord/reference_dialog/check_reference_list_dialog.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 class VarifyDocumentItem extends StatefulWidget {
@@ -70,8 +70,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     statuslist = QueryFilter().PlainValues(eSystemEnums().ApplicationStatus);
 
     reviewstatuslist.clear();
-    reviewstatuslist =
-        QueryFilter().PlainValuesWithSorting(eSystemEnums().DocReviewStatus);
+    reviewstatuslist = QueryFilter().PlainValuesWithSorting(eSystemEnums().DocReviewStatus);
 
     super.initState();
   }
@@ -128,15 +127,12 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(
-                        left: 20, right: 20, top: 15, bottom: 15),
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
                         TBLTenancyApplicationStatus(
                           onPressedIcon: () {
-                            if (listdata[index].applicationReceivedDate !=
-                                    null &&
-                                listdata[index].applicationReceivedDate != "") {
+                            if (listdata[index].applicationReceivedDate != null && listdata[index].applicationReceivedDate != "") {
                               openTenancyApplicationDetails(index);
                             }
                           },
@@ -159,15 +155,11 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
                         SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[index].referenceRequestSentDate!,
-                          receivedate:
-                              listdata[index].referenceRequestReceivedDate!,
+                          receivedate: listdata[index].referenceRequestReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[index].referenceRequestReceivedDate !=
-                                    null &&
-                                listdata[index].referenceRequestReceivedDate !=
-                                    "") {
-                              CustomeWidget.ReferencePreview(
-                                  context, listdata[index].id.toString());
+                            if (listdata[index].referenceRequestReceivedDate != null &&
+                                listdata[index].referenceRequestReceivedDate != "") {
+                              CustomeWidget.ReferencePreview(context, listdata[index].id.toString());
                             }
                           },
                         ),
@@ -176,8 +168,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
                           sentdate: listdata[index].agreementSentDate!,
                           receivedate: listdata[index].agreementReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[index].agreementReceivedDate != null &&
-                                listdata[index].agreementReceivedDate != "") {
+                            if (listdata[index].agreementReceivedDate != null && listdata[index].agreementReceivedDate != "") {
                               _dailogPreviewLease(listdata[index]);
                             }
                           },
@@ -203,13 +194,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     result.add(_reviewstatusdropdown(model));
     result.add(_priviewdocs(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(
-        model.isexpand!
-            ? "assets/images/circle_up.png"
-            : "assets/images/circle_down.png",
-        30,
-        model,
-        index));
+    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, index));
 
     //result.add(_datavalueArchive("assets/images/ic_archive.png", 30));
     return result;
@@ -281,13 +266,11 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
                 TenancyApplicationID updateid = new TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating =
-                    new TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(
-                    context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     await varificationDocCallApi();
                   }
@@ -326,11 +309,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != ""
-            ? new DateFormat("dd-MMM-yyyy")
-                .format(DateTime.parse(text))
-                .toString()
-            : "",
+        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -345,11 +324,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != ""
-            ? new DateFormat("dd-MMM-yyyy")
-                .format(DateTime.parse(text))
-                .toString()
-            : "",
+        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -369,27 +344,22 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
-        defultHeight:
-            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem:
-            model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: true,
         onChanged: (data) {
-          if (data!.EnumDetailID.toString() !=
-              eApplicationStatus().ActiveTenent.toString()) {
+          if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus =
-                new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(
-                context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 await varificationDocCallApi();
 
@@ -430,23 +400,18 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
           textstyle: MyStyles.Medium(12, myColor.text_color),
           itemAsString: (SystemEnumDetails? u) => u!.displayValue,
           hint: "Action",
-          defultHeight: reviewstatuslist.length * 33 > 250
-              ? 250
-              : reviewstatuslist.length * 33,
+          defultHeight: reviewstatuslist.length * 33 > 250 ? 250 : reviewstatuslist.length * 33,
           showSearchBox: false,
-          selectedItem:
-              model.docReviewStatus != null ? model.docReviewStatus : null,
+          selectedItem: model.docReviewStatus != null ? model.docReviewStatus : null,
           isFilteredOnline: true,
           onChanged: (data) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            DocumentReviewUpdateStatus updatestatus =
-                new DocumentReviewUpdateStatus();
+            DocumentReviewUpdateStatus updatestatus = new DocumentReviewUpdateStatus();
             updatestatus.DocReviewStatus = data!.EnumDetailID.toString();
 
-            ApiManager().UpdateReviewstatusVarificationDocumentList(
-                context, updateid, updatestatus, (status, responce) {
+            ApiManager().UpdateReviewstatusVarificationDocumentList(context, updateid, updatestatus, (status, responce) {
               if (status) {}
             });
           },
@@ -501,8 +466,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     );
   }
 
-  Widget _datavalueExpand(
-      String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () {
         if (model.isexpand!) {
@@ -550,8 +514,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
     _store.dispatch(UpdateLLVDapplicationisloding(true));
     _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
-    _store
-        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+    _store.dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -625,12 +588,10 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive =
-                new TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive = new TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
-            await ApiManager().UpdateArchiveApplication(
-                context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 await varificationDocCallApi();
               }
@@ -695,8 +656,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getReferenceListApplicantWise(
-        context, model.id.toString(), (status, responce, messege) async {
+    await ApiManager().getReferenceListApplicantWise(context, model.id.toString(), (status, responce, messege) async {
       if (status) {
         loader.remove();
         if (responce.length > 0) {
@@ -716,13 +676,11 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
             },
           );
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.DCR_No_reference, false);
+          ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.DCR_No_reference, false);
+        ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
       }
     });
   }
@@ -733,8 +691,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
 
     _store.dispatch(UpdateRCDisAllCheck(false));
 
-    await ApiManager().getReferenceListApplicantWise(
-        context, model.id.toString(), (status, responce, messege) async {
+    await ApiManager().getReferenceListApplicantWise(context, model.id.toString(), (status, responce, messege) async {
       if (status) {
         loader.remove();
         if (responce.length > 0) {
@@ -759,13 +716,11 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
             },
           );
         } else {
-          ToastUtils.showCustomToast(
-              context, GlobleString.DCR_No_reference, false);
+          ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.DCR_No_reference, false);
+        ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
       }
     });
   }
@@ -837,16 +792,14 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
           onPressedYes: () async {
             Navigator.of(context1).pop();
 
-            await ApiManager().CheckTenantActiveOrNot(
-                context, model.propId.toString(), model.applicantId.toString(),
+            await ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(),
                 (status, responce) async {
               if (status) {
                 await varificationDocCallApi();
                 ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }

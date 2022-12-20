@@ -15,12 +15,11 @@ import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/customer/customer_property_card.dart';
-import 'package:silverhome/widget/responsive_grid.dart';
+import 'package:silverhome/widget/customer/responsive_grid.dart';
 
 class CustomerPropertyListPage extends StatefulWidget {
   @override
-  _CustomerPropertyListPageState createState() =>
-      _CustomerPropertyListPageState();
+  _CustomerPropertyListPageState createState() => _CustomerPropertyListPageState();
 }
 
 class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
@@ -53,8 +52,7 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                    EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
+                padding: EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                 child: Text(
                   GlobleString.CSM_FeaturedListings,
                   style: MyStyles.SemiBold(24, myColor.CM_footer_powerby),
@@ -65,13 +63,10 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
                 child: ResponsiveGridList(
                     desiredItemWidth: 300,
                     minSpacing: 1,
-                    children:
-                        Helper.Widgetchild(cusProlistState!.propertylist.length)
-                            .map((i) {
+                    children: Helper.Widgetchild(cusProlistState!.propertylist.length).map((i) {
                       return CSM_PropertyCard(
                         callbackOnItem: () {
-                          getFeaturePropertyDetails(
-                              cusProlistState.propertylist[i], cusProlistState);
+                          getFeaturePropertyDetails(cusProlistState.propertylist[i], cusProlistState);
                           //_store.dispatch(UpdateCustomerPortal_pageindex(1));
                         },
                         propertyData: cusProlistState.propertylist[i],
@@ -87,15 +82,13 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
     );
   }
 
-  getFeaturePropertyDetails(PropertyData propertyval,
-      CustomerPropertylistState cusProlistState) async {
+  getFeaturePropertyDetails(PropertyData propertyval, CustomerPropertylistState cusProlistState) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
     String propId = propertyval.ID.toString();
 
-    await ApiManager().getPropertyRestriction_Customer(context, propId,
-        (status, responce, restrictionlist) {
+    await ApiManager().getPropertyRestriction_Customer(context, propId, (status, responce, restrictionlist) {
       if (status) {
         _store.dispatch(UpdateCPDRestrictionlist(restrictionlist));
       } else {
@@ -103,8 +96,7 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
       }
     });
 
-    await ApiManager().getPropertyImagesDSQ(context, propId,
-        (status, responce, PropertyImageMediaInfolist) {
+    await ApiManager().getPropertyImagesDSQ(context, propId, (status, responce, PropertyImageMediaInfolist) {
       if (status) {
         _store.dispatch(UpdateCPDPropertyImageList(PropertyImageMediaInfolist));
       } else {
@@ -112,20 +104,16 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
       }
     });
 
-    await ApiManager().getPropertyAmanityUtility(context, propId,
-        (status, responce, amenitieslist, utilitylist) async {
+    await ApiManager().getPropertyAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
 
-        List<PropertyAmenitiesUtility> new_amenitieslist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_amenitieslist = <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> new_utilitylist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_utilitylist = <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> new_notincludedutilitylist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_notincludedutilitylist = <PropertyAmenitiesUtility>[];
 
         for (PropertyAmenitiesUtility proam in amenitieslist) {
           if (proam.value == "1") {
@@ -147,8 +135,7 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
 
         _store.dispatch(UpdateCPDPropertyAmenitiesList(new_amenitieslist));
         _store.dispatch(UpdateCPDPropertyUtilitiesList(new_utilitylist));
-        _store.dispatch(UpdateCPDPropertyNotIncludedUtilitiesList(
-            new_notincludedutilitylist));
+        _store.dispatch(UpdateCPDPropertyNotIncludedUtilitiesList(new_notincludedutilitylist));
       } else {
         _store.dispatch(UpdateCPDPropertyAmenitiesList([]));
         _store.dispatch(UpdateCPDPropertyUtilitiesList([]));
@@ -157,8 +144,7 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
       }
     });
 
-    await ApiManager().getPropertyDetails(context, propId,
-        (status, responce, propertyData) async {
+    await ApiManager().getPropertyDetails(context, propId, (status, responce, propertyData) async {
       if (status) {
         _store.dispatch(UpdateCPDpropertylist(cusProlistState.propertylist));
         await ApiManager().Customer_bindPropertyData(propertyData!);

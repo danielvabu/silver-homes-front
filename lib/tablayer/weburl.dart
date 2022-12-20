@@ -16,6 +16,8 @@ class Weburl {
   static String DBCODE_UAT = "SilverHome_UAT";
   static String DBCODE_DEV = "SilverHome_DEV";
 
+  static String urlProd = "https://app.silverhomes.ai/#/";
+//"https://www.ren-hogar.com/#/
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
 
   static var Domain_NEW = "https://";
@@ -25,7 +27,7 @@ class Weburl {
           ? "http://161.97.104.204:8090/#/"
           : Domain_CR
               ? "http://161.97.104.204:8091/#/"
-              : "https://danivargas.co/#/";
+              : urlProd;
 
   static var Email_URL = Domain_PROD
       ? "https://app.silverhomes.ai/"
@@ -38,10 +40,13 @@ class Weburl {
   static var CustomerFeaturedPage = Domain_URL;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
+  static var API_ServerNew = isPROD_API
+      ? "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging/"
+      : "https://vuy3fbu93g.execute-api.us-east-1.amazonaws.com/prod/";
 
   static var API_Server = isPROD_API
       ? "https://api.silverhomes.ai"
-      : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";
+      : "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging";
 
 //      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 

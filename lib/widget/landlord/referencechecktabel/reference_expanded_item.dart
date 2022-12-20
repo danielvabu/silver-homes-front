@@ -22,7 +22,7 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:silverhome/widget/Landlord/emailtemplet/referencerequest_dialogbox.dart';
 import 'package:silverhome/widget/Landlord/reference_dialog/reference_details_dialog.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 import '../../searchdropdown/dropdown_search.dart';
 import '../customewidget.dart';

@@ -8,7 +8,7 @@ import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 
-import '../_network_image_web.dart';
+import '../internet/_network_image_web.dart';
 
 typedef CallbackOnItem = void Function();
 typedef CallbackOnFeatured = void Function(bool flag);

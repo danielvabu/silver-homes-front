@@ -15,8 +15,8 @@ import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/inactive_alert_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/inactive_alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

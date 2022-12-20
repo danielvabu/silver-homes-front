@@ -21,19 +21,18 @@ import 'package:silverhome/tablayer/api_manager_admin.dart';
 import 'package:silverhome/tablayer/dsq_query.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/admin_panel/addnewmember_dialogbox.dart';
-import 'package:silverhome/widget/admin_panel/team_table/team_header.dart';
-import 'package:silverhome/widget/admin_panel/team_table/team_item.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/adminPanel/addnewmember_dialogbox.dart';
+import 'package:silverhome/widget/adminPanel/team_table/team_header.dart';
+import 'package:silverhome/widget/adminPanel/team_table/team_item.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 import '../../../../widget/Landlord/customewidget.dart';
 
 class AdminTeamManagementScreen extends StatefulWidget {
   @override
-  _AdminTeamManagementScreenState createState() =>
-      _AdminTeamManagementScreenState();
+  _AdminTeamManagementScreenState createState() => _AdminTeamManagementScreenState();
 }
 
 class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
@@ -68,8 +67,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
     _store.dispatch(UpdateAdminTeam_totalRecord(0));
   }
 
-  apimanager(String search, int pageNo, String SortField, int saquence,
-      int ftime) async {
+  apimanager(String search, int pageNo, String SortField, int saquence, int ftime) async {
     LanloadListReqtokens reqtokens = new LanloadListReqtokens();
     reqtokens.roles = Weburl.Super_Admin_RoleID;
     reqtokens.Name = search != null ? search : "";
@@ -126,8 +124,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                   children: [
                     Row(
                       children: [
-                        if (adminTeamState!.isloding &&
-                            adminTeamState.AdminTeamSearchText == "")
+                        if (adminTeamState!.isloding && adminTeamState.AdminTeamSearchText == "")
                           Container(
                             width: 260,
                             height: 30,
@@ -144,8 +141,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                                 Expanded(
                                   child: Text(
                                     GlobleString.LL_Search,
-                                    style:
-                                        MyStyles.Medium(14, myColor.hintcolor),
+                                    style: MyStyles.Medium(14, myColor.hintcolor),
                                   ),
                                 ),
                                 Padding(
@@ -173,8 +169,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                               children: <Widget>[
                                 new Expanded(
                                   child: TextFormField(
-                                    initialValue:
-                                        adminTeamState.AdminTeamSearchText,
+                                    initialValue: adminTeamState.AdminTeamSearchText,
                                     onChanged: (value) async {
                                       if (timer != null) timer!.cancel();
 
@@ -183,14 +178,12 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintStyle: MyStyles.Medium(
-                                          14, myColor.hintcolor),
+                                      hintStyle: MyStyles.Medium(14, myColor.hintcolor),
                                       contentPadding: EdgeInsets.all(10),
                                       isDense: true,
                                       hintText: GlobleString.LL_Search,
                                     ),
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                   ),
                                 ),
                                 Padding(
@@ -341,8 +334,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
             },
           ),
           tableItem(adminTeamState),
-          if (adminTeamState.teamdatalist != null &&
-              adminTeamState.teamdatalist.length > 0)
+          if (adminTeamState.teamdatalist != null && adminTeamState.teamdatalist.length > 0)
             Container(
               height: 40,
               color: myColor.TA_table_header,
@@ -364,15 +356,9 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                     alignment: Alignment.center,
                     child: DropdownSearch<String>(
                       mode: Mode.MENU,
-                      defultHeight:
-                          Helper.PagingRecord(adminTeamState.totalRecord)
-                                          .length *
-                                      35 >
-                                  250
-                              ? 250
-                              : Helper.PagingRecord(adminTeamState.totalRecord)
-                                      .length *
-                                  35,
+                      defultHeight: Helper.PagingRecord(adminTeamState.totalRecord).length * 35 > 250
+                          ? 250
+                          : Helper.PagingRecord(adminTeamState.totalRecord).length * 35,
                       textstyle: MyStyles.Medium(14, myColor.black),
                       hint: "Select page",
                       selectedItem: adminTeamState.pageNo.toString(),
@@ -380,10 +366,8 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                       showSearchBox: false,
                       isFilteredOnline: true,
                       onChanged: (value) {
-                        _store.dispatch(UpdateAdminTeam_pageNo(
-                            int.parse(value.toString())));
-                        paginationCall(
-                            adminTeamState, int.parse(value.toString()));
+                        _store.dispatch(UpdateAdminTeam_pageNo(int.parse(value.toString())));
+                        paginationCall(adminTeamState, int.parse(value.toString()));
                       },
                     ),
                   ),
@@ -478,8 +462,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                   ),
                 ),
               )
-            : adminTeamState.teamdatalist != null &&
-                    adminTeamState.teamdatalist.length > 0
+            : adminTeamState.teamdatalist != null && adminTeamState.teamdatalist.length > 0
                 ? Expanded(
                     child: TeamItem(
                       listdata1: adminTeamState.teamdatalist,
@@ -490,25 +473,16 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                         _dailogAdminActive(true, 2, admindata);
                       },
                       onPresseEdit: (LandLordData admindata, int pos) async {
-                        _store.dispatch(UpdateAdminTM_AM_OwnerId(
-                            admindata.ownerId.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_Persionid(
-                            admindata.id.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_firstname(
-                            admindata.firstName.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_lastname(
-                            admindata.lastName.toString()));
-                        _store.dispatch(
-                            UpdateAdminTM_AM_email(admindata.email.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_dialcode(
-                            admindata.dialCode.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_countrycode(
-                            admindata.countryCode.toString()));
-                        _store.dispatch(UpdateAdminTM_AM_phone(
-                            admindata.phoneNumber.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_OwnerId(admindata.ownerId.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_Persionid(admindata.id.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_firstname(admindata.firstName.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_lastname(admindata.lastName.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_email(admindata.email.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_dialcode(admindata.dialCode.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_countrycode(admindata.countryCode.toString()));
+                        _store.dispatch(UpdateAdminTM_AM_phone(admindata.phoneNumber.toString()));
 
-                        _store
-                            .dispatch(UpdateAdminTM_AM_error_firstname(false));
+                        _store.dispatch(UpdateAdminTM_AM_error_firstname(false));
                         _store.dispatch(UpdateAdminTM_AM_error_lastname(false));
                         _store.dispatch(UpdateAdminTM_AM_error_email(false));
                         _store.dispatch(UpdateAdminTM_AM_error_phone(false));
@@ -547,8 +521,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
                               positiveText: GlobleString.Admin_Delete_yes,
                               onPressedYes: () {
                                 Navigator.of(context1).pop();
-                                DeleteTeamMember(admindata.ownerId.toString(),
-                                    admindata.id.toString());
+                                DeleteTeamMember(admindata.ownerId.toString(), admindata.id.toString());
                               },
                               onPressedNo: () {
                                 Navigator.of(context1).pop();
@@ -579,27 +552,22 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
 
   void paginationCall(AdminTeamState adminTeamState, int pageno) {
     if (adminTeamState.isIDSort) {
-      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Owner_ID",
-          adminTeamState.IDSortAcsDes, 1);
+      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Owner_ID", adminTeamState.IDSortAcsDes, 1);
     }
 
     if (adminTeamState.isNameSort) {
-      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Landlord Name",
-          adminTeamState.NameSortAcsDes, 1);
+      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Landlord Name", adminTeamState.NameSortAcsDes, 1);
     }
 
     if (adminTeamState.isEmailSort) {
-      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Email",
-          adminTeamState.EmailSortAcsDes, 1);
+      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Email", adminTeamState.EmailSortAcsDes, 1);
     }
 
     if (adminTeamState.isPhoneSort) {
-      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Phone Number",
-          adminTeamState.PhoneSortAcsDes, 1);
+      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Phone Number", adminTeamState.PhoneSortAcsDes, 1);
     }
     if (adminTeamState.isActiveSort) {
-      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Active/Inactive",
-          adminTeamState.ActiveSortAcsDes, 1);
+      apimanager(adminTeamState.AdminTeamSearchText, pageno, "Active/Inactive", adminTeamState.ActiveSortAcsDes, 1);
     }
   }
 
@@ -607,55 +575,45 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
     updateSortingFeild(flag);
 
     if (flag == 1) {
-      _store.dispatch(UpdateAdminTeam_IDSortAcsDes(
-          adminTeamState.IDSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminTeam_IDSortAcsDes(adminTeamState.IDSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminTeam_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(0));
 
-      apimanager(
-          "", 1, "Owner_ID", adminTeamState.IDSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Owner_ID", adminTeamState.IDSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 2) {
-      _store.dispatch(UpdateAdminTeam_NameSortAcsDes(
-          adminTeamState.NameSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminTeam_NameSortAcsDes(adminTeamState.NameSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminTeam_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(0));
 
-      apimanager("", 1, "Landlord Name",
-          adminTeamState.NameSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Landlord Name", adminTeamState.NameSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 3) {
-      _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(
-          adminTeamState.EmailSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(adminTeamState.EmailSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminTeam_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(0));
 
-      apimanager(
-          "", 1, "Email", adminTeamState.EmailSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Email", adminTeamState.EmailSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 4) {
-      _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(
-          adminTeamState.PhoneSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(adminTeamState.PhoneSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminTeam_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(0));
 
-      apimanager("", 1, "Phone Number",
-          adminTeamState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Phone Number", adminTeamState.PhoneSortAcsDes == 1 ? 0 : 1, 0);
     } else if (flag == 5) {
-      _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(
-          adminTeamState.ActiveSortAcsDes == 1 ? 0 : 1));
+      _store.dispatch(UpdateAdminTeam_ActiveSortAcsDes(adminTeamState.ActiveSortAcsDes == 1 ? 0 : 1));
       _store.dispatch(UpdateAdminTeam_IDSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_NameSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_EmailSortAcsDes(0));
       _store.dispatch(UpdateAdminTeam_PhoneSortAcsDes(0));
 
-      apimanager("", 1, "Active/Inactive",
-          adminTeamState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
+      apimanager("", 1, "Active/Inactive", adminTeamState.ActiveSortAcsDes == 1 ? 0 : 1, 0);
     }
   }
 
@@ -709,9 +667,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
       barrierDismissible: false,
       builder: (BuildContext context1) {
         return AlertDialogBox(
-          title: flag == 1
-              ? GlobleString.Admin_INActive_msg
-              : GlobleString.Admin_Active_msg,
+          title: flag == 1 ? GlobleString.Admin_INActive_msg : GlobleString.Admin_Active_msg,
           positiveText: GlobleString.Admin_Active_yes,
           negativeText: GlobleString.Admin_Active_NO,
           onPressedYes: () async {
@@ -723,8 +679,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
             AdminsideIsActive update = new AdminsideIsActive();
             update.adminsideIsActive = status;
 
-            ApiManagerAdmin().UpdateLandlordActive(context, commonid, update,
-                (error, respoce) async {
+            ApiManagerAdmin().UpdateLandlordActive(context, commonid, update, (error, respoce) async {
               if (error) {
                 updateState();
                 apimanager("", 1, "Owner_ID", 1, 0);
@@ -748,8 +703,7 @@ class _AdminTeamManagementScreenState extends State<AdminTeamManagementScreen> {
     CommonID uid = new CommonID();
     uid.ID = ownerId;
 
-    ApiManagerAdmin().DeleteTeamManagement(context, pid, uid,
-        (status, responce) async {
+    ApiManagerAdmin().DeleteTeamManagement(context, pid, uid, (status, responce) async {
       if (status) {
         ToastUtils.showCustomToast(context, GlobleString.User_delete, true);
         await updateState();

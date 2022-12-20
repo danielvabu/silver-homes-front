@@ -37,17 +37,15 @@ import 'package:silverhome/widget/landlord/lead_dialog/addnewlead_dialogbox.dart
 import 'package:silverhome/widget/landlord/propertydropdown.dart';
 import 'package:silverhome/widget/landlord/varifydocumenttabel/varify_document_header.dart';
 import 'package:silverhome/widget/landlord/varifydocumenttabel/varify_document_item.dart';
-import 'package:silverhome/widget/searchboxview.dart';
-import 'package:silverhome/widget/toggle_switch.dart';
+import 'package:silverhome/widget/search/searchboxview.dart';
+import 'package:silverhome/widget/customer/toggle_switch.dart';
 
 class LandlordVarificationDocumentScreen extends StatefulWidget {
   @override
-  _LandlordVarificationDocumentScreenState createState() =>
-      _LandlordVarificationDocumentScreenState();
+  _LandlordVarificationDocumentScreenState createState() => _LandlordVarificationDocumentScreenState();
 }
 
-class _LandlordVarificationDocumentScreenState
-    extends State<LandlordVarificationDocumentScreen> {
+class _LandlordVarificationDocumentScreenState extends State<LandlordVarificationDocumentScreen> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
   late OverlayEntry overlayEntry;
@@ -72,8 +70,7 @@ class _LandlordVarificationDocumentScreenState
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
 
     _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
-    _store
-        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+    _store.dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -95,8 +92,7 @@ class _LandlordVarificationDocumentScreenState
     String json = await Prefs.getString(PrefsName.ApplyFilterJson);
 
     _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
-    _store
-        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+    _store.dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
 
     var filter = jsonDecode(json);
 
@@ -143,31 +139,16 @@ class _LandlordVarificationDocumentScreenState
                             ? SearchBoxView(
                                 callbackOnChanetext: (String text) {
                                   if (text.isNotEmpty) {
-                                    List<TenancyApplication>
-                                        filtervarificationdoclist =
-                                        List.empty();
+                                    List<TenancyApplication> filtervarificationdoclist = List.empty();
 
-                                    filtervarificationdoclist =
-                                        varificationDocumentState
-                                            .varificationdoclist
-                                            .where((u) => (u.propertyName!
-                                                    .toLowerCase()
-                                                    .contains(
-                                                        text.toLowerCase()) ||
-                                                u.applicantName!
-                                                    .toLowerCase()
-                                                    .contains(
-                                                        text.toLowerCase())))
-                                            .toList();
+                                    filtervarificationdoclist = varificationDocumentState.varificationdoclist
+                                        .where((u) => (u.propertyName!.toLowerCase().contains(text.toLowerCase()) ||
+                                            u.applicantName!.toLowerCase().contains(text.toLowerCase())))
+                                        .toList();
 
-                                    _store.dispatch(
-                                        UpdateLLVDfiltervarificationdoclist(
-                                            filtervarificationdoclist));
+                                    _store.dispatch(UpdateLLVDfiltervarificationdoclist(filtervarificationdoclist));
                                   } else {
-                                    _store.dispatch(
-                                        UpdateLLVDfiltervarificationdoclist(
-                                            varificationDocumentState
-                                                .varificationdoclist));
+                                    _store.dispatch(UpdateLLVDfiltervarificationdoclist(varificationDocumentState.varificationdoclist));
                                   }
 
                                   RefreshstartTime();
@@ -175,26 +156,18 @@ class _LandlordVarificationDocumentScreenState
                               )
                             : PropertyDropdown(
                                 onSelectVal: (item) async {
-                                  _store.dispatch(
-                                      UpdateLLVDapplicationPropertyItem(item));
+                                  _store.dispatch(UpdateLLVDapplicationPropertyItem(item));
                                   _store.dispatch(UpdateLLRCPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTLleasePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateArchivePropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTALeadPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLTAApplicantPropertyItem(item));
-                                  _store.dispatch(
-                                      UpdateLLActiveTenantPropertyItem(item));
+                                  _store.dispatch(UpdateLLTLleasePropertyItem(item));
+                                  _store.dispatch(UpdateArchivePropertyItem(item));
+                                  _store.dispatch(UpdateLLTALeadPropertyItem(item));
+                                  _store.dispatch(UpdateLLTAApplicantPropertyItem(item));
+                                  _store.dispatch(UpdateLLActiveTenantPropertyItem(item));
 
                                   await finnleviewcallapi(item!.ID.toString());
                                 },
-                                propertylist:
-                                    varificationDocumentState.propertylist,
-                                propertyValue:
-                                    varificationDocumentState.propertyValue,
+                                propertylist: varificationDocumentState.propertylist,
+                                propertyValue: varificationDocumentState.propertyValue,
                               ),
                         SizedBox(
                           width: 10,
@@ -204,8 +177,7 @@ class _LandlordVarificationDocumentScreenState
                     ),
                     Row(
                       children: [
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                           InkWell(
                             onTap: () {
                               ClearFilter(varificationDocumentState);
@@ -215,10 +187,8 @@ class _LandlordVarificationDocumentScreenState
                               padding: EdgeInsets.only(left: 25, right: 25),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border: Border.all(
-                                    color: myColor.errorcolor, width: 1),
+                                borderRadius: BorderRadius.all(Radius.circular(5)),
+                                border: Border.all(color: myColor.errorcolor, width: 1),
                                 color: myColor.white,
                               ),
                               child: Text(
@@ -227,8 +197,7 @@ class _LandlordVarificationDocumentScreenState
                               ),
                             ),
                           ),
-                        if (Prefs.getBool(PrefsName.IsApplyFilterList) ||
-                            Prefs.getBool(PrefsName.IsApplyFilterFunnel))
+                        if (Prefs.getBool(PrefsName.IsApplyFilterList) || Prefs.getBool(PrefsName.IsApplyFilterFunnel))
                           SizedBox(
                             width: 30,
                           ),
@@ -242,9 +211,7 @@ class _LandlordVarificationDocumentScreenState
                   ],
                 ),
               ),
-              varificationDocumentState.selecttoggle == 0
-                  ? _tableview(varificationDocumentState)
-                  : _funnelview(varificationDocumentState)
+              varificationDocumentState.selecttoggle == 0 ? _tableview(varificationDocumentState) : _funnelview(varificationDocumentState)
             ],
           );
         },
@@ -270,8 +237,7 @@ class _LandlordVarificationDocumentScreenState
                       context, Prefs.getString(PrefsName.OwnerID));*/
                 } else {
                   if (VDState.propertyValue != null) {
-                    await finnleviewcallapi(
-                        VDState.propertyValue!.ID.toString());
+                    await finnleviewcallapi(VDState.propertyValue!.ID.toString());
                   }
                 }
               },
@@ -313,8 +279,7 @@ class _LandlordVarificationDocumentScreenState
               varificationDocCallApi();
             } else {
               if (varificationDocumentState.propertyValue != null) {
-                await finnleviewcallapi(
-                    varificationDocumentState.propertyValue!.ID.toString());
+                await finnleviewcallapi(varificationDocumentState.propertyValue!.ID.toString());
               }
             }
             await Prefs.setBool(PrefsName.IsApplyFilterFunnel, false);
@@ -340,27 +305,22 @@ class _LandlordVarificationDocumentScreenState
               if (varificationDocumentState.propertyValue != null) {
                 _showFilterOverlayView(context, varificationDocumentState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 2) {
             if (varificationDocumentState.selecttoggle == 0) {
               if (varificationDocumentState.filtervarificationdoclist != null &&
-                  varificationDocumentState.filtervarificationdoclist.length >
-                      0) {
+                  varificationDocumentState.filtervarificationdoclist.length > 0) {
                 createTableDataCSVFile(varificationDocumentState);
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_export, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_export, false);
               }
             } else {
               if (varificationDocumentState.propertyValue != null) {
-                CustomeWidget.FunnelDataCSVFile(context,
-                    varificationDocumentState.propertyValue!.ID.toString());
+                CustomeWidget.FunnelDataCSVFile(context, varificationDocumentState.propertyValue!.ID.toString());
               } else {
-                ToastUtils.showCustomToast(
-                    context, GlobleString.Blank_funnel, false);
+                ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
               }
             }
           } else if (value == 3) {
@@ -368,22 +328,18 @@ class _LandlordVarificationDocumentScreenState
               loader = Helper.overlayLoader(context);
               Overlay.of(context)!.insert(loader);
 
-              ApiManager().AllArchivePropertyWise(context,
-                  varificationDocumentState.propertyValue!.ID.toString(),
+              ApiManager().AllArchivePropertyWise(context, varificationDocumentState.propertyValue!.ID.toString(),
                   (status, responce) async {
                 if (status) {
-                  await finnleviewcallapi(
-                      varificationDocumentState.propertyValue!.ID.toString());
+                  await finnleviewcallapi(varificationDocumentState.propertyValue!.ID.toString());
                   loader.remove();
                 } else {
                   loader.remove();
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Error1, false);
+                  ToastUtils.showCustomToast(context, GlobleString.Error1, false);
                 }
               });
             } else {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Blank_funnel, false);
+              ToastUtils.showCustomToast(context, GlobleString.Blank_funnel, false);
             }
           }
         },
@@ -459,35 +415,25 @@ class _LandlordVarificationDocumentScreenState
           VarifyDocumentHeader(
             onPressedSortName: () async {
               await updateOtherSortingValue(1);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
               if (!varificationDocumentState.isNameSort) {
-                lalist.sort((a, b) => a.applicantName!
-                    .toLowerCase()
-                    .compareTo(b.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => a.applicantName!.toLowerCase().compareTo(b.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisNameSort(true));
               } else {
-                lalist.sort((a, b) => b.applicantName!
-                    .toLowerCase()
-                    .compareTo(a.applicantName!.toLowerCase()));
+                lalist.sort((a, b) => b.applicantName!.toLowerCase().compareTo(a.applicantName!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisNameSort(false));
               }
               _store.dispatch(UpdateLLVDfiltervarificationdoclist(lalist));
             },
             onPressedSortProperty: () async {
               await updateOtherSortingValue(2);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
 
               if (!varificationDocumentState.isPropertySort) {
-                lalist.sort((a, b) => a.propertyName!
-                    .toLowerCase()
-                    .compareTo(b.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => a.propertyName!.toLowerCase().compareTo(b.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisPropertySort(true));
               } else {
-                lalist.sort((a, b) => b.propertyName!
-                    .toLowerCase()
-                    .compareTo(a.propertyName!.toLowerCase()));
+                lalist.sort((a, b) => b.propertyName!.toLowerCase().compareTo(a.propertyName!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisPropertySort(false));
               }
 
@@ -495,65 +441,49 @@ class _LandlordVarificationDocumentScreenState
             },
             onPressedSortRating: () async {
               await updateOtherSortingValue(3);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
               if (!varificationDocumentState.isRatingSort) {
-                lalist.sort((a, b) =>
-                    b.rating.toString().compareTo(a.rating.toString()));
+                lalist.sort((a, b) => b.rating.toString().compareTo(a.rating.toString()));
                 _store.dispatch(UpdateLLVDisRatingSort(true));
               } else {
-                lalist.sort((a, b) =>
-                    a.rating.toString().compareTo(b.rating.toString()));
+                lalist.sort((a, b) => a.rating.toString().compareTo(b.rating.toString()));
                 _store.dispatch(UpdateLLVDisRatingSort(false));
               }
               _store.dispatch(UpdateLLVDfiltervarificationdoclist(lalist));
             },
             onPressedSortDateSent: () async {
               await updateOtherSortingValue(4);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
               if (!varificationDocumentState.isDateSentSort) {
-                lalist.sort((a, b) => b.docRequestSentDate!
-                    .toLowerCase()
-                    .compareTo(a.docRequestSentDate!.toLowerCase()));
+                lalist.sort((a, b) => b.docRequestSentDate!.toLowerCase().compareTo(a.docRequestSentDate!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisDateSentSort(true));
               } else {
-                lalist.sort((a, b) => a.docRequestSentDate!
-                    .toLowerCase()
-                    .compareTo(b.docRequestSentDate!.toLowerCase()));
+                lalist.sort((a, b) => a.docRequestSentDate!.toLowerCase().compareTo(b.docRequestSentDate!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisDateSentSort(false));
               }
               _store.dispatch(UpdateLLVDfiltervarificationdoclist(lalist));
             },
             onPressedSortDateReceive: () async {
               await updateOtherSortingValue(5);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
               if (!varificationDocumentState.isDateReceiveSort) {
-                lalist.sort((a, b) => b.docReceivedDate!
-                    .toLowerCase()
-                    .compareTo(a.docReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => b.docReceivedDate!.toLowerCase().compareTo(a.docReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisDateReceiveSort(true));
               } else {
-                lalist.sort((a, b) => a.docReceivedDate!
-                    .toLowerCase()
-                    .compareTo(b.docReceivedDate!.toLowerCase()));
+                lalist.sort((a, b) => a.docReceivedDate!.toLowerCase().compareTo(b.docReceivedDate!.toLowerCase()));
                 _store.dispatch(UpdateLLVDisDateReceiveSort(false));
               }
               _store.dispatch(UpdateLLVDfiltervarificationdoclist(lalist));
             },
             onPressedSortAppStatus: () async {
               await updateOtherSortingValue(6);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
 
               if (!varificationDocumentState.isAppStatusSort) {
-                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID
-                    .compareTo(b.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => a.applicationStatus!.EnumDetailID.compareTo(b.applicationStatus!.EnumDetailID));
                 _store.dispatch(UpdateLLVDisAppStatusSort(true));
               } else {
-                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID
-                    .compareTo(a.applicationStatus!.EnumDetailID));
+                lalist.sort((a, b) => b.applicationStatus!.EnumDetailID.compareTo(a.applicationStatus!.EnumDetailID));
                 //lalist.reversed.toList();
                 _store.dispatch(UpdateLLVDisAppStatusSort(false));
               }
@@ -562,24 +492,17 @@ class _LandlordVarificationDocumentScreenState
             },
             onPressedSortReviewStatus: () async {
               await updateOtherSortingValue(7);
-              List<TenancyApplication> lalist =
-                  varificationDocumentState.filtervarificationdoclist;
+              List<TenancyApplication> lalist = varificationDocumentState.filtervarificationdoclist;
 
               if (!varificationDocumentState.isDocStatusSort) {
                 lalist.sort((a, b) => a.docReviewStatus == null
                     ? 0
-                    : a.docReviewStatus!.EnumDetailID.compareTo(
-                        b.docReviewStatus == null
-                            ? 0
-                            : b.docReviewStatus!.EnumDetailID));
+                    : a.docReviewStatus!.EnumDetailID.compareTo(b.docReviewStatus == null ? 0 : b.docReviewStatus!.EnumDetailID));
                 _store.dispatch(UpdateLLVDisDocStatusSort(true));
               } else {
                 lalist.sort((a, b) => b.docReviewStatus == null
                     ? 0
-                    : b.docReviewStatus!.EnumDetailID.compareTo(
-                        a.docReviewStatus == null
-                            ? 0
-                            : a.docReviewStatus!.EnumDetailID));
+                    : b.docReviewStatus!.EnumDetailID.compareTo(a.docReviewStatus == null ? 0 : a.docReviewStatus!.EnumDetailID));
                 //lalist.reversed.toList();
                 _store.dispatch(UpdateLLVDisDocStatusSort(false));
               }
@@ -612,8 +535,7 @@ class _LandlordVarificationDocumentScreenState
                   ),
                 ),
               )
-            : varDocState.filtervarificationdoclist != null &&
-                    varDocState.filtervarificationdoclist.length > 0
+            : varDocState.filtervarificationdoclist != null && varDocState.filtervarificationdoclist.length > 0
                 ? Expanded(
                     child: VarifyDocumentItem(
                       OnRefresh: () {},
@@ -648,8 +570,7 @@ class _LandlordVarificationDocumentScreenState
       varificationDocCallApi();
     } else {
       if (varificationDocumentState.propertyValue != null) {
-        await finnleviewcallapi(
-            varificationDocumentState.propertyValue!.ID.toString());
+        await finnleviewcallapi(varificationDocumentState.propertyValue!.ID.toString());
       }
     }
 
@@ -692,8 +613,7 @@ class _LandlordVarificationDocumentScreenState
     _store.dispatch(UpdateLLVDapplicationisloding(false));
   }
 
-  createTableDataCSVFile(
-      VarificationDocumentState varificationDocumentState) async {
+  createTableDataCSVFile(VarificationDocumentState varificationDocumentState) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -712,8 +632,7 @@ class _LandlordVarificationDocumentScreenState
 
     csvList.add(csvHeaderTitle);
 
-    for (var data
-        in varificationDocumentState.filtervarificationdoclist.toSet()) {
+    for (var data in varificationDocumentState.filtervarificationdoclist.toSet()) {
       List row = [];
       row.add(data.id);
       row.add(data.applicantName);
@@ -721,21 +640,15 @@ class _LandlordVarificationDocumentScreenState
       row.add(data.rating.toString());
       row.add(data.docRequestSentDate);
       row.add(data.docReceivedDate);
-      row.add(data.applicationStatus != null
-          ? data.applicationStatus!.displayValue.toString()
-          : "");
-      row.add(data.docReviewStatus != null
-          ? data.docReviewStatus!.displayValue.toString()
-          : "");
+      row.add(data.applicationStatus != null ? data.applicationStatus!.displayValue.toString() : "");
+      row.add(data.docReviewStatus != null ? data.docReviewStatus!.displayValue.toString() : "");
 
       csvList.add(row);
     }
 
     csv = const ListToCsvConverter().convert(csvList);
 
-    String filename = "VarificationDocument_" +
-        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
-        ".csv";
+    String filename = "VarificationDocument_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
 
     // prepare
     final bytes = utf8.encode(csv);
@@ -752,8 +665,7 @@ class _LandlordVarificationDocumentScreenState
     loader.remove();
   }
 
-  _showFilterOverlayView(BuildContext context,
-      VarificationDocumentState varificationDocumentState) {
+  _showFilterOverlayView(BuildContext context, VarificationDocumentState varificationDocumentState) {
     OverlayState overlayState = Overlay.of(context)!;
     overlayEntry = OverlayEntry(builder: (context) {
       return Container(
@@ -791,38 +703,29 @@ class _LandlordVarificationDocumentScreenState
                   } else {
                     if (isclear) {
                       if (varificationDocumentState.propertyValue != null) {
-                        await finnleviewcallapi(varificationDocumentState
-                            .propertyValue!.ID
-                            .toString());
+                        await finnleviewcallapi(varificationDocumentState.propertyValue!.ID.toString());
                       }
                     } else {
                       _store.dispatch(UpdateLLVDToggle(1));
-                      _store.dispatch(
-                          UpdateFunnelAllListData(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelAllListData(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeadCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeadList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeadList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelApplicantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelApplicantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelApplicantList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelDocumentVarifyCount(0));
-                      _store.dispatch(UpdateFunnelDocumentVarifyList(
-                          <TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelDocumentVarifyList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelReferenceCheckCount(0));
-                      _store.dispatch(
-                          UpdateFunnelReferenceList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelReferenceList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelLeaseCount(0));
-                      _store.dispatch(
-                          UpdateFunnelLeassentList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelLeassentList(<TenancyApplication>[]));
 
                       _store.dispatch(UpdateFunnelActiveTenantCount(0));
-                      _store.dispatch(
-                          UpdateFunnelActiveTenantList(<TenancyApplication>[]));
+                      _store.dispatch(UpdateFunnelActiveTenantList(<TenancyApplication>[]));
 
                       await ApiManager().getPropertyWiseFunnel(context, json);
                     }

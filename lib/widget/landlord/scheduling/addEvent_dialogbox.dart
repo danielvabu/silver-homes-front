@@ -27,7 +27,7 @@ import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
-import '../../alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 
 class AddEventDialogBox extends StatefulWidget {
   final VoidCallback _callbackSave;

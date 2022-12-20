@@ -32,9 +32,9 @@ import 'package:silverhome/store/store.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/_network_image_web.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/internet/_network_image_web.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 import 'taf_additional_information_screen.dart';
 import 'taf_additional_occupants_screen.dart';

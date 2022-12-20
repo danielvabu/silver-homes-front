@@ -384,7 +384,8 @@ class DocumentsService {
           (type == "" || type == null) ? urlParams : urlParams + "type=$type";
  */
       var response = await _client?.post(
-          Uri.parse("https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentslist"),
+          Uri.parse(
+              "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/documentslist"),
           headers: getHeadersJson(),
           body: jsonEncode({
             "type": type.toUpperCase(),

@@ -33,10 +33,10 @@ import 'package:silverhome/widget/Landlord/funnelview/reference_checked_cardview
 import 'package:silverhome/widget/Landlord/lead_dialog/editlead_dialogbox.dart';
 import 'package:silverhome/widget/Landlord/reference_dialog/check_reference_confirm_dialog.dart';
 import 'package:silverhome/widget/Landlord/reference_dialog/check_reference_list_dialog.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/leasesend_dialogbox.dart';
 import 'package:silverhome/widget/landlord/lead_dialog/leadinfo_dialogbox.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 
 import '../../../presentation/models/landlord_models/funnelview_state.dart';
 import '../customewidget.dart';
