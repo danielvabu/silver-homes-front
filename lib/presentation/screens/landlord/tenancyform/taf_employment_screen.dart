@@ -70,7 +70,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     empstatuslist.clear();
     anualincomelist.clear();
     empstatuslist = QueryFilter().PlainValues(eSystemEnums().EmploymentStatus);
-    anualincomelist = QueryFilter().PlainValues(eSystemEnums().AnnualIncomeStatus);
+    anualincomelist =
+        QueryFilter().PlainValues(eSystemEnums().AnnualIncomeStatus);
     _store.dispatch(UpdateTFEmploymentempstatuslist(empstatuslist));
     _store.dispatch(UpdateTFEmploymentanualincomestatuslist(anualincomelist));
     initilizedata();
@@ -82,14 +83,19 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     if (_store.state!.tfEmploymentState != null) {
       TFEmploymentState tfEmploymentState = _store.state!.tfEmploymentState;
 
-      _store.dispatch(UpdateTFEmploymentothersourceincome(tfEmploymentState.FNLothersourceincome));
-      _store.dispatch(UpdateTFEmploymentlinkedprofile(tfEmploymentState.FNLlinkedprofile));
-      _store.dispatch(UpdateTFEmploymentanualincomestatus(tfEmploymentState.FNLanualincomestatus));
-      _store.dispatch(UpdateTFEmploymentempstatus(tfEmploymentState.FNLempstatus));
+      _store.dispatch(UpdateTFEmploymentothersourceincome(
+          tfEmploymentState.FNLothersourceincome));
+      _store.dispatch(
+          UpdateTFEmploymentlinkedprofile(tfEmploymentState.FNLlinkedprofile));
+      _store.dispatch(UpdateTFEmploymentanualincomestatus(
+          tfEmploymentState.FNLanualincomestatus));
+      _store.dispatch(
+          UpdateTFEmploymentempstatus(tfEmploymentState.FNLempstatus));
 
       _store.dispatch(UpdateTFEmploymentlistoccupation([]));
       List<TenancyEmploymentInformation> secondList =
-          tfEmploymentState.FNLlistoccupation.map((item) => new TenancyEmploymentInformation.clone(item)).toList();
+          tfEmploymentState.FNLlistoccupation.map(
+              (item) => new TenancyEmploymentInformation.clone(item)).toList();
 
       _store.dispatch(UpdateTFEmploymentlistoccupation(secondList));
     }
@@ -97,7 +103,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
 
   initNavigationBack() {
     navigationNotifier.addListener(() {
-      if (mounted) if (navigationNotifier.backScreen == NavigationConstant.tenancyEmployment) {
+      if (mounted) if (navigationNotifier.backScreen ==
+          NavigationConstant.tenancyEmployment) {
         isGotoback = navigationNotifier.gotoBack;
         stepper = navigationNotifier.stepper;
         _saveDataAndNext(_store.state!.tfEmploymentState);
@@ -201,21 +208,29 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             items: tfEmploymentState.empstatuslist,
                             defultHeight: 210,
                             textstyle: MyStyles.Medium(13, myColor.text_color),
-                            itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
+                            itemAsString: (SystemEnumDetails? u) =>
+                                u != null ? u.displayValue : "",
                             hint: valueHint.toString(),
                             showSearchBox: false,
-                            selectedItem: tfEmploymentState.empstatus != null ? tfEmploymentState.empstatus : null,
+                            selectedItem: tfEmploymentState.empstatus != null
+                                ? tfEmploymentState.empstatus
+                                : null,
                             isFilteredOnline: true,
                             onChanged: (data) {
                               valueHint = data!.displayValue.toString();
-                              _store.dispatch(UpdateTFEmploymentempstatus(data));
+                              _store
+                                  .dispatch(UpdateTFEmploymentempstatus(data));
 
-                              _store.dispatch(UpdateTFEmploymentError_empstatus(false));
+                              _store.dispatch(
+                                  UpdateTFEmploymentError_empstatus(false));
 
-                              if (tfEmploymentState.listoccupation.length == 0) {
-                                List<TenancyEmploymentInformation> listoccupation = [];
+                              if (tfEmploymentState.listoccupation.length ==
+                                  0) {
+                                List<TenancyEmploymentInformation>
+                                    listoccupation = [];
 
-                                TenancyEmploymentInformation empinfo = new TenancyEmploymentInformation();
+                                TenancyEmploymentInformation empinfo =
+                                    new TenancyEmploymentInformation();
                                 empinfo.id = "1";
                                 empinfo.occupation = "";
                                 empinfo.organization = "";
@@ -228,7 +243,9 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
 
                                 listoccupation.add(empinfo);
 
-                                _store.dispatch(UpdateTFEmploymentlistoccupation(listoccupation));
+                                _store.dispatch(
+                                    UpdateTFEmploymentlistoccupation(
+                                        listoccupation));
                               }
                               _changeData();
                             },
@@ -302,7 +319,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             filled: true,
                           ),
                           onChanged: (value) {
-                            _store.dispatch(UpdateTFEmploymentlinkedprofile(value));
+                            _store.dispatch(
+                                UpdateTFEmploymentlinkedprofile(value));
 
                             /* if (tfEmploymentState.error_linkedprofile)
                                 _store.dispatch(
@@ -349,17 +367,20 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                         maxLength: 500,
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: myColor.blue, width: 1.0),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: myColor.gray, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: myColor.gray, width: 1.0),
                             ),
                             isDense: true,
                             contentPadding: EdgeInsets.all(11),
                             fillColor: myColor.white,
                             filled: true),
                         onChanged: (value) {
-                          _store.dispatch(UpdateTFEmploymentothersourceincome(value));
+                          _store.dispatch(
+                              UpdateTFEmploymentothersourceincome(value));
                           _changeData();
                         },
                       ),
@@ -384,7 +405,11 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [back(), SizedBox(width: 10), saveandnext(tfEmploymentState)],
+                    children: [
+                      back(),
+                      SizedBox(width: 10),
+                      saveandnext(tfEmploymentState)
+                    ],
                   ),
                 ],
               ),
@@ -404,7 +429,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
         key: UniqueKey(),
         itemCount: tfEmploymentState.listoccupation.length,
         itemBuilder: (BuildContext ctxt, int index) {
-          TenancyEmploymentInformation tempinfo = tfEmploymentState.listoccupation[index];
+          TenancyEmploymentInformation tempinfo =
+              tfEmploymentState.listoccupation[index];
 
           //return Text("Item"+index.toString());
 
@@ -422,7 +448,9 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          index == 0 ? GlobleString.TAF_Employment_current_occupation : GlobleString.TAF_Employment_Occupation,
+                          index == 0
+                              ? GlobleString.TAF_Employment_current_occupation
+                              : GlobleString.TAF_Employment_Occupation,
                           style: MyStyles.Medium(14, myColor.text_color),
                           textAlign: TextAlign.start,
                         ),
@@ -436,10 +464,15 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                           decoration: InputDecoration(
                             //border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: myColor.blue, width: 1.0),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: tempinfo.error_occupation! ? myColor.errorcolor : myColor.gray, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: tempinfo.error_occupation!
+                                      ? myColor.errorcolor
+                                      : myColor.gray,
+                                  width: 1.0),
                             ),
                             isDense: true,
                             contentPadding: EdgeInsets.all(11),
@@ -447,9 +480,11 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             filled: true,
                           ),
                           onChanged: (value) {
-                            tfEmploymentState.listoccupation[index].occupation = value.toString();
+                            tfEmploymentState.listoccupation[index].occupation =
+                                value.toString();
 
-                            tfEmploymentState.listoccupation[index].error_occupation = false;
+                            tfEmploymentState
+                                .listoccupation[index].error_occupation = false;
                             _changeData();
                           },
                         ),
@@ -479,10 +514,15 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                           decoration: InputDecoration(
                             //border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: myColor.blue, width: 1.0),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: tempinfo.error_organization! ? myColor.errorcolor : myColor.gray, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: tempinfo.error_organization!
+                                      ? myColor.errorcolor
+                                      : myColor.gray,
+                                  width: 1.0),
                             ),
                             isDense: true,
                             contentPadding: EdgeInsets.all(11),
@@ -490,9 +530,11 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             filled: true,
                           ),
                           onChanged: (value) {
-                            tfEmploymentState.listoccupation[index].organization = value.toString();
+                            tfEmploymentState.listoccupation[index]
+                                .organization = value.toString();
 
-                            tfEmploymentState.listoccupation[index].error_organization = false;
+                            tfEmploymentState.listoccupation[index]
+                                .error_organization = false;
                             _changeData();
                           },
                         ),
@@ -531,10 +573,15 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                           decoration: InputDecoration(
                             //border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: myColor.blue, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: myColor.blue, width: 1.0),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: tempinfo.error_lenthofemp! ? myColor.errorcolor : myColor.gray, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: tempinfo.error_lenthofemp!
+                                      ? myColor.errorcolor
+                                      : myColor.gray,
+                                  width: 1.0),
                             ),
                             isDense: true,
                             contentPadding: EdgeInsets.all(11),
@@ -542,9 +589,11 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             filled: true,
                           ),
                           onChanged: (value) {
-                            tfEmploymentState.listoccupation[index].lenthofemp = value.toString();
+                            tfEmploymentState.listoccupation[index].lenthofemp =
+                                value.toString();
 
-                            tfEmploymentState.listoccupation[index].error_lenthofemp = false;
+                            tfEmploymentState
+                                .listoccupation[index].error_lenthofemp = false;
                             _changeData();
                           },
                         ),
@@ -580,19 +629,26 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                             items: tfEmploymentState.anualincomelist,
                             defultHeight: 175,
                             textstyle: MyStyles.Medium(13, myColor.text_color),
-                            itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
+                            itemAsString: (SystemEnumDetails? u) =>
+                                u != null ? u.displayValue : "",
                             hint: "Select Income",
                             showSearchBox: false,
-                            selectedItem: tfEmploymentState.listoccupation[index].anualIncome != null
-                                ? tfEmploymentState.listoccupation[index].anualIncome
+                            selectedItem: tfEmploymentState
+                                        .listoccupation[index].anualIncome !=
+                                    null
+                                ? tfEmploymentState
+                                    .listoccupation[index].anualIncome
                                 : null,
                             isFilteredOnline: true,
                             onChanged: (data) {
-                              tfEmploymentState.listoccupation[index].anualIncome = data;
+                              tfEmploymentState
+                                  .listoccupation[index].anualIncome = data;
 
-                              tfEmploymentState.listoccupation[index].error_anualIncome = false;
+                              tfEmploymentState.listoccupation[index]
+                                  .error_anualIncome = false;
 
-                              _store.dispatch(UpdateTFEmploymentlistoccupation(tfEmploymentState.listoccupation));
+                              _store.dispatch(UpdateTFEmploymentlistoccupation(
+                                  tfEmploymentState.listoccupation));
                               _changeData();
                             },
                           ),
@@ -628,9 +684,13 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                                     negativeText: GlobleString.dailog_no,
                                     onPressedYes: () {
                                       Navigator.of(context1).pop();
-                                      tfEmploymentState.listoccupation.removeAt(index);
+                                      tfEmploymentState.listoccupation
+                                          .removeAt(index);
 
-                                      _store.dispatch(UpdateTFEmploymentlistoccupation(tfEmploymentState.listoccupation));
+                                      _store.dispatch(
+                                          UpdateTFEmploymentlistoccupation(
+                                              tfEmploymentState
+                                                  .listoccupation));
                                       _changeData();
                                     },
                                     onPressedNo: () {
@@ -689,7 +749,9 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                 itemAsString: (SystemEnumDetails? u) => u!.displayValue,
                 hint: "Select Income",
                 showSearchBox: false,
-                selectedItem: tfEmploymentState.anualincomestatus != null ? tfEmploymentState.anualincomestatus : null,
+                selectedItem: tfEmploymentState.anualincomestatus != null
+                    ? tfEmploymentState.anualincomestatus
+                    : null,
                 isFilteredOnline: true,
                 onChanged: (data) {
                   _store.dispatch(UpdateTFEmploymentanualincomestatus(data!));
@@ -742,19 +804,23 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     bool isAdd = false;
 
     for (int i = 0; i < tfEmploymentState.listoccupation.length; i++) {
-      TenancyEmploymentInformation empinfo = tfEmploymentState.listoccupation[i];
+      TenancyEmploymentInformation empinfo =
+          tfEmploymentState.listoccupation[i];
 
       if (empinfo.occupation == null || empinfo.occupation!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(context, GlobleString.taf_person_error_occupation, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_person_error_occupation, false);
 
         /*tfEmploymentState.listoccupation[i].error_occupation = true;
         _store.dispatch(
             UpdateTFEmploymentlistoccupation(tfEmploymentState.listoccupation));*/
         break;
-      } else if (empinfo.organization == null || empinfo.organization!.isEmpty) {
+      } else if (empinfo.organization == null ||
+          empinfo.organization!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(context, GlobleString.taf_person_error_organization, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_person_error_organization, false);
 
         /* tfEmploymentState.listoccupation[i].error_organization = true;
         _store.dispatch(
@@ -762,7 +828,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
         break;
       } else if (empinfo.lenthofemp == null || empinfo.lenthofemp!.isEmpty) {
         isAdd = true;
-        ToastUtils.showCustomToast(context, GlobleString.taf_person_error_lenthofemp, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_person_error_lenthofemp, false);
 
         /*tfEmploymentState.listoccupation[i].error_lenthofemp = true;
         _store.dispatch(
@@ -770,7 +837,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
         break;
       } else if (empinfo.anualIncome == null) {
         isAdd = true;
-        ToastUtils.showCustomToast(context, GlobleString.taf_person_error_annualincome, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_person_error_annualincome, false);
 
         /*tfEmploymentState.listoccupation[i].error_anualIncome = true;
         _store.dispatch(
@@ -791,7 +859,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
           error_occupation: false,
         ));
 
-        _store.dispatch(UpdateTFEmploymentlistoccupation(tfEmploymentState.listoccupation));
+        _store.dispatch(
+            UpdateTFEmploymentlistoccupation(tfEmploymentState.listoccupation));
         break;
       }
     }
@@ -816,39 +885,45 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
   _saveDataAndNext(TFEmploymentState tfEmploymentState) {
     if (tfEmploymentState.empstatus == null) {
       _store.dispatch(UpdateTFEmploymentError_empstatus(true));
-      ToastUtils.showCustomToast(context, GlobleString.taf_person_error_employmentstatus, false);
+      ToastUtils.showCustomToast(
+          context, GlobleString.taf_person_error_employmentstatus, false);
     } else if (tfEmploymentState.empstatus!.EnumDetailID == 2 ||
         tfEmploymentState.empstatus!.EnumDetailID == 3 ||
         tfEmploymentState.empstatus!.EnumDetailID == 4) {
       bool isAdd = false;
 
       for (int i = 0; i < tfEmploymentState.listoccupation.length; i++) {
-        TenancyEmploymentInformation empinfo = tfEmploymentState.listoccupation[i];
+        TenancyEmploymentInformation empinfo =
+            tfEmploymentState.listoccupation[i];
 
         if (empinfo.occupation == null || empinfo.occupation == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(context, GlobleString.taf_person_error_occupation, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.taf_person_error_occupation, false);
           /*tfEmploymentState.listoccupation[i].error_occupation = true;
               _store.dispatch(UpdateTFEmploymentlistoccupation(
                   tfEmploymentState.listoccupation));*/
           break;
         } else if (empinfo.organization == null || empinfo.organization == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(context, GlobleString.taf_person_error_organization, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.taf_person_error_organization, false);
           /*tfEmploymentState.listoccupation[i].error_organization = true;
               _store.dispatch(UpdateTFEmploymentlistoccupation(
                   tfEmploymentState.listoccupation));*/
           break;
         } else if (empinfo.lenthofemp == null || empinfo.lenthofemp == "") {
           isAdd = true;
-          ToastUtils.showCustomToast(context, GlobleString.taf_person_error_lenthofemp, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.taf_person_error_lenthofemp, false);
           /* tfEmploymentState.listoccupation[i].error_lenthofemp = true;
               _store.dispatch(UpdateTFEmploymentlistoccupation(
                   tfEmploymentState.listoccupation));*/
           break;
         } else if (empinfo.anualIncome == null) {
           isAdd = true;
-          ToastUtils.showCustomToast(context, GlobleString.taf_person_error_annualincome, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.taf_person_error_annualincome, false);
           /* tfEmploymentState.listoccupation[i].error_anualIncome = true;
               _store.dispatch(UpdateTFEmploymentlistoccupation(
                   tfEmploymentState.listoccupation));*/
@@ -859,10 +934,13 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
           //ToastUtils.showCustomToast(context, "Success", true);
           //ApiCall(tfEmploymentState, 1);
 
-          if (tfEmploymentState.linkedprofile != null && tfEmploymentState.linkedprofile.isNotEmpty) {
-            if (!Helper.ValidLinkLinedProfile(tfEmploymentState.linkedprofile.toString())) {
+          if (tfEmploymentState.linkedprofile != null &&
+              tfEmploymentState.linkedprofile.isNotEmpty) {
+            if (!Helper.ValidLinkLinedProfile(
+                tfEmploymentState.linkedprofile.toString())) {
               _store.dispatch(UpdateTFEmploymentError_linkedprofile(true));
-              ToastUtils.showCustomToast(context, GlobleString.taf_person_error_LinkedIn, false);
+              ToastUtils.showCustomToast(
+                  context, GlobleString.taf_person_error_LinkedIn, false);
             } else {
               ApiCall(tfEmploymentState, 1);
             }
@@ -876,14 +954,18 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
         tfEmploymentState.empstatus!.EnumDetailID == 6) {
       if (tfEmploymentState.anualincomestatus == null) {
         _store.dispatch(UpdateTFEmploymentError_anualincomestatus(true));
-        ToastUtils.showCustomToast(context, GlobleString.taf_person_error_annualincome, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_person_error_annualincome, false);
       } else {
         //ToastUtils.showCustomToast(context, "Success", true);
         // ApiCall(tfEmploymentState, 2);
-        if (tfEmploymentState.linkedprofile != null && tfEmploymentState.linkedprofile.isNotEmpty) {
-          if (!Helper.ValidLinkLinedProfile(tfEmploymentState.linkedprofile.toString())) {
+        if (tfEmploymentState.linkedprofile != null &&
+            tfEmploymentState.linkedprofile.isNotEmpty) {
+          if (!Helper.ValidLinkLinedProfile(
+              tfEmploymentState.linkedprofile.toString())) {
             _store.dispatch(UpdateTFEmploymentError_linkedprofile(true));
-            ToastUtils.showCustomToast(context, GlobleString.taf_person_error_LinkedIn, false);
+            ToastUtils.showCustomToast(
+                context, GlobleString.taf_person_error_LinkedIn, false);
           } else {
             ApiCall(tfEmploymentState, 2);
           }
@@ -898,7 +980,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    if (tfEmploymentState.EmploymentID != null && tfEmploymentState.EmploymentID != "") {
+    if (tfEmploymentState.EmploymentID != null &&
+        tfEmploymentState.EmploymentID != "") {
       DeleteOccupation deleteOccupation = new DeleteOccupation();
       deleteOccupation.Employment_ID = tfEmploymentState.EmploymentID;
 
@@ -908,7 +991,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
       DeleteEmployment commonID = new DeleteEmployment();
       commonID.Applicant_ID = Prefs.getString(PrefsName.TCF_ApplicantID);
 
-      ApiManager().TFEmployementDelete(context, commonID, deleteOccupation, (status, responce) {
+      ApiManager().TFEmployementDelete(context, commonID, deleteOccupation,
+          (status, responce) {
         if (status) {
           InserData(tfEmploymentState, flag);
         } else {
@@ -927,9 +1011,11 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
     if (flag == 1) {
       employmentInfo.Annual_Income_Status = null;
     } else if (flag == 2) {
-      employmentInfo.Annual_Income_Status = tfEmploymentState.anualincomestatus!.EnumDetailID.toString();
+      employmentInfo.Annual_Income_Status =
+          tfEmploymentState.anualincomestatus!.EnumDetailID.toString();
     }
-    employmentInfo.Emp_Status_ID = tfEmploymentState.empstatus!.EnumDetailID.toString();
+    employmentInfo.Emp_Status_ID =
+        tfEmploymentState.empstatus!.EnumDetailID.toString();
     employmentInfo.LinkedIn = tfEmploymentState.linkedprofile;
     employmentInfo.OtherSourceIncome = tfEmploymentState.othersourceincome;
 
@@ -938,7 +1024,8 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
         if (flag == 1) {
           List<EmpOccupation> empOccupationlist = <EmpOccupation>[];
           for (int i = 0; i < tfEmploymentState.listoccupation.length; i++) {
-            TenancyEmploymentInformation empinfo = tfEmploymentState.listoccupation[i];
+            TenancyEmploymentInformation empinfo =
+                tfEmploymentState.listoccupation[i];
 
             EmpOccupation empOccupation = new EmpOccupation();
             empOccupation.Employment_ID = responce;
@@ -946,12 +1033,14 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
             empOccupation.Occupation = empinfo.occupation;
             empOccupation.organization = empinfo.organization;
             empOccupation.duration = empinfo.lenthofemp;
-            empOccupation.annual_Income_Status = empinfo.anualIncome!.EnumDetailID.toString();
+            empOccupation.annual_Income_Status =
+                empinfo.anualIncome!.EnumDetailID.toString();
 
             empOccupationlist.add(empOccupation);
           }
 
-          ApiManager().TFEmployementOccuapation(context, empOccupationlist, (status, responce) {
+          ApiManager().TFEmployementOccuapation(context, empOccupationlist,
+              (status, responce) {
             if (status) {
               loader.remove();
               gotoNext();
