@@ -40,13 +40,13 @@ class Weburl {
   static var CustomerFeaturedPage = Domain_URL;
 
   /*X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X-X*/
-  static var API_ServerNew = isPROD_API
-      ? "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging/"
-      : "https://vuy3fbu93g.execute-api.us-east-1.amazonaws.com/prod/";
+  // static var API_ServerNew = isPROD_API
+  //     ? "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging/"
+  //     : "https://vuy3fbu93g.execute-api.us-east-1.amazonaws.com/prod/";
 
   static var API_Server = isPROD_API
       ? "https://api.silverhomes.ai"
-      : "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging";
+      : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";
 
 //      : "https://25k75q7gy2.execute-api.us-east-1.amazonaws.com";
 

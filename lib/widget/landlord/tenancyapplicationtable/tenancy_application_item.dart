@@ -26,11 +26,11 @@ import 'package:silverhome/tablayer/query_pojo.dart';
 import 'package:silverhome/tablayer/tabclass.dart';
 import 'package:silverhome/tablayer/tablePOJO.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-import 'package:silverhome/widget/Landlord/action_popup/applicant_popupmenu.dart';
 import 'package:silverhome/widget/Landlord/action_popup/document_popupmenu.dart';
 import 'package:silverhome/widget/Landlord/emailtemplet/referencerequest_dialogbox.dart';
 import 'package:silverhome/widget/Landlord/reference_dialog/check_reference_list_dialog.dart';
-import 'package:silverhome/widget/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
+import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/landlord/emailtemplet/documentrequest_dialogbox.dart';
 import 'package:silverhome/widget/landlord/listviewitemstatus/tbl_documentverificationstatus.dart';
@@ -41,7 +41,6 @@ import 'package:silverhome/widget/landlord/preview_Lease_dialogbox.dart';
 import 'package:silverhome/widget/landlord/preview_documents_dialogbox.dart';
 import 'package:silverhome/widget/landlord/ratingupdate_dialogbox.dart';
 import 'package:silverhome/widget/landlord/reference_dialog/check_reference_confirm_dialog.dart';
-import 'package:silverhome/widget/message_dialogbox.dart';
 import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 
 typedef CallbackInvite = void Function(
