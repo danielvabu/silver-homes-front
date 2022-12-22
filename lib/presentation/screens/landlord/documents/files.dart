@@ -52,11 +52,9 @@ _sendFileToApi(BuildContext context, Bloc bloc) async {
     Helper.Log("file size", file.size.toString());
 
     if ((file.size / 1024) < 0) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.TVD_Document_Image_Size_0_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.TVD_Document_Image_Size_0_error, false);
     } else if ((file.size / 1024) > 10240) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.TVD_Document_Image_Size_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.TVD_Document_Image_Size_error, false);
     } else if ((file.name.split('.').last).contains("jpg") ||
         (file.name.split('.').last).contains("JPG") ||
         (file.name.split('.').last).contains("png") ||
@@ -74,23 +72,15 @@ _sendFileToApi(BuildContext context, Bloc bloc) async {
           file.bytes!,
           file.name.split('.').last,
           bloc.documentBloc.currentDocumentTab.toUpperCase(),
-          bloc.documentBloc.currentFilterSelected == null
-              ? ""
-              : bloc.documentBloc.currentFilterSelected!.id ?? "",
+          bloc.documentBloc.currentFilterSelected == null ? "" : bloc.documentBloc.currentFilterSelected!.id ?? "",
           bloc.documentBloc.currentFatherFolderUUID ?? "",
           file.name.split('.').first);
       /* if (documentModel != null) { */
-      DocumentsListScreenModel? temporalDocumentList =
-          await _documentsService.getDocumentListByUUID(
-              context,
-              bloc.documentBloc.currentFatherFolderUUID!,
-              bloc.documentBloc.currentDocumentTab.toUpperCase());
-      bloc.documentBloc
-          .changeDocumentFileList(temporalDocumentList!.folderContent!);
-      bloc.documentBloc
-          .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-      bloc.documentBloc.currentFatherFolderUUID =
-          temporalDocumentList.documentFatherUUID;
+      DocumentsListScreenModel? temporalDocumentList = await _documentsService.getDocumentListByUUID(
+          context, bloc.documentBloc.currentFatherFolderUUID!, bloc.documentBloc.currentDocumentTab.toUpperCase());
+      bloc.documentBloc.changeDocumentFileList(temporalDocumentList!.folderContent!);
+      bloc.documentBloc.changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+      bloc.documentBloc.currentFatherFolderUUID = temporalDocumentList.documentFatherUUID;
       loader.remove();
       /*   } */
     }
@@ -131,10 +121,8 @@ _moveDocument(Bloc bloc, BuildContext context) async {
         negativeButton: () {
           Navigator.pop(context1);
         },
-        documentFatherUUID:
-            bloc.documentBloc.currentDocumentMenuSelected!.folderFatherUUID!,
-        documentUUID:
-            bloc.documentBloc.currentDocumentMenuSelected!.documentUUID!,
+        documentFatherUUID: bloc.documentBloc.currentDocumentMenuSelected!.folderFatherUUID!,
+        documentUUID: bloc.documentBloc.currentDocumentMenuSelected!.documentUUID!,
         documentNewFatherUUID: bloc.documentBloc.currentFatherFolderUUID!,
       );
     },
@@ -142,14 +130,8 @@ _moveDocument(Bloc bloc, BuildContext context) async {
 }
 
 _onSearchChanged(String searchValue, Bloc bloc, BuildContext context) async {
-  await _getDocumentsFileList(
-      bloc,
-      context,
-      bloc.documentBloc.currentDocumentTab.toUpperCase(),
-      searchValue,
-      bloc.documentBloc.currentFilterSelected == null
-          ? ""
-          : bloc.documentBloc.currentFilterSelected!.id ?? "");
+  await _getDocumentsFileList(bloc, context, bloc.documentBloc.currentDocumentTab.toUpperCase(), searchValue,
+      bloc.documentBloc.currentFilterSelected == null ? "" : bloc.documentBloc.currentFilterSelected!.id ?? "");
 /*   _searchController.clear(); */
 }
 
@@ -158,8 +140,7 @@ Widget _breadcrumbs(Bloc bloc) {
     stream: bloc.documentBloc.getDocumentBreadcumListTransformer,
     builder: (BuildContext context, AsyncSnapshot snapshotBreadcumList) {
       if (snapshotBreadcumList.hasData) {
-        List<BreadcumbModel> tempBreadList =
-            snapshotBreadcumList.data as List<BreadcumbModel>;
+        List<BreadcumbModel> tempBreadList = snapshotBreadcumList.data as List<BreadcumbModel>;
         return Container(
           height: tempBreadList.isNotEmpty ? 35 : 0,
           margin: EdgeInsets.fromLTRB(5, 12, 5, 6),
@@ -231,40 +212,27 @@ _changeDocumentList(int value, Bloc bloc, BuildContext context) async {
   }
 }
 
-_getDocumentsFileList(Bloc bloc, BuildContext context, String type,
-    String search, String filter) async {
+_getDocumentsFileList(Bloc bloc, BuildContext context, String type, String search, String filter) async {
   print(filter);
   bloc.documentBloc.changeDocumentFileList([]);
   bloc.documentBloc.changeDocumentBreadcumList([]);
   DocumentsListScreenModel? temporalDocumentList =
-      await _documentsService.getDocumentListByUUID(
-          context, "", type != "" ? type : "property", search, filter);
-  bloc.documentBloc
-      .changeDocumentFileList(temporalDocumentList!.folderContent!);
-  bloc.documentBloc
-      .changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
-  bloc.documentBloc.currentFatherFolderUUID =
-      temporalDocumentList.documentFatherUUID;
+      await _documentsService.getDocumentListByUUID(context, "", type != "" ? type : "property", search, filter);
+  bloc.documentBloc.changeDocumentFileList(temporalDocumentList!.folderContent!);
+  bloc.documentBloc.changeDocumentBreadcumList(temporalDocumentList.breadcumbs!);
+  bloc.documentBloc.currentFatherFolderUUID = temporalDocumentList.documentFatherUUID;
 }
 
 initData(Bloc bloc, BuildContext context, [String type = ""]) async {
-  await bloc.propertyBloc
-      .getPropertyFilterList("", 1, "PropertyName", 1, 0, context);
-  await _getDocumentsFileList(
-      bloc,
-      context,
-      type == "" ? "property" : type,
-      "",
-      bloc.documentBloc.currentFilterSelected != null
-          ? (bloc.documentBloc.currentFilterSelected!.id ?? "")
-          : "");
+  await bloc.propertyBloc.getPropertyFilterList("", 1, "PropertyName", 1, 0, context);
+  await _getDocumentsFileList(bloc, context, type == "" ? "property" : type, "",
+      bloc.documentBloc.currentFilterSelected != null ? (bloc.documentBloc.currentFilterSelected!.id ?? "") : "");
 }
 
 class _FileDocumentsState extends State<FileDocuments> {
   double height = 0, width = 0, ancho = 0;
   bool isFirstCharge = true;
-  Widget _searchRow(
-      double width, double height, Bloc bloc, BuildContext context) {
+  Widget _searchRow(double width, double height, Bloc bloc, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -285,7 +253,9 @@ class _FileDocumentsState extends State<FileDocuments> {
                       width: width * .20,
                       child: TextFormField(
                         controller: _searchController,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          _onSearchChanged(value, bloc, context);
+                        },
                         onFieldSubmitted: (value) {
                           _onSearchChanged(value, bloc, context);
                         },
@@ -313,10 +283,8 @@ class _FileDocumentsState extends State<FileDocuments> {
             StreamBuilder(
                 stream: bloc.documentBloc.getDocumentTrashTransformer,
                 initialData: false,
-                builder:
-                    (BuildContext context, AsyncSnapshot snapshotTrashButton) {
-                  if (!snapshotTrashButton.hasData ||
-                      !snapshotTrashButton.data) {
+                builder: (BuildContext context, AsyncSnapshot snapshotTrashButton) {
+                  if (!snapshotTrashButton.hasData || !snapshotTrashButton.data) {
                     return PopupMenuButton(
                       constraints: BoxConstraints(
                         maxWidth: width * .107,
@@ -329,10 +297,7 @@ class _FileDocumentsState extends State<FileDocuments> {
                             _sendFileToApi(context, bloc);
                             break;
                           case 1:
-                            _createFolder(
-                                context,
-                                bloc.documentBloc.currentFatherFolderUUID ??
-                                    "");
+                            _createFolder(context, bloc.documentBloc.currentFatherFolderUUID ?? "");
                             break;
                           default:
                         }
@@ -412,11 +377,9 @@ class _FileDocumentsState extends State<FileDocuments> {
           children: [
             StreamBuilder(
                 stream: bloc.propertyBloc.getpropertyTransformer,
-                builder: (BuildContext context,
-                    AsyncSnapshot snapshotDocumentFilterList) {
+                builder: (BuildContext context, AsyncSnapshot snapshotDocumentFilterList) {
                   if (snapshotDocumentFilterList.hasData) {
-                    List<PropertyDataList> temporalListP =
-                        snapshotDocumentFilterList.data;
+                    List<PropertyDataList> temporalListP = snapshotDocumentFilterList.data;
 
                     return Container(
                       width: width * .30,
@@ -431,16 +394,9 @@ class _FileDocumentsState extends State<FileDocuments> {
                             onTap: () async {
                               bloc.documentBloc.currentFilterSelected = null;
                               setState(() {});
-                              await _getDocumentsFileList(
-                                  bloc,
-                                  context,
-                                  bloc.documentBloc.currentDocumentTab
-                                      .toUpperCase(),
-                                  "",
-                                  "");
+                              await _getDocumentsFileList(bloc, context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "", "");
                             },
-                            child: Icon(Icons.close,
-                                size: 12, color: Colors.black),
+                            child: Icon(Icons.close, size: 12, color: Colors.black),
                           );
                         },
                         showClearButton: true,
@@ -448,23 +404,14 @@ class _FileDocumentsState extends State<FileDocuments> {
                         focusWidth: 2,
                         popupBackgroundColor: myColor.white,
                         items: temporalListP,
-                        itemAsString: (PropertyDataList? p) =>
-                            p != null ? p.propertyName! : "",
-                        defultHeight: temporalListP.length * 35 > 250
-                            ? 250
-                            : temporalListP.length * 35,
+                        itemAsString: (PropertyDataList? p) => p != null ? p.propertyName! : "",
+                        defultHeight: temporalListP.length * 35 > 250 ? 250 : temporalListP.length * 35,
                         textstyle: MyStyles.Medium(14, myColor.text_color),
-                        hint:
-                            "All ${bloc.documentBloc.currentDocumentTab.toUpperCase()}",
+                        hint: "All ${bloc.documentBloc.currentDocumentTab.toUpperCase()}",
                         selectedItem: bloc.documentBloc.currentFilterSelected,
                         onChanged: (value) async {
                           bloc.documentBloc.currentFilterSelected = value;
-                          await _getDocumentsFileList(
-                              bloc,
-                              context,
-                              bloc.documentBloc.currentDocumentTab
-                                  .toUpperCase(),
-                              "",
+                          await _getDocumentsFileList(bloc, context, bloc.documentBloc.currentDocumentTab.toUpperCase(), "",
                               bloc.documentBloc.currentFilterSelected!.id!);
                         },
                       ),
@@ -476,10 +423,8 @@ class _FileDocumentsState extends State<FileDocuments> {
             StreamBuilder(
               stream: bloc.documentBloc.getDocumentShowMoveTransformer,
               initialData: false,
-              builder: (BuildContext context,
-                  AsyncSnapshot snapshotDocumentShowMove) {
-                if (snapshotDocumentShowMove.hasData &&
-                    snapshotDocumentShowMove.data) {
+              builder: (BuildContext context, AsyncSnapshot snapshotDocumentShowMove) {
+                if (snapshotDocumentShowMove.hasData && snapshotDocumentShowMove.data) {
                   return Row(
                     children: [
                       InkWell(
@@ -530,16 +475,11 @@ class _FileDocumentsState extends State<FileDocuments> {
                   return StreamBuilder(
                     stream: bloc.documentBloc.getDocumentTrashTransformer,
                     initialData: false,
-                    builder: (BuildContext context,
-                        AsyncSnapshot snapshotTrashButton) {
+                    builder: (BuildContext context, AsyncSnapshot snapshotTrashButton) {
                       return InkWell(
                           onTap: () {
-                            bloc.documentBloc
-                                .changeDocumentTrash(!snapshotTrashButton.data);
-                            _changeDocumentList(
-                                snapshotTrashButton.data ? 0 : 5,
-                                bloc,
-                                context);
+                            bloc.documentBloc.changeDocumentTrash(!snapshotTrashButton.data);
+                            _changeDocumentList(snapshotTrashButton.data ? 0 : 5, bloc, context);
                           },
                           child: Container(
                             height: 32,
@@ -550,15 +490,9 @@ class _FileDocumentsState extends State<FileDocuments> {
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(5),
                               ),
-                              border: Border.all(
-                                  color: snapshotTrashButton.hasData &&
-                                          snapshotTrashButton.data
-                                      ? myColor.gray
-                                      : myColor.black),
-                              color: snapshotTrashButton.hasData &&
-                                      snapshotTrashButton.data
-                                  ? myColor.gray
-                                  : myColor.white,
+                              border:
+                                  Border.all(color: snapshotTrashButton.hasData && snapshotTrashButton.data ? myColor.gray : myColor.black),
+                              color: snapshotTrashButton.hasData && snapshotTrashButton.data ? myColor.gray : myColor.white,
                             ),
                             child: Row(
                               children: <Widget>[
@@ -566,10 +500,7 @@ class _FileDocumentsState extends State<FileDocuments> {
                                   padding: EdgeInsets.only(left: 5),
                                   child: Icon(
                                     FontAwesomeIcons.trashAlt,
-                                    color: snapshotTrashButton.hasData &&
-                                            snapshotTrashButton.data
-                                        ? myColor.white
-                                        : myColor.Circle_main,
+                                    color: snapshotTrashButton.hasData && snapshotTrashButton.data ? myColor.white : myColor.Circle_main,
                                     size: 15,
                                   ),
                                 ),
@@ -579,11 +510,7 @@ class _FileDocumentsState extends State<FileDocuments> {
                                 Text(
                                   GlobleString.Button_Document_view_trash,
                                   style: MyStyles.Regular(
-                                      14,
-                                      snapshotTrashButton.hasData &&
-                                              snapshotTrashButton.data
-                                          ? myColor.white
-                                          : myColor.Circle_main),
+                                      14, snapshotTrashButton.hasData && snapshotTrashButton.data ? myColor.white : myColor.Circle_main),
                                 ),
                               ],
                             ),
