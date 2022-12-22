@@ -67,8 +67,7 @@ class _CustomerPropertyDetailsPageState extends State<CustomerPropertyDetailsPag
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-        body: Container(
+    return Container(
       width: width,
       height: height - 170,
       color: Colors.white,
@@ -175,7 +174,7 @@ class _CustomerPropertyDetailsPageState extends State<CustomerPropertyDetailsPag
           );
         },
       ),
-    ));
+    );
   }
 
   Widget propertyheader(CustomerPropertyDetailsState? cpdState) {

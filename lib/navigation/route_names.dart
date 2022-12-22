@@ -31,6 +31,9 @@ import '../presentation/screens/landlord/tenancyform/taf_employment_screen.dart'
 import '../widget/tenantScreening/progress_widget.dart';
 
 class RouteNames {
+  RouteNames() {
+    print('AuthError is initialized');
+  }
   static const String splashScreen = '/';
   static const String Login = '/login';
   static const String ForgotPassword = '/forgotpassword';
@@ -89,6 +92,7 @@ class RouteNames {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     List<String> pathComponents = settings.name!.split('/');
+    print("got to: " + settings.toString());
 
     /*if (pathComponents.length == 2) {
       switch ("/${pathComponents[1]}") {
@@ -139,7 +143,7 @@ class RouteNames {
           {
             String url = window.location.href;
 
-            Helper.Log("Got to url", url);
+            print("Got to url" + url);
 
             if (!url.contains(ResetPassword) ||
                 !url.contains(TenancyApplicationform) ||
@@ -251,5 +255,6 @@ class RouteNames {
 }
 
 Future<void> navigateTo(BuildContext context, String screen) async {
+  print("got to2: " + screen.toString());
   Navigator.pushNamed(context, screen);
 }

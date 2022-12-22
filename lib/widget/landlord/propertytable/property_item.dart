@@ -8,11 +8,14 @@ import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/navigation/route_names.dart';
+import 'package:silverhome/presentation/screens/TEST/customerTest.dart';
 import 'package:silverhome/presentation/screens/TEST/test.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
 
 import '../../../common/sharedpref.dart';
+import '../../../presentation/screens/customer/customer_featurelist_page.dart';
 import '../../../presentation/screens/customer/customer_property_details_page.dart';
 
 typedef VoidCallName = void Function(PropertyDataList propertyData);
@@ -306,26 +309,46 @@ class _PropertyItemState extends State<PropertyItem> {
 
   Widget _actionPopupCopy(PropertyDataList model) {
     return Expanded(
-      flex: 1,
-      child: Container(
-          height: 28,
-          margin: EdgeInsets.only(left: 10, right: 20),
-          alignment: Alignment.centerRight,
-          child: PopupMenuButton(
-            onSelected: (value) {
+        flex: 1,
+        child: GestureDetector(
+            onTap: () {
+              print("prueba: " + model.id.toString());
+              Navigator.pushNamed(context, RouteNames.Login);
               Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CustomerFeaturedlistPageTest(
+                            LID: "niirPGKrPsSSSHaeMBwd",
+                            idProperties: model.id.toString(),
+                          )));
+            },
+            child: Container(
+                height: 28,
+                margin: EdgeInsets.only(left: 10, right: 20),
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: 40,
+                  width: 20,
+                  margin: EdgeInsets.only(right: 5),
+                  child: Icon(Icons.copy),
+                ))
+            /* PopupMenuButton(
+            onSelected: (value) {
+              /*Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
                         CustomerPropertyDetailsPage(LID: /*Prefs.getString(PrefsName.Customer_OwnerID)*/ model.id.toString())),
+              );*/
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CustomerFeaturedlistPage(
+                          LID: model.id.toString(),
+                        )),
               );
             },
-            child: Container(
-              height: 40,
-              width: 20,
-              margin: EdgeInsets.only(right: 5),
-              child: Icon(Icons.copy),
-            ),
+            child: 
             itemBuilder: (context) => [
               PopupMenuItem(
                 value: 2,
@@ -336,8 +359,8 @@ class _PropertyItemState extends State<PropertyItem> {
                 ),
               ),
             ],
-          )),
-    );
+          )),*/
+            ));
   }
 
   Widget _actionPopup(PropertyDataList model) {

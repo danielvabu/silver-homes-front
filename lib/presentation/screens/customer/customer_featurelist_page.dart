@@ -34,8 +34,7 @@ class CustomerFeaturedlistPage extends StatefulWidget {
   final String? LID;
 
   @override
-  _CustomerFeaturedlistPageState createState() =>
-      _CustomerFeaturedlistPageState();
+  _CustomerFeaturedlistPageState createState() => _CustomerFeaturedlistPageState();
 }
 
 class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
@@ -65,16 +64,14 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
         await Prefs.setString(PrefsName.userTokan, respoce);
 
         if (widget.LID != null && widget.LID != "") {
-          ApiManager().userDetailsDSQCall(context, widget.LID.toString(),
-              (error1, respoce2) async {
+          ApiManager().userDetailsDSQCall(context, widget.LID.toString(), (error1, respoce2) async {
             Helper.Log("error", error1.toString());
             Helper.Log("respoce2", respoce2);
 
             if (error1) {
               await Prefs.setString(PrefsName.Customer_OwnerID, respoce2);
 
-              await ApiManager().getFeatuePropertyList(context, respoce2,
-                  (status, responce3) {
+              await ApiManager().getFeatuePropertyList(context, respoce2, (status, responce3) {
                 if (status) {
                   updatemethod();
                 } else {
@@ -267,11 +264,7 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
               Container(
                 alignment: Alignment.center,
                 child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxHeight: 80,
-                      minHeight: 80,
-                      maxWidth: 380,
-                      minWidth: 380),
+                  constraints: BoxConstraints(maxHeight: 80, minHeight: 80, maxWidth: 380, minWidth: 380),
                   child: Image.asset(
                     "assets/images/silverhome.png",
                   ),
@@ -341,8 +334,7 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            cusPortalState.Companynamelogo != null &&
-                    cusPortalState.Companynamelogo!.id != null
+            cusPortalState.Companynamelogo != null && cusPortalState.Companynamelogo!.id != null
                 ? Container(
                     width: 380,
                     height: 100,
@@ -352,12 +344,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                         fit: BoxFit.contain,
                         alignment: Alignment.center,
                         image: CustomNetworkImage(
-                          Weburl.image_API +
-                              cusPortalState.Companynamelogo!.id.toString(),
+                          Weburl.image_API + cusPortalState.Companynamelogo!.id.toString(),
                           scale: 1.5,
                           headers: {
-                            'Authorization': 'bearer ' +
-                                Prefs.getString(PrefsName.userTokan),
+                            'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                             'ApplicationCode': Weburl.API_CODE,
                           },
                         ),
@@ -419,8 +409,7 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                cusPortalState.Companynamelogo != null &&
-                        cusPortalState.Companynamelogo!.id != null
+                cusPortalState.Companynamelogo != null && cusPortalState.Companynamelogo!.id != null
                     ? InkWell(
                         onTap: () async {
                           Helper.urlload(cusPortalState.homepagelink);
@@ -435,13 +424,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                               fit: BoxFit.contain,
                               alignment: Alignment.centerLeft,
                               image: CustomNetworkImage(
-                                Weburl.image_API +
-                                    cusPortalState.Companynamelogo!.id
-                                        .toString(),
+                                Weburl.image_API + cusPortalState.Companynamelogo!.id.toString(),
                                 scale: 1.5,
                                 headers: {
-                                  'Authorization': 'bearer ' +
-                                      Prefs.getString(PrefsName.userTokan),
+                                  'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                                   'ApplicationCode': Weburl.API_CODE,
                                 },
                               ),
@@ -468,13 +454,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                     Helper.urlload(cusPortalState.homepagelink);
                   },
                   onHover: (value) {
-                    final Size txtSize = Helper.textSize(GlobleString.CSM_Home,
-                        MyStyles.SemiBold(16, myColor.black));
+                    final Size txtSize = Helper.textSize(GlobleString.CSM_Home, MyStyles.SemiBold(16, myColor.black));
 
-                    _store.dispatch(
-                        UpdateCustomerPortal_ishover_heder_home(value));
-                    _store.dispatch(
-                        UpdateCustomerPortal_tw_header_home(txtSize.width));
+                    _store.dispatch(UpdateCustomerPortal_ishover_heder_home(value));
+                    _store.dispatch(UpdateCustomerPortal_tw_header_home(txtSize.width));
                   },
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
@@ -507,14 +490,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                     _store.dispatch(UpdateCustomerPortal_pageindex(0));
                   },
                   onHover: (value) {
-                    final Size txtSize = Helper.textSize(
-                        GlobleString.CSM_Listings,
-                        MyStyles.SemiBold(16, myColor.black));
+                    final Size txtSize = Helper.textSize(GlobleString.CSM_Listings, MyStyles.SemiBold(16, myColor.black));
 
-                    _store.dispatch(
-                        UpdateCustomerPortal_ishover_heder_listing(value));
-                    _store.dispatch(
-                        UpdateCustomerPortal_tw_header_listing(txtSize.width));
+                    _store.dispatch(UpdateCustomerPortal_ishover_heder_listing(value));
+                    _store.dispatch(UpdateCustomerPortal_tw_header_listing(txtSize.width));
                   },
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
@@ -551,16 +530,19 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
     switch (index) {
       case 0:
         {
-          return CustomerPropertyListPage();
+          return CustomerPropertyListPage(
+            id: "d3dc4aac-bacf-4a1d-bd1d-5b9ff2ba4bf0",
+          );
         }
       case 1:
         {
-          return CustomerPropertyDetailsPage(
-              LID: Prefs.getString(PrefsName.Customer_OwnerID));
+          return CustomerPropertyDetailsPage(LID: Prefs.getString(PrefsName.Customer_OwnerID));
         }
       default:
         {
-          return CustomerPropertyListPage();
+          return CustomerPropertyListPage(
+            id: "d3dc4aac-bacf-4a1d-bd1d-5b9ff2ba4bf0",
+          );
         }
     }
   }
@@ -586,13 +568,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                   Helper.urlload(cusPortalState.homepagelink);
                 },
                 onHover: (value) {
-                  final Size txtSize = Helper.textSize(GlobleString.CSM_Home,
-                      MyStyles.SemiBold(16, myColor.black));
+                  final Size txtSize = Helper.textSize(GlobleString.CSM_Home, MyStyles.SemiBold(16, myColor.black));
 
-                  _store.dispatch(
-                      UpdateCustomerPortal_ishover_footer_home(value));
-                  _store.dispatch(
-                      UpdateCustomerPortal_tw_footer_home(txtSize.width));
+                  _store.dispatch(UpdateCustomerPortal_ishover_footer_home(value));
+                  _store.dispatch(UpdateCustomerPortal_tw_footer_home(txtSize.width));
                 },
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.center,
@@ -625,14 +604,10 @@ class _CustomerFeaturedlistPageState extends State<CustomerFeaturedlistPage> {
                   _store.dispatch(UpdateCustomerPortal_pageindex(0));
                 },
                 onHover: (value) {
-                  final Size txtSize = Helper.textSize(
-                      GlobleString.CSM_Listings,
-                      MyStyles.SemiBold(16, myColor.black));
+                  final Size txtSize = Helper.textSize(GlobleString.CSM_Listings, MyStyles.SemiBold(16, myColor.black));
 
-                  _store.dispatch(
-                      UpdateCustomerPortal_ishover_footer_listing(value));
-                  _store.dispatch(
-                      UpdateCustomerPortal_tw_footer_listing(txtSize.width));
+                  _store.dispatch(UpdateCustomerPortal_ishover_footer_listing(value));
+                  _store.dispatch(UpdateCustomerPortal_tw_footer_listing(txtSize.width));
                 },
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.center,
