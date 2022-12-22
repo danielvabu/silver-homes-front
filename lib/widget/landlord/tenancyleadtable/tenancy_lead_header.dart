@@ -65,7 +65,7 @@ class _TenancyLeadHeaderState extends State<TenancyLeadHeader> {
   List<Widget> _headerRow() {
     var result = <Widget>[];
     result.add(_headerTitleName(GlobleString.TLH_Applicant_Name));
-    result.add(_headerTitleName(GlobleString.TLH_Group_Id));
+    //result.add(_headerTitleName(GlobleString.TLH_Group_Id));
     result.add(_headerTitleProperty(GlobleString.TLH_Property_Name));
     result.add(_headerTitleRating(GlobleString.TLH_Rating));
     result.add(_headerTitleEmailAddress(GlobleString.TLH_Email_Address));

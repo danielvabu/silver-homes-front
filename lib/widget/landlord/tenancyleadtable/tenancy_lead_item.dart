@@ -192,7 +192,7 @@ class _TenancyLeadItemState extends State<TenancyLeadItem> {
   List<Widget> _tableData(TenancyApplication model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueTitle(model, Index));
-    result.add(_datavalueGroup(model, Index));
+    //result.add(_datavalueGroup(model, Index));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueTitleEmailAddress(model.email!));
