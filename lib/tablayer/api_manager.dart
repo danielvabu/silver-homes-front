@@ -1285,63 +1285,37 @@ class ApiManager {
     List<int> _selectedFile = data;
 
     String filepath = '${DateTime.now().millisecondsSinceEpoch}.png';
-    // String filepath = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+
+    List urlS3 = await getUrlS3One(filepath, "singleImage");
 
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
       'ApplicationCode': Weburl.API_CODE,
     };
+    List<String> mediaString = [];
+    int send = 0;
 
+    String S3content = urlS3[0]["presigned_url"];
+    //var multipartRequest =
+    // new http.MultipartRequest("PUT", Uri.parse(S3content));
     var multipartRequest =
-        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
+    multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+    // multipartRequest.headers.addAll(headers);
+    multipartRequest.sink.add(_selectedFile);
+    multipartRequest.sink.close();
+    var response = await multipartRequest.send();
+    if (response.statusCode == 200) {
+      send = send + 1;
+    }
 
-    multipartRequest.headers.addAll(headers);
-
-    multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        'file[]', _selectedFile,
-        contentType: new MediaType('application', 'png'), filename: filepath));
-
-    await multipartRequest.send().then((result) {
-      //print('AddSingleImage');
-      if (result.statusCode == 200) {
-        http.Response.fromStream(result).then((response) {
-          if (response.statusCode == 200) {
-            if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-              var data = jsonDecode(response.body);
-
-              if (data != null) {
-                for (int i = 0; i < data['Result'].length; i++) {
-                  var myobject = data['Result'][i];
-
-                  String MediaID = myobject['MediaID'] != null
-                      ? "" + myobject['MediaID'].toString()
-                      : "";
-
-                  String url = myobject['url'] != null
-                      ? "" + myobject['url'].toString()
-                      : "";
-
-                  CallBackQuesy(true, MediaID);
-                }
-              } else {
-                CallBackQuesy(false, GlobleString.Error);
-              }
-            } else {
-              CallBackQuesy(false, GlobleString.Error);
-            }
-          } else if (response.statusCode == 401) {
-            CallBackQuesy(false, GlobleString.Error_401);
-          } else {
-            CallBackQuesy(false, GlobleString.Error);
-          }
-        });
-      } else if (result.statusCode == 401) {
-        CallBackQuesy(false, GlobleString.Error_401);
-      } else {
-        CallBackQuesy(false, GlobleString.Error);
-      }
-    });
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      CallBackQuesy(true, mediaString[0]);
+    } else {
+      CallBackQuesy(false, GlobleString.Error);
+    }
   }
 
   UpdatePropertyDisclosure(BuildContext context, Object CPOJO, Object UpPOJO,
@@ -3128,10 +3102,142 @@ class ApiManager {
     });
   }
 
+  Future<List> getUrlS3(
+      List<PropertyImageMediaInfo> propertyimagelist, String module) async {
+    List<String> names = [];
+    List datares = [];
+    for (int i = 0; i < propertyimagelist.length; i++) {
+      names.add(propertyimagelist[i].fileName!);
+    }
+
+    var myjson = {"object_names": names, "path": module};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().LinkS3APICall(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        datares = data["response"] as List;
+      } else {
+        Helper.Log("getS3Links", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
+  Future<List> getUrlS3File(
+      List<FileObject> propertyimagelist, String module) async {
+    List<String> names = [];
+    List datares = [];
+    for (int i = 0; i < propertyimagelist.length; i++) {
+      names.add(propertyimagelist[i].filename!);
+    }
+
+    var myjson = {"object_names": names, "path": module};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().LinkS3APICall(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        datares = data["response"] as List;
+      } else {
+        Helper.Log("getS3Links", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
+  Future<List> getUrlS3One(String link1, String module) async {
+    List<String> names = [];
+    List datares = [];
+    names.add(link1);
+
+    var myjson = {"object_names": names, "path": module};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().LinkS3APICall(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        datares = data["response"] as List;
+      } else {
+        Helper.Log("getS3Links", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
+  Future<List<String>> insertMediaData(List links) async {
+    List<String> datares = [];
+    List datalink = [];
+    for (int i = 0; i < links.length; i++) {
+      datalink.add(links[i]["file_url"]);
+    }
+
+    var myjson = {"media_urls": datalink, "ref_id": 0};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().InsertMedia(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        var result = data["Result"] as List;
+        for (int i = 0; i < result.length; i++) {
+          datares.add(result[i]["MediaID"]);
+        }
+      } else {
+        Helper.Log("saveDataMedia", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
   PropertyImagesUpload(
       BuildContext context,
       List<PropertyImageMediaInfo> propertyimagelist,
       CallBackListQuesy CallBackQuesy) async {
+    //get s3 links
+    List urlS3 = await getUrlS3(propertyimagelist, "property");
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+    };
+    List<String> mediaString = [];
+    int send = 0;
+    for (int i = 0; i < propertyimagelist.length; i++) {
+      String S3content = urlS3[i]["presigned_url"];
+      //var multipartRequest =
+      // new http.MultipartRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
+      multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+      // multipartRequest.headers.addAll(headers);
+      List<int> _selectedFile = propertyimagelist[i].appImage!;
+      multipartRequest.sink.add(_selectedFile);
+      multipartRequest.sink.close();
+      var response = await multipartRequest.send();
+      if (response.statusCode == 200) {
+        send = send + 1;
+      }
+    }
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      CallBackQuesy(true, mediaString, "");
+    } else {
+      CallBackQuesy(false, [], GlobleString.Error);
+    }
+  }
+
+  PropertyImagesUploadBack(
+      BuildContext context,
+      List<PropertyImageMediaInfo> propertyimagelist,
+      CallBackListQuesy CallBackQuesy) async {
+    //get s3 links
+    // List urlS3 = getUrlS3(propertyimagelist, "property");
+
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
@@ -8140,59 +8246,36 @@ class ApiManager {
       filepath = 'Lease_' + '${DateTime.now().millisecondsSinceEpoch}.pdf';
     }
 
+    List urlS3 = await getUrlS3One(filepath, "LeaseDocument");
+
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
       'ApplicationCode': Weburl.API_CODE,
     };
+    List<String> mediaString = [];
+    int send = 0;
 
+    String S3content = urlS3[0]["presigned_url"];
+    //var multipartRequest =
+    // new http.MultipartRequest("PUT", Uri.parse(S3content));
     var multipartRequest =
-        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
-    multipartRequest.headers.addAll(headers);
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
+    multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+    // multipartRequest.headers.addAll(headers);
+    multipartRequest.sink.add(_selectedFile);
+    multipartRequest.sink.close();
+    var response = await multipartRequest.send();
+    if (response.statusCode == 200) {
+      send = send + 1;
+    }
 
-    multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        'file[]', _selectedFile,
-        contentType: new MediaType('application', 'pdf'), filename: filepath));
-
-    await multipartRequest.send().then((result) {
-      if (result.statusCode == 200) {
-        http.Response.fromStream(result).then((response) {
-          if (response.statusCode == 200) {
-            if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-              var data = jsonDecode(response.body);
-
-              if (data != null) {
-                for (int i = 0; i < data['Result'].length; i++) {
-                  var myobject = data['Result'][i];
-
-                  String MediaID = myobject['MediaID'] != null
-                      ? "" + myobject['MediaID'].toString()
-                      : "";
-
-                  String url = myobject['url'] != null
-                      ? "" + myobject['url'].toString()
-                      : "";
-
-                  CallBackQuesy(true, MediaID);
-                }
-              } else {
-                CallBackQuesy(false, GlobleString.Error);
-              }
-            } else {
-              CallBackQuesy(false, GlobleString.Error);
-            }
-          } else if (response.statusCode == 401) {
-            CallBackQuesy(false, GlobleString.Error_401);
-          } else {
-            CallBackQuesy(false, GlobleString.Error);
-          }
-        });
-      } else if (result.statusCode == 401) {
-        CallBackQuesy(false, GlobleString.Error_401);
-      } else {
-        CallBackQuesy(false, GlobleString.Error);
-      }
-    });
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      CallBackQuesy(true, mediaString[0]);
+    } else {
+      CallBackQuesy(false, GlobleString.Error);
+    }
   }
 
   TLAMediaInfoDelete(BuildContext context, Object? M1POJO, Object OPOJO,
@@ -8257,65 +8340,37 @@ class ApiManager {
   //Multifile
   TenantLeaseAgreementUpload(BuildContext context, Uint8List? mdata1,
       String filename1, CallBackQuesy callBackQuesy) async {
+    List<int> _selectedFile = mdata1!;
+    List urlS3 = await getUrlS3One(filename1, "TenantLeaseAgreement");
+
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
       'ApplicationCode': Weburl.API_CODE,
     };
+    List<String> mediaString = [];
+    int send = 0;
 
+    String S3content = urlS3[0]["presigned_url"];
+    //var multipartRequest =
+    // new http.MultipartRequest("PUT", Uri.parse(S3content));
     var multipartRequest =
-        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
-    multipartRequest.headers.addAll(headers);
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
+    multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+    // multipartRequest.headers.addAll(headers);
+    multipartRequest.sink.add(_selectedFile);
+    multipartRequest.sink.close();
+    var response = await multipartRequest.send();
+    if (response.statusCode == 200) {
+      send = send + 1;
+    }
 
-    List<int> _selectedFile = mdata1!;
-
-    /* String filepath = '${DateTime
-        .now()
-        .millisecondsSinceEpoch}.pdf';*/
-
-    multipartRequest.files.add(await http.MultipartFile.fromBytes(
-        "file[]", _selectedFile,
-        contentType: new MediaType('application', "pdf"), filename: filename1));
-
-    await multipartRequest.send().then((result) {
-      if (result.statusCode == 200) {
-        http.Response.fromStream(result).then((response) {
-          if (response.statusCode == 200) {
-            if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-              var data = jsonDecode(response.body);
-
-              if (data != null) {
-                for (int i = 0; i < data['Result'].length; i++) {
-                  var myobject = data['Result'][i];
-
-                  String MediaID = myobject['MediaID'] != null
-                      ? "" + myobject['MediaID'].toString()
-                      : "";
-
-                  String url = myobject['url'] != null
-                      ? "" + myobject['url'].toString()
-                      : "";
-
-                  callBackQuesy(true, MediaID);
-                }
-              } else {
-                callBackQuesy(false, GlobleString.Error);
-              }
-            } else {
-              callBackQuesy(false, GlobleString.Error);
-            }
-          } else if (response.statusCode == 401) {
-            callBackQuesy(false, GlobleString.Error_401);
-          } else {
-            callBackQuesy(false, GlobleString.Error);
-          }
-        });
-      } else if (result.statusCode == 401) {
-        callBackQuesy(false, GlobleString.Error_401);
-      } else {
-        callBackQuesy(false, GlobleString.Error);
-      }
-    });
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      callBackQuesy(true, mediaString[0]);
+    } else {
+      callBackQuesy(false, GlobleString.Error);
+    }
   }
 
   InsetPropertyDocument(
@@ -12792,9 +12847,45 @@ class ApiManager {
     });
   }
 
-  //Multifile
   MaintenanceImagesUpload(BuildContext context, List<FileObject> fileobjectlist,
       CallBackListQuesy CallBackQuesy) async {
+    //get s3 links
+    List urlS3 = await getUrlS3File(fileobjectlist, "MaintenanceImages");
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+    };
+    List<String> mediaString = [];
+    int send = 0;
+    for (int i = 0; i < fileobjectlist.length; i++) {
+      String S3content = urlS3[i]["presigned_url"];
+      //var multipartRequest =
+      // new http.MultipartRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
+      multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+      // multipartRequest.headers.addAll(headers);
+      List<int> _selectedFile = fileobjectlist[i].appImage!;
+      multipartRequest.sink.add(_selectedFile);
+      multipartRequest.sink.close();
+      var response = await multipartRequest.send();
+      if (response.statusCode == 200) {
+        send = send + 1;
+      }
+    }
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      CallBackQuesy(true, mediaString, "");
+    } else {
+      CallBackQuesy(false, [], GlobleString.Error);
+    }
+  }
+
+  //Multifile
+  MaintenanceImagesUploadBack(BuildContext context,
+      List<FileObject> fileobjectlist, CallBackListQuesy CallBackQuesy) async {
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),

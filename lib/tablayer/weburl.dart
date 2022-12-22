@@ -101,6 +101,8 @@ class Weburl {
   //static var FileUpload_Api = base_url_WorkFlow + "upload";
   static var FileUpload_Api = Email_URL + "aws/";
   static var DSQ_Api = base_url + "DSQ";
+  static var GetNamesS3 = base_url + "upload-link";
+  static var InsertMedia = base_url + "insert-media";
   static var WorkFlow_Api = base_url_WorkFlow + "workflow/";
 
   static var login_Api = base_url_Login + "login";

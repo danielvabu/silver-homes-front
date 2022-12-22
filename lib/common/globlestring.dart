@@ -3,11 +3,14 @@ class GlobleString {
   static const String Please_Wait = "Please wait...";
 
   /*Welcome*/
-  static const String Welcome_title = "Thanks for completing your account activation,";
-  static const String Welcome_message = "Please click on the button below to activate your account.";
+  static const String Welcome_title =
+      "Thanks for completing your account activation,";
+  static const String Welcome_message =
+      "Please click on the button below to activate your account.";
   static const String Welcome_continue = "Continue";
 
-  static const String Welcome_Mail_dailog_Success_register = "We have sent you a verification email to complete your registration.";
+  static const String Welcome_Mail_dailog_Success_register =
+      "We have sent you a verification email to complete your registration.";
   static const String Welcome_Mail_dailog_Success_login =
       "Please check your email and follow the instructions to complete your registration.";
   static const String Welcome_Mail_dailog_OK = "Close";
@@ -21,9 +24,11 @@ class GlobleString {
       "It appears that your account has been deactivated. Please contact our support team at support@silverhomes.ai and they will be happy to assist.";
   static const String user_inactive_admin_OK = "OK";
 
-  static const String Welcome_Mail_dailog_Success2 = "Your account has not been activated yet.";
+  static const String Welcome_Mail_dailog_Success2 =
+      "Your account has not been activated yet.";
 
-  static const String user_not_accessible = "This property is no longer active. Please contact our support team at support@silverhomes.ai.";
+  static const String user_not_accessible =
+      "This property is no longer active. Please contact our support team at support@silverhomes.ai.";
 
   static const String Button_OK = "OK";
 
@@ -34,10 +39,13 @@ class GlobleString {
   static const String register = "Register";
   static const String forgotpassword = "Forgot Password?";
 
-  static const String login_error = "The user entered does not exist in our records. Please check your login credentials.";
-  static const String new_login_error = "The email address and password you provided do not match. Please try again.";
+  static const String login_error =
+      "The user entered does not exist in our records. Please check your login credentials.";
+  static const String new_login_error =
+      "The email address and password you provided do not match. Please try again.";
 
-  static const String FP_title = "Please enter a valid email where we can send you a link to reset your password.";
+  static const String FP_title =
+      "Please enter a valid email where we can send you a link to reset your password.";
   static const String FP_Submit = "Submit";
   static const String FP_Backto = "Back to";
 
@@ -47,7 +55,8 @@ class GlobleString {
   static const String RP_gobacktologin = "Go back to login";
 
   static const String Signup = "Sign up";
-  static const String register_title = "Enter your information below to register.";
+  static const String register_title =
+      "Enter your information below to register.";
   static const String login_msg = "Already have an account?";
   static const String company_log = "Company Logo";
   static const String Signin = "Sign in";
@@ -61,7 +70,8 @@ class GlobleString {
   static const String password = "Password";
 
   static const String login_error_email = "Please enter your email address";
-  static const String login_error_valid_email = "Please enter a valid email address";
+  static const String login_error_valid_email =
+      "Please enter a valid email address";
   static const String login_error_password = "Please enter a valid password.";
 
   static const String forgot_password_suggestion =
@@ -71,30 +81,40 @@ class GlobleString {
   static const String register_error_fname = "Please enter your first name";
   static const String register_error_lname = "Please enter your last name";
   static const String register_error_email = "Please enter your email address";
-  static const String register_error_valid_email = "Please enter a valid email address";
+  static const String register_error_valid_email =
+      "Please enter a valid email address";
   static const String register_error_password = "Please enter a password";
-  static const String register_error_confirmpassword = "Please confirm your new password.";
-  static const String register_error_password_not_match = "The passwords entered do not match. Please try again.";
-  static const String register_error_tmpp = "Please accept our Terms of Service and Privacy Policy";
+  static const String register_error_confirmpassword =
+      "Please confirm your new password.";
+  static const String register_error_password_not_match =
+      "The passwords entered do not match. Please try again.";
+  static const String register_error_tmpp =
+      "Please accept our Terms of Service and Privacy Policy";
   static const String registersuccessfully =
       "Congratulations! Your account has been created. Please check your email and follow the instructions to complete your registration.";
 
   static const String password_error =
       "Your password must meet the following requirements:\n -8 characters minimum\n- at least 1 digit (0 - 9)\n- at least 1 uppercase character (A...Z)\n- at least 1 lowercase character (a...z)\n- at least 1 special character (@#\$%^&+=!)";
 
-  static const String register_error = "This email address already exists in our records. Please try again with a different email address.";
+  static const String register_error =
+      "This email address already exists in our records. Please try again with a different email address.";
 
   static const String forgot_error_email = "Please enter your email address";
-  static const String forgot_error_valid_email = "Please enter a valid email address";
+  static const String forgot_error_valid_email =
+      "Please enter a valid email address";
 
   static const String forgot_error_user =
       "We couldn't find a valid account associated with this email address. Please enter the email address associated with your account.";
-  static const String forgot_emailsend = "The link to reset your password has been sent to your email.";
-  static const String forgot_emailsend1 = "The link to reset the user's password has been sent to their email address.";
+  static const String forgot_emailsend =
+      "The link to reset your password has been sent to your email.";
+  static const String forgot_emailsend1 =
+      "The link to reset the user's password has been sent to their email address.";
 
   static const String RP_newpassword_error = "Please enter new password";
-  static const String RP_confirmpassword_error = "Please confirm your new password";
-  static const String RP_password_not_match = "The password confirmation does not match. Please try again.";
+  static const String RP_confirmpassword_error =
+      "Please confirm your new password";
+  static const String RP_password_not_match =
+      "The password confirmation does not match. Please try again.";
   static const String RP_reset_success = "Your password has been reset.";
 
   /*Drawer*/
@@ -115,7 +135,8 @@ class GlobleString {
 
   static const String NAV_Scheduling_calendar = "Calendar";
   static const String NAV_Scheduling_event_types = "Event Types";
-  static const String NAV_Scheduling_event_type_templates = "Event Type Templates";
+  static const String NAV_Scheduling_event_type_templates =
+      "Event Type Templates";
 
   /*Admin Drawer*/
   static const String NAV_admin_Overview = "Overview";
@@ -125,12 +146,15 @@ class GlobleString {
   static const String NAV_admin_Settings = "Settings";
 
   static const String NAV_Under_Maintenance = "Under maintenance";
-  static const String NAV_Under_WibsiteMaintenance = "Website under maintenance";
+  static const String NAV_Under_WibsiteMaintenance =
+      "Website under maintenance";
   static const String NAV_Under_titleMaintenance = "Maintenance title";
-  static const String NAV_Under_InstructionMaintenance = "Maintenance instruction";
+  static const String NAV_Under_InstructionMaintenance =
+      "Maintenance instruction";
 
   static const String Under_Maintenance_error_title = "Please enter title";
-  static const String Under_Maintenance_error_instrution = "Please enter instruction";
+  static const String Under_Maintenance_error_instrution =
+      "Please enter instruction";
 
   /*Basic Tenant Drawer*/
   static const String NAV_tenant_LeaseDetails = "Lease Details";
@@ -171,12 +195,14 @@ class GlobleString {
   static const String PH_ACT_Edit = "Edit";
   static const String PH_ACT_Duplicate = "Duplicate";
   static const String PH_ACT_SaveTemplate = "Save as Template";
-  static const String PS_Back_to_Propertys_msg = "Do you want to save your changes? If yes, click 'Save and Next' in each step";
+  static const String PS_Back_to_Propertys_msg =
+      "Do you want to save your changes? If yes, click 'Save and Next' in each step";
   static const String PS_Back_to_Propertys_yes = "I Understand";
   static const String PS_Back_to_Propertyse_NO = "Don't save";
 
   /*Add Edit Property*/
-  static const String PS_Save_Propertys_msg = "Would you like to save your changes?";
+  static const String PS_Save_Propertys_msg =
+      "Would you like to save your changes?";
   static const String PS_Save_Propertys_yes = "Yes";
   static const String PS_Save_Propertyse_NO = "No";
 
@@ -185,8 +211,10 @@ class GlobleString {
 
   static const String PS_Back_to_Propertys = "< Back to Properties";
   static const String PS_Property_Details = "Property and Lease Details";
-  static const String PS_Property_Specifications_Restrictions = "Specifications and Restrictions";
-  static const String PS_Property_Features_Disclosures = "Features and \nDisclosures";
+  static const String PS_Property_Specifications_Restrictions =
+      "Specifications and Restrictions";
+  static const String PS_Property_Features_Disclosures =
+      "Features and \nDisclosures";
   static const String PS_Property_Features = "Features and Photos";
   static const String PS_Property_Summary = "Summary";
   static const String PS_Property_Export = "Export";
@@ -196,7 +224,8 @@ class GlobleString {
   static const String PS1_Property_Details = "Property Details";
   static const String PS1_Property_Images = "Property photos (max. 10 photos)";
   static const String PS1_Property_Images_optional = "Optional";
-  static const String PS1_Property_Images_Allowed = "Allowed formats include PNG, JPG, JPEG and HEIF";
+  static const String PS1_Property_Images_Allowed =
+      "Allowed formats include PNG, JPG, JPEG and HEIF";
   static const String PS1_Property_Images1 = "Property photos";
   static const String PS1_Lease_Details = "Lease Details";
   static const String PS1_Property_type = "Property Type";
@@ -212,7 +241,8 @@ class GlobleString {
   static const String PS1_Postal_code = "Postal/Zip Code";
   static const String PS1_Rent_amount = "Rent Amount";
   static const String PS1_Rent_payment_frequency = "Rent Payment Frequency";
-  static const String PS1_Rent_payment_frequency_New = "Rent Payment Frequency (due on the 1st day)";
+  static const String PS1_Rent_payment_frequency_New =
+      "Rent Payment Frequency (due on the 1st day)";
   static const String PS1_Lease_type = "Lease Type";
   static const String PS1_Date_available = "Date Available";
   static const String PS1_Minimum_lease_duration = "Minimum Lease Duration";
@@ -222,22 +252,33 @@ class GlobleString {
 
   /*Property Details Error*/
 
-  static const String PS1_Property_type_error = "Please select the property type.";
-  static const String PS1_Property_type_value_error = "Please select the property type.";
-  static const String PS1_Rental_space_error = "Please select the type of rental space.";
+  static const String PS1_Property_type_error =
+      "Please select the property type.";
+  static const String PS1_Property_type_value_error =
+      "Please select the property type.";
+  static const String PS1_Rental_space_error =
+      "Please select the type of rental space.";
   static const String PS1_Property_name_error =
       "Please enter the property name. Note that this name will be used to reference the property throughout the platform.";
-  static const String PS1_Property_address_error = "Please enter the property address.";
+  static const String PS1_Property_address_error =
+      "Please enter the property address.";
   static const String PS1_Property_City_error = "Please enter the city.";
-  static const String PS1_Property_province_error = "Please enter the province/state.";
+  static const String PS1_Property_province_error =
+      "Please enter the province/state.";
   static const String PS1_Property_country_error = "Please enter the country.";
-  static const String PS1_Property_postalcode_error = "Please enter the postal/zip code.";
-  static const String PS1_Property_rentamount_error = "Please enter the rent amount.";
-  static const String PS1_Rent_payment_frequency_error = "Please enter the rent payment frequency.";
+  static const String PS1_Property_postalcode_error =
+      "Please enter the postal/zip code.";
+  static const String PS1_Property_rentamount_error =
+      "Please enter the rent amount.";
+  static const String PS1_Rent_payment_frequency_error =
+      "Please enter the rent payment frequency.";
   static const String PS1_Lease_type_error = "Please enter the lease type.";
-  static const String PS1_Date_available_error = "Please enter the date from which the property is available.";
-  static const String PS1_Minimum_lease_duration_error = "Please enter the minimum lease duration (e.g. 12 months).";
-  static const String PS1_Minimum_lease_duration_value_error = "Please enter the minimum lease duration (e.g. 12 months).";
+  static const String PS1_Date_available_error =
+      "Please enter the date from which the property is available.";
+  static const String PS1_Minimum_lease_duration_error =
+      "Please enter the minimum lease duration (e.g. 12 months).";
+  static const String PS1_Minimum_lease_duration_value_error =
+      "Please enter the minimum lease duration (e.g. 12 months).";
 
   /*Property Specifications and Restrictions*/
 
@@ -248,8 +289,10 @@ class GlobleString {
   static const String PS2_Property_Sizeinsquarefeet = "Square footage";
   static const String PS2_Property_Maxoccupancy = "Maximum occupancy";
   static const String PS2_Property_Furnishing = "Furnishing";
-  static const String PS2_Property_Furnishing_partial = "Please elaborate (e.g., bed frame, sofa, etc.)";
-  static const String PS2_Property_restrictions = "Select all of the restrictions that apply to this property";
+  static const String PS2_Property_Furnishing_partial =
+      "Please elaborate (e.g., bed frame, sofa, etc.)";
+  static const String PS2_Property_restrictions =
+      "Select all of the restrictions that apply to this property";
   static const String PS2_Property_Nopets = "No pets";
   static const String PS2_Property_Nosmoking = "No smoking";
   static const String PS2_Property_Noshorttermrentals = "No short-term rentals";
@@ -258,14 +301,21 @@ class GlobleString {
 
   /*Property Specifications and Restrictions Error*/
 
-  static const String PS2_Property_Bedrooms_error = "Please enter the number of bedrooms.";
-  static const String PS2_Property_Bathrooms_error = "Please enter the number of bathrooms.";
-  static const String PS2_Property_Sizeinsquarefeet_error = "Please enter the property size (in square feet).";
-  static const String PS2_Property_Maxoccupancy_error = "Please enter the maximum number of occupants for this property (e.g. 4).";
-  static const String PS2_Property_Furnishing_error = "Please select the furnishing type.";
+  static const String PS2_Property_Bedrooms_error =
+      "Please enter the number of bedrooms.";
+  static const String PS2_Property_Bathrooms_error =
+      "Please enter the number of bathrooms.";
+  static const String PS2_Property_Sizeinsquarefeet_error =
+      "Please enter the property size (in square feet).";
+  static const String PS2_Property_Maxoccupancy_error =
+      "Please enter the maximum number of occupants for this property (e.g. 4).";
+  static const String PS2_Property_Furnishing_error =
+      "Please select the furnishing type.";
 
-  static const String PS2_Property_partial_furniture_error = "Please specify the type of furnishing included (e.g. bed, sofa, etc.)";
-  static const String PS2_Property_restrictions_error = "Please select the restrictions that apply to this property.";
+  static const String PS2_Property_partial_furniture_error =
+      "Please specify the type of furnishing included (e.g. bed, sofa, etc.)";
+  static const String PS2_Property_restrictions_error =
+      "Please select the restrictions that apply to this property.";
 
   /*Property Features*/
   static const String PS3_Property_Features = "Property Features";
@@ -273,8 +323,10 @@ class GlobleString {
       "Select all of the amenities and utilities that apply to this property and indicate whether they are included in the rent, available but not included in the rent, or not available.";
   static const String PS3_Property_Features_Utilities = "Utilities";
   static const String PS3_Property_Features_Amenities = "Amenities";
-  static const String PS3_Property_Features_Included_in_the_rent = "Included in the rent";
-  static const String PS3_Property_Features_Available = "Available but not\n included in the rent";
+  static const String PS3_Property_Features_Included_in_the_rent =
+      "Included in the rent";
+  static const String PS3_Property_Features_Available =
+      "Available but not\n included in the rent";
   static const String PS3_Property_Features_Notavailable = "Not available";
   static const String PS3_Property_Features_Parkingstalls = "Parking stalls";
   static const String PS3_Property_Features_StorageAvailable = "Storage";
@@ -284,22 +336,32 @@ class GlobleString {
 
   /*Property Features Error*/
 
-  static const String PS3_Property_Features_Parkingstalls_error = "Please enter the number of parking stalls available.";
-  static const String PS3_Property_Features_StorageAvailable_error = "Please specify storage availability.";
-  static const String PS3_Property_Features_image_error = "Please add at least one property image";
+  static const String PS3_Property_Features_Parkingstalls_error =
+      "Please enter the number of parking stalls available.";
+  static const String PS3_Property_Features_StorageAvailable_error =
+      "Please specify storage availability.";
+  static const String PS3_Property_Features_image_error =
+      "Please add at least one property image";
 
-  static const String PS3_Property_Image_error = "Please select images (acceptable formats include .jpg/.png/.jpeg/)";
+  static const String PS3_Property_Image_error =
+      "Please select images (acceptable formats include .jpg/.png/.jpeg/)";
 
-  static const String PS3_Property_Image_error1 = "Please select images (acceptable formats include .jpg/.png/.jpeg/.heif)";
+  static const String PS3_Property_Image_error1 =
+      "Please select images (acceptable formats include .jpg/.png/.jpeg/.heif)";
 
-  static const String PS3_Property_Image_maximum = "A maximum of 10 photos are allowed.";
+  static const String PS3_Property_Image_maximum =
+      "A maximum of 10 photos are allowed.";
 
-  static const String PS3_Property_all_details = "Please complete all mandatory fields.";
-  static const String PS3_Property_Disclosures = "Please confirm that you agree with the Terms and Conditions and Privacy Policy.";
+  static const String PS3_Property_all_details =
+      "Please complete all mandatory fields.";
+  static const String PS3_Property_Disclosures =
+      "Please confirm that you agree with the Terms and Conditions and Privacy Policy.";
   static const String PS3_Property_Active_publish =
       "Only active properties can be published on your listings page. Please activate the property prior to publishing it.";
-  static const String PS3_Property_NoImageAvailable = "No photos have been uploaded for this property.";
-  static const String PS3_Property_file = "We are unable to upload this file. Please try again.";
+  static const String PS3_Property_NoImageAvailable =
+      "No photos have been uploaded for this property.";
+  static const String PS3_Property_file =
+      "We are unable to upload this file. Please try again.";
 
   /*Property Disclosure*/
   static const String ps4_disclosure_chk1 =
@@ -312,7 +374,8 @@ class GlobleString {
   static const String ps4_disclosure_chk42 = "Terms of Service";
   static const String ps4_disclosure_chk43 = " and ";
   static const String ps4_disclosure_chk44 = "Privacy Policy";
-  static const String ps4_disclosure_chk45 = " from Silver Homes Technology, Inc. included in the website";
+  static const String ps4_disclosure_chk45 =
+      " from Silver Homes Technology, Inc. included in the website";
   static const String ps4_disclosure_Iagree = "I agree";
 
   static const String ps4_Specifications = "Specifications";
@@ -324,8 +387,10 @@ class GlobleString {
   static const String ps4_Furnishing = "Furnishing";
   static const String ps4_Allowed = "Allowed";
   static const String ps4_NotAllowed = "Not Allowed";
-  static const String ps4_Features_IncludedIn_The_Rent = "Features Included In The Rent";
-  static const String ps4_Features_Available_But_Not_Included_In_The_Rent = "Features Available But Not Included In The Rent";
+  static const String ps4_Features_IncludedIn_The_Rent =
+      "Features Included In The Rent";
+  static const String ps4_Features_Available_But_Not_Included_In_The_Rent =
+      "Features Available But Not Included In The Rent";
   static const String ps4_Features_Not_Available = "Features Not Available";
 
   static const String Prop_Inactive =
@@ -334,22 +399,34 @@ class GlobleString {
   static const String Prop_btn_yes = "Yes";
   static const String Prop_btn_cancel = "Cancel";
 
-  static const String Prop_Publish = "Are you sure you want to publish this property on your listings page?";
-  static const String Prop_UnPublish = "Are you sure you want to unpublish this property from your listings page?";
-  static const String Event_Publish = "Are you sure you want to publish this Event Type on your listings page?";
-  static const String Event_UnPublish = "Are you sure you want to unpublish this Event Type from your listings page?";
-  static const String Prop_Image_Delete = "Are you sure that you want to remove this photo?";
+  static const String Prop_Publish =
+      "Are you sure you want to publish this property on your listings page?";
+  static const String Prop_UnPublish =
+      "Are you sure you want to unpublish this property from your listings page?";
+  static const String Event_Publish =
+      "Are you sure you want to publish this Event Type on your listings page?";
+  static const String Event_UnPublish =
+      "Are you sure you want to unpublish this Event Type from your listings page?";
+  static const String Prop_Image_Delete =
+      "Are you sure that you want to remove this photo?";
   static const String Prop_Image_btn_No = "No";
   static const String Prop_Image_btn_yes = "Yes";
 
-  static const String Prop_Image_featured = "Would you like to make this photo the featured photo in the property listing?";
+  static const String Prop_Image_featured =
+      "Would you like to make this photo the featured photo in the property listing?";
 
-  static const String Prop_activated_success = "The property has been activated.";
-  static const String Prop_deactivated_success = "The property has been deactivated.";
-  static const String Prop_published_success = "The property has been published on your listings page.";
-  static const String Prop_unpublished_success = "The property has been unpublished from your listings page.";
-  static const String Event_published_success = "The Event type has been published on your listings page.";
-  static const String Event_unpublished_success = "The Event type has been unpublished from your listings page.";
+  static const String Prop_activated_success =
+      "The property has been activated.";
+  static const String Prop_deactivated_success =
+      "The property has been deactivated.";
+  static const String Prop_published_success =
+      "The property has been published on your listings page.";
+  static const String Prop_unpublished_success =
+      "The property has been unpublished from your listings page.";
+  static const String Event_published_success =
+      "The Event type has been published on your listings page.";
+  static const String Event_unpublished_success =
+      "The Event type has been unpublished from your listings page.";
   /*Landlord View*/
   static const String LL_status_Leads = "Leads";
   static const String LL_status_Applications = "Applications";
@@ -384,11 +461,14 @@ class GlobleString {
   static const String CheckReference = "Check reference";
 
   static const String Blank_export = "No tenancy application was found.";
-  static const String Blank_lead = "There are no leads/applicants under this status.";
+  static const String Blank_lead =
+      "There are no leads/applicants under this status.";
 
-  static const String Blank_funnel = "Please select a property from the dropdown menu on the left.";
+  static const String Blank_funnel =
+      "Please select a property from the dropdown menu on the left.";
 
-  static const String ARC_Restore_title = "Are you sure you want to restore this lead/applicant?";
+  static const String ARC_Restore_title =
+      "Are you sure you want to restore this lead/applicant?";
   static const String ARC_Restore_btn_No = "No";
   static const String ARC_Restore_btn_yes = "Yes";
 
@@ -396,7 +476,8 @@ class GlobleString {
       "You cannot activate this tenant because it has been archived. You must restore the lead first.";
   static const String ARC_Not_ActTenant_yes = "OK";
 
-  static const String ARC_delete_msg = "Are you sure you want to archive this lead?";
+  static const String ARC_delete_msg =
+      "Are you sure you want to archive this lead?";
   static const String ARC_delete_yes = "Yes";
   static const String ARC_delete_NO = "No";
 
@@ -409,28 +490,34 @@ class GlobleString {
   static const String ARC_terminante_yes = "Yes";
   static const String ARC_terminante_NO = "No";
 
-  static const String ARC_terminante_successfully = "The tenancy has been terminated and the tenant has been archived.";
+  static const String ARC_terminante_successfully =
+      "The tenancy has been terminated and the tenant has been archived.";
 
-  static const String ARC_restore_msg = "Are you sure you want to restore this lead?";
+  static const String ARC_restore_msg =
+      "Are you sure you want to restore this lead?";
   static const String ARC_restore_yes = "Yes";
   static const String ARC_restore_NO = "No";
 
-  static const String LeaseStatus_msg = "To activate the tenant, please ensure that the `Lease Review Status` field is changed to `Signed`";
+  static const String LeaseStatus_msg =
+      "To activate the tenant, please ensure that the `Lease Review Status` field is changed to `Signed`";
   static const String LeaseStatus_yes = "Yes";
   static const String LeaseStatus_NO = "No";
 
-  static const String activeTenant_msg = "Are you sure you want to activate this tenant?";
+  static const String activeTenant_msg =
+      "Are you sure you want to activate this tenant?";
   static const String activeTenant_yes = "Yes";
   static const String activeTenant_NO = "No";
 
   /* static const String LeaseStatus_msg = "To activate the tenant, please ensure that the Lease Review Status field is changed to Signed";
   static const String LeaseStatus_Ok = "OK";*/
 
-  static const String activeTenant_remove_msg = "Are you sure you want to deactivate this tenant?";
+  static const String activeTenant_remove_msg =
+      "Are you sure you want to deactivate this tenant?";
   static const String activeTenant_remove_yes = "Yes";
   static const String activeTenant_remove_NO = "No";
 
-  static const String lease_not_available = "No lease agreement has been received from this tenant.";
+  static const String lease_not_available =
+      "No lease agreement has been received from this tenant.";
 
   static const String already_active_tenant =
       "You cannot activate this tenant because there is already an active tenant associated with this property.";
@@ -442,6 +529,7 @@ class GlobleString {
 
   /*Lead Header*/
   static const String TLH_Applicant_Name = "Lead Name";
+  static const String TLH_Group_Id = "Group ID";
   static const String TLH_Property_Name = "Property Name";
   static const String TLH_Rating = "Rating";
   static const String TLH_Email_Address = "Email Address";
@@ -467,7 +555,8 @@ class GlobleString {
   static const String ARH_Rating = "Rating";
   static const String ARH_Status = "Applicant Status";
   static const String ARH_Action = "Action";
-  static const String ARH_delete_msg = "Are you sure you wants to move it to Archived";
+  static const String ARH_delete_msg =
+      "Are you sure you wants to move it to Archived";
 
   /*Verify Document Header*/
   static const String VDH_Applicant_Name = "Applicant Name";
@@ -478,7 +567,8 @@ class GlobleString {
   static const String VDH_Review_Status = "Docs Review Status";
   static const String VDH_Application_Status = "Applicant Status";
   static const String VDH_Filter = "Filter";
-  static const String VDH_delete_msg = " Are you sure you wants to move it to Archived";
+  static const String VDH_delete_msg =
+      " Are you sure you wants to move it to Archived";
   static const String VDH_delete_yes = "Yes";
   static const String VDH_delete_cancel = "Cancel";
 
@@ -548,9 +638,11 @@ class GlobleString {
   static const String NL_hint_Last_name = "Enter Last name";
   static const String NL_hint_notes_here = "Enter notes here.";
   static const String NL_Lead_no = "Lead #";
-  static const String NL_Lead_delete_msg = "Are you sure you wants to delete this lead?";
+  static const String NL_Lead_delete_msg =
+      "Are you sure you wants to delete this lead?";
 
-  static const String NL_Lead_close_msg = "Would you like to save your changes?";
+  static const String NL_Lead_close_msg =
+      "Would you like to save your changes?";
 
   static const String NL_Lead_close_yes = "Yes";
   static const String NL_Lead_close_NO = "No";
@@ -561,22 +653,27 @@ class GlobleString {
 
   static const String NL_error_Select_property = "Please select a property.";
   static const String NL_error_Enter_email = "Please enter an email address.";
-  static const String NL_error_valid_email = "Please enter a valid email address.";
-  static const String NL_error_valid_phone = "Please enter a valid phone number.";
+  static const String NL_error_valid_email =
+      "Please enter a valid email address.";
+  static const String NL_error_valid_phone =
+      "Please enter a valid phone number.";
   static const String NL_error_First_name = "Please enter the first name.";
   static const String NL_error_Last_name = "Please enter the last name.";
-  static const String NL_error_insertcall = "We were unable to save your data. Please try again.";
+  static const String NL_error_insertcall =
+      "We were unable to save your data. Please try again.";
 
   static const String Lead_email_title =
       "This lead already exists under this property. Please enter a different email address or select a different property.";
-  static const String Lead_email_subtitle = "Each lead must have a unique email address in order to be added";
+  static const String Lead_email_subtitle =
+      "Each lead must have a unique email address in order to be added";
   static const String Lead_email_OK = "OK";
 
   static const String NL_error_Rating = "Would you like to save your changes?";
 
   /*Preview Documents*/
   static const String PD_Preview_Documents = "Preview Documents";
-  static const String PD_document_review = " has provided the following documents for your review:";
+  static const String PD_document_review =
+      " has provided the following documents for your review:";
   static const String PD_Document_Type = "Document Type";
   static const String PD_Attachment_Name = "Attachment Name";
   static const String PD_Preview = "Preview";
@@ -591,7 +688,8 @@ class GlobleString {
 
   /*Preview Lease*/
   static const String PL_Preview_Lease = "Preview Lease";
-  static const String PL_document_review = " has uploaded the following agreement for your review:";
+  static const String PL_document_review =
+      " has uploaded the following agreement for your review:";
   static const String PL_Document_Type = "Document Type";
   static const String PL_Attachment_Name = "Attachment Name";
   static const String PL_Date_Uploaded = "Date Uploaded";
@@ -609,31 +707,44 @@ class GlobleString {
   static const String RQ_1_year_to_2_years = "1 year to 2 years";
   static const String RQ_Over_2_years = "Over 2 years";
   static const String RQ_Reason_For_Departure = "Reason for Departure";
-  static const String RQ_Reason_For_Departure_hint = "Please explain in 150 words or less the reason for departure.";
-  static const String RQ_question_title = "Please rate the tenant on the following from 1 Star (Poor) to 5 Stars (Excellent):";
+  static const String RQ_Reason_For_Departure_hint =
+      "Please explain in 150 words or less the reason for departure.";
+  static const String RQ_question_title =
+      "Please rate the tenant on the following from 1 Star (Poor) to 5 Stars (Excellent):";
   static const String RQ_Poor = "Poor";
   static const String RQ_Excellent = "Excellent";
   static const String RQ_question1_title = "1. Cleanliness";
-  static const String RQ_question1 = "Did the tenant take good care of the unit?";
+  static const String RQ_question1 =
+      "Did the tenant take good care of the unit?";
   static const String RQ_question2_title = "2. Communication";
   static const String RQ_question2 = "How responsive was the tenant?";
   static const String RQ_question3_title = "3. Respectfulness";
-  static const String RQ_question3 = "Was the tenant respectful and considerate of the landlord, other tenants/neighbours, etc.?";
+  static const String RQ_question3 =
+      "Was the tenant respectful and considerate of the landlord, other tenants/neighbours, etc.?";
   static const String RQ_question4_title = "4. Payment Punctuality";
-  static const String RQ_question4 = "Did the tenant consistently pay his/her rent and other obligations on time?";
+  static const String RQ_question4 =
+      "Did the tenant consistently pay his/her rent and other obligations on time?";
   static const String RQ_question5_title = "Would you recommend this tenant?";
   static const String RQ_Yes = "Yes";
   static const String RQ_No = "No";
   static const String RQ_Other_Comments = "Other Comments";
-  static const String RQ_Other_Comments_hint = "Please add any additional information you feel would be applicable.";
+  static const String RQ_Other_Comments_hint =
+      "Please add any additional information you feel would be applicable.";
 
-  static const String RQ_Error_LengthofTenancy = "Please enter the length of this tenancy.";
-  static const String RQ_Error_reasonfordeparture = "Please enter the reason for departure.";
-  static const String RQ_Error_Cleanliness = "Please add a rating for \"cleanliness\"";
-  static const String RQ_Error_communication = "Please add a rating for \"communication\"";
-  static const String RQ_Error_respectfulness = "Please add a rating for \"respectfulness\"";
-  static const String RQ_Error_PaymentPunctuality = "Please add a rating for \"payment punctuality\"";
-  static const String RQ_Error_recommendtenant = "Please confirm if you would recommend this tenant to another landlord.";
+  static const String RQ_Error_LengthofTenancy =
+      "Please enter the length of this tenancy.";
+  static const String RQ_Error_reasonfordeparture =
+      "Please enter the reason for departure.";
+  static const String RQ_Error_Cleanliness =
+      "Please add a rating for \"cleanliness\"";
+  static const String RQ_Error_communication =
+      "Please add a rating for \"communication\"";
+  static const String RQ_Error_respectfulness =
+      "Please add a rating for \"respectfulness\"";
+  static const String RQ_Error_PaymentPunctuality =
+      "Please add a rating for \"payment punctuality\"";
+  static const String RQ_Error_recommendtenant =
+      "Please confirm if you would recommend this tenant to another landlord.";
   static const String RQ_Error_OtherComments = "Please enter Other Comments";
 
   static const String DRQ_Reference_Questionnaire = "Reference Questionnaire";
@@ -669,39 +780,50 @@ class GlobleString {
   static const String Fl_Apply = "Apply";
 
   static const String dailog_finish = "Finish";
-  static const String dailog_varification_document = "Your documents have been submitted.";
-  static const String dailog_lease_agreement = "The signed lease agreement has been sent.";
+  static const String dailog_varification_document =
+      "Your documents have been submitted.";
+  static const String dailog_lease_agreement =
+      "The signed lease agreement has been sent.";
   static const String dailog_lease_agreement_close = "Close";
-  static const String dailog_reference_questionanry = "Your reference questionnaire has been submitted.";
+  static const String dailog_reference_questionanry =
+      "Your reference questionnaire has been submitted.";
   static const String dailog_reference_questionanry_close = "Close";
-  static const String dailog_application_success = "Your application has been submitted. ";
+  static const String dailog_application_success =
+      "Your application has been submitted. ";
   static const String dailog_application_success_close = "Close";
 
   static const String dailog_yes = "Yes";
   static const String dailog_no = "No";
-  static const String dailog_remove_msg = "Are you sure you want to remove this item?";
+  static const String dailog_remove_msg =
+      "Are you sure you want to remove this item?";
 
   static const String DCR_Check_References = "Check References";
   static const String DCR_Applicant = "Applicant: ";
-  static const String DCR_Select_the_reference = "Select the reference you would like to manually complete the questionnaire for: ";
+  static const String DCR_Select_the_reference =
+      "Select the reference you would like to manually complete the questionnaire for: ";
   static const String DCR_Reference_Name = "Reference Name";
   static const String DCR_Relationship = "Relationship";
   static const String DCR_Phone_Number = "Phone Number";
   static const String DCR_Email = "Email";
-  static const String DCR_SendQuestion = "Select the references you would like to send the questionnaire to:";
-  static const String DCR_Preview = "Below is a preview of the message below that will be sent to the selected references.";
+  static const String DCR_SendQuestion =
+      "Select the references you would like to send the questionnaire to:";
+  static const String DCR_Preview =
+      "Below is a preview of the message below that will be sent to the selected references.";
   static const String DCR_Save = "Save";
   static const String DCR_Next = "Next";
   static const String DCR_Subject = "Subject:";
   static const String DCR_Subject_msg = "Tenancy Reference Check for";
-  static const String DCR_success = "The reference request has been sent to the applicant's reference(s).";
+  static const String DCR_success =
+      "The reference request has been sent to the applicant's reference(s).";
   static const String DCR_success_close = "Close";
   static const String DCR_Would_you_liketo = "Would you like to:";
   static const String DCR_Send_Questionnaire = "Send Questionnaire";
   static const String DCR_FillOut_Manually = "Fill Out Manually";
 
-  static const String DCR_No_reference = "No reference. Please add an additional reference to the tenant details";
-  static const String DCR_select_reference = "Please select at least one reference.";
+  static const String DCR_No_reference =
+      "No reference. Please add an additional reference to the tenant details";
+  static const String DCR_select_reference =
+      "Please select at least one reference.";
 
   static const String DIA_Invite_to_Apply = "Invite to Apply";
   static const String DIA_Preview_email = "Preview Email";
@@ -711,18 +833,24 @@ class GlobleString {
   static const String DIA_R_Documents = "Request Documents";
   static const String DIA_Invite_to_Apply_title =
       "Below is a preview of the message that will be sent to the applicants including the application link. ";
-  static const String DIA_Invite_to_Apply_List = "List the documents that the applicant should upload. ";
-  static const String DIA_Invite_to_Apply_ListDco = "Apply saved documents list";
-  static const String DIA_Invite_to_save_ListDco = "Save documents request list";
-  static const String DIA_Invite_to_save_ListDcore = "Documents Request List Name";
+  static const String DIA_Invite_to_Apply_List =
+      "List the documents that the applicant should upload. ";
+  static const String DIA_Invite_to_Apply_ListDco =
+      "Apply saved documents list";
+  static const String DIA_Invite_to_save_ListDco =
+      "Save documents request list";
+  static const String DIA_Invite_to_save_ListDcore =
+      "Documents Request List Name";
   static const String DIA_Send = "Send";
   static const String DIA_Back = "Back";
   static const String DIA_Close = "Close";
   static const String DIA_Preview = "Preview Sample";
   static const String DIA_Subject = "Subject:";
   static const String DIA_Subject_msg = "Tenant Application for:";
-  static const String DIA_Invite_success1 = "The application form has been sent to the lead.";
-  static const String DIA_Invite_success = "Your application form has been submitted to the landlord.";
+  static const String DIA_Invite_success1 =
+      "The application form has been sent to the lead.";
+  static const String DIA_Invite_success =
+      "Your application form has been submitted to the landlord.";
   static const String DIA_Invite_success_finish = "Finish";
 
   static const String DDQ_Request_Documents = "Request Documents	 ";
@@ -738,7 +866,8 @@ class GlobleString {
   static const String DDQ_Preview = "Preview Sample";
   static const String DDQ_Subject = "Subject:";
   static const String DDQ_Subject_msg = "Tenant Application for:";
-  static const String DDQ_DocRequest_success = "Your document request has been sent to the applicant.";
+  static const String DDQ_DocRequest_success =
+      "Your document request has been sent to the applicant.";
 
   static const String FNL_status_Invite_to_Apply = "Invite to Apply";
   static const String FNL_status_Request_Documents = "Request Documents";
@@ -751,8 +880,10 @@ class GlobleString {
   static const String NT_status_Lease_Received = "Lease Received";
   static const String NT_status_Application_Received = "Application Received";
   static const String NT_status_Maintenance_Requests = "Maintenance Requests";
-  static const String NT_status_Maintenance_Status_Changed = "Status changed for maintenance request";
-  static const String NT_status_Maintenance_Priority_Changed = "Priority changed for maintenance request";
+  static const String NT_status_Maintenance_Status_Changed =
+      "Status changed for maintenance request";
+  static const String NT_status_Maintenance_Priority_Changed =
+      "Priority changed for maintenance request";
 
   static const String DLR_Update_Rating = "Update Rating";
   static const String DLR_General_Rating = "Rating";
@@ -760,7 +891,8 @@ class GlobleString {
   static const String DLR_hint_notes_here = "Enter notes here.";
   static const String DLR_Save = "Save";
 
-  static const String DLR_Update_Rating_msg = "Would you like to save your changes?";
+  static const String DLR_Update_Rating_msg =
+      "Would you like to save your changes?";
   static const String DLR_Update_Rating_yes = "Yes";
   static const String DLR_Update_Rating_NO = "No";
 
@@ -789,13 +921,15 @@ class GlobleString {
   static const String FNL_AC_Invite_Tenant = "Invite Tenant";
 
   static const String DLS_SendLease = "Send Lease";
-  static const String DLS_SendLease_title = "You are about to send the lease agreement to the following candidate:";
+  static const String DLS_SendLease_title =
+      "You are about to send the lease agreement to the following candidate:";
   static const String DLS_Preview_email = "Preview Email";
   static const String DLS_Applicant_Name = "Applicant Name";
   static const String DLS_Email = "Email";
   static const String DLS_Phone_Number = "Phone Number";
   static const String DLS_LeaseUpload = "Upload";
-  static const String DLS_LeaseUpload_title = "Please upload a copy of the lease agreement ready for signature:";
+  static const String DLS_LeaseUpload_title =
+      "Please upload a copy of the lease agreement ready for signature:";
   static const String DLS_SendLease_email_title =
       "Below is a preview of the message that will be sent to the applicant with the lease agreement for their review and signature. ";
   static const String DLS_Send = "Send";
@@ -804,79 +938,134 @@ class GlobleString {
   static const String DLS_Preview = "Preview Sample";
   static const String DLS_Subject = "Subject:";
   static const String DLS_Subject_msg = "Lease Agreement for:";
-  static const String DLS_Invite_success = "Your application has been submitted.";
+  static const String DLS_Invite_success =
+      "Your application has been submitted.";
 
-  static const String DLS_Document_Image_error = "Please select files with pdf. extensions.";
-  static const String DLS_Document_Image_Size_error = "The maximum file size is 10 MB.";
+  static const String DLS_Document_Image_error =
+      "Please select files with pdf. extensions.";
+  static const String DLS_Document_Image_Size_error =
+      "The maximum file size is 10 MB.";
 
-  static const String DLS_Document_lease_error = "Please attach a copy of the lease agreement.";
-  static const String DLS_Document_lease_sucess = "The lease agreement has been sent to the applicant.";
+  static const String DLS_Document_lease_error =
+      "Please attach a copy of the lease agreement.";
+  static const String DLS_Document_lease_sucess =
+      "The lease agreement has been sent to the applicant.";
   static const String DLS_Document_lease_sucess_close = "Close";
 
   /*====================Validation error ==========================*/
 
   /*Tenancy Person info*/
-  static const String taf_person_error_first_name = "Please enter your first name.";
-  static const String taf_person_error_last_name = "Please enter your last name.";
-  static const String taf_person_error_dateofbarth = "Please select your date of birth.";
-  static const String taf_person_error_dateofbarth1 = "You must be of legal age to submit a tenancy application.";
-  static const String taf_person_error_email = "Please enter your email address.";
-  static const String taf_person_error_valid_email = "Please enter a valid email address.";
-  static const String taf_person_error_mobile = "Please enter your mobile phone number.";
-  static const String taf_person_error_validmobile = "Please enter a valid phone mobile number.";
+  static const String taf_person_error_first_name =
+      "Please enter your first name.";
+  static const String taf_person_error_last_name =
+      "Please enter your last name.";
+  static const String taf_person_error_dateofbarth =
+      "Please select your date of birth.";
+  static const String taf_person_error_dateofbarth1 =
+      "You must be of legal age to submit a tenancy application.";
+  static const String taf_person_error_email =
+      "Please enter your email address.";
+  static const String taf_person_error_valid_email =
+      "Please enter a valid email address.";
+  static const String taf_person_error_mobile =
+      "Please enter your mobile phone number.";
+  static const String taf_person_error_validmobile =
+      "Please enter a valid phone mobile number.";
 
   /*Tenancy Employment info*/
-  static const String taf_person_error_occupation = "Please enter your occupation.";
-  static const String taf_person_error_organization = "Please enter the name of your organization.";
-  static const String taf_person_error_lenthofemp = "Please enter your length of employment at that organization.";
-  static const String taf_person_error_annualincome = "Please select your annual income.";
-  static const String taf_person_error_employmentstatus = "Please select your employment status.";
-  static const String taf_person_error_LinkedIn = "Please enter a valid LinkedIn URL.";
+  static const String taf_person_error_occupation =
+      "Please enter your occupation.";
+  static const String taf_person_error_organization =
+      "Please enter the name of your organization.";
+  static const String taf_person_error_lenthofemp =
+      "Please enter your length of employment at that organization.";
+  static const String taf_person_error_annualincome =
+      "Please select your annual income.";
+  static const String taf_person_error_employmentstatus =
+      "Please select your employment status.";
+  static const String taf_person_error_LinkedIn =
+      "Please enter a valid LinkedIn URL.";
 
   /*Tenancy Current info*/
-  static const String taf_currenttenancy_error_startdate = "Please select the start date of your current tenancy.";
-  static const String taf_currenttenancy_error_enddate = "Please select the end date of your current tenancy.";
-  static const String taf_currenttenancy_error_suiteunit = "Please enter your current suite unit (if applicable).";
-  static const String taf_currenttenancy_error_address = "Please enter your current address.";
-  static const String taf_currenttenancy_error_city = "Please enter your current city.";
-  static const String taf_currenttenancy_error_province = "Please enter your current province/state.";
-  static const String taf_currenttenancy_error_postalcode = "Please enter your current postal/zip code.";
-  static const String taf_currenttenancy_error_firstname = "Please enter the first name of your current landlord.";
-  static const String taf_currenttenancy_error_lastname = "Please enter the last name of your current landlord.";
-  static const String taf_currenttenancy_error_email = "Please enter the email address of your current landlord.";
-  static const String taf_currenttenancy_error_valid_email = "Please enter a valid email address.";
-  static const String taf_currenttenancy_error_mobile = "Please enter the mobile number of your current landlord.";
-  static const String taf_currenttenancy_error_validmobile = "Please enter a valid mobile number of your current landlord.";
+  static const String taf_currenttenancy_error_startdate =
+      "Please select the start date of your current tenancy.";
+  static const String taf_currenttenancy_error_enddate =
+      "Please select the end date of your current tenancy.";
+  static const String taf_currenttenancy_error_suiteunit =
+      "Please enter your current suite unit (if applicable).";
+  static const String taf_currenttenancy_error_address =
+      "Please enter your current address.";
+  static const String taf_currenttenancy_error_city =
+      "Please enter your current city.";
+  static const String taf_currenttenancy_error_province =
+      "Please enter your current province/state.";
+  static const String taf_currenttenancy_error_postalcode =
+      "Please enter your current postal/zip code.";
+  static const String taf_currenttenancy_error_firstname =
+      "Please enter the first name of your current landlord.";
+  static const String taf_currenttenancy_error_lastname =
+      "Please enter the last name of your current landlord.";
+  static const String taf_currenttenancy_error_email =
+      "Please enter the email address of your current landlord.";
+  static const String taf_currenttenancy_error_valid_email =
+      "Please enter a valid email address.";
+  static const String taf_currenttenancy_error_mobile =
+      "Please enter the mobile number of your current landlord.";
+  static const String taf_currenttenancy_error_validmobile =
+      "Please enter a valid mobile number of your current landlord.";
 
   /*Tenancy Occupant*/
-  static const String taf_occupant_error_mandatory = "Please complete all the fields marked as mandatory.";
-  static const String taf_occupant_error_firstname = "Please enter the first name of the occupant.";
-  static const String taf_occupant_error_lastname = "Please enter the last name of the occupant.";
-  static const String taf_occupant_error_primaryApplicant = "Please specify your relationship with the occupant.";
+  static const String taf_occupant_error_mandatory =
+      "Please complete all the fields marked as mandatory.";
+  static const String taf_occupant_error_firstname =
+      "Please enter the first name of the occupant.";
+  static const String taf_occupant_error_lastname =
+      "Please enter the last name of the occupant.";
+  static const String taf_occupant_error_primaryApplicant =
+      "Please specify your relationship with the occupant.";
 
   /*Tenancy Additional Info*/
-  static const String taf_AdditionalInfo_error_pets_typeofpets = "Please indicate the type of pet (e.g. dog, cat, etc.).";
-  static const String taf_AdditionalInfo_error_pets_size = "Please enter the pet's size (i.e. weight in pounds).";
-  static const String taf_AdditionalInfo_error_pets_age = "Please enter the pet's age (e.g. 2 years).";
-  static const String taf_AdditionalInfo_error_smoke_comment = "Please provide details.";
-  static const String taf_AdditionalInfo_error_vahical_make = "Please specify the brand of the vehicle.";
-  static const String taf_AdditionalInfo_error_vahical_model = "Please specify the model of the vehicle.";
-  static const String taf_AdditionalInfo_error_vahical_year = "Please specify the year of the vehicle.";
-  static const String taf_AdditionalInfo_error_intend_tenancy_start_date = "Please select your desired tenancy start date.";
-  static const String taf_AdditionalInfo_error_intend_length_of_tenancy = "Please indicate the intended length of your tenancy.";
-  static const String taf_AdditionalInfo_error_intend_length_of_tenancy_number = "Please indicate the intended length of your tenancy.";
-  static const String taf_AdditionalInfo_error_intend_length_of_tenancy_period = "Please indicate the intended length of your tenancy.";
+  static const String taf_AdditionalInfo_error_pets_typeofpets =
+      "Please indicate the type of pet (e.g. dog, cat, etc.).";
+  static const String taf_AdditionalInfo_error_pets_size =
+      "Please enter the pet's size (i.e. weight in pounds).";
+  static const String taf_AdditionalInfo_error_pets_age =
+      "Please enter the pet's age (e.g. 2 years).";
+  static const String taf_AdditionalInfo_error_smoke_comment =
+      "Please provide details.";
+  static const String taf_AdditionalInfo_error_vahical_make =
+      "Please specify the brand of the vehicle.";
+  static const String taf_AdditionalInfo_error_vahical_model =
+      "Please specify the model of the vehicle.";
+  static const String taf_AdditionalInfo_error_vahical_year =
+      "Please specify the year of the vehicle.";
+  static const String taf_AdditionalInfo_error_intend_tenancy_start_date =
+      "Please select your desired tenancy start date.";
+  static const String taf_AdditionalInfo_error_intend_length_of_tenancy =
+      "Please indicate the intended length of your tenancy.";
+  static const String taf_AdditionalInfo_error_intend_length_of_tenancy_number =
+      "Please indicate the intended length of your tenancy.";
+  static const String taf_AdditionalInfo_error_intend_length_of_tenancy_period =
+      "Please indicate the intended length of your tenancy.";
 
   /*Tenancy Reference*/
-  static const String taf_reference_error_firstname = "Please enter your reference's first name.";
-  static const String taf_reference_error_lastname = "Please enter your reference's last name.";
-  static const String taf_reference_error_primaryApplicant = "Please specify your relationship with the reference.";
-  static const String taf_reference_error_phonenumber = "Please enter the reference's phone number.";
-  static const String taf_reference_error_email = "Please enter the reference's email address.";
-  static const String taf_reference_error_valid_email = "Please enter a valid email address.";
-  static const String taf_reference_error__validphonenumber = "Please enter a valid phone number.";
+  static const String taf_reference_error_firstname =
+      "Please enter your reference's first name.";
+  static const String taf_reference_error_lastname =
+      "Please enter your reference's last name.";
+  static const String taf_reference_error_primaryApplicant =
+      "Please specify your relationship with the reference.";
+  static const String taf_reference_error_phonenumber =
+      "Please enter the reference's phone number.";
+  static const String taf_reference_error_email =
+      "Please enter the reference's email address.";
+  static const String taf_reference_error_valid_email =
+      "Please enter a valid email address.";
+  static const String taf_reference_error__validphonenumber =
+      "Please enter a valid phone number.";
 
-  static const String taf_reference_error_isAuthorize = "Please check the authorization box.";
+  static const String taf_reference_error_isAuthorize =
+      "Please check the authorization box.";
   static const String taf_reference_error_termcondition =
       "Please check the box indicating that you agree with the Terms of Service and Privacy Policy";
 
@@ -911,10 +1100,13 @@ class GlobleString {
   static const String TAF_Employment_current_occupation = "Current occupation";
   static const String TAF_Employment_Occupation = "Occupation";
   static const String TAF_Employment_Organization = "Organization";
-  static const String TAF_Employment_legth_of_empoyment = "Length of Employment (years)";
+  static const String TAF_Employment_legth_of_empoyment =
+      "Length of Employment (years)";
   static const String TAF_Employment_Annual_Income = "Annual income";
-  static const String TAF_Employment_LinkedIn_profile_link = "LinkedIn profile link";
-  static const String TAF_Employment_other_source_of_income = "Other sources of income (please describe and quantify)";
+  static const String TAF_Employment_LinkedIn_profile_link =
+      "LinkedIn profile link";
+  static const String TAF_Employment_other_source_of_income =
+      "Other sources of income (please describe and quantify)";
   static const String TAF_Employment_Add_New_Occupation = "Add New Occupation";
 
   /*Current Ten*/
@@ -930,19 +1122,22 @@ class GlobleString {
   static const String TAF_CT_Last_name = "Last name";
   static const String TAF_CT_Email_address = "Email address";
   static const String TAF_CT_Phone_number = "Phone number";
-  static const String TAF_CT_aggree = "By checking this box you authorize us to use your current landlord as a reference.";
+  static const String TAF_CT_aggree =
+      "By checking this box you authorize us to use your current landlord as a reference.";
   static const String TAF_CT_Add_New_Occupant = "Add New Occupant";
 
   /*Additional Occupant*/
   static const String TAF_Additional_Occupants = "Additional Occupants";
   static const String TAF_AO_first_name = "First name";
   static const String TAF_AO_Last_name = "Last name";
-  static const String TAF_AO_Relationship_applicant = "Relationship to primary applicant";
+  static const String TAF_AO_Relationship_applicant =
+      "Relationship to primary applicant";
   static const String TAF_AO_NotApplicable = "Not applicable";
 
   static const String TAF_Additional_Occupants_dailog_yes = "Yes";
   static const String TAF_Additional_Occupants_dailog_no = "No";
-  static const String TAF_Additional_Occupants_dailog_remove_msg = "Are you sure you want to delete this additional occupant?";
+  static const String TAF_Additional_Occupants_dailog_remove_msg =
+      "Are you sure you want to delete this additional occupant?";
 
   /*Additional Occupant*/
   static const String TAF_Additional_information = "Additional Information";
@@ -958,8 +1153,10 @@ class GlobleString {
   static const String TAF_AI_Vehicle_model = "Model";
   static const String TAF_AI_Vehicle_year = "Year";
   static const String TAF_AI_Add_New_Vehicle = "Add New Vehicle";
-  static const String TAF_AI_Intended_tenancy_start_date = "Intended tenancy start date";
-  static const String TAF_AI_Intended_length_of_tenancy = "Intended length of tenancy";
+  static const String TAF_AI_Intended_tenancy_start_date =
+      "Intended tenancy start date";
+  static const String TAF_AI_Intended_length_of_tenancy =
+      "Intended length of tenancy";
 
   static const String TAF_AI_Number = "Number (#)";
   static const String TAF_AI_Period = "Period";
@@ -977,21 +1174,28 @@ class GlobleString {
   static const String TAF_AR_Last_name = "Last name";
   static const String TAF_AR_Email_address = "Email address";
   static const String TAF_AR_Phone_number = "Phone number";
-  static const String TAF_AR_Relationship_applicant = "Relationship to primary applicant";
+  static const String TAF_AR_Relationship_applicant =
+      "Relationship to primary applicant";
   static const String TAF_AR_Add_new_Reference = "Add New Reference";
   static const String Submit = "Submit";
-  static const String AR_agree2 = "I have read and agree to the Terms and Conditions and Privacy policy of Sliver Homes";
+  static const String AR_agree2 =
+      "I have read and agree to the Terms and Conditions and Privacy policy of Sliver Homes";
   static const String AR_Agree1 =
       "I confirm that all the information provided in this application form is true and accurate to the best of my knowledge, and I authorize the landlord to conduct credit, background, and reference checks in connection to this application.";
 
   static const String TAF_Additional_References_dailog_yes = "Yes";
   static const String TAF_Additional_References_dailog_no = "No";
-  static const String TAF_Additional_References_dailog_msg = "Are you sure that you want to remove this reference?";
+  static const String TAF_Additional_References_dailog_msg =
+      "Are you sure that you want to remove this reference?";
 
-  static const String TA_General_Rating_error = "Please give your general rating";
-  static const String TA_Application_Status_error = "Please select application status";
-  static const String TA_Docs_Review_Status_error = "Please select docs review status";
-  static const String TA_Additional_Notes_error = "Please enter your additional notes";
+  static const String TA_General_Rating_error =
+      "Please give your general rating";
+  static const String TA_Application_Status_error =
+      "Please select application status";
+  static const String TA_Docs_Review_Status_error =
+      "Please select docs review status";
+  static const String TA_Additional_Notes_error =
+      "Please enter your additional notes";
 
   /*Tenancy Applications*/
 
@@ -1028,7 +1232,8 @@ class GlobleString {
   static const String TA_Other_sources_of_income = "Other sources of income";
 
   static const String TA_Current_Tenacy = "Current Tenancy";
-  static const String TA_Current_tenacy_start_date = "Current tenancy  start date";
+  static const String TA_Current_tenacy_start_date =
+      "Current tenancy  start date";
   static const String TA_Current_tenacy_end_date = "Current tenancy  end date";
   static const String TA_Current_tenacy_Address = "Address";
 
@@ -1039,7 +1244,8 @@ class GlobleString {
   static const String TA_Additional_Occupants = "Additional Occupants";
   static const String TA_Additional_Occupants_first_name = "First name";
   static const String TA_Additional_Occupants_Last_name = "Last name";
-  static const String TA_Additional_Occupants_Relationship_applicant = "Relationship to primary applicant";
+  static const String TA_Additional_Occupants_Relationship_applicant =
+      "Relationship to primary applicant";
 
   static const String TA_Additional_Informations = "Additional Information";
   static const String TA_Pet = "Pet";
@@ -1049,24 +1255,32 @@ class GlobleString {
   static const String TA_No = "No";
   static const String TA_Vehicle = "Vehicle";
   static const String TA_Vehicle_Make_Model_Year = "(Make, Model, Year)";
-  static const String TA_Intended_tenancy_start_date = "Intended tenancy start date";
-  static const String TA_Intended_legth_of_tenancy = "Intended length of tenancy";
+  static const String TA_Intended_tenancy_start_date =
+      "Intended tenancy start date";
+  static const String TA_Intended_legth_of_tenancy =
+      "Intended length of tenancy";
   static const String TA_AI_Number = "Number (#)";
   static const String TA_AI_Period = "Period";
 
   static const String TA_Reference = "Reference";
   static const String TA_References = "References";
   static const String TA_Reference_Name = "Reference name";
-  static const String TA_Relationship_to_primary_applicant = "Relationship to primary applicant";
+  static const String TA_Relationship_to_primary_applicant =
+      "Relationship to primary applicant";
   static const String TA_Reference_Email = "Email";
   static const String TA_Reference_Phone_Number = "Phone number";
 
   /*Tenancy Verification Document*/
-  static const String TVD_title = "Please attach the following verification documents:";
-  static const String TVD_doc1 = "1. Copy of government-issued ID (e.g., driver’s license, passport, PR card, etc.)";
-  static const String TVD_doc2 = "2. Proof of funds (i.e., bank statements for the last three months showing opening and ending balances)";
-  static const String TVD_doc3 = "3. Employment verification (e.g., letter of employment, four most recent pay stubs, etc.)";
-  static const String TVD_doc4 = "4. Credit record (please request a credit score from";
+  static const String TVD_title =
+      "Please attach the following verification documents:";
+  static const String TVD_doc1 =
+      "1. Copy of government-issued ID (e.g., driver’s license, passport, PR card, etc.)";
+  static const String TVD_doc2 =
+      "2. Proof of funds (i.e., bank statements for the last three months showing opening and ending balances)";
+  static const String TVD_doc3 =
+      "3. Employment verification (e.g., letter of employment, four most recent pay stubs, etc.)";
+  static const String TVD_doc4 =
+      "4. Credit record (please request a credit score from";
   static const String TVD_doc4_2 = " Equifax ";
   static const String TVD_doc4_3 = "and attach a copy of the report)";
   static const String TVD_Not_Applicable = "Not Applicable";
@@ -1074,16 +1288,20 @@ class GlobleString {
   static const String TVD_Upload = "Upload";
   static const String TVD_Submit = "Submit";
 
-  static const String TVD_Document_Delet = "Are you sure that you want to remove this file?";
+  static const String TVD_Document_Delet =
+      "Are you sure that you want to remove this file?";
   static const String TVD_Document_btn_No = "No";
   static const String TVD_Document_btn_yes = "Yes";
 
-  static const String TVD_Document_Image_error = "Please upload files with the following formats only: .jpg/.png/.pdf/.jpeg/.doc";
-  static const String TVD_Document_Image_Size_0_error = "There is an error with this file. Please upload a different file.";
+  static const String TVD_Document_Image_error =
+      "Please upload files with the following formats only: .jpg/.png/.pdf/.jpeg/.doc";
+  static const String TVD_Document_Image_Size_0_error =
+      "There is an error with this file. Please upload a different file.";
   static const String TVD_Document_Image_Size_error =
       "The maximum file size is 10 MB. Please upload a file that meets the size requirement.";
 
-  static const String TVD_Agreement_Image_error = "Please upload .pdf files only.";
+  static const String TVD_Agreement_Image_error =
+      "Please upload .pdf files only.";
 
   static const String TVD_Document1_error =
       "Please attach a copy of your government-issued ID (e.g., driver’s license, passport, PR card, etc.)";
@@ -1091,10 +1309,12 @@ class GlobleString {
       "Please attach your proof of funds (i.e., bank statements for the last three months showing opening and ending balances)";
   static const String TVD_Document3_error =
       "Please attach your employment verification (e.g., letter of employment, four most recent pay stubs, etc.)";
-  static const String TVD_Document4_error = "Please attach a recent copy of your credit report (i.e., no less than 2 months old)";
+  static const String TVD_Document4_error =
+      "Please attach a recent copy of your credit report (i.e., no less than 2 months old)";
 
   /*Tenancy Lease Agreement*/
-  static const String TLA_title = "Please follow the steps below to complete the lease agreement:";
+  static const String TLA_title =
+      "Please follow the steps below to complete the lease agreement:";
   static const String TLA_doc1 = "1. Download, review and sign lease";
   static const String TLA_doc2 = "2. Upload a copy of the signed lease";
   static const String TLA_Download = "Download";
@@ -1118,22 +1338,34 @@ class GlobleString {
   static const String LL_Profile_Homepagelink = "Home page link";
   static const String LL_Profile_Uploadlogo = "Upload logo";
   static const String LL_Profile_Save = "Save";
-  static const String LL_cfl_hint = "special characters or spaces are not allowed";
+  static const String LL_cfl_hint =
+      "special characters or spaces are not allowed";
 
   static const String LL_cfl_copy = "Link copied.";
 
-  static const String LL_Profile_error_clogo = "Please upload your company logo.";
-  static const String LL_Profile_error_Customerfeaturelisting = "Please enter the URL for your listing page. ";
-  static const String LL_Profile_error_cname = "Please enter your company name.";
-  static const String LL_Profile_error_homepage = "Please enter your company website.";
-  static const String LL_Profile_error_validhomepage = "Please enter a valid company website.";
-  static const String LL_Profile_error_firstname = "Please enter your first name.";
-  static const String LL_Profile_error_lastname = "Please enter your last name.";
-  static const String LL_Profile_error_email = "Please enter your email address.";
-  static const String LL_Profile_error_phone = "Please enter your phone number.";
-  static const String LL_Profile_error_validphone = "Please enter a valid phone number.";
+  static const String LL_Profile_error_clogo =
+      "Please upload your company logo.";
+  static const String LL_Profile_error_Customerfeaturelisting =
+      "Please enter the URL for your listing page. ";
+  static const String LL_Profile_error_cname =
+      "Please enter your company name.";
+  static const String LL_Profile_error_homepage =
+      "Please enter your company website.";
+  static const String LL_Profile_error_validhomepage =
+      "Please enter a valid company website.";
+  static const String LL_Profile_error_firstname =
+      "Please enter your first name.";
+  static const String LL_Profile_error_lastname =
+      "Please enter your last name.";
+  static const String LL_Profile_error_email =
+      "Please enter your email address.";
+  static const String LL_Profile_error_phone =
+      "Please enter your phone number.";
+  static const String LL_Profile_error_validphone =
+      "Please enter a valid phone number.";
 
-  static const String LL_Profile_success = "The changes to your profile have been saved.";
+  static const String LL_Profile_success =
+      "The changes to your profile have been saved.";
 
   /*=======================================================================*/
   /*========================== Super Admin ================================*/
@@ -1145,7 +1377,8 @@ class GlobleString {
   static const String ADB_TotalLandlords = "Total Landlords";
   static const String ADB_TotalLeasedSigned = "Total Leases Signed";
   static const String ADB_TodaysNewJoinee = "New Property Owners";
-  static const String ADB_TodayTenantInvitation = "New Tenant Application Invites Sent";
+  static const String ADB_TodayTenantInvitation =
+      "New Tenant Application Invites Sent";
 
   /*Todays New Joinee*/
   static const String ADB_TNJ_ID = "ID";
@@ -1172,8 +1405,10 @@ class GlobleString {
   static const String ALL_action_ViewAccount = "View Account";
   static const String ALL_action_DeleteAccount = "Delete Account";
 
-  static const String AdminActiveLandlord_msg = "Are you sure you want to activate this user?";
-  static const String AdminINActiveLandlord_msg = "Are you sure you want to deactivate this user?";
+  static const String AdminActiveLandlord_msg =
+      "Are you sure you want to activate this user?";
+  static const String AdminINActiveLandlord_msg =
+      "Are you sure you want to deactivate this user?";
   static const String AdminActiveLandlord_yes = "Yes";
   static const String AdminActiveLandlord_NO = "No";
 
@@ -1181,7 +1416,8 @@ class GlobleString {
   static const String AA_Sendpassword_resetemail = "Send password reset email";
   static const String AA_Sendpassword = "Send";
 
-  static const String Admin_sendpassword_msg = "Are you sure you want to send a password reset email? ";
+  static const String Admin_sendpassword_msg =
+      "Are you sure you want to send a password reset email? ";
   static const String Admin_sendpassword__yes = "Yes";
   static const String Admin_sendpassword__NO = "No";
 
@@ -1190,7 +1426,8 @@ class GlobleString {
   /*Landload view details*/
 
   static const String ALLD_Account_backto_Landlords = "< Back to Landlords";
-  static const String ALLD_Account_Profile_contact_information = "Profile and contact information";
+  static const String ALLD_Account_Profile_contact_information =
+      "Profile and contact information";
   static const String ALLD_Account_ID = "ID Number";
   static const String ALLD_Account_First_name = "First name";
   static const String ALLD_Account_Last_name = "Last name";
@@ -1254,34 +1491,48 @@ class GlobleString {
   static const String TM_Member_SAVE = "Save";
   static const String TM_Member_hint_First_name = "Please enter a first name.";
   static const String TM_Member_hint_Last_name = "Please enter a last name.";
-  static const String TM_Member_hint_Enter_email = "Please enter an email address.";
-  static const String TM_Member_hint_Enter_Phone_Number = "Please enter a phone number.";
-  static const String TM_Member_hint_Enter_valid_email = "Please enter a valid email address.";
-  static const String TM_Member_hint_Enter_valid_Phone_Number = "Please enter a valid phone number.";
+  static const String TM_Member_hint_Enter_email =
+      "Please enter an email address.";
+  static const String TM_Member_hint_Enter_Phone_Number =
+      "Please enter a phone number.";
+  static const String TM_Member_hint_Enter_valid_email =
+      "Please enter a valid email address.";
+  static const String TM_Member_hint_Enter_valid_Phone_Number =
+      "Please enter a valid phone number.";
 
-  static const String TM_Member_error_Enter_email = "Please enter an email address.";
-  static const String TM_Member_error_valid_email = "Please enter a valid email address.";
-  static const String TM_Member_error_valid_phone = "Please enter a valid phone number";
+  static const String TM_Member_error_Enter_email =
+      "Please enter an email address.";
+  static const String TM_Member_error_valid_email =
+      "Please enter a valid email address.";
+  static const String TM_Member_error_valid_phone =
+      "Please enter a valid phone number";
   static const String TM_Member_error_First_name = "Please enter a first name.";
   static const String TM_Member_error_Last_name = "Please enter a last name.";
 
-  static const String TM_Member_error_customerfeaturelist = "Please enter the URL for the client's listing page.";
-  static const String TM_Member_error_customerfeaturelist1 = "Note that special characters or spaces are not allowed. ";
+  static const String TM_Member_error_customerfeaturelist =
+      "Please enter the URL for the client's listing page.";
+  static const String TM_Member_error_customerfeaturelist1 =
+      "Note that special characters or spaces are not allowed. ";
   static const String TM_Member_successfully = "The changes have been saved.";
 
-  static const String admin_Member_successfully = "The user has been registered.";
+  static const String admin_Member_successfully =
+      "The user has been registered.";
   static const String admin_Member_OK = "OK";
 
-  static const String Admin_Active_msg = "Are you sure you want to activate this user?";
-  static const String Admin_INActive_msg = "Are you sure you want to deactivate this user?";
+  static const String Admin_Active_msg =
+      "Are you sure you want to activate this user?";
+  static const String Admin_INActive_msg =
+      "Are you sure you want to deactivate this user?";
   static const String Admin_Active_yes = "Yes";
   static const String Admin_Active_NO = "No";
 
-  static const String Admin_Delete_title = "Are you sure you want to delete the account for this user?";
+  static const String Admin_Delete_title =
+      "Are you sure you want to delete the account for this user?";
   static const String Admin_Delete_yes = "Yes";
   static const String Admin_Delete_NO = "No";
 
-  static const String Admin_Property_CSV_error = "The file must be in .csv format.";
+  static const String Admin_Property_CSV_error =
+      "The file must be in .csv format.";
 
   static const String Error_400 = "Bad request.";
   static const String Error_401 = "Unauthorized.";
@@ -1293,19 +1544,28 @@ class GlobleString {
   static const String Error_503 = "Service unavailable.";
   static const String Error = "Server not responding.";
   static const String Error1 = "Server error.";
-  static const String Error_server = "The server is not responding. Please try again.";
-  static const String CSV_Error_server = "There was an unexpected error when importing the data. Please check the file format.";
+  static const String Error_server =
+      "The server is not responding. Please try again.";
+  static const String CSV_Error_server =
+      "There was an unexpected error when importing the data. Please check the file format.";
 
   static const String Property_Import = "Import properties.";
   static const String Property_Import_Note = "Note";
-  static const String Property_Import_title1 = "1. The file should be in .csv format";
-  static const String Property_Import_title2 = "2. Column names must match the names in the sample csv. file";
-  static const String Property_Import_title3 = "3. Each value should be separated by a comma";
-  static const String Property_Import_note_csv = "Download instructions for the property bulk upload";
-  static const String Property_Import_sample_csv = "Sample csv. file for property bulk upload";
+  static const String Property_Import_title1 =
+      "1. The file should be in .csv format";
+  static const String Property_Import_title2 =
+      "2. Column names must match the names in the sample csv. file";
+  static const String Property_Import_title3 =
+      "3. Each value should be separated by a comma";
+  static const String Property_Import_note_csv =
+      "Download instructions for the property bulk upload";
+  static const String Property_Import_sample_csv =
+      "Sample csv. file for property bulk upload";
 
-  static const String Property_Import_successfully = "The properties have been imported.";
-  static const String Property_Import_fail = "The properties import has failed. Please try again.";
+  static const String Property_Import_successfully =
+      "The properties have been imported.";
+  static const String Property_Import_fail =
+      "The properties import has failed. Please try again.";
 
   static const String Property_Import_Result = "Import results.";
   static const String Property_Import_OK = "OK";
@@ -1330,17 +1590,20 @@ class GlobleString {
   //static const String CSM_Sqft = "Square footage";
   static const String CSM_Parking = "Parking";
 
-  static const String CSM_BacktoFeaturedListings = "< Back to Featured Listings";
+  static const String CSM_BacktoFeaturedListings =
+      "< Back to Featured Listings";
   static const String CSM_permonth = "per month";
   static const String CSM_Details = "Details";
   static const String CSM_Aboutthesuite = "About the suite";
   static const String CSM_Features = "Features";
   static const String CSM_Includedutilities = "Utilities included in Rent";
-  static const String CSM_NotIncludedutilities = "Utilities not included in Rent";
+  static const String CSM_NotIncludedutilities =
+      "Utilities not included in Rent";
   static const String CSM_Restrictions = "Restrictions";
   static const String CSM_Similarlistings = "Other listings";
 
-  static const String CSM_Lead_title = "Please contact us to schedule a viewing:";
+  static const String CSM_Lead_title =
+      "Please contact us to schedule a viewing:";
   static const String CSM_Lead_Firstname = "First name";
   static const String CSM_Lead_Lastname = "Last name";
   static const String CSM_Lead_Email = "Email";
@@ -1352,15 +1615,21 @@ class GlobleString {
   static const String CSM_Lead_AdditionalInformation = "Additional information";
   static const String CSM_Lead_Submit = "Submit";
 
-  static const String CSM_Lead_error_Firstname = "Please enter your first name.";
+  static const String CSM_Lead_error_Firstname =
+      "Please enter your first name.";
   static const String CSM_Lead_error_Lastname = "Please enter your last name.";
   static const String CSM_Lead_error_email = "Please enter your email address.";
   static const String CSM_Lead_error_phone = "Please enter your phone number.";
-  static const String CSM_Lead_error_valid_email = "Please enter a valid email address.";
-  static const String CSM_Lead_error_valid_phone = "Please enter a valid phone number.";
-  static const String CSM_Lead_error_occupant = "Please indicate the number of occupants.";
-  static const String CSM_Lead_error_children = "Please select the number of vehicles.";
-  static const String CSM_Lead_error_additionalinfo = "Please enter the additional infomation";
+  static const String CSM_Lead_error_valid_email =
+      "Please enter a valid email address.";
+  static const String CSM_Lead_error_valid_phone =
+      "Please enter a valid phone number.";
+  static const String CSM_Lead_error_occupant =
+      "Please indicate the number of occupants.";
+  static const String CSM_Lead_error_children =
+      "Please select the number of vehicles.";
+  static const String CSM_Lead_error_additionalinfo =
+      "Please enter the additional infomation";
   static const String CSM_Lead_Successfully =
       "Thanks for submitting the form. If you are a good fit for this property, we will contact you.";
   static const String CSM_Lead_already_Email =
@@ -1391,7 +1660,8 @@ class GlobleString {
   static const String BT_Submitpassword = "Submit";
 
   static const String BT_Property_Information = "Property Information";
-  static const String BT_Lease_Landlord_Information = "Lease & Landlord Information";
+  static const String BT_Lease_Landlord_Information =
+      "Lease & Landlord Information";
 
   static const String BT_Landlord_Details = "Landlord Details";
   static const String BT_Ld_CompanyName = "Company Name";
@@ -1434,7 +1704,8 @@ class GlobleString {
   static const String Mant_DL_Describetheissue = "Description of the issue";
   static const String Mant_DL_hint_request = "Enter request name";
   static const String Mant_DL_hint_Describetheissue = "Explain the issue here.";
-  static const String Mant_DL_Uploadfiles = "Upload files (files supported: jpeg, png, heif, pdf, mp4)";
+  static const String Mant_DL_Uploadfiles =
+      "Upload files (files supported: jpeg, png, heif, pdf, mp4)";
   static const String Mant_DL_Upload = "Upload";
   static const String Mant_DL_Save = "Save";
   static const String Mant_DL_Cancel = "Close";
@@ -1451,13 +1722,15 @@ class GlobleString {
   static const String Mant_DL_Province_State = "Province/State";
   static const String Mant_DL_Country = "Country";
 
-  static const String Mant_DL_Vendor_city = "Select the city(ies) applicable to the vendor";
+  static const String Mant_DL_Vendor_city =
+      "Select the city(ies) applicable to the vendor";
   static const String Mant_DL_Vendor_Category = "Category";
   static const String Mant_DL_Vendor_Vendor = "Vendor";
   static const String Mant_DL_Vendor_Instructions = "Instructions";
   static const String Mant_DL_Vendor_AddVendor = "Assign vendor(s)";
 
-  static const String Mant_DL_Vendor_Delete = "Are you sure that you want to remove this vendor?";
+  static const String Mant_DL_Vendor_Delete =
+      "Are you sure that you want to remove this vendor?";
   static const String Mant_DL_Vendor_btn_No = "No";
   static const String Mant_DL_Vendor_btn_yes = "Yes";
 
@@ -1468,13 +1741,15 @@ class GlobleString {
   static const String Mant_view_Priority = "Priority:";
   static const String Mant_view_PropertyName = "Property Name:";
   static const String Mant_view_Address = "Address:";
-  static const String Mant_view_MaintenanceRequestInformation = "Maintenance Request Information";
+  static const String Mant_view_MaintenanceRequestInformation =
+      "Maintenance Request Information";
   static const String Mant_view_Category = "Category:";
   static const String Mant_view_RequestName = "Request Name:";
   static const String Mant_view_Describetheissue = "Description of the issue:";
   static const String Mant_view_FilesUploaded = "Files Uploaded:";
   static const String Mant_view_Download = "Download";
-  static const String Mant_view_LandlordContactDetails = "Landlord Contact Details";
+  static const String Mant_view_LandlordContactDetails =
+      "Landlord Contact Details";
   static const String Mant_view_FullName = "Full Name:";
   static const String Mant_view_Email = "Email:";
   static const String Mant_view_Phone = "Phone:";
@@ -1546,9 +1821,12 @@ class GlobleString {
       "Are you sure you want to delete this vendor? If you do, all of the impacted maintenance requests will have the vendor information removed.";
   static const String LMV_DL_Vendor_btn_Cancel = "Cancel";
   static const String LMV_DL_Vendor_btn_Delete = "Delete";
-  static const String LMV_DL_EvenType = "Are you sure you want to delete this Event Type?";
-  static const String LMV_DL_EvenTypeTemplate = "Are you sure you want to delete this Event Type Template?";
-  static const String LMV_DL_Slot = "Are you sure you want to delete this slot?";
+  static const String LMV_DL_EvenType =
+      "Are you sure you want to delete this Event Type?";
+  static const String LMV_DL_EvenTypeTemplate =
+      "Are you sure you want to delete this Event Type Template?";
+  static const String LMV_DL_Slot =
+      "Are you sure you want to delete this slot?";
 
   /* Calendar Screen */
   static const String CALENDAR_Search = "Search";
@@ -1635,7 +1913,8 @@ class GlobleString {
   static const String ET_multiple = 'Group';
   static const String ET_One_Invitee = 'meet with one invitee at a time';
   static const String ET_Group = 'Group';
-  static const String ET_Multiple_Invitees = 'meet with multiple invitees at the same time';
+  static const String ET_Multiple_Invitees =
+      'meet with multiple invitees at the same time';
   static const String ET_Event_Category = 'Event Category';
   static const String ET_Is_Showing = 'Is this event a showing?';
   static const String ET_Yes = 'Yes';
@@ -1657,20 +1936,25 @@ class GlobleString {
   static const String ET_Indefinitely = 'Indefinitely into the future';
   static const String ET_Event_Duration = 'Event Duration';
   static const String ET_Buffer_Time = 'Buffer Time';
-  static const String ET_Buffer_msg = 'Give yourself some buffer time to prepare for or wrap up from booked events.';
+  static const String ET_Buffer_msg =
+      'Give yourself some buffer time to prepare for or wrap up from booked events.';
   static const String ET_Before_event = 'Before event';
   static const String ET_After_event = 'After event';
   static const String ET_Set_Availability = 'Set your availability for event:';
   static const String ET_Time_Zone_Display = 'Time Zone Display';
-  static const String ET_TZ_Auto = 'Automatically detect and show the times in my invitee\'s time zone.';
-  static const String ET_TZ_Lock = 'Lock the time zone (best for in-person events)';
+  static const String ET_TZ_Auto =
+      'Automatically detect and show the times in my invitee\'s time zone.';
+  static const String ET_TZ_Lock =
+      'Lock the time zone (best for in-person events)';
   static const String ET_Your_Weekly = 'Set Your Weekly Availability';
   static const String ET_Overrides = 'Add Date Overrides';
-  static const String ET_Overrides_Txt = 'Add dates when your availability changes from your weekly hours.';
+  static const String ET_Overrides_Txt =
+      'Add dates when your availability changes from your weekly hours.';
   static const String ET_Scheduling_Conditions = 'Scheduling Conditions';
   static const String ET_SC_Cant = 'Invitees can\'t schedule within...';
   static const String ET_SC_Of_Start_Time = 'of an event start time.';
-  static const String ET_SC_Max_Allowed = 'Maximun allowed events per day for this type of event';
+  static const String ET_SC_Max_Allowed =
+      'Maximun allowed events per day for this type of event';
   static const String ET_Use = 'Use';
   static const String ET_First_Name = 'First Name:';
   static const String ET_Last_Name = 'Last Name:';
@@ -1689,61 +1973,84 @@ class GlobleString {
   //static const String ET_Optional = 'Optional';
   //static const String ET_Optional = 'Optional';
 
-  static const String Blank_export_maintenace = "No maintenance request data found.";
-  static const String No_Vendors_Assigned_Msg = "No vendors have been assigned to this maintenance request.";
+  static const String Blank_export_maintenace =
+      "No maintenance request data found.";
+  static const String No_Vendors_Assigned_Msg =
+      "No vendors have been assigned to this maintenance request.";
 
-  static const String vendor_dupliacate_title = "Are you sure you want to duplicate this vendor?";
+  static const String vendor_dupliacate_title =
+      "Are you sure you want to duplicate this vendor?";
   static const String vendor_dupliacate_yes = "Yes";
   static const String vendor_dupliacate_NO = "No";
 
-  static const String vendor_dupliacate_successfully = "Your vendor has been duplicated.";
+  static const String vendor_dupliacate_successfully =
+      "Your vendor has been duplicated.";
 
-  static const String maintenace_dupliacate_title = "Are you sure you want to duplicate this maintenance request?";
+  static const String maintenace_dupliacate_title =
+      "Are you sure you want to duplicate this maintenance request?";
   static const String maintenace_dupliacate_yes = "Yes";
   static const String maintenace_dupliacate_NO = "No";
 
-  static const String maintenace_dupliacate_successfully = "This maintenance request has been duplicated.";
+  static const String maintenace_dupliacate_successfully =
+      "This maintenance request has been duplicated.";
 
-  static const String maintenace_delete_title = "Are you sure you want to delete this maintenance request?";
+  static const String maintenace_delete_title =
+      "Are you sure you want to delete this maintenance request?";
   static const String maintenace_delete_yes = "Yes";
   static const String maintenace_delete_NO = "No";
 
-  static const String maintenace_delete_successfully = "Your maintenance request has been deleted.";
+  static const String maintenace_delete_successfully =
+      "Your maintenance request has been deleted.";
 
-  static const String maintenace_insert_successfully = "Your maintenance request has been added.";
+  static const String maintenace_insert_successfully =
+      "Your maintenance request has been added.";
 
-  static const String maintenace_update_successfully = "Your maintenance request has been updated.";
+  static const String maintenace_update_successfully =
+      "Your maintenance request has been updated.";
 
   static const String ADM_assign_vendor_Instruction =
       "By changing the country, province/state or city, all the assigned vendors under this maintenance request will be reset.";
 
   static const String ADM_error_Select_status = "Please select the status.";
   static const String ADM_error_Select_property = "Please select a property.";
-  static const String ADM_error_Select_requestname = "Please enter a maintenance request name (max. 25 characters).";
-  static const String ADM_error_Select_category = "Please select a maintenance category.";
-  static const String ADM_error_Select_priority = "Please indicate the priority level.";
-  static const String ADM_error_Select_description = "Please enter a description of the issue.";
-  static const String ADM_error_Select_uploadfile = "Please upload at least one file";
+  static const String ADM_error_Select_requestname =
+      "Please enter a maintenance request name (max. 25 characters).";
+  static const String ADM_error_Select_category =
+      "Please select a maintenance category.";
+  static const String ADM_error_Select_priority =
+      "Please indicate the priority level.";
+  static const String ADM_error_Select_description =
+      "Please enter a description of the issue.";
+  static const String ADM_error_Select_uploadfile =
+      "Please upload at least one file";
   static const String ADM_error_Select_country = "Please select the country.";
-  static const String ADM_error_Select_state = "Please select the province/state.";
+  static const String ADM_error_Select_state =
+      "Please select the province/state.";
   static const String ADM_error_Select_city = "Please select the city.";
 
-  static const String ADM_error_Avendor_category = "Please select a maintenance category.";
+  static const String ADM_error_Avendor_category =
+      "Please select a maintenance category.";
 
   static const String ADM_error_Avendor_vendor = "Please select a vendor.";
 
-  static const String ADM_error_Avendor_samevendor = "This vendor has already been assigned to this maintenance request.";
+  static const String ADM_error_Avendor_samevendor =
+      "This vendor has already been assigned to this maintenance request.";
 
   static const String ADV_insert_successfully = "The vendor has been added.";
 
-  static const String ADV_update_successfully = "The vendor information has been updated.";
+  static const String ADV_update_successfully =
+      "The vendor information has been updated.";
 
-  static const String Vendor_delete_successfully = "The vendor has been deleted.";
-  static const String EventType_delete_successfully = "The Event Type has been deleted.";
-  static const String EventTypeTemplate_delete_successfully = "The Event Type Template has been deleted.";
+  static const String Vendor_delete_successfully =
+      "The vendor has been deleted.";
+  static const String EventType_delete_successfully =
+      "The Event Type has been deleted.";
+  static const String EventTypeTemplate_delete_successfully =
+      "The Event Type Template has been deleted.";
   static const String Slots_Delete = "The slot has been deleted.";
 
-  static const String maintenance_Delete_image_title = "Are you sure you want to remove this file? ";
+  static const String maintenance_Delete_image_title =
+      "Are you sure you want to remove this file? ";
   static const String maintenance_Delete_image_yes = "Yes";
   static const String maintenance_Delete_image_NO = "No";
 
@@ -1755,42 +2062,56 @@ class GlobleString {
   static const String ADV_error_category = "Please select the vendor category.";
   static const String ADV_error_email = "Please enter a valid email address.";
   static const String ADV_error_phone = "Please enter a phone number.";
-  static const String ADV_error_phone_valid = "Please enter a valid phone number.";
+  static const String ADV_error_phone_valid =
+      "Please enter a valid phone number.";
   static const String ADV_error_country = "Please select the country.";
   static const String ADV_error_state = "Please select the province/state.";
   static const String ADV_error_city = "Please select the city.";
 
-  static const String ADV_back_to_msg = "Would you like to save your changes before closing?";
+  static const String ADV_back_to_msg =
+      "Would you like to save your changes before closing?";
   static const String ADV_back_to_msg_yes = "Save";
   static const String ADV_back_to_msg_NO = "Don’t save";
 
   static const String LogActivity_enter = "Please enter activity log";
 
-  static const String logactivity_Delete_title = "Are you sure you want to delete this log?";
+  static const String logactivity_Delete_title =
+      "Are you sure you want to delete this log?";
   static const String logactivity_Delete_yes = "Yes";
   static const String logactivity_Delete_NO = "No";
 
-  static const String ARC_Tenant_Invite_msg = "Are you sure you want to invite this tenant?";
+  static const String ARC_Tenant_Invite_msg =
+      "Are you sure you want to invite this tenant?";
   static const String ARC_Tenant_Invite_yes = "Yes";
   static const String ARC_Tenant_Invite_NO = "No";
 
-  static const String ARC_Tenant_Invite_successfully = "The invite to the tenant has been sent.";
+  static const String ARC_Tenant_Invite_successfully =
+      "The invite to the tenant has been sent.";
 
-  static const String ARC_Tenant_Invite_Error = "A user with this email address already exists. Please try a different email address.";
+  static const String ARC_Tenant_Invite_Error =
+      "A user with this email address already exists. Please try a different email address.";
 
-  static const String tenant_cuurent_error = "Please enter your current password.";
+  static const String tenant_cuurent_error =
+      "Please enter your current password.";
   static const String tenant_new_error = "Please enter a new password.";
-  static const String tenant_newconfirm_error = "Please confirm your new password.";
-  static const String tenant_confirm_password_error = "The passwords entered do not match. Please try again.";
-  static const String tenant_password_same_error = "Current password and new password cannot be same";
-  static const String tenant_password_error = "The user name or password is incorrect. Please try again.";
+  static const String tenant_newconfirm_error =
+      "Please confirm your new password.";
+  static const String tenant_confirm_password_error =
+      "The passwords entered do not match. Please try again.";
+  static const String tenant_password_same_error =
+      "Current password and new password cannot be same";
+  static const String tenant_password_error =
+      "The user name or password is incorrect. Please try again.";
 
-  static const String tenant_password_success = "Your password has been changed.";
+  static const String tenant_password_success =
+      "Your password has been changed.";
 
-  static const String tenant_inactive = "Your tenancy has been terminated by the landlord. Please contact your landlord for support.";
+  static const String tenant_inactive =
+      "Your tenancy has been terminated by the landlord. Please contact your landlord for support.";
   static const String tenant_inactive_OK = "OK";
 
-  static const String lbl_tenant_signup_title = "Enter your details below to sign up.";
+  static const String lbl_tenant_signup_title =
+      "Enter your details below to sign up.";
 
   static const String storage_availability = "Select storage availability";
 
@@ -1808,10 +2129,12 @@ class GlobleString {
   static const String Select_Status = "Select Status";
   static const String Select_Property = "Select Property";
 
-  static const String tenant_invite_Mail_dailog_Success = "Congratulations! Your account has been created.";
+  static const String tenant_invite_Mail_dailog_Success =
+      "Congratulations! Your account has been created.";
   static const String tenant_invite_Mail_dailog_OK = "OK";
 
-  static const String maintenance_request_not_found_title = "The maintenance request you are trying to find is not available now.";
+  static const String maintenance_request_not_found_title =
+      "The maintenance request you are trying to find is not available now.";
   static const String maintenance_request_not_found_ok = "OK";
 
   static const String tenent_I_accept_the = "I accept the ";
@@ -1819,7 +2142,8 @@ class GlobleString {
   static const String tenent_terms_policy_end = " & ";
   static const String tenent_Privacy_Policy = "Privacy Policy";
 
-  static const String maintenence_data_not_found = "No maintenance requests have been created yet.";
+  static const String maintenence_data_not_found =
+      "No maintenance requests have been created yet.";
   static const String vendor_data_not_found = "No vendors have been added yet.";
 
   static const String User_delete = "The user has been deleted.";

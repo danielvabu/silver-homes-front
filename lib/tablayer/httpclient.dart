@@ -435,6 +435,88 @@ class HttpClientCall {
     }
   }
 
+  LinkS3APICall(String myjson, CallBackQuesy CallBackQuesy) async {
+    var client = http.Client();
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+      //'Access-Control-Allow-Origin': "*",
+      //'Access-Control-Allow-Credentials': "true"
+    };
+
+    try {
+      var response = await client.post(Uri.parse(Weburl.GetNamesS3),
+          headers: headers, body: myjson);
+
+      //Helper.Log("Responce",  response.body.toString());
+      Helper.Log("statusCode", response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        var temp = jsonDecode(response.body);
+        print(temp);
+        if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
+          CallBackQuesy(true, response.body);
+        } else {
+          CallBackQuesy(false, GlobleString.Error1);
+        }
+      } else if (response.statusCode == 401) {
+        //  callNavigateLogin(context);
+        CallBackQuesy(false, GlobleString.Error_401);
+      } else {
+        CallBackQuesy(false, GlobleString.Error);
+      }
+    } catch (e) {
+      print(e);
+      CallBackQuesy(false, GlobleString.Error_server);
+    } finally {
+      client.close();
+      //CallBackQuesy(false, GlobleString.Error_server);
+    }
+  }
+
+  InsertMedia(String myjson, CallBackQuesy CallBackQuesy) async {
+    var client = http.Client();
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+      //'Access-Control-Allow-Origin': "*",
+      //'Access-Control-Allow-Credentials': "true"
+    };
+
+    try {
+      var response = await client.post(Uri.parse(Weburl.InsertMedia),
+          headers: headers, body: myjson);
+
+      //Helper.Log("Responce",  response.body.toString());
+      Helper.Log("statusCode", response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        var temp = jsonDecode(response.body);
+        print(temp);
+        if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
+          CallBackQuesy(true, response.body);
+        } else {
+          CallBackQuesy(false, GlobleString.Error1);
+        }
+      } else if (response.statusCode == 401) {
+        //  callNavigateLogin(context);
+        CallBackQuesy(false, GlobleString.Error_401);
+      } else {
+        CallBackQuesy(false, GlobleString.Error);
+      }
+    } catch (e) {
+      print(e);
+      CallBackQuesy(false, GlobleString.Error_server);
+    } finally {
+      client.close();
+      //CallBackQuesy(false, GlobleString.Error_server);
+    }
+  }
+
   Future<void> CallAPIToken(
       BuildContext context, CallBackQuesy CallBackQuesy) async {
     var myjson = {
