@@ -6,6 +6,7 @@ import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
+import 'package:silverhome/presentation/screens/TEST/customerTest.dart';
 import 'package:silverhome/presentation/screens/admin_panel/admin_portal/admin_portal_screen.dart';
 import 'package:silverhome/presentation/screens/basic_tenant/tenant_login/tenant_login_screen.dart';
 import 'package:silverhome/presentation/screens/basic_tenant/tenant_portal/tenant_portal_screen.dart';
@@ -92,7 +93,24 @@ class RouteNames {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     List<String> pathComponents = settings.name!.split('/');
-    print("got to: " + settings.toString());
+    print("got to: " + settings.name.toString());
+    List<String> pathComponentsPoint = pathComponents[1].split('.');
+    print("got to3: " + "/" + pathComponentsPoint[0]);
+
+    if ("sharedproperties" == pathComponentsPoint[0]) {
+      // List<String> pathComponentsPoint = pathComponents[1].split('.');
+      print("got to24: " + "/" + pathComponentsPoint.toString());
+      print("got to35: " + "/" + pathComponentsPoint[0] + "/" + pathComponentsPoint[1] + "/" + pathComponentsPoint[2]);
+      return MaterialPageRoute(
+        builder: (_) => CustomerFeaturedlistPageTest(
+          LID: pathComponentsPoint[1].toString(),
+          idProperties: pathComponentsPoint[2].toString(),
+        ),
+        settings: RouteSettings(
+            name:
+                "/sharedproperties" /* pathComponentsPoint[0].toString() + "/" + pathComponentsPoint[1].toString() + "/" + pathComponents[2].toString()*/),
+      );
+    }
 
     /*if (pathComponents.length == 2) {
       switch ("/${pathComponents[1]}") {
@@ -143,7 +161,7 @@ class RouteNames {
           {
             String url = window.location.href;
 
-            print("Got to url" + url);
+            print("Got to url: " + url);
 
             if (!url.contains(ResetPassword) ||
                 !url.contains(TenancyApplicationform) ||

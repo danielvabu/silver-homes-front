@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:silverhome/common/globlestring.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/prefsname.dart';
@@ -15,6 +16,7 @@ import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
+import 'package:silverhome/tablayer/weburl.dart';
 
 import '../../../common/sharedpref.dart';
 import '../../../presentation/models/landlord_models/landlord_profile_state.dart';
@@ -321,13 +323,25 @@ class _PropertyItemState extends State<PropertyItem> {
                   onTap: () {
                     print("value: " + profileState!.CustomerFeatureListingURL.toString());
 
-                    Navigator.push(
+                    String url = Weburl.CustomerFeaturedPage +
+                        "" +
+                        "sharedproperties" +
+                        "." +
+                        profileState!.CustomerFeatureListingURL.toString() +
+                        "." +
+                        model.id.toString();
+
+                    print("CustomerFeaturedPage" + url);
+
+                    Helper.copyToClipboardHack(context, url);
+//kkk
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CustomerFeaturedlistPageTest(
                                   LID: profileState!.CustomerFeatureListingURL.toString(),
                                   idProperties: model.id.toString(),
-                                )));
+                                )));*/
                   },
                   child: Container(
                       height: 28,
