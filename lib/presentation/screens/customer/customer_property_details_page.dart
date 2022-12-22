@@ -40,12 +40,10 @@ class CustomerPropertyDetailsPage extends StatefulWidget {
   final String? LID;
 
   @override
-  _CustomerPropertyDetailsPageState createState() =>
-      _CustomerPropertyDetailsPageState();
+  _CustomerPropertyDetailsPageState createState() => _CustomerPropertyDetailsPageState();
 }
 
-class _CustomerPropertyDetailsPageState
-    extends State<CustomerPropertyDetailsPage> {
+class _CustomerPropertyDetailsPageState extends State<CustomerPropertyDetailsPage> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
   int imgindex = 0;
@@ -69,7 +67,8 @@ class _CustomerPropertyDetailsPageState
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
-    return Container(
+    return Scaffold(
+        body: Container(
       width: width,
       height: height - 170,
       color: Colors.white,
@@ -90,8 +89,7 @@ class _CustomerPropertyDetailsPageState
                   },
                   child: Text(
                     GlobleString.CSM_BacktoFeaturedListings,
-                    style: MyStyles.SemiBold(
-                        14, myColor.CM_Prop_detail_header_fill),
+                    style: MyStyles.SemiBold(14, myColor.CM_Prop_detail_header_fill),
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -177,15 +175,14 @@ class _CustomerPropertyDetailsPageState
           );
         },
       ),
-    );
+    ));
   }
 
   Widget propertyheader(CustomerPropertyDetailsState? cpdState) {
     String rentAmount = "";
 
     if (cpdState!.RentAmount != null && cpdState.RentAmount != "") {
-      String amount =
-          '${formatCurrency.format(int.parse(cpdState.RentAmount.replaceAll(",", "")))}';
+      String amount = '${formatCurrency.format(int.parse(cpdState.RentAmount.replaceAll(",", "")))}';
       rentAmount = amount.replaceAll(".00", "");
     }
 
@@ -196,8 +193,7 @@ class _CustomerPropertyDetailsPageState
       decoration: new BoxDecoration(
         color: myColor.CM_Prop_detail_header_fill,
         borderRadius: BorderRadius.all(Radius.circular(2)),
-        border:
-            Border.all(color: myColor.CM_Prop_detail_header_border, width: 1),
+        border: Border.all(color: myColor.CM_Prop_detail_header_border, width: 1),
       ),
       padding: EdgeInsets.only(left: 20, right: 20),
       child: Row(
@@ -209,22 +205,13 @@ class _CustomerPropertyDetailsPageState
             children: [
               Text(
                 cpdState.Suiteunit.toString() +
-                    ((cpdState.Suiteunit != null &&
-                            cpdState.Suiteunit.trim().isNotEmpty)
-                        ? "-"
-                        : "") +
+                    ((cpdState.Suiteunit != null && cpdState.Suiteunit.trim().isNotEmpty) ? "-" : "") +
                     cpdState.PropertyAddress,
                 style: MyStyles.Medium(20, myColor.white),
                 // textAlign: TextAlign.start,
               ),
               Text(
-                cpdState.City +
-                    ", " +
-                    cpdState.Province +
-                    ", " +
-                    cpdState.CountryName +
-                    " " +
-                    cpdState.Postalcode,
+                cpdState.City + ", " + cpdState.Province + ", " + cpdState.CountryName + " " + cpdState.Postalcode,
                 style: MyStyles.Medium(14, myColor.white),
                 // textAlign: TextAlign.start,
               ),
@@ -269,8 +256,7 @@ class _CustomerPropertyDetailsPageState
                   shape: BoxShape.rectangle,
                   color: myColor.CM_Prop_card_fill,
                   borderRadius: BorderRadius.all(Radius.circular(1)),
-                  border:
-                      Border.all(color: myColor.CM_Prop_card_border, width: 2),
+                  border: Border.all(color: myColor.CM_Prop_card_border, width: 2),
                   /* image: new DecorationImage(
                     fit: BoxFit.fill,
                     image: CustomNetworkImage(
@@ -289,12 +275,10 @@ class _CustomerPropertyDetailsPageState
                   fit: BoxFit.fill,
                   placeholder: AssetImage('assets/images/cp_placeholder.png'),
                   image: CustomNetworkImage(
-                    Weburl.image_API +
-                        cpdState.propertyImagelist[imgindex].id.toString(),
+                    Weburl.image_API + cpdState.propertyImagelist[imgindex].id.toString(),
                     scale: 1.5,
                     headers: {
-                      'Authorization':
-                          'bearer ' + Prefs.getString(PrefsName.userTokan),
+                      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
                       'ApplicationCode': Weburl.API_CODE,
                     },
                   ),
@@ -306,8 +290,7 @@ class _CustomerPropertyDetailsPageState
                 decoration: new BoxDecoration(
                   color: myColor.CM_Prop_card_fill,
                   borderRadius: BorderRadius.all(Radius.circular(1)),
-                  border:
-                      Border.all(color: myColor.CM_Prop_card_border, width: 2),
+                  border: Border.all(color: myColor.CM_Prop_card_border, width: 2),
                 ),
                 padding: EdgeInsets.all(40),
                 child: Image.asset(
@@ -349,8 +332,7 @@ class _CustomerPropertyDetailsPageState
                             viewportFraction: 1,
                           ),
                           carouselController: _controller,
-                          itemCount:
-                              (cpdState.propertyImagelist.length / 4).round(),
+                          itemCount: (cpdState.propertyImagelist.length / 4).round(),
                           itemBuilder: (context, index, realIdx) {
                             var resultArray = <int>[];
                             int first = index * 4;
@@ -358,16 +340,13 @@ class _CustomerPropertyDetailsPageState
                             if (first < cpdState.propertyImagelist.length) {
                               resultArray.add(first);
                             }
-                            if ((first + 1) <
-                                cpdState.propertyImagelist.length) {
+                            if ((first + 1) < cpdState.propertyImagelist.length) {
                               resultArray.add(first + 1);
                             }
-                            if ((first + 2) <
-                                cpdState.propertyImagelist.length) {
+                            if ((first + 2) < cpdState.propertyImagelist.length) {
                               resultArray.add(first + 2);
                             }
-                            if ((first + 3) <
-                                cpdState.propertyImagelist.length) {
+                            if ((first + 3) < cpdState.propertyImagelist.length) {
                               resultArray.add(first + 3);
                             }
 
@@ -383,34 +362,22 @@ class _CustomerPropertyDetailsPageState
                                         });
                                       },
                                       child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 10),
+                                        margin: EdgeInsets.symmetric(horizontal: 10),
                                         decoration: new BoxDecoration(
                                           shape: BoxShape.rectangle,
                                           color: myColor.CM_Prop_card_fill,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(1)),
-                                          border: Border.all(
-                                              color:
-                                                  myColor.CM_Prop_card_border,
-                                              width: 2),
+                                          borderRadius: BorderRadius.all(Radius.circular(1)),
+                                          border: Border.all(color: myColor.CM_Prop_card_border, width: 2),
                                         ),
                                         child: FadeInImage(
                                           fit: BoxFit.fill,
-                                          placeholder: AssetImage(
-                                              'assets/images/cp_placeholder.png'),
+                                          placeholder: AssetImage('assets/images/cp_placeholder.png'),
                                           image: CustomNetworkImage(
-                                            Weburl.image_API +
-                                                cpdState
-                                                    .propertyImagelist[indx].id
-                                                    .toString(),
+                                            Weburl.image_API + cpdState.propertyImagelist[indx].id.toString(),
                                             scale: 1.5,
                                             headers: {
-                                              'Authorization': 'bearer ' +
-                                                  Prefs.getString(
-                                                      PrefsName.userTokan),
-                                              'ApplicationCode':
-                                                  Weburl.API_CODE,
+                                              'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+                                              'ApplicationCode': Weburl.API_CODE,
                                             },
                                           ),
                                         ),
@@ -519,11 +486,8 @@ class _CustomerPropertyDetailsPageState
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                        cpdState.PropertyAmenitieslist[index].Feature
-                            .toString(),
-                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
-                        textAlign: TextAlign.center),
+                    Text(cpdState.PropertyAmenitieslist[index].Feature.toString(),
+                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2), textAlign: TextAlign.center),
                   ],
                 ),
               );
@@ -577,11 +541,8 @@ class _CustomerPropertyDetailsPageState
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                        cpdState.PropertyUtilitieslist[index].Feature
-                            .toString(),
-                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
-                        textAlign: TextAlign.center),
+                    Text(cpdState.PropertyUtilitieslist[index].Feature.toString(),
+                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2), textAlign: TextAlign.center),
                   ],
                 ),
               );
@@ -635,11 +596,8 @@ class _CustomerPropertyDetailsPageState
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                        cpdState.PropertyNotIncludedUtilitieslist[index].Feature
-                            .toString(),
-                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
-                        textAlign: TextAlign.center),
+                    Text(cpdState.PropertyNotIncludedUtilitieslist[index].Feature.toString(),
+                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2), textAlign: TextAlign.center),
                   ],
                 ),
               );
@@ -693,13 +651,8 @@ class _CustomerPropertyDetailsPageState
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                        cpdState.restrictionlist[index] != null
-                            ? cpdState.restrictionlist[index].displayValue
-                                .toString()
-                            : "",
-                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
-                        textAlign: TextAlign.center),
+                    Text(cpdState.restrictionlist[index] != null ? cpdState.restrictionlist[index].displayValue.toString() : "",
+                        style: MyStyles.Medium(14, myColor.CM_Prop_card_text2), textAlign: TextAlign.center),
                   ],
                 ),
               );
@@ -791,8 +744,7 @@ class _CustomerPropertyDetailsPageState
                         itemBuilder: (context, index, realIdx) {
                           var resultArray = <int>[];
 
-                          int mcount =
-                              MediaQuery.of(context).size.width < 1400 ? 3 : 4;
+                          int mcount = MediaQuery.of(context).size.width < 1400 ? 3 : 4;
 
                           //int first = index * mcount;
                           int first = index * mcount;
@@ -818,13 +770,11 @@ class _CustomerPropertyDetailsPageState
                               (index) {
                                 return CSM_PropertyCard(
                                   callbackOnItem: () {
-                                    getFeaturePropertyDetails(
-                                        propertylist[index], cpdState!);
+                                    getFeaturePropertyDetails(propertylist[index], cpdState!);
                                   },
                                   propertyData: propertylist[index],
                                   pos: index,
-                                  cdwidth: MediaQuery.of(context).size.width <
-                                          1400
+                                  cdwidth: MediaQuery.of(context).size.width < 1400
                                       ? MediaQuery.of(context).size.width / 4
                                       : MediaQuery.of(context).size.width / 5.2,
                                 );
@@ -875,10 +825,8 @@ class _CustomerPropertyDetailsPageState
   Widget detailsView(CustomerPropertyDetailsState? cpdState) {
     String sqrft = "";
 
-    if (cpdState!.PropertySizeinsquarefeet != null &&
-        cpdState.PropertySizeinsquarefeet != "") {
-      String squareft = format1.format(int.parse(
-          cpdState.PropertySizeinsquarefeet.replaceAll(",", "").toString()));
+    if (cpdState!.PropertySizeinsquarefeet != null && cpdState.PropertySizeinsquarefeet != "") {
+      String squareft = format1.format(int.parse(cpdState.PropertySizeinsquarefeet.replaceAll(",", "").toString()));
       sqrft = squareft.replaceAll(".00", "");
     }
 
@@ -916,9 +864,7 @@ class _CustomerPropertyDetailsPageState
                   child: Column(
                     children: [
                       Text(
-                        cpdState.PropertyBedrooms +
-                            " " +
-                            GlobleString.CSM_Bedroom,
+                        cpdState.PropertyBedrooms + " " + GlobleString.CSM_Bedroom,
                         style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                       ),
                       SizedBox(
@@ -942,9 +888,7 @@ class _CustomerPropertyDetailsPageState
                   child: Column(
                     children: [
                       Text(
-                        cpdState.PropertyBathrooms +
-                            " " +
-                            GlobleString.CSM_Bathroom,
+                        cpdState.PropertyBathrooms + " " + GlobleString.CSM_Bathroom,
                         style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                       ),
                       SizedBox(
@@ -1024,8 +968,7 @@ class _CustomerPropertyDetailsPageState
                       borderRadius: BorderRadius.all(
                         Radius.circular(3),
                       ),
-                      border: Border.all(
-                          color: myColor.CM_Prop_card_border, width: 1),
+                      border: Border.all(color: myColor.CM_Prop_card_border, width: 1),
                     ),
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -1034,19 +977,14 @@ class _CustomerPropertyDetailsPageState
                       children: [
                         Text(
                           GlobleString.CSM_Furnishings,
-                          style:
-                              MyStyles.Medium(16, myColor.CM_Prop_detail_text1),
+                          style: MyStyles.Medium(16, myColor.CM_Prop_detail_text1),
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Text(
-                          cpdState.furnishingValue != null
-                              ? cpdState.furnishingValue!.displayValue
-                                  .toString()
-                              : "",
-                          style:
-                              MyStyles.Medium(20, myColor.CM_Prop_card_text2),
+                          cpdState.furnishingValue != null ? cpdState.furnishingValue!.displayValue.toString() : "",
+                          style: MyStyles.Medium(20, myColor.CM_Prop_card_text2),
                         ),
                       ],
                     ),
@@ -1062,8 +1000,7 @@ class _CustomerPropertyDetailsPageState
                       borderRadius: BorderRadius.all(
                         Radius.circular(3),
                       ),
-                      border: Border.all(
-                          color: myColor.CM_Prop_card_border, width: 1),
+                      border: Border.all(color: myColor.CM_Prop_card_border, width: 1),
                     ),
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -1072,22 +1009,16 @@ class _CustomerPropertyDetailsPageState
                       children: [
                         Text(
                           GlobleString.CSM_Available,
-                          style:
-                              MyStyles.Medium(16, myColor.CM_Prop_detail_text1),
+                          style: MyStyles.Medium(16, myColor.CM_Prop_detail_text1),
                         ),
                         SizedBox(
                           height: 5,
                         ),
                         Text(
-                          cpdState.dateofavailable != null &&
-                                  cpdState.dateofavailable != ""
-                              ? new DateFormat("MMM dd")
-                                  .format(
-                                      DateTime.parse(cpdState.dateofavailable))
-                                  .toString()
+                          cpdState.dateofavailable != null && cpdState.dateofavailable != ""
+                              ? new DateFormat("MMM dd").format(DateTime.parse(cpdState.dateofavailable)).toString()
                               : "",
-                          style:
-                              MyStyles.Medium(20, myColor.CM_Prop_card_text2),
+                          style: MyStyles.Medium(20, myColor.CM_Prop_card_text2),
                         ),
                       ],
                     ),
@@ -1148,8 +1079,7 @@ class _CustomerPropertyDetailsPageState
                                 children: [
                                   Text(
                                     GlobleString.CSM_Lead_Firstname,
-                                    style: MyStyles.Medium(
-                                        14, myColor.CM_Prop_card_text2),
+                                    style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                                     textAlign: TextAlign.start,
                                   ),
                                   SizedBox(
@@ -1160,21 +1090,17 @@ class _CustomerPropertyDetailsPageState
                                     textAlign: TextAlign.start,
                                     autofocus: true,
                                     //focusNode: _focus1,
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(25),
                                     ],
                                     decoration: InputDecoration(
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.blue, width: 2),
+                                        borderSide: BorderSide(color: myColor.blue, width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.CM_Prop_card_border,
-                                            width: 1.0),
+                                        borderSide: BorderSide(color: myColor.CM_Prop_card_border, width: 1.0),
                                       ),
                                       isDense: true,
                                       contentPadding: EdgeInsets.all(15),
@@ -1182,8 +1108,7 @@ class _CustomerPropertyDetailsPageState
                                       filled: true,
                                     ),
                                     onChanged: (value) {
-                                      _store.dispatch(
-                                          UpdateCPDLead_firstname(value));
+                                      _store.dispatch(UpdateCPDLead_firstname(value));
                                     },
                                   ),
                                 ],
@@ -1199,8 +1124,7 @@ class _CustomerPropertyDetailsPageState
                                 children: [
                                   Text(
                                     GlobleString.CSM_Lead_Lastname,
-                                    style: MyStyles.Medium(
-                                        14, myColor.CM_Prop_card_text2),
+                                    style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                                     textAlign: TextAlign.start,
                                   ),
                                   SizedBox(
@@ -1209,18 +1133,14 @@ class _CustomerPropertyDetailsPageState
                                   TextFormField(
                                     initialValue: cpdState.Lead_lastname,
                                     textAlign: TextAlign.start,
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                     decoration: InputDecoration(
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.blue, width: 2),
+                                        borderSide: BorderSide(color: myColor.blue, width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.CM_Prop_card_border,
-                                            width: 1.0),
+                                        borderSide: BorderSide(color: myColor.CM_Prop_card_border, width: 1.0),
                                       ),
                                       isDense: true,
                                       contentPadding: EdgeInsets.all(15),
@@ -1228,8 +1148,7 @@ class _CustomerPropertyDetailsPageState
                                       filled: true,
                                     ),
                                     onChanged: (value) {
-                                      _store.dispatch(
-                                          UpdateCPDLead_lastname(value));
+                                      _store.dispatch(UpdateCPDLead_lastname(value));
                                     },
                                   ),
                                 ],
@@ -1250,8 +1169,7 @@ class _CustomerPropertyDetailsPageState
                                 children: [
                                   Text(
                                     GlobleString.CSM_Lead_Email,
-                                    style: MyStyles.Medium(
-                                        14, myColor.CM_Prop_card_text2),
+                                    style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                                     textAlign: TextAlign.start,
                                   ),
                                   SizedBox(
@@ -1260,21 +1178,17 @@ class _CustomerPropertyDetailsPageState
                                   TextFormField(
                                     initialValue: cpdState.Lead_email,
                                     textAlign: TextAlign.start,
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
+                                    style: MyStyles.Medium(14, myColor.text_color),
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(50),
                                     ],
                                     decoration: InputDecoration(
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.blue, width: 2),
+                                        borderSide: BorderSide(color: myColor.blue, width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.CM_Prop_card_border,
-                                            width: 1.0),
+                                        borderSide: BorderSide(color: myColor.CM_Prop_card_border, width: 1.0),
                                       ),
                                       isDense: true,
                                       contentPadding: EdgeInsets.all(15),
@@ -1282,8 +1196,7 @@ class _CustomerPropertyDetailsPageState
                                       filled: true,
                                     ),
                                     onChanged: (value) {
-                                      _store
-                                          .dispatch(UpdateCPDLead_email(value));
+                                      _store.dispatch(UpdateCPDLead_email(value));
                                     },
                                   ),
                                 ],
@@ -1299,8 +1212,7 @@ class _CustomerPropertyDetailsPageState
                                 children: [
                                   Text(
                                     GlobleString.CSM_Lead_Phone,
-                                    style: MyStyles.Medium(
-                                        14, myColor.CM_Prop_card_text2),
+                                    style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                                     textAlign: TextAlign.start,
                                   ),
                                   SizedBox(
@@ -1309,33 +1221,25 @@ class _CustomerPropertyDetailsPageState
                                   TextFormField(
                                     initialValue: cpdState.Lead_phone,
                                     textAlign: TextAlign.start,
-                                    style:
-                                        MyStyles.Medium(14, myColor.text_color),
-                                    inputFormatters: [
-                                      MaskedInputFormatter("(000) 000 0000")
-                                    ],
+                                    style: MyStyles.Medium(14, myColor.text_color),
+                                    inputFormatters: [MaskedInputFormatter("(000) 000 0000")],
                                     decoration: InputDecoration(
                                       //border: InputBorder.none,
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.blue, width: 2),
+                                        borderSide: BorderSide(color: myColor.blue, width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: myColor.CM_Prop_card_border,
-                                            width: 1.0),
+                                        borderSide: BorderSide(color: myColor.CM_Prop_card_border, width: 1.0),
                                       ),
                                       isDense: true,
                                       hintText: "(000) 000 0000",
-                                      hintStyle: MyStyles.Medium(
-                                          14, myColor.CM_Prop_card_border),
+                                      hintStyle: MyStyles.Medium(14, myColor.CM_Prop_card_border),
                                       contentPadding: EdgeInsets.all(15),
                                       fillColor: myColor.white,
                                       filled: true,
                                     ),
                                     onChanged: (value) {
-                                      _store
-                                          .dispatch(UpdateCPDLead_phone(value));
+                                      _store.dispatch(UpdateCPDLead_phone(value));
                                     },
                                   ),
                                 ],
@@ -1491,8 +1395,7 @@ class _CustomerPropertyDetailsPageState
                               children: [
                                 Text(
                                   GlobleString.CSM_Lead_AdditionalInformation,
-                                  style: MyStyles.Medium(
-                                      14, myColor.CM_Prop_card_text2),
+                                  style: MyStyles.Medium(14, myColor.CM_Prop_card_text2),
                                   textAlign: TextAlign.start,
                                 ),
                                 SizedBox(
@@ -1519,13 +1422,10 @@ class _CustomerPropertyDetailsPageState
                               decoration: InputDecoration(
                                 //border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: myColor.blue, width: 2),
+                                  borderSide: BorderSide(color: myColor.blue, width: 2),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: myColor.CM_Prop_card_border,
-                                      width: 1.0),
+                                  borderSide: BorderSide(color: myColor.CM_Prop_card_border, width: 1.0),
                                 ),
                                 isDense: true,
                                 contentPadding: EdgeInsets.all(15),
@@ -1533,8 +1433,7 @@ class _CustomerPropertyDetailsPageState
                                 filled: true,
                               ),
                               onChanged: (value) {
-                                _store.dispatch(UpdateCPDLead_additionalInfo(
-                                    value.toString()));
+                                _store.dispatch(UpdateCPDLead_additionalInfo(value.toString()));
                               },
                             ),
                           ],
@@ -1555,8 +1454,7 @@ class _CustomerPropertyDetailsPageState
                                 padding: EdgeInsets.only(left: 25, right: 25),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
                                   color: myColor.Circle_main,
                                 ),
                                 child: Text(
@@ -1612,15 +1510,13 @@ class _CustomerPropertyDetailsPageState
     }
   }
 
-  getFeaturePropertyDetails(
-      PropertyData propertyData1, CustomerPropertyDetailsState cpdState) async {
+  getFeaturePropertyDetails(PropertyData propertyData1, CustomerPropertyDetailsState cpdState) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
     String propId = propertyData1.ID.toString();
 
-    await ApiManager().getPropertyRestriction_Customer(context, propId,
-        (status, responce, restrictionlist) {
+    await ApiManager().getPropertyRestriction_Customer(context, propId, (status, responce, restrictionlist) {
       if (status) {
         _store.dispatch(UpdateCPDRestrictionlist(restrictionlist));
       } else {
@@ -1628,8 +1524,7 @@ class _CustomerPropertyDetailsPageState
       }
     });
 
-    await ApiManager().getPropertyImagesDSQ(context, propId,
-        (status, responce, PropertyImageMediaInfolist) {
+    await ApiManager().getPropertyImagesDSQ(context, propId, (status, responce, PropertyImageMediaInfolist) {
       if (status) {
         _store.dispatch(UpdateCPDPropertyImageList(PropertyImageMediaInfolist));
       } else {
@@ -1637,20 +1532,16 @@ class _CustomerPropertyDetailsPageState
       }
     });
 
-    await ApiManager().getPropertyAmanityUtility(context, propId,
-        (status, responce, amenitieslist, utilitylist) async {
+    await ApiManager().getPropertyAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
 
-        List<PropertyAmenitiesUtility> new_amenitieslist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_amenitieslist = <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> new_utilitylist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_utilitylist = <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> new_notincludedutilitylist =
-            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> new_notincludedutilitylist = <PropertyAmenitiesUtility>[];
 
         for (PropertyAmenitiesUtility proam in amenitieslist) {
           if (proam.value == "1") {
@@ -1672,8 +1563,7 @@ class _CustomerPropertyDetailsPageState
 
         _store.dispatch(UpdateCPDPropertyAmenitiesList(new_amenitieslist));
         _store.dispatch(UpdateCPDPropertyUtilitiesList(new_utilitylist));
-        _store.dispatch(UpdateCPDPropertyNotIncludedUtilitiesList(
-            new_notincludedutilitylist));
+        _store.dispatch(UpdateCPDPropertyNotIncludedUtilitiesList(new_notincludedutilitylist));
       } else {
         _store.dispatch(UpdateCPDPropertyAmenitiesList([]));
         _store.dispatch(UpdateCPDPropertyUtilitiesList([]));
@@ -1682,8 +1572,7 @@ class _CustomerPropertyDetailsPageState
       }
     });
 
-    await ApiManager().getPropertyDetails(context, propId,
-        (status, responce, propertyData) async {
+    await ApiManager().getPropertyDetails(context, propId, (status, responce, propertyData) async {
       if (status) {
         _store.dispatch(UpdateCPDpropertylist(cpdState.propertylist));
 
@@ -1701,28 +1590,19 @@ class _CustomerPropertyDetailsPageState
     });
   }
 
-  Future<void> _checkValidation(
-      BuildContext context, CustomerPropertyDetailsState? cpdState) async {
+  Future<void> _checkValidation(BuildContext context, CustomerPropertyDetailsState? cpdState) async {
     if (cpdState!.Lead_firstname == null || cpdState.Lead_firstname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_Firstname, false);
-    } else if (cpdState.Lead_lastname == null ||
-        cpdState.Lead_lastname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_Lastname, false);
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_Firstname, false);
+    } else if (cpdState.Lead_lastname == null || cpdState.Lead_lastname.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_Lastname, false);
     } else if (cpdState.Lead_email == null || cpdState.Lead_email.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_email, false);
-    } else if (Helper.ValidEmail(cpdState.Lead_email.trim().toString()) !=
-        true) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_valid_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_email, false);
+    } else if (Helper.ValidEmail(cpdState.Lead_email.trim().toString()) != true) {
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_valid_email, false);
     } else if (cpdState.Lead_phone == null || cpdState.Lead_phone.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_phone, false);
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_phone, false);
     } else if (Helper.ValidPhonenumber(cpdState.Lead_phone.toString())) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.CSM_Lead_error_valid_phone, false);
+      ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_error_valid_phone, false);
     }
     /*else if (cpdState.Lead_occupant == null ||
         cpdState.Lead_occupant == "0") {
@@ -1741,8 +1621,7 @@ class _CustomerPropertyDetailsPageState
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      await ApiManager().checkEmailAddressCustomer(
-          context, cpdState.PropID, cpdState.Lead_email, (status, responce) {
+      await ApiManager().checkEmailAddressCustomer(context, cpdState.PropID, cpdState.Lead_email, (status, responce) {
         if (status) {
           PersonId personid = new PersonId();
           personid.firstName = cpdState.Lead_firstname;
@@ -1771,8 +1650,7 @@ class _CustomerPropertyDetailsPageState
         } else {
           loader.remove();
           if (responce == "1") {
-            ToastUtils.showCustomToast(
-                context, GlobleString.CSM_Lead_already_Email_new, false);
+            ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_already_Email_new, false);
           } else {
             ToastUtils.showCustomToast(context, responce, false);
           }
@@ -1786,8 +1664,7 @@ class _CustomerPropertyDetailsPageState
       if (error) {
         loader.remove();
 
-        ToastUtils.showCustomToast(
-            context, GlobleString.CSM_Lead_Successfully, true);
+        ToastUtils.showCustomToast(context, GlobleString.CSM_Lead_Successfully, true);
 
         RefreshstartTime();
 
@@ -1800,8 +1677,7 @@ class _CustomerPropertyDetailsPageState
         _store.dispatch(UpdateCPDLead_additionalInfo(""));
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.NL_error_insertcall, false);
+        ToastUtils.showCustomToast(context, GlobleString.NL_error_insertcall, false);
       }
     });
   }

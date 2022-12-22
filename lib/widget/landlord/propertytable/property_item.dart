@@ -6,19 +6,22 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
 import 'package:silverhome/common/mystyles.dart';
+import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
+import 'package:silverhome/presentation/screens/TEST/test.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
+
+import '../../../common/sharedpref.dart';
+import '../../../presentation/screens/customer/customer_property_details_page.dart';
 
 typedef VoidCallName = void Function(PropertyDataList propertyData);
 typedef VoidCallDetails = void Function(PropertyDataList propertyData);
 typedef VoidCallEdit = void Function(PropertyDataList propertyData);
 typedef VoidCallDuplicat = void Function(PropertyDataList propertyData);
 typedef VoidCallActive = void Function(PropertyDataList propertyData, int pos);
-typedef VoidCallInActive = void Function(
-    PropertyDataList propertyData, int pos);
-typedef VoidCallIsPublish = void Function(
-    PropertyDataList propertyData, int pos, bool flag);
+typedef VoidCallInActive = void Function(PropertyDataList propertyData, int pos);
+typedef VoidCallIsPublish = void Function(PropertyDataList propertyData, int pos, bool flag);
 
 class PropertyItem extends StatefulWidget {
   final VoidCallName _callbackPropertyName;
@@ -109,6 +112,7 @@ class _PropertyItemState extends State<PropertyItem> {
     result.add(_datavalueStatus(model));
     result.add(_datavalueActiveInactive(model, Index));
     result.add(_datavalueIsPublished(model, Index));
+    result.add(_actionPopupCopy(model));
     result.add(_actionPopup(model));
 
     return result;
@@ -203,9 +207,7 @@ class _PropertyItemState extends State<PropertyItem> {
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        !model.vacancy!
-            ? GlobleString.PH_Vacancy_Vacant
-            : GlobleString.PH_Vacancy_Occupied, //model.province!,
+        !model.vacancy! ? GlobleString.PH_Vacancy_Vacant : GlobleString.PH_Vacancy_Occupied, //model.province!,
         textAlign: TextAlign.center,
         style: MyStyles.Medium(12, myColor.Circle_main),
       ),
@@ -299,6 +301,42 @@ class _PropertyItemState extends State<PropertyItem> {
           Expanded(child: Container())
         ],
       ),
+    );
+  }
+
+  Widget _actionPopupCopy(PropertyDataList model) {
+    return Expanded(
+      flex: 1,
+      child: Container(
+          height: 28,
+          margin: EdgeInsets.only(left: 10, right: 20),
+          alignment: Alignment.centerRight,
+          child: PopupMenuButton(
+            onSelected: (value) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        CustomerPropertyDetailsPage(LID: /*Prefs.getString(PrefsName.Customer_OwnerID)*/ model.id.toString())),
+              );
+            },
+            child: Container(
+              height: 40,
+              width: 20,
+              margin: EdgeInsets.only(right: 5),
+              child: Icon(Icons.copy),
+            ),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 2,
+                child: Text(
+                  GlobleString.PH_ACT_Edit,
+                  style: MyStyles.Medium(14, myColor.text_color),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ],
+          )),
     );
   }
 
