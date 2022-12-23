@@ -1,6 +1,27 @@
-2022/12/21-16:48:16.089 5203 Reusing MANIFEST /private/var/folders/dj/_6h552kx2y378_qk4qh5_dwm0000gn/T/flutter_tools.Z8865O/flutter_tools_chrome_device.6Dm7c5/Default/Local Storage/leveldb/MANIFEST-000001
-2022/12/21-16:48:16.089 5203 Recovering log #5
-2022/12/21-16:48:16.090 5203 Reusing old log /private/var/folders/dj/_6h552kx2y378_qk4qh5_dwm0000gn/T/flutter_tools.Z8865O/flutter_tools_chrome_device.6Dm7c5/Default/Local Storage/leveldb/000005.log 
-2022/12/21-16:48:16.090 5203 Delete type=0 #4
-2022/12/21-16:48:16.090 5203 Delete type=0 #3
-2022/12/21-16:48:16.090 5203 Delete type=2 #5
+2022/12/22-21:23:47.000 61f0 Reusing MANIFEST C:\Users\POWER\AppData\Local\Temp\flutter_tools.e66f7414\flutter_tools_chrome_device.a4bdbc32\Default\Local Storage\leveldb/MANIFEST-000001
+2022/12/22-21:23:47.001 61f0 Recovering log #10
+2022/12/22-21:23:47.002 61f0 Reusing old log C:\Users\POWER\AppData\Local\Temp\flutter_tools.e66f7414\flutter_tools_chrome_device.a4bdbc32\Default\Local Storage\leveldb/000010.log 
+2022/12/22-21:23:47.003 61f0 Delete type=0 #3
+2022/12/22-21:23:47.003 61f0 Delete type=0 #4
+2022/12/22-21:23:47.003 61f0 Delete type=0 #7
+2022/12/22-21:27:36.434 2e8c Level-0 table #14: started
+2022/12/22-21:27:36.441 2e8c Level-0 table #14: 12842 bytes OK
+2022/12/22-21:27:36.447 2e8c Delete type=0 #10
+2022/12/23-01:02:09.557 3b3c Level-0 table #16: started
+2022/12/23-01:02:09.564 3b3c Level-0 table #16: 12521 bytes OK
+2022/12/23-01:02:09.571 3b3c Delete type=0 #13
+2022/12/23-02:13:17.173 31f4 Level-0 table #18: started
+2022/12/23-02:13:17.179 31f4 Level-0 table #18: 12835 bytes OK
+2022/12/23-02:13:17.182 31f4 Delete type=0 #15
+2022/12/23-02:13:17.182 31f4 Compacting 4@0 + 1@1 files
+2022/12/23-02:13:17.188 31f4 Generated table #19@0: 83 keys, 8329 bytes
+2022/12/23-02:13:17.188 31f4 Compacted 4@0 + 1@1 files => 8329 bytes
+2022/12/23-02:13:17.191 31f4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2022/12/23-02:13:17.192 31f4 Delete type=2 #8
+2022/12/23-02:13:17.192 31f4 Delete type=2 #11
+2022/12/23-02:13:17.193 31f4 Delete type=2 #14
+2022/12/23-02:13:17.193 31f4 Delete type=2 #16
+2022/12/23-02:13:17.193 31f4 Delete type=2 #18
+2022/12/23-03:24:45.484 511c Level-0 table #21: started
+2022/12/23-03:24:45.492 511c Level-0 table #21: 12812 bytes OK
+2022/12/23-03:24:45.495 511c Delete type=0 #17

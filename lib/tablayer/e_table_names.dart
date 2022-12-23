@@ -37,6 +37,7 @@ enum etableName {
   request_documents,
   list_documents,
   documentsfields,
+  htmlRequest,
   Events_type_templates,
   AvailabilityTemplate,
   AvailabilityTimeTemplate,
@@ -174,7 +175,9 @@ class TableNames {
       case etableName.documentsfields:
         name = "documentsfields";
         break;
-
+      case etableName.htmlRequest:
+        name = "applicationsendhtml";
+        break;
       default:
         name = "";
     }

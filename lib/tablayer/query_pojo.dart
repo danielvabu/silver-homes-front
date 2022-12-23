@@ -1831,6 +1831,19 @@ class RequestDocuments {
       };
 }
 
+class GetRequestDocuments {
+  String? application_id;
+
+  GetRequestDocuments({this.application_id});
+
+  factory GetRequestDocuments.fromJson(Map<String, dynamic> json) =>
+      GetRequestDocuments(application_id: json["application_id"]);
+
+  Map<String, dynamic> toJson() => {
+        "application_id": application_id,
+      };
+}
+
 class RequestDocumentsFields {
   String? listdocument_id;
   String name;
@@ -1855,6 +1868,22 @@ class RequestDocumentsFields {
         "name": name,
         "required": required,
         "owner_id": owner_id,
+      };
+}
+
+class RequestHtml {
+  String? application_id;
+  String htmltemplate;
+
+  RequestHtml({this.application_id, required this.htmltemplate});
+
+  factory RequestHtml.fromJson(Map<String, dynamic> json) => RequestHtml(
+      application_id: json["application_id"],
+      htmltemplate: json["htmltemplate"]);
+
+  Map<String, dynamic> toJson() => {
+        "application_id": application_id,
+        "htmltemplate": htmltemplate,
       };
 }
 
@@ -2282,21 +2311,25 @@ class DeleteApplicationDocument {
 class InsertApplicationDocument {
   String? Media_ID;
   String? Application_ID;
+  String? field;
 
   InsertApplicationDocument({
     this.Media_ID,
     this.Application_ID,
+    this.field,
   });
 
   factory InsertApplicationDocument.fromJson(Map<String, dynamic> json) =>
       InsertApplicationDocument(
         Media_ID: json["Media_ID"],
         Application_ID: json["Application_ID"],
+        field: json["field"],
       );
 
   Map<String, dynamic> toJson() => {
         "Media_ID": Media_ID,
         "Application_ID": Application_ID,
+        "field": field,
       };
 }
 

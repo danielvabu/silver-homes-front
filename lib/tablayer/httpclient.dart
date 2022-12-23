@@ -39,7 +39,8 @@ import 'package:silverhome/tablayer/weburl.dart';
 
 typedef CallBackListQuesy = void Function(
     bool status, List<String> responce, String message);
-
+typedef CallBackDocList = void Function(
+    bool status, String message, List<GetListDocument> allListData);
 typedef CallBackQuesy = void Function(bool status, String responce);
 
 typedef CallBackApplicant = void Function(

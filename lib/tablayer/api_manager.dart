@@ -1104,6 +1104,27 @@ class ApiManager {
     });
   }
 
+  AddRequestHtml(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    String query = QueryFilter().InsertQuery(POJO, etableName.htmlRequest,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().insertAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        String Result = data['Result'] != null ? data['Result'].toString() : "";
+        CallBackQuesy(true, Result);
+        loader.remove();
+      } else {
+        loader.remove();
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   AddOveriderTemplate(
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
@@ -3125,6 +3146,29 @@ class ApiManager {
     return datares;
   }
 
+  Future<List> getUrlS3doc(
+      List<ApplicationDocumentUploads> propertyimagelist, String module) async {
+    List<String> names = [];
+    List datares = [];
+    for (int i = 0; i < propertyimagelist.length; i++) {
+      names.add(propertyimagelist[i].fileName!);
+    }
+
+    var myjson = {"object_names": names, "path": module};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().LinkS3APICall(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        datares = data["response"] as List;
+      } else {
+        Helper.Log("getS3Links", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
   Future<List> getUrlS3File(
       List<FileObject> propertyimagelist, String module) async {
     List<String> names = [];
@@ -3199,6 +3243,44 @@ class ApiManager {
       CallBackListQuesy CallBackQuesy) async {
     //get s3 links
     List urlS3 = await getUrlS3(propertyimagelist, "property");
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+    };
+    List<String> mediaString = [];
+    int send = 0;
+    for (int i = 0; i < propertyimagelist.length; i++) {
+      String S3content = urlS3[i]["presigned_url"];
+      //var multipartRequest =
+      // new http.MultipartRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
+      multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+      // multipartRequest.headers.addAll(headers);
+      List<int> _selectedFile = propertyimagelist[i].appImage!;
+      multipartRequest.sink.add(_selectedFile);
+      multipartRequest.sink.close();
+      var response = await multipartRequest.send();
+      if (response.statusCode == 200) {
+        send = send + 1;
+      }
+    }
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      CallBackQuesy(true, mediaString, "");
+    } else {
+      CallBackQuesy(false, [], GlobleString.Error);
+    }
+  }
+
+  DocumentsUpload(
+      BuildContext context,
+      List<ApplicationDocumentUploads> propertyimagelist,
+      CallBackListQuesy CallBackQuesy) async {
+    //get s3 links
+    List urlS3 = await getUrlS3doc(propertyimagelist, "property");
 
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
@@ -6481,6 +6563,72 @@ class ApiManager {
   }
 
   getPriviewDocumentList(
+      BuildContext context, String id, CallBackDocList callBackQuesy) async {
+    /* loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+
+    var myjson = {
+      "DSQID": Weburl.DSQ_VIEW_VARIFICATION_DOCUMENTLIST,
+      "LoadLookupValues": true,
+      "LoadChildren": false,
+      "Reqtokens": {"ApplicantID": id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        List<GetListDocument> listadoc = [];
+        if (data['Result'].length > 0) {
+          for (int j = 0; j < data['Result'].length; j++) {
+            var objectApplicationDocument = data['Result'][j];
+
+            String ID = objectApplicationDocument['ID'] != null
+                ? objectApplicationDocument['ID'].toString()
+                : "";
+
+            /*===============*/
+            /*  Media Info */
+            /*===============*/
+            var Media_ID = objectApplicationDocument["Media_ID"];
+
+            int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
+            String Field = Media_ID['Field'] != null ? Media_ID['Field'] : "";
+
+            MediaInfo? mediaInfo = objectApplicationDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectApplicationDocument['Media_ID'])
+                : null;
+            GetListDocument objdoc = GetListDocument(
+                id: ID, mediaInfo: mediaInfo, type: Type, field: Field);
+
+            listadoc.add(objdoc);
+            // if (Type == eMediaType().CopyofID) {
+            //   _store.dispatch(UpdatePDMIDDoc1(ID));
+            //   _store.dispatch(UpdatePDMediaInfo1(mediaInfo));
+            // } else if (Type == eMediaType().Proofoffunds) {
+            //   _store.dispatch(UpdatePDMIDDoc2(ID));
+            //   _store.dispatch(UpdatePDMediaInfo2(mediaInfo));
+            // } else if (Type == eMediaType().Employmentverification) {
+            //   _store.dispatch(UpdatePDMIDDoc3(ID));
+            //   _store.dispatch(UpdatePDMediaInfo3(mediaInfo));
+            // } else if (Type == eMediaType().Creditrecord) {
+            //   _store.dispatch(UpdatePDMIDDoc4(ID));
+            //   _store.dispatch(UpdatePDMediaInfo4(mediaInfo));
+            // }
+          }
+        } else {}
+        //loader.remove();
+        callBackQuesy(true, "", listadoc);
+      } else {
+        //loader.remove();
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, respoce, []);
+      }
+    });
+  }
+
+  getPriviewDocumentListBack(
       BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
@@ -15200,6 +15348,29 @@ class ApiManager {
     String query = await QueryFilter().SelectQuery(
         POJO,
         etableName.documentsfields,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
+
+    HttpClientCall().selectAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        var rest = data["Result"] as List;
+
+        CallBackQuesy(true, rest);
+      } else {
+        CallBackQuesy(false, []);
+      }
+    });
+  }
+
+  //getfieldsList
+  getDocumentRequest(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.request_documents,
         eConjuctionClause().AND,
         eRelationalOperator().EqualTo,
         false);

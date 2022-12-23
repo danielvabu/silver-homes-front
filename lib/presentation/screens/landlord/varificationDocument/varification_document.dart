@@ -31,7 +31,8 @@ class VarificationDocumentView extends StatefulWidget {
   }) : _callbackSaveandNext = onPressedSave;
 
   @override
-  _VarificationDocumentViewState createState() => _VarificationDocumentViewState();
+  _VarificationDocumentViewState createState() =>
+      _VarificationDocumentViewState();
 }
 
 class _VarificationDocumentViewState extends State<VarificationDocumentView> {
@@ -80,7 +81,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                     Expanded(
                       child: Row(
                         children: [
-                          CustomeWidget.AttechDocFileCheck(TVDState!.docs1_filename),
+                          CustomeWidget.AttechDocFileCheck(
+                              TVDState!.docs1_filename),
                           Container(
                             width: 180,
                           ),
@@ -93,7 +95,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                           SizedBox(
                             width: 30,
                           ),
-                          CustomeWidget.AttechDocFileView(TVDState.docs1_filename),
+                          CustomeWidget.AttechDocFileView(
+                              TVDState.docs1_filename),
                           SizedBox(
                             width: 10,
                           ),
@@ -139,7 +142,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                     Expanded(
                       child: Row(
                         children: [
-                          CustomeWidget.AttechDocFileCheck(TVDState.docs2_filename),
+                          CustomeWidget.AttechDocFileCheck(
+                              TVDState.docs2_filename),
                           Container(
                             width: 180,
                           ),
@@ -152,7 +156,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                           SizedBox(
                             width: 30,
                           ),
-                          CustomeWidget.AttechDocFileView(TVDState.docs2_filename),
+                          CustomeWidget.AttechDocFileView(
+                              TVDState.docs2_filename),
                           SizedBox(
                             width: 10,
                           ),
@@ -198,7 +203,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                     Expanded(
                       child: Row(
                         children: [
-                          CustomeWidget.AttechDocFileCheck(TVDState.docs3_filename),
+                          CustomeWidget.AttechDocFileCheck(
+                              TVDState.docs3_filename),
                           SizedBox(
                             width: 15,
                           ),
@@ -216,14 +222,21 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                                         onChanged: (value) {
                                           if (TVDState.docs1_filename != "" &&
                                               TVDState.docs2_filename != "" &&
-                                              (TVDState.docs3_filename != "" || value!) &&
-                                              (TVDState.docs4_filename != "" || TVDState.notapplicable_doc4)) {
-                                            _store.dispatch(UpdateTVDIsbuttonActive(true));
+                                              (TVDState.docs3_filename != "" ||
+                                                  value!) &&
+                                              (TVDState.docs4_filename != "" ||
+                                                  TVDState
+                                                      .notapplicable_doc4)) {
+                                            _store.dispatch(
+                                                UpdateTVDIsbuttonActive(true));
                                           } else {
-                                            _store.dispatch(UpdateTVDIsbuttonActive(false));
+                                            _store.dispatch(
+                                                UpdateTVDIsbuttonActive(false));
                                           }
 
-                                          _store.dispatch(UpdateTVDNotapplicableDoc3(value!));
+                                          _store.dispatch(
+                                              UpdateTVDNotapplicableDoc3(
+                                                  value!));
                                         },
                                       )
                                     : Checkbox(
@@ -235,7 +248,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                                 Text(
                                   GlobleString.TVD_Not_Applicable,
                                   overflow: TextOverflow.ellipsis,
-                                  style: MyStyles.Medium(12, myColor.text_color),
+                                  style:
+                                      MyStyles.Medium(12, myColor.text_color),
                                   textAlign: TextAlign.start,
                                 ),
                               ],
@@ -255,7 +269,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                           SizedBox(
                             width: 30,
                           ),
-                          CustomeWidget.AttechDocFileView(TVDState.docs3_filename),
+                          CustomeWidget.AttechDocFileView(
+                              TVDState.docs3_filename),
                           SizedBox(
                             width: 10,
                           ),
@@ -290,16 +305,23 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                   children: [
                     Expanded(
                       child: RichText(
-                        text: TextSpan(text: GlobleString.TVD_doc4, style: MyStyles.Medium(14, myColor.text_color), children: [
-                          TextSpan(
-                              text: GlobleString.TVD_doc4_2,
-                              style: MyStyles.Medium(14, myColor.blue),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Helper.launchURL(Weburl.verification_document_url);
-                                }),
-                          TextSpan(text: GlobleString.TVD_doc4_3, style: MyStyles.Medium(14, myColor.text_color)),
-                        ]),
+                        text: TextSpan(
+                            text: GlobleString.TVD_doc4,
+                            style: MyStyles.Medium(14, myColor.text_color),
+                            children: [
+                              TextSpan(
+                                  text: GlobleString.TVD_doc4_2,
+                                  style: MyStyles.Medium(14, myColor.blue),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Helper.launchURL(
+                                          Weburl.verification_document_url);
+                                    }),
+                              TextSpan(
+                                  text: GlobleString.TVD_doc4_3,
+                                  style:
+                                      MyStyles.Medium(14, myColor.text_color)),
+                            ]),
                       ),
                       // child: Text(
                       //   GlobleString.TVD_doc4,
@@ -313,7 +335,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                     Expanded(
                       child: Row(
                         children: [
-                          CustomeWidget.AttechDocFileCheck(TVDState.docs4_filename),
+                          CustomeWidget.AttechDocFileCheck(
+                              TVDState.docs4_filename),
                           SizedBox(
                             width: 15,
                           ),
@@ -331,14 +354,21 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                                         onChanged: (value) {
                                           if (TVDState.docs1_filename != "" &&
                                               TVDState.docs2_filename != "" &&
-                                              (TVDState.docs3_filename != "" || TVDState.notapplicable_doc3) &&
-                                              (TVDState.docs4_filename != "" || value!)) {
-                                            _store.dispatch(UpdateTVDIsbuttonActive(true));
+                                              (TVDState.docs3_filename != "" ||
+                                                  TVDState
+                                                      .notapplicable_doc3) &&
+                                              (TVDState.docs4_filename != "" ||
+                                                  value!)) {
+                                            _store.dispatch(
+                                                UpdateTVDIsbuttonActive(true));
                                           } else {
-                                            _store.dispatch(UpdateTVDIsbuttonActive(false));
+                                            _store.dispatch(
+                                                UpdateTVDIsbuttonActive(false));
                                           }
 
-                                          _store.dispatch(UpdateTVDNotapplicableDoc4(value!));
+                                          _store.dispatch(
+                                              UpdateTVDNotapplicableDoc4(
+                                                  value!));
                                         },
                                       )
                                     : Checkbox(
@@ -350,7 +380,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                                 Text(
                                   GlobleString.TVD_Not_Applicable,
                                   overflow: TextOverflow.ellipsis,
-                                  style: MyStyles.Medium(12, myColor.text_color),
+                                  style:
+                                      MyStyles.Medium(12, myColor.text_color),
                                   textAlign: TextAlign.start,
                                 ),
                               ],
@@ -370,7 +401,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
                           SizedBox(
                             width: 30,
                           ),
-                          CustomeWidget.AttechDocFileView(TVDState.docs4_filename),
+                          CustomeWidget.AttechDocFileView(
+                              TVDState.docs4_filename),
                           SizedBox(
                             width: 10,
                           ),
@@ -425,7 +457,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
 
         //widget._callbackSaveandNext();
       },
-      child: CustomeWidget.FillButton(35, GlobleString.TVD_Submit, TVDState!.isbuttonActive),
+      child: CustomeWidget.FillButton(
+          35, GlobleString.TVD_Submit, TVDState!.isbuttonActive),
     );
   }
 
@@ -447,9 +480,11 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
       Helper.Log("file size", file.size.toString());
 
       if ((file.size / 1024) < 0) {
-        ToastUtils.showCustomToast(context, GlobleString.TVD_Document_Image_Size_0_error, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_Size_0_error, false);
       } else if ((file.size / 1024) > 10240) {
-        ToastUtils.showCustomToast(context, GlobleString.TVD_Document_Image_Size_error, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_Size_error, false);
       } else if ((file.name.split('.').last).contains("jpg") ||
           (file.name.split('.').last).contains("JPG") ||
           (file.name.split('.').last).contains("png") ||
@@ -560,7 +595,8 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
           }
         }
       } else {
-        ToastUtils.showCustomToast(context, GlobleString.TVD_Document_Image_error, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_error, false);
       }
     }
 
@@ -617,13 +653,17 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
 
   validation(TenancyVarificationDocumentState? TVDState) {
     if (TVDState!.docs1_file == null) {
-      ToastUtils.showCustomToast(context, GlobleString.TVD_Document1_error, false);
+      ToastUtils.showCustomToast(
+          context, GlobleString.TVD_Document1_error, false);
     } else if (TVDState.docs2_file == null) {
-      ToastUtils.showCustomToast(context, GlobleString.TVD_Document2_error, false);
+      ToastUtils.showCustomToast(
+          context, GlobleString.TVD_Document2_error, false);
     } else if (!TVDState.notapplicable_doc3 && TVDState.docs3_file == null) {
-      ToastUtils.showCustomToast(context, GlobleString.TVD_Document3_error, false);
+      ToastUtils.showCustomToast(
+          context, GlobleString.TVD_Document3_error, false);
     } else if (!TVDState.notapplicable_doc4 && TVDState.docs4_file == null) {
-      ToastUtils.showCustomToast(context, GlobleString.TVD_Document4_error, false);
+      ToastUtils.showCustomToast(
+          context, GlobleString.TVD_Document4_error, false);
     } else {
       ApiCallDocument(TVDState);
     }
@@ -659,9 +699,12 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
       }
 
       DeleteApplicationDocument applicantDoc = new DeleteApplicationDocument();
-      applicantDoc.Application_ID = Prefs.getString(PrefsName.TCF_ApplicationID);
+      applicantDoc.Application_ID =
+          Prefs.getString(PrefsName.TCF_ApplicationID);
 
-      ApiManager().TVDMediaInfoDelete(context, mediadoc1, mediadoc2, mediadoc3, mediadoc4, applicantDoc, (status, responce) {
+      ApiManager().TVDMediaInfoDelete(
+          context, mediadoc1, mediadoc2, mediadoc3, mediadoc4, applicantDoc,
+          (status, responce) {
         if (status) {
           loader.remove();
           insertApiCall(TVDState);
@@ -696,14 +739,17 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
         TVDState.docs4_fileextension, (status, listString, responce) {
       if (status) {
         if (listString.length > 0) {
-          List<InsertApplicationDocument> appdoclist = <InsertApplicationDocument>[];
+          List<InsertApplicationDocument> appdoclist =
+              <InsertApplicationDocument>[];
 
           for (int i = 0; i < listString.length; i++) {
-            appdoclist
-                .add(new InsertApplicationDocument(Media_ID: listString[i], Application_ID: Prefs.getString(PrefsName.TCF_ApplicationID)));
+            appdoclist.add(new InsertApplicationDocument(
+                Media_ID: listString[i],
+                Application_ID: Prefs.getString(PrefsName.TCF_ApplicationID)));
           }
 
-          ApiManager().InsetApplicantDocument(context, appdoclist, (status, responce) {
+          ApiManager().InsetApplicantDocument(context, appdoclist,
+              (status, responce) {
             if (status) {
               NotificationCall();
             } else {
@@ -720,7 +766,9 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
   }
 
   NotificationCall() {
-    ApiManager().NotificationDocReceive(context, Prefs.getString(PrefsName.TCF_ApplicationID), (status, responce) async {
+    ApiManager().NotificationDocReceive(
+        context, Prefs.getString(PrefsName.TCF_ApplicationID),
+        (status, responce) async {
       if (status) {
         loader.remove();
         widget._callbackSaveandNext();
@@ -735,12 +783,14 @@ class _VarificationDocumentViewState extends State<VarificationDocumentView> {
     CommonID commonID = new CommonID();
     commonID.ID = Prefs.getString(PrefsName.TCF_ApplicationID);
 
-    String date = new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
+    String date =
+        new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString();
 
     InsertDocReceiveDate insertDocReceiveDate = new InsertDocReceiveDate();
     insertDocReceiveDate.DocReceivedDate = date;
 
-    ApiManager().UapdateApplicantDocumentReceiveDate(context, commonID, insertDocReceiveDate, (error, respoce) async {
+    ApiManager().UapdateApplicantDocumentReceiveDate(
+        context, commonID, insertDocReceiveDate, (error, respoce) async {
       if (error) {
         loader.remove();
         widget._callbackSaveandNext();

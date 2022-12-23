@@ -167,6 +167,45 @@ class MediaInfo {
       };
 }
 
+class GetListDocument {
+  String? id;
+  String? field;
+  int? type;
+  MediaInfo? mediaInfo;
+
+  GetListDocument({
+    this.id,
+    this.field,
+    this.type,
+    this.mediaInfo,
+  });
+
+  factory GetListDocument.fromJson(Map<String, dynamic> json) =>
+      GetListDocument(
+        id: json["id"],
+        field: json["field"],
+        type: json["type"],
+        mediaInfo: json["mediaInfo"],
+      );
+
+  Map toJson() => {
+        "id": id,
+        "field": field,
+        "type": type,
+        "mediaInfo": mediaInfo,
+      };
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["field"] = field;
+    map["type"] = type;
+    map["mediaInfo"] = mediaInfo;
+
+    return map;
+  }
+}
+
 class Applicant {
   int id;
   int? personid;
@@ -387,6 +426,59 @@ class ApplicationDocument {
     map["ID"] = id;
     map["Applicantion_ID"] = applicantionid;
     map["Media_ID"] = mediaID;
+    return map;
+  }
+}
+
+class ApplicationDocumentUploads {
+  String? fileName;
+  String? fieldname;
+  bool? isbuttonActive;
+  bool? notaplicable;
+  Uint8List? appImage;
+  bool? required;
+  bool? nuevo;
+
+  ApplicationDocumentUploads({
+    this.fileName,
+    this.fieldname,
+    this.isbuttonActive,
+    this.notaplicable,
+    this.appImage,
+    this.required,
+    this.nuevo,
+  });
+
+  factory ApplicationDocumentUploads.fromJson(Map<String, dynamic> json) =>
+      ApplicationDocumentUploads(
+        fileName: json["fileName"],
+        fieldname: json["fieldname"],
+        isbuttonActive: json["isbuttonActive"],
+        notaplicable: json["notaplicable"],
+        appImage: json["appImage"],
+        required: json["required"],
+        nuevo: json["nuevo"],
+      );
+
+  Map toJson() => {
+        "fileName": fileName,
+        "fieldname": fieldname,
+        "isbuttonActive": isbuttonActive,
+        "notaplicable": notaplicable,
+        "appImage": appImage,
+        "required": required,
+        "nuevo": nuevo,
+      };
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["fileName"] = fileName;
+    map["fieldname"] = fieldname;
+    map["isbuttonActive"] = isbuttonActive;
+    map["notaplicable"] = notaplicable;
+    map["appImage"] = appImage;
+    map["required"] = required;
+    map["nuevo"] = nuevo;
     return map;
   }
 }

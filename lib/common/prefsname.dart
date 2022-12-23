@@ -42,6 +42,7 @@ class PrefsName {
   static const String TCF_Step4 = "TCF_Step4";
   static const String TCF_Step5 = "TCF_Step5";
   static const String TCF_Step6 = "TCF_Step6";
+  static const String TCF_Step7 = "TCF_Step7";
 
   static const String RC_Referenceid = "RC_Referenceid";
   static const String RC_ApplicantID = "RC_ApplicantID";
