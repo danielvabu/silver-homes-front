@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,7 @@ import 'package:silverhome/widget/alert/message_dialogbox.dart';
 import '../../../domain/actions/customer/customer_property_details_actions.dart';
 import '../../../domain/entities/propertydata.dart';
 import '../../models/customer/customer_propertylist_state.dart';
+import 'dart:html' as html;
 
 class CustomerFeaturedlistPageTest extends StatefulWidget {
   const CustomerFeaturedlistPageTest({
@@ -43,10 +45,12 @@ class CustomerFeaturedlistPageTest extends StatefulWidget {
   _CustomerFeaturedlistPageTestState createState() => _CustomerFeaturedlistPageTestState();
 }
 
+bool refresh = false;
+
 class _CustomerFeaturedlistPageTestState extends State<CustomerFeaturedlistPageTest> {
   double height = 0, width = 0;
-  final _store = getIt<AppStore>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  var _store = getIt<AppStore>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late OverlayEntry loader;
   bool isloading = true;
   bool isError = false;
@@ -54,7 +58,14 @@ class _CustomerFeaturedlistPageTestState extends State<CustomerFeaturedlistPageT
 
   @override
   void initState() {
-    apimanager();
+    print("valuerefresh: ");
+
+    Timer.run(() async {
+      apimanager();
+      setState(() {});
+    });
+
+    // _store = getIt<AppStore>();
     super.initState();
   }
 

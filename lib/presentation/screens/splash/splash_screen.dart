@@ -27,22 +27,19 @@ class _SplashScreenState extends State<SplashScreen> {
   startTime() async => new Timer(Duration(seconds: 1), pageNavigate);
 
   pageNavigate() {
-    if (Prefs.getBool(PrefsName.Is_login)) {
-      Navigator.pushNamed(
-          context,
-          Prefs.getBool(PrefsName.Is_adminlogin)
-              ? RouteNames.Admin_Portal
-              : RouteNames.Portal);
-    } else if (Prefs.getBool(PrefsName.BT_Is_login)) {
-      Navigator.pushNamed(context,
-          "/${Prefs.getString(PrefsName.BT_CustomerFeatureListingURL)}/${RouteNames.Basic_Tenant_Portal}");
-    } else {
-      String url = window.location.href.toString();
+    if (route == false) {
+      if (Prefs.getBool(PrefsName.Is_login)) {
+        Navigator.pushNamed(context, Prefs.getBool(PrefsName.Is_adminlogin) ? RouteNames.Admin_Portal : RouteNames.Portal);
+      } else if (Prefs.getBool(PrefsName.BT_Is_login)) {
+        Navigator.pushNamed(context, "/${Prefs.getString(PrefsName.BT_CustomerFeatureListingURL)}/${RouteNames.Basic_Tenant_Portal}");
+      } else {
+        String url = window.location.href.toString();
 
-      String name = url.substring(url.indexOf("#/") + 2);
+        String name = url.substring(url.indexOf("#/") + 2);
 
-      if (name.isEmpty || name == null) {
-        Navigator.of(context).pushReplacementNamed(RouteNames.Login);
+        if (name.isEmpty || name == null) {
+          Navigator.of(context).pushReplacementNamed(RouteNames.Login);
+        }
       }
     }
   }

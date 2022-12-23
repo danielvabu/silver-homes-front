@@ -519,7 +519,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
           PopupMenuItem(
             value: 2,
             child: Text(
-              "Copy listing page",
+              "Copy listings page link",
               style: MyStyles.Medium(14, myColor.text_color),
               textAlign: TextAlign.start,
             ),

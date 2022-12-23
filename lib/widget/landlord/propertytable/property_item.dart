@@ -17,7 +17,7 @@ import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/weburl.dart';
-
+import 'dart:html';
 import '../../../common/sharedpref.dart';
 import '../../../presentation/models/landlord_models/landlord_profile_state.dart';
 import '../../../presentation/screens/customer/customer_featurelist_page.dart';
@@ -323,7 +323,14 @@ class _PropertyItemState extends State<PropertyItem> {
                   onTap: () {
                     print("value: " + profileState!.CustomerFeatureListingURL.toString());
 
-                    String url = Weburl.CustomerFeaturedPage +
+                    String urlDate = Weburl.CustomerFeaturedPage;
+                    var urlBase = window.location.href;
+
+                    final startIndex = urlBase.indexOf("#/");
+                    String endIndex = urlBase.substring(0, startIndex + 2);
+
+                    print("result: " + endIndex.toString());
+                    String url = endIndex +
                         "" +
                         "sharedproperties" +
                         "." +
