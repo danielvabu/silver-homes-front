@@ -648,7 +648,7 @@ class _FunnelViewScreenState extends State<FunnelViewScreen> {
                           ApiManager().funUpdateStatus(
                               context,
                               lead.id.toString(),
-                              eApplicationStatus().DocVarify.toString(),
+                              eApplicationStatus().Applicant.toString(),
                               widget.selectpropertyValue!.ID!,
                               (status, responce) async {
                             if (status) {}

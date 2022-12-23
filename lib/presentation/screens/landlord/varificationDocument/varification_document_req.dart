@@ -212,7 +212,7 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
                                     splashColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () {
-                                      deleteAttechment(1);
+                                      deleteAttechment(i);
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
@@ -348,28 +348,10 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
           negativeText: GlobleString.TVD_Document_btn_No,
           onPressedYes: () {
             Navigator.of(context1).pop();
-
-            if (flag == 1) {
-              _store.dispatch(UpdateTVDDocs1FileName(""));
-              _store.dispatch(UpdateTVDDocs1FileExtension(""));
-              _store.dispatch(UpdateTVDUint8ListDocs1File(null));
-              _store.dispatch(UpdateTVDIsbuttonActive(false));
-            } else if (flag == 2) {
-              _store.dispatch(UpdateTVDDocs2FileName(""));
-              _store.dispatch(UpdateTVDDocs2FileExtension(""));
-              _store.dispatch(UpdateTVDUint8ListDocs2File(null));
-              _store.dispatch(UpdateTVDIsbuttonActive(false));
-            } else if (flag == 3) {
-              _store.dispatch(UpdateTVDDocs3FileName(""));
-              _store.dispatch(UpdateTVDDocs3FileExtension(""));
-              _store.dispatch(UpdateTVDUint8ListDocs3File(null));
-              _store.dispatch(UpdateTVDIsbuttonActive(false));
-            } else if (flag == 4) {
-              _store.dispatch(UpdateTVDDocs4FileName(""));
-              _store.dispatch(UpdateTVDDocs4FileExtension(""));
-              _store.dispatch(UpdateTVDUint8ListDocs4File(null));
-              _store.dispatch(UpdateTVDIsbuttonActive(false));
-            }
+            setState(() {
+              fields[flag].appImage = null;
+              fields[flag].fileName = "";
+            });
           },
           onPressedNo: () {
             Navigator.of(context1).pop();
