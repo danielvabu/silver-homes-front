@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
@@ -18,9 +20,14 @@ import 'package:silverhome/widget/customer/customer_property_card.dart';
 import 'package:silverhome/widget/customer/responsive_grid.dart';
 
 class CustomerPropertyListPage extends StatefulWidget {
+  CustomerPropertyListPage({super.key, required this.id});
+
+  final String id;
   @override
   _CustomerPropertyListPageState createState() => _CustomerPropertyListPageState();
 }
+
+bool execute = false;
 
 class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
   double height = 0, width = 0;
@@ -30,6 +37,7 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
 
   @override
   void initState() {
+    execute = false;
     // TODO: implement initState
     super.initState();
   }
@@ -64,9 +72,19 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
                     desiredItemWidth: 300,
                     minSpacing: 1,
                     children: Helper.Widgetchild(cusProlistState!.propertylist.length).map((i) {
+                      if (widget.id == cusProlistState.propertylist[i].ID.toString()) {
+                        if (execute == false) {
+                          execute = true;
+                          print("execute" + cusProlistState.propertylist[i].ID.toString());
+                          Timer.run(() {
+                            getFeaturePropertyDetails(cusProlistState.propertylist[i].ID.toString(), cusProlistState);
+                          });
+                        }
+                      }
                       return CSM_PropertyCard(
                         callbackOnItem: () {
-                          getFeaturePropertyDetails(cusProlistState.propertylist[i], cusProlistState);
+                          print("execute");
+                          getFeaturePropertyDetails(cusProlistState.propertylist[i].ID.toString(), cusProlistState);
                           //_store.dispatch(UpdateCustomerPortal_pageindex(1));
                         },
                         propertyData: cusProlistState.propertylist[i],
@@ -82,11 +100,11 @@ class _CustomerPropertyListPageState extends State<CustomerPropertyListPage> {
     );
   }
 
-  getFeaturePropertyDetails(PropertyData propertyval, CustomerPropertylistState cusProlistState) async {
+  getFeaturePropertyDetails(String propId, CustomerPropertylistState cusProlistState) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String propId = propertyval.ID.toString();
+    //String propId = propertyval.ID.toString();
 
     await ApiManager().getPropertyRestriction_Customer(context, propId, (status, responce, restrictionlist) {
       if (status) {

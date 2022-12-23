@@ -56,7 +56,6 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
 
   @override
   void initState() {
-    
     updateCount();
     init();
     super.initState();
@@ -71,11 +70,8 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     //ApiManager().getUserProfile(context);
     //Navigator.pop(context);
 
-    await ApiManager().userProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
-        (error, respoce2) {
-      
-    });
-    
+    await ApiManager().userProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID), (error, respoce2) {});
+
     ApiManager().updatePropertyStatusCount(context);
     updateState();
     apimanager("", 1, "PropertyName", 1, 0);
@@ -285,16 +281,16 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                       builder: (profileState) {
                         return Row(
                           children: [
-                            listingPageLink(profileState!),
-                            const SizedBox(width:5),
-                            copyIconButton(profileState),
+                            _actionPopup(propertyListState, profileState)
+                            //    listingPageLink(profileState!),
+                            // const SizedBox(width: 5),
+                            //copyIconButton(profileState),
                           ],
                         );
                       },
                     ),
-                    
+
                     //copyListLink(),
-                    _actionPopup(propertyListState)
                   ],
                 ),
               ],
@@ -434,64 +430,76 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
     _store.dispatch(UpdateSummeryPropertyImageList(<PropertyImageMediaInfo>[]));
   }
 
-  Widget _actionPopup(PropertyListState propertyListState) {
+  Widget _actionPopup(
+    PropertyListState propertyListState,
+    LandlordProfileState? profileState,
+  ) {
     return Container(
       height: 32,
       width: 30,
       child: PopupMenuButton(
         onSelected: (value) async {
-          PropertyListReqtokens reqtokens = new PropertyListReqtokens();
-          reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-          reqtokens.Name = propertyListState.PropertySearchText != null ? propertyListState.PropertySearchText : "";
+          print("value: " + value.toString());
+          if (value.toString() == "2") {
+            String url = Weburl.CustomerFeaturedPage + "" + profileState!.CustomerFeatureListingURL;
 
-          List<Sort> sortinglist = [];
-          Sort sort = new Sort();
-          if (propertyListState.PropertySearchText != null && propertyListState.PropertySearchText.isNotEmpty) {
-            sort.fieldId = "ID";
-            sort.sortSequence = 0;
+            print("CustomerFeaturedPage" + url);
+
+            Helper.copyToClipboardHack(context, url);
           } else {
-            if (propertyListState.isPropertyNameSort) {
-              sort.fieldId = "PropertyName";
-              sort.sortSequence = propertyListState.NameSortAcsDes;
-            } else if (propertyListState.isPropertyUnitSort) {
-              sort.fieldId = "Suite_Unit";
-              sort.sortSequence = propertyListState.UnitSortAcsDes;
-            } else if (propertyListState.isCitySort) {
-              sort.fieldId = "City";
-              sort.sortSequence = propertyListState.CitySortAcsDes;
-            } else if (propertyListState.isCountrySort) {
-              sort.fieldId = "Country";
-              sort.sortSequence = propertyListState.CountrySortAcsDes;
-            } else if (propertyListState.isPropertyTypeSort) {
-              sort.fieldId = "Property_Type";
-              sort.sortSequence = propertyListState.PropertyTypeSortAcsDes;
-            } else if (propertyListState.isvacancySort) {
-              sort.fieldId = "Vacancy";
-              sort.sortSequence = propertyListState.VacancySortAcsDes;
-            } else if (propertyListState.isActiveInactiveSort) {
-              sort.fieldId = "IsActive";
-              sort.sortSequence = propertyListState.ActiveSortAcsDes;
-            } else if (propertyListState.isPublishedSort) {
-              sort.fieldId = "IsPublished";
-              sort.sortSequence = propertyListState.PublishedSortAcsDes;
-            } else {
+            PropertyListReqtokens reqtokens = new PropertyListReqtokens();
+            reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+            reqtokens.Name = propertyListState.PropertySearchText != null ? propertyListState.PropertySearchText : "";
+
+            List<Sort> sortinglist = [];
+            Sort sort = new Sort();
+            if (propertyListState.PropertySearchText != null && propertyListState.PropertySearchText.isNotEmpty) {
               sort.fieldId = "ID";
               sort.sortSequence = 0;
+            } else {
+              if (propertyListState.isPropertyNameSort) {
+                sort.fieldId = "PropertyName";
+                sort.sortSequence = propertyListState.NameSortAcsDes;
+              } else if (propertyListState.isPropertyUnitSort) {
+                sort.fieldId = "Suite_Unit";
+                sort.sortSequence = propertyListState.UnitSortAcsDes;
+              } else if (propertyListState.isCitySort) {
+                sort.fieldId = "City";
+                sort.sortSequence = propertyListState.CitySortAcsDes;
+              } else if (propertyListState.isCountrySort) {
+                sort.fieldId = "Country";
+                sort.sortSequence = propertyListState.CountrySortAcsDes;
+              } else if (propertyListState.isPropertyTypeSort) {
+                sort.fieldId = "Property_Type";
+                sort.sortSequence = propertyListState.PropertyTypeSortAcsDes;
+              } else if (propertyListState.isvacancySort) {
+                sort.fieldId = "Vacancy";
+                sort.sortSequence = propertyListState.VacancySortAcsDes;
+              } else if (propertyListState.isActiveInactiveSort) {
+                sort.fieldId = "IsActive";
+                sort.sortSequence = propertyListState.ActiveSortAcsDes;
+              } else if (propertyListState.isPublishedSort) {
+                sort.fieldId = "IsPublished";
+                sort.sortSequence = propertyListState.PublishedSortAcsDes;
+              } else {
+                sort.fieldId = "ID";
+                sort.sortSequence = 0;
+              }
             }
+
+            sortinglist.add(sort);
+
+            DSQQuery dsqQuery = new DSQQuery();
+            dsqQuery.dsqid = Weburl.DSQ_PropertyOnBoardingList;
+            dsqQuery.loadLookUpValues = true;
+            dsqQuery.loadRecordInfo = true;
+            dsqQuery.propertyListReqtokens = reqtokens;
+            dsqQuery.sort = sortinglist;
+
+            String filterjson = jsonEncode(dsqQuery);
+
+            await ApiManager().getAllPropertyOnboadingListCSV(context, filterjson);
           }
-
-          sortinglist.add(sort);
-
-          DSQQuery dsqQuery = new DSQQuery();
-          dsqQuery.dsqid = Weburl.DSQ_PropertyOnBoardingList;
-          dsqQuery.loadLookUpValues = true;
-          dsqQuery.loadRecordInfo = true;
-          dsqQuery.propertyListReqtokens = reqtokens;
-          dsqQuery.sort = sortinglist;
-
-          String filterjson = jsonEncode(dsqQuery);
-
-          await ApiManager().getAllPropertyOnboadingListCSV(context, filterjson);
         },
         child: Container(
           height: 40,
@@ -508,12 +516,21 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
               textAlign: TextAlign.start,
             ),
           ),
+          PopupMenuItem(
+            value: 2,
+            child: Text(
+              "Copy listings page link",
+              style: MyStyles.Medium(14, myColor.text_color),
+              textAlign: TextAlign.start,
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _tableview(PropertyListState propertyListState) {
+    //listpropertyco
     return Container(
       width: sswidth,
       height: ssheight - 167,
@@ -1151,10 +1168,8 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
         textAlign: TextAlign.center,
       ),
       onPointerDown: (event) async {
-        if (event.kind == PointerDeviceKind.mouse &&
-            event.buttons == kSecondaryMouseButton) {
-          final overlay =
-              Overlay.of(context)!.context.findRenderObject() as RenderBox;
+        if (event.kind == PointerDeviceKind.mouse && event.buttons == kSecondaryMouseButton) {
+          final overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
           final menuItem = await showMenu<int>(
               context: context,
               items: [
@@ -1167,14 +1182,11 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
                   value: 1,
                 ),
               ],
-              position: RelativeRect.fromSize(
-                  event.position & Size(48.0, 48.0), overlay.size));
+              position: RelativeRect.fromSize(event.position & Size(48.0, 48.0), overlay.size));
           // Check if menu item clicked
           switch (menuItem) {
             case 1:
-              String url = Weburl.CustomerFeaturedPage +
-                  "" +
-                  profileState.CustomerFeatureListingURL;
+              String url = Weburl.CustomerFeaturedPage + "" + profileState.CustomerFeatureListingURL;
 
               Helper.copyToClipboardHack(context, url);
               break;
@@ -1188,9 +1200,7 @@ class _PropertyScreenNewState extends State<PropertyScreenNew> {
   InkWell copyIconButton(LandlordProfileState profileState) {
     return InkWell(
       onTap: () async {
-        String url = Weburl.CustomerFeaturedPage +
-            "" +
-            profileState.CustomerFeatureListingURL;
+        String url = Weburl.CustomerFeaturedPage + "" + profileState.CustomerFeatureListingURL;
 
         print("CustomerFeaturedPage" + url);
 
