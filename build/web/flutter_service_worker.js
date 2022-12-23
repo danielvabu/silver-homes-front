@@ -4,10 +4,11 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "2f06e8d564f4ee923b0eed97464e8eac",
-"index.html": "473815a37f9ac3e0aea543b074ea2c07",
-"/": "473815a37f9ac3e0aea543b074ea2c07",
+"index.html": "149c614e75b09efcb8702dbb6a36043d",
+"/": "149c614e75b09efcb8702dbb6a36043d",
 "favicon.jpeg": "b9d85d5a4e68dff0c986804a1a220e4b",
 "main.dart.js": "995a689114ee82128b04751b116ed84f",
+"flutter.js": "8ae00b472ec3937a5bee52055d6bc8b4",
 "favicon.png": "c7332461e1ae0bd791d54a5bca7d6459",
 "icons/Icon-192.png": "c7332461e1ae0bd791d54a5bca7d6459",
 "icons/Icon-maskable-192.png": "c7332461e1ae0bd791d54a5bca7d6459",
@@ -693,7 +694,11 @@ const RESOURCES = {
 "assets/assets/fonts/avenirnext-regular.ttf": "7c6fbea20b5d03a764465cea64c89987",
 "assets/assets/fonts/avenirnext-medium.ttf": "f828f3cec274290a7ff24cad74872b1f",
 "assets/assets/fonts/avenirnext-bold.ttf": "c0a736d1225e1139496f675c3dab1581",
-"assets/assets/sample_invitetoapply.jpg": "f2aac2b95fafe43e478b5cf0188b2d4f"
+"assets/assets/sample_invitetoapply.jpg": "f2aac2b95fafe43e478b5cf0188b2d4f",
+"canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
+"canvaskit/profiling/canvaskit.js": "38164e5a72bdad0faa4ce740c9b8e564",
+"canvaskit/profiling/canvaskit.wasm": "95a45378b69e77af5ed2bc72b2209b94",
+"canvaskit/canvaskit.wasm": "bf50631470eb967688cca13ee181af62"
 };
 
 // The application shell files that are downloaded before a service worker can
