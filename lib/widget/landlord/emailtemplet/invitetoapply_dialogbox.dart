@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/fontname.dart';
+import 'package:silverhome/domain/entities/LandlordProfile.dart';
+import 'package:silverhome/domain/entities/propertydata.dart';
 import 'package:webviewx/webviewx.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
@@ -49,6 +51,8 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
   String idlista = '0';
   List<Map<String, dynamic>> items = [];
   List<TextEditingController> _controller = [];
+  LandlordProfile? landlordProfile1;
+  PropertyData? propertyData1;
   var selectvalue;
   late WebViewXController webviewController;
   HtmlEditorController controller = HtmlEditorController();
@@ -56,6 +60,8 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
   void initState() {
     apiManager();
     traerlistas();
+    traerdatalandlord();
+    traerdataProperty();
     super.initState();
   }
 
@@ -100,6 +106,36 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
       } else {
         //  _store.dispatch(UpdateProperTytypeValue1([]));
       }
+    });
+  }
+
+  traerdatalandlord() async {
+    await ApiManager()
+        .landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+            (error, respoce2, landlordProfile) {
+      if (error) {
+        // if (landlordProfile!.companylogo != null &&
+        //     landlordProfile.companylogo!.id != null) {
+        landlordProfile1 = landlordProfile;
+
+        //   //CompanyLogo = landlordProfile.companylogo!.id.toString();
+        // } else {
+        //   //CompanyLogo = '1';
+        // }
+      } else {
+        //loader.remove();
+        ToastUtils.showCustomToast(context, respoce2, false);
+      }
+    });
+  }
+
+  traerdataProperty() async {
+    String propId = widget._tenancyleadlist[0].propId.toString();
+    await ApiManager().getPropertyDetails(context, propId,
+        (status, responce, propertyData) async {
+      if (status) {
+        propertyData1 = propertyData;
+      } else {}
     });
   }
 
@@ -522,9 +558,11 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                                 'LandlordLastName',
                                                 'LandlordEmail',
                                                 'LandlordPhonenumber',
+                                                'LandlordCompanyName',
                                                 'LandlordWebsite',
                                                 'LandlordListingsPage',
-                                                'LandlordLogo',
+                                                'CurrentDate',
+                                                'propertyDescription',
                                               ];
                                               return mentions
                                                   .where((element) =>
@@ -540,9 +578,11 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                               'LandlordLastName',
                                               'LandlordEmail',
                                               'LandlordPhonenumber',
+                                              'LandlordCompanyName',
                                               'LandlordWebsite',
                                               'LandlordListingsPage',
-                                              'LandlordLogo',
+                                              'CurrentDate',
+                                              'propertyDescription',
                                             ],
                                             onSelect: (String value) {
                                               print(value);
@@ -559,7 +599,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                       controller: controller, //required
                                       htmlEditorOptions: HtmlEditorOptions(
                                         initialText:
-                                            "<p style='color:#1f1f1f'>Hi <span style='color:#5454ff'> @NameApplicant</span></p> <p style='color:#1f1f1f'> This is <span style='color:#5454ff'>@LandlordFirstName @LandlordLastname</span>. Click on the button below to access the tenant application form for: <span style='color:#5454ff'>@PropertyName</span> - <span style='color:#5454ff'>@Unit/Suite</span>-<span style='color:#5454ff'>@PropertyAddress</span>, <span style='color:#5454ff'>@City</span>,<span style='color:#5454ff'> @Province/State</span>, <span style='color:#5454ff'>@PostalCode/ZipCode</span>.<br><br><p style='style='color:#1f1f1f''>I will reach out to you once your application has been reviewed.</p><p style='color:#1f1f1f'>Thank you,</P><p style='color:#5454ff'>@landlordFirstname @landlordLastname</p><p style='color:#5454ff'>@CompanyName</p>",
+                                            "<p style='color:#1f1f1f'>Hi <span style='color:#5454ff'> @NameApplicant</span></p> <p style='color:#1f1f1f'> This is <span style='color:#5454ff'>@LandlordFirstName @LandlordLastName</span>. Click on the button below to access the tenant application form for: <span style='color:#5454ff'>@PropertyName</span>-<span style='color:#5454ff'>@PropertyAddress</span>.<br><br><p style='style='color:#1f1f1f''>I will reach out to you once your application has been reviewed.</p><p style='color:#1f1f1f'>Thank you,</P><p style='color:#5454ff'>@landlordFirstname @LandlordLastname</p><p style='color:#5454ff'>@LandlordCompanyName</p>",
                                         autoAdjustHeight: false,
                                         adjustHeightForKeyboard: false,
 
@@ -1017,14 +1057,42 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     int idapplication = widget._tenancyleadlist[0].id!;
     DateTime dateToday =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    String propiedaddata = propertyData1!.propertyAddress! +
+        "," +
+        propertyData1!.suiteUnit! +
+        "," +
+        propertyData1!.city! +
+        "," +
+        propertyData1!.province! +
+        "," +
+        propertyData1!.country! +
+        "," +
+        propertyData1!.postalCode!;
+    String propdesc = propertyData1!.propertyDescription!;
+    String landfn = landlordProfile1!.firstname!;
+    String landln = landlordProfile1!.lastname!;
+    String landem = landlordProfile1!.email!;
+    String landph = landlordProfile1!.phonenumber!;
+    String landcn = landlordProfile1!.companyname!;
+    String landlinkweb = landlordProfile1!.homepagelink!;
+    String landllistweb = landlordProfile1!.CustomerFeatureListingURL!;
     String html = await controller.getText();
-    String html1 = html.replaceAll(
+    String? html1 = html.replaceAll(
         '@NameApplicant', widget._tenancyleadlist[0].applicantName!);
     html1 = html1.replaceAll(
         '@PropertyName', widget._tenancyleadlist[0].propertyName!);
-    html1 =
-        html1.replaceAll('@PropertyAdress', widget._tenancyleadlist[0].city!);
+    //html1 = html1.replaceAll('@PropertyAddress', propiedaddata);
     html1 = html1.replaceAll('@CurrentDate', dateToday.toString());
+    html1 = html1.replaceAll('@LandlordFirstName', landfn);
+    html1 = html1.replaceAll('@LandlordLastName', landln);
+    html1 = html1.replaceAll('@LandlordEmail', landem);
+    html1 = html1.replaceAll('@LandlordPhonenumber', landph);
+    html1 = html1.replaceAll('@LandlordCompanyName', landcn);
+    html1 = html1.replaceAll('@LandlordWebsite', landlinkweb);
+    html1 = html1.replaceAll('@LandlordListingsPage', landllistweb);
+    html1 = html1.replaceAll('@PropertyAddress', propiedaddata);
+    html1 = html1.replaceAll('@propertyDescription', propdesc);
+
     String html2 =
         '<br><p style="margin:15px;"><a href="http://localhost:51975/#/tenancy_application_form/$idapplication" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
     String html0 =

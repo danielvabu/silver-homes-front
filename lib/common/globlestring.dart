@@ -540,6 +540,7 @@ class GlobleString {
 
   /*Active Application Header*/
   static const String ACH_Applicant_Name = "Applicant Name";
+  static const String ACH_Applicant_Group = "Group Id";
   static const String ACH_Property_Name = "Property Name";
   static const String ACH_Rating = "Rating";
   static const String ACH_Date_Sent = "Application Sent";
@@ -1130,6 +1131,7 @@ class GlobleString {
   static const String TAF_CT_Add_New_Applicant = "Add New Applicant";
   /*Additional Occupant*/
   static const String TAF_Additional_Occupants = "Additional Occupants";
+  static const String TAF_Additional_Applicants = "Additional Applicants";
   static const String TAF_AO_first_name = "First name";
   static const String TAF_AO_Last_name = "Last name";
   static const String TAF_AO_Relationship_applicant =

@@ -63,6 +63,7 @@ class _TenancyApplicationHeaderState extends State<TenancyApplicationHeader> {
   List<Widget> _headerRow() {
     var result = <Widget>[];
     result.add(_headerTitleName(GlobleString.ACH_Applicant_Name));
+    result.add(_headerTitleName(GlobleString.ACH_Applicant_Group));
     result.add(_headerTitleProperty(GlobleString.ACH_Property_Name));
     result.add(_headerTitleRating(GlobleString.ACH_Rating));
     result.add(_headerTitleDateSent(GlobleString.ACH_Date_Sent));

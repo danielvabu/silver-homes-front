@@ -59,6 +59,7 @@ class _VarifyDocumentHeaderState extends State<VarifyDocumentHeader> {
   List<Widget> _headerRow() {
     var result = <Widget>[];
     result.add(_headerTitleName(GlobleString.VDH_Applicant_Name));
+    result.add(_headerTitleName2(GlobleString.ACH_Applicant_Group));
     result.add(_headerTitleProperty(GlobleString.VDH_Property_Name));
     result.add(_headerTitleRating(GlobleString.VDH_Rating));
     result.add(_headerTitleDateSent(GlobleString.VDH_Date_Sent));
@@ -78,7 +79,41 @@ class _VarifyDocumentHeaderState extends State<VarifyDocumentHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 9,
+        width: width / 11,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _headerTitleName2(String text) {
+    return InkWell(
+      onTap: () {
+        widget._callbackSortName();
+      },
+      child: Container(
+        height: 40,
+        width: width / 16,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(

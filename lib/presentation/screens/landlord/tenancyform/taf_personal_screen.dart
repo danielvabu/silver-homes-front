@@ -12,8 +12,11 @@ import 'package:silverhome/common/navigation_constants.dart';
 import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/common/sharedpref.dart';
 import 'package:silverhome/common/toastutils.dart';
+import 'package:silverhome/domain/actions/landlord_action/tenancyaddoccupant_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancyform_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancyperson_actions.dart';
+import 'package:silverhome/domain/entities/tenancy_additionaloccupants.dart';
+import 'package:silverhome/presentation/models/landlord_models/tf_additonal_occupant_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/tf_personal_state.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancyform/tenancyapplicationfrom_screen.dart';
 import 'package:silverhome/store/app_store.dart';
@@ -22,6 +25,7 @@ import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/store/utils.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/query_pojo.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:silverhome/widget/landlord/customewidget.dart';
 import 'package:silverhome/widget/tenantScreening/widget.dart';
 import 'package:sizer/sizer.dart';
@@ -58,6 +62,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   @override
   void initState() {
     initilizedata();
+    initilizedata2();
     initNavigationBack();
     TenancyApplicationFormScreen.changeFormData = false;
     super.initState();
@@ -78,6 +83,24 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       _store.dispatch(UpdateTFPersonStory(tfPersonalState.FNLperStory));
       _store
           .dispatch(UpdateTFPersonDateofBirth(tfPersonalState.FNLdateofbirth));
+    }
+  }
+
+  initilizedata2() {
+    if (_store.state!.tfAdditionalOccupantState != null) {
+      TFAdditionalOccupantState tfAdditionalOccupantState =
+          _store.state!.tfAdditionalOccupantState;
+
+      _store.dispatch(UpdateTFAddOccupantlist([]));
+      List<TenancyAdditionalOccupant> secondList =
+          tfAdditionalOccupantState.FNLliveserveroccupantlist.map(
+              (item) => new TenancyAdditionalOccupant.clone(item)).toList();
+
+      _store.dispatch(UpdateTFAddOccupantlist(secondList));
+      _store.dispatch(UpdateTFAddLiveServerOccupantlist(secondList));
+
+      _store.dispatch(UpdateTFAddOccupantNotApplicable(
+          tfAdditionalOccupantState.FNLnotapplicable));
     }
   }
 
@@ -134,7 +157,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
               height: 10.sp,
             ),
             _form(),
-            for (int i = 0; i < forms; i++) _form2(),
+            Form2(),
           ],
         ),
       ),
@@ -602,10 +625,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                       height: 30,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [AddNewApplicant()],
-                    ),
-                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [saveandnext(tfPersonalState)],
                     ),
@@ -615,16 +634,37 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     );
   }
 
-  Widget _form2() {
+  Widget Form2() {
     return Container(
       width: 1000,
-      child: ConnectState<TFPersonalState>(
-          map: (state) => state.tfPersonalState,
+      child: ConnectState<TFAdditionalOccupantState>(
+          map: (state) => state.tfAdditionalOccupantState,
           where: notIdentical,
-          builder: (tfPersonalState) {
+          builder: (tfAdditionalOccupantState) {
+            if (tfAdditionalOccupantState!.occupantlist.length == 0) {
+              List<TenancyAdditionalOccupant> listoccupation = [];
+              TenancyAdditionalOccupant oocupinfo =
+                  new TenancyAdditionalOccupant();
+              oocupinfo.id = "1";
+              oocupinfo.firstname = "";
+              oocupinfo.lastname = "";
+              oocupinfo.email = "";
+              oocupinfo.mobilenumber = "";
+              oocupinfo.primaryApplicant = "";
+              oocupinfo.OccupantID = "";
+              oocupinfo.errro_firstname = false;
+              oocupinfo.errro_lastname = false;
+              oocupinfo.errro_email = false;
+              oocupinfo.errro_email = false;
+              oocupinfo.errro_primaryApplicant = false;
+
+              listoccupation.add(oocupinfo);
+
+              _store.dispatch(UpdateTFAddOccupantlist(listoccupation));
+            }
+
             return FocusScope(
                 node: _focusScopeNode,
-                autofocus: true,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -635,16 +675,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            GlobleString.TAF__ApplicantNum + "${forms + 1}",
-                            style: MyStyles.Medium(20, myColor.text_color),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            GlobleString.TAF_Personal_Information,
-                            style: MyStyles.Medium(20, myColor.text_color),
+                            GlobleString.TAF_Additional_Applicants,
+                            style: MyStyles.SemiBold(20, myColor.text_color),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -653,416 +685,657 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                GlobleString.TAF_Personal_firstname,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                textAlign: TextAlign.start,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                initialValue: tfPersonalState!.perFirstname,
-                                textAlign: TextAlign.start,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perFirstname
-                                                  ? myColor.errorcolor
-                                                  : myColor.blue,
-                                          width: 1.0),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perFirstname
-                                                  ? myColor.errorcolor
-                                                  : myColor.gray,
-                                          width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(10),
-                                    fillColor: myColor.white,
-                                    filled: true),
-                                onChanged: (value) {
-                                  Helper.Log("Firstname onChanged", "Calll");
-                                  _store.dispatch(UpdateTFPersonFirstname(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perFirstname(false));
-                                  _changeData();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                GlobleString.TAF_Personal_lastname,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                textAlign: TextAlign.start,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                // initialValue: tfPersonalState.perLastname,
-                                textAlign: TextAlign.start,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perLastname
-                                                  ? myColor.errorcolor
-                                                  : myColor.blue,
-                                          width: 1.0),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              tfPersonalState.error_perLastname
-                                                  ? myColor.errorcolor
-                                                  : myColor.gray,
-                                          width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(10),
-                                    fillColor: myColor.white,
-                                    filled: true),
-                                onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonLastname(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perLastname(false));
-                                  _changeData();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: 220,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                GlobleString.TAF_Personal_dateofbirth,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                textAlign: TextAlign.start,
-                              ),
-                              const SizedBox(height: 10.0),
-                              TextButton(
-                                onPressed: () {
-                                  _selectDate(context, tfPersonalState);
-                                },
-                                child: Container(
-                                  width: 220,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: tfPersonalState.error_dateofbirth
-                                          ? myColor.errorcolor
-                                          : myColor.gray,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            tfPersonalState.dateofbirth == null
-                                                ? ""
-                                                : new DateFormat("dd-MMM-yyyy")
-                                                    .format(tfPersonalState
-                                                        .dateofbirth!)
-                                                    .toString(),
-                                            style: MyStyles.Medium(
-                                                13, myColor.text_color),
-                                          ),
-                                        ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      key: UniqueKey(),
+                      itemCount: tfAdditionalOccupantState.occupantlist.length,
+                      itemBuilder: (BuildContext ctxt, int Index) {
+                        TenancyAdditionalOccupant oocupinfo =
+                            tfAdditionalOccupantState.occupantlist[Index];
+                        /*return FocusScope(
+                        node: FocusScopeNode(),
+                        onFocusChange: (value) {
+                          */ /* _store.dispatch(UpdateTFAddOccupantlist(
+                            tfAdditionalOccupantState
+                                .occupantlist));*/ /*
+                        },
+                        child: ,
+                      );*/
+
+                        return Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString.TAF_AO_first_name,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        textAlign: TextAlign.start,
                                       ),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 8, right: 5),
-                                        child: Icon(
-                                          Icons.calendar_today_outlined,
-                                          color: Colors.grey,
-                                          size: 20,
-                                        ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        initialValue: oocupinfo.firstname,
+                                        textAlign: TextAlign.start,
+                                        autofocus: true,
+                                        readOnly: tfAdditionalOccupantState
+                                            .notapplicable,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : myColor.blue,
+                                                  width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: tfAdditionalOccupantState
+                                                          .notapplicable
+                                                      ? myColor.disablecolor
+                                                      : oocupinfo
+                                                              .errro_firstname!
+                                                          ? myColor.errorcolor
+                                                          : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(10),
+                                            fillColor: myColor.white,
+                                            filled: true),
+                                        onChanged: (value) {
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .firstname = value.toString();
+
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .errro_firstname = false;
+                                          _changeData();
+                                        },
                                       ),
                                     ],
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                GlobleString.TAF_Personal_email,
-                                style:
-                                    MyStyles.Medium(13, myColor.disablecolor),
-                                textAlign: TextAlign.start,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                readOnly: true,
-                                // initialValue: tfPersonalState.perEmail,
-                                textAlign: TextAlign.start,
-                                style:
-                                    MyStyles.Medium(13, myColor.disablecolor),
-                                decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: tfPersonalState.error_perEmail
-                                              ? myColor.errorcolor
-                                              : myColor.disablecolor,
-                                          width: 1.0),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: tfPersonalState.error_perEmail
-                                              ? myColor.errorcolor
-                                              : myColor.disablecolor,
-                                          width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(10),
-                                    fillColor: myColor.white,
-                                    filled: true),
-                                onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonEmail(
-                                      value.toString().trim()));
-                                  _store.dispatch(
-                                      UpdateTFPersonError_perEmail(false));
-                                  _changeData();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: 240,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                GlobleString.TAF_Personal_phonenumber,
-                                style: MyStyles.Medium(14, myColor.text_color),
-                                textAlign: TextAlign.start,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                width: 250,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: tfPersonalState.error_perPhoneNumber
-                                        ? myColor.errorcolor
-                                        : myColor.gray,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(4.0),
+                                SizedBox(
+                                  width: 15,
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    CountryCodePicker(
-                                      onChanged: (value) {
-                                        _store.dispatch(
-                                            UpdateTFPersonCountryCode(
-                                                value.code.toString()));
-
-                                        _store.dispatch(UpdateTFPersonDialCode(
-                                            value.dialCode.toString()));
-
-                                        setState(() {});
-                                        _changeData();
-                                      },
-                                      // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                      initialSelection:
-                                          tfPersonalState.perCountryCode,
-                                      showFlag: true,
-                                      textStyle: MyStyles.Medium(
-                                          13, myColor.text_color),
-                                      dialogTextStyle: MyStyles.Medium(
-                                          13, myColor.text_color),
-                                      //showDropDownButton: true,
-                                    ),
-                                    Expanded(
-                                      child: TextFormField(
-                                        // initialValue:
-                                        //     tfPersonalState.perPhoneNumber,
-                                        keyboardType: TextInputType.phone,
-                                        inputFormatters: [
-                                          MaskedInputFormatter("(000) 000 0000")
-                                        ],
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          contentPadding: EdgeInsets.all(10),
-                                          isDense: true,
-                                        ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString.TAF_AO_Last_name,
                                         style: MyStyles.Medium(
-                                            13, myColor.text_color),
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        initialValue: oocupinfo.lastname,
+                                        textAlign: TextAlign.start,
+                                        readOnly: tfAdditionalOccupantState
+                                            .notapplicable,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : myColor.blue,
+                                                  width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: tfAdditionalOccupantState
+                                                          .notapplicable
+                                                      ? myColor.disablecolor
+                                                      : oocupinfo
+                                                              .errro_lastname!
+                                                          ? myColor.errorcolor
+                                                          : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(10),
+                                            fillColor: myColor.white,
+                                            filled: true),
                                         onChanged: (value) {
-                                          _store.dispatch(
-                                              UpdateTFPersonPhoneNumber(
-                                                  value.toString().trim()));
-                                          _store.dispatch(
-                                              UpdateTFPersonError_perPhoneNumber(
-                                                  false));
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .lastname = value.toString();
+
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .errro_lastname = false;
                                           _changeData();
                                         },
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "",
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                textAlign: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString
+                                            .TAF_AO_Relationship_applicant,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        initialValue:
+                                            oocupinfo.primaryApplicant,
+                                        textAlign: TextAlign.start,
+                                        readOnly: tfAdditionalOccupantState
+                                            .notapplicable,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : myColor.blue,
+                                                  width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: tfAdditionalOccupantState
+                                                          .notapplicable
+                                                      ? myColor.disablecolor
+                                                      : oocupinfo
+                                                              .errro_primaryApplicant!
+                                                          ? myColor.errorcolor
+                                                          : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(10),
+                                            fillColor: myColor.white,
+                                            filled: true),
+                                        onChanged: (value) {
+                                          tfAdditionalOccupantState
+                                                  .occupantlist[Index]
+                                                  .primaryApplicant =
+                                              value.toString();
+
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .errro_primaryApplicant = false;
+                                          _changeData();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                tfAdditionalOccupantState.occupantlist.length >
+                                        1
+                                    ? !tfAdditionalOccupantState.notapplicable
+                                        ? InkWell(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                barrierColor: Colors.black45,
+                                                useSafeArea: true,
+                                                barrierDismissible: false,
+                                                builder:
+                                                    (BuildContext context1) {
+                                                  return AlertDialogBox(
+                                                    title: GlobleString
+                                                        .TAF_Additional_Occupants_dailog_remove_msg,
+                                                    positiveText: GlobleString
+                                                        .TAF_Additional_Occupants_dailog_yes,
+                                                    negativeText: GlobleString
+                                                        .TAF_Additional_Occupants_dailog_no,
+                                                    onPressedYes: () {
+                                                      Navigator.of(context1)
+                                                          .pop();
+                                                      tfAdditionalOccupantState
+                                                          .occupantlist
+                                                          .removeAt(Index);
+                                                      _store.dispatch(
+                                                          UpdateTFAddOccupantlist(
+                                                              tfAdditionalOccupantState
+                                                                  .occupantlist));
+                                                      _changeData();
+                                                    },
+                                                    onPressedNo: () {
+                                                      Navigator.of(context1)
+                                                          .pop();
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            canRequestFocus: true,
+                                            hoverColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            child: Container(
+                                              height: 30,
+                                              width: 50,
+                                              padding: EdgeInsets.only(
+                                                  left: 15, right: 15),
+                                              margin: EdgeInsets.only(top: 20),
+                                              alignment: Alignment.center,
+                                              child: Image.asset(
+                                                "assets/images/ic_delete.png",
+                                                height: 22,
+                                                //width: 20,
+                                                alignment: Alignment.centerLeft,
+                                              ),
+                                            ),
+                                          )
+                                        : InkWell(
+                                            onTap: () {},
+                                            canRequestFocus: true,
+                                            hoverColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            child: Container(
+                                              height: 30,
+                                              width: 50,
+                                              padding: EdgeInsets.only(
+                                                  left: 15, right: 15),
+                                              margin: EdgeInsets.only(top: 20),
+                                              alignment: Alignment.center,
+                                              child: Image.asset(
+                                                "assets/images/ic_delete.png",
+                                                height: 22,
+                                                //width: 20,
+                                                alignment: Alignment.centerLeft,
+                                                color: myColor.disablecolor,
+                                              ),
+                                            ),
+                                          )
+                                    : InkWell(
+                                        onTap: () {},
+                                        onFocusChange: (value) {},
+                                        canRequestFocus: true,
+                                        hoverColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        child: Container(
+                                          height: 30,
+                                          width: 50,
+                                          padding: EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          margin: EdgeInsets.only(top: 20),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            "",
+                                            style: MyStyles.Medium(
+                                                12, myColor.white),
+                                          ),
+                                        ),
+                                      )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString.TAF_Personal_email,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        // initialValue: oocupinfo.email,
+                                        textAlign: TextAlign.start,
+                                        autofocus: true,
+                                        readOnly: tfAdditionalOccupantState
+                                            .notapplicable,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : myColor.blue,
+                                                  width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  // color:
+                                                  //     tfAdditionalOccupantState
+                                                  //             .notapplicable
+                                                  //         ? myColor.disablecolor
+                                                  //         : oocupinfo
+                                                  //                 .errro_email!
+                                                  //             ? myColor
+                                                  //                 .errorcolor
+                                                  //             : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(10),
+                                            fillColor: myColor.white,
+                                            filled: true),
+                                        onChanged: (value) {
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .email = value.toString();
+
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .errro_email = false;
+                                          _changeData();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        GlobleString.TAF_Personal_phonenumber,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        textAlign: TextAlign.start,
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextFormField(
+                                        // initialValue: oocupinfo.mobilenumber,
+                                        textAlign: TextAlign.start,
+                                        readOnly: tfAdditionalOccupantState
+                                            .notapplicable,
+                                        style: MyStyles.Medium(
+                                            13,
+                                            tfAdditionalOccupantState
+                                                    .notapplicable
+                                                ? myColor.disablecolor
+                                                : myColor.text_color),
+                                        decoration: InputDecoration(
+                                            //border: InputBorder.none,
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : myColor.blue,
+                                                  width: 1.0),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  // color: tfAdditionalOccupantState
+                                                  //         .notapplicable
+                                                  //     ? myColor.disablecolor
+                                                  //     : oocupinfo
+                                                  //             .errro_mobilenumber!
+                                                  //         ? myColor.errorcolor
+                                                  //         : myColor.gray,
+                                                  width: 1.0),
+                                            ),
+                                            isDense: true,
+                                            contentPadding: EdgeInsets.all(10),
+                                            fillColor: myColor.white,
+                                            filled: true),
+                                        onChanged: (value) {
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .mobilenumber = value.toString();
+
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .errro_mobilenumber = false;
+                                          _changeData();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    GlobleString.TAF_Personal_yourstory,
-                                    style:
-                                        MyStyles.Medium(13, myColor.text_color),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    GlobleString.Optional,
-                                    style:
-                                        MyStyles.Medium(10, myColor.optional),
-                                    textAlign: TextAlign.start,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                // initialValue: tfPersonalState.perStory,
-                                textAlign: TextAlign.start,
-                                style: MyStyles.Medium(13, myColor.text_color),
-                                maxLength: 500,
-                                maxLines: 4,
-                                decoration: InputDecoration(
-                                    //border: InputBorder.none,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: myColor.blue, width: 1.0),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: myColor.gray, width: 1.0),
-                                    ),
-                                    isDense: true,
-                                    contentPadding: EdgeInsets.all(10),
-                                    fillColor: myColor.white,
-                                    filled: true),
-                                onChanged: (value) {
-                                  _store.dispatch(UpdateTFPersonStory(
-                                      value.toString().trim()));
-                                  _changeData();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      children: [AddNewOccupation(tfAdditionalOccupantState)],
                     ),
                     SizedBox(
                       height: 30,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [AddNewApplicant()],
-                    ),
-                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [saveandnext(tfPersonalState)],
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              activeColor: myColor.Circle_main,
+                              checkColor: myColor.white,
+                              value: tfAdditionalOccupantState.notapplicable,
+                              onChanged: (value) {
+                                _store.dispatch(
+                                    UpdateTFAddOccupantNotApplicable(value!));
+                                _changeData();
+                              },
+                            ),
+                            Text(
+                              GlobleString.TAF_AO_NotApplicable,
+                              style: MyStyles.Medium(13, myColor.text_color),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ));
           }),
     );
+  }
+
+  Widget AddNewOccupation(TFAdditionalOccupantState tfAdditionalOccupantState) {
+    return InkWell(
+      onTap: () {
+        if (!tfAdditionalOccupantState.notapplicable) {
+          _addnewoccupation(tfAdditionalOccupantState);
+          _changeData();
+        }
+      },
+      child: Container(
+        height: 35,
+        padding: EdgeInsets.only(left: 15, right: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          color: tfAdditionalOccupantState.notapplicable
+              ? myColor.disablecolor
+              : myColor.Circle_main,
+        ),
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            Text(
+              GlobleString.TAF_CT_Add_New_Applicant,
+              style: MyStyles.Medium(14, myColor.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _addnewoccupation(TFAdditionalOccupantState tfAdditionalOccupantState) {
+    bool isAdd = false;
+
+    for (int i = 0; i < tfAdditionalOccupantState.occupantlist.length; i++) {
+      TenancyAdditionalOccupant empinfo =
+          tfAdditionalOccupantState.occupantlist[i];
+
+      if (empinfo.firstname == "") {
+        isAdd = true;
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_occupant_error_firstname, false);
+
+        /*tfAdditionalOccupantState.occupantlist[i].errro_firstname = true;
+        _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
+        break;
+      } else if (empinfo.lastname == "") {
+        isAdd = true;
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_occupant_error_lastname, false);
+        /*tfAdditionalOccupantState.occupantlist[i].errro_lastname = true;
+       _store.dispatch(UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
+        break;
+      } else if (empinfo.primaryApplicant == "") {
+        isAdd = true;
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_occupant_error_primaryApplicant, false);
+        /* tfAdditionalOccupantState.occupantlist[i].errro_primaryApplicant = true;
+        _store.dispatch(
+            UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
+        break;
+      }
+
+      if ((tfAdditionalOccupantState.occupantlist.length - 1) == i && !isAdd) {
+        tfAdditionalOccupantState.occupantlist.add(
+            new TenancyAdditionalOccupant(
+                id: (tfAdditionalOccupantState.occupantlist.length + 1)
+                    .toString(),
+                firstname: "",
+                lastname: "",
+                email: "",
+                mobilenumber: "",
+                primaryApplicant: "",
+                OccupantID: "",
+                errro_firstname: false,
+                errro_lastname: false,
+                errro_primaryApplicant: false));
+
+        _store.dispatch(
+            UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));
+        break;
+      }
+    }
   }
 
   Widget saveandnext(TFPersonalState tfPersonalState) {

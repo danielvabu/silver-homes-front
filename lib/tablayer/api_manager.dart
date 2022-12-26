@@ -3151,7 +3151,9 @@ class ApiManager {
     List<String> names = [];
     List datares = [];
     for (int i = 0; i < propertyimagelist.length; i++) {
-      names.add(propertyimagelist[i].fileName!);
+      if (propertyimagelist[i].fileName! != "") {
+        names.add(propertyimagelist[i].fileName!);
+      }
     }
 
     var myjson = {"object_names": names, "path": module};
@@ -3290,19 +3292,21 @@ class ApiManager {
     List<String> mediaString = [];
     int send = 0;
     for (int i = 0; i < propertyimagelist.length; i++) {
-      String S3content = urlS3[i]["presigned_url"];
-      //var multipartRequest =
-      // new http.MultipartRequest("PUT", Uri.parse(S3content));
-      var multipartRequest =
-          new http.StreamedRequest("PUT", Uri.parse(S3content));
-      multipartRequest.headers["Content-Type"] = "binary/octet-stream";
-      // multipartRequest.headers.addAll(headers);
-      List<int> _selectedFile = propertyimagelist[i].appImage!;
-      multipartRequest.sink.add(_selectedFile);
-      multipartRequest.sink.close();
-      var response = await multipartRequest.send();
-      if (response.statusCode == 200) {
-        send = send + 1;
+      if (propertyimagelist[i].fileName! != "") {
+        String S3content = urlS3[i]["presigned_url"];
+        //var multipartRequest =
+        // new http.MultipartRequest("PUT", Uri.parse(S3content));
+        var multipartRequest =
+            new http.StreamedRequest("PUT", Uri.parse(S3content));
+        multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+        // multipartRequest.headers.addAll(headers);
+        List<int> _selectedFile = propertyimagelist[i].appImage!;
+        multipartRequest.sink.add(_selectedFile);
+        multipartRequest.sink.close();
+        var response = await multipartRequest.send();
+        if (response.statusCode == 200) {
+          send = send + 1;
+        }
       }
     }
     if (send > 0) {

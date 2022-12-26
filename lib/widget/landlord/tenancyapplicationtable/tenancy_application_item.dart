@@ -197,6 +197,7 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
   List<Widget> _tableData(TenancyApplication model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueTitle(model.applicantName!, Index));
+    result.add(_datavalueGroup());
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueTitleDataSent(model.applicationSentDate!));
@@ -230,6 +231,30 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
           message: text,
           child: Text(
             text,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: MyStyles.Medium(12, myColor.blue),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _datavalueGroup() {
+    return InkWell(
+      onTap: () {
+        //  openApplicationDetailsView(Index);
+      },
+      child: Container(
+        height: 40,
+        width: 10,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: "grupo",
+          child: Text(
+            "Group 112",
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
