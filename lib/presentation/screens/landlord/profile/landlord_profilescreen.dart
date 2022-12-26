@@ -74,8 +74,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: myColor.application_boreder, width: 1),
             ),
-            padding:
-                const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
             child: ConnectState<LandlordProfileState>(
               map: (state) => state.profileState,
               where: notIdentical,
@@ -103,9 +102,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (profileState
-                                    .CustomerFeatureListingURL.isNotEmpty)
-                                  customerfeaturelist(profileState),
+                                if (profileState.CustomerFeatureListingURL.isNotEmpty) customerfeaturelist(profileState),
                                 Container(
                                   height: 33,
                                   decoration: BoxDecoration(
@@ -121,41 +118,31 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                         height: 33,
                                         color: Colors.black12,
                                         alignment: Alignment.center,
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
+                                        padding: const EdgeInsets.only(left: 10, right: 10),
                                         child: Text(
                                           Weburl.CustomerFeaturedPage,
-                                          style: MyStyles.Medium(
-                                              14, myColor.black),
+                                          style: MyStyles.Medium(14, myColor.black),
                                           textAlign: TextAlign.start,
                                         ),
                                       ),
                                       Expanded(
                                         child: TextFormField(
                                           onChanged: (newValue) {
-                                            _store.dispatch(
-                                                UpdateLandlordProfileCustomerFeatureListingURL_update(
-                                                    newValue));
+                                            _store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(newValue));
                                           },
-                                          initialValue: profileState
-                                              .CustomerFeatureListingURL_update,
+                                          initialValue: profileState.CustomerFeatureListingURL_update,
                                           keyboardType: TextInputType.text,
                                           autofocus: true,
                                           focusNode: _focus1,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp("[a-zA-Z0-9]"))
-                                          ],
+                                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]"))],
                                           decoration: const InputDecoration(
                                             border: InputBorder.none,
                                             hintText: GlobleString.LL_cfl_hint,
-                                            hintStyle:
-                                                TextStyle(color: Colors.grey),
+                                            hintStyle: TextStyle(color: Colors.grey),
                                             contentPadding: EdgeInsets.all(12),
                                             isDense: true,
                                           ),
-                                          style: MyStyles.Medium(
-                                              14, myColor.text_color),
+                                          style: MyStyles.Medium(14, myColor.text_color),
                                         ),
                                       ),
                                     ],
@@ -167,53 +154,38 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.LL_Profile_Companyname,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(height: 5.0),
                                           TextFormField(
-                                            initialValue:
-                                                profileState.companyname,
+                                            initialValue: profileState.companyname,
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  25),
+                                              LengthLimitingTextInputFormatter(25),
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
                                             decoration: const InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.blue,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.blue, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.gray,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateLandlordProfileCompanyname(
-                                                      value));
+                                              _store.dispatch(UpdateLandlordProfileCompanyname(value));
                                             },
                                           ),
                                         ],
@@ -222,48 +194,33 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            GlobleString
-                                                .LL_Profile_Homepagelink,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            GlobleString.LL_Profile_Homepagelink,
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(height: 5.0),
                                           TextFormField(
-                                            initialValue:
-                                                profileState.homepagelink,
+                                            initialValue: profileState.homepagelink,
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             decoration: const InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.blue,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.blue, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.gray,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateLandlordProfileHomepagelink(
-                                                      value));
+                                              _store.dispatch(UpdateLandlordProfileHomepagelink(value));
                                             },
                                           ),
                                         ],
@@ -277,53 +234,38 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.LL_Profile_Firstname,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(height: 5.0),
                                           TextFormField(
-                                            initialValue:
-                                                profileState.firstname,
+                                            initialValue: profileState.firstname,
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  25),
+                                              LengthLimitingTextInputFormatter(25),
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
                                             decoration: const InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.blue,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.blue, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.gray,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateLandlordProfileFirstname(
-                                                      value));
+                                              _store.dispatch(UpdateLandlordProfileFirstname(value));
                                             },
                                           ),
                                         ],
@@ -332,46 +274,33 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.LL_Profile_Lastname,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(height: 5.0),
                                           TextFormField(
                                             initialValue: profileState.lastname,
                                             textAlign: TextAlign.start,
-                                            style: MyStyles.Regular(
-                                                14, myColor.text_color),
+                                            style: MyStyles.Regular(14, myColor.text_color),
                                             decoration: const InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.blue,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.blue, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: myColor.gray,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.gray, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateLandlordProfileLastname(
-                                                      value));
+                                              _store.dispatch(UpdateLandlordProfileLastname(value));
                                             },
                                           ),
                                         ],
@@ -385,15 +314,12 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             GlobleString.LL_Profile_Email,
-                                            style: MyStyles.Medium(
-                                                14, myColor.black),
+                                            style: MyStyles.Medium(14, myColor.black),
                                             textAlign: TextAlign.start,
                                           ),
                                           const SizedBox(height: 5.0),
@@ -401,39 +327,26 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                             initialValue: profileState.email,
                                             textAlign: TextAlign.start,
                                             readOnly: true,
-                                            style: MyStyles.Regular(
-                                                14, myColor.disablecolor),
+                                            style: MyStyles.Regular(14, myColor.disablecolor),
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  25),
+                                              LengthLimitingTextInputFormatter(25),
                                               /* FilteringTextInputFormatter.allow(
                                         RegExp("[a-z A-Z]")),*/
                                             ],
                                             decoration: const InputDecoration(
                                                 //border: InputBorder.none,
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 2),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 2),
                                                 ),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          myColor.disablecolor,
-                                                      width: 1.0),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                                                 ),
                                                 isDense: true,
-                                                contentPadding:
-                                                    EdgeInsets.all(12),
+                                                contentPadding: EdgeInsets.all(12),
                                                 fillColor: myColor.white,
                                                 filled: true),
                                             onChanged: (value) {
-                                              _store.dispatch(
-                                                  UpdateLandlordProfileEmail(
-                                                      value));
+                                              _store.dispatch(UpdateLandlordProfileEmail(value));
                                             },
                                           ),
                                         ],
@@ -442,25 +355,20 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                     const SizedBox(width: 30.0),
                                     Expanded(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Row(
                                             children: [
                                               Text(
-                                                GlobleString
-                                                    .LL_Profile_Phonenumber,
-                                                style: MyStyles.Medium(
-                                                    14, myColor.black),
+                                                GlobleString.LL_Profile_Phonenumber,
+                                                style: MyStyles.Medium(14, myColor.black),
                                                 textAlign: TextAlign.start,
                                               ),
                                               const SizedBox(width: 10.0),
                                               Text(
                                                 GlobleString.Optional,
-                                                style: MyStyles.Regular(
-                                                    12, myColor.optional),
+                                                style: MyStyles.Regular(12, myColor.optional),
                                                 textAlign: TextAlign.start,
                                               ),
                                             ],
@@ -473,58 +381,37 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                                 color: myColor.gray,
                                                 width: 1.0,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(4.0),
+                                              borderRadius: BorderRadius.circular(4.0),
                                             ),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
                                               children: <Widget>[
                                                 CountryCodePicker(
                                                   onChanged: (value) {
-                                                    _store.dispatch(
-                                                        UpdateLandlordProfileCountrycode(
-                                                            value.code!));
-                                                    _store.dispatch(
-                                                        UpdateLandlordProfileDialcode(
-                                                            value.dialCode!));
+                                                    _store.dispatch(UpdateLandlordProfileCountrycode(value.code!));
+                                                    _store.dispatch(UpdateLandlordProfileDialcode(value.dialCode!));
                                                     //widget.newleadlist.insert(widget.pos, widget.dmodel);
                                                   },
-                                                  initialSelection:
-                                                      profileState.countrycode,
+                                                  initialSelection: profileState.countrycode,
                                                   showFlag: true,
-                                                  textStyle: MyStyles.Medium(
-                                                      14, myColor.text_color),
-                                                  dialogTextStyle:
-                                                      MyStyles.Medium(14,
-                                                          myColor.text_color),
+                                                  textStyle: MyStyles.Medium(14, myColor.text_color),
+                                                  dialogTextStyle: MyStyles.Medium(14, myColor.text_color),
                                                   //showDropDownButton: true,
                                                 ),
                                                 Expanded(
                                                   child: TextFormField(
-                                                    initialValue: profileState
-                                                        .phonenumber,
-                                                    keyboardType:
-                                                        TextInputType.phone,
-                                                    inputFormatters: [
-                                                      MaskedInputFormatter(
-                                                          "(000) 000 0000")
-                                                    ],
-                                                    decoration:
-                                                        const InputDecoration(
+                                                    initialValue: profileState.phonenumber,
+                                                    keyboardType: TextInputType.phone,
+                                                    inputFormatters: [MaskedInputFormatter("(000) 000 0000")],
+                                                    decoration: const InputDecoration(
                                                       border: InputBorder.none,
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                      contentPadding:
-                                                          EdgeInsets.all(10),
+                                                      hintStyle: TextStyle(color: Colors.grey),
+                                                      contentPadding: EdgeInsets.all(10),
                                                       isDense: true,
                                                     ),
-                                                    style: MyStyles.Medium(
-                                                        14, myColor.text_color),
+                                                    style: MyStyles.Medium(14, myColor.text_color),
                                                     onChanged: (value) {
-                                                      _store.dispatch(
-                                                          UpdateLandlordProfilePhonenumber(
-                                                              value));
+                                                      _store.dispatch(UpdateLandlordProfilePhonenumber(value));
                                                     },
                                                   ),
                                                 ),
@@ -548,18 +435,15 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                                       child: Container(
                                         height: 35,
                                         width: 100,
-                                        padding: const EdgeInsets.only(
-                                            left: 15, right: 15),
+                                        padding: const EdgeInsets.only(left: 15, right: 15),
                                         alignment: Alignment.center,
                                         decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
                                           color: myColor.Circle_main,
                                         ),
                                         child: Text(
                                           GlobleString.LL_Profile_Save,
-                                          style: MyStyles.Medium(
-                                              14, myColor.white),
+                                          style: MyStyles.Medium(14, myColor.white),
                                         ),
                                       ),
                                     )
@@ -621,20 +505,14 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
             ),
             const SizedBox(width: 10.0),
             Text(
-              Weburl.CustomerFeaturedPage +
-                  profileState.CustomerFeatureListingURL +
-                  "/" +
-                  RouteNames.Basic_Tenant_Login,
+              Weburl.CustomerFeaturedPage + profileState.CustomerFeatureListingURL + "/" + RouteNames.Basic_Tenant_Login,
               style: MyStyles.Medium(14, myColor.blue),
               textAlign: TextAlign.center,
             ),
             const SizedBox(width: 10.0),
             InkWell(
               onTap: () async {
-                String url = Weburl.CustomerFeaturedPage +
-                    profileState.CustomerFeatureListingURL +
-                    "/" +
-                    RouteNames.Basic_Tenant_Login;
+                String url = Weburl.CustomerFeaturedPage + profileState.CustomerFeatureListingURL + "/" + RouteNames.Basic_Tenant_Login;
 
                 print("CustomerFeaturedPage" + url);
 
@@ -663,77 +541,68 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
     );
   }
 
-  Listener listingPageLink(LandlordProfileState profileState){
+  Listener listingPageLink(LandlordProfileState profileState) {
     return Listener(
-            child: Text(
-              Weburl.CustomerFeaturedPage +
-                  profileState.CustomerFeatureListingURL,
-              style: MyStyles.Medium(14, myColor.blue),
-              textAlign: TextAlign.center,
-            ),
-            onPointerDown: (event) async {
-              if (event.kind == PointerDeviceKind.mouse &&
-                  event.buttons == kSecondaryMouseButton) {
-                final overlay = Overlay.of(context)!
-                    .context
-                    .findRenderObject() as RenderBox;
-                final menuItem = await showMenu<int>(
-                    context: context,
-                    items: [
-                      PopupMenuItem(
-                        height: 30,
-                        child: Text(
-                          'Copy link',
-                          style: MyStyles.Regular(12, myColor.black),
-                        ),
-                        value: 1,
-                      ),
-                    ],
-                    position: RelativeRect.fromSize(
-                        event.position & Size(48.0, 48.0), overlay.size));
-                // Check if menu item clicked
-                switch (menuItem) {
-                  case 1:
-                    String url = Weburl.CustomerFeaturedPage +
-                        "" +
-                        profileState.CustomerFeatureListingURL;
+      child: Text(
+        Weburl.CustomerFeaturedPage + profileState.CustomerFeatureListingURL,
+        style: MyStyles.Medium(14, myColor.blue),
+        textAlign: TextAlign.center,
+      ),
+      onPointerDown: (event) async {
+        if (event.kind == PointerDeviceKind.mouse && event.buttons == kSecondaryMouseButton) {
+          final overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+          final menuItem = await showMenu<int>(
+              context: context,
+              items: [
+                PopupMenuItem(
+                  height: 30,
+                  child: Text(
+                    'Copy link',
+                    style: MyStyles.Regular(12, myColor.black),
+                  ),
+                  value: 1,
+                ),
+              ],
+              position: RelativeRect.fromSize(event.position & Size(48.0, 48.0), overlay.size));
+          // Check if menu item clicked
+          switch (menuItem) {
+            case 1:
+              String url = Weburl.CustomerFeaturedPage + "" + profileState.CustomerFeatureListingURL;
 
-                    Helper.copyToClipboardHack(context, url);
-                    break;
-                  default:
-                }
-              }
-            },
-          );
+              Helper.copyToClipboardHack(context, url);
+              break;
+            default:
+          }
+        }
+      },
+    );
   }
 
   InkWell copyIconButton(LandlordProfileState profileState) {
     return InkWell(
-            onTap: () async {
-              String url = Weburl.CustomerFeaturedPage +
-                  "" +
-                  profileState.CustomerFeatureListingURL;
+      onTap: () async {
+        String url = Weburl.CustomerFeaturedPage + "" + profileState.CustomerFeatureListingURL;
 
-              print("CustomerFeaturedPage" + url);
+        print("CustomerFeaturedPage" + url);
 
-              Helper.copyToClipboardHack(context, url);
-            },
-            child: Tooltip(
-              message: "Click to copy link",
-              child: Container(
-                decoration: BoxDecoration(
-                  color: myColor.pf_available,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                padding: EdgeInsets.all(7),
-                child: Icon(
-                  Icons.copy,
-                  color: myColor.black,
-                  size: 17,
-                ),
-              ),
-            ),
-          );
+        Helper.copyToClipboardHack(context, url);
+      },
+      child: Tooltip(
+        message: "Click to copy link",
+        child: Container(
+          decoration: BoxDecoration(
+            color: myColor.pf_available,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          padding: EdgeInsets.all(7),
+          child: Icon(
+            Icons.copy,
+            color: myColor.black,
+            size: 17,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget companylogo(LandlordProfileState profileState) {
@@ -767,15 +636,10 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                   border: Border.all(width: 2, color: myColor.blue),
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: CustomNetworkImage(
-                        Weburl.image_API +
-                            profileState.companylogo!.id.toString(),
-                        scale: 1,
-                        headers: {
-                          'Authorization':
-                              'bearer ' + Prefs.getString(PrefsName.userTokan),
-                          'ApplicationCode': Weburl.API_CODE,
-                        }),
+                    image: CustomNetworkImage(Weburl.image_API + profileState.companylogo!.id.toString(), scale: 1, headers: {
+                      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+                      'ApplicationCode': Weburl.API_CODE,
+                    }),
                   ),
                 ),
               )
@@ -875,9 +739,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                         //border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
-                            CpasswordVisible
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                            CpasswordVisible ? Icons.visibility_off : Icons.visibility,
                             color: Colors.black38,
                           ),
                           onPressed: () {
@@ -890,8 +752,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                           borderSide: BorderSide(color: myColor.blue, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: myColor.disablecolor, width: 1.0),
+                          borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.all(12),
@@ -937,9 +798,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                         //border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
-                            NpasswordVisible
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                            NpasswordVisible ? Icons.visibility_off : Icons.visibility,
                             color: Colors.black38,
                           ),
                           onPressed: () {
@@ -952,8 +811,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                           borderSide: BorderSide(color: myColor.blue, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: myColor.disablecolor, width: 1.0),
+                          borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.all(12),
@@ -999,9 +857,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                         //border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
-                            NCpasswordVisible
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                            NCpasswordVisible ? Icons.visibility_off : Icons.visibility,
                             color: Colors.black38,
                           ),
                           onPressed: () {
@@ -1014,8 +870,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
                           borderSide: BorderSide(color: myColor.blue, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: myColor.disablecolor, width: 1.0),
+                          borderSide: BorderSide(color: myColor.disablecolor, width: 1.0),
                         ),
                         isDense: true,
                         contentPadding: EdgeInsets.all(12),
@@ -1081,8 +936,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
           element.remove();
         }
       } else {
-        ToastUtils.showCustomToast(
-            context, GlobleString.PS3_Property_Image_error, false);
+        ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Image_error, false);
       }
     }
     final String id = '__file_picker_web-file-input';
@@ -1098,18 +952,12 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
           context, GlobleString.LL_Profile_error_clogo, false);
     } else*/
 
-    if (profileState.CustomerFeatureListingURL_update == null ||
-        profileState.CustomerFeatureListingURL_update.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_Customerfeaturelisting, false);
-    } else if (profileState.companyname == null ||
-        profileState.companyname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_cname, false);
-    } else if (profileState.homepagelink == null ||
-        profileState.homepagelink.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_homepage, false);
+    if (profileState.CustomerFeatureListingURL_update == null || profileState.CustomerFeatureListingURL_update.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_Customerfeaturelisting, false);
+    } else if (profileState.companyname == null || profileState.companyname.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_cname, false);
+    } else if (profileState.homepagelink == null || profileState.homepagelink.isEmpty) {
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_homepage, false);
     } else if (isURL(profileState.homepagelink.toString(), {
           //'protocols': ['http', 'https'],
           'require_tld': true,
@@ -1117,8 +965,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
           'allow_underscores': false
         }) ==
         false) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_validhomepage, false);
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_validhomepage, false);
     }
 
     /* if(!Uri.parse( profileState.homepagelink.toString()).isAbsolute){
@@ -1126,14 +973,11 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
           context, GlobleString.LL_Profile_error_validhomepage, false);
     }*/
     else if (profileState.firstname == null || profileState.firstname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_firstname, false);
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_firstname, false);
     } else if (profileState.lastname == null || profileState.lastname.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_lastname, false);
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_lastname, false);
     } else if (profileState.email == null || profileState.email.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_email, false);
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_email, false);
     }
     /*else if (profileState.phonenumber == null ||
         profileState.phonenumber.isEmpty) {
@@ -1146,8 +990,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
     else if (profileState.phonenumber != null &&
         profileState.phonenumber.isNotEmpty &&
         Helper.ValidPhonenumber(profileState.phonenumber.toString())) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.LL_Profile_error_validphone, false);
+      ToastUtils.showCustomToast(context, GlobleString.LL_Profile_error_validphone, false);
     } else {
       _addSaveAndFinishCall(profileState);
     }
@@ -1158,8 +1001,7 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
     Overlay.of(context)!.insert(loader);
 
     if (profileState.companyimage != null) {
-      ApiManager().AddSingleImage(context, profileState.companyimage!,
-          (status, responce) {
+      ApiManager().AddSingleImage(context, profileState.companyimage!, (status, responce) {
         if (status) {
           final String id = '__file_picker_web-file-input';
           var element = html.document.getElementById(id);
@@ -1195,28 +1037,23 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
             : ""
         : mid;
     uPojo.CompanyName = profileState.companyname;
-    uPojo.CustomerFeatureListingURL =
-        profileState.CustomerFeatureListingURL_update;
+    uPojo.CustomerFeatureListingURL = profileState.CustomerFeatureListingURL_update;
     uPojo.HomePageLink = profileState.homepagelink;
     uPojo.personId = personid;
 
     CommonID cPojo = new CommonID();
     cPojo.ID = Prefs.getString(PrefsName.OwnerID);
 
-    ApiManager().UpdateProfileData(context, cPojo, uPojo,
-        (error, respoce) async {
+    ApiManager().UpdateProfileData(context, cPojo, uPojo, (error, respoce) async {
       if (error) {
         await Prefs.setString(PrefsName.user_Email, profileState.email);
         await Prefs.setString(PrefsName.user_fname, profileState.firstname);
         await Prefs.setString(PrefsName.user_lname, profileState.firstname);
-        await Prefs.setString(PrefsName.user_CustomerFeatureListingURL,
-            profileState.CustomerFeatureListingURL_update);
-        await Prefs.setString(
-            PrefsName.user_CompanyName, profileState.companyname);
+        await Prefs.setString(PrefsName.user_CustomerFeatureListingURL, profileState.CustomerFeatureListingURL_update);
+        await Prefs.setString(PrefsName.user_CompanyName, profileState.companyname);
 
         loader.remove();
-        ToastUtils.showCustomToast(
-            context, GlobleString.LL_Profile_success, true);
+        ToastUtils.showCustomToast(context, GlobleString.LL_Profile_success, true);
         _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
       } else {
         loader.remove();
@@ -1231,37 +1068,29 @@ class _LandlordProfileScreenState extends State<LandlordProfileScreen> {
     String confirmpass = _textConfirmPwd.text.toString().trim();
 
     if (curpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_cuurent_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_cuurent_error, false);
     } else if (newpass.isEmpty) {
       ToastUtils.showCustomToast(context, GlobleString.tenant_new_error, false);
     } else if (newpass == curpass) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_password_same_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_password_same_error, false);
     } else if (!Helper.isPasswordCompliant(newpass)) {
       ToastUtils.showCustomToast(context, GlobleString.password_error, false);
     } else if (confirmpass.isEmpty) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_newconfirm_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_newconfirm_error, false);
     } else if (newpass != confirmpass) {
-      ToastUtils.showCustomToast(
-          context, GlobleString.tenant_confirm_password_error, false);
+      ToastUtils.showCustomToast(context, GlobleString.tenant_confirm_password_error, false);
     } else {
       loader = Helper.overlayLoader(context);
       Overlay.of(context)!.insert(loader);
 
-      ApiManager().ChangePasswordAPI(
-          context, Prefs.getString(PrefsName.user_Email), curpass, newpass,
-          (error, respoce) {
+      ApiManager().ChangePasswordAPI(context, Prefs.getString(PrefsName.user_Email), curpass, newpass, (error, respoce) {
         if (error) {
           loader.remove();
-          ToastUtils.showCustomToast(
-              context, GlobleString.tenant_password_success, true);
+          ToastUtils.showCustomToast(context, GlobleString.tenant_password_success, true);
           _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
         } else {
           loader.remove();
-          ToastUtils.showCustomToast(
-              context, GlobleString.tenant_password_error, false);
+          ToastUtils.showCustomToast(context, GlobleString.tenant_password_error, false);
         }
       });
     }
