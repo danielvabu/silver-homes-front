@@ -181,7 +181,7 @@ class _VarifyDocumentHeaderState extends State<VarifyDocumentHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 11,
+        width: width / 14,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -291,7 +291,7 @@ class _VarifyDocumentHeaderState extends State<VarifyDocumentHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 6,
+        width: width / 9,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(

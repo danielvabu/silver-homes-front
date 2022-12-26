@@ -655,7 +655,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
               oocupinfo.errro_firstname = false;
               oocupinfo.errro_lastname = false;
               oocupinfo.errro_email = false;
-              oocupinfo.errro_email = false;
+              oocupinfo.errro_mobilenumber = false;
               oocupinfo.errro_primaryApplicant = false;
 
               listoccupation.add(oocupinfo);
@@ -1087,15 +1087,15 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  // color:
-                                                  //     tfAdditionalOccupantState
-                                                  //             .notapplicable
-                                                  //         ? myColor.disablecolor
-                                                  //         : oocupinfo
-                                                  //                 .errro_email!
-                                                  //             ? myColor
-                                                  //                 .errorcolor
-                                                  //             : myColor.gray,
+                                                  color:
+                                                      tfAdditionalOccupantState
+                                                              .notapplicable
+                                                          ? myColor.disablecolor
+                                                          : oocupinfo
+                                                                  .errro_email!
+                                                              ? myColor
+                                                                  .errorcolor
+                                                              : myColor.gray,
                                                   width: 1.0),
                                             ),
                                             isDense: true,
@@ -1162,13 +1162,13 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                  // color: tfAdditionalOccupantState
-                                                  //         .notapplicable
-                                                  //     ? myColor.disablecolor
-                                                  //     : oocupinfo
-                                                  //             .errro_mobilenumber!
-                                                  //         ? myColor.errorcolor
-                                                  //         : myColor.gray,
+                                                  color: tfAdditionalOccupantState
+                                                          .notapplicable
+                                                      ? myColor.disablecolor
+                                                      : oocupinfo
+                                                              .errro_mobilenumber!
+                                                          ? myColor.errorcolor
+                                                          : myColor.gray,
                                                   width: 1.0),
                                             ),
                                             isDense: true,
@@ -1329,6 +1329,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                 OccupantID: "",
                 errro_firstname: false,
                 errro_lastname: false,
+                errro_email: false,
+                errro_mobilenumber: false,
                 errro_primaryApplicant: false));
 
         _store.dispatch(

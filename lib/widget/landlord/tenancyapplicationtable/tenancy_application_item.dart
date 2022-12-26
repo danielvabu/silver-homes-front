@@ -329,7 +329,7 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
       },
       child: Container(
         height: 40,
-        width: width / 9,
+        width: width / 6,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: RatingBarIndicator(

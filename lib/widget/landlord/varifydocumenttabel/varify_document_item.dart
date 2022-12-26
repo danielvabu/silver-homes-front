@@ -327,7 +327,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
       },
       child: Container(
         height: 40,
-        width: width / 11,
+        width: width / 14,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: RatingBarIndicator(
@@ -385,7 +385,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
   Widget _appstatusdropdown(TenancyApplication model) {
     return Container(
       height: 28,
-      width: width / 6,
+      width: width / 9,
       padding: EdgeInsets.only(left: 2),
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(
