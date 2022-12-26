@@ -49,8 +49,8 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
   }
 
   traerfields() async {
-    GetRequestDocuments querylist =
-        GetRequestDocuments(application_id: widget.id);
+    GetRequestDocuments querylist = GetRequestDocuments(
+        application_id: Prefs.getString(PrefsName.TCF_ApplicationID));
     // _store.dispatch(UpdateProperTytypeValue1([]));
     await ApiManager().getDocumentRequest(context, querylist,
         (status, errorlist) {
