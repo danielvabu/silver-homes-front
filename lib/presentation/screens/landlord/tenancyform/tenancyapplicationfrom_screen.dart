@@ -873,7 +873,7 @@ class TenancyApplicationFormScreenState
             )),
         Container(
           alignment: Alignment.topCenter,
-          width: 800,
+          width: 1000,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -893,7 +893,7 @@ class TenancyApplicationFormScreenState
 
   Widget _indicator(TenancyFormState tenancyFormState) {
     return Container(
-      width: 830,
+      width: 1000,
       margin: EdgeInsets.only(top: 25),
       alignment: Alignment.center,
       child: Row(
@@ -1112,10 +1112,9 @@ class TenancyApplicationFormScreenState
           ),
           InkWell(
             onTap: () {
-              /*if (Prefs.getBool(PrefsName.TCF_Step6)) {
+              if (Prefs.getBool(PrefsName.TCF_Step6)) {
                 _store.dispatch(UpdateTenacyFormIndex(6));
-              } else*/
-              if (Prefs.getBool(PrefsName.TCF_Step1) &&
+              } else if (Prefs.getBool(PrefsName.TCF_Step1) &&
                   Prefs.getBool(PrefsName.TCF_Step2) &&
                   Prefs.getBool(PrefsName.TCF_Step3) &&
                   Prefs.getBool(PrefsName.TCF_Step4) &&
@@ -1152,7 +1151,56 @@ class TenancyApplicationFormScreenState
                 )
               ],
             ),
-          )
+          ),
+          SizedBox(
+            width: 60,
+          ),
+          InkWell(
+            onTap: () {
+              // if (Prefs.getBool(PrefsName.TCF_Step7)) {
+              //   RemoveHighLight();
+              //   showBackDialog(tenancyFormState, false, stepper: 7);
+              //   // _store.dispatch(UpdateTenacyFormIndex(5));
+              // } else
+              if (Prefs.getBool(PrefsName.TCF_Step1) &&
+                  Prefs.getBool(PrefsName.TCF_Step2) &&
+                  Prefs.getBool(PrefsName.TCF_Step3) &&
+                  Prefs.getBool(PrefsName.TCF_Step4) &&
+                  Prefs.getBool(PrefsName.TCF_Step5) &&
+                  Prefs.getBool(PrefsName.TCF_Step6)) {
+                RemoveHighLight();
+                showBackDialog(tenancyFormState, false, stepper: 7);
+                // _store.dispatch(UpdateTenacyFormIndex(5));
+              }
+            },
+            splashColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset(
+                    Prefs.getBool(PrefsName.TCF_Step7)
+                        ? "assets/images/ic_circle_check.png"
+                        : tenancyFormState.selectView > 7
+                            ? "assets/images/ic_circle_fill.png"
+                            : "assets/images/ic_circle_border.png",
+                    width: 35,
+                    height: 35,
+                    alignment: Alignment.topLeft,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  GlobleString.TAF_Documents_Info,
+                  style: MyStyles.SemiBold(13, myColor.text_color),
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -1264,6 +1312,49 @@ class TenancyApplicationFormScreenState
               else
                 _store.dispatch(UpdateTenacyFormIndex(5));
             },
+            onPressedSave: () {
+              Prefs.setBool(PrefsName.TCF_Step6, true);
+              UpdateViewAPI(7);
+              //_store.dispatch(UpdateTenacyFormIndex(6));
+            },
+            // onPressedSave: () async {
+            //   _store.dispatch(UpdateTenacyFormIndex(1));
+
+            //   if (Prefs.getBool(PrefsName.TCF_EditApplicant) != null &&
+            //       Prefs.getBool(PrefsName.TCF_EditApplicant) != "" &&
+            //       Prefs.getBool(PrefsName.TCF_EditApplicant) == true) {
+            //     await Prefs.setBool(PrefsName.TCF_Step1, false);
+            //     await Prefs.setBool(PrefsName.TCF_Step2, false);
+            //     await Prefs.setBool(PrefsName.TCF_Step3, false);
+            //     await Prefs.setBool(PrefsName.TCF_Step4, false);
+            //     await Prefs.setBool(PrefsName.TCF_Step5, false);
+            //     await Prefs.setBool(PrefsName.TCF_Step6, false);
+            //     await Prefs.setString(PrefsName.TCF_ApplicantID, "");
+            //     await Prefs.setString(PrefsName.TCF_ApplicationID, "");
+            //     await Prefs.setString(PrefsName.TCF_Current_isReference, "");
+            //     await Prefs.setString(PrefsName.TCF_CurrentlandlordID, "");
+            //     await Prefs.setBool(PrefsName.TCF_EditApplicant, false);
+
+            //     Navigator.pushNamed(context, RouteNames.Portal);
+            //   } else {
+            //     callNavigate(tenancyFormState);
+            //   }
+            // },
+            onPressGotoBack: () => gotoBack(),
+            onPressedRecordStep: (int stepper) {
+              UpdateViewAPI(stepper);
+            },
+          );
+        }
+      case 7:
+        {
+          return TAFDocumentScreen(
+            onPressedBack: () {
+              if (TenancyApplicationFormScreen.changeFormData)
+                showBackDialog(tenancyFormState, false, stepper: 6);
+              else
+                _store.dispatch(UpdateTenacyFormIndex(6));
+            },
             onPressedSave: () async {
               _store.dispatch(UpdateTenacyFormIndex(1));
 
@@ -1276,6 +1367,7 @@ class TenancyApplicationFormScreenState
                 await Prefs.setBool(PrefsName.TCF_Step4, false);
                 await Prefs.setBool(PrefsName.TCF_Step5, false);
                 await Prefs.setBool(PrefsName.TCF_Step6, false);
+                await Prefs.setBool(PrefsName.TCF_Step7, false);
                 await Prefs.setString(PrefsName.TCF_ApplicantID, "");
                 await Prefs.setString(PrefsName.TCF_ApplicationID, "");
                 await Prefs.setString(PrefsName.TCF_Current_isReference, "");
@@ -1291,6 +1383,7 @@ class TenancyApplicationFormScreenState
             onPressedRecordStep: (int stepper) {
               UpdateViewAPI(stepper);
             },
+            id: widget.ApplicantID,
           );
         }
 

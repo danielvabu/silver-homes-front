@@ -40,6 +40,7 @@ import 'package:silverhome/widget/searchdropdown/dropdown_search.dart';
 typedef VoidCallbackRecordStep = void Function(int stepper);
 
 class TAFDocumentScreen extends StatefulWidget {
+  final String? id;
   final VoidCallback _callbackBack;
   final VoidCallback _callbackSaveandNext;
   final VoidCallback _callbackGotoBack;
@@ -50,6 +51,7 @@ class TAFDocumentScreen extends StatefulWidget {
     required VoidCallback onPressedBack,
     required VoidCallback onPressedSave,
     required VoidCallback onPressGotoBack,
+    required this.id,
   })  : _callbackBack = onPressedBack,
         _callbackSaveandNext = onPressedSave,
         _callbackGotoBack = onPressGotoBack,
@@ -132,6 +134,7 @@ class _TAFDocumentScreenState extends State<TAFDocumentScreen> {
                   onPressedSave: () {
                     opensuccessDialog(TVDState!);
                   },
+                  id: widget.id,
                 ),
               ],
             );

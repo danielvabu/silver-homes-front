@@ -1076,8 +1076,10 @@ class GlobleString {
   static const String TAF_Current_tenancy = "Current Tenancy";
   static const String TAF_Other_applicants = "Other Applicants";
   static const String TAF_Additional_Info = "Additional Info.";
+  static const String TAF_Documents_Info = "Documents";
   static const String TAF_References = "References";
   static const String TAF_Primary_Applicant = "Primary Applicant -";
+  static const String TAF__ApplicantNum = "Applicant #";
   static const String TAF_Back_to_Tenants = "< Back to Tenants";
 
   static const String Optional = "- optional";
@@ -1125,7 +1127,7 @@ class GlobleString {
   static const String TAF_CT_aggree =
       "By checking this box you authorize us to use your current landlord as a reference.";
   static const String TAF_CT_Add_New_Occupant = "Add New Occupant";
-
+  static const String TAF_CT_Add_New_Applicant = "Add New Applicant";
   /*Additional Occupant*/
   static const String TAF_Additional_Occupants = "Additional Occupants";
   static const String TAF_AO_first_name = "First name";

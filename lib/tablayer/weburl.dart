@@ -44,6 +44,8 @@ class Weburl {
   //     ? "https://prsjz0gbn3.execute-api.us-east-1.amazonaws.com/staging/"
   //     : "https://vuy3fbu93g.execute-api.us-east-1.amazonaws.com/prod/";
 
+  //static var API_Server = 'http://staging.silverhomes.ai';
+
   static var API_Server = isPROD_API
       ? "https://api.silverhomes.ai"
       : "https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev";

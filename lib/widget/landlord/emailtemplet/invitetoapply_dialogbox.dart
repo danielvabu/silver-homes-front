@@ -517,7 +517,14 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                               List<String> mentions = [
                                                 'NameApplicant',
                                                 'PropertyName',
-                                                'City'
+                                                'PropertyAddress',
+                                                'LandlordFirstName',
+                                                'LandlordLastName',
+                                                'LandlordEmail',
+                                                'LandlordPhonenumber',
+                                                'LandlordWebsite',
+                                                'LandlordListingsPage',
+                                                'LandlordLogo',
                                               ];
                                               return mentions
                                                   .where((element) =>
@@ -528,7 +535,14 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                             mentionsWeb: [
                                               'NameApplicant',
                                               'PropertyName',
-                                              'City'
+                                              'PropertyAddress',
+                                              'LandlordFirstName',
+                                              'LandlordLastName',
+                                              'LandlordEmail',
+                                              'LandlordPhonenumber',
+                                              'LandlordWebsite',
+                                              'LandlordListingsPage',
+                                              'LandlordLogo',
                                             ],
                                             onSelect: (String value) {
                                               print(value);
@@ -826,7 +840,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     );
   }
 
-  _callInviteWorkFlow() {
+  _callInviteWorkFlow() async {
     InviteWorkFlowReqtokens reqtokens = new InviteWorkFlowReqtokens();
 
     for (int i = 0; i < widget._tenancyleadlist.length; i++) {
@@ -888,24 +902,29 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
         }
       });
     }
-    ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
+
+    String templatehtml = await GenerateTemplate();
+    var content = '''$templatehtml''';
+    String encoded = base64Url.encode(utf8.encode(content));
+    RequestHtml reqhtml = RequestHtml(
+        htmltemplate: encoded,
+        application_id: widget._tenancyleadlist[0].id.toString());
+    ApiManager().AddRequestHtml(context, reqhtml, (error, responce) async {
       if (error) {
-        widget._callbackSave();
-      } else {}
+        ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
+          if (error) {
+            widget._callbackSave();
+          } else {}
+        });
+      } else {
+        // loader.remove();
+        ToastUtils.showCustomToast(context, responce, false);
+      }
     });
   }
 
-  void previewEmailTemplate(String html) {
-    String html1 = html.replaceAll(
-        '@NameApplicant', widget._tenancyleadlist[0].applicantName!);
-    html1 = html1.replaceAll(
-        '@PropertyName', widget._tenancyleadlist[0].propertyName!);
-    html1 = html1.replaceAll('@City', widget._tenancyleadlist[0].city!);
-
-    String html2 =
-        '<br><p style="margin:15px;"><a href="https://www.ren-hogar.com/#/tenancy_application_form/" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
-    String html0 =
-        '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
+  void previewEmailTemplate(String html) async {
+    String template1 = await GenerateTemplate();
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -971,7 +990,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                         padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                         alignment: Alignment.topLeft,
                         child: WebViewX(
-                          initialContent: html0 + html1 + html2,
+                          initialContent: template1,
                           initialSourceType: SourceType.html,
                           onWebViewCreated: (controller) =>
                               webviewController = controller,
@@ -992,5 +1011,24 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
         );
       },
     );
+  }
+
+  Future<String> GenerateTemplate() async {
+    int idapplication = widget._tenancyleadlist[0].id!;
+    DateTime dateToday =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    String html = await controller.getText();
+    String html1 = html.replaceAll(
+        '@NameApplicant', widget._tenancyleadlist[0].applicantName!);
+    html1 = html1.replaceAll(
+        '@PropertyName', widget._tenancyleadlist[0].propertyName!);
+    html1 =
+        html1.replaceAll('@PropertyAdress', widget._tenancyleadlist[0].city!);
+    html1 = html1.replaceAll('@CurrentDate', dateToday.toString());
+    String html2 =
+        '<br><p style="margin:15px;"><a href="http://localhost:51975/#/tenancy_application_form/$idapplication" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
+    String html0 =
+        '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
+    return html0 + html1 + html2;
   }
 }
