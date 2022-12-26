@@ -329,7 +329,7 @@ class _PropertyItemState extends State<PropertyItem> {
                     final startIndex = urlBase.indexOf("#/");
                     String endIndex = urlBase.substring(0, startIndex + 2);
 
-                    print("result: " + endIndex.toString());
+                    print("sresult: " + endIndex.toString());
                     String url = endIndex +
                         "" +
                         "sharedproperties" +
