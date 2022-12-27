@@ -1024,7 +1024,10 @@ class GlobleString {
       "Please enter the last name of the occupant.";
   static const String taf_occupant_error_primaryApplicant =
       "Please specify your relationship with the occupant.";
-
+  static const String taf_occupant_error_email =
+      "Please specify your email with the occupant.";
+  static const String taf_occupant_error_phone =
+      "Please specify your phone number with the occupant.";
   /*Tenancy Additional Info*/
   static const String taf_AdditionalInfo_error_pets_typeofpets =
       "Please indicate the type of pet (e.g. dog, cat, etc.).";

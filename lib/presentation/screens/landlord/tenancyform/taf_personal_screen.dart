@@ -15,6 +15,7 @@ import 'package:silverhome/common/toastutils.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancyaddoccupant_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancyform_actions.dart';
 import 'package:silverhome/domain/actions/landlord_action/tenancyperson_actions.dart';
+import 'package:silverhome/domain/entities/newlead.dart';
 import 'package:silverhome/domain/entities/tenancy_additionaloccupants.dart';
 import 'package:silverhome/presentation/models/landlord_models/tf_additonal_occupant_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/tf_personal_state.dart';
@@ -59,6 +60,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   int stepper = 0;
   bool change = false;
   int forms = 0;
+  late TFAdditionalOccupantState tfAdditionalOccupantState1;
+
   @override
   void initState() {
     initilizedata();
@@ -645,6 +648,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
               List<TenancyAdditionalOccupant> listoccupation = [];
               TenancyAdditionalOccupant oocupinfo =
                   new TenancyAdditionalOccupant();
+
               oocupinfo.id = "1";
               oocupinfo.firstname = "";
               oocupinfo.lastname = "";
@@ -662,7 +666,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
               _store.dispatch(UpdateTFAddOccupantlist(listoccupation));
             }
-
+            tfAdditionalOccupantState1 = tfAdditionalOccupantState;
             return FocusScope(
                 node: _focusScopeNode,
                 child: Column(
@@ -693,6 +697,18 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                       itemBuilder: (BuildContext ctxt, int Index) {
                         TenancyAdditionalOccupant oocupinfo =
                             tfAdditionalOccupantState.occupantlist[Index];
+                        if (oocupinfo.email == null) {
+                          oocupinfo.email = "";
+                        }
+                        if (oocupinfo.mobilenumber == null) {
+                          oocupinfo.mobilenumber = "";
+                        }
+                        if (oocupinfo.errro_email == null) {
+                          oocupinfo.errro_email = false;
+                        }
+                        if (oocupinfo.errro_mobilenumber == null) {
+                          oocupinfo.errro_mobilenumber = false;
+                        }
                         /*return FocusScope(
                         node: FocusScopeNode(),
                         onFocusChange: (value) {
@@ -846,6 +862,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                           tfAdditionalOccupantState
                                               .occupantlist[Index]
                                               .errro_lastname = false;
+
                                           _changeData();
                                         },
                                       ),
@@ -1063,7 +1080,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                         height: 5,
                                       ),
                                       TextFormField(
-                                        // initialValue: oocupinfo.email,
+                                        initialValue: oocupinfo.email,
                                         textAlign: TextAlign.start,
                                         autofocus: true,
                                         readOnly: tfAdditionalOccupantState
@@ -1139,7 +1156,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                         height: 5,
                                       ),
                                       TextFormField(
-                                        // initialValue: oocupinfo.mobilenumber,
+                                        initialValue: oocupinfo.mobilenumber,
                                         textAlign: TextAlign.start,
                                         readOnly: tfAdditionalOccupantState
                                             .notapplicable,
@@ -1228,7 +1245,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                               onChanged: (value) {
                                 _store.dispatch(
                                     UpdateTFAddOccupantNotApplicable(value!));
-                                _changeData();
+                                //   _changeData();
                               },
                             ),
                             Text(
@@ -1310,6 +1327,22 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         isAdd = true;
         ToastUtils.showCustomToast(
             context, GlobleString.taf_occupant_error_primaryApplicant, false);
+        /* tfAdditionalOccupantState.occupantlist[i].errro_primaryApplicant = true;
+        _store.dispatch(
+            UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
+        break;
+      } else if (empinfo.email == "") {
+        isAdd = true;
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_occupant_error_email, false);
+        /* tfAdditionalOccupantState.occupantlist[i].errro_primaryApplicant = true;
+        _store.dispatch(
+            UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
+        break;
+      } else if (empinfo.mobilenumber == "") {
+        isAdd = true;
+        ToastUtils.showCustomToast(
+            context, GlobleString.taf_occupant_error_phone, false);
         /* tfAdditionalOccupantState.occupantlist[i].errro_primaryApplicant = true;
         _store.dispatch(
             UpdateTFAddOccupantlist(tfAdditionalOccupantState.occupantlist));*/
@@ -1407,6 +1440,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       ApiManager().UpdateTFPersonalInfo(context, commonID, upersonInfo,
           (status, responce) {
         if (status) {
+          _saveDataAndNext2(tfAdditionalOccupantState1);
+          //_saveDataAndNext2(occupantlist);
           loader.remove();
           if (!isGotoback) {
             Prefs.setBool(PrefsName.TCF_Step1, true);
@@ -1423,6 +1458,29 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           loader.remove();
         }
       });
+
+      // PersonId personid = new PersonId();
+      // personid.firstName = "tom";
+      // personid.lastName = "cruise";
+      // personid.email = "tom@gmail.com";
+      // personid.mobileNumber = "324234232";
+      // personid.Country_Code = "CA";
+      // personid.Dial_Code = "57";
+
+      // ApplicantId applicationid = new ApplicantId();
+      // applicationid.note = "";
+      // applicationid.personId = personid;
+
+      // AddLead addlead = new AddLead();
+      // addlead.propId = newleadstate.propertyValue!.ID.toString();
+      // addlead.applicationStatus = "1";
+      // addlead.docReviewStatus = "2";
+      // addlead.referenceStatus = null;
+      // addlead.leaseStatus = "2";
+      // addlead.applicantId = applicationid;
+      // addlead.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+
+      // applicantIdlist.add(addlead);
     }
   }
 
@@ -1459,5 +1517,139 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         ),
       ),
     );
+  }
+
+//save ocupants
+  _saveDataAndNext2(TFAdditionalOccupantState tfAddOState) {
+    if (tfAddOState.notapplicable) {
+      ApiCall2(tfAddOState);
+    } else {
+      bool isAdd = false;
+      for (int i = 0; i < tfAddOState.occupantlist.length; i++) {
+        TenancyAdditionalOccupant empinfo = tfAddOState.occupantlist[i];
+
+        if (empinfo.firstname == "" &&
+            empinfo.lastname == "" &&
+            empinfo.primaryApplicant == "") {
+          isAdd = true;
+          //ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_mandatory, false);
+          break;
+        } else if (empinfo.firstname == "") {
+          isAdd = true;
+          //ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_firstname, false);
+          /* tfAddOState.occupantlist[i].errro_firstname = true;
+              _store
+                  .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
+          break;
+        } else if (empinfo.lastname == "") {
+          isAdd = true;
+          //ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_lastname, false);
+          /* tfAddOState.occupantlist[i].errro_lastname = true;
+              _store
+                  .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
+          break;
+        } else if (empinfo.primaryApplicant == "") {
+          isAdd = true;
+          //ToastUtils.showCustomToast(context, GlobleString.taf_occupant_error_primaryApplicant, false);
+          /* tfAddOState.occupantlist[i].errro_primaryApplicant = true;
+              _store
+                  .dispatch(UpdateTFAddOccupantlist(tfAddOState.occupantlist));*/
+          break;
+        }
+
+        if ((tfAddOState.occupantlist.length - 1) == i && !isAdd) {
+          ApiCall2(tfAddOState);
+        }
+      }
+    }
+  }
+
+  ApiCall2(TFAdditionalOccupantState tfAddOccState) {
+    loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);
+
+    List<CommonID> CommonIDlist = <CommonID>[];
+
+    for (int i = 0; i < tfAddOccState.liveserveroccupantlist.length; i++) {
+      TenancyAdditionalOccupant taoccupant =
+          tfAddOccState.liveserveroccupantlist[i];
+
+      if (taoccupant.OccupantID != "") {
+        CommonIDlist.add(new CommonID(ID: taoccupant.OccupantID));
+      }
+    }
+
+    if (CommonIDlist.length > 0) {
+      DeleteAdditionalOccupant deleteOccupant = new DeleteAdditionalOccupant(
+          Applicantion_ID: Prefs.getString(PrefsName.TCF_ApplicationID));
+
+      ApiManager().TFAdditionalOCcupantDelete(
+          context, CommonIDlist, deleteOccupant, (status, responce) {
+        if (status) {
+          InserData(tfAddOccState);
+        } else {
+          loader.remove();
+          ToastUtils.showCustomToast(context, responce, false);
+        }
+      });
+    } else {
+      InserData(tfAddOccState);
+    }
+  }
+
+  InserData(TFAdditionalOccupantState tfAdditionalOccupantState) {
+    List<AdditionalOccupants> additionalOccupantslist = <AdditionalOccupants>[];
+
+    if (!tfAdditionalOccupantState.notapplicable) {
+      for (int j = 0; j < tfAdditionalOccupantState.occupantlist.length; j++) {
+        TenancyAdditionalOccupant taoccupant1 =
+            tfAdditionalOccupantState.occupantlist[j];
+
+        if (taoccupant1.firstname != "" &&
+            taoccupant1.lastname != "" &&
+            taoccupant1.primaryApplicant != "") {
+          Occupant occupant = new Occupant();
+          occupant.FirstName = taoccupant1.firstname;
+          occupant.LastName = taoccupant1.lastname;
+          occupant.LastName = taoccupant1.email;
+
+          AdditionalOccupants additionalOccupants = new AdditionalOccupants();
+          additionalOccupants.Applicantion_ID =
+              Prefs.getString(PrefsName.TCF_ApplicationID);
+          additionalOccupants.relationWithApplicant =
+              taoccupant1.primaryApplicant;
+          additionalOccupants.occupant = occupant;
+
+          additionalOccupantslist.add(additionalOccupants);
+        }
+      }
+    }
+
+    UpdateAdditionalOccupants upojo = new UpdateAdditionalOccupants(
+        IsNotApplicableAddOccupant: tfAdditionalOccupantState.notapplicable);
+
+    CommonID cpojo =
+        new CommonID(ID: Prefs.getString(PrefsName.TCF_ApplicationID));
+
+    ApiManager().InsetTFAdditionalOCcupant(
+        context, additionalOccupantslist, cpojo, upojo, (status, responce) {
+      if (status) {
+        loader.remove();
+        // if (!isGotoback) {
+        //   Prefs.setBool(PrefsName.TCF_Step4, true);
+        //   if (stepper == 0) {
+        //     widget._callbackSaveandNext();
+        //   } else {
+        //     widget._callbackRecordStep(stepper);
+        //     //_store.dispatch(UpdateTenacyFormIndex(stepper));
+        //   }
+        // } else {
+        //   widget._callbackGotoback();
+        // }
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(context, responce, false);
+      }
+    });
   }
 }

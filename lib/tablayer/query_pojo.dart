@@ -1103,20 +1103,27 @@ class AdditionalOccupants {
 class Occupant {
   String? FirstName;
   String? LastName;
-
+  String? email;
+  String? mobilenumber;
   Occupant({
     this.FirstName,
     this.LastName,
+    this.email,
+    this.mobilenumber,
   });
 
   factory Occupant.fromJson(Map<String, dynamic> json) => Occupant(
         FirstName: json["FirstName"],
         LastName: json["LastName"],
+        email: json["email"],
+        mobilenumber: json["mobilenumber"],
       );
 
   Map<String, dynamic> toJson() => {
         "FirstName": FirstName,
         "LastName": LastName,
+        "email": email,
+        "mobilenumber": mobilenumber,
       };
 }
 
