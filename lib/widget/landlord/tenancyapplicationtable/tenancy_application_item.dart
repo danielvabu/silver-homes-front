@@ -254,7 +254,7 @@ class _TenancyApplicationItemState extends State<TenancyApplicationItem> {
         child: Tooltip(
           message: "grupo",
           child: Text(
-            "Group 112",
+            "Group 120",
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,

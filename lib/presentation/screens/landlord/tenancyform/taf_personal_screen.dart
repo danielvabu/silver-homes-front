@@ -1459,28 +1459,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         }
       });
 
-      // PersonId personid = new PersonId();
-      // personid.firstName = "tom";
-      // personid.lastName = "cruise";
-      // personid.email = "tom@gmail.com";
-      // personid.mobileNumber = "324234232";
-      // personid.Country_Code = "CA";
-      // personid.Dial_Code = "57";
 
-      // ApplicantId applicationid = new ApplicantId();
-      // applicationid.note = "";
-      // applicationid.personId = personid;
-
-      // AddLead addlead = new AddLead();
-      // addlead.propId = newleadstate.propertyValue!.ID.toString();
-      // addlead.applicationStatus = "1";
-      // addlead.docReviewStatus = "2";
-      // addlead.referenceStatus = null;
-      // addlead.leaseStatus = "2";
-      // addlead.applicantId = applicationid;
-      // addlead.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-
-      // applicantIdlist.add(addlead);
     }
   }
 
@@ -1565,8 +1544,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   }
 
   ApiCall2(TFAdditionalOccupantState tfAddOccState) {
-    loader = Helper.overlayLoader(context);
-    Overlay.of(context)!.insert(loader);
+    //loader = Helper.overlayLoader(context);
+    //Overlay.of(context)!.insert(loader);
 
     List<CommonID> CommonIDlist = <CommonID>[];
 
@@ -1599,7 +1578,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
   InserData(TFAdditionalOccupantState tfAdditionalOccupantState) {
     List<AdditionalOccupants> additionalOccupantslist = <AdditionalOccupants>[];
-
+    List<AddLead2> applicantIdlist = <AddLead2>[];  
     if (!tfAdditionalOccupantState.notapplicable) {
       for (int j = 0; j < tfAdditionalOccupantState.occupantlist.length; j++) {
         TenancyAdditionalOccupant taoccupant1 =
@@ -1622,6 +1601,32 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           additionalOccupants.occupant = occupant;
 
           additionalOccupantslist.add(additionalOccupants);
+
+      PersonId personid = new PersonId();
+      personid.firstName = taoccupant1.firstname;
+      personid.lastName = taoccupant1.lastname;
+      personid.email = taoccupant1.email;
+      personid.mobileNumber = taoccupant1.mobilenumber;
+      personid.Country_Code = "";
+      personid.Dial_Code = "";
+
+      ApplicantId applicationid = new ApplicantId();
+      applicationid.note = "";
+      applicationid.personId = personid;
+
+      AddLead2 addlead = new AddLead2();
+      addlead.propId = Prefs.getString(PrefsName.PropertyID);
+      addlead.applicationStatus = "2";
+      addlead.docReviewStatus = "2";
+      addlead.referenceStatus = null;
+      addlead.leaseStatus = "2";
+      addlead.applicantId = applicationid;
+      addlead.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+      addlead.group=Prefs.getString(PrefsName.TCF_ApplicationID);
+
+      applicantIdlist.add(addlead);
+
+
         }
       }
     }
@@ -1636,6 +1641,14 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         context, additionalOccupantslist, cpojo, upojo, (status, responce) {
       if (status) {
         loader.remove();
+
+ 
+
+       leadcall(applicantIdlist);
+
+
+
+        
         // if (!isGotoback) {
         //   Prefs.setBool(PrefsName.TCF_Step4, true);
         //   if (stepper == 0) {
@@ -1650,6 +1663,20 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       } else {
         loader.remove();
         ToastUtils.showCustomToast(context, responce, false);
+      }
+    });
+  }
+    leadcall(List<AddLead2> applicantIdlist) {
+    ApiManager().InsetNewLeadAPI(context, applicantIdlist, (error, respoce) {
+      if (error) {
+        // ToastUtils.showCustomToast(context, GlobleString.NL_Lead_Success, true);
+        // loader.remove();
+        // _store.dispatch(UpdateNewLeadProperty(null));
+        // widget._callbackSave();
+      } else {
+        loader.remove();
+        ToastUtils.showCustomToast(
+            context, GlobleString.NL_error_insertcall, false);
       }
     });
   }
