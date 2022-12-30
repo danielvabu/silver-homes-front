@@ -38,6 +38,49 @@ class AddLead {
       };
 }
 
+class AddLead2 {
+  AddLead2({
+    this.propId,
+    this.applicantId,
+    this.applicationStatus,
+    this.docReviewStatus,
+    this.referenceStatus,
+    this.leaseStatus,
+    this.Owner_ID,
+    this.group,
+  });
+
+  String? propId;
+  ApplicantId? applicantId;
+  String? applicationStatus;
+  String? docReviewStatus;
+  String? referenceStatus;
+  String? leaseStatus;
+  String? Owner_ID;
+  String? group;
+  factory AddLead2.fromJson(Map<String, dynamic> json) => AddLead2(
+        propId: json["Prop_ID"],
+        applicantId: ApplicantId.fromJson(json["Applicant_ID"]),
+        applicationStatus: json["ApplicationStatus"],
+        docReviewStatus: json["DocReviewStatus"],
+        referenceStatus: json["ReferenceStatus"],
+        leaseStatus: json["LeaseStatus"],
+        Owner_ID: json["Owner_ID"],
+         group: json["group"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Prop_ID": propId,
+        "Applicant_ID": applicantId!.toJson(),
+        "ApplicationStatus": applicationStatus,
+        "DocReviewStatus": docReviewStatus,
+        "ReferenceStatus": referenceStatus,
+        "LeaseStatus": leaseStatus,
+        "Owner_ID": Owner_ID,
+        "group": group,
+      };
+}
+
 class ApplicantId {
   ApplicantId({
     this.note,
