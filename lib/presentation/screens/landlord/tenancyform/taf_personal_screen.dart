@@ -1611,7 +1611,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           Occupant occupant = new Occupant();
           occupant.FirstName = taoccupant1.firstname;
           occupant.LastName = taoccupant1.lastname;
-          occupant.LastName = taoccupant1.email;
+          occupant.email = taoccupant1.email;
+          occupant.mobilenumber = taoccupant1.mobilenumber;
 
           AdditionalOccupants additionalOccupants = new AdditionalOccupants();
           additionalOccupants.Applicantion_ID =
