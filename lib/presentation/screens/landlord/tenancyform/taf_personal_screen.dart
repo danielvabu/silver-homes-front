@@ -61,6 +61,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   bool change = false;
   int forms = 0;
   late TFAdditionalOccupantState tfAdditionalOccupantState1;
+  late TFPersonalState tenancyFormState1;
 
   @override
   void initState() {
@@ -198,6 +199,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           map: (state) => state.tfPersonalState,
           where: notIdentical,
           builder: (tfPersonalState) {
+            tenancyFormState1 = tfPersonalState!;
             return FocusScope(
                 node: _focusScopeNode,
                 autofocus: true,
@@ -627,10 +629,10 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                     SizedBox(
                       height: 30,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [saveandnext(tfPersonalState)],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [saveandnext(tfPersonalState)],
+                    // ),
                   ],
                 ));
           }),
@@ -656,6 +658,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
               oocupinfo.mobilenumber = "";
               oocupinfo.primaryApplicant = "";
               oocupinfo.OccupantID = "";
+              oocupinfo.applicant = false;
               oocupinfo.errro_firstname = false;
               oocupinfo.errro_lastname = false;
               oocupinfo.errro_email = false;
@@ -666,7 +669,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
               _store.dispatch(UpdateTFAddOccupantlist(listoccupation));
             }
-            tfAdditionalOccupantState1 = tfAdditionalOccupantState;
+            tfAdditionalOccupantState1 = tfAdditionalOccupantState!;
             return FocusScope(
                 node: _focusScopeNode,
                 child: Column(
@@ -708,6 +711,10 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                         }
                         if (oocupinfo.errro_mobilenumber == null) {
                           oocupinfo.errro_mobilenumber = false;
+                        }
+
+                        if (oocupinfo.applicant == null) {
+                          oocupinfo.applicant = false;
                         }
                         /*return FocusScope(
                         node: FocusScopeNode(),
@@ -1211,11 +1218,41 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 30,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Checkbox(
+                                      activeColor: myColor.Circle_main,
+                                      checkColor: myColor.white,
+                                      value: tfAdditionalOccupantState
+                                          .occupantlist[Index].applicant,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          tfAdditionalOccupantState
+                                              .occupantlist[Index]
+                                              .applicant = value;
+                                        });
+
+                                        _changeData();
+                                        //   _changeData();
+                                      },
+                                    ),
+                                    Text(
+                                      GlobleString.TAF_AO_NotApplicable,
+                                      style: MyStyles.Medium(
+                                          13, myColor.text_color),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 15,
                             ),
                           ],
                         );
@@ -1238,21 +1275,22 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Checkbox(
-                              activeColor: myColor.Circle_main,
-                              checkColor: myColor.white,
-                              value: tfAdditionalOccupantState.notapplicable,
-                              onChanged: (value) {
-                                _store.dispatch(
-                                    UpdateTFAddOccupantNotApplicable(value!));
-                                //   _changeData();
-                              },
-                            ),
-                            Text(
-                              GlobleString.TAF_AO_NotApplicable,
-                              style: MyStyles.Medium(13, myColor.text_color),
-                              textAlign: TextAlign.start,
-                            ),
+                            saveandnext(tenancyFormState1),
+                            // Checkbox(
+                            //   activeColor: myColor.Circle_main,
+                            //   checkColor: myColor.white,
+                            //   value: tfAdditionalOccupantState.notapplicable,
+                            //   onChanged: (value) {
+                            //     _store.dispatch(
+                            //         UpdateTFAddOccupantNotApplicable(value!));
+                            //     //   _changeData();
+                            //   },
+                            // ),
+                            // Text(
+                            //   GlobleString.TAF_AO_NotApplicable,
+                            //   style: MyStyles.Medium(13, myColor.text_color),
+                            //   textAlign: TextAlign.start,
+                            // ),
                           ],
                         ),
                       ],
@@ -1360,6 +1398,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                 mobilenumber: "",
                 primaryApplicant: "",
                 OccupantID: "",
+                applicant: false,
                 errro_firstname: false,
                 errro_lastname: false,
                 errro_email: false,
@@ -1458,8 +1497,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           loader.remove();
         }
       });
-
-
     }
   }
 
@@ -1578,7 +1615,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
   InserData(TFAdditionalOccupantState tfAdditionalOccupantState) {
     List<AdditionalOccupants> additionalOccupantslist = <AdditionalOccupants>[];
-    List<AddLead2> applicantIdlist = <AddLead2>[];  
+    List<AddLead2> applicantIdlist = <AddLead2>[];
     if (!tfAdditionalOccupantState.notapplicable) {
       for (int j = 0; j < tfAdditionalOccupantState.occupantlist.length; j++) {
         TenancyAdditionalOccupant taoccupant1 =
@@ -1586,7 +1623,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
         if (taoccupant1.firstname != "" &&
             taoccupant1.lastname != "" &&
-            taoccupant1.primaryApplicant != "") {
+            taoccupant1.primaryApplicant != "" &&
+            taoccupant1.applicant == true) {
           Occupant occupant = new Occupant();
           occupant.FirstName = taoccupant1.firstname;
           occupant.LastName = taoccupant1.lastname;
@@ -1601,32 +1639,34 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           additionalOccupants.occupant = occupant;
 
           additionalOccupantslist.add(additionalOccupants);
+        }
+        if (taoccupant1.firstname != "" &&
+            taoccupant1.lastname != "" &&
+            taoccupant1.primaryApplicant != "" &&
+            taoccupant1.applicant == false) {
+          PersonId personid = new PersonId();
+          personid.firstName = taoccupant1.firstname;
+          personid.lastName = taoccupant1.lastname;
+          personid.email = taoccupant1.email;
+          personid.mobileNumber = taoccupant1.mobilenumber;
+          personid.Country_Code = "";
+          personid.Dial_Code = "";
 
-      PersonId personid = new PersonId();
-      personid.firstName = taoccupant1.firstname;
-      personid.lastName = taoccupant1.lastname;
-      personid.email = taoccupant1.email;
-      personid.mobileNumber = taoccupant1.mobilenumber;
-      personid.Country_Code = "";
-      personid.Dial_Code = "";
+          ApplicantId applicationid = new ApplicantId();
+          applicationid.note = "";
+          applicationid.personId = personid;
 
-      ApplicantId applicationid = new ApplicantId();
-      applicationid.note = "";
-      applicationid.personId = personid;
+          AddLead2 addlead = new AddLead2();
+          addlead.propId = Prefs.getString(PrefsName.PropertyID);
+          addlead.applicationStatus = "2";
+          addlead.docReviewStatus = "2";
+          addlead.referenceStatus = null;
+          addlead.leaseStatus = "2";
+          addlead.applicantId = applicationid;
+          addlead.Owner_ID = Prefs.getString(PrefsName.OwnerID);
+          addlead.group1 = Prefs.getString(PrefsName.TCF_ApplicationID);
 
-      AddLead2 addlead = new AddLead2();
-      addlead.propId = Prefs.getString(PrefsName.PropertyID);
-      addlead.applicationStatus = "2";
-      addlead.docReviewStatus = "2";
-      addlead.referenceStatus = null;
-      addlead.leaseStatus = "2";
-      addlead.applicantId = applicationid;
-      addlead.Owner_ID = Prefs.getString(PrefsName.OwnerID);
-      addlead.group=Prefs.getString(PrefsName.TCF_ApplicationID);
-
-      applicantIdlist.add(addlead);
-
-
+          applicantIdlist.add(addlead);
         }
       }
     }
@@ -1642,13 +1682,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       if (status) {
         loader.remove();
 
- 
-
-       leadcall(applicantIdlist);
-
-
-
-        
         // if (!isGotoback) {
         //   Prefs.setBool(PrefsName.TCF_Step4, true);
         //   if (stepper == 0) {
@@ -1665,8 +1698,10 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         ToastUtils.showCustomToast(context, responce, false);
       }
     });
+    leadcall(applicantIdlist);
   }
-    leadcall(List<AddLead2> applicantIdlist) {
+
+  leadcall(List<AddLead2> applicantIdlist) {
     ApiManager().InsetNewLeadAPI(context, applicantIdlist, (error, respoce) {
       if (error) {
         // ToastUtils.showCustomToast(context, GlobleString.NL_Lead_Success, true);

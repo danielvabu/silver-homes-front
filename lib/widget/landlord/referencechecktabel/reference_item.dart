@@ -128,25 +128,32 @@ class _ReferenceItemState extends State<ReferenceItem> {
                     child: Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
+                          padding: EdgeInsets.only(
+                              left: 20, right: 20, top: 15, bottom: 5),
                           child: Row(
                             children: [
                               TBLTenancyApplicationStatus(
                                 onPressedIcon: () {
-                                  if (listdata[index].applicationReceivedDate != null && listdata[index].applicationReceivedDate != "") {
+                                  if (listdata[index].applicationReceivedDate !=
+                                          null &&
+                                      listdata[index].applicationReceivedDate !=
+                                          "") {
                                     openTenancyApplicationDetails(index);
                                   }
                                 },
                                 sentdate: listdata[index].applicationSentDate!,
-                                receivedate: listdata[index].applicationReceivedDate!,
+                                receivedate:
+                                    listdata[index].applicationReceivedDate!,
                               ),
                               SizedBox(width: 20),
                               TBLDocumentVerificationStatus(
                                 sentdate: listdata[index].docRequestSentDate!,
                                 receivedate: listdata[index].docReceivedDate!,
                                 onPressedIcon: () {
-                                  if (listdata[index].docRequestSentDate != null &&
-                                      listdata[index].docRequestSentDate != "" &&
+                                  if (listdata[index].docRequestSentDate !=
+                                          null &&
+                                      listdata[index].docRequestSentDate !=
+                                          "" &&
                                       listdata[index].docReceivedDate != null &&
                                       listdata[index].docReceivedDate != "") {
                                     _dailogPreviewDoc(listdata[index]);
@@ -155,21 +162,32 @@ class _ReferenceItemState extends State<ReferenceItem> {
                               ),
                               SizedBox(width: 20),
                               TBLReferenceChecksStatus(
-                                sentdate: listdata[index].referenceRequestSentDate!,
-                                receivedate: listdata[index].referenceRequestReceivedDate!,
+                                sentdate:
+                                    listdata[index].referenceRequestSentDate!,
+                                receivedate: listdata[index]
+                                    .referenceRequestReceivedDate!,
                                 onPressedIcon: () {
-                                  if (listdata[index].referenceRequestReceivedDate != null &&
-                                      listdata[index].referenceRequestReceivedDate != "") {
-                                    CustomeWidget.ReferencePreview(context, listdata[index].id.toString());
+                                  if (listdata[index]
+                                              .referenceRequestReceivedDate !=
+                                          null &&
+                                      listdata[index]
+                                              .referenceRequestReceivedDate !=
+                                          "") {
+                                    CustomeWidget.ReferencePreview(
+                                        context, listdata[index].id.toString());
                                   }
                                 },
                               ),
                               SizedBox(width: 20),
                               TBLLeaseAgreementStatus(
                                 sentdate: listdata[index].agreementSentDate!,
-                                receivedate: listdata[index].agreementReceivedDate!,
+                                receivedate:
+                                    listdata[index].agreementReceivedDate!,
                                 onPressedIcon: () {
-                                  if (listdata[index].agreementReceivedDate != null && listdata[index].agreementReceivedDate != "") {
+                                  if (listdata[index].agreementReceivedDate !=
+                                          null &&
+                                      listdata[index].agreementReceivedDate !=
+                                          "") {
                                     _dailogPreviewLease(listdata[index]);
                                   }
                                 },
@@ -177,12 +195,15 @@ class _ReferenceItemState extends State<ReferenceItem> {
                             ],
                           ),
                         ),
-                        listdata[index].leadReference != null && listdata[index].leadReference!.length > 0
+                        listdata[index].leadReference != null &&
+                                listdata[index].leadReference!.length > 0
                             ? Container(
                                 decoration: BoxDecoration(
                                   color: myColor.white,
                                   borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(color: myColor.TA_status_Border, width: 2),
+                                  border: Border.all(
+                                      color: myColor.TA_status_Border,
+                                      width: 2),
                                 ),
                                 margin: EdgeInsets.all(10),
                                 child: Row(
@@ -196,11 +217,13 @@ class _ReferenceItemState extends State<ReferenceItem> {
                                           Container(
                                             height: 1,
                                             color: myColor.TA_tab_devide,
-                                            margin: EdgeInsets.only(left: 20, right: 20),
+                                            margin: EdgeInsets.only(
+                                                left: 20, right: 20),
                                           ),
                                           ReferenceExpandedItem(
                                             onPressed: () {},
-                                            listdata1: listdata[index].leadReference!,
+                                            listdata1:
+                                                listdata[index].leadReference!,
                                             referencedata: listdata[index],
                                           )
                                         ],
@@ -223,14 +246,23 @@ class _ReferenceItemState extends State<ReferenceItem> {
   List<Widget> _tableData(TenancyApplication model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueTitle(model.applicantName!, Index));
+    result.add(_datavalueGroup(model.group1!, model.id!));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueReferences(model.referencesCount.toString()));
-    result.add(_datavalueQuestionnairesSent(model.questionnairesSentCount.toString()));
-    result.add(_datavalueTitlequestionnairesReceived(model.questionnairesReceivedCount.toString()));
+    result.add(
+        _datavalueQuestionnairesSent(model.questionnairesSentCount.toString()));
+    result.add(_datavalueTitlequestionnairesReceived(
+        model.questionnairesReceivedCount.toString()));
     result.add(_appstatusdropdown(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, Index));
+    result.add(_datavalueExpand(
+        model.isexpand!
+            ? "assets/images/circle_up.png"
+            : "assets/images/circle_down.png",
+        30,
+        model,
+        Index));
 
     //result.add(_datavalueArchive("assets/images/ic_archive.png", 30));
 
@@ -253,6 +285,36 @@ class _ReferenceItemState extends State<ReferenceItem> {
             text,
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
+            style: MyStyles.Medium(12, myColor.blue),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _datavalueGroup(int group, int id) {
+    String grupo = "";
+    if (group == 0) {
+      grupo = "Group $id - primary";
+    } else {
+      grupo = "Group $group";
+    }
+    return InkWell(
+      onTap: () {
+        //  openApplicationDetailsView(Index);
+      },
+      child: Container(
+        height: 40,
+        width: width / 9,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: "grupo",
+          child: Text(
+            grupo,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: MyStyles.Medium(12, myColor.blue),
           ),
         ),
@@ -302,11 +364,13 @@ class _ReferenceItemState extends State<ReferenceItem> {
                 TenancyApplicationID updateid = new TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating =
+                    new TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(
+                    context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     await referencecallApi();
                   }
@@ -342,7 +406,7 @@ class _ReferenceItemState extends State<ReferenceItem> {
   Widget _datavalueReferences(String text) {
     return Container(
       height: 40,
-      width: width / 8.5,
+      width: width / 10,
       padding: EdgeInsets.only(left: 10, right: 10),
       alignment: Alignment.center,
       child: Text(
@@ -356,7 +420,7 @@ class _ReferenceItemState extends State<ReferenceItem> {
   Widget _datavalueQuestionnairesSent(String text) {
     return Container(
       height: 40,
-      width: width / 8.5,
+      width: width / 10,
       padding: EdgeInsets.only(left: 10, right: 10),
       alignment: Alignment.center,
       child: Text(
@@ -370,7 +434,7 @@ class _ReferenceItemState extends State<ReferenceItem> {
   Widget _datavalueTitlequestionnairesReceived(String text) {
     return Container(
       height: 40,
-      width: width / 8.5,
+      width: width / 10,
       padding: EdgeInsets.only(left: 10, right: 10),
       alignment: Alignment.center,
       child: Text(
@@ -384,7 +448,7 @@ class _ReferenceItemState extends State<ReferenceItem> {
   Widget _appstatusdropdown(TenancyApplication model) {
     return Container(
       height: 28,
-      width: width / 6,
+      width: width / 10,
       padding: EdgeInsets.only(left: 2),
       alignment: Alignment.centerLeft,
       // ignore: missing_required_param
@@ -394,22 +458,27 @@ class _ReferenceItemState extends State<ReferenceItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u!.displayValue,
         hint: "Action",
-        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem:
+            model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: true,
         onChanged: (data) {
-          if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
+          if (data!.EnumDetailID.toString() !=
+              eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus =
+                new TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(
+                context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 await referencecallApi();
 
@@ -460,14 +529,16 @@ class _ReferenceItemState extends State<ReferenceItem> {
     );
   }
 
-  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(
+      String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () async {
         if (model.isexpand!) {
           widget.listdata[index].isexpand = false;
           setState(() {});
         } else {
-          await ApiManager().getReferenceListApplicantWise(context, model.id.toString(), (status, responce, messege) async {
+          await ApiManager().getReferenceListApplicantWise(
+              context, model.id.toString(), (status, responce, messege) async {
             if (status) {
               widget.listdata[index].leadReference = responce;
               widget.listdata[index].isexpand = true;
@@ -537,7 +608,8 @@ class _ReferenceItemState extends State<ReferenceItem> {
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
     _store.dispatch(UpdateLLRCisloding(true));
     _store.dispatch(UpdateLLRCReferenceCheckslist(<TenancyApplication>[]));
-    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
+    _store
+        .dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -714,14 +786,16 @@ class _ReferenceItemState extends State<ReferenceItem> {
           onPressedYes: () async {
             Navigator.of(context1).pop();
 
-            await ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(),
+            await ApiManager().CheckTenantActiveOrNot(
+                context, model.propId.toString(), model.applicantId.toString(),
                 (status, responce) async {
               if (status) {
                 await referencecallApi();
                 ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(
+                      context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }
@@ -760,10 +834,12 @@ class _ReferenceItemState extends State<ReferenceItem> {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateArchive updateArchive = new TenancyApplicationUpdateArchive();
+            TenancyApplicationUpdateArchive updateArchive =
+                new TenancyApplicationUpdateArchive();
             updateArchive.IsArchived = "1";
 
-            await ApiManager().UpdateArchiveApplication(context, updateid, updateArchive, (status, responce) async {
+            await ApiManager().UpdateArchiveApplication(
+                context, updateid, updateArchive, (status, responce) async {
               if (status) {
                 await referencecallApi();
               }

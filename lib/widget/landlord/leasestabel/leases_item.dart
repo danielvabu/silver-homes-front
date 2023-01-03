@@ -188,6 +188,7 @@ class _LeasesItemState extends State<LeasesItem> {
   List<Widget> _tableData(TenancyApplication model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueName(model.applicantName!, Index));
+    result.add(_datavalueGroup(model.group1!, model.id!));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueDateSent(model.agreementSentDate!));
@@ -225,6 +226,36 @@ class _LeasesItemState extends State<LeasesItem> {
             textAlign: TextAlign.start,
             style: MyStyles.Medium(12, myColor.blue),
             overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _datavalueGroup(int group, int id) {
+    String grupo = "";
+    if (group == 0) {
+      grupo = "Group $id - primary";
+    } else {
+      grupo = "Group $group";
+    }
+    return InkWell(
+      onTap: () {
+        //  openApplicationDetailsView(Index);
+      },
+      child: Container(
+        height: 40,
+        width: width / 9,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: "grupo",
+          child: Text(
+            grupo,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: MyStyles.Medium(12, myColor.blue),
           ),
         ),
       ),
@@ -315,7 +346,7 @@ class _LeasesItemState extends State<LeasesItem> {
   Widget _datavalueDateSent(String text) {
     return Container(
       height: 40,
-      width: width / 9,
+      width: width / 10,
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -334,7 +365,7 @@ class _LeasesItemState extends State<LeasesItem> {
   Widget _datavalueDateReceive(String text) {
     return Container(
       height: 40,
-      width: width / 9,
+      width: width / 10,
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -353,7 +384,7 @@ class _LeasesItemState extends State<LeasesItem> {
   Widget _appstatusdropdown(TenancyApplication model) {
     return Container(
       height: 28,
-      width: width / 6.5,
+      width: width / 9,
       padding: EdgeInsets.only(left: 2),
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(
@@ -419,7 +450,7 @@ class _LeasesItemState extends State<LeasesItem> {
   Widget _reviewstatusdropdown(TenancyApplication model) {
     return Container(
       height: 28,
-      width: width / 6.5,
+      width: width / 9,
       padding: EdgeInsets.only(left: 12),
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(

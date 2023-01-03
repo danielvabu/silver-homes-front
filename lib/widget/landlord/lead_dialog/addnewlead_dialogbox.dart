@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/common/mycolor.dart';
@@ -46,7 +47,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
   final _store = getIt<AppStore>();
 
   late ScrollController _scrollController;
-
+  int rating1 = 0;
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -195,6 +196,45 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
                                           _store.dispatch(
                                               UpdateNewLeadProperty(data));
                                         },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      " " + GlobleString.ATH_Rating + ":",
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                    const SizedBox(height: 5.0),
+                                    Container(
+                                      height: 30,
+                                      // ignore: missing_required_param
+                                      child: RatingBar.builder(
+                                        initialRating: 0.0,
+                                        allowHalfRating: false,
+                                        glow: false,
+                                        itemBuilder: (context, index) =>
+                                            const Icon(
+                                          Icons.star,
+                                          color: myColor.blue,
+                                        ),
+                                        onRatingUpdate: (rating) {
+                                          rating1 =
+                                              int.parse(rating.toString());
+                                          // _store.dispatch(UpdateADV_rating(rating));
+                                          // _changeData();
+                                        },
+                                        itemCount: 5,
+                                        itemSize: 25.0,
+                                        unratedColor: myColor.TA_Border,
+                                        direction: Axis.horizontal,
                                       ),
                                     )
                                   ],
@@ -490,6 +530,7 @@ class _AddNewLeadDialogBoxState extends State<AddNewLeadDialogBox> {
           ApplicantId applicationid = new ApplicantId();
           applicationid.note = lead.PrivateNotes;
           applicationid.personId = personid;
+          applicationid.rating = rating1;
 
           AddLead addlead = new AddLead();
           addlead.propId = newleadstate.propertyValue!.ID.toString();

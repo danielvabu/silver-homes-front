@@ -46,6 +46,7 @@ class TenancyApplication {
   String? UpdatedOn;
   bool? ischeck;
   bool? isexpand;
+  int? group1;
   List<LeadReference>? leadReference;
 
   TenancyApplication({
@@ -93,6 +94,7 @@ class TenancyApplication {
     this.UpdatedOn,
     this.ischeck,
     this.isexpand,
+    this.group1,
     this.leadReference,
   });
 
@@ -143,6 +145,7 @@ class TenancyApplication {
         UpdatedOn: json["UpdatedOn"],
         ischeck: json["ischeck"],
         isexpand: json["isexpand"],
+        group1: json["group1"],
         leadReference: List<LeadReference>.from(
             json["leadReference"].map((x) => LeadReference.fromJson(x))),
       );
@@ -192,6 +195,7 @@ class TenancyApplication {
         "UpdatedOn": UpdatedOn,
         "ischeck": ischeck,
         "isexpand": isexpand,
+        "group1": group1,
         'leadReference': leadReference,
       };
 }

@@ -768,6 +768,7 @@ class GlobleString {
   static const String Fl_Select_all = "Select all";
   static const String Fl_Clear_all = "Clear all";
   static const String Fl_Property_Name = "Property Name";
+  static const String Fl_Property_Group = "Group";
   static const String Fl_City = "City";
   static const String Fl_Rating = "Rating";
   static const String Fl_Application_Received = "Application Received";

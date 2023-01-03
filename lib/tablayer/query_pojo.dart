@@ -47,7 +47,7 @@ class AddLead2 {
     this.referenceStatus,
     this.leaseStatus,
     this.Owner_ID,
-    this.group,
+    this.group1,
   });
 
   String? propId;
@@ -57,7 +57,7 @@ class AddLead2 {
   String? referenceStatus;
   String? leaseStatus;
   String? Owner_ID;
-  String? group;
+  String? group1;
   factory AddLead2.fromJson(Map<String, dynamic> json) => AddLead2(
         propId: json["Prop_ID"],
         applicantId: ApplicantId.fromJson(json["Applicant_ID"]),
@@ -66,7 +66,7 @@ class AddLead2 {
         referenceStatus: json["ReferenceStatus"],
         leaseStatus: json["LeaseStatus"],
         Owner_ID: json["Owner_ID"],
-         group: json["group"],
+        group1: json["group1"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,7 +77,7 @@ class AddLead2 {
         "ReferenceStatus": referenceStatus,
         "LeaseStatus": leaseStatus,
         "Owner_ID": Owner_ID,
-        "group": group,
+        "group1": group1,
       };
 }
 
@@ -85,19 +85,23 @@ class ApplicantId {
   ApplicantId({
     this.note,
     this.personId,
+    this.rating,
   });
 
   String? note;
   PersonId? personId;
+  int? rating;
 
   factory ApplicantId.fromJson(Map<String, dynamic> json) => ApplicantId(
         note: json["Note"],
         personId: PersonId.fromJson(json["Person_ID"]),
+        rating: json["rating"],
       );
 
   Map<String, dynamic> toJson() => {
         "Note": note,
         "Person_ID": personId!.toJson(),
+        "rating": rating,
       };
 }
 

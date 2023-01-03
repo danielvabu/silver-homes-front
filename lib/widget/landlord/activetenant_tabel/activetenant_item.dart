@@ -68,7 +68,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
     statuslist = QueryFilter().PlainValues(eSystemEnums().ApplicationStatus);
 
     leasereviewstatuslist.clear();
-    leasereviewstatuslist = QueryFilter().PlainValuesWithSorting(eSystemEnums().LeaseStatus);
+    leasereviewstatuslist =
+        QueryFilter().PlainValuesWithSorting(eSystemEnums().LeaseStatus);
 
     super.initState();
   }
@@ -125,12 +126,15 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
+                    padding: EdgeInsets.only(
+                        left: 20, right: 20, top: 15, bottom: 15),
                     child: Row(
                       children: [
                         TBLTenancyApplicationStatus(
                           onPressedIcon: () {
-                            if (listdata[Index].applicationReceivedDate != null && listdata[Index].applicationReceivedDate != "") {
+                            if (listdata[Index].applicationReceivedDate !=
+                                    null &&
+                                listdata[Index].applicationReceivedDate != "") {
                               openTenancyApplicationDetails(Index);
                             }
                           },
@@ -153,11 +157,15 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
                         SizedBox(width: 20),
                         TBLReferenceChecksStatus(
                           sentdate: listdata[Index].referenceRequestSentDate!,
-                          receivedate: listdata[Index].referenceRequestReceivedDate!,
+                          receivedate:
+                              listdata[Index].referenceRequestReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].referenceRequestReceivedDate != null &&
-                                listdata[Index].referenceRequestReceivedDate != "") {
-                              CustomeWidget.ReferencePreview(context, listdata[Index].id.toString());
+                            if (listdata[Index].referenceRequestReceivedDate !=
+                                    null &&
+                                listdata[Index].referenceRequestReceivedDate !=
+                                    "") {
+                              CustomeWidget.ReferencePreview(
+                                  context, listdata[Index].id.toString());
                             }
                           },
                         ),
@@ -166,7 +174,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
                           sentdate: listdata[Index].agreementSentDate!,
                           receivedate: listdata[Index].agreementReceivedDate!,
                           onPressedIcon: () {
-                            if (listdata[Index].agreementReceivedDate != null && listdata[Index].agreementReceivedDate != "") {
+                            if (listdata[Index].agreementReceivedDate != null &&
+                                listdata[Index].agreementReceivedDate != "") {
                               _dailogPreviewLease(listdata[Index]);
                             }
                           },
@@ -184,6 +193,7 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
   List<Widget> _tableData(TenancyApplication model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueName(model.applicantName!, Index));
+    result.add(_datavalueGroup(model.group1!, model.id!));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueLeaseStartDate(""));
@@ -191,7 +201,13 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
     result.add(_appstatusdropdown(model));
     result.add(_priviewLease(model));
     result.add(_actionPopup(model));
-    result.add(_datavalueExpand(model.isexpand! ? "assets/images/circle_up.png" : "assets/images/circle_down.png", 30, model, Index));
+    result.add(_datavalueExpand(
+        model.isexpand!
+            ? "assets/images/circle_up.png"
+            : "assets/images/circle_down.png",
+        30,
+        model,
+        Index));
 
     //result.add(_datavalueArchive("assets/images/ic_archive.png", 30));
 
@@ -215,6 +231,36 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
             textAlign: TextAlign.start,
             style: MyStyles.Medium(12, myColor.blue),
             overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _datavalueGroup(int group, int id) {
+    String grupo = "";
+    if (group == 0) {
+      grupo = "Group $id - primary";
+    } else {
+      grupo = "Group $group";
+    }
+    return InkWell(
+      onTap: () {
+        //  openApplicationDetailsView(Index);
+      },
+      child: Container(
+        height: 40,
+        width: width / 9,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: "grupo",
+          child: Text(
+            grupo,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: MyStyles.Medium(12, myColor.blue),
           ),
         ),
       ),
@@ -263,11 +309,13 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
                 TenancyApplicationID updateid = new TenancyApplicationID();
                 updateid.ID = model.applicantId.toString();
 
-                TenancyApplicationUpdateRating updaterating = new TenancyApplicationUpdateRating();
+                TenancyApplicationUpdateRating updaterating =
+                    new TenancyApplicationUpdateRating();
                 updaterating.Rating = rating;
                 updaterating.Note = ratingraview;
 
-                await ApiManager().UpdateRatingApplication(context, updateid, updaterating, (status, responce) async {
+                await ApiManager().UpdateRatingApplication(
+                    context, updateid, updaterating, (status, responce) async {
                   if (status) {
                     await activetenantcallApi();
                   }
@@ -303,11 +351,15 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
   Widget _datavalueLeaseStartDate(String text) {
     return Container(
       height: 40,
-      width: width / 9,
+      width: width / 16,
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
+        text != null && text != ""
+            ? new DateFormat("dd-MMM-yyyy")
+                .format(DateTime.parse(text))
+                .toString()
+            : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -318,11 +370,15 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
   Widget _datavalueLeaseDuration(String text) {
     return Container(
       height: 40,
-      width: width / 9,
+      width: width / 16,
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        text != null && text != "" ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(text)).toString() : "",
+        text != null && text != ""
+            ? new DateFormat("dd-MMM-yyyy")
+                .format(DateTime.parse(text))
+                .toString()
+            : "",
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -342,25 +398,31 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
         textstyle: MyStyles.Medium(12, myColor.text_color),
         itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
         hint: "Select Status",
-        defultHeight: statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
+        defultHeight:
+            statuslist.length * 33 > 250 ? 250 : statuslist.length * 33,
         showSearchBox: false,
-        selectedItem: model.applicationStatus != null ? model.applicationStatus : null,
+        selectedItem:
+            model.applicationStatus != null ? model.applicationStatus : null,
         isFilteredOnline: true,
         onChanged: (data) {
           if (model.applicationStatus != null &&
-              model.applicationStatus!.EnumDetailID.toString() == eApplicationStatus().ActiveTenent.toString()) {
+              model.applicationStatus!.EnumDetailID.toString() ==
+                  eApplicationStatus().ActiveTenent.toString()) {
             _dailogRemoveActiveTenant(model, data!.EnumDetailID.toString());
-          } else if (data!.EnumDetailID.toString() != eApplicationStatus().ActiveTenent.toString()) {
+          } else if (data!.EnumDetailID.toString() !=
+              eApplicationStatus().ActiveTenent.toString()) {
             TenancyApplicationID updateid = new TenancyApplicationID();
             updateid.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus updatestatus =
+                new TenancyApplicationUpdateStatus();
             updatestatus.ApplicationStatus = data.EnumDetailID.toString();
 
             loader = Helper.overlayLoader(context);
             Overlay.of(context)!.insert(loader);
 
-            ApiManager().UpdateStatusApplication(context, updateid, updatestatus, (status, responce) async {
+            ApiManager().UpdateStatusApplication(
+                context, updateid, updatestatus, (status, responce) async {
               if (status) {
                 await activetenantcallApi();
                 ;
@@ -389,7 +451,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
   }
 
   Widget _priviewLease(TenancyApplication model) {
-    return (model.agreementReceivedDate != null && model.agreementReceivedDate != "")
+    return (model.agreementReceivedDate != null &&
+            model.agreementReceivedDate != "")
         ? InkWell(
             onTap: () {
               _dailogPreviewLease(model);
@@ -437,7 +500,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
     );
   }
 
-  Widget _datavalueExpand(String iconData, double widthv, TenancyApplication model, int index) {
+  Widget _datavalueExpand(
+      String iconData, double widthv, TenancyApplication model, int index) {
     return InkWell(
       onTap: () {
         if (model.isexpand!) {
@@ -537,13 +601,16 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
           onPressedYes: () {
             Navigator.of(context1).pop();
 
-            ApiManager().CheckTenantActiveOrNot(context, model.propId.toString(), model.applicantId.toString(), (status, responce) async {
+            ApiManager().CheckTenantActiveOrNot(
+                context, model.propId.toString(), model.applicantId.toString(),
+                (status, responce) async {
               if (status) {
                 await activetenantcallApi();
                 await ApiManager().updateTenancyStatusCount(context);
               } else {
                 if (responce == "1") {
-                  ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
+                  ToastUtils.showCustomToast(
+                      context, GlobleString.already_active_tenant, false);
                 } else {
                   ToastUtils.showCustomToast(context, responce, false);
                 }
@@ -597,7 +664,8 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
           onPressedYes: () {
             Navigator.of(context1).pop();
 
-            if (Prefs.getString(PrefsName.user_CustomerFeatureListingURL).isNotEmpty) {
+            if (Prefs.getString(PrefsName.user_CustomerFeatureListingURL)
+                .isNotEmpty) {
               tenantRegister(model);
             } else {
               _dailogErrorTenant(model);
@@ -639,14 +707,17 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID), (error, respoce2, landlordProfile) {
+    ApiManager()
+        .landlord_ProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+            (error, respoce2, landlordProfile) {
       if (error) {
         /* String url = Weburl.CustomerFeaturedPage +
             landlordProfile!.CustomerFeatureListingURL! +
             "/" +
             RouteNames.Basic_Tenant_Login;*/
 
-        if ((landlordProfile!.CustomerFeatureListingURL != null && landlordProfile.CustomerFeatureListingURL!.isNotEmpty)) {
+        if ((landlordProfile!.CustomerFeatureListingURL != null &&
+            landlordProfile.CustomerFeatureListingURL!.isNotEmpty)) {
           String url = Weburl.CustomerFeaturedPage +
               landlordProfile.CustomerFeatureListingURL! +
               "/" +
@@ -660,11 +731,13 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
               landlordProfile.companylogo!.url!.isNotEmpty) {
             CompanyLogo = landlordProfile.companylogo!.url.toString();
           } else {
-            CompanyLogo = "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
+            CompanyLogo =
+                "http://161.97.104.204:8013/Attachments/Files/20210720135003287_logo.png";
           }
 
           String CompanyName;
-          if (landlordProfile.companyname != null && landlordProfile.companyname!.isNotEmpty) {
+          if (landlordProfile.companyname != null &&
+              landlordProfile.companyname!.isNotEmpty) {
             CompanyName = landlordProfile.companyname!;
           } else {
             CompanyName = GlobleString.App_Name;
@@ -682,11 +755,13 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
               CompanyName, (status, responce) async {
             if (status) {
               loader.remove();
-              ToastUtils.showCustomToast(context, GlobleString.ARC_Tenant_Invite_successfully, true);
+              ToastUtils.showCustomToast(
+                  context, GlobleString.ARC_Tenant_Invite_successfully, true);
               activetenantcallApi();
             } else {
               loader.remove();
-              ToastUtils.showCustomToast(context, GlobleString.ARC_Tenant_Invite_Error, false);
+              ToastUtils.showCustomToast(
+                  context, GlobleString.ARC_Tenant_Invite_Error, false);
             }
           });
         } else {
@@ -729,10 +804,12 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().terminateTenancyWorkflow(context, model.applicantId.toString(), (status, responce) async {
+    ApiManager().terminateTenancyWorkflow(context, model.applicantId.toString(),
+        (status, responce) async {
       if (status) {
         loader.remove();
-        ToastUtils.showCustomToast(context, GlobleString.ARC_terminante_successfully, true);
+        ToastUtils.showCustomToast(
+            context, GlobleString.ARC_terminante_successfully, true);
         activetenantcallApi();
       } else {
         loader.remove();
@@ -834,10 +911,13 @@ class _ActiveTenantItemState extends State<ActiveTenantItem> {
             TenancyApplicationID cpojo2 = new TenancyApplicationID();
             cpojo2.ID = model.id.toString();
 
-            TenancyApplicationUpdateStatus upojo2 = new TenancyApplicationUpdateStatus();
+            TenancyApplicationUpdateStatus upojo2 =
+                new TenancyApplicationUpdateStatus();
             upojo2.ApplicationStatus = status;
 
-            await ApiManager().RemoveActiveTenant(context, cpojo1, upojo1, cpojo2, upojo2, (status, responce) async {
+            await ApiManager()
+                .RemoveActiveTenant(context, cpojo1, upojo1, cpojo2, upojo2,
+                    (status, responce) async {
               if (status) {
                 await activetenantcallApi();
                 await ApiManager().updateTenancyStatusCount(context);

@@ -329,6 +329,7 @@ class TenancyApplicationFormScreenState
               propdata.province! +
               ", " +
               propdata.country!;
+          await Prefs.setString(PrefsName.PropertyID, propdata.ID!);
 
           _store.dispatch(UpdateTenacyFormAddress(Address));
 
@@ -1016,51 +1017,51 @@ class TenancyApplicationFormScreenState
               ],
             ),
           ),
-          SizedBox(
-            width: 60,
-          ),
-          InkWell(
-            onTap: () {
-              if (Prefs.getBool(PrefsName.TCF_Step4)) {
-                RemoveHighLight();
-                showBackDialog(tenancyFormState, false, stepper: 4);
-                // _store.dispatch(UpdateTenacyFormIndex(4));
-              } else if (Prefs.getBool(PrefsName.TCF_Step1) &&
-                  Prefs.getBool(PrefsName.TCF_Step2) &&
-                  Prefs.getBool(PrefsName.TCF_Step3)) {
-                RemoveHighLight();
-                showBackDialog(tenancyFormState, false, stepper: 4);
-                // _store.dispatch(UpdateTenacyFormIndex(4));
-              }
-            },
-            splashColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            child: Column(
-              children: [
-                Container(
-                  child: Image.asset(
-                    Prefs.getBool(PrefsName.TCF_Step4)
-                        ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 4
-                            ? "assets/images/ic_circle_fill.png"
-                            : "assets/images/ic_circle_border.png",
-                    width: 35,
-                    height: 35,
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  GlobleString.TAF_Other_applicants,
-                  style: MyStyles.SemiBold(13, myColor.text_color),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-          ),
+          // SizedBox(
+          //   width: 60,
+          // ),
+          // InkWell(
+          //   onTap: () {
+          //     if (Prefs.getBool(PrefsName.TCF_Step4)) {
+          //       RemoveHighLight();
+          //       showBackDialog(tenancyFormState, false, stepper: 4);
+          //       // _store.dispatch(UpdateTenacyFormIndex(4));
+          //     } else if (Prefs.getBool(PrefsName.TCF_Step1) &&
+          //         Prefs.getBool(PrefsName.TCF_Step2) &&
+          //         Prefs.getBool(PrefsName.TCF_Step3)) {
+          //       RemoveHighLight();
+          //       showBackDialog(tenancyFormState, false, stepper: 4);
+          //       // _store.dispatch(UpdateTenacyFormIndex(4));
+          //     }
+          //   },
+          //   splashColor: Colors.transparent,
+          //   hoverColor: Colors.transparent,
+          //   highlightColor: Colors.transparent,
+          //   child: Column(
+          //     children: [
+          //       Container(
+          //         child: Image.asset(
+          //           Prefs.getBool(PrefsName.TCF_Step4)
+          //               ? "assets/images/ic_circle_check.png"
+          //               : tenancyFormState.selectView > 4
+          //                   ? "assets/images/ic_circle_fill.png"
+          //                   : "assets/images/ic_circle_border.png",
+          //           width: 35,
+          //           height: 35,
+          //           alignment: Alignment.topLeft,
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: 5,
+          //       ),
+          //       Text(
+          //         GlobleString.TAF_Other_applicants,
+          //         style: MyStyles.SemiBold(13, myColor.text_color),
+          //         textAlign: TextAlign.center,
+          //       )
+          //     ],
+          //   ),
+          // ),
           SizedBox(
             width: 60,
           ),
@@ -1254,7 +1255,7 @@ class TenancyApplicationFormScreenState
             },
             onPressedSave: () {
               Prefs.setBool(PrefsName.TCF_Step3, true);
-              UpdateViewAPI(4);
+              UpdateViewAPI(5);
               // _store.dispatch(UpdateTenacyFormIndex(4));
             },
             onPressGotoback: () => gotoBack(),
