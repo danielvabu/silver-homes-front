@@ -24,6 +24,7 @@ import 'package:silverhome/domain/entities/propertylist.dart';
 import 'package:silverhome/presentation/models/landlord_models/landlord_profile_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/property_list_state.dart';
 import 'package:silverhome/presentation/screens/landlord/property/add_edit_property.dart';
+import 'package:silverhome/presentation/screens/teams/alert/alertEdiFilter.dart';
 import 'package:silverhome/presentation/screens/teams/alert/alertEdiMember.dart';
 import 'package:silverhome/presentation/screens/teams/alert/alertEditAssigment.dart';
 import 'package:silverhome/presentation/screens/teams/header/roleHeaders.dart';
@@ -390,6 +391,27 @@ class _TeamMemberState extends State<TeamMember> {
                     height: height - 300,
                     width: width - 200,
                     child: EditRoleSelectionDialog(),
+                  );
+                },
+              ),
+            ));
+  }
+
+  showAlertDialogCreateEditFilter(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              content: Builder(
+                builder: (context) {
+                  // Get available height and width of the build area of this widget. Make a choice depending on the size.
+                  var height = MediaQuery.of(context).size.height;
+                  var width = MediaQuery.of(context).size.width;
+
+                  return Container(
+                    height: height - 300,
+                    width: width - 200,
+                    child: FilterScreen(),
                   );
                 },
               ),
