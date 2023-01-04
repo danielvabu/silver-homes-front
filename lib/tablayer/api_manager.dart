@@ -4349,7 +4349,7 @@ class ApiManager {
           String StatusCode = myobject['StatusCode'] != null
               ? myobject['StatusCode'].toString()
               : "";
-          res = res + myobject['Result'];
+          res = res + myobject['Result'].toString();
           res = res + ",";
           if (StatusCode.isEmpty || StatusCode != "200") {
             loader.remove();
@@ -4358,10 +4358,11 @@ class ApiManager {
             break;
           }
 
-          if ((data.length - 1) == i && !issuccess) {
-            CallBackQuesy(true, res);
-          }
+          // if ((data.length - 1) == i && !issuccess) {
+          //   CallBackQuesy(true, res);
+          // }
         }
+        CallBackQuesy(true, res);
       } else {
         CallBackQuesy(false, "");
       }
@@ -10513,6 +10514,26 @@ class ApiManager {
         callBackQuesy(true, respoce);
       } else {
         loader.remove();
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  DuplicatTemplateHtml(BuildContext context, String id, String appid,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_DuplicatTemplateHtml,
+      "Reqtokens": {"ID": id, "APPID": appid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        callBackQuesy(true, respoce);
+      } else {
         callBackQuesy(false, respoce);
       }
     });

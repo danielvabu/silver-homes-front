@@ -205,6 +205,8 @@ class Weburl {
   static var WorkFlow_DuplicatProperty = "1DF5CC24-A44B-45DE-B9E4-289D65EAC2DD";
   static var WorkFlow_DuplicateEventype =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC222";
+  static var WorkFlow_DuplicatTemplateHtml =
+      "1DF5CC24-A44B-45DE-B9E4-289D65EACTEMP";
   static var WorkFlow_DuplicateEventypeTemplate =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC777";
   static var WorkFlow_CreateTemplateEventype =

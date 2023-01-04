@@ -1778,8 +1778,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     ApiManager().InsetTFAdditionalOCcupant(
         context, additionalOccupantslist, cpojo, upojo, (status, responce) {
       if (status) {
-        loader.remove();
-
         // if (!isGotoback) {
         //   Prefs.setBool(PrefsName.TCF_Step4, true);
         //   if (stepper == 0) {
@@ -1792,8 +1790,8 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         //   widget._callbackGotoback();
         // }
       } else {
-        loader.remove();
-        ToastUtils.showCustomToast(context, responce, false);
+        // loader.remove();
+        // ToastUtils.showCustomToast(context, responce, false);
       }
     });
     leadcall(applicantIdlist, emails);
@@ -1803,29 +1801,36 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
     ApiManager().InsetNewLeadAPI(context, applicantIdlist, (error, respoce) {
       if (error) {
         InviteWorkFlowReqtokens reqtokens = new InviteWorkFlowReqtokens();
-        for (int i = 0; i < emails.length; i++) {
-          reqtokens.id = '147';
-          reqtokens.ToEmail = emails[i];
-          reqtokens.applicationSentDate = new DateFormat("yyyy-MM-dd HH:mm:ss")
-              .format(DateTime.now())
-              .toString();
-          reqtokens.HostURL = Weburl.Email_URL;
-          reqtokens.DbAppCode = Weburl.API_CODE;
-          InviteWorkFlow inviteWorkFlow = new InviteWorkFlow();
-          inviteWorkFlow.workFlowId =
-              Weburl.Lead_Invitation_workflow.toString();
-          inviteWorkFlow.reqtokens = reqtokens;
-          ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
-            if (error) {
-              // widget._callbackSave();
-            } else {}
+        List<String> ids = respoce.split(",");
+        ids.removeLast();
+        for (int i = 0; i < ids.length; i++) {
+          ApiManager().DuplicatTemplateHtml(
+              context, Prefs.getString(PrefsName.TCF_ApplicationID), ids[i],
+              (status, responce) async {
+            if (status) {
+              reqtokens.id = ids[i];
+              reqtokens.ToEmail = emails[i];
+              reqtokens.applicationSentDate =
+                  new DateFormat("yyyy-MM-dd HH:mm:ss")
+                      .format(DateTime.now())
+                      .toString();
+              reqtokens.HostURL = Weburl.Email_URL;
+              reqtokens.DbAppCode = Weburl.API_CODE;
+              InviteWorkFlow inviteWorkFlow = new InviteWorkFlow();
+              inviteWorkFlow.workFlowId =
+                  Weburl.Lead_Invitation_workflow.toString();
+              inviteWorkFlow.reqtokens = reqtokens;
+              await ApiManager().Emailworkflow(context, inviteWorkFlow,
+                  (error, respoce) {
+                if (error) {
+                  // widget._callbackSave();
+                } else {}
+              });
+            } else {
+              ToastUtils.showCustomToast(context, GlobleString.Error1, false);
+            }
           });
         }
-
-        // ToastUtils.showCustomToast(context, GlobleString.NL_Lead_Success, true);
-        // loader.remove();
-        // _store.dispatch(UpdateNewLeadProperty(null));
-        // widget._callbackSave();
       } else {
         loader.remove();
         ToastUtils.showCustomToast(

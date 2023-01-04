@@ -966,6 +966,8 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
 
   void previewEmailTemplate(String html) async {
     String template1 = await GenerateTemplate();
+    template1 = template1.replaceAll(
+        '@ApplicantName', widget._tenancyleadlist[0].applicantName!);
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -1079,9 +1081,9 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     String landllistweb = "https://app.silverhomes.ai/#/" +
         landlordProfile1!.CustomerFeatureListingURL!;
     String html = await controller.getText();
+    // String? html1 = html.replaceAll(
+    //     '@ApplicantName', widget._tenancyleadlist[0].applicantName!);
     String? html1 = html.replaceAll(
-        '@ApplicantName', widget._tenancyleadlist[0].applicantName!);
-    html1 = html1.replaceAll(
         '@PropertyName', widget._tenancyleadlist[0].propertyName!);
     //html1 = html1.replaceAll('@PropertyAddress', propiedaddata);
     html1 = html1.replaceAll('@CurrentDate', dateToday.toString());
@@ -1096,7 +1098,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     html1 = html1.replaceAll('@propertyDescription', propdesc);
     var url = Uri.base.origin;
     String html2 =
-        '<br><p style="margin:15px;"><a href="$url/#/tenancy_application_form/$idapplication" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
+        '<br><p style="margin:15px;"><a href="$url/#/tenancy_application_form/@id" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
     String html0 =
         '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
     return html0 + html1 + html2;
