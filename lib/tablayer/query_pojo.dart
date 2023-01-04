@@ -1152,11 +1152,13 @@ class Occupant {
   String? LastName;
   String? email;
   String? mobilenumber;
+  String? suspendedreason;
   Occupant({
     this.FirstName,
     this.LastName,
     this.email,
     this.mobilenumber,
+    this.suspendedreason,
   });
 
   factory Occupant.fromJson(Map<String, dynamic> json) => Occupant(
@@ -1164,6 +1166,7 @@ class Occupant {
         LastName: json["LastName"],
         email: json["email"],
         mobilenumber: json["mobilenumber"],
+        suspendedreason: json["suspendedreason"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -1171,6 +1174,7 @@ class Occupant {
         "LastName": LastName,
         "email": email,
         "mobilenumber": mobilenumber,
+        "suspendedreason": suspendedreason,
       };
 }
 

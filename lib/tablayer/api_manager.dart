@@ -4341,7 +4341,7 @@ class ApiManager {
     HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
       if (error) {
         List data = jsonDecode(respoce) as List;
-
+        String res = "";
         bool issuccess = false;
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
@@ -4349,7 +4349,8 @@ class ApiManager {
           String StatusCode = myobject['StatusCode'] != null
               ? myobject['StatusCode'].toString()
               : "";
-
+          res = res + myobject['Result'];
+          res = res + ",";
           if (StatusCode.isEmpty || StatusCode != "200") {
             loader.remove();
             issuccess = true;
@@ -4358,7 +4359,7 @@ class ApiManager {
           }
 
           if ((data.length - 1) == i && !issuccess) {
-            CallBackQuesy(true, "");
+            CallBackQuesy(true, res);
           }
         }
       } else {
@@ -4702,7 +4703,7 @@ class ApiManager {
               myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
-
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
@@ -4853,6 +4854,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
+          tenancyApplication.group1 = group1;
 
           allListData.add(tenancyApplication);
 
@@ -5637,7 +5639,9 @@ class ApiManager {
             String Occupant_FirstName = Occupant['FirstName'] != null
                 ? Occupant['FirstName'].toString()
                 : "";
-
+            String SuspendedReason = Occupant['SuspendedReason'] != null
+                ? Occupant['SuspendedReason'].toString()
+                : "";
             String Occupant_LastName = Occupant['LastName'] != null
                 ? Occupant['LastName'].toString()
                 : "";
@@ -5656,6 +5660,7 @@ class ApiManager {
             tenancyAdditionalOccupant.OccupantID = Occupant_ID;
             tenancyAdditionalOccupant.email = Occupant_Email;
             tenancyAdditionalOccupant.mobilenumber = Occupant_MobileNumber;
+            tenancyAdditionalOccupant.explain = SuspendedReason;
             tenancyAdditionalOccupant.applicant = true;
             tenancyAdditionalOccupant.errro_email = false;
             tenancyAdditionalOccupant.errro_mobilenumber = false;

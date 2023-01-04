@@ -80,6 +80,7 @@ class TenancyApplicationFormScreenState
     await Prefs.setBool(PrefsName.TCF_Step4, false);
     await Prefs.setBool(PrefsName.TCF_Step5, false);
     await Prefs.setBool(PrefsName.TCF_Step6, false);
+    await Prefs.setBool(PrefsName.TCF_Step7, false);
     await Prefs.setBool(PrefsName.TCF_Current_isReference_Receive, false);
 
     if (Prefs.getBool(PrefsName.TCF_EditApplicant) != null &&
@@ -311,6 +312,7 @@ class TenancyApplicationFormScreenState
           if (applicationDetails.isAuthorized! &&
               applicationDetails.isAgreedTerms!) {
             Prefs.setBool(PrefsName.TCF_Step6, true);
+            Prefs.setBool(PrefsName.TCF_Step7, true);
           } else {
             Prefs.setBool(PrefsName.TCF_Step6, false);
           }
@@ -330,10 +332,10 @@ class TenancyApplicationFormScreenState
               ", " +
               propdata.country!;
           await Prefs.setString(PrefsName.PropertyID, propdata.ID!);
-
+          await Prefs.setString(PrefsName.OwnerID, ownerdata!.id.toString());
           _store.dispatch(UpdateTenacyFormAddress(Address));
 
-          _store.dispatch(UpdateTenacyFormCompanyName(ownerdata!.CompanyName!));
+          _store.dispatch(UpdateTenacyFormCompanyName(ownerdata.CompanyName!));
           _store
               .dispatch(UpdateTenacyFormHomePagelink(ownerdata.HomePageLink!));
           _store.dispatch(UpdateTenacyFormCustomerFeatureListingURL(

@@ -1097,6 +1097,7 @@ class GlobleString {
   static const String TAF_Personal_email = "Email";
   static const String TAF_Personal_phonenumber = "Phone number";
   static const String TAF_Personal_yourstory = "Your story";
+  static const String TAF_Personal_explain = "Please explain";
   static const String Back = "Back";
   static const String Save_and_next = "Save and Next";
   static const String Save_and_Finish = "Save and Finish";
@@ -1140,7 +1141,8 @@ class GlobleString {
   static const String TAF_AO_Last_name = "Last name";
   static const String TAF_AO_Relationship_applicant =
       "Relationship to primary applicant";
-  static const String TAF_AO_NotApplicable = "Not applicable";
+  static const String TAF_AO_NotApplicable =
+      "Tenancy application not applicable";
 
   static const String TAF_Additional_Occupants_dailog_yes = "Yes";
   static const String TAF_Additional_Occupants_dailog_no = "No";
