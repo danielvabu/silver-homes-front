@@ -490,10 +490,12 @@ class _TeamMemberState extends State<TeamMember> {
         _store.dispatch(UpdatePropertyFormAddress(""));
         _store.dispatch(UpdateAddEditProperty());*/
 
-        showAlertDialog(context);
+        /*   showAlertDialog(context);
         showAlertDialogCreateRol(context);
         showAlertDialogEditRol(context);
         showAlertDialogEditAssigmentRol(context);
+
+        */
         print("pruebamain: " + Prefs.getString(PrefsName.userTokan) + "      :    " + Weburl.API_CODE);
         /*  Navigator.push(
           context,

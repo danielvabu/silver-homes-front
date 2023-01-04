@@ -10,6 +10,7 @@ import 'package:silverhome/common/mystyles.dart';
 import 'package:silverhome/common/prefsname.dart';
 import 'package:silverhome/domain/entities/propertylist.dart';
 import 'package:silverhome/navigation/route_names.dart';
+import 'package:silverhome/presentation/models/teamMembers/teamMemberUserList.dart';
 import 'package:silverhome/presentation/models/teamMembers/teamMembersRoleModel.dart';
 import 'package:silverhome/presentation/screens/TEST/customerTest.dart';
 import 'package:silverhome/presentation/screens/TEST/test.dart';
@@ -38,10 +39,10 @@ class TeamMembersItem extends StatefulWidget {
   final VoidCallActive _callbackActive;
   final VoidCallInActive _callbackInActive;
   final VoidCallIsPublish _callbackIsPublish;
-  TeamMembersModel listdata;
+  TeamMemberUserListModel listdata;
 
   TeamMembersItem({
-    required TeamMembersModel listdata1,
+    required TeamMemberUserListModel listdata1,
     required VoidCallName onPressName,
     required VoidCallDetails onPressDetails,
     required VoidCallEdit onPresseEdit,
@@ -84,7 +85,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget ListviewBuid(TeamMembersModel listdata) {
+  Widget ListviewBuid(TeamMemberUserListModel listdata) {
     return ListView.separated(
       separatorBuilder: (context, index) => Divider(
         color: myColor.TA_table_header,
@@ -93,7 +94,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
       ),
       scrollDirection: Axis.vertical,
       key: UniqueKey(),
-      itemCount: listdata.teamMembers!.length,
+      itemCount: listdata.data!.length,
       itemBuilder: (BuildContext ctxt, int Index) {
         return Container(
           height: 40,
@@ -101,14 +102,14 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
-            children: _tableData(listdata.teamMembers![Index], Index),
+            children: _tableData(listdata.data![Index], Index),
           ),
         );
       },
     );
   }
 
-  List<Widget> _tableData(TeamMember model, int Index) {
+  List<Widget> _tableData(DatumTeamUser model, int Index) {
     var result = <Widget>[];
     result.add(_datavalueProperty(model));
     result.add(_datavalueUnit(model));
@@ -127,7 +128,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     return result;
   }
 
-  Widget _datavalueProperty(TeamMember model) {
+  Widget _datavalueProperty(DatumTeamUser model) {
     return InkWell(
       onTap: () {
         // widget._callbackPropertyName(model);
@@ -150,7 +151,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget _datavalueUnit(TeamMember model) {
+  Widget _datavalueUnit(DatumTeamUser model) {
     return Container(
       height: 40,
       width: width / 7,
@@ -165,14 +166,14 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget _datavalueCity(TeamMember model) {
+  Widget _datavalueCity(DatumTeamUser model) {
     return Container(
       height: 40,
       width: width / 8,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.role.toString(),
+        model.roleName.toString(),
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -180,14 +181,14 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget _datavalueCountry(TeamMember model) {
+  Widget _datavalueCountry(DatumTeamUser model) {
     return Container(
       height: 40,
-      width: width / 10,
+      width: width / 6,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.activatedAt.toString(),
+        model.activatedAt == null ? "No result" : model.activatedAt.toString(),
         textAlign: TextAlign.start,
         overflow: TextOverflow.ellipsis,
         style: MyStyles.Medium(12, myColor.Circle_main),
@@ -195,14 +196,14 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget _datavaluePropertyType(TeamMember model) {
+  Widget _datavaluePropertyType(DatumTeamUser model) {
     return Container(
       height: 40,
       width: width / 11,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
-        model.lastLoggedIn.toString(),
+        model.lastLoggedIn == null ? "No result" : model.lastLoggedIn.toString(),
         textAlign: TextAlign.center,
         style: MyStyles.Medium(12, myColor.Circle_main),
       ),
@@ -235,7 +236,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
     );
   }
 
-  Widget _datavalueActiveInactive(TeamMember model, int index) {
+  Widget _datavalueActiveInactive(DatumTeamUser model, int index) {
     return Container(
       height: 40,
       width: width / 11,
@@ -393,7 +394,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
             }));
   }
 
-  Widget _actionPopup(TeamMember model) {
+  Widget _actionPopup(DatumTeamUser model) {
     return Expanded(
       flex: 1,
       child: Container(

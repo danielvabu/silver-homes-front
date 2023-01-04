@@ -16,6 +16,7 @@ import 'package:silverhome/presentation/models/landlord_models/landlord_tenancy_
 import 'package:silverhome/presentation/models/landlord_models/notification_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/slots_list_state.dart';
 import 'package:silverhome/presentation/models/landlord_models/slots_state.dart';
+import 'package:silverhome/presentation/models/teamMembers/teamMembersRoleModel.dart';
 import 'package:silverhome/presentation/models/vendor/add_vendor_state.dart';
 
 import 'admin_models/admin_add_newmember_state.dart';
@@ -102,8 +103,7 @@ abstract class AppState with _$AppState {
     required PreviewDocumentState previewDocumentState,
     required ReferenceCheckState referenceCheckState,
     required LandLordTenancyArchiveState landLordTenancyArchiveState,
-    required ReferenceQuestionnaireDetailsState
-        referenceQuestionnaireDetailsState,
+    required ReferenceQuestionnaireDetailsState referenceQuestionnaireDetailsState,
     required ReferenceCheckDialogState referenceCheckDialogState,
     required LandLordTenancyLeaseState landlordTenancyLeaseState,
     required LandLordActiveTenantState landLordActiveTenantState,
@@ -145,6 +145,8 @@ abstract class AppState with _$AppState {
     required LeaseDetailsState leaseDetailsState,
     required TenantAddMaintenanceState tenantAddMaintenanceState,
     required TenantPersonalState tenantPersonalState,
+
+    // required TeamMembersModel teamMembersModel,
   }) = _AppState;
 
   factory AppState.initial() => AppState(
@@ -171,17 +173,14 @@ abstract class AppState with _$AppState {
         editLeadState: EditLeadState.initial(),
         slotsState: SlotsState.initial(),
         slotsListState: SlotsListState.initial(),
-        tenantsApplicationDetailsState:
-            TenantsApplicationDetailsState.initial(),
-        tenancyVarificationDocumentState:
-            TenancyVarificationDocumentState.initial(),
+        tenantsApplicationDetailsState: TenantsApplicationDetailsState.initial(),
+        tenancyVarificationDocumentState: TenancyVarificationDocumentState.initial(),
         varificationDocumentState: VarificationDocumentState.initial(),
         referenceQuestionnaireState: ReferenceQuestionnaireState.initial(),
         previewDocumentState: PreviewDocumentState.initial(),
         referenceCheckState: ReferenceCheckState.initial(),
         landLordTenancyArchiveState: LandLordTenancyArchiveState.initial(),
-        referenceQuestionnaireDetailsState:
-            ReferenceQuestionnaireDetailsState.initial(),
+        referenceQuestionnaireDetailsState: ReferenceQuestionnaireDetailsState.initial(),
         referenceCheckDialogState: ReferenceCheckDialogState.initial(),
         landlordTenancyLeaseState: LandLordTenancyLeaseState.initial(),
         landLordActiveTenantState: LandLordActiveTenantState.initial(),
@@ -208,8 +207,7 @@ abstract class AppState with _$AppState {
         adminLandlordPropertyState: AdminLandlordPropertyState.initial(),
         adminPropertyDetailsState: AdminPropertyDetailsState.initial(),
         adminLandlordLeadsState: AdminLandlordLeadsState.initial(),
-        adminLandlordLeadsDetailsState:
-            AdminLandlordLeadsDetailsState.initial(),
+        adminLandlordLeadsDetailsState: AdminLandlordLeadsDetailsState.initial(),
         adminTeamState: AdminTeamState.initial(),
         adminSettingState: AdminSettingState.initial(),
 
@@ -224,5 +222,8 @@ abstract class AppState with _$AppState {
         leaseDetailsState: LeaseDetailsState.initial(),
         tenantAddMaintenanceState: TenantAddMaintenanceState.initial(),
         tenantPersonalState: TenantPersonalState.initial(),
+
+/*Team Members*/
+        // teamMembersModel: TeamMembersModel(),
       );
 }

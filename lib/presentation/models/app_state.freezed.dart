@@ -41,15 +41,13 @@ class _$AppStateTearOff {
       required SlotsState slotsState,
       required SlotsListState slotsListState,
       required TenantsApplicationDetailsState tenantsApplicationDetailsState,
-      required TenancyVarificationDocumentState
-          tenancyVarificationDocumentState,
+      required TenancyVarificationDocumentState tenancyVarificationDocumentState,
       required VarificationDocumentState varificationDocumentState,
       required ReferenceQuestionnaireState referenceQuestionnaireState,
       required PreviewDocumentState previewDocumentState,
       required ReferenceCheckState referenceCheckState,
       required LandLordTenancyArchiveState landLordTenancyArchiveState,
-      required ReferenceQuestionnaireDetailsState
-          referenceQuestionnaireDetailsState,
+      required ReferenceQuestionnaireDetailsState referenceQuestionnaireDetailsState,
       required ReferenceCheckDialogState referenceCheckDialogState,
       required LandLordTenancyLeaseState landlordTenancyLeaseState,
       required LandLordActiveTenantState landLordActiveTenantState,
@@ -165,122 +163,76 @@ mixin _$AppState {
   TenancyFormState get tenancyFormState => throw _privateConstructorUsedError;
   TFPersonalState get tfPersonalState => throw _privateConstructorUsedError;
   TFEmploymentState get tfEmploymentState => throw _privateConstructorUsedError;
-  TFCurrentTenancyState get tfCurrentTenancyState =>
-      throw _privateConstructorUsedError;
-  TFAdditionalOccupantState get tfAdditionalOccupantState =>
-      throw _privateConstructorUsedError;
-  TFAdditionalInfoState get tfAdditionalInfoState =>
-      throw _privateConstructorUsedError;
-  TFAdditionalReferenceState get tfAdditionalReferenceState =>
-      throw _privateConstructorUsedError;
+  TFCurrentTenancyState get tfCurrentTenancyState => throw _privateConstructorUsedError;
+  TFAdditionalOccupantState get tfAdditionalOccupantState => throw _privateConstructorUsedError;
+  TFAdditionalInfoState get tfAdditionalInfoState => throw _privateConstructorUsedError;
+  TFAdditionalReferenceState get tfAdditionalReferenceState => throw _privateConstructorUsedError;
   TenantFilterState get tenantFilterState => throw _privateConstructorUsedError;
-  LandLordApplicationState get landLordApplicationState =>
-      throw _privateConstructorUsedError;
+  LandLordApplicationState get landLordApplicationState => throw _privateConstructorUsedError;
   NewLeadState get newLeadState => throw _privateConstructorUsedError;
   FunnelViewState get funnelViewState => throw _privateConstructorUsedError;
   PropertyFormState get propertyFormState => throw _privateConstructorUsedError;
-  EventTypesFormState get eventTypesFormState =>
-      throw _privateConstructorUsedError;
+  EventTypesFormState get eventTypesFormState => throw _privateConstructorUsedError;
   PropertyState get propertyState => throw _privateConstructorUsedError;
   EventTypesState get eventTypesState => throw _privateConstructorUsedError;
-  PropertySummeryState get propertySummeryState =>
-      throw _privateConstructorUsedError;
-  EventTypesSummeryState get eventTypesSummeryState =>
-      throw _privateConstructorUsedError;
+  PropertySummeryState get propertySummeryState => throw _privateConstructorUsedError;
+  EventTypesSummeryState get eventTypesSummeryState => throw _privateConstructorUsedError;
   PropertyListState get propertyListState => throw _privateConstructorUsedError;
-  EventTypesListState get eventTypesListState =>
-      throw _privateConstructorUsedError;
+  EventTypesListState get eventTypesListState => throw _privateConstructorUsedError;
   EditLeadState get editLeadState => throw _privateConstructorUsedError;
   SlotsState get slotsState => throw _privateConstructorUsedError;
   SlotsListState get slotsListState => throw _privateConstructorUsedError;
-  TenantsApplicationDetailsState get tenantsApplicationDetailsState =>
-      throw _privateConstructorUsedError;
-  TenancyVarificationDocumentState get tenancyVarificationDocumentState =>
-      throw _privateConstructorUsedError;
-  VarificationDocumentState get varificationDocumentState =>
-      throw _privateConstructorUsedError;
-  ReferenceQuestionnaireState get referenceQuestionnaireState =>
-      throw _privateConstructorUsedError;
-  PreviewDocumentState get previewDocumentState =>
-      throw _privateConstructorUsedError;
-  ReferenceCheckState get referenceCheckState =>
-      throw _privateConstructorUsedError;
-  LandLordTenancyArchiveState get landLordTenancyArchiveState =>
-      throw _privateConstructorUsedError;
-  ReferenceQuestionnaireDetailsState get referenceQuestionnaireDetailsState =>
-      throw _privateConstructorUsedError;
-  ReferenceCheckDialogState get referenceCheckDialogState =>
-      throw _privateConstructorUsedError;
-  LandLordTenancyLeaseState get landlordTenancyLeaseState =>
-      throw _privateConstructorUsedError;
-  LandLordActiveTenantState get landLordActiveTenantState =>
-      throw _privateConstructorUsedError;
+  TenantsApplicationDetailsState get tenantsApplicationDetailsState => throw _privateConstructorUsedError;
+  TenancyVarificationDocumentState get tenancyVarificationDocumentState => throw _privateConstructorUsedError;
+  VarificationDocumentState get varificationDocumentState => throw _privateConstructorUsedError;
+  ReferenceQuestionnaireState get referenceQuestionnaireState => throw _privateConstructorUsedError;
+  PreviewDocumentState get previewDocumentState => throw _privateConstructorUsedError;
+  ReferenceCheckState get referenceCheckState => throw _privateConstructorUsedError;
+  LandLordTenancyArchiveState get landLordTenancyArchiveState => throw _privateConstructorUsedError;
+  ReferenceQuestionnaireDetailsState get referenceQuestionnaireDetailsState => throw _privateConstructorUsedError;
+  ReferenceCheckDialogState get referenceCheckDialogState => throw _privateConstructorUsedError;
+  LandLordTenancyLeaseState get landlordTenancyLeaseState => throw _privateConstructorUsedError;
+  LandLordActiveTenantState get landLordActiveTenantState => throw _privateConstructorUsedError;
   PreviewLeaseState get previewLeaseState => throw _privateConstructorUsedError;
-  TenancyLeaseAgreementState get tenancyLeaseAgreementState =>
-      throw _privateConstructorUsedError;
-  LandLordTenancyLeadState get landLordTenancyLeadState =>
-      throw _privateConstructorUsedError;
-  LandLordTenancyApplicantState get landLordTenancyApplicantState =>
-      throw _privateConstructorUsedError;
+  TenancyLeaseAgreementState get tenancyLeaseAgreementState => throw _privateConstructorUsedError;
+  LandLordTenancyLeadState get landLordTenancyLeadState => throw _privateConstructorUsedError;
+  LandLordTenancyApplicantState get landLordTenancyApplicantState => throw _privateConstructorUsedError;
   NotificationState get notificationState => throw _privateConstructorUsedError;
   LandlordProfileState get profileState => throw _privateConstructorUsedError;
-  LandlordMaintenanceState get landlordMaintenanceState =>
-      throw _privateConstructorUsedError;
-  LandlordVendorState get landlordVendorState =>
-      throw _privateConstructorUsedError;
-  MaintenanceDetailsState get maintenanceDetailsState =>
-      throw _privateConstructorUsedError;
-  AddMaintenanceState get addMaintenanceState =>
-      throw _privateConstructorUsedError;
+  LandlordMaintenanceState get landlordMaintenanceState => throw _privateConstructorUsedError;
+  LandlordVendorState get landlordVendorState => throw _privateConstructorUsedError;
+  MaintenanceDetailsState get maintenanceDetailsState => throw _privateConstructorUsedError;
+  AddMaintenanceState get addMaintenanceState => throw _privateConstructorUsedError;
   AddVendorState get addVendorState => throw _privateConstructorUsedError;
-  EditMaintenanceState get editMaintenanceState =>
-      throw _privateConstructorUsedError; /*Admin*/
+  EditMaintenanceState get editMaintenanceState => throw _privateConstructorUsedError; /*Admin*/
   AdminPortalState get adminPortalState => throw _privateConstructorUsedError;
-  AdminDashbordState get adminDashbordState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordDetailsState get adminLandlordDetailsState =>
-      throw _privateConstructorUsedError;
-  AdminAddNewMemberState get adminAddNewMemberState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordState get adminLandlordState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordAccountState get adminLandlordAccountState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordPropertyState get adminLandlordPropertyState =>
-      throw _privateConstructorUsedError;
-  AdminPropertyDetailsState get adminPropertyDetailsState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordLeadsState get adminLandlordLeadsState =>
-      throw _privateConstructorUsedError;
-  AdminLandlordLeadsDetailsState get adminLandlordLeadsDetailsState =>
-      throw _privateConstructorUsedError;
+  AdminDashbordState get adminDashbordState => throw _privateConstructorUsedError;
+  AdminLandlordDetailsState get adminLandlordDetailsState => throw _privateConstructorUsedError;
+  AdminAddNewMemberState get adminAddNewMemberState => throw _privateConstructorUsedError;
+  AdminLandlordState get adminLandlordState => throw _privateConstructorUsedError;
+  AdminLandlordAccountState get adminLandlordAccountState => throw _privateConstructorUsedError;
+  AdminLandlordPropertyState get adminLandlordPropertyState => throw _privateConstructorUsedError;
+  AdminPropertyDetailsState get adminPropertyDetailsState => throw _privateConstructorUsedError;
+  AdminLandlordLeadsState get adminLandlordLeadsState => throw _privateConstructorUsedError;
+  AdminLandlordLeadsDetailsState get adminLandlordLeadsDetailsState => throw _privateConstructorUsedError;
   AdminTeamState get adminTeamState => throw _privateConstructorUsedError;
-  AdminSettingState get adminSettingState =>
-      throw _privateConstructorUsedError; /*Customer*/
-  CustomerPortalState get customerPortalState =>
-      throw _privateConstructorUsedError;
-  CustomerPropertylistState get customerPropertylistState =>
-      throw _privateConstructorUsedError;
-  CustomerPropertyDetailsState get customerPropertyDetailsState =>
-      throw _privateConstructorUsedError; /*Basic Tenant*/
+  AdminSettingState get adminSettingState => throw _privateConstructorUsedError; /*Customer*/
+  CustomerPortalState get customerPortalState => throw _privateConstructorUsedError;
+  CustomerPropertylistState get customerPropertylistState => throw _privateConstructorUsedError;
+  CustomerPropertyDetailsState get customerPropertyDetailsState => throw _privateConstructorUsedError; /*Basic Tenant*/
   TenantPortalState get tenantPortalState => throw _privateConstructorUsedError;
-  TenantMaintenanceState get tenantMaintenanceState =>
-      throw _privateConstructorUsedError;
+  TenantMaintenanceState get tenantMaintenanceState => throw _privateConstructorUsedError;
   LeaseDetailsState get leaseDetailsState => throw _privateConstructorUsedError;
-  TenantAddMaintenanceState get tenantAddMaintenanceState =>
-      throw _privateConstructorUsedError;
-  TenantPersonalState get tenantPersonalState =>
-      throw _privateConstructorUsedError;
+  TenantAddMaintenanceState get tenantAddMaintenanceState => throw _privateConstructorUsedError;
+  TenantPersonalState get tenantPersonalState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $AppStateCopyWith<AppState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $AppStateCopyWith<AppState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
-  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
-      _$AppStateCopyWithImpl<$Res>;
+  factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) = _$AppStateCopyWithImpl<$Res>;
   $Res call(
       {PortalState portalState,
       TenancyFormState tenancyFormState,
@@ -373,25 +325,21 @@ abstract class $AppStateCopyWith<$Res> {
   $SlotsStateCopyWith<$Res> get slotsState;
   $SlotsListStateCopyWith<$Res> get slotsListState;
 
-  $TenantsApplicationDetailsStateCopyWith<$Res>
-      get tenantsApplicationDetailsState;
-  $TenancyVarificationDocumentStateCopyWith<$Res>
-      get tenancyVarificationDocumentState;
+  $TenantsApplicationDetailsStateCopyWith<$Res> get tenantsApplicationDetailsState;
+  $TenancyVarificationDocumentStateCopyWith<$Res> get tenancyVarificationDocumentState;
   $VarificationDocumentStateCopyWith<$Res> get varificationDocumentState;
   $ReferenceQuestionnaireStateCopyWith<$Res> get referenceQuestionnaireState;
   $PreviewDocumentStateCopyWith<$Res> get previewDocumentState;
   $ReferenceCheckStateCopyWith<$Res> get referenceCheckState;
   $LandLordTenancyArchiveStateCopyWith<$Res> get landLordTenancyArchiveState;
-  $ReferenceQuestionnaireDetailsStateCopyWith<$Res>
-      get referenceQuestionnaireDetailsState;
+  $ReferenceQuestionnaireDetailsStateCopyWith<$Res> get referenceQuestionnaireDetailsState;
   $ReferenceCheckDialogStateCopyWith<$Res> get referenceCheckDialogState;
   $LandLordTenancyLeaseStateCopyWith<$Res> get landlordTenancyLeaseState;
   $LandLordActiveTenantStateCopyWith<$Res> get landLordActiveTenantState;
   $PreviewLeaseStateCopyWith<$Res> get previewLeaseState;
   $TenancyLeaseAgreementStateCopyWith<$Res> get tenancyLeaseAgreementState;
   $LandLordTenancyLeadStateCopyWith<$Res> get landLordTenancyLeadState;
-  $LandLordTenancyApplicantStateCopyWith<$Res>
-      get landLordTenancyApplicantState;
+  $LandLordTenancyApplicantStateCopyWith<$Res> get landLordTenancyApplicantState;
   $NotificationStateCopyWith<$Res> get notificationState;
   $LandlordProfileStateCopyWith<$Res> get profileState;
   $LandlordMaintenanceStateCopyWith<$Res> get landlordMaintenanceState;
@@ -409,8 +357,7 @@ abstract class $AppStateCopyWith<$Res> {
   $AdminLandlordPropertyStateCopyWith<$Res> get adminLandlordPropertyState;
   $AdminPropertyDetailsStateCopyWith<$Res> get adminPropertyDetailsState;
   $AdminLandlordLeadsStateCopyWith<$Res> get adminLandlordLeadsState;
-  $AdminLandlordLeadsDetailsStateCopyWith<$Res>
-      get adminLandlordLeadsDetailsState;
+  $AdminLandlordLeadsDetailsStateCopyWith<$Res> get adminLandlordLeadsDetailsState;
   $AdminTeamStateCopyWith<$Res> get adminTeamState;
   $AdminSettingStateCopyWith<$Res> get adminSettingState;
   $CustomerPortalStateCopyWith<$Res> get customerPortalState;
@@ -597,8 +544,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.tenantsApplicationDetailsState
           : tenantsApplicationDetailsState // ignore: cast_nullable_to_non_nullable
               as TenantsApplicationDetailsState,
-      tenancyVarificationDocumentState: tenancyVarificationDocumentState ==
-              freezed
+      tenancyVarificationDocumentState: tenancyVarificationDocumentState == freezed
           ? _value.tenancyVarificationDocumentState
           : tenancyVarificationDocumentState // ignore: cast_nullable_to_non_nullable
               as TenancyVarificationDocumentState,
@@ -622,8 +568,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
           ? _value.landLordTenancyArchiveState
           : landLordTenancyArchiveState // ignore: cast_nullable_to_non_nullable
               as LandLordTenancyArchiveState,
-      referenceQuestionnaireDetailsState: referenceQuestionnaireDetailsState ==
-              freezed
+      referenceQuestionnaireDetailsState: referenceQuestionnaireDetailsState == freezed
           ? _value.referenceQuestionnaireDetailsState
           : referenceQuestionnaireDetailsState // ignore: cast_nullable_to_non_nullable
               as ReferenceQuestionnaireDetailsState,
@@ -800,32 +745,28 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $TFCurrentTenancyStateCopyWith<$Res> get tfCurrentTenancyState {
-    return $TFCurrentTenancyStateCopyWith<$Res>(_value.tfCurrentTenancyState,
-        (value) {
+    return $TFCurrentTenancyStateCopyWith<$Res>(_value.tfCurrentTenancyState, (value) {
       return _then(_value.copyWith(tfCurrentTenancyState: value));
     });
   }
 
   @override
   $TFAdditionalOccupantStateCopyWith<$Res> get tfAdditionalOccupantState {
-    return $TFAdditionalOccupantStateCopyWith<$Res>(
-        _value.tfAdditionalOccupantState, (value) {
+    return $TFAdditionalOccupantStateCopyWith<$Res>(_value.tfAdditionalOccupantState, (value) {
       return _then(_value.copyWith(tfAdditionalOccupantState: value));
     });
   }
 
   @override
   $TFAdditionalInfoStateCopyWith<$Res> get tfAdditionalInfoState {
-    return $TFAdditionalInfoStateCopyWith<$Res>(_value.tfAdditionalInfoState,
-        (value) {
+    return $TFAdditionalInfoStateCopyWith<$Res>(_value.tfAdditionalInfoState, (value) {
       return _then(_value.copyWith(tfAdditionalInfoState: value));
     });
   }
 
   @override
   $TFAdditionalReferenceStateCopyWith<$Res> get tfAdditionalReferenceState {
-    return $TFAdditionalReferenceStateCopyWith<$Res>(
-        _value.tfAdditionalReferenceState, (value) {
+    return $TFAdditionalReferenceStateCopyWith<$Res>(_value.tfAdditionalReferenceState, (value) {
       return _then(_value.copyWith(tfAdditionalReferenceState: value));
     });
   }
@@ -839,8 +780,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $LandLordApplicationStateCopyWith<$Res> get landLordApplicationState {
-    return $LandLordApplicationStateCopyWith<$Res>(
-        _value.landLordApplicationState, (value) {
+    return $LandLordApplicationStateCopyWith<$Res>(_value.landLordApplicationState, (value) {
       return _then(_value.copyWith(landLordApplicationState: value));
     });
   }
@@ -868,8 +808,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $EventTypesFormStateCopyWith<$Res> get eventTypesFormState {
-    return $EventTypesFormStateCopyWith<$Res>(_value.eventTypesFormState,
-        (value) {
+    return $EventTypesFormStateCopyWith<$Res>(_value.eventTypesFormState, (value) {
       return _then(_value.copyWith(eventTypesFormState: value));
     });
   }
@@ -890,16 +829,14 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $PropertySummeryStateCopyWith<$Res> get propertySummeryState {
-    return $PropertySummeryStateCopyWith<$Res>(_value.propertySummeryState,
-        (value) {
+    return $PropertySummeryStateCopyWith<$Res>(_value.propertySummeryState, (value) {
       return _then(_value.copyWith(propertySummeryState: value));
     });
   }
 
   @override
   $EventTypesSummeryStateCopyWith<$Res> get eventTypesSummeryState {
-    return $EventTypesSummeryStateCopyWith<$Res>(_value.eventTypesSummeryState,
-        (value) {
+    return $EventTypesSummeryStateCopyWith<$Res>(_value.eventTypesSummeryState, (value) {
       return _then(_value.copyWith(eventTypesSummeryState: value));
     });
   }
@@ -913,8 +850,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $EventTypesListStateCopyWith<$Res> get eventTypesListState {
-    return $EventTypesListStateCopyWith<$Res>(_value.eventTypesListState,
-        (value) {
+    return $EventTypesListStateCopyWith<$Res>(_value.eventTypesListState, (value) {
       return _then(_value.copyWith(eventTypesListState: value));
     });
   }
@@ -941,92 +877,78 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   }
 
   @override
-  $TenantsApplicationDetailsStateCopyWith<$Res>
-      get tenantsApplicationDetailsState {
-    return $TenantsApplicationDetailsStateCopyWith<$Res>(
-        _value.tenantsApplicationDetailsState, (value) {
+  $TenantsApplicationDetailsStateCopyWith<$Res> get tenantsApplicationDetailsState {
+    return $TenantsApplicationDetailsStateCopyWith<$Res>(_value.tenantsApplicationDetailsState, (value) {
       return _then(_value.copyWith(tenantsApplicationDetailsState: value));
     });
   }
 
   @override
-  $TenancyVarificationDocumentStateCopyWith<$Res>
-      get tenancyVarificationDocumentState {
-    return $TenancyVarificationDocumentStateCopyWith<$Res>(
-        _value.tenancyVarificationDocumentState, (value) {
+  $TenancyVarificationDocumentStateCopyWith<$Res> get tenancyVarificationDocumentState {
+    return $TenancyVarificationDocumentStateCopyWith<$Res>(_value.tenancyVarificationDocumentState, (value) {
       return _then(_value.copyWith(tenancyVarificationDocumentState: value));
     });
   }
 
   @override
   $VarificationDocumentStateCopyWith<$Res> get varificationDocumentState {
-    return $VarificationDocumentStateCopyWith<$Res>(
-        _value.varificationDocumentState, (value) {
+    return $VarificationDocumentStateCopyWith<$Res>(_value.varificationDocumentState, (value) {
       return _then(_value.copyWith(varificationDocumentState: value));
     });
   }
 
   @override
   $ReferenceQuestionnaireStateCopyWith<$Res> get referenceQuestionnaireState {
-    return $ReferenceQuestionnaireStateCopyWith<$Res>(
-        _value.referenceQuestionnaireState, (value) {
+    return $ReferenceQuestionnaireStateCopyWith<$Res>(_value.referenceQuestionnaireState, (value) {
       return _then(_value.copyWith(referenceQuestionnaireState: value));
     });
   }
 
   @override
   $PreviewDocumentStateCopyWith<$Res> get previewDocumentState {
-    return $PreviewDocumentStateCopyWith<$Res>(_value.previewDocumentState,
-        (value) {
+    return $PreviewDocumentStateCopyWith<$Res>(_value.previewDocumentState, (value) {
       return _then(_value.copyWith(previewDocumentState: value));
     });
   }
 
   @override
   $ReferenceCheckStateCopyWith<$Res> get referenceCheckState {
-    return $ReferenceCheckStateCopyWith<$Res>(_value.referenceCheckState,
-        (value) {
+    return $ReferenceCheckStateCopyWith<$Res>(_value.referenceCheckState, (value) {
       return _then(_value.copyWith(referenceCheckState: value));
     });
   }
 
   @override
   $LandLordTenancyArchiveStateCopyWith<$Res> get landLordTenancyArchiveState {
-    return $LandLordTenancyArchiveStateCopyWith<$Res>(
-        _value.landLordTenancyArchiveState, (value) {
+    return $LandLordTenancyArchiveStateCopyWith<$Res>(_value.landLordTenancyArchiveState, (value) {
       return _then(_value.copyWith(landLordTenancyArchiveState: value));
     });
   }
 
   @override
-  $ReferenceQuestionnaireDetailsStateCopyWith<$Res>
-      get referenceQuestionnaireDetailsState {
-    return $ReferenceQuestionnaireDetailsStateCopyWith<$Res>(
-        _value.referenceQuestionnaireDetailsState, (value) {
+  $ReferenceQuestionnaireDetailsStateCopyWith<$Res> get referenceQuestionnaireDetailsState {
+    return $ReferenceQuestionnaireDetailsStateCopyWith<$Res>(_value.referenceQuestionnaireDetailsState, (value) {
       return _then(_value.copyWith(referenceQuestionnaireDetailsState: value));
     });
   }
 
   @override
   $ReferenceCheckDialogStateCopyWith<$Res> get referenceCheckDialogState {
-    return $ReferenceCheckDialogStateCopyWith<$Res>(
-        _value.referenceCheckDialogState, (value) {
+    return $ReferenceCheckDialogStateCopyWith<$Res>(_value.referenceCheckDialogState, (value) {
       return _then(_value.copyWith(referenceCheckDialogState: value));
     });
   }
 
   @override
   $LandLordTenancyLeaseStateCopyWith<$Res> get landlordTenancyLeaseState {
-    return $LandLordTenancyLeaseStateCopyWith<$Res>(
-        _value.landlordTenancyLeaseState, (value) {
+    return $LandLordTenancyLeaseStateCopyWith<$Res>(_value.landlordTenancyLeaseState, (value) {
       return _then(_value.copyWith(landlordTenancyLeaseState: value));
     });
   }
 
   @override
   $LandLordActiveTenantStateCopyWith<$Res> get landLordActiveTenantState {
-    return $LandLordActiveTenantStateCopyWith<$Res>(
-        _value.landLordActiveTenantState, (value) {
+    return $LandLordActiveTenantStateCopyWith<$Res>(_value.landLordActiveTenantState, (value) {
       return _then(_value.copyWith(landLordActiveTenantState: value));
     });
   }
@@ -1040,25 +962,21 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $TenancyLeaseAgreementStateCopyWith<$Res> get tenancyLeaseAgreementState {
-    return $TenancyLeaseAgreementStateCopyWith<$Res>(
-        _value.tenancyLeaseAgreementState, (value) {
+    return $TenancyLeaseAgreementStateCopyWith<$Res>(_value.tenancyLeaseAgreementState, (value) {
       return _then(_value.copyWith(tenancyLeaseAgreementState: value));
     });
   }
 
   @override
   $LandLordTenancyLeadStateCopyWith<$Res> get landLordTenancyLeadState {
-    return $LandLordTenancyLeadStateCopyWith<$Res>(
-        _value.landLordTenancyLeadState, (value) {
+    return $LandLordTenancyLeadStateCopyWith<$Res>(_value.landLordTenancyLeadState, (value) {
       return _then(_value.copyWith(landLordTenancyLeadState: value));
     });
   }
 
   @override
-  $LandLordTenancyApplicantStateCopyWith<$Res>
-      get landLordTenancyApplicantState {
-    return $LandLordTenancyApplicantStateCopyWith<$Res>(
-        _value.landLordTenancyApplicantState, (value) {
+  $LandLordTenancyApplicantStateCopyWith<$Res> get landLordTenancyApplicantState {
+    return $LandLordTenancyApplicantStateCopyWith<$Res>(_value.landLordTenancyApplicantState, (value) {
       return _then(_value.copyWith(landLordTenancyApplicantState: value));
     });
   }
@@ -1079,32 +997,28 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $LandlordMaintenanceStateCopyWith<$Res> get landlordMaintenanceState {
-    return $LandlordMaintenanceStateCopyWith<$Res>(
-        _value.landlordMaintenanceState, (value) {
+    return $LandlordMaintenanceStateCopyWith<$Res>(_value.landlordMaintenanceState, (value) {
       return _then(_value.copyWith(landlordMaintenanceState: value));
     });
   }
 
   @override
   $LandlordVendorStateCopyWith<$Res> get landlordVendorState {
-    return $LandlordVendorStateCopyWith<$Res>(_value.landlordVendorState,
-        (value) {
+    return $LandlordVendorStateCopyWith<$Res>(_value.landlordVendorState, (value) {
       return _then(_value.copyWith(landlordVendorState: value));
     });
   }
 
   @override
   $MaintenanceDetailsStateCopyWith<$Res> get maintenanceDetailsState {
-    return $MaintenanceDetailsStateCopyWith<$Res>(
-        _value.maintenanceDetailsState, (value) {
+    return $MaintenanceDetailsStateCopyWith<$Res>(_value.maintenanceDetailsState, (value) {
       return _then(_value.copyWith(maintenanceDetailsState: value));
     });
   }
 
   @override
   $AddMaintenanceStateCopyWith<$Res> get addMaintenanceState {
-    return $AddMaintenanceStateCopyWith<$Res>(_value.addMaintenanceState,
-        (value) {
+    return $AddMaintenanceStateCopyWith<$Res>(_value.addMaintenanceState, (value) {
       return _then(_value.copyWith(addMaintenanceState: value));
     });
   }
@@ -1118,8 +1032,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $EditMaintenanceStateCopyWith<$Res> get editMaintenanceState {
-    return $EditMaintenanceStateCopyWith<$Res>(_value.editMaintenanceState,
-        (value) {
+    return $EditMaintenanceStateCopyWith<$Res>(_value.editMaintenanceState, (value) {
       return _then(_value.copyWith(editMaintenanceState: value));
     });
   }
@@ -1133,73 +1046,63 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $AdminDashbordStateCopyWith<$Res> get adminDashbordState {
-    return $AdminDashbordStateCopyWith<$Res>(_value.adminDashbordState,
-        (value) {
+    return $AdminDashbordStateCopyWith<$Res>(_value.adminDashbordState, (value) {
       return _then(_value.copyWith(adminDashbordState: value));
     });
   }
 
   @override
   $AdminLandlordDetailsStateCopyWith<$Res> get adminLandlordDetailsState {
-    return $AdminLandlordDetailsStateCopyWith<$Res>(
-        _value.adminLandlordDetailsState, (value) {
+    return $AdminLandlordDetailsStateCopyWith<$Res>(_value.adminLandlordDetailsState, (value) {
       return _then(_value.copyWith(adminLandlordDetailsState: value));
     });
   }
 
   @override
   $AdminAddNewMemberStateCopyWith<$Res> get adminAddNewMemberState {
-    return $AdminAddNewMemberStateCopyWith<$Res>(_value.adminAddNewMemberState,
-        (value) {
+    return $AdminAddNewMemberStateCopyWith<$Res>(_value.adminAddNewMemberState, (value) {
       return _then(_value.copyWith(adminAddNewMemberState: value));
     });
   }
 
   @override
   $AdminLandlordStateCopyWith<$Res> get adminLandlordState {
-    return $AdminLandlordStateCopyWith<$Res>(_value.adminLandlordState,
-        (value) {
+    return $AdminLandlordStateCopyWith<$Res>(_value.adminLandlordState, (value) {
       return _then(_value.copyWith(adminLandlordState: value));
     });
   }
 
   @override
   $AdminLandlordAccountStateCopyWith<$Res> get adminLandlordAccountState {
-    return $AdminLandlordAccountStateCopyWith<$Res>(
-        _value.adminLandlordAccountState, (value) {
+    return $AdminLandlordAccountStateCopyWith<$Res>(_value.adminLandlordAccountState, (value) {
       return _then(_value.copyWith(adminLandlordAccountState: value));
     });
   }
 
   @override
   $AdminLandlordPropertyStateCopyWith<$Res> get adminLandlordPropertyState {
-    return $AdminLandlordPropertyStateCopyWith<$Res>(
-        _value.adminLandlordPropertyState, (value) {
+    return $AdminLandlordPropertyStateCopyWith<$Res>(_value.adminLandlordPropertyState, (value) {
       return _then(_value.copyWith(adminLandlordPropertyState: value));
     });
   }
 
   @override
   $AdminPropertyDetailsStateCopyWith<$Res> get adminPropertyDetailsState {
-    return $AdminPropertyDetailsStateCopyWith<$Res>(
-        _value.adminPropertyDetailsState, (value) {
+    return $AdminPropertyDetailsStateCopyWith<$Res>(_value.adminPropertyDetailsState, (value) {
       return _then(_value.copyWith(adminPropertyDetailsState: value));
     });
   }
 
   @override
   $AdminLandlordLeadsStateCopyWith<$Res> get adminLandlordLeadsState {
-    return $AdminLandlordLeadsStateCopyWith<$Res>(
-        _value.adminLandlordLeadsState, (value) {
+    return $AdminLandlordLeadsStateCopyWith<$Res>(_value.adminLandlordLeadsState, (value) {
       return _then(_value.copyWith(adminLandlordLeadsState: value));
     });
   }
 
   @override
-  $AdminLandlordLeadsDetailsStateCopyWith<$Res>
-      get adminLandlordLeadsDetailsState {
-    return $AdminLandlordLeadsDetailsStateCopyWith<$Res>(
-        _value.adminLandlordLeadsDetailsState, (value) {
+  $AdminLandlordLeadsDetailsStateCopyWith<$Res> get adminLandlordLeadsDetailsState {
+    return $AdminLandlordLeadsDetailsStateCopyWith<$Res>(_value.adminLandlordLeadsDetailsState, (value) {
       return _then(_value.copyWith(adminLandlordLeadsDetailsState: value));
     });
   }
@@ -1220,24 +1123,21 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $CustomerPortalStateCopyWith<$Res> get customerPortalState {
-    return $CustomerPortalStateCopyWith<$Res>(_value.customerPortalState,
-        (value) {
+    return $CustomerPortalStateCopyWith<$Res>(_value.customerPortalState, (value) {
       return _then(_value.copyWith(customerPortalState: value));
     });
   }
 
   @override
   $CustomerPropertylistStateCopyWith<$Res> get customerPropertylistState {
-    return $CustomerPropertylistStateCopyWith<$Res>(
-        _value.customerPropertylistState, (value) {
+    return $CustomerPropertylistStateCopyWith<$Res>(_value.customerPropertylistState, (value) {
       return _then(_value.copyWith(customerPropertylistState: value));
     });
   }
 
   @override
   $CustomerPropertyDetailsStateCopyWith<$Res> get customerPropertyDetailsState {
-    return $CustomerPropertyDetailsStateCopyWith<$Res>(
-        _value.customerPropertyDetailsState, (value) {
+    return $CustomerPropertyDetailsStateCopyWith<$Res>(_value.customerPropertyDetailsState, (value) {
       return _then(_value.copyWith(customerPropertyDetailsState: value));
     });
   }
@@ -1251,8 +1151,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $TenantMaintenanceStateCopyWith<$Res> get tenantMaintenanceState {
-    return $TenantMaintenanceStateCopyWith<$Res>(_value.tenantMaintenanceState,
-        (value) {
+    return $TenantMaintenanceStateCopyWith<$Res>(_value.tenantMaintenanceState, (value) {
       return _then(_value.copyWith(tenantMaintenanceState: value));
     });
   }
@@ -1266,16 +1165,14 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
   @override
   $TenantAddMaintenanceStateCopyWith<$Res> get tenantAddMaintenanceState {
-    return $TenantAddMaintenanceStateCopyWith<$Res>(
-        _value.tenantAddMaintenanceState, (value) {
+    return $TenantAddMaintenanceStateCopyWith<$Res>(_value.tenantAddMaintenanceState, (value) {
       return _then(_value.copyWith(tenantAddMaintenanceState: value));
     });
   }
 
   @override
   $TenantPersonalStateCopyWith<$Res> get tenantPersonalState {
-    return $TenantPersonalStateCopyWith<$Res>(_value.tenantPersonalState,
-        (value) {
+    return $TenantPersonalStateCopyWith<$Res>(_value.tenantPersonalState, (value) {
       return _then(_value.copyWith(tenantPersonalState: value));
     });
   }
@@ -1283,8 +1180,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) then) =
-      __$AppStateCopyWithImpl<$Res>;
+  factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) then) = __$AppStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {PortalState portalState,
@@ -1401,11 +1297,9 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $SlotsListStateCopyWith<$Res> get slotsListState;
   @override
-  $TenantsApplicationDetailsStateCopyWith<$Res>
-      get tenantsApplicationDetailsState;
+  $TenantsApplicationDetailsStateCopyWith<$Res> get tenantsApplicationDetailsState;
   @override
-  $TenancyVarificationDocumentStateCopyWith<$Res>
-      get tenancyVarificationDocumentState;
+  $TenancyVarificationDocumentStateCopyWith<$Res> get tenancyVarificationDocumentState;
   @override
   $VarificationDocumentStateCopyWith<$Res> get varificationDocumentState;
   @override
@@ -1417,8 +1311,7 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $LandLordTenancyArchiveStateCopyWith<$Res> get landLordTenancyArchiveState;
   @override
-  $ReferenceQuestionnaireDetailsStateCopyWith<$Res>
-      get referenceQuestionnaireDetailsState;
+  $ReferenceQuestionnaireDetailsStateCopyWith<$Res> get referenceQuestionnaireDetailsState;
   @override
   $ReferenceCheckDialogStateCopyWith<$Res> get referenceCheckDialogState;
   @override
@@ -1432,8 +1325,7 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $LandLordTenancyLeadStateCopyWith<$Res> get landLordTenancyLeadState;
   @override
-  $LandLordTenancyApplicantStateCopyWith<$Res>
-      get landLordTenancyApplicantState;
+  $LandLordTenancyApplicantStateCopyWith<$Res> get landLordTenancyApplicantState;
   @override
   $NotificationStateCopyWith<$Res> get notificationState;
   @override
@@ -1469,8 +1361,7 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @override
   $AdminLandlordLeadsStateCopyWith<$Res> get adminLandlordLeadsState;
   @override
-  $AdminLandlordLeadsDetailsStateCopyWith<$Res>
-      get adminLandlordLeadsDetailsState;
+  $AdminLandlordLeadsDetailsStateCopyWith<$Res> get adminLandlordLeadsDetailsState;
   @override
   $AdminTeamStateCopyWith<$Res> get adminTeamState;
   @override
@@ -1494,10 +1385,8 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
-    implements _$AppStateCopyWith<$Res> {
-  __$AppStateCopyWithImpl(_AppState _value, $Res Function(_AppState) _then)
-      : super(_value, (v) => _then(v as _AppState));
+class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res> implements _$AppStateCopyWith<$Res> {
+  __$AppStateCopyWithImpl(_AppState _value, $Res Function(_AppState) _then) : super(_value, (v) => _then(v as _AppState));
 
   @override
   _AppState get _value => super._value as _AppState;
@@ -1668,8 +1557,7 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.tenantsApplicationDetailsState
           : tenantsApplicationDetailsState // ignore: cast_nullable_to_non_nullable
               as TenantsApplicationDetailsState,
-      tenancyVarificationDocumentState: tenancyVarificationDocumentState ==
-              freezed
+      tenancyVarificationDocumentState: tenancyVarificationDocumentState == freezed
           ? _value.tenancyVarificationDocumentState
           : tenancyVarificationDocumentState // ignore: cast_nullable_to_non_nullable
               as TenancyVarificationDocumentState,
@@ -1693,8 +1581,7 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
           ? _value.landLordTenancyArchiveState
           : landLordTenancyArchiveState // ignore: cast_nullable_to_non_nullable
               as LandLordTenancyArchiveState,
-      referenceQuestionnaireDetailsState: referenceQuestionnaireDetailsState ==
-              freezed
+      referenceQuestionnaireDetailsState: referenceQuestionnaireDetailsState == freezed
           ? _value.referenceQuestionnaireDetailsState
           : referenceQuestionnaireDetailsState // ignore: cast_nullable_to_non_nullable
               as ReferenceQuestionnaireDetailsState,
@@ -2055,87 +1942,100 @@ class _$_AppState implements _AppState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AppState &&
-            (identical(other.portalState, portalState) ||
-                const DeepCollectionEquality()
-                    .equals(other.portalState, portalState)) &&
+            (identical(other.portalState, portalState) || const DeepCollectionEquality().equals(other.portalState, portalState)) &&
             (identical(other.tenancyFormState, tenancyFormState) ||
-                const DeepCollectionEquality()
-                    .equals(other.tenancyFormState, tenancyFormState)) &&
+                const DeepCollectionEquality().equals(other.tenancyFormState, tenancyFormState)) &&
             (identical(other.tfPersonalState, tfPersonalState) ||
-                const DeepCollectionEquality()
-                    .equals(other.tfPersonalState, tfPersonalState)) &&
+                const DeepCollectionEquality().equals(other.tfPersonalState, tfPersonalState)) &&
             (identical(other.tfEmploymentState, tfEmploymentState) ||
-                const DeepCollectionEquality()
-                    .equals(other.tfEmploymentState, tfEmploymentState)) &&
+                const DeepCollectionEquality().equals(other.tfEmploymentState, tfEmploymentState)) &&
             (identical(other.tfCurrentTenancyState, tfCurrentTenancyState) ||
-                const DeepCollectionEquality().equals(
-                    other.tfCurrentTenancyState, tfCurrentTenancyState)) &&
+                const DeepCollectionEquality().equals(other.tfCurrentTenancyState, tfCurrentTenancyState)) &&
             (identical(other.tfAdditionalOccupantState, tfAdditionalOccupantState) ||
-                const DeepCollectionEquality().equals(
-                    other.tfAdditionalOccupantState,
-                    tfAdditionalOccupantState)) &&
+                const DeepCollectionEquality().equals(other.tfAdditionalOccupantState, tfAdditionalOccupantState)) &&
             (identical(other.tfAdditionalInfoState, tfAdditionalInfoState) ||
-                const DeepCollectionEquality().equals(
-                    other.tfAdditionalInfoState, tfAdditionalInfoState)) &&
+                const DeepCollectionEquality().equals(other.tfAdditionalInfoState, tfAdditionalInfoState)) &&
             (identical(other.tfAdditionalReferenceState, tfAdditionalReferenceState) ||
-                const DeepCollectionEquality().equals(
-                    other.tfAdditionalReferenceState,
-                    tfAdditionalReferenceState)) &&
+                const DeepCollectionEquality().equals(other.tfAdditionalReferenceState, tfAdditionalReferenceState)) &&
             (identical(other.tenantFilterState, tenantFilterState) ||
-                const DeepCollectionEquality()
-                    .equals(other.tenantFilterState, tenantFilterState)) &&
+                const DeepCollectionEquality().equals(other.tenantFilterState, tenantFilterState)) &&
             (identical(other.landLordApplicationState, landLordApplicationState) ||
-                const DeepCollectionEquality().equals(
-                    other.landLordApplicationState,
-                    landLordApplicationState)) &&
-            (identical(other.newLeadState, newLeadState) ||
-                const DeepCollectionEquality()
-                    .equals(other.newLeadState, newLeadState)) &&
+                const DeepCollectionEquality().equals(other.landLordApplicationState, landLordApplicationState)) &&
+            (identical(other.newLeadState, newLeadState) || const DeepCollectionEquality().equals(other.newLeadState, newLeadState)) &&
             (identical(other.funnelViewState, funnelViewState) ||
-                const DeepCollectionEquality()
-                    .equals(other.funnelViewState, funnelViewState)) &&
+                const DeepCollectionEquality().equals(other.funnelViewState, funnelViewState)) &&
             (identical(other.propertyFormState, propertyFormState) ||
-                const DeepCollectionEquality()
-                    .equals(other.propertyFormState, propertyFormState)) &&
+                const DeepCollectionEquality().equals(other.propertyFormState, propertyFormState)) &&
             (identical(other.eventTypesFormState, eventTypesFormState) ||
-                const DeepCollectionEquality()
-                    .equals(other.eventTypesFormState, eventTypesFormState)) &&
+                const DeepCollectionEquality().equals(other.eventTypesFormState, eventTypesFormState)) &&
             (identical(other.propertyState, propertyState) || const DeepCollectionEquality().equals(other.propertyState, propertyState)) &&
-            (identical(other.eventTypesState, eventTypesState) || const DeepCollectionEquality().equals(other.eventTypesState, eventTypesState)) &&
-            (identical(other.propertySummeryState, propertySummeryState) || const DeepCollectionEquality().equals(other.propertySummeryState, propertySummeryState)) &&
-            (identical(other.eventTypesSummeryState, eventTypesSummeryState) || const DeepCollectionEquality().equals(other.eventTypesSummeryState, eventTypesSummeryState)) &&
-            (identical(other.propertyListState, propertyListState) || const DeepCollectionEquality().equals(other.propertyListState, propertyListState)) &&
-            (identical(other.eventTypesListState, eventTypesListState) || const DeepCollectionEquality().equals(other.eventTypesListState, eventTypesListState)) &&
+            (identical(other.eventTypesState, eventTypesState) ||
+                const DeepCollectionEquality().equals(other.eventTypesState, eventTypesState)) &&
+            (identical(other.propertySummeryState, propertySummeryState) ||
+                const DeepCollectionEquality().equals(other.propertySummeryState, propertySummeryState)) &&
+            (identical(other.eventTypesSummeryState, eventTypesSummeryState) ||
+                const DeepCollectionEquality().equals(other.eventTypesSummeryState, eventTypesSummeryState)) &&
+            (identical(other.propertyListState, propertyListState) ||
+                const DeepCollectionEquality().equals(other.propertyListState, propertyListState)) &&
+            (identical(other.eventTypesListState, eventTypesListState) ||
+                const DeepCollectionEquality().equals(other.eventTypesListState, eventTypesListState)) &&
             (identical(other.editLeadState, editLeadState) || const DeepCollectionEquality().equals(other.editLeadState, editLeadState)) &&
             (identical(other.slotsState, slotsState) || const DeepCollectionEquality().equals(other.slotsState, slotsState)) &&
-            (identical(other.slotsListState, slotsListState) || const DeepCollectionEquality().equals(other.slotsListState, slotsListState)) &&
-            (identical(other.tenantsApplicationDetailsState, tenantsApplicationDetailsState) || const DeepCollectionEquality().equals(other.tenantsApplicationDetailsState, tenantsApplicationDetailsState)) &&
-            (identical(other.tenancyVarificationDocumentState, tenancyVarificationDocumentState) || const DeepCollectionEquality().equals(other.tenancyVarificationDocumentState, tenancyVarificationDocumentState)) &&
-            (identical(other.varificationDocumentState, varificationDocumentState) || const DeepCollectionEquality().equals(other.varificationDocumentState, varificationDocumentState)) &&
-            (identical(other.referenceQuestionnaireState, referenceQuestionnaireState) || const DeepCollectionEquality().equals(other.referenceQuestionnaireState, referenceQuestionnaireState)) &&
-            (identical(other.previewDocumentState, previewDocumentState) || const DeepCollectionEquality().equals(other.previewDocumentState, previewDocumentState)) &&
-            (identical(other.referenceCheckState, referenceCheckState) || const DeepCollectionEquality().equals(other.referenceCheckState, referenceCheckState)) &&
-            (identical(other.landLordTenancyArchiveState, landLordTenancyArchiveState) || const DeepCollectionEquality().equals(other.landLordTenancyArchiveState, landLordTenancyArchiveState)) &&
-            (identical(other.referenceQuestionnaireDetailsState, referenceQuestionnaireDetailsState) || const DeepCollectionEquality().equals(other.referenceQuestionnaireDetailsState, referenceQuestionnaireDetailsState)) &&
-            (identical(other.referenceCheckDialogState, referenceCheckDialogState) || const DeepCollectionEquality().equals(other.referenceCheckDialogState, referenceCheckDialogState)) &&
-            (identical(other.landlordTenancyLeaseState, landlordTenancyLeaseState) || const DeepCollectionEquality().equals(other.landlordTenancyLeaseState, landlordTenancyLeaseState)) &&
-            (identical(other.landLordActiveTenantState, landLordActiveTenantState) || const DeepCollectionEquality().equals(other.landLordActiveTenantState, landLordActiveTenantState)) &&
-            (identical(other.previewLeaseState, previewLeaseState) || const DeepCollectionEquality().equals(other.previewLeaseState, previewLeaseState)) &&
-            (identical(other.tenancyLeaseAgreementState, tenancyLeaseAgreementState) || const DeepCollectionEquality().equals(other.tenancyLeaseAgreementState, tenancyLeaseAgreementState)) &&
-            (identical(other.landLordTenancyLeadState, landLordTenancyLeadState) || const DeepCollectionEquality().equals(other.landLordTenancyLeadState, landLordTenancyLeadState)) &&
-            (identical(other.landLordTenancyApplicantState, landLordTenancyApplicantState) || const DeepCollectionEquality().equals(other.landLordTenancyApplicantState, landLordTenancyApplicantState)) &&
-            (identical(other.notificationState, notificationState) || const DeepCollectionEquality().equals(other.notificationState, notificationState)) &&
+            (identical(other.slotsListState, slotsListState) ||
+                const DeepCollectionEquality().equals(other.slotsListState, slotsListState)) &&
+            (identical(other.tenantsApplicationDetailsState, tenantsApplicationDetailsState) ||
+                const DeepCollectionEquality().equals(other.tenantsApplicationDetailsState, tenantsApplicationDetailsState)) &&
+            (identical(other.tenancyVarificationDocumentState, tenancyVarificationDocumentState) ||
+                const DeepCollectionEquality().equals(other.tenancyVarificationDocumentState, tenancyVarificationDocumentState)) &&
+            (identical(other.varificationDocumentState, varificationDocumentState) ||
+                const DeepCollectionEquality().equals(other.varificationDocumentState, varificationDocumentState)) &&
+            (identical(other.referenceQuestionnaireState, referenceQuestionnaireState) ||
+                const DeepCollectionEquality().equals(other.referenceQuestionnaireState, referenceQuestionnaireState)) &&
+            (identical(other.previewDocumentState, previewDocumentState) ||
+                const DeepCollectionEquality().equals(other.previewDocumentState, previewDocumentState)) &&
+            (identical(other.referenceCheckState, referenceCheckState) ||
+                const DeepCollectionEquality().equals(other.referenceCheckState, referenceCheckState)) &&
+            (identical(other.landLordTenancyArchiveState, landLordTenancyArchiveState) ||
+                const DeepCollectionEquality().equals(other.landLordTenancyArchiveState, landLordTenancyArchiveState)) &&
+            (identical(other.referenceQuestionnaireDetailsState, referenceQuestionnaireDetailsState) ||
+                const DeepCollectionEquality().equals(other.referenceQuestionnaireDetailsState, referenceQuestionnaireDetailsState)) &&
+            (identical(other.referenceCheckDialogState, referenceCheckDialogState) ||
+                const DeepCollectionEquality().equals(other.referenceCheckDialogState, referenceCheckDialogState)) &&
+            (identical(other.landlordTenancyLeaseState, landlordTenancyLeaseState) ||
+                const DeepCollectionEquality().equals(other.landlordTenancyLeaseState, landlordTenancyLeaseState)) &&
+            (identical(other.landLordActiveTenantState, landLordActiveTenantState) ||
+                const DeepCollectionEquality().equals(other.landLordActiveTenantState, landLordActiveTenantState)) &&
+            (identical(other.previewLeaseState, previewLeaseState) ||
+                const DeepCollectionEquality().equals(other.previewLeaseState, previewLeaseState)) &&
+            (identical(other.tenancyLeaseAgreementState, tenancyLeaseAgreementState) ||
+                const DeepCollectionEquality().equals(other.tenancyLeaseAgreementState, tenancyLeaseAgreementState)) &&
+            (identical(other.landLordTenancyLeadState, landLordTenancyLeadState) ||
+                const DeepCollectionEquality().equals(other.landLordTenancyLeadState, landLordTenancyLeadState)) &&
+            (identical(other.landLordTenancyApplicantState, landLordTenancyApplicantState) ||
+                const DeepCollectionEquality().equals(other.landLordTenancyApplicantState, landLordTenancyApplicantState)) &&
+            (identical(other.notificationState, notificationState) ||
+                const DeepCollectionEquality().equals(other.notificationState, notificationState)) &&
             (identical(other.profileState, profileState) || const DeepCollectionEquality().equals(other.profileState, profileState)) &&
-            (identical(other.landlordMaintenanceState, landlordMaintenanceState) || const DeepCollectionEquality().equals(other.landlordMaintenanceState, landlordMaintenanceState)) &&
-            (identical(other.landlordVendorState, landlordVendorState) || const DeepCollectionEquality().equals(other.landlordVendorState, landlordVendorState)) &&
-            (identical(other.maintenanceDetailsState, maintenanceDetailsState) || const DeepCollectionEquality().equals(other.maintenanceDetailsState, maintenanceDetailsState)) &&
-            (identical(other.addMaintenanceState, addMaintenanceState) || const DeepCollectionEquality().equals(other.addMaintenanceState, addMaintenanceState)) &&
-            (identical(other.addVendorState, addVendorState) || const DeepCollectionEquality().equals(other.addVendorState, addVendorState)) &&
-            (identical(other.editMaintenanceState, editMaintenanceState) || const DeepCollectionEquality().equals(other.editMaintenanceState, editMaintenanceState)) &&
-            (identical(other.adminPortalState, adminPortalState) || const DeepCollectionEquality().equals(other.adminPortalState, adminPortalState)) &&
-            (identical(other.adminDashbordState, adminDashbordState) || const DeepCollectionEquality().equals(other.adminDashbordState, adminDashbordState)) &&
-            (identical(other.adminLandlordDetailsState, adminLandlordDetailsState) || const DeepCollectionEquality().equals(other.adminLandlordDetailsState, adminLandlordDetailsState)) &&
-            (identical(other.adminAddNewMemberState, adminAddNewMemberState) || const DeepCollectionEquality().equals(other.adminAddNewMemberState, adminAddNewMemberState)) &&
+            (identical(other.landlordMaintenanceState, landlordMaintenanceState) ||
+                const DeepCollectionEquality().equals(other.landlordMaintenanceState, landlordMaintenanceState)) &&
+            (identical(other.landlordVendorState, landlordVendorState) ||
+                const DeepCollectionEquality().equals(other.landlordVendorState, landlordVendorState)) &&
+            (identical(other.maintenanceDetailsState, maintenanceDetailsState) ||
+                const DeepCollectionEquality().equals(other.maintenanceDetailsState, maintenanceDetailsState)) &&
+            (identical(other.addMaintenanceState, addMaintenanceState) ||
+                const DeepCollectionEquality().equals(other.addMaintenanceState, addMaintenanceState)) &&
+            (identical(other.addVendorState, addVendorState) ||
+                const DeepCollectionEquality().equals(other.addVendorState, addVendorState)) &&
+            (identical(other.editMaintenanceState, editMaintenanceState) ||
+                const DeepCollectionEquality().equals(other.editMaintenanceState, editMaintenanceState)) &&
+            (identical(other.adminPortalState, adminPortalState) ||
+                const DeepCollectionEquality().equals(other.adminPortalState, adminPortalState)) &&
+            (identical(other.adminDashbordState, adminDashbordState) ||
+                const DeepCollectionEquality().equals(other.adminDashbordState, adminDashbordState)) &&
+            (identical(other.adminLandlordDetailsState, adminLandlordDetailsState) ||
+                const DeepCollectionEquality().equals(other.adminLandlordDetailsState, adminLandlordDetailsState)) &&
+            (identical(other.adminAddNewMemberState, adminAddNewMemberState) ||
+                const DeepCollectionEquality().equals(other.adminAddNewMemberState, adminAddNewMemberState)) &&
             (identical(other.adminLandlordState, adminLandlordState) || const DeepCollectionEquality().equals(other.adminLandlordState, adminLandlordState)) &&
             (identical(other.adminLandlordAccountState, adminLandlordAccountState) || const DeepCollectionEquality().equals(other.adminLandlordAccountState, adminLandlordAccountState)) &&
             (identical(other.adminLandlordPropertyState, adminLandlordPropertyState) || const DeepCollectionEquality().equals(other.adminLandlordPropertyState, adminLandlordPropertyState)) &&
@@ -2226,8 +2126,7 @@ class _$_AppState implements _AppState {
 
   @JsonKey(ignore: true)
   @override
-  _$AppStateCopyWith<_AppState> get copyWith =>
-      __$AppStateCopyWithImpl<_AppState>(this, _$identity);
+  _$AppStateCopyWith<_AppState> get copyWith => __$AppStateCopyWithImpl<_AppState>(this, _$identity);
 }
 
 abstract class _AppState implements AppState {
@@ -2256,15 +2155,13 @@ abstract class _AppState implements AppState {
       required SlotsState slotsState,
       required SlotsListState slotsListState,
       required TenantsApplicationDetailsState tenantsApplicationDetailsState,
-      required TenancyVarificationDocumentState
-          tenancyVarificationDocumentState,
+      required TenancyVarificationDocumentState tenancyVarificationDocumentState,
       required VarificationDocumentState varificationDocumentState,
       required ReferenceQuestionnaireState referenceQuestionnaireState,
       required PreviewDocumentState previewDocumentState,
       required ReferenceCheckState referenceCheckState,
       required LandLordTenancyArchiveState landLordTenancyArchiveState,
-      required ReferenceQuestionnaireDetailsState
-          referenceQuestionnaireDetailsState,
+      required ReferenceQuestionnaireDetailsState referenceQuestionnaireDetailsState,
       required ReferenceCheckDialogState referenceCheckDialogState,
       required LandLordTenancyLeaseState landlordTenancyLeaseState,
       required LandLordActiveTenantState landLordActiveTenantState,
@@ -2310,22 +2207,17 @@ abstract class _AppState implements AppState {
   @override
   TFEmploymentState get tfEmploymentState => throw _privateConstructorUsedError;
   @override
-  TFCurrentTenancyState get tfCurrentTenancyState =>
-      throw _privateConstructorUsedError;
+  TFCurrentTenancyState get tfCurrentTenancyState => throw _privateConstructorUsedError;
   @override
-  TFAdditionalOccupantState get tfAdditionalOccupantState =>
-      throw _privateConstructorUsedError;
+  TFAdditionalOccupantState get tfAdditionalOccupantState => throw _privateConstructorUsedError;
   @override
-  TFAdditionalInfoState get tfAdditionalInfoState =>
-      throw _privateConstructorUsedError;
+  TFAdditionalInfoState get tfAdditionalInfoState => throw _privateConstructorUsedError;
   @override
-  TFAdditionalReferenceState get tfAdditionalReferenceState =>
-      throw _privateConstructorUsedError;
+  TFAdditionalReferenceState get tfAdditionalReferenceState => throw _privateConstructorUsedError;
   @override
   TenantFilterState get tenantFilterState => throw _privateConstructorUsedError;
   @override
-  LandLordApplicationState get landLordApplicationState =>
-      throw _privateConstructorUsedError;
+  LandLordApplicationState get landLordApplicationState => throw _privateConstructorUsedError;
   @override
   NewLeadState get newLeadState => throw _privateConstructorUsedError;
   @override
@@ -2333,23 +2225,19 @@ abstract class _AppState implements AppState {
   @override
   PropertyFormState get propertyFormState => throw _privateConstructorUsedError;
   @override
-  EventTypesFormState get eventTypesFormState =>
-      throw _privateConstructorUsedError;
+  EventTypesFormState get eventTypesFormState => throw _privateConstructorUsedError;
   @override
   PropertyState get propertyState => throw _privateConstructorUsedError;
   @override
   EventTypesState get eventTypesState => throw _privateConstructorUsedError;
   @override
-  PropertySummeryState get propertySummeryState =>
-      throw _privateConstructorUsedError;
+  PropertySummeryState get propertySummeryState => throw _privateConstructorUsedError;
   @override
-  EventTypesSummeryState get eventTypesSummeryState =>
-      throw _privateConstructorUsedError;
+  EventTypesSummeryState get eventTypesSummeryState => throw _privateConstructorUsedError;
   @override
   PropertyListState get propertyListState => throw _privateConstructorUsedError;
   @override
-  EventTypesListState get eventTypesListState =>
-      throw _privateConstructorUsedError;
+  EventTypesListState get eventTypesListState => throw _privateConstructorUsedError;
   @override
   EditLeadState get editLeadState => throw _privateConstructorUsedError;
   @override
@@ -2357,127 +2245,92 @@ abstract class _AppState implements AppState {
   @override
   SlotsListState get slotsListState => throw _privateConstructorUsedError;
   @override
-  TenantsApplicationDetailsState get tenantsApplicationDetailsState =>
-      throw _privateConstructorUsedError;
+  TenantsApplicationDetailsState get tenantsApplicationDetailsState => throw _privateConstructorUsedError;
   @override
-  TenancyVarificationDocumentState get tenancyVarificationDocumentState =>
-      throw _privateConstructorUsedError;
+  TenancyVarificationDocumentState get tenancyVarificationDocumentState => throw _privateConstructorUsedError;
   @override
-  VarificationDocumentState get varificationDocumentState =>
-      throw _privateConstructorUsedError;
+  VarificationDocumentState get varificationDocumentState => throw _privateConstructorUsedError;
   @override
-  ReferenceQuestionnaireState get referenceQuestionnaireState =>
-      throw _privateConstructorUsedError;
+  ReferenceQuestionnaireState get referenceQuestionnaireState => throw _privateConstructorUsedError;
   @override
-  PreviewDocumentState get previewDocumentState =>
-      throw _privateConstructorUsedError;
+  PreviewDocumentState get previewDocumentState => throw _privateConstructorUsedError;
   @override
-  ReferenceCheckState get referenceCheckState =>
-      throw _privateConstructorUsedError;
+  ReferenceCheckState get referenceCheckState => throw _privateConstructorUsedError;
   @override
-  LandLordTenancyArchiveState get landLordTenancyArchiveState =>
-      throw _privateConstructorUsedError;
+  LandLordTenancyArchiveState get landLordTenancyArchiveState => throw _privateConstructorUsedError;
   @override
-  ReferenceQuestionnaireDetailsState get referenceQuestionnaireDetailsState =>
-      throw _privateConstructorUsedError;
+  ReferenceQuestionnaireDetailsState get referenceQuestionnaireDetailsState => throw _privateConstructorUsedError;
   @override
-  ReferenceCheckDialogState get referenceCheckDialogState =>
-      throw _privateConstructorUsedError;
+  ReferenceCheckDialogState get referenceCheckDialogState => throw _privateConstructorUsedError;
   @override
-  LandLordTenancyLeaseState get landlordTenancyLeaseState =>
-      throw _privateConstructorUsedError;
+  LandLordTenancyLeaseState get landlordTenancyLeaseState => throw _privateConstructorUsedError;
   @override
-  LandLordActiveTenantState get landLordActiveTenantState =>
-      throw _privateConstructorUsedError;
+  LandLordActiveTenantState get landLordActiveTenantState => throw _privateConstructorUsedError;
   @override
   PreviewLeaseState get previewLeaseState => throw _privateConstructorUsedError;
   @override
-  TenancyLeaseAgreementState get tenancyLeaseAgreementState =>
-      throw _privateConstructorUsedError;
+  TenancyLeaseAgreementState get tenancyLeaseAgreementState => throw _privateConstructorUsedError;
   @override
-  LandLordTenancyLeadState get landLordTenancyLeadState =>
-      throw _privateConstructorUsedError;
+  LandLordTenancyLeadState get landLordTenancyLeadState => throw _privateConstructorUsedError;
   @override
-  LandLordTenancyApplicantState get landLordTenancyApplicantState =>
-      throw _privateConstructorUsedError;
+  LandLordTenancyApplicantState get landLordTenancyApplicantState => throw _privateConstructorUsedError;
   @override
   NotificationState get notificationState => throw _privateConstructorUsedError;
   @override
   LandlordProfileState get profileState => throw _privateConstructorUsedError;
   @override
-  LandlordMaintenanceState get landlordMaintenanceState =>
-      throw _privateConstructorUsedError;
+  LandlordMaintenanceState get landlordMaintenanceState => throw _privateConstructorUsedError;
   @override
-  LandlordVendorState get landlordVendorState =>
-      throw _privateConstructorUsedError;
+  LandlordVendorState get landlordVendorState => throw _privateConstructorUsedError;
   @override
-  MaintenanceDetailsState get maintenanceDetailsState =>
-      throw _privateConstructorUsedError;
+  MaintenanceDetailsState get maintenanceDetailsState => throw _privateConstructorUsedError;
   @override
-  AddMaintenanceState get addMaintenanceState =>
-      throw _privateConstructorUsedError;
+  AddMaintenanceState get addMaintenanceState => throw _privateConstructorUsedError;
   @override
   AddVendorState get addVendorState => throw _privateConstructorUsedError;
   @override
-  EditMaintenanceState get editMaintenanceState =>
-      throw _privateConstructorUsedError;
+  EditMaintenanceState get editMaintenanceState => throw _privateConstructorUsedError;
   @override /*Admin*/
   AdminPortalState get adminPortalState => throw _privateConstructorUsedError;
   @override
-  AdminDashbordState get adminDashbordState =>
-      throw _privateConstructorUsedError;
+  AdminDashbordState get adminDashbordState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordDetailsState get adminLandlordDetailsState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordDetailsState get adminLandlordDetailsState => throw _privateConstructorUsedError;
   @override
-  AdminAddNewMemberState get adminAddNewMemberState =>
-      throw _privateConstructorUsedError;
+  AdminAddNewMemberState get adminAddNewMemberState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordState get adminLandlordState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordState get adminLandlordState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordAccountState get adminLandlordAccountState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordAccountState get adminLandlordAccountState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordPropertyState get adminLandlordPropertyState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordPropertyState get adminLandlordPropertyState => throw _privateConstructorUsedError;
   @override
-  AdminPropertyDetailsState get adminPropertyDetailsState =>
-      throw _privateConstructorUsedError;
+  AdminPropertyDetailsState get adminPropertyDetailsState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordLeadsState get adminLandlordLeadsState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordLeadsState get adminLandlordLeadsState => throw _privateConstructorUsedError;
   @override
-  AdminLandlordLeadsDetailsState get adminLandlordLeadsDetailsState =>
-      throw _privateConstructorUsedError;
+  AdminLandlordLeadsDetailsState get adminLandlordLeadsDetailsState => throw _privateConstructorUsedError;
   @override
   AdminTeamState get adminTeamState => throw _privateConstructorUsedError;
   @override
   AdminSettingState get adminSettingState => throw _privateConstructorUsedError;
   @override /*Customer*/
-  CustomerPortalState get customerPortalState =>
-      throw _privateConstructorUsedError;
+  CustomerPortalState get customerPortalState => throw _privateConstructorUsedError;
   @override
-  CustomerPropertylistState get customerPropertylistState =>
-      throw _privateConstructorUsedError;
+  CustomerPropertylistState get customerPropertylistState => throw _privateConstructorUsedError;
   @override
-  CustomerPropertyDetailsState get customerPropertyDetailsState =>
-      throw _privateConstructorUsedError;
+  CustomerPropertyDetailsState get customerPropertyDetailsState => throw _privateConstructorUsedError;
   @override /*Basic Tenant*/
   TenantPortalState get tenantPortalState => throw _privateConstructorUsedError;
   @override
-  TenantMaintenanceState get tenantMaintenanceState =>
-      throw _privateConstructorUsedError;
+  TenantMaintenanceState get tenantMaintenanceState => throw _privateConstructorUsedError;
   @override
   LeaseDetailsState get leaseDetailsState => throw _privateConstructorUsedError;
   @override
-  TenantAddMaintenanceState get tenantAddMaintenanceState =>
-      throw _privateConstructorUsedError;
+  TenantAddMaintenanceState get tenantAddMaintenanceState => throw _privateConstructorUsedError;
   @override
-  TenantPersonalState get tenantPersonalState =>
-      throw _privateConstructorUsedError;
+  TenantPersonalState get tenantPersonalState => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AppStateCopyWith<_AppState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$AppStateCopyWith<_AppState> get copyWith => throw _privateConstructorUsedError;
 }

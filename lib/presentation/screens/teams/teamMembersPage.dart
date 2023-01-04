@@ -26,6 +26,7 @@ import 'package:silverhome/presentation/models/landlord_models/property_list_sta
 import 'package:silverhome/presentation/models/teamMembers/teamMembersRoleModel.dart';
 import 'package:silverhome/presentation/screens/landlord/property/add_edit_property.dart';
 import 'package:silverhome/presentation/screens/teams/itemFolder/itemPage.dart';
+import 'package:silverhome/presentation/screens/teams/repository/teamMembersService.dart';
 import 'package:silverhome/presentation/screens/teams/roleTablePage.dart';
 import 'package:silverhome/presentation/screens/teams/header/teamsHeaders.dart';
 import 'package:silverhome/store/app_store.dart';
@@ -1085,8 +1086,128 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        FutureBuilder(
+            future: TeamMemberService().getTeamMembers(context, "13"), // function where you call your api
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              // AsyncSnapshot<Your object type>
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Expanded(
+                  child: Container(
+                    width: sswidth,
+                    height: ssheight - 310,
+                    margin: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Please wait.....",
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: MyStyles.Medium(18, myColor.Circle_main),
+                    ),
+                  ),
+                );
+              } else {
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return Expanded(
+                    child: TeamMembersItem(
+                      listdata1: snapshot.data,
+                      onPresseEdit: (PropertyDataList propertyData) {
+                        getPropertyDetails(propertyData, 2, propertyData.propDrafting!);
+                      },
+                      onPresseDuplicat: (PropertyDataList propertyData) {
+                        ApiManager().DuplicatPropertyGenerate(context, propertyData.id!, (status, responce) async {
+                          if (status) {
+                            _store.dispatch(UpdatePropertyListIsloding(true));
+                            _store.dispatch(UpdatePropertyList(<PropertyDataList>[]));
+                            apimanager("", 1, "PropertyName", 1, 0);
+                          } else {
+                            ToastUtils.showCustomToast(context, GlobleString.Error1, false);
+                          }
+                        });
+                      },
+                      onPressDetails: (PropertyDataList propertyData) {
+                        getPropertyDetails(propertyData, 1, propertyData.propDrafting!);
+                      },
+                      onPressName: (PropertyDataList propertyData) {
+                        getPropertyDetails(propertyData, 1, propertyData.propDrafting!);
+                      },
+                      onPresseInActive: (PropertyDataList propertyData, int pos) {
+                        ApiManager().TenantAvailableInProperty(context, Prefs.getString(PrefsName.OwnerID), propertyData.id!,
+                            (status, responce) {
+                          if (status) {
+                            if (responce == "1") {
+                              showDialog(
+                                context: context,
+                                barrierColor: Colors.black45,
+                                useSafeArea: true,
+                                barrierDismissible: false,
+                                builder: (BuildContext context1) {
+                                  return AlertDialogBox(
+                                    title: GlobleString.Prop_Inactive,
+                                    positiveText: GlobleString.Prop_btn_yes,
+                                    negativeText: GlobleString.Prop_btn_cancel,
+                                    onPressedYes: () {
+                                      Navigator.of(context1).pop();
+                                      propertyActive_InAction_call(propertyListState, false, propertyData.id!);
+                                    },
+                                    onPressedNo: () {
+                                      Navigator.of(context1).pop();
+                                    },
+                                  );
+                                },
+                              );
+                            } else {
+                              propertyActive_InAction_call(propertyListState, false, propertyData.id!);
+                            }
+                          } else {
+                            propertyActive_InAction_call(propertyListState, false, propertyData.id!);
+                          }
+                        });
+                      },
+                      onPresseActive: (PropertyDataList propertyData, int pos) {
+                        if (propertyData.propDrafting != 3) {
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_all_details, false);
+                        } else if (!propertyData.isAgreedTandC!) {
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Disclosures, false);
+                        } else {
+                          propertyActive_InAction_call(propertyListState, true, propertyData.id!);
+                        }
+                      },
+                      onPresseIsPublish: (PropertyDataList propertyData, int pos, bool flag) {
+                        if (!propertyData.isActive!) {
+                          ToastUtils.showCustomToast(context, GlobleString.PS3_Property_Active_publish, false);
+                        } else {
+                          showDialog(
+                            context: context,
+                            barrierColor: Colors.black45,
+                            useSafeArea: true,
+                            barrierDismissible: false,
+                            builder: (BuildContext context1) {
+                              return AlertDialogBox(
+                                title: flag ? GlobleString.Prop_Publish : GlobleString.Prop_UnPublish,
+                                positiveText: GlobleString.Prop_btn_yes,
+                                negativeText: GlobleString.Prop_btn_cancel,
+                                onPressedYes: () {
+                                  Navigator.of(context1).pop();
+                                  propertyIsPublished_call(propertyListState, flag, propertyData.id!);
+                                },
+                                onPressedNo: () {
+                                  Navigator.of(context1).pop();
+                                },
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                  );
+                }
+              }
+            }),
         propertyListState.isloding
-            ? Expanded(
+            ? SizedBox()
+            /* Expanded(
                 child: Container(
                   width: sswidth,
                   height: ssheight - 310,
@@ -1193,21 +1314,22 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
                         }
                       },
                     ),
-                  )
-                : Expanded(
-                    child: Container(
-                      width: sswidth,
-                      height: ssheight - 310,
-                      margin: EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      child: Text(
-                        GlobleString.Blank_Property,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: MyStyles.Medium(18, myColor.tabel_msg),
-                      ),
-                    ),
-                  )
+                  )*/
+
+            : Expanded(
+                child: Container(
+                  width: sswidth,
+                  height: ssheight - 310,
+                  margin: EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  child: Text(
+                    GlobleString.Blank_Property,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: MyStyles.Medium(18, myColor.tabel_msg),
+                  ),
+                ),
+              )
       ],
     );
   }
