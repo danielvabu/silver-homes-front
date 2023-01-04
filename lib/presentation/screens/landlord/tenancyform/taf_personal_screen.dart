@@ -1798,13 +1798,14 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   }
 
   leadcall(List<AddLead2> applicantIdlist, List<String> emails) {
-    ApiManager().InsetNewLeadAPI(context, applicantIdlist, (error, respoce) {
+    ApiManager().InsetNewLeadAPI(context, applicantIdlist,
+        (error, respoce) async {
       if (error) {
         InviteWorkFlowReqtokens reqtokens = new InviteWorkFlowReqtokens();
         List<String> ids = respoce.split(",");
         ids.removeLast();
         for (int i = 0; i < ids.length; i++) {
-          ApiManager().DuplicatTemplateHtml(
+          await ApiManager().DuplicatTemplateHtml(
               context, Prefs.getString(PrefsName.TCF_ApplicationID), ids[i],
               (status, responce) async {
             if (status) {
