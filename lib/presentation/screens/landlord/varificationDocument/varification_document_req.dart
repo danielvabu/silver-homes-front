@@ -431,6 +431,8 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
   }
 
   insertApiCall(List<ApplicationDocumentUploads>? TVDState) {
+    TVDState?.removeWhere((element) => element.fileName == "");
+    TVDState;
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 

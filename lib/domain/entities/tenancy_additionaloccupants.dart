@@ -6,6 +6,8 @@ class TenancyAdditionalOccupant {
   String? mobilenumber;
   String? primaryApplicant;
   String? OccupantID;
+  String? explain;
+  bool? applicant = false;
   bool? errro_firstname = false;
   bool? errro_lastname = false;
   bool? errro_email = false;
@@ -20,6 +22,8 @@ class TenancyAdditionalOccupant {
     this.mobilenumber,
     this.primaryApplicant,
     this.OccupantID,
+    this.explain,
+    this.applicant,
     this.errro_firstname,
     this.errro_lastname,
     this.errro_email,
@@ -35,6 +39,8 @@ class TenancyAdditionalOccupant {
         this.mobilenumber = source.mobilenumber,
         this.primaryApplicant = source.primaryApplicant,
         this.OccupantID = source.OccupantID,
+        this.explain = source.explain,
+        this.applicant = source.applicant,
         this.errro_firstname = source.errro_firstname,
         this.errro_lastname = source.errro_lastname,
         this.errro_email = source.errro_email,
@@ -50,6 +56,8 @@ class TenancyAdditionalOccupant {
         mobilenumber: json["mobilenumber"],
         primaryApplicant: json["primaryApplicant"],
         OccupantID: json["OccupantID"],
+        explain: json["explain"],
+        applicant: json["applicant"],
         errro_firstname: json["errro_firstname"],
         errro_lastname: json["errro_lastname"],
         errro_email: json["errro_email"],
@@ -65,6 +73,8 @@ class TenancyAdditionalOccupant {
         "mobilenumber": mobilenumber,
         "primaryApplicant": primaryApplicant,
         "OccupantID": OccupantID,
+        "explain": explain,
+        "applicant": applicant,
         "errro_firstname": errro_firstname,
         "errro_lastname": errro_lastname,
         "errro_mobilenumber": errro_mobilenumber,

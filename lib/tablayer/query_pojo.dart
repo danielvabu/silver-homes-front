@@ -38,23 +38,70 @@ class AddLead {
       };
 }
 
+class AddLead2 {
+  AddLead2({
+    this.propId,
+    this.applicantId,
+    this.applicationStatus,
+    this.docReviewStatus,
+    this.referenceStatus,
+    this.leaseStatus,
+    this.Owner_ID,
+    this.group1,
+  });
+
+  String? propId;
+  ApplicantId? applicantId;
+  String? applicationStatus;
+  String? docReviewStatus;
+  String? referenceStatus;
+  String? leaseStatus;
+  String? Owner_ID;
+  String? group1;
+  factory AddLead2.fromJson(Map<String, dynamic> json) => AddLead2(
+        propId: json["Prop_ID"],
+        applicantId: ApplicantId.fromJson(json["Applicant_ID"]),
+        applicationStatus: json["ApplicationStatus"],
+        docReviewStatus: json["DocReviewStatus"],
+        referenceStatus: json["ReferenceStatus"],
+        leaseStatus: json["LeaseStatus"],
+        Owner_ID: json["Owner_ID"],
+        group1: json["group1"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Prop_ID": propId,
+        "Applicant_ID": applicantId!.toJson(),
+        "ApplicationStatus": applicationStatus,
+        "DocReviewStatus": docReviewStatus,
+        "ReferenceStatus": referenceStatus,
+        "LeaseStatus": leaseStatus,
+        "Owner_ID": Owner_ID,
+        "group1": group1,
+      };
+}
+
 class ApplicantId {
   ApplicantId({
     this.note,
     this.personId,
+    this.rating,
   });
 
   String? note;
   PersonId? personId;
+  int? rating;
 
   factory ApplicantId.fromJson(Map<String, dynamic> json) => ApplicantId(
         note: json["Note"],
         personId: PersonId.fromJson(json["Person_ID"]),
+        rating: json["rating"],
       );
 
   Map<String, dynamic> toJson() => {
         "Note": note,
         "Person_ID": personId!.toJson(),
+        "rating": rating,
       };
 }
 
@@ -1103,20 +1150,31 @@ class AdditionalOccupants {
 class Occupant {
   String? FirstName;
   String? LastName;
-
+  String? email;
+  String? mobilenumber;
+  String? suspendedreason;
   Occupant({
     this.FirstName,
     this.LastName,
+    this.email,
+    this.mobilenumber,
+    this.suspendedreason,
   });
 
   factory Occupant.fromJson(Map<String, dynamic> json) => Occupant(
         FirstName: json["FirstName"],
         LastName: json["LastName"],
+        email: json["email"],
+        mobilenumber: json["mobilenumber"],
+        suspendedreason: json["suspendedreason"],
       );
 
   Map<String, dynamic> toJson() => {
         "FirstName": FirstName,
         "LastName": LastName,
+        "email": email,
+        "mobilenumber": mobilenumber,
+        "suspendedreason": suspendedreason,
       };
 }
 

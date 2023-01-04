@@ -79,6 +79,13 @@ class _ReferenceCheckedCardViewWidgetState
 
   @override
   Widget build(BuildContext context) {
+    String grupo = widget.dmodel.group1.toString();
+    String id = widget.dmodel.id.toString();
+    if (grupo == '0') {
+      grupo = "Group $id - primary";
+    } else {
+      grupo = "Group $grupo";
+    }
     // TODO: implement build
     return Container(
       width: 280,
@@ -155,6 +162,7 @@ class _ReferenceCheckedCardViewWidgetState
                         SizedBox(
                           height: 10,
                         ),
+                        Text(grupo),
                         InkWell(
                           onTap: () {
                             if (widget.dmodel.isexpand!) {

@@ -768,6 +768,7 @@ class GlobleString {
   static const String Fl_Select_all = "Select all";
   static const String Fl_Clear_all = "Clear all";
   static const String Fl_Property_Name = "Property Name";
+  static const String Fl_Property_Group = "Group";
   static const String Fl_City = "City";
   static const String Fl_Rating = "Rating";
   static const String Fl_Application_Received = "Application Received";
@@ -1024,7 +1025,10 @@ class GlobleString {
       "Please enter the last name of the occupant.";
   static const String taf_occupant_error_primaryApplicant =
       "Please specify your relationship with the occupant.";
-
+  static const String taf_occupant_error_email =
+      "Please specify your email with the occupant.";
+  static const String taf_occupant_error_phone =
+      "Please specify your phone number with the occupant.";
   /*Tenancy Additional Info*/
   static const String taf_AdditionalInfo_error_pets_typeofpets =
       "Please indicate the type of pet (e.g. dog, cat, etc.).";
@@ -1093,6 +1097,7 @@ class GlobleString {
   static const String TAF_Personal_email = "Email";
   static const String TAF_Personal_phonenumber = "Phone number";
   static const String TAF_Personal_yourstory = "Your story";
+  static const String TAF_Personal_explain = "Please explain";
   static const String Back = "Back";
   static const String Save_and_next = "Save and Next";
   static const String Save_and_Finish = "Save and Finish";
@@ -1136,7 +1141,8 @@ class GlobleString {
   static const String TAF_AO_Last_name = "Last name";
   static const String TAF_AO_Relationship_applicant =
       "Relationship to primary applicant";
-  static const String TAF_AO_NotApplicable = "Not applicable";
+  static const String TAF_AO_NotApplicable =
+      "Tenancy application not applicable";
 
   static const String TAF_Additional_Occupants_dailog_yes = "Yes";
   static const String TAF_Additional_Occupants_dailog_no = "No";

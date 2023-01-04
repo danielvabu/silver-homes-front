@@ -351,6 +351,11 @@ class _FilterViewState extends State<FilterView> {
                                     height: 20,
                                   ),
                                   if (!widget.isfunnel)
+                                    groupfilter(tenantFilterState),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  if (!widget.isfunnel)
                                     propertyfilter(tenantFilterState),
                                   if (!widget.isfunnel)
                                     SizedBox(
@@ -505,6 +510,85 @@ class _FilterViewState extends State<FilterView> {
                     Expanded(
                       child: Text(
                         GlobleString.Fl_Property_Name,
+                        style: MyStyles.Medium(14, myColor.TA_Border),
+                      ),
+                    ),
+                    Icon(
+                      filterState.isExpandProperties
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                      size: 20,
+                    )
+                  ],
+                ),
+                Container(
+                  height: 1,
+                  margin: EdgeInsets.only(top: 3),
+                  color: myColor.TA_Border,
+                )
+              ],
+            ),
+          ),
+        ),
+        filterState.isExpandProperties
+            ? Container(
+                margin: EdgeInsets.only(top: 10),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  key: UniqueKey(),
+                  itemCount: filterState.properties.length,
+                  itemBuilder: (BuildContext ctxt, int Index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Checkbox(
+                          activeColor: myColor.Circle_main,
+                          checkColor: myColor.white,
+                          value: filterState.properties[Index].isSelected,
+                          onChanged: (value) {
+                            filterState.properties[Index].isSelected = value;
+                            _store.dispatch(
+                                UpdateFilterProperty(filterState.properties));
+                          },
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          filterState.properties[Index].propertyName!,
+                          textAlign: TextAlign.start,
+                          style: MyStyles.Medium(14, myColor.text_color),
+                        )
+                      ],
+                    );
+                  },
+                ),
+              )
+            : Container()
+      ],
+    );
+  }
+
+  groupfilter(TenantFilterState filterState) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            if (filterState.isExpandProperties) {
+              _store.dispatch(UpdateFilterisExpandProperties(false));
+            } else {
+              _store.dispatch(UpdateFilterisExpandProperties(true));
+            }
+          },
+          child: Container(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        GlobleString.Fl_Property_Group,
                         style: MyStyles.Medium(14, myColor.TA_Border),
                       ),
                     ),

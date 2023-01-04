@@ -267,6 +267,25 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        (tfEmploymentState.empstatus != null &&
+                                (tfEmploymentState.empstatus!.EnumDetailID ==
+                                        2 ||
+                                    tfEmploymentState.empstatus!.EnumDetailID ==
+                                        3 ||
+                                    tfEmploymentState.empstatus!.EnumDetailID ==
+                                        4))
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  AddNewOccupationbutton(tfEmploymentState)
+                                ],
+                              )
+                            : SizedBox(
+                                height: 0,
+                              ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Row(
                           children: [
                             Text(
@@ -386,20 +405,6 @@ class _TAFEmploymentScreenState extends State<TAFEmploymentScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  (tfEmploymentState.empstatus != null &&
-                          (tfEmploymentState.empstatus!.EnumDetailID == 2 ||
-                              tfEmploymentState.empstatus!.EnumDetailID == 3 ||
-                              tfEmploymentState.empstatus!.EnumDetailID == 4))
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [AddNewOccupationbutton(tfEmploymentState)],
-                        )
-                      : SizedBox(
-                          height: 0,
-                        ),
                   SizedBox(
                     height: 15,
                   ),

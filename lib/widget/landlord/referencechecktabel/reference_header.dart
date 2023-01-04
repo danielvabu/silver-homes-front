@@ -59,6 +59,7 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
   List<Widget> _headerRow() {
     var result = <Widget>[];
     result.add(_headerTitleName(GlobleString.RCH_Applicant_Name));
+    result.add(_headerTitleName2(GlobleString.ACH_Applicant_Group));
     result.add(_headerTitleProperty(GlobleString.RCH_Property_Name));
     result.add(_headerTitleRating(GlobleString.RCH_Rating));
     result.add(_headerTitleReferences(GlobleString.RCH_References));
@@ -80,6 +81,40 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
       child: Container(
         height: 40,
         width: width / 8,
+        padding: EdgeInsets.only(left: 10),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.start,
+              style: MyStyles.SemiBold(12, myColor.text_color),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Image.asset(
+              'assets/images/ic_sort.png',
+              width: 12,
+              height: 12,
+              fit: BoxFit.contain,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _headerTitleName2(String text) {
+    return InkWell(
+      onTap: () {
+        widget._callbackSortName();
+      },
+      child: Container(
+        height: 40,
+        width: width / 9,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(
@@ -181,7 +216,7 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 8.5,
+        width: width / 10,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.center,
         child: Row(
@@ -215,7 +250,7 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 8.5,
+        width: width / 10,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.center,
         child: Row(
@@ -253,7 +288,7 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 8.5,
+        width: width / 10,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.center,
         child: Row(
@@ -291,7 +326,7 @@ class _ReferenceHeaderState extends State<ReferenceHeader> {
       },
       child: Container(
         height: 40,
-        width: width / 6,
+        width: width / 10,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Row(

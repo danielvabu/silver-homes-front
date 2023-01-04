@@ -520,10 +520,7 @@ class HttpClientCall {
 
   Future<void> CallAPIToken(
       BuildContext context, CallBackQuesy CallBackQuesy) async {
-    var myjson = {
-      "Email": "hardik.thakkar@techextensor.com",
-      "Password": "123456789"
-    };
+    var myjson = {"Email": "silverhomeapp@gmail.com", "Password": "Asdf1234.."};
 
     String json = jsonEncode(myjson);
 

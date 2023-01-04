@@ -195,7 +195,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
   List<Widget> _tableData(TenancyApplication model, int index) {
     var result = <Widget>[];
     result.add(_datavalueTitle(model.applicantName!, index));
-    result.add(_datavalueGroup());
+    result.add(_datavalueGroup(model.group1!, model.id!));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueDatesent(model.applicationSentDate!));
@@ -239,20 +239,26 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     );
   }
 
-  Widget _datavalueGroup() {
+  Widget _datavalueGroup(int group, int id) {
+    String grupo = "";
+    if (group == 0) {
+      grupo = "Group $id - primary";
+    } else {
+      grupo = "Group $group";
+    }
     return InkWell(
       onTap: () {
         //  openApplicationDetailsView(Index);
       },
       child: Container(
         height: 40,
-        width: width / 16,
+        width: width / 9,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
           message: "grupo",
           child: Text(
-            "Group 112",
+            grupo,
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
@@ -327,7 +333,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
       },
       child: Container(
         height: 40,
-        width: width / 11,
+        width: width / 14,
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: RatingBarIndicator(
@@ -385,7 +391,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
   Widget _appstatusdropdown(TenancyApplication model) {
     return Container(
       height: 28,
-      width: width / 6,
+      width: width / 9,
       padding: EdgeInsets.only(left: 2),
       // ignore: missing_required_param
       child: DropdownSearch<SystemEnumDetails>(
@@ -446,7 +452,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
   Widget _reviewstatusdropdown(TenancyApplication model) {
     return Container(
         height: 28,
-        width: width / 8.5,
+        width: width / 10,
         padding: EdgeInsets.only(left: 12),
         // ignore: missing_required_param
         child: DropdownSearch<SystemEnumDetails>(

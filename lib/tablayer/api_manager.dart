@@ -4341,7 +4341,7 @@ class ApiManager {
     HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
       if (error) {
         List data = jsonDecode(respoce) as List;
-
+        String res = "";
         bool issuccess = false;
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
@@ -4349,7 +4349,8 @@ class ApiManager {
           String StatusCode = myobject['StatusCode'] != null
               ? myobject['StatusCode'].toString()
               : "";
-
+          res = res + myobject['Result'].toString();
+          res = res + ",";
           if (StatusCode.isEmpty || StatusCode != "200") {
             loader.remove();
             issuccess = true;
@@ -4357,10 +4358,11 @@ class ApiManager {
             break;
           }
 
-          if ((data.length - 1) == i && !issuccess) {
-            CallBackQuesy(true, "");
-          }
+          // if ((data.length - 1) == i && !issuccess) {
+          //   CallBackQuesy(true, res);
+          // }
         }
+        CallBackQuesy(true, res);
       } else {
         CallBackQuesy(false, "");
       }
@@ -4702,7 +4704,7 @@ class ApiManager {
               myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
-
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
@@ -4853,6 +4855,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
+          tenancyApplication.group1 = group1;
 
           allListData.add(tenancyApplication);
 
@@ -5637,11 +5640,17 @@ class ApiManager {
             String Occupant_FirstName = Occupant['FirstName'] != null
                 ? Occupant['FirstName'].toString()
                 : "";
-
+            String SuspendedReason = Occupant['SuspendedReason'] != null
+                ? Occupant['SuspendedReason'].toString()
+                : "";
             String Occupant_LastName = Occupant['LastName'] != null
                 ? Occupant['LastName'].toString()
                 : "";
-
+            String Occupant_Email =
+                Occupant['Email'] != null ? Occupant['Email'].toString() : "";
+            String Occupant_MobileNumber = Occupant['MobileNumber'] != null
+                ? Occupant['MobileNumber'].toString()
+                : "";
             TenancyAdditionalOccupant tenancyAdditionalOccupant =
                 new TenancyAdditionalOccupant();
             tenancyAdditionalOccupant.id = AOID;
@@ -5650,6 +5659,12 @@ class ApiManager {
             tenancyAdditionalOccupant.firstname = Occupant_FirstName;
             tenancyAdditionalOccupant.lastname = Occupant_LastName;
             tenancyAdditionalOccupant.OccupantID = Occupant_ID;
+            tenancyAdditionalOccupant.email = Occupant_Email;
+            tenancyAdditionalOccupant.mobilenumber = Occupant_MobileNumber;
+            tenancyAdditionalOccupant.explain = SuspendedReason;
+            tenancyAdditionalOccupant.applicant = true;
+            tenancyAdditionalOccupant.errro_email = false;
+            tenancyAdditionalOccupant.errro_mobilenumber = false;
             tenancyAdditionalOccupant.errro_firstname = false;
             tenancyAdditionalOccupant.errro_lastname = false;
             tenancyAdditionalOccupant.errro_primaryApplicant = false;
@@ -6303,6 +6318,7 @@ class ApiManager {
 
           int Applicant_ID =
               myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
 
           double Rating = myobject['Rating'] != null
               ? double.parse(myobject['Rating'].toString())
@@ -6426,7 +6442,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
-
+          tenancyApplication.group1 = group1;
           tenancyleadlist.add(tenancyApplication);
         }
 
@@ -7387,7 +7403,7 @@ class ApiManager {
               myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
-
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
@@ -7538,6 +7554,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
+          tenancyApplication.group1 = group1;
 
           tenancyleadlist.add(tenancyApplication);
         }
@@ -8177,6 +8194,7 @@ class ApiManager {
               myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
 
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
@@ -8328,6 +8346,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
+          tenancyApplication.group1 = group1;
 
           tenancyleadlist.add(tenancyApplication);
         }
@@ -9041,7 +9060,7 @@ class ApiManager {
 
           int Applicant_ID =
               myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
-
+          int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
           double Rating = myobject['Rating'] != null
               ? double.parse(myobject['Rating'].toString())
               : 0;
@@ -9164,6 +9183,7 @@ class ApiManager {
           tenancyApplication.city = City;
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
+          tenancyApplication.group1 = group1;
 
           tenancyleadlist.add(tenancyApplication);
         }
@@ -10494,6 +10514,26 @@ class ApiManager {
         callBackQuesy(true, respoce);
       } else {
         loader.remove();
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  DuplicatTemplateHtml(BuildContext context, String id, String appid,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_DuplicatTemplateHtml,
+      "Reqtokens": {"ID": id, "APPID": appid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        callBackQuesy(true, respoce);
+      } else {
         callBackQuesy(false, respoce);
       }
     });

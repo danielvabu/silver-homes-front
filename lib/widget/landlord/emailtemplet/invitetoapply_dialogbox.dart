@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:html_editor_enhanced/utils/shims/dart_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/fontname.dart';
 import 'package:silverhome/domain/entities/LandlordProfile.dart';
@@ -551,7 +552,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                             getSuggestionsMobile:
                                                 (String value) {
                                               List<String> mentions = [
-                                                'NameApplicant',
+                                                'ApplicantName',
                                                 'PropertyName',
                                                 'PropertyAddress',
                                                 'LandlordFirstName',
@@ -571,7 +572,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                             },
                                             //returns the dropdown items on web
                                             mentionsWeb: [
-                                              'NameApplicant',
+                                              'ApplicantName',
                                               'PropertyName',
                                               'PropertyAddress',
                                               'LandlordFirstName',
@@ -599,7 +600,7 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                       controller: controller, //required
                                       htmlEditorOptions: HtmlEditorOptions(
                                         initialText:
-                                            "<p style='color:#1f1f1f'>Hi <span style='color:#5454ff'> @NameApplicant</span></p> <p style='color:#1f1f1f'> This is <span style='color:#5454ff'>@LandlordFirstName @LandlordLastName</span>. Click on the button below to access the tenant application form for: <span style='color:#5454ff'>@PropertyName</span>-<span style='color:#5454ff'>@PropertyAddress</span>.<br><br><p style='style='color:#1f1f1f''>I will reach out to you once your application has been reviewed.</p><p style='color:#1f1f1f'>Thank you,</P><p style='color:#5454ff'>@landlordFirstname @LandlordLastname</p><p style='color:#5454ff'>@LandlordCompanyName</p>",
+                                            "<p style='color:#1f1f1f'>Hi <span style='color:#5454ff'> @ApplicantName</span></p> <p style='color:#1f1f1f'> This is <span style='color:#5454ff'>@LandlordFirstName @LandlordLastName</span>. Click on the button below to access the tenant application form for: <span style='color:#5454ff'>@PropertyName</span>-<span style='color:#5454ff'>@PropertyAddress</span>.<br><br><p style='style='color:#1f1f1f''>I will reach out to you once your application has been reviewed.</p><p style='color:#1f1f1f'>Thank you,</P><p style='color:#5454ff'>@LandlordFirstName @LandlordLastName</p><p style='color:#5454ff'>@LandlordCompanyName</p>",
                                         autoAdjustHeight: false,
                                         adjustHeightForKeyboard: false,
 
@@ -965,6 +966,8 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
 
   void previewEmailTemplate(String html) async {
     String template1 = await GenerateTemplate();
+    template1 = template1.replaceAll(
+        '@ApplicantName', widget._tenancyleadlist[0].applicantName!);
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -1058,15 +1061,15 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     DateTime dateToday =
         DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     String propiedaddata = propertyData1!.propertyAddress! +
-        "," +
+        ", " +
         propertyData1!.suiteUnit! +
-        "," +
+        ", " +
         propertyData1!.city! +
-        "," +
+        ", " +
         propertyData1!.province! +
-        "," +
+        ", " +
         propertyData1!.country! +
-        "," +
+        ", " +
         propertyData1!.postalCode!;
     String propdesc = propertyData1!.propertyDescription!;
     String landfn = landlordProfile1!.firstname!;
@@ -1075,11 +1078,12 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     String landph = landlordProfile1!.phonenumber!;
     String landcn = landlordProfile1!.companyname!;
     String landlinkweb = landlordProfile1!.homepagelink!;
-    String landllistweb = landlordProfile1!.CustomerFeatureListingURL!;
+    String landllistweb = "https://app.silverhomes.ai/#/" +
+        landlordProfile1!.CustomerFeatureListingURL!;
     String html = await controller.getText();
+    // String? html1 = html.replaceAll(
+    //     '@ApplicantName', widget._tenancyleadlist[0].applicantName!);
     String? html1 = html.replaceAll(
-        '@NameApplicant', widget._tenancyleadlist[0].applicantName!);
-    html1 = html1.replaceAll(
         '@PropertyName', widget._tenancyleadlist[0].propertyName!);
     //html1 = html1.replaceAll('@PropertyAddress', propiedaddata);
     html1 = html1.replaceAll('@CurrentDate', dateToday.toString());
@@ -1092,9 +1096,9 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     html1 = html1.replaceAll('@LandlordListingsPage', landllistweb);
     html1 = html1.replaceAll('@PropertyAddress', propiedaddata);
     html1 = html1.replaceAll('@propertyDescription', propdesc);
-
+    var url = Uri.base.origin;
     String html2 =
-        '<br><p style="margin:15px;"><a href="http://localhost:51975/#/tenancy_application_form/$idapplication" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
+        '<br><p style="margin:15px;"><a href="$url/#/tenancy_application_form/@id" style="padding:8px 20px;border:none;border-radius:5px;background-color:#010B32;color:white;text-decoration:none;">Click here to access the tenancy application</a></p>';
     String html0 =
         '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
     return html0 + html1 + html2;
