@@ -18,12 +18,10 @@ import 'package:silverhome/widget/landlord/customewidget.dart';
 
 class AdminLandlordsDetailsScreen extends StatefulWidget {
   @override
-  _AdminLandlordsDetailsScreenState createState() =>
-      _AdminLandlordsDetailsScreenState();
+  _AdminLandlordsDetailsScreenState createState() => _AdminLandlordsDetailsScreenState();
 }
 
-class _AdminLandlordsDetailsScreenState
-    extends State<AdminLandlordsDetailsScreen> {
+class _AdminLandlordsDetailsScreenState extends State<AdminLandlordsDetailsScreen> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
 
@@ -58,8 +56,7 @@ class _AdminLandlordsDetailsScreenState
                   decoration: BoxDecoration(
                     color: myColor.white,
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: myColor.application_boreder, width: 1),
+                    border: Border.all(color: myColor.application_boreder, width: 1),
                   ),
                   child: Column(
                     children: [
@@ -81,11 +78,9 @@ class _AdminLandlordsDetailsScreenState
       child: InkWell(
         onTap: () {
           if (Prefs.getBool(PrefsName.admin_tenant_Landlord_Back)) {
-            _store.dispatch(
-                UpdateAdminPortalPage(2, GlobleString.NAV_admin_LeadsTenants));
+            _store.dispatch(UpdateAdminPortalPage(2, GlobleString.NAV_admin_LeadsTenants));
           } else {
-            _store.dispatch(
-                UpdateAdminPortalPage(1, GlobleString.NAV_admin_Landlords));
+            _store.dispatch(UpdateAdminPortalPage(1, GlobleString.NAV_admin_Landlords));
           }
         },
         child: Text(
@@ -116,10 +111,7 @@ class _AdminLandlordsDetailsScreenState
                       onTap: () {
                         _store.dispatch(UpdateLandlordDetailsTab(1));
                       },
-                      child: CustomeWidget.AdminTabWidget(
-                          GlobleString.ALLD_TAB_Account,
-                          adminLandlordDetailsState.selecttab,
-                          1),
+                      child: CustomeWidget.AdminTabWidget(GlobleString.ALLD_TAB_Account, adminLandlordDetailsState.selecttab, 1),
                     ),
                   ),
                 ),
@@ -130,10 +122,7 @@ class _AdminLandlordsDetailsScreenState
                       onTap: () {
                         _store.dispatch(UpdateLandlordDetailsTab(2));
                       },
-                      child: CustomeWidget.AdminTabWidget(
-                          GlobleString.ALLD_TAB_Properties,
-                          adminLandlordDetailsState.selecttab,
-                          2),
+                      child: CustomeWidget.AdminTabWidget(GlobleString.ALLD_TAB_Properties, adminLandlordDetailsState.selecttab, 2),
                     ),
                   ),
                 ),
@@ -144,10 +133,7 @@ class _AdminLandlordsDetailsScreenState
                       onTap: () {
                         _store.dispatch(UpdateLandlordDetailsTab(3));
                       },
-                      child: CustomeWidget.AdminTabWidget(
-                          GlobleString.ALLD_TAB_Leads_Tenants,
-                          adminLandlordDetailsState.selecttab,
-                          3),
+                      child: CustomeWidget.AdminTabWidget(GlobleString.ALLD_TAB_Leads_Tenants, adminLandlordDetailsState.selecttab, 3),
                     ),
                   ),
                 ),

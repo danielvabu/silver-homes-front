@@ -184,7 +184,7 @@ class _AddEventDialogBoxState extends State<AddEventDialogBox> {
                                               Container(
                                                 padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
                                                 child: Text(
-                                                  GlobleString.CALENDAR_Event_Type,
+                                                  GlobleString.CALENDAR_Event_Type + "dd",
                                                   style: MyStyles.Medium(14, myColor.text_color),
                                                   textAlign: TextAlign.start,
                                                 ),

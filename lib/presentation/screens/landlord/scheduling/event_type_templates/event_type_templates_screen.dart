@@ -270,7 +270,7 @@ class _EventTypeTemplateScreenState extends State<EventTypeTemplateScreen> {
                       ],
                     ),
                     const SizedBox(width: 10.0),
-                    _addNewLead(),
+                    //  _addNewLead(),
                   ],
                 ),
                 Row(
