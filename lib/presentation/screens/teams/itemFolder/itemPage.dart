@@ -14,6 +14,7 @@ import 'package:silverhome/presentation/models/teamMembers/teamMemberUserList.da
 import 'package:silverhome/presentation/models/teamMembers/teamMembersRoleModel.dart';
 import 'package:silverhome/presentation/screens/TEST/customerTest.dart';
 import 'package:silverhome/presentation/screens/TEST/test.dart';
+import 'package:silverhome/presentation/screens/teams/repository/teamMembersService.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/connect_state.dart';
 import 'package:silverhome/store/service_locator.dart';
@@ -238,42 +239,58 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
   }
 
   Widget _datavalueActiveInactive(DatumTeamUser model, int index) {
-    return Container(
-      height: 40,
-      width: width / 11,
-      margin: EdgeInsets.only(left: 15),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlutterSwitch(
-            width: 55.0,
-            height: 25.0,
-            valueFontSize: 10.0,
-            toggleSize: 20.0,
-            value: model.isEnabled == true ? false : true,
-            borderRadius: 30.0,
-            padding: 2.0,
-            activeColor: myColor.propertyOn,
-            activeText: "ON",
-            activeTextColor: myColor.white,
-            inactiveColor: myColor.gray,
-            inactiveText: "OFF",
-            inactiveTextColor: myColor.white,
-            showOnOff: true,
-            onToggle: (val) {
-              if (val) {
+    bool? valueOff = model.isEnabled;
+    return StatefulBuilder(builder: (context, setState) {
+      print("value22: " + valueOff.toString());
+      return Container(
+        height: 40,
+        width: width / 11,
+        margin: EdgeInsets.only(left: 15),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FlutterSwitch(
+              width: 55.0,
+              height: 25.0,
+              valueFontSize: 10.0,
+              toggleSize: 20.0,
+              value: valueOff!,
+              borderRadius: 30.0,
+              padding: 2.0,
+              activeColor: myColor.propertyOn,
+              activeText: "ON",
+              activeTextColor: myColor.white,
+              inactiveColor: myColor.gray,
+              inactiveText: "OFF",
+              inactiveTextColor: myColor.white,
+              showOnOff: true,
+              onToggle: (val) {
+                if (val == true) {
+                  valueOff = false;
+                } else {
+                  valueOff = true;
+                }
+                valueOff = !valueOff!;
+
+                print("value: " + val.toString());
+                /*  if (val) {
                 // widget._callbackActive(model, index);
               } else {
                 //    widget._callbackInActive(model, index);
-              }
-            },
-          ),
-          Expanded(child: Container())
-        ],
-      ),
-    );
+              }*/
+
+                TeamMemberService().activeAndInactiveMembers(context, model.id.toString(), valueOff!);
+
+                setState(() {});
+              },
+            ),
+            Expanded(child: Container())
+          ],
+        ),
+      );
+    });
   }
 
   Widget _datavalueIsPublished(PropertyDataList model, int index) {

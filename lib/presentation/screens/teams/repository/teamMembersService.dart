@@ -107,4 +107,31 @@ class TeamMemberService {
     // ToastUtils.showCustomToast(context, GlobleString.Error_server, false);
     // }
   }
+
+  Future activeAndInactiveMembers(BuildContext context, String id, bool active) async {
+    Map data = {"id": id, "is_enabled": active};
+    //encode Map to JSON
+    var body = json.encode(data);
+    //try {
+    var response = await _client?.post(Uri.parse("https://qjif09kr99.execute-api.us-east-1.amazonaws.com/dev/team/set-team-member-status"),
+        headers: getHeadersJson(), body: body);
+
+    print("prueba1010: " + response!.body.toString());
+    if (response!.statusCode == 200) {
+      if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
+        // TeamMemberUserListModel data = teamMemberUserListModelFromJson(response.body);
+
+        // return data;
+      } else {
+        ToastUtils.showCustomToast(context, GlobleString.Error, false);
+        return null;
+      }
+    } else if (response.statusCode == 401) {
+      ToastUtils.showCustomToast(context, GlobleString.Error_401, false);
+      return null;
+    } else {
+      ToastUtils.showCustomToast(context, GlobleString.Error, false);
+      return null;
+    }
+  }
 }
