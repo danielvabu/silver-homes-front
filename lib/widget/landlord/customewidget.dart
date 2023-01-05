@@ -524,6 +524,62 @@ class CustomeWidget {
     );
   }
 
+  static Widget AddNewRole() {
+    return Container(
+      height: 32,
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: myColor.Circle_main,
+      ),
+      child: Row(
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(
+              Icons.add_circle,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+          Text(
+            "Add new role",
+            style: MyStyles.Regular(14, myColor.white),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Widget AddNewTeamMember() {
+    return Container(
+      height: 32,
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        color: myColor.Circle_main,
+      ),
+      child: Row(
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(
+              Icons.add_circle,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+          Text(
+            "Add new teams members",
+            style: MyStyles.Regular(14, myColor.white),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget AddEventTypes() {
     return Container(
       height: 32,
@@ -544,7 +600,7 @@ class CustomeWidget {
             ),
           ),
           Text(
-            'Add Event Type',
+            'Add Event Types',
             style: MyStyles.Regular(14, myColor.white),
           ),
         ],
