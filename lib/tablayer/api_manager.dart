@@ -103,32 +103,52 @@ class ApiManager {
 
   SelectAPICall(Object POJO) {
     Helper.Log("In APIManager SelectQuery", ">>");
-    String query =
-        QueryFilter().SelectQuery(POJO, etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+    String query = QueryFilter().SelectQuery(
+        POJO,
+        etableName.AdditionalOccupants,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
   }
 
   DeleteAPICall(Object POJO) {
     Helper.Log("In APIManager DeleteQuery", ">>");
-    String query = QueryFilter().DeleteQuery(POJO, etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AdditionalOccupants,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
   }
 
   InsetAPICall(Object POJO) {
     Helper.Log("In APIManager InsertQuery", ">>");
-    String query = QueryFilter().InsertQuery(POJO, etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AdditionalOccupants,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
   }
 
   UpdateAPICall(Object ClausePOJO, Object UpdatePOJO) {
     Helper.Log("In APIManager UpdateQuery", ">>");
-    QueryFilter()
-        .UpdateQuery(ClausePOJO, UpdatePOJO, etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    QueryFilter().UpdateQuery(
+        ClausePOJO,
+        UpdatePOJO,
+        etableName.AdditionalOccupants,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
   }
 
   //----------------------------x: Required API :x---------------------------//
 
-  getSystemEnumCallDSQ(BuildContext context, CallBackQuesy CallBackQuesy) async {
+  getSystemEnumCallDSQ(
+      BuildContext context, CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_SYSTEMENUM.toString(),
-      "Reqtokens": {"ID": "1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,2184,3184,3186,3187,3188"}
+      "Reqtokens": {
+        "ID":
+            "1176,1177,1178,1179,1180,1181,1182,1183,1184,1185,1186,1187,1188,1189,1190,1191,2184,3184,3186,3187,3188"
+      }
     };
 
     String json = jsonEncode(myjson);
@@ -137,7 +157,9 @@ class ApiManager {
         List<SystemEnumDetails> list;
         var data = jsonDecode(respoce);
         var rest = data["Result"] as List;
-        list = rest.map<SystemEnumDetails>((json) => SystemEnumDetails.fromJson(json)).toList();
+        list = rest
+            .map<SystemEnumDetails>((json) => SystemEnumDetails.fromJson(json))
+            .toList();
 
         await Prefs.setString(PrefsName.systemEnumDetails, jsonEncode(list));
         CallBackQuesy(true, "");
@@ -152,7 +174,8 @@ class ApiManager {
   /*========================     Authentication     =============================*/
   /*==============================================================================*/
 
-  LoginApi(BuildContext context, String email, String password, CallBackQuesy CallBackQuesy) async {
+  LoginApi(BuildContext context, String email, String password,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "Email": email,
       "Password": password,
@@ -185,15 +208,18 @@ class ApiManager {
     });
   }
 
-  userCheckActive(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
-    String query = await QueryFilter().SelectQuery(POJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  userCheckActive(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
         var rest = data["Result"] as List;
 
-        bool IsActive = rest[0]["IsActive"] != null ? rest[0]["IsActive"] : false;
+        bool IsActive =
+            rest[0]["IsActive"] != null ? rest[0]["IsActive"] : false;
 
         if (IsActive) {
           CallBackQuesy(true, "");
@@ -207,7 +233,8 @@ class ApiManager {
     });
   }
 
-  userLoginDSQCall(BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
+  userLoginDSQCall(
+      BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_UserLogin.toString(),
       "LoadLookupValues": true,
@@ -223,9 +250,12 @@ class ApiManager {
         var rest = data["Result"] as List;
 
         if (data["Result"].length > 0) {
-          bool IsActive = rest[0]["IsActive"] != null ? rest[0]["IsActive"] : false;
+          bool IsActive =
+              rest[0]["IsActive"] != null ? rest[0]["IsActive"] : false;
 
-          bool adminsideIsActive = rest[0]["AdminsideIsActive"] != null ? rest[0]["AdminsideIsActive"] : false;
+          bool adminsideIsActive = rest[0]["AdminsideIsActive"] != null
+              ? rest[0]["AdminsideIsActive"]
+              : false;
 
           if (IsActive) {
             if (adminsideIsActive) {
@@ -235,9 +265,13 @@ class ApiManager {
               var ID = rest[0]["ID"].toString();
 
               String CustomerFeatureListingURL =
-                  rest[0]["CustomerFeatureListingURL"] != null ? rest[0]["CustomerFeatureListingURL"].toString() : "";
+                  rest[0]["CustomerFeatureListingURL"] != null
+                      ? rest[0]["CustomerFeatureListingURL"].toString()
+                      : "";
 
-              String CompanyName = rest[0]["CompanyName"] != null ? rest[0]["CompanyName"].toString() : "";
+              String CompanyName = rest[0]["CompanyName"] != null
+                  ? rest[0]["CompanyName"].toString()
+                  : "";
 
               var PersonID = rest[0]["PersonID"];
 
@@ -256,7 +290,8 @@ class ApiManager {
                 await Prefs.setString(PrefsName.user_Email, Email);
                 await Prefs.setString(PrefsName.user_fname, FirstName);
                 await Prefs.setString(PrefsName.user_lname, LastName);
-                await Prefs.setString(PrefsName.user_CustomerFeatureListingURL, CustomerFeatureListingURL);
+                await Prefs.setString(PrefsName.user_CustomerFeatureListingURL,
+                    CustomerFeatureListingURL);
                 await Prefs.setString(PrefsName.user_CompanyName, CompanyName);
                 await Prefs.setBool(PrefsName.Is_adminlogin, false);
               }
@@ -279,7 +314,8 @@ class ApiManager {
     });
   }
 
-  CheckUserAccountExistDSQCall(BuildContext context, String email, CallBackCheckUserExist callbackUserExist) {
+  CheckUserAccountExistDSQCall(BuildContext context, String email,
+      CallBackCheckUserExist callbackUserExist) {
     var myjson = {
       "DSQID": Weburl.DSQ_CheckUserExist,
       "Reqtokens": {"email": email},
@@ -307,7 +343,8 @@ class ApiManager {
     });
   }
 
-  welcomeMailWorkflow(BuildContext context, String userid, CallBackQuesy callBackQuesy) async {
+  welcomeMailWorkflow(
+      BuildContext context, String userid, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.Welcome_workflow,
       "Reqtokens": {
@@ -331,8 +368,10 @@ class ApiManager {
     });
   }
 
-  UserDetails(BuildContext context, Object POJO, CallBackWelcome CallBackQuesy) async {
-    String query = await QueryFilter().SelectQuery(POJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
+  UserDetails(
+      BuildContext context, Object POJO, CallBackWelcome CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -354,11 +393,13 @@ class ApiManager {
     });
   }
 
-  UpdateUserAccount(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateUserAccount(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -373,7 +414,8 @@ class ApiManager {
     });
   }
 
-  RegisterApi(BuildContext context, String email, String password, String Role, CallBackQuesy CallBackQuesy) async {
+  RegisterApi(BuildContext context, String email, String password, String Role,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "Email": email,
       "Password": password,
@@ -403,7 +445,8 @@ class ApiManager {
   }
 
   InsetNewUser(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -415,7 +458,8 @@ class ApiManager {
     });
   }
 
-  userProfileDSQCall(BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
+  userProfileDSQCall(
+      BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_User_ProfileDetails.toString(),
       "LoadLookupValues": true,
@@ -433,30 +477,52 @@ class ApiManager {
 
         String ID = rest[0]["ID"] != null ? rest[0]["ID"].toString() : "";
 
-        String CompanyName = rest[0]["CompanyName"] != null ? rest[0]["CompanyName"].toString() : "";
+        String CompanyName = rest[0]["CompanyName"] != null
+            ? rest[0]["CompanyName"].toString()
+            : "";
 
-        String HomePageLink = rest[0]["HomePageLink"] != null ? rest[0]["HomePageLink"].toString() : "";
+        String HomePageLink = rest[0]["HomePageLink"] != null
+            ? rest[0]["HomePageLink"].toString()
+            : "";
 
-        String CustomerFeatureListingURL = rest[0]['CustomerFeatureListingURL'] != null ? rest[0]['CustomerFeatureListingURL'] : "";
+        String CustomerFeatureListingURL =
+            rest[0]['CustomerFeatureListingURL'] != null
+                ? rest[0]['CustomerFeatureListingURL']
+                : "";
 
-        MediaInfo? Company_logo = rest[0]['Company_logo'] != null ? MediaInfo.fromJson(rest[0]['Company_logo']) : null;
+        MediaInfo? Company_logo = rest[0]['Company_logo'] != null
+            ? MediaInfo.fromJson(rest[0]['Company_logo'])
+            : null;
 
         var PersonID = rest[0]["PersonID"];
 
         String pID = PersonID['ID'] != null ? PersonID['ID'].toString() : "";
-        String Email = PersonID['Email'] != null ? PersonID['Email'].toString() : "";
-        String FirstName = PersonID['FirstName'] != null ? PersonID['FirstName'].toString() : "";
-        String LastName = PersonID['LastName'] != null ? PersonID['LastName'].toString() : "";
+        String Email =
+            PersonID['Email'] != null ? PersonID['Email'].toString() : "";
+        String FirstName = PersonID['FirstName'] != null
+            ? PersonID['FirstName'].toString()
+            : "";
+        String LastName =
+            PersonID['LastName'] != null ? PersonID['LastName'].toString() : "";
         String Country_Code =
-            PersonID['Country_Code'] != null && PersonID['Country_Code'] != "" ? PersonID['Country_Code'].toString() : "CA";
-        String Dial_Code = PersonID['Dial_Code'] != null && PersonID['Dial_Code'] != "" ? PersonID['Dial_Code'].toString() : "+1";
-        String MobileNumber = PersonID['MobileNumber'] != null ? PersonID['MobileNumber'].toString() : "";
+            PersonID['Country_Code'] != null && PersonID['Country_Code'] != ""
+                ? PersonID['Country_Code'].toString()
+                : "CA";
+        String Dial_Code =
+            PersonID['Dial_Code'] != null && PersonID['Dial_Code'] != ""
+                ? PersonID['Dial_Code'].toString()
+                : "+1";
+        String MobileNumber = PersonID['MobileNumber'] != null
+            ? PersonID['MobileNumber'].toString()
+            : "";
 
         _store.dispatch(UpdateLandlordProfileID(ID));
         _store.dispatch(UpdateLandlordProfileCompanyname(CompanyName));
         _store.dispatch(UpdateLandlordProfileHomepagelink(HomePageLink));
-        _store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL(CustomerFeatureListingURL));
-        _store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(CustomerFeatureListingURL));
+        _store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL(
+            CustomerFeatureListingURL));
+        _store.dispatch(UpdateLandlordProfileCustomerFeatureListingURL_update(
+            CustomerFeatureListingURL));
         _store.dispatch(UpdateLandlordProfileCompanylogo(Company_logo));
         _store.dispatch(UpdateLandlordProfileUint8List(null));
 
@@ -468,15 +534,21 @@ class ApiManager {
         _store.dispatch(UpdateLandlordProfileCountrycode(Country_Code));
         _store.dispatch(UpdateLandlordProfileDialcode(Dial_Code));
 
-        CallBackQuesy(true, (Company_logo != null && Company_logo.url != null ? Company_logo.url.toString() : ""));
+        CallBackQuesy(
+            true,
+            (Company_logo != null && Company_logo.url != null
+                ? Company_logo.url.toString()
+                : ""));
       } else {
         CallBackQuesy(false, respoce);
       }
     });
   }
 
-  UpdateProfileData(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateProfileData(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -493,7 +565,8 @@ class ApiManager {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().userProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID), (error, respoce2) {
+    ApiManager().userProfileDSQCall(context, Prefs.getString(PrefsName.OwnerID),
+        (error, respoce2) {
       if (error) {
         loader.remove();
         _store.dispatch(UpdatePortalPage(7, GlobleString.NAV_Profile));
@@ -508,16 +581,18 @@ class ApiManager {
   /*========================  Property OnBoarding  =============================*/
   /*==============================================================================*/
 
-  getPropertyIdForApplication(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getPropertyIdForApplication(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Application,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
         var rest = data["Result"] as List;
 
-        String Prop_ID = rest[0]["Prop_ID"] != null ? rest[0]["Prop_ID"] : false;
+        String Prop_ID =
+            rest[0]["Prop_ID"] != null ? rest[0]["Prop_ID"] : false;
 
         CallBackQuesy(true, Prop_ID);
       } else {
@@ -549,9 +624,12 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          int VacantUnits = myobject['Vacant Units'] != null ? myobject['Vacant Units'] : 0;
-          int UnitsRented = myobject['Units Rented'] != null ? myobject['Units Rented'] : 0;
-          int UnitsHeld = myobject['Units Held'] != null ? myobject['Units Held'] : 0;
+          int VacantUnits =
+              myobject['Vacant Units'] != null ? myobject['Vacant Units'] : 0;
+          int UnitsRented =
+              myobject['Units Rented'] != null ? myobject['Units Rented'] : 0;
+          int UnitsHeld =
+              myobject['Units Held'] != null ? myobject['Units Held'] : 0;
 
           _store.dispatch(UpdatePropertyStatus_UnitsHeld(UnitsHeld));
           _store.dispatch(UpdatePropertyStatus_UnitsRented(UnitsRented));
@@ -564,11 +642,13 @@ class ApiManager {
     });
   }
 
-  InsertPropertyDetails(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  InsertPropertyDetails(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -583,11 +663,13 @@ class ApiManager {
     });
   }
 
-  InsertEventTypesDetails(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  InsertEventTypesDetails(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -602,12 +684,16 @@ class ApiManager {
     });
   }
 
-  InsertEventTypesDetailsTemplates(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  InsertEventTypesDetailsTemplates(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().InsertQuery(POJO, etableName.Events_type_templates, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.Events_type_templates,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -622,11 +708,13 @@ class ApiManager {
     });
   }
 
-  UpdatePropertyDetails(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdatePropertyDetails(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -641,11 +729,17 @@ class ApiManager {
     });
   }
 
-  UpdateEventTypesDetails(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateEventTypesDetails(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -660,12 +754,17 @@ class ApiManager {
     });
   }
 
-  UpdateEventTypesDetailsTemplate(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateEventTypesDetailsTemplate(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Events_type_templates, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type_templates,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -680,11 +779,17 @@ class ApiManager {
     });
   }
 
-  UpdateEventTypesDetailsTemplates(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateEventTypesDetailsTemplates(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -699,8 +804,13 @@ class ApiManager {
     });
   }
 
-  deleteAllRestriction(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.Property_Restriction, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteAllRestriction(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.Property_Restriction,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -712,16 +822,21 @@ class ApiManager {
     });
   }
 
-  AddPropertySpecificatinRestriction(BuildContext context, List<Object> POJO, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  AddPropertySpecificatinRestriction(BuildContext context, List<Object> POJO,
+      Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> queryList = <QueryObject>[];
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var querydecode = jsonDecode(query);
     QueryObject updatequery = QueryObject.fromJson(querydecode);
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.Property_Restriction, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.Property_Restriction,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -740,7 +855,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -758,16 +875,21 @@ class ApiManager {
     });
   }
 
-  AddEventTypesSpecificatinRestriction(BuildContext context, List<Object> POJO, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  AddEventTypesSpecificatinRestriction(BuildContext context, List<Object> POJO,
+      Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> queryList = <QueryObject>[];
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var querydecode = jsonDecode(query);
     QueryObject updatequery = QueryObject.fromJson(querydecode);
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.Property_Restriction, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.Property_Restriction,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -786,7 +908,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -804,11 +928,13 @@ class ApiManager {
     });
   }
 
-  AddEventTypesAvailability(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddEventTypesAvailability(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.Availability, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.Availability,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -823,11 +949,16 @@ class ApiManager {
     });
   }
 
-  AddEventTypesAvailabilityTemplate(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddEventTypesAvailabilityTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.AvailabilityTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AvailabilityTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -842,11 +973,13 @@ class ApiManager {
     });
   }
 
-  AddEventTypesAvailabilityTime(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddEventTypesAvailabilityTime(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.AvailabilityTime, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.AvailabilityTime,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -861,12 +994,16 @@ class ApiManager {
     });
   }
 
-  AddEventTypesAvailabilityTimeTemplate(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddEventTypesAvailabilityTimeTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().InsertQuery(POJO, etableName.AvailabilityTimeTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AvailabilityTimeTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -885,8 +1022,11 @@ class ApiManager {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().InsertQuery(POJO, etableName.availability_overrides, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -901,11 +1041,13 @@ class ApiManager {
     });
   }
 
-  AddRequestDocument(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddRequestDocument(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.request_documents, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.request_documents,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -920,11 +1062,13 @@ class ApiManager {
     });
   }
 
-  AddRequestDocumentList(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddRequestDocumentList(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.list_documents, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.list_documents,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -939,11 +1083,13 @@ class ApiManager {
     });
   }
 
-  AddRequestDocumentFields(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddRequestDocumentFields(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.documentsfields, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.documentsfields,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -958,11 +1104,13 @@ class ApiManager {
     });
   }
 
-  AddRequestHtml(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddRequestHtml(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.htmlRequest, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.htmlRequest,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -977,12 +1125,16 @@ class ApiManager {
     });
   }
 
-  AddOveriderTemplate(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  AddOveriderTemplate(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().InsertQuery(POJO, etableName.availability_overridesTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.availability_overridesTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -1000,29 +1152,40 @@ class ApiManager {
   getPropertyFeaturelist(BuildContext context) async {
     Object blankObject = new Object();
 
-    String query = await QueryFilter()
-        .SelectQuery(blankObject, etableName.Property_Features, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+    String query = await QueryFilter().SelectQuery(
+        blankObject,
+        etableName.Property_Features,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
 
-        List<PropertyAmenitiesUtility> amenitieslist = <PropertyAmenitiesUtility>[];
-        List<PropertyAmenitiesUtility> summery_amenitieslist = <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> amenitieslist =
+            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> summery_amenitieslist =
+            <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> utilitylist = <PropertyAmenitiesUtility>[];
-        List<PropertyAmenitiesUtility> summery_utilitylist = <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> utilitylist =
+            <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> summery_utilitylist =
+            <PropertyAmenitiesUtility>[];
 
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          String Feature = myobject['Feature'] != null ? myobject['Feature'].toString() : "";
+          String Feature =
+              myobject['Feature'] != null ? myobject['Feature'].toString() : "";
 
-          int Feature_Type = myobject['Feature_Type'] != null ? myobject['Feature_Type'] : "";
+          int Feature_Type =
+              myobject['Feature_Type'] != null ? myobject['Feature_Type'] : "";
 
-          PropertyAmenitiesUtility propertyAmenitiesUtility = new PropertyAmenitiesUtility();
+          PropertyAmenitiesUtility propertyAmenitiesUtility =
+              new PropertyAmenitiesUtility();
           propertyAmenitiesUtility.id = ID;
           propertyAmenitiesUtility.Feature = Feature;
           propertyAmenitiesUtility.Feature_Type = Feature_Type;
@@ -1046,15 +1209,19 @@ class ApiManager {
         _store.dispatch(UpdatePropertyAmenitiesList(amenitieslist));
         _store.dispatch(UpdatePropertyUtilitiesList(utilitylist));
 
-        List<PropertyAmenitiesUtility> secondAmenityList =
-            summery_amenitieslist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
+        List<PropertyAmenitiesUtility> secondAmenityList = summery_amenitieslist
+            .map((item) => new PropertyAmenitiesUtility.clone(item))
+            .toList();
 
-        _store.dispatch(UpdateSummeryPropertyAmenitiesList(List.from(secondAmenityList)));
+        _store.dispatch(
+            UpdateSummeryPropertyAmenitiesList(List.from(secondAmenityList)));
 
-        List<PropertyAmenitiesUtility> secondUtilityList =
-            summery_utilitylist.map((item) => new PropertyAmenitiesUtility.clone(item)).toList();
+        List<PropertyAmenitiesUtility> secondUtilityList = summery_utilitylist
+            .map((item) => new PropertyAmenitiesUtility.clone(item))
+            .toList();
 
-        _store.dispatch(UpdateSummeryPropertyUtilitiesList(List.from(secondUtilityList)));
+        _store.dispatch(
+            UpdateSummeryPropertyUtilitiesList(List.from(secondUtilityList)));
 
         _store.dispatch(UpdateCPDPropertyAmenitiesList(summery_amenitieslist));
         _store.dispatch(UpdateCPDPropertyUtilitiesList(summery_utilitylist));
@@ -1064,9 +1231,13 @@ class ApiManager {
     });
   }
 
-  deleteAllAmenitiesUtilities(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.Property_Amenities_Utilities, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteAllAmenitiesUtilities(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.Property_Amenities_Utilities,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -1078,16 +1249,21 @@ class ApiManager {
     });
   }
 
-  AddPropertyFeature(BuildContext context, List<Object> POJO, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  AddPropertyFeature(BuildContext context, List<Object> POJO, Object CPOJO,
+      Object UpPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var querydecode = jsonDecode(query);
     QueryObject updatequery = QueryObject.fromJson(querydecode);
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert = QueryFilter()
-          .InsertQuery(POJO[i], etableName.Property_Amenities_Utilities, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.Property_Amenities_Utilities,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -1105,7 +1281,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -1123,7 +1301,8 @@ class ApiManager {
     });
   }
 
-  AddSingleImage(BuildContext context, Uint8List data, CallBackQuesy CallBackQuesy) async {
+  AddSingleImage(
+      BuildContext context, Uint8List data, CallBackQuesy CallBackQuesy) async {
     List<int> _selectedFile = data;
 
     String filepath = '${DateTime.now().millisecondsSinceEpoch}.png';
@@ -1141,7 +1320,8 @@ class ApiManager {
     String S3content = urlS3[0]["presigned_url"];
     //var multipartRequest =
     // new http.MultipartRequest("PUT", Uri.parse(S3content));
-    var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+    var multipartRequest =
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
     multipartRequest.headers["Content-Type"] = "binary/octet-stream";
     // multipartRequest.headers.addAll(headers);
     multipartRequest.sink.add(_selectedFile);
@@ -1159,8 +1339,10 @@ class ApiManager {
     }
   }
 
-  UpdatePropertyDisclosure(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdatePropertyDisclosure(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -1174,8 +1356,10 @@ class ApiManager {
     });
   }
 
-  UpdateEventTypesDisclosure(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateEventTypesDisclosure(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -1207,36 +1391,55 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
 
-          String Other_Property_Type = myobject['Other_Property_Type'] != null ? myobject['Other_Property_Type'].toString() : "";
+          String Other_Property_Type = myobject['Other_Property_Type'] != null
+              ? myobject['Other_Property_Type'].toString()
+              : "";
 
-          String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+          String Suite_Unit = myobject['Suite_Unit'] != null
+              ? myobject['Suite_Unit'].toString()
+              : "";
 
-          bool IsActive = myobject['IsActive'] != null ? myobject['IsActive'] : false;
+          bool IsActive =
+              myobject['IsActive'] != null ? myobject['IsActive'] : false;
 
-          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null ? myobject['IsAgreed_TandC'] : false;
+          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+              ? myobject['IsAgreed_TandC']
+              : false;
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+          String Country =
+              myobject['Country'] != null ? myobject['Country'].toString() : "";
 
-          int PropDrafting = myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+          int PropDrafting =
+              myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
 
-          bool Vacancy = myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+          bool Vacancy =
+              myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
 
-          bool IsPublished = myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
+          bool IsPublished =
+              myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
 
-          SystemEnumDetails? Property_Type =
-              myobject['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject['Property_Type']) : null;
+          SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+              : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           PropertyDataList propertyData = new PropertyDataList();
           propertyData.id = ID;
@@ -1262,7 +1465,8 @@ class ApiManager {
 
         if (ftime == 0) {
           if (propertylist.length > 0) {
-            int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
             _store.dispatch(UpdatePropertyListTotalRecord(TotalRecords));
 
@@ -1290,7 +1494,8 @@ class ApiManager {
     });
   }
 
-  getEventTypesOnboadingList(BuildContext context, String json, int ftime) async {
+  getEventTypesOnboadingList(
+      BuildContext context, String json, int ftime) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -1308,31 +1513,46 @@ class ApiManager {
 
           String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-          String Name = myobject['name'] != null ? myobject['name'].toString() : "";
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
 
-          String PropertyName = myobject['property_name'] != null ? myobject['property_name'].toString() : "";
+          String PropertyName = myobject['property_name'] != null
+              ? myobject['property_name'].toString()
+              : "";
 
-          String PropId = (myobject['prop_id'] != null && myobject['prop_id'] != "dddddddd-dddd-dddd-dddd-dddddddddddd")
+          String PropId = (myobject['prop_id'] != null &&
+                  myobject['prop_id'] != "dddddddd-dddd-dddd-dddd-dddddddddddd")
               ? myobject['prop_id'].toString()
               : "";
 
-          String color = myobject['color'] != null ? myobject['color'].toString() : "";
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
 
-          String RelationShip = myobject['relationship'] != null ? myobject['relationship'].toString() : "";
+          String RelationShip = myobject['relationship'] != null
+              ? myobject['relationship'].toString()
+              : "";
 
-          String Duration = myobject['duration'] != null ? myobject['duration'].toString() : "";
-          String Link = myobject['link'] != null ? myobject['link'].toString() : "";
+          String Duration = myobject['duration'] != null
+              ? myobject['duration'].toString()
+              : "";
+          String Link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
           int Slots = myobject['slots'] != null ? myobject['slots'] : 0;
 
-          bool ispublished = myobject['ispublished'] != null ? myobject['ispublished'] : false;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["recordinfo"];
 
-          String CreatedOn = objRecordInfo['createdon'] != null ? objRecordInfo['createdon'].toString() : "0";
+          String CreatedOn = objRecordInfo['createdon'] != null
+              ? objRecordInfo['createdon'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['updatedon'] != null ? objRecordInfo['updatedon'].toString() : "0";
+          String UpdatedOn = objRecordInfo['updatedon'] != null
+              ? objRecordInfo['updatedon'].toString()
+              : "0";
 
           EventTypesDataList eventData = EventTypesDataList();
           eventData.id = ID;
@@ -1356,7 +1576,8 @@ class ApiManager {
 
         if (ftime == 0) {
           if (eventTypelist.length > 0) {
-            int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
             _store.dispatch(UpdateEventTypesListTotalRecord(TotalRecords));
 
@@ -1398,23 +1619,38 @@ class ApiManager {
 
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
-          EventTypesData? eventTypesData = myobject['Event_Type'] != null ? EventTypesData.fromJson(myobject['Event_Type']) : null;
+          EventTypesData? eventTypesData = myobject['Event_Type'] != null
+              ? EventTypesData.fromJson(myobject['Event_Type'])
+              : null;
 
-          int eventid = myobject['eventTypesDataId'] != null ? myobject['eventTypesDataId'] : 0;
+          int eventid = myobject['eventTypesDataId'] != null
+              ? myobject['eventTypesDataId']
+              : 0;
 
-          String datestart = myobject['date_start'] != null ? myobject['date_start'].toString() : "";
+          String datestart = myobject['date_start'] != null
+              ? myobject['date_start'].toString()
+              : "";
 
-          String dateend = myobject['date_end'] != null ? myobject['date_end'].toString() : "";
+          String dateend = myobject['date_end'] != null
+              ? myobject['date_end'].toString()
+              : "";
 
-          String name = myobject['name'] != null ? myobject['name'].toString() : "";
+          String name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
 
-          String fname = myobject['fname'] != null ? myobject['fname'].toString() : "";
+          String fname =
+              myobject['fname'] != null ? myobject['fname'].toString() : "";
 
-          String lname = myobject['lname'] != null ? myobject['lname'].toString() : "";
+          String lname =
+              myobject['lname'] != null ? myobject['lname'].toString() : "";
 
-          String phone = myobject['phone'] != null ? myobject['phone'].toString() : "";
-          String person_id = myobject['person_id'] != null ? myobject['person_id'].toString() : "";
-          String email = myobject['email'] != null ? myobject['email'].toString() : "";
+          String phone =
+              myobject['phone'] != null ? myobject['phone'].toString() : "";
+          String person_id = myobject['person_id'] != null
+              ? myobject['person_id'].toString()
+              : "";
+          String email =
+              myobject['email'] != null ? myobject['email'].toString() : "";
           int state = myobject['state'] != null ? myobject['state'] : 0;
 
           Slots eventData = new Slots();
@@ -1489,36 +1725,57 @@ class ApiManager {
 
             String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+            String PropertyName = myobject['PropertyName'] != null
+                ? myobject['PropertyName'].toString()
+                : "";
 
-            String Other_Property_Type = myobject['Other_Property_Type'] != null ? myobject['Other_Property_Type'].toString() : "";
+            String Other_Property_Type = myobject['Other_Property_Type'] != null
+                ? myobject['Other_Property_Type'].toString()
+                : "";
 
-            String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+            String Suite_Unit = myobject['Suite_Unit'] != null
+                ? myobject['Suite_Unit'].toString()
+                : "";
 
-            bool IsActive = myobject['IsActive'] != null ? myobject['IsActive'] : false;
+            bool IsActive =
+                myobject['IsActive'] != null ? myobject['IsActive'] : false;
 
-            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null ? myobject['IsAgreed_TandC'] : false;
+            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+                ? myobject['IsAgreed_TandC']
+                : false;
 
-            String City = myobject['City'] != null ? myobject['City'].toString() : "";
+            String City =
+                myobject['City'] != null ? myobject['City'].toString() : "";
 
-            String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+            String Country = myobject['Country'] != null
+                ? myobject['Country'].toString()
+                : "";
 
-            int PropDrafting = myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+            int PropDrafting =
+                myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
 
-            bool Vacancy = myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+            bool Vacancy =
+                myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
 
-            bool IsPublished = myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
+            bool IsPublished = myobject['IsPublished'] != null
+                ? myobject['IsPublished']
+                : false;
 
-            SystemEnumDetails? Property_Type =
-                myobject['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject['Property_Type']) : null;
+            SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+                ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+                : null;
 
             /*RecordInfo*/
 
             var objRecordInfo = myobject["RecordInfo"];
 
-            String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+            String CreatedOn = objRecordInfo['CreatedOn'] != null
+                ? objRecordInfo['CreatedOn'].toString()
+                : "0";
 
-            String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+            String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+                ? objRecordInfo['UpdatedOn'].toString()
+                : "0";
 
             PropertyDataList propertyData = new PropertyDataList();
             propertyData.id = ID;
@@ -1560,7 +1817,9 @@ class ApiManager {
 
           csv = const ListToCsvConverter().convert(csvList);
 
-          String filename = "property_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
+          String filename = "property_" +
+              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+              ".csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -1577,7 +1836,8 @@ class ApiManager {
 
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
 
         loader.remove();
@@ -1619,19 +1879,29 @@ class ApiManager {
 
             String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-            String Name = myobject['name'] != null ? myobject['name'].toString() : "";
+            String Name =
+                myobject['name'] != null ? myobject['name'].toString() : "";
 
-            String PropertyName = myobject['property_name'] != null ? myobject['property_name'].toString() : "";
+            String PropertyName = myobject['property_name'] != null
+                ? myobject['property_name'].toString()
+                : "";
 
-            String RelationShip = myobject['relationship'] != null ? myobject['relationship'].toString() : "";
+            String RelationShip = myobject['relationship'] != null
+                ? myobject['relationship'].toString()
+                : "";
 
-            String Duration = myobject['duration'] != null ? myobject['duration'].toString() : "";
+            String Duration = myobject['duration'] != null
+                ? myobject['duration'].toString()
+                : "";
 
-            String Link = myobject['link'] != null ? myobject['link'].toString() : "";
+            String Link =
+                myobject['link'] != null ? myobject['link'].toString() : "";
 
             int Slots = myobject['slots'] != null ? myobject['slots'] : 0;
 
-            bool IsPublished = myobject['ispublished'] != null ? myobject['ispublished'] : false;
+            bool IsPublished = myobject['ispublished'] != null
+                ? myobject['ispublished']
+                : false;
 
             /*RecordInfo*/
             //var objRecordInfo = myobject["RecordInfo"];
@@ -1649,7 +1919,8 @@ class ApiManager {
             csvList.add(row);
           }
           csv = const ListToCsvConverter().convert(csvList);
-          String filename = "eventtypes_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
+          String filename =
+              "eventtypes_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -1662,7 +1933,8 @@ class ApiManager {
           html.document.body!.children.add(anchor);
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
         loader.remove();
       } else {
@@ -1672,7 +1944,8 @@ class ApiManager {
     });
   }
 
-  getAllEventTypesTemplateOnboadingListCSV(BuildContext context, String json) async {
+  getAllEventTypesTemplateOnboadingListCSV(
+      BuildContext context, String json) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -1699,11 +1972,16 @@ class ApiManager {
 
             String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-            String Name = myobject['name'] != null ? myobject['name'].toString() : "";
+            String Name =
+                myobject['name'] != null ? myobject['name'].toString() : "";
 
-            String RelationShip = myobject['relationship'] != null ? myobject['relationship'].toString() : "";
+            String RelationShip = myobject['relationship'] != null
+                ? myobject['relationship'].toString()
+                : "";
 
-            String Duration = myobject['duration'] != null ? myobject['duration'].toString() : "";
+            String Duration = myobject['duration'] != null
+                ? myobject['duration'].toString()
+                : "";
 
             List row = [];
             row.add(Name);
@@ -1712,7 +1990,8 @@ class ApiManager {
             csvList.add(row);
           }
           csv = const ListToCsvConverter().convert(csvList);
-          String filename = "et_templates_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
+          String filename =
+              "et_templates_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -1725,7 +2004,8 @@ class ApiManager {
           html.document.body!.children.add(anchor);
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
         loader.remove();
       } else {
@@ -1735,7 +2015,8 @@ class ApiManager {
     });
   }
 
-  getPropertyDetails(BuildContext context, String id, CallBackPropertyDetails CallBackQuesy) async {
+  getPropertyDetails(BuildContext context, String id,
+      CallBackPropertyDetails CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_PropertyDetails,
       "LoadLookUpValues": true,
@@ -1759,76 +2040,132 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
 
-          String Other_Property_Type = myobject['Other_Property_Type'] != null ? myobject['Other_Property_Type'].toString() : "";
+          String Other_Property_Type = myobject['Other_Property_Type'] != null
+              ? myobject['Other_Property_Type'].toString()
+              : "";
 
-          String Building_Name = myobject['Building_Name'] != null ? myobject['Building_Name'].toString() : "";
+          String Building_Name = myobject['Building_Name'] != null
+              ? myobject['Building_Name'].toString()
+              : "";
 
-          String Property_Address = myobject['Property_Address'] != null ? myobject['Property_Address'].toString() : "";
+          String Property_Address = myobject['Property_Address'] != null
+              ? myobject['Property_Address'].toString()
+              : "";
 
-          bool IsActive = myobject['IsActive'] != null ? myobject['IsActive'] : false;
+          bool IsActive =
+              myobject['IsActive'] != null ? myobject['IsActive'] : false;
 
-          String Postal_Code = myobject['Postal_Code'] != null ? myobject['Postal_Code'].toString() : "";
+          String Postal_Code = myobject['Postal_Code'] != null
+              ? myobject['Postal_Code'].toString()
+              : "";
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "";
 
           int Size = myobject['Size'] != null ? myobject['Size'] : 0;
 
           String Other_Partial_Furniture =
-              myobject['Other_Partial_Furniture'] != null ? myobject['Other_Partial_Furniture'].toString() : "";
+              myobject['Other_Partial_Furniture'] != null
+                  ? myobject['Other_Partial_Furniture'].toString()
+                  : "";
 
-          String Max_Occupancy = myobject['Max_Occupancy'] != null ? myobject['Max_Occupancy'].toString() : "";
+          String Max_Occupancy = myobject['Max_Occupancy'] != null
+              ? myobject['Max_Occupancy'].toString()
+              : "";
 
-          String Date_Available = myobject['Date_Available'] != null ? myobject['Date_Available'].toString() : "";
+          String Date_Available = myobject['Date_Available'] != null
+              ? myobject['Date_Available'].toString()
+              : "";
 
-          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null ? myobject['IsAgreed_TandC'] : false;
+          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+              ? myobject['IsAgreed_TandC']
+              : false;
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String Rent_Amount = myobject['Rent_Amount'] != null ? myobject['Rent_Amount'].toString() : "";
+          String Rent_Amount = myobject['Rent_Amount'] != null
+              ? myobject['Rent_Amount'].toString()
+              : "";
 
-          int Min_Lease_Number = myobject['Min_Lease_Number'] != null ? myobject['Min_Lease_Number'] : "";
+          int Min_Lease_Number = myobject['Min_Lease_Number'] != null
+              ? myobject['Min_Lease_Number']
+              : "";
 
-          String Parking_Stalls = myobject['Parking_Stalls'] != null ? myobject['Parking_Stalls'].toString() : "";
+          String Parking_Stalls = myobject['Parking_Stalls'] != null
+              ? myobject['Parking_Stalls'].toString()
+              : "";
 
-          String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+          String Country =
+              myobject['Country'] != null ? myobject['Country'].toString() : "";
 
-          int Bedrooms = myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
+          int Bedrooms =
+              myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
 
-          String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+          String Suite_Unit = myobject['Suite_Unit'] != null
+              ? myobject['Suite_Unit'].toString()
+              : "";
 
-          String Province = myobject['Province'] != null ? myobject['Province'].toString() : "";
+          String Province = myobject['Province'] != null
+              ? myobject['Province'].toString()
+              : "";
 
-          String Property_Description = myobject['Property_Description'] != null ? myobject['Property_Description'].toString() : "";
+          String Property_Description = myobject['Property_Description'] != null
+              ? myobject['Property_Description'].toString()
+              : "";
 
-          int Bathrooms = myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
+          int Bathrooms =
+              myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
 
-          int PropDrafting = myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+          int PropDrafting =
+              myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
 
-          bool Vacancy = myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+          bool Vacancy =
+              myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
 
-          bool IsPublished = myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
+          bool IsPublished =
+              myobject['IsPublished'] != null ? myobject['IsPublished'] : false;
 
-          MediaInfo? Property_Image = myobject['Property_Image'] != null ? MediaInfo.fromJson(myobject['Property_Image']) : null;
+          MediaInfo? Property_Image = myobject['Property_Image'] != null
+              ? MediaInfo.fromJson(myobject['Property_Image'])
+              : null;
 
-          SystemEnumDetails? Property_Type =
-              myobject['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject['Property_Type']) : null;
+          SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+              : null;
 
           SystemEnumDetails? Min_Lease_Duration =
-              myobject['Min_Lease_Duration'] != null ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration']) : null;
+              myobject['Min_Lease_Duration'] != null
+                  ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration'])
+                  : null;
 
-          SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null ? SystemEnumDetails.fromJson(myobject['Lease_Type']) : null;
+          SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Lease_Type'])
+              : null;
 
-          SystemEnumDetails? Furnishing = myobject['Furnishing'] != null ? SystemEnumDetails.fromJson(myobject['Furnishing']) : null;
+          SystemEnumDetails? Furnishing = myobject['Furnishing'] != null
+              ? SystemEnumDetails.fromJson(myobject['Furnishing'])
+              : null;
 
           SystemEnumDetails? Rent_Payment_Frequency =
-              myobject['Rent_Payment_Frequency'] != null ? SystemEnumDetails.fromJson(myobject['Rent_Payment_Frequency']) : null;
+              myobject['Rent_Payment_Frequency'] != null
+                  ? SystemEnumDetails.fromJson(
+                      myobject['Rent_Payment_Frequency'])
+                  : null;
 
           SystemEnumDetails? StorageAvailable =
-              myobject['StorageAvailable'] != null ? SystemEnumDetails.fromJson(myobject['StorageAvailable']) : null;
+              myobject['StorageAvailable'] != null
+                  ? SystemEnumDetails.fromJson(myobject['StorageAvailable'])
+                  : null;
 
-          SystemEnumDetails? Rental_Space = myobject['Rental_Space'] != null ? SystemEnumDetails.fromJson(myobject['Rental_Space']) : null;
+          SystemEnumDetails? Rental_Space = myobject['Rental_Space'] != null
+              ? SystemEnumDetails.fromJson(myobject['Rental_Space'])
+              : null;
 
           propertyData.ID = ID;
           propertyData.propertyName = PropertyName;
@@ -1873,7 +2210,8 @@ class ApiManager {
     });
   }
 
-  getEventTypesDetails(BuildContext context, String id, CallBackEventTypesDetails CallBackQuesy) async {
+  getEventTypesDetails(BuildContext context, String id,
+      CallBackEventTypesDetails CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_EventTypeDetails,
       "LoadLookUpValues": true,
@@ -1896,39 +2234,70 @@ class ApiManager {
           var myobject = data['Result'][i];
           String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-          String Name = myobject['name'] != null ? myobject['name'].toString() : "";
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
 
-          bool RelationShip = myobject['relation'] != null ? myobject['relation'] : false;
+          bool RelationShip =
+              myobject['relation'] != null ? myobject['relation'] : false;
 
-          int Duration = myobject['duration'] != null ? myobject['duration'] : 0;
+          int Duration =
+              myobject['duration'] != null ? myobject['duration'] : 0;
 
-          bool showing = myobject['showing'] != null ? myobject['showing'] : false;
-          bool ispublished = myobject['ispublished'] != null ? myobject['ispublished'] : false;
+          bool showing =
+              myobject['showing'] != null ? myobject['showing'] : false;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
 
           bool spa = myobject['spa'] != null ? myobject['spa'] : false;
           bool notap = myobject['notap'] != null ? myobject['notap'] : false;
-          String datefrom = myobject['datefrom'] != null ? myobject['datefrom'].toString() : "";
-          String dateto = myobject['dateto'] != null ? myobject['dateto'].toString() : "";
-          String location = myobject['location'] != null ? myobject['location'].toString() : "";
-          String description = myobject['description'] != null ? myobject['description'].toString() : "";
-          String link = myobject['link'] != null ? myobject['link'].toString() : "";
+          String datefrom = myobject['datefrom'] != null
+              ? myobject['datefrom'].toString()
+              : "";
+          String dateto =
+              myobject['dateto'] != null ? myobject['dateto'].toString() : "";
+          String location = myobject['location'] != null
+              ? myobject['location'].toString()
+              : "";
+          String description = myobject['description'] != null
+              ? myobject['description'].toString()
+              : "";
+          String link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
 
-          String color = myobject['color'] != null ? myobject['color'].toString() : "";
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
           int range = myobject['range'] != null ? myobject['range'] : 0;
 
-          int buffer_after = myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
+          int buffer_after =
+              myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
 
-          String buffer_after_measure = myobject['aftermed'] != null ? myobject['aftermed'] : "";
-          int buffer_before = myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
-          String buffer_before_measure = myobject['beforemed'] != null ? myobject['beforemed'] : "";
-          String durationmed = myobject['durationmed'] != null ? myobject['durationmed'] : "";
-          String confirmation_message = myobject['confirmation_message'] != null ? myobject['confirmation_message'].toString() : "";
-          String time_zone = myobject['time_zone'] != null ? myobject['time_zone'] : "";
-          int time_scheduling = myobject['time_scheduling'] != null ? myobject['time_scheduling'] : 0;
-          String time_scheduling_medida = myobject['time_scheduling_medida'] != null ? myobject['time_scheduling_medida'] : "";
-          int max_event_per_day = myobject['max_event_per_day'] != null ? myobject['max_event_per_day'] : 0;
-          String prop_id = myobject['prop_id'] != null ? myobject['prop_id'] : 0;
-          int owner_id = myobject['owner_id'] != null ? myobject['owner_id'] : 0;
+          String buffer_after_measure =
+              myobject['aftermed'] != null ? myobject['aftermed'] : "";
+          int buffer_before =
+              myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
+          String buffer_before_measure =
+              myobject['beforemed'] != null ? myobject['beforemed'] : "";
+          String durationmed =
+              myobject['durationmed'] != null ? myobject['durationmed'] : "";
+          String confirmation_message = myobject['confirmation_message'] != null
+              ? myobject['confirmation_message'].toString()
+              : "";
+          String time_zone =
+              myobject['time_zone'] != null ? myobject['time_zone'] : "";
+          int time_scheduling = myobject['time_scheduling'] != null
+              ? myobject['time_scheduling']
+              : 0;
+          String time_scheduling_medida =
+              myobject['time_scheduling_medida'] != null
+                  ? myobject['time_scheduling_medida']
+                  : "";
+          int max_event_per_day = myobject['max_event_per_day'] != null
+              ? myobject['max_event_per_day']
+              : 0;
+          String prop_id =
+              myobject['prop_id'] != null ? myobject['prop_id'] : 0;
+          int owner_id =
+              myobject['owner_id'] != null ? myobject['owner_id'] : 0;
           bool sun = myobject['sun'] != null ? myobject['sun'] : false;
           bool mon = myobject['mon'] != null ? myobject['mon'] : false;
 
@@ -2011,7 +2380,8 @@ class ApiManager {
     });
   }
 
-  getEventTypesDetailsTemp(BuildContext context, String id, CallBackEventTypesDetails CallBackQuesy) async {
+  getEventTypesDetailsTemp(BuildContext context, String id,
+      CallBackEventTypesDetails CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_EventTypeDetailsTemplate,
       "LoadLookUpValues": true,
@@ -2034,39 +2404,70 @@ class ApiManager {
           var myobject = data['Result'][i];
           String ID = myobject['id'] != null ? myobject['id'].toString() : "";
 
-          String Name = myobject['name'] != null ? myobject['name'].toString() : "";
+          String Name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
 
-          bool RelationShip = myobject['relation'] != null ? myobject['relation'] : false;
+          bool RelationShip =
+              myobject['relation'] != null ? myobject['relation'] : false;
 
-          int Duration = myobject['duration'] != null ? myobject['duration'] : 0;
+          int Duration =
+              myobject['duration'] != null ? myobject['duration'] : 0;
 
-          bool showing = myobject['showing'] != null ? myobject['showing'] : false;
-          bool ispublished = myobject['ispublished'] != null ? myobject['ispublished'] : false;
+          bool showing =
+              myobject['showing'] != null ? myobject['showing'] : false;
+          bool ispublished =
+              myobject['ispublished'] != null ? myobject['ispublished'] : false;
 
           bool spa = myobject['spa'] != null ? myobject['spa'] : false;
           bool notap = myobject['notap'] != null ? myobject['notap'] : false;
-          String datefrom = myobject['datefrom'] != null ? myobject['datefrom'].toString() : "";
-          String dateto = myobject['dateto'] != null ? myobject['dateto'].toString() : "";
-          String location = myobject['location'] != null ? myobject['location'].toString() : "";
-          String description = myobject['description'] != null ? myobject['description'].toString() : "";
-          String link = myobject['link'] != null ? myobject['link'].toString() : "";
+          String datefrom = myobject['datefrom'] != null
+              ? myobject['datefrom'].toString()
+              : "";
+          String dateto =
+              myobject['dateto'] != null ? myobject['dateto'].toString() : "";
+          String location = myobject['location'] != null
+              ? myobject['location'].toString()
+              : "";
+          String description = myobject['description'] != null
+              ? myobject['description'].toString()
+              : "";
+          String link =
+              myobject['link'] != null ? myobject['link'].toString() : "";
 
-          String color = myobject['color'] != null ? myobject['color'].toString() : "";
+          String color =
+              myobject['color'] != null ? myobject['color'].toString() : "";
           int range = myobject['range'] != null ? myobject['range'] : 0;
 
-          int buffer_after = myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
+          int buffer_after =
+              myobject['buffer_after'] != null ? myobject['buffer_after'] : 0;
 
-          String buffer_after_measure = myobject['aftermed'] != null ? myobject['aftermed'] : "";
-          int buffer_before = myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
-          String buffer_before_measure = myobject['beforemed'] != null ? myobject['beforemed'] : "";
-          String durationmed = myobject['durationmed'] != null ? myobject['durationmed'] : "";
-          String confirmation_message = myobject['confirmation_message'] != null ? myobject['confirmation_message'].toString() : "";
-          String time_zone = myobject['time_zone'] != null ? myobject['time_zone'] : "";
-          int time_scheduling = myobject['time_scheduling'] != null ? myobject['time_scheduling'] : 0;
-          String time_scheduling_medida = myobject['time_scheduling_medida'] != null ? myobject['time_scheduling_medida'] : "";
-          int max_event_per_day = myobject['max_event_per_day'] != null ? myobject['max_event_per_day'] : 0;
-          String prop_id = myobject['prop_id'] != null ? myobject['prop_id'] : 0;
-          int owner_id = myobject['owner_id'] != null ? myobject['owner_id'] : 0;
+          String buffer_after_measure =
+              myobject['aftermed'] != null ? myobject['aftermed'] : "";
+          int buffer_before =
+              myobject['buffer_before'] != null ? myobject['buffer_before'] : 0;
+          String buffer_before_measure =
+              myobject['beforemed'] != null ? myobject['beforemed'] : "";
+          String durationmed =
+              myobject['durationmed'] != null ? myobject['durationmed'] : "";
+          String confirmation_message = myobject['confirmation_message'] != null
+              ? myobject['confirmation_message'].toString()
+              : "";
+          String time_zone =
+              myobject['time_zone'] != null ? myobject['time_zone'] : "";
+          int time_scheduling = myobject['time_scheduling'] != null
+              ? myobject['time_scheduling']
+              : 0;
+          String time_scheduling_medida =
+              myobject['time_scheduling_medida'] != null
+                  ? myobject['time_scheduling_medida']
+                  : "";
+          int max_event_per_day = myobject['max_event_per_day'] != null
+              ? myobject['max_event_per_day']
+              : 0;
+          String prop_id =
+              myobject['prop_id'] != null ? myobject['prop_id'] : 0;
+          int owner_id =
+              myobject['owner_id'] != null ? myobject['owner_id'] : 0;
           bool sun = myobject['sun'] != null ? myobject['sun'] : false;
           bool mon = myobject['mon'] != null ? myobject['mon'] : false;
 
@@ -2149,7 +2550,8 @@ class ApiManager {
     });
   }
 
-  getPropertyAmanityUtility(BuildContext context, String Id, CallBackAmntUtltlist CallBackQuesy) async {
+  getPropertyAmanityUtility(BuildContext context, String Id,
+      CallBackAmntUtltlist CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Property_AM_UT,
       "LoadLookUpValues": true,
@@ -2166,35 +2568,46 @@ class ApiManager {
 
         //Helper.Log("getPropertyDetails", respoce);
 
-        List<PropertyAmenitiesUtility> amenitieslist = <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> amenitieslist =
+            <PropertyAmenitiesUtility>[];
 
-        List<PropertyAmenitiesUtility> utilitylist = <PropertyAmenitiesUtility>[];
+        List<PropertyAmenitiesUtility> utilitylist =
+            <PropertyAmenitiesUtility>[];
 
         if (data['Result'] != null && data['Result'].length > 0) {
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            var Feature_ID = myobject['Feature_ID'] != null ? myobject['Feature_ID'] : null;
+            var Feature_ID =
+                myobject['Feature_ID'] != null ? myobject['Feature_ID'] : null;
 
-            PropertyAmenitiesUtility propertyAmenitiesUtility = new PropertyAmenitiesUtility();
+            PropertyAmenitiesUtility propertyAmenitiesUtility =
+                new PropertyAmenitiesUtility();
 
             if (Feature_ID != null) {
               int ID = Feature_ID['ID'] != null ? Feature_ID['ID'] : 0;
 
-              String Feature = Feature_ID['Feature'] != null ? Feature_ID['Feature'].toString() : "";
+              String Feature = Feature_ID['Feature'] != null
+                  ? Feature_ID['Feature'].toString()
+                  : "";
 
               SystemEnumDetails? Feature_Type =
-                  Feature_ID['Feature_Type'] != null ? SystemEnumDetails.fromJson(Feature_ID['Feature_Type']) : null;
+                  Feature_ID['Feature_Type'] != null
+                      ? SystemEnumDetails.fromJson(Feature_ID['Feature_Type'])
+                      : null;
 
               propertyAmenitiesUtility.id = ID;
               propertyAmenitiesUtility.Feature = Feature;
-              propertyAmenitiesUtility.Feature_Type = Feature_Type!.EnumDetailID;
+              propertyAmenitiesUtility.Feature_Type =
+                  Feature_Type!.EnumDetailID;
             }
 
-            SystemEnumDetails? Feature_Value =
-                myobject['Feature_Value'] != null ? SystemEnumDetails.fromJson(myobject['Feature_Value']) : null;
+            SystemEnumDetails? Feature_Value = myobject['Feature_Value'] != null
+                ? SystemEnumDetails.fromJson(myobject['Feature_Value'])
+                : null;
 
-            propertyAmenitiesUtility.value = Feature_Value!.EnumDetailID.toString();
+            propertyAmenitiesUtility.value =
+                Feature_Value!.EnumDetailID.toString();
 
             if (propertyAmenitiesUtility.Feature_Type == 1) {
               amenitieslist.add(propertyAmenitiesUtility);
@@ -2217,7 +2630,8 @@ class ApiManager {
     });
   }
 
-  getPropertyRestriction(BuildContext context, String Id, CallBackRestriction CallBackQuesy) async {
+  getPropertyRestriction(BuildContext context, String Id,
+      CallBackRestriction CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Property_Restrictions,
       "LoadLookUpValues": true,
@@ -2236,12 +2650,15 @@ class ApiManager {
 
         List<SystemEnumDetails> restrictionlist = [];
 
-        restrictionlist = await QueryFilter().PlainValues(eSystemEnums().Restrictions);
+        restrictionlist =
+            await QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null ? SystemEnumDetails.fromJson(myobject['Restrictions']) : null;
+          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null
+              ? SystemEnumDetails.fromJson(myobject['Restrictions'])
+              : null;
 
           for (int d = 0; d < restrictionlist.length; d++) {
             SystemEnumDetails restric = restrictionlist[d];
@@ -2259,7 +2676,8 @@ class ApiManager {
     });
   }
 
-  getEventTypesRestriction(BuildContext context, String Id, CallBackRestriction CallBackQuesy) async {
+  getEventTypesRestriction(BuildContext context, String Id,
+      CallBackRestriction CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Property_Restrictions,
       "LoadLookUpValues": true,
@@ -2278,12 +2696,15 @@ class ApiManager {
 
         List<SystemEnumDetails> restrictionlist = [];
 
-        restrictionlist = await QueryFilter().PlainValues(eSystemEnums().Restrictions);
+        restrictionlist =
+            await QueryFilter().PlainValues(eSystemEnums().Restrictions);
 
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null ? SystemEnumDetails.fromJson(myobject['Restrictions']) : null;
+          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null
+              ? SystemEnumDetails.fromJson(myobject['Restrictions'])
+              : null;
 
           for (int d = 0; d < restrictionlist.length; d++) {
             SystemEnumDetails restric = restrictionlist[d];
@@ -2301,7 +2722,8 @@ class ApiManager {
     });
   }
 
-  getPropertyRestriction_Customer(BuildContext context, String Id, CallBackRestriction CallBackQuesy) async {
+  getPropertyRestriction_Customer(BuildContext context, String Id,
+      CallBackRestriction CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Property_Restrictions,
       "LoadLookUpValues": true,
@@ -2323,7 +2745,9 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null ? SystemEnumDetails.fromJson(myobject['Restrictions']) : null;
+          SystemEnumDetails? Restrictions = myobject['Restrictions'] != null
+              ? SystemEnumDetails.fromJson(myobject['Restrictions'])
+              : null;
 
           Restrictions!.ischeck = true;
           restrictionlist.add(Restrictions);
@@ -2336,7 +2760,8 @@ class ApiManager {
     });
   }
 
-  getPropertyImagesDSQ(BuildContext context, String Id, CallBackPropertyImages CallBackQuesy) async {
+  getPropertyImagesDSQ(BuildContext context, String Id,
+      CallBackPropertyImages CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Property_Images,
       "LoadLookUpValues": true,
@@ -2360,19 +2785,24 @@ class ApiManager {
 
           String PID = PImages['ID'] != null ? PImages['ID'].toString() : "";
 
-          bool IsFavorite = PImages['IsFavorite'] != null ? PImages['IsFavorite'] : false;
+          bool IsFavorite =
+              PImages['IsFavorite'] != null ? PImages['IsFavorite'] : false;
 
           var Media_ID = PImages["Media_ID"];
 
           int ID = Media_ID['ID'] != null ? Media_ID['ID'] : 0;
           int RefID = Media_ID['RefID'] != null ? Media_ID['RefID'] : 0;
           String URL = Media_ID['URL'] != null ? Media_ID['URL'] : "";
-          int Sequence = Media_ID['Sequence'] != null ? Media_ID['Sequence'] : 0;
-          int FileType = Media_ID['FileType'] != null ? Media_ID['FileType'] : 0;
-          int IsActive = Media_ID['IsActive'] != null ? Media_ID['IsActive'] : 0;
+          int Sequence =
+              Media_ID['Sequence'] != null ? Media_ID['Sequence'] : 0;
+          int FileType =
+              Media_ID['FileType'] != null ? Media_ID['FileType'] : 0;
+          int IsActive =
+              Media_ID['IsActive'] != null ? Media_ID['IsActive'] : 0;
           int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
 
-          PropertyImageMediaInfo propertyImageMediaInfo = new PropertyImageMediaInfo();
+          PropertyImageMediaInfo propertyImageMediaInfo =
+              new PropertyImageMediaInfo();
 
           propertyImageMediaInfo.id = ID;
           propertyImageMediaInfo.fileType = FileType;
@@ -2399,8 +2829,10 @@ class ApiManager {
     });
   }
 
-  UpdatePropertyActive(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdatePropertyActive(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -2413,8 +2845,14 @@ class ApiManager {
     });
   }
 
-  UpdateEventTypesActive(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateEventTypesActive(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Events_type,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -2427,7 +2865,8 @@ class ApiManager {
     });
   }
 
-  TenantAvailableInProperty(BuildContext context, String Ownerid, String propertyid, CallBackQuesy callBackQuesy) async {
+  TenantAvailableInProperty(BuildContext context, String Ownerid,
+      String propertyid, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICATIONLIST_OWNERWISE,
       "LoadLookupValues": true,
@@ -2453,7 +2892,8 @@ class ApiManager {
 
   bindPropertyData(PropertyData propertyData) {
     _store.dispatch(UpdateProperTytypeValue(propertyData.propertyType));
-    _store.dispatch(UpdatePropertyTypeOtherValue(propertyData.otherPropertyType!));
+    _store.dispatch(
+        UpdatePropertyTypeOtherValue(propertyData.otherPropertyType!));
 
     //DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(propertyData.dateAvailable);
 
@@ -2463,7 +2903,8 @@ class ApiManager {
     _store.dispatch(UpdateRentalSpaceValue(propertyData.rentalSpace));
     _store.dispatch(UpdatePropertyName(propertyData.propertyName!));
     _store.dispatch(UpdatePropertyAddress(propertyData.propertyAddress!));
-    _store.dispatch(UpdatePropertyDescription(propertyData.propertyDescription!));
+    _store
+        .dispatch(UpdatePropertyDescription(propertyData.propertyDescription!));
     _store.dispatch(UpdateSuiteunit(propertyData.suiteUnit!));
     _store.dispatch(UpdateBuildingname(propertyData.buildingName!));
     _store.dispatch(UpdatePropertyCity(propertyData.city!));
@@ -2472,14 +2913,18 @@ class ApiManager {
     _store.dispatch(UpdatePropertyProvince(propertyData.province!));
     _store.dispatch(UpdatePropertyPostalcode(propertyData.postalCode!));
     _store.dispatch(UpdatePropertyRentAmount(propertyData.rentAmount!));
-    _store.dispatch(UpdateRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
+    _store.dispatch(
+        UpdateRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
     _store.dispatch(UpdateLeaseTypeValue(propertyData.leaseType));
-    _store.dispatch(UpdateMinimumLeasedurationValue(propertyData.minLeaseDuration));
-    _store.dispatch(UpdateMinimumleasedurationNumber(propertyData.minLeaseNumber.toString()));
+    _store.dispatch(
+        UpdateMinimumLeasedurationValue(propertyData.minLeaseDuration));
+    _store.dispatch(UpdateMinimumleasedurationNumber(
+        propertyData.minLeaseNumber.toString()));
 
     _store.dispatch(UpdatePropertyBedrooms(propertyData.bedrooms.toString()));
     _store.dispatch(UpdatePropertyBathrooms(propertyData.bathrooms.toString()));
-    _store.dispatch(UpdatePropertySizeinsquarefeet(propertyData.size.toString()));
+    _store
+        .dispatch(UpdatePropertySizeinsquarefeet(propertyData.size.toString()));
     _store.dispatch(UpdatePropertyMaxoccupancy(propertyData.maxOccupancy!));
     _store.dispatch(UpdateFurnishingValue(propertyData.furnishing));
     _store.dispatch(UpdateParkingstalls(propertyData.parkingStalls!));
@@ -2531,34 +2976,47 @@ class ApiManager {
     /*Summery*/
 
     _store.dispatch(UpdateSummeryProperTytypeValue(propertyData.propertyType));
-    _store.dispatch(UpdateSummeryPropertyTypeOtherValue(propertyData.otherPropertyType!));
+    _store.dispatch(
+        UpdateSummeryPropertyTypeOtherValue(propertyData.otherPropertyType!));
     _store.dispatch(UpdateSummeryDateofavailable(tempDate));
     _store.dispatch(UpdateSummeryRentalSpaceValue(propertyData.rentalSpace));
     _store.dispatch(UpdateSummeryPropertyName(propertyData.propertyName!));
-    _store.dispatch(UpdateSummeryPropertyAddress(propertyData.propertyAddress!));
-    _store.dispatch(UpdateSummeryPropertyDescription(propertyData.propertyDescription!));
+    _store
+        .dispatch(UpdateSummeryPropertyAddress(propertyData.propertyAddress!));
+    _store.dispatch(
+        UpdateSummeryPropertyDescription(propertyData.propertyDescription!));
     _store.dispatch(UpdateSummerySuiteunit(propertyData.suiteUnit!));
     _store.dispatch(UpdateSummeryBuildingname(propertyData.buildingName!));
     _store.dispatch(UpdateSummeryPropertyCity(propertyData.city!));
-    _store.dispatch(UpdateSummeryPropertyCountryCode(propertyData.countryCode!));
+    _store
+        .dispatch(UpdateSummeryPropertyCountryCode(propertyData.countryCode!));
     _store.dispatch(UpdateSummeryPropertyCountryName(propertyData.country!));
     _store.dispatch(UpdateSummeryPropertyProvince(propertyData.province!));
     _store.dispatch(UpdateSummeryPropertyPostalcode(propertyData.postalCode!));
     _store.dispatch(UpdateSummeryPropertyRentAmount(propertyData.rentAmount!));
-    _store.dispatch(UpdateSummeryRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
+    _store.dispatch(UpdateSummeryRentPaymentFrequencyValue(
+        propertyData.rentPaymentFrequency));
     _store.dispatch(UpdateSummeryLeaseTypeValue(propertyData.leaseType));
-    _store.dispatch(UpdateSummeryMinimumLeasedurationValue(propertyData.minLeaseDuration));
-    _store.dispatch(UpdateSummeryMinimumleasedurationNumber(propertyData.minLeaseNumber.toString()));
+    _store.dispatch(
+        UpdateSummeryMinimumLeasedurationValue(propertyData.minLeaseDuration));
+    _store.dispatch(UpdateSummeryMinimumleasedurationNumber(
+        propertyData.minLeaseNumber.toString()));
     _store.dispatch(UpdateSummeryPropertyImage(propertyData.propertyImage));
     _store.dispatch(UpdateSummeryPropertyUint8List(null));
-    _store.dispatch(UpdateSummeryPropertyBedrooms(propertyData.bedrooms.toString()));
-    _store.dispatch(UpdateSummeryPropertyBathrooms(propertyData.bathrooms.toString()));
-    _store.dispatch(UpdateSummeryPropertySizeinsquarefeet(propertyData.size.toString()));
-    _store.dispatch(UpdateSummeryPropertyMaxoccupancy(propertyData.maxOccupancy!));
+    _store.dispatch(
+        UpdateSummeryPropertyBedrooms(propertyData.bedrooms.toString()));
+    _store.dispatch(
+        UpdateSummeryPropertyBathrooms(propertyData.bathrooms.toString()));
+    _store.dispatch(
+        UpdateSummeryPropertySizeinsquarefeet(propertyData.size.toString()));
+    _store.dispatch(
+        UpdateSummeryPropertyMaxoccupancy(propertyData.maxOccupancy!));
     _store.dispatch(UpdateSummeryFurnishingValue(propertyData.furnishing));
-    _store.dispatch(UpdateSummeryOtherPartialFurniture(propertyData.otherPartialFurniture.toString()));
+    _store.dispatch(UpdateSummeryOtherPartialFurniture(
+        propertyData.otherPartialFurniture.toString()));
     _store.dispatch(UpdateSummeryParkingstalls(propertyData.parkingStalls!));
-    _store.dispatch(UpdateSummeryStorageAvailableValue(propertyData.storageAvailable));
+    _store.dispatch(
+        UpdateSummeryStorageAvailableValue(propertyData.storageAvailable));
     _store.dispatch(UpdateSummeryAgreeTCPP(propertyData.isAgreedTandC!));
     _store.dispatch(UpdateSummeryPropertyDrafting(propertyData.PropDrafting!));
     _store.dispatch(UpdateSummeryPropertyVacancy(propertyData.Vacancy!));
@@ -2582,7 +3040,8 @@ class ApiManager {
     _store.dispatch(UpdateBefore(eventTypesData.buffer_before!));
     _store.dispatch(UpdateAfter(eventTypesData.buffer_after!));
     _store.dispatch(UpdateBeforep(eventTypesData.buffer_before_measure!));
-    _store.dispatch(UpdateEventTypesConfirmation(eventTypesData.confirmation_message!));
+    _store.dispatch(
+        UpdateEventTypesConfirmation(eventTypesData.confirmation_message!));
     _store.dispatch(UpdateTimezon(eventTypesData.time_zone!));
     //_store.dispatch(UpdateDisplaytz(eventTypesData!));
     _store.dispatch(UpdateSun(eventTypesData.sun!));
@@ -2608,22 +3067,26 @@ class ApiManager {
     _store.dispatch(Updatsath2(eventTypesData.sath2!));
     _store.dispatch(Updatetimescheduling(eventTypesData.time_scheduling!));
     _store.dispatch(Updatemaximum(eventTypesData.max_event_per_day!));
-    _store.dispatch(Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
+    _store.dispatch(
+        Updatetimeschedulingmed(eventTypesData.time_scheduling_medida!));
 
     _store.dispatch(UpdateRentalSpaceList1(eventTypesData.overrrides!));
     /*Summery*/
   }
 
-  deletePropertyImage(BuildContext context, Object PIMPOJO, Object MIPoJO, CallBackQuesy CallBackQuesy) {
+  deletePropertyImage(BuildContext context, Object PIMPOJO, Object MIPoJO,
+      CallBackQuesy CallBackQuesy) {
     List<QueryObject> queryList = <QueryObject>[];
 
-    String query = QueryFilter().DeleteQuery(PIMPOJO, etableName.PropertyImages, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().DeleteQuery(PIMPOJO, etableName.PropertyImages,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var querydecode = jsonDecode(query);
     QueryObject PropertyImagesquery = QueryObject.fromJson(querydecode);
 
     queryList.add(PropertyImagesquery);
 
-    String query2 = QueryFilter().DeleteQuery(MIPoJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query2 = QueryFilter().DeleteQuery(MIPoJO, etableName.MediaInfo,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var querycode2 = jsonDecode(query2);
     QueryObject MediaInfoquery = QueryObject.fromJson(querycode2);
 
@@ -2640,7 +3103,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -2658,7 +3123,8 @@ class ApiManager {
     });
   }
 
-  Future<List> getUrlS3(List<PropertyImageMediaInfo> propertyimagelist, String module) async {
+  Future<List> getUrlS3(
+      List<PropertyImageMediaInfo> propertyimagelist, String module) async {
     List<String> names = [];
     List datares = [];
     for (int i = 0; i < propertyimagelist.length; i++) {
@@ -2680,7 +3146,8 @@ class ApiManager {
     return datares;
   }
 
-  Future<List> getUrlS3doc(List<ApplicationDocumentUploads> propertyimagelist, String module) async {
+  Future<List> getUrlS3doc(
+      List<ApplicationDocumentUploads> propertyimagelist, String module) async {
     List<String> names = [];
     List datares = [];
     for (int i = 0; i < propertyimagelist.length; i++) {
@@ -2704,7 +3171,8 @@ class ApiManager {
     return datares;
   }
 
-  Future<List> getUrlS3File(List<FileObject> propertyimagelist, String module) async {
+  Future<List> getUrlS3File(
+      List<FileObject> propertyimagelist, String module) async {
     List<String> names = [];
     List datares = [];
     for (int i = 0; i < propertyimagelist.length; i++) {
@@ -2771,7 +3239,10 @@ class ApiManager {
     return datares;
   }
 
-  PropertyImagesUpload(BuildContext context, List<PropertyImageMediaInfo> propertyimagelist, CallBackListQuesy CallBackQuesy) async {
+  PropertyImagesUpload(
+      BuildContext context,
+      List<PropertyImageMediaInfo> propertyimagelist,
+      CallBackListQuesy CallBackQuesy) async {
     //get s3 links
     List urlS3 = await getUrlS3(propertyimagelist, "property");
 
@@ -2786,7 +3257,8 @@ class ApiManager {
       String S3content = urlS3[i]["presigned_url"];
       //var multipartRequest =
       // new http.MultipartRequest("PUT", Uri.parse(S3content));
-      var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
       multipartRequest.headers["Content-Type"] = "binary/octet-stream";
       // multipartRequest.headers.addAll(headers);
       List<int> _selectedFile = propertyimagelist[i].appImage!;
@@ -2805,7 +3277,10 @@ class ApiManager {
     }
   }
 
-  DocumentsUpload(BuildContext context, List<ApplicationDocumentUploads> propertyimagelist, CallBackListQuesy CallBackQuesy) async {
+  DocumentsUpload(
+      BuildContext context,
+      List<ApplicationDocumentUploads> propertyimagelist,
+      CallBackListQuesy CallBackQuesy) async {
     //get s3 links
     List urlS3 = await getUrlS3doc(propertyimagelist, "property");
 
@@ -2821,7 +3296,8 @@ class ApiManager {
         String S3content = urlS3[i]["presigned_url"];
         //var multipartRequest =
         // new http.MultipartRequest("PUT", Uri.parse(S3content));
-        var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+        var multipartRequest =
+            new http.StreamedRequest("PUT", Uri.parse(S3content));
         multipartRequest.headers["Content-Type"] = "binary/octet-stream";
         // multipartRequest.headers.addAll(headers);
         List<int> _selectedFile = propertyimagelist[i].appImage!;
@@ -2841,7 +3317,10 @@ class ApiManager {
     }
   }
 
-  PropertyImagesUploadBack(BuildContext context, List<PropertyImageMediaInfo> propertyimagelist, CallBackListQuesy CallBackQuesy) async {
+  PropertyImagesUploadBack(
+      BuildContext context,
+      List<PropertyImageMediaInfo> propertyimagelist,
+      CallBackListQuesy CallBackQuesy) async {
     //get s3 links
     // List urlS3 = getUrlS3(propertyimagelist, "property");
 
@@ -2851,15 +3330,18 @@ class ApiManager {
       'ApplicationCode': Weburl.API_CODE,
     };
 
-    var multipartRequest = new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
+    var multipartRequest =
+        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
     multipartRequest.headers.addAll(headers);
 
     for (int i = 0; i < propertyimagelist.length; i++) {
       List<int> _selectedFile = propertyimagelist[i].appImage!;
       String filepath = propertyimagelist[i].fileName!;
 
-      multipartRequest.files.add(await http.MultipartFile.fromBytes('file[' + i.toString() + ']', _selectedFile,
-          contentType: new MediaType('application', 'png'), filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes(
+          'file[' + i.toString() + ']', _selectedFile,
+          contentType: new MediaType('application', 'png'),
+          filename: filepath));
     }
 
     await multipartRequest.send().then((result) {
@@ -2875,9 +3357,13 @@ class ApiManager {
                 for (int i = 0; i < data['Result'].length; i++) {
                   var myobject = data['Result'][i];
 
-                  String MediaID = myobject['MediaID'] != null ? "" + myobject['MediaID'].toString() : "";
+                  String MediaID = myobject['MediaID'] != null
+                      ? "" + myobject['MediaID'].toString()
+                      : "";
 
-                  String url = myobject['url'] != null ? "" + myobject['url'].toString() : "";
+                  String url = myobject['url'] != null
+                      ? "" + myobject['url'].toString()
+                      : "";
 
                   mediaString.add(MediaID);
 
@@ -2905,8 +3391,13 @@ class ApiManager {
     });
   }
 
-  InsetPropertyImages(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String json = QueryFilter().InsertQueryArray(POJO, etableName.PropertyImages, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetPropertyImages(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQueryArray(
+        POJO,
+        etableName.PropertyImages,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -2916,7 +3407,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -2934,9 +3427,14 @@ class ApiManager {
     });
   }
 
-  getPropertyImages(BuildContext context, Object POJO, CallBackQuesy callbackquery) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.PropertyImages, eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
+  getPropertyImages(
+      BuildContext context, Object POJO, CallBackQuesy callbackquery) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.PropertyImages,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        true);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -2950,7 +3448,8 @@ class ApiManager {
 
             String PID = PImages['ID'] != null ? PImages['ID'].toString() : "";
 
-            bool IsFavorite = PImages['IsFavorite'] != null ? PImages['IsFavorite'] : false;
+            bool IsFavorite =
+                PImages['IsFavorite'] != null ? PImages['IsFavorite'] : false;
 
             var Media_ID = PImages["Media_ID"];
 
@@ -2960,15 +3459,19 @@ class ApiManager {
 
             String URL = Media_ID['URL'] != null ? Media_ID['URL'] : "";
 
-            int Sequence = Media_ID['Sequence'] != null ? Media_ID['Sequence'] : 0;
+            int Sequence =
+                Media_ID['Sequence'] != null ? Media_ID['Sequence'] : 0;
 
-            int FileType = Media_ID['FileType'] != null ? Media_ID['FileType'] : 0;
+            int FileType =
+                Media_ID['FileType'] != null ? Media_ID['FileType'] : 0;
 
-            int IsActive = Media_ID['IsActive'] != null ? Media_ID['IsActive'] : 0;
+            int IsActive =
+                Media_ID['IsActive'] != null ? Media_ID['IsActive'] : 0;
 
             int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
 
-            PropertyImageMediaInfo propertyImageMediaInfo = new PropertyImageMediaInfo();
+            PropertyImageMediaInfo propertyImageMediaInfo =
+                new PropertyImageMediaInfo();
 
             propertyImageMediaInfo.id = ID;
             propertyImageMediaInfo.fileType = FileType;
@@ -2996,7 +3499,10 @@ class ApiManager {
             }
 
             if (PropertyImageMediaInfolist.length - 1 == j && !findfavorite) {
-              ApiManager().setFeaturedImage(context, Prefs.getString(PrefsName.PropertyID), PropertyImageMediaInfolist[0].id.toString(),
+              ApiManager().setFeaturedImage(
+                  context,
+                  Prefs.getString(PrefsName.PropertyID),
+                  PropertyImageMediaInfolist[0].id.toString(),
                   (error, responce) async {
                 if (error) {
                   PropertyImageMediaInfolist[0].IsFavorite = true;
@@ -3008,10 +3514,12 @@ class ApiManager {
           }
 
           _store.dispatch(UpdatePropertyImageList(PropertyImageMediaInfolist));
-          _store.dispatch(UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
+          _store.dispatch(
+              UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
         } else {
           _store.dispatch(UpdatePropertyImageList(<PropertyImageMediaInfo>[]));
-          _store.dispatch(UpdateSummeryPropertyImageList(<PropertyImageMediaInfo>[]));
+          _store.dispatch(
+              UpdateSummeryPropertyImageList(<PropertyImageMediaInfo>[]));
         }
 
         callbackquery(true, "");
@@ -3021,7 +3529,8 @@ class ApiManager {
     });
   }
 
-  setFeaturedImage(BuildContext context, String PropID, String MediaID, CallBackQuesy callBackQuesy) async {
+  setFeaturedImage(BuildContext context, String PropID, String MediaID,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Featured_image,
       "Reqtokens": {"Property_ID": PropID, "Media_ID": MediaID}
@@ -3052,103 +3561,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -3176,12 +3755,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -3199,7 +3781,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLTALeadleadList(tenancyleadlist));
         _store.dispatch(UpdateLLTLeadFilterleadList(tenancyleadlist));
@@ -3227,103 +3810,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -3351,12 +4004,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -3374,7 +4030,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLTAApplicantleadList(tenancyleadlist));
         _store.dispatch(UpdateLLTAFilterApplicantleadList(tenancyleadlist));
@@ -3391,7 +4048,8 @@ class ApiManager {
     });
   }
 
-  terminateTenancyWorkflow(BuildContext context, String applicantId, CallBackQuesy callBackQuesy) async {
+  terminateTenancyWorkflow(BuildContext context, String applicantId,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Terminate_Tenancy,
       "Reqtokens": {
@@ -3437,24 +4095,38 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          int TotalLeads = myobject['Total Leads'] != null ? myobject['Total Leads'] : 0;
+          int TotalLeads =
+              myobject['Total Leads'] != null ? myobject['Total Leads'] : 0;
 
-          int TotalApplications = myobject['Total Applications'] != null ? myobject['Total Applications'] : 0;
+          int TotalApplications = myobject['Total Applications'] != null
+              ? myobject['Total Applications']
+              : 0;
 
-          int TotalDocuments = myobject['Total Documents'] != null ? myobject['Total Documents'] : 0;
+          int TotalDocuments = myobject['Total Documents'] != null
+              ? myobject['Total Documents']
+              : 0;
 
-          int TotalReferences = myobject['Total References'] != null ? myobject['Total References'] : 0;
+          int TotalReferences = myobject['Total References'] != null
+              ? myobject['Total References']
+              : 0;
 
-          int TotalLeases = myobject['Total Leases'] != null ? myobject['Total Leases'] : 0;
+          int TotalLeases =
+              myobject['Total Leases'] != null ? myobject['Total Leases'] : 0;
 
-          int TotalActiveTenants = myobject['Total Active Tenants'] != null ? myobject['Total Active Tenants'] : 0;
+          int TotalActiveTenants = myobject['Total Active Tenants'] != null
+              ? myobject['Total Active Tenants']
+              : 0;
 
           _store.dispatch(UpdateLandlordApplication_Lead_Count(TotalLeads));
           _store.dispatch(UpdateLandlordApplications_count(TotalApplications));
-          _store.dispatch(UpdateLandlordApplication_verification_documents_count(TotalDocuments));
-          _store.dispatch(UpdateLandlordApplication_references_check_count(TotalReferences));
+          _store.dispatch(
+              UpdateLandlordApplication_verification_documents_count(
+                  TotalDocuments));
+          _store.dispatch(UpdateLandlordApplication_references_check_count(
+              TotalReferences));
           _store.dispatch(UpdateLandlordApplication_leases_count(TotalLeases));
-          _store.dispatch(UpdateLandlordApplication_Active_Tenants_Count(TotalActiveTenants));
+          _store.dispatch(UpdateLandlordApplication_Active_Tenants_Count(
+              TotalActiveTenants));
         }
       } else {
         //loader.remove();
@@ -3463,11 +4135,13 @@ class ApiManager {
     });
   }
 
-  PropertyListInDropDownApi(BuildContext context, Object POJO, PropertyListCallback CallBack) {
+  PropertyListInDropDownApi(
+      BuildContext context, Object POJO, PropertyListCallback CallBack) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().SelectQuery(POJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
+    String query = QueryFilter().SelectQuery(POJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3480,78 +4154,135 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
 
-          String Other_Property_Type = myobject['Other_Property_Type'] != null ? myobject['Other_Property_Type'].toString() : "";
+          String Other_Property_Type = myobject['Other_Property_Type'] != null
+              ? myobject['Other_Property_Type'].toString()
+              : "";
 
-          String Building_Name = myobject['Building_Name'] != null ? myobject['Building_Name'].toString() : "";
+          String Building_Name = myobject['Building_Name'] != null
+              ? myobject['Building_Name'].toString()
+              : "";
 
-          String Property_Address = myobject['Property_Address'] != null ? myobject['Property_Address'].toString() : "";
+          String Property_Address = myobject['Property_Address'] != null
+              ? myobject['Property_Address'].toString()
+              : "";
 
-          bool IsActive = myobject['IsActive'] != null ? myobject['IsActive'] : false;
+          bool IsActive =
+              myobject['IsActive'] != null ? myobject['IsActive'] : false;
 
-          String Postal_Code = myobject['Postal_Code'] != null ? myobject['Postal_Code'].toString() : "";
+          String Postal_Code = myobject['Postal_Code'] != null
+              ? myobject['Postal_Code'].toString()
+              : "";
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "";
 
           int Size = myobject['Size'] != null ? myobject['Size'] : 0;
 
           String Other_Partial_Furniture =
-              myobject['Other_Partial_Furniture'] != null ? myobject['Other_Partial_Furniture'].toString() : "";
+              myobject['Other_Partial_Furniture'] != null
+                  ? myobject['Other_Partial_Furniture'].toString()
+                  : "";
 
-          String Max_Occupancy = myobject['Max_Occupancy'] != null ? myobject['Max_Occupancy'].toString() : "";
+          String Max_Occupancy = myobject['Max_Occupancy'] != null
+              ? myobject['Max_Occupancy'].toString()
+              : "";
 
-          String Date_Available = myobject['Date_Available'] != null ? myobject['Date_Available'].toString() : "";
+          String Date_Available = myobject['Date_Available'] != null
+              ? myobject['Date_Available'].toString()
+              : "";
 
-          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null ? myobject['IsAgreed_TandC'] : false;
+          bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+              ? myobject['IsAgreed_TandC']
+              : false;
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String Rent_Amount = myobject['Rent_Amount'] != null ? myobject['Rent_Amount'].toString() : "";
+          String Rent_Amount = myobject['Rent_Amount'] != null
+              ? myobject['Rent_Amount'].toString()
+              : "";
 
-          int Min_Lease_Number = myobject['Min_Lease_Number'] != null ? myobject['Min_Lease_Number'] : "";
+          int Min_Lease_Number = myobject['Min_Lease_Number'] != null
+              ? myobject['Min_Lease_Number']
+              : "";
 
-          String Parking_Stalls = myobject['Parking_Stalls'] != null ? myobject['Parking_Stalls'].toString() : "";
+          String Parking_Stalls = myobject['Parking_Stalls'] != null
+              ? myobject['Parking_Stalls'].toString()
+              : "";
 
-          String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+          String Country =
+              myobject['Country'] != null ? myobject['Country'].toString() : "";
 
-          int Bedrooms = myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
+          int Bedrooms =
+              myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
 
-          String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+          String Suite_Unit = myobject['Suite_Unit'] != null
+              ? myobject['Suite_Unit'].toString()
+              : "";
 
-          String Province = myobject['Province'] != null ? myobject['Province'].toString() : "";
+          String Province = myobject['Province'] != null
+              ? myobject['Province'].toString()
+              : "";
 
-          String Property_Description = myobject['Property_Description'] != null ? myobject['Property_Description'].toString() : "";
+          String Property_Description = myobject['Property_Description'] != null
+              ? myobject['Property_Description'].toString()
+              : "";
 
-          int Bathrooms = myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
+          int Bathrooms =
+              myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
 
-          MediaInfo? Property_Image = myobject['Property_Image'] != null ? MediaInfo.fromJson(myobject['Property_Image']) : null;
+          MediaInfo? Property_Image = myobject['Property_Image'] != null
+              ? MediaInfo.fromJson(myobject['Property_Image'])
+              : null;
 
-          SystemEnumDetails? Property_Type =
-              myobject['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject['Property_Type']) : null;
+          SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+              : null;
 
           SystemEnumDetails? Min_Lease_Duration =
-              myobject['Min_Lease_Duration'] != null ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration']) : null;
+              myobject['Min_Lease_Duration'] != null
+                  ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration'])
+                  : null;
 
-          SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null ? SystemEnumDetails.fromJson(myobject['Lease_Type']) : null;
+          SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null
+              ? SystemEnumDetails.fromJson(myobject['Lease_Type'])
+              : null;
 
-          SystemEnumDetails? Furnishing = myobject['Furnishing'] != null ? SystemEnumDetails.fromJson(myobject['Furnishing']) : null;
+          SystemEnumDetails? Furnishing = myobject['Furnishing'] != null
+              ? SystemEnumDetails.fromJson(myobject['Furnishing'])
+              : null;
 
           SystemEnumDetails? Rent_Payment_Frequency =
-              myobject['Rent_Payment_Frequency'] != null ? SystemEnumDetails.fromJson(myobject['Rent_Payment_Frequency']) : null;
+              myobject['Rent_Payment_Frequency'] != null
+                  ? SystemEnumDetails.fromJson(
+                      myobject['Rent_Payment_Frequency'])
+                  : null;
 
           SystemEnumDetails? StorageAvailable =
-              myobject['StorageAvailable'] != null ? SystemEnumDetails.fromJson(myobject['StorageAvailable']) : null;
+              myobject['StorageAvailable'] != null
+                  ? SystemEnumDetails.fromJson(myobject['StorageAvailable'])
+                  : null;
 
-          SystemEnumDetails? Rental_Space = myobject['Rental_Space'] != null ? SystemEnumDetails.fromJson(myobject['Rental_Space']) : null;
+          SystemEnumDetails? Rental_Space = myobject['Rental_Space'] != null
+              ? SystemEnumDetails.fromJson(myobject['Rental_Space'])
+              : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           PropertyData propertyData = new PropertyData();
           propertyData.ID = ID;
@@ -3591,7 +4322,8 @@ class ApiManager {
           propertylist.add(propertyData);
         }
 
-        propertylist.sort((a, b) => b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));
+        propertylist.sort((a, b) =>
+            b.createdOn!.toLowerCase().compareTo(a.createdOn!.toLowerCase()));
         loader.remove();
         CallBack(propertylist, true);
       } else {
@@ -3601,8 +4333,10 @@ class ApiManager {
     });
   }
 
-  InsetNewLeadAPI(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQueryArray(POJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetNewLeadAPI(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQueryArray(POJO, etableName.Application,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3612,7 +4346,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
           res = res + myobject['Result'].toString();
           res = res + ",";
           if (StatusCode.isEmpty || StatusCode != "200") {
@@ -3633,7 +4369,8 @@ class ApiManager {
     });
   }
 
-  checkEmailAddressExit(BuildContext context, String Propertyid, String Email, CallBackQuesyEmailExit callBackQuesyEmailExit) async {
+  checkEmailAddressExit(BuildContext context, String Propertyid, String Email,
+      CallBackQuesyEmailExit callBackQuesyEmailExit) async {
     var myjson = {
       "DSQID": Weburl.DSQ_TenantEmail_already_Property,
       "LoadLookupValues": true,
@@ -3648,7 +4385,9 @@ class ApiManager {
         if (data['Result'].length > 0) {
           List<EmailExit> emailexitlist = <EmailExit>[];
 
-          emailexitlist = (data['Result'] as List).map((p) => EmailExit.fromJson(p)).toList();
+          emailexitlist = (data['Result'] as List)
+              .map((p) => EmailExit.fromJson(p))
+              .toList();
 
           callBackQuesyEmailExit(false, "1", emailexitlist);
         } else {
@@ -3661,7 +4400,8 @@ class ApiManager {
     });
   }
 
-  getEditLeadDataAPI(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getEditLeadDataAPI(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_DETAILS,
       "LoadLookupValues": true,
@@ -3680,30 +4420,48 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          String NumberOfOccupant = myobject['NumberOfOccupant'] != null ? myobject['NumberOfOccupant'].toString() : "0";
+          String NumberOfOccupant = myobject['NumberOfOccupant'] != null
+              ? myobject['NumberOfOccupant'].toString()
+              : "0";
 
-          String NumberOfChildren = myobject['NumberOfChildren'] != null ? myobject['NumberOfChildren'].toString() : "0";
+          String NumberOfChildren = myobject['NumberOfChildren'] != null
+              ? myobject['NumberOfChildren'].toString()
+              : "0";
 
           /*===============*/
           /* Personal Info */
           /*===============*/
           var PersonalInfo = myobject["Person_ID"];
 
-          String PersonID = PersonalInfo['ID'] != null ? PersonalInfo['ID'].toString() : "0";
+          String PersonID =
+              PersonalInfo['ID'] != null ? PersonalInfo['ID'].toString() : "0";
 
-          String FirstName = PersonalInfo['FirstName'] != null ? PersonalInfo['FirstName'].toString() : "";
+          String FirstName = PersonalInfo['FirstName'] != null
+              ? PersonalInfo['FirstName'].toString()
+              : "";
 
-          String LastName = PersonalInfo['LastName'] != null ? PersonalInfo['LastName'].toString() : "";
+          String LastName = PersonalInfo['LastName'] != null
+              ? PersonalInfo['LastName'].toString()
+              : "";
 
-          String Email = PersonalInfo['Email'] != null ? PersonalInfo['Email'].toString() : "";
+          String Email = PersonalInfo['Email'] != null
+              ? PersonalInfo['Email'].toString()
+              : "";
 
-          String MobileNumber = PersonalInfo['MobileNumber'] != null ? PersonalInfo['MobileNumber'].toString() : "";
+          String MobileNumber = PersonalInfo['MobileNumber'] != null
+              ? PersonalInfo['MobileNumber'].toString()
+              : "";
 
-          String Country_Code = PersonalInfo['Country_Code'] != null ? PersonalInfo['Country_Code'].toString() : "CA";
+          String Country_Code = PersonalInfo['Country_Code'] != null
+              ? PersonalInfo['Country_Code'].toString()
+              : "CA";
 
-          String Dial_Code = PersonalInfo['Dial_Code'] != null ? PersonalInfo['Dial_Code'].toString() : "+1";
+          String Dial_Code = PersonalInfo['Dial_Code'] != null
+              ? PersonalInfo['Dial_Code'].toString()
+              : "+1";
 
           _store.dispatch(UpdateEditLeadPersionId(PersonID));
           _store.dispatch(UpdateEditLeadFirstname(FirstName));
@@ -3725,11 +4483,17 @@ class ApiManager {
     });
   }
 
-  UpdateLead(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateLead(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3742,8 +4506,14 @@ class ApiManager {
     });
   }
 
-  UpdateStatusApplication(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateStatusApplication(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3754,11 +4524,17 @@ class ApiManager {
     });
   }
 
-  UpdateRatingApplication(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
+  UpdateRatingApplication(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Applicant, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3771,11 +4547,17 @@ class ApiManager {
     });
   }
 
-  UpdateArchiveApplication(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
+  UpdateArchiveApplication(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3788,21 +4570,30 @@ class ApiManager {
     });
   }
 
-  funUpdateStatus(BuildContext context, String Id, String status, String propertyid, CallBackQuesy callbackquery) {
+  funUpdateStatus(BuildContext context, String Id, String status,
+      String propertyid, CallBackQuesy callbackquery) {
     TenancyApplicationID updateid = new TenancyApplicationID();
     updateid.ID = Id;
 
-    TenancyApplicationUpdateStatus updatestatus = new TenancyApplicationUpdateStatus();
+    TenancyApplicationUpdateStatus updatestatus =
+        new TenancyApplicationUpdateStatus();
     updatestatus.ApplicationStatus = status;
 
-    ApiManager().UpdatestatusAPIFunnelView(context, updateid, updatestatus, propertyid, callbackquery);
+    ApiManager().UpdatestatusAPIFunnelView(
+        context, updateid, updatestatus, propertyid, callbackquery);
   }
 
-  UpdatestatusAPIFunnelView(BuildContext context, Object CPOJO, Object UpPOJO, String propertyid, CallBackQuesy callbackquery) {
+  UpdatestatusAPIFunnelView(BuildContext context, Object CPOJO, Object UpPOJO,
+      String propertyid, CallBackQuesy callbackquery) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -3848,103 +4639,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -3972,12 +4833,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -4035,7 +4899,8 @@ class ApiManager {
     });
   }
 
-  getPropertyWiseLead(BuildContext context, String Ownerid, String propertyid, CallBackLeadList callBackLeadList) async {
+  getPropertyWiseLead(BuildContext context, String Ownerid, String propertyid,
+      CallBackLeadList callBackLeadList) async {
     var myjson = {
       "DSQID": Weburl.DSQ_CommonView,
       "LoadLookupValues": true,
@@ -4054,103 +4919,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -4178,12 +5113,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -4212,7 +5150,8 @@ class ApiManager {
 /*========================  Tenancy Application Details  =============================*/
 /*==============================================================================*/
 
-  getTenancyDetails_Applicant(BuildContext context, String id, CallBackApplicantDetails callBackQuesy) async {
+  getTenancyDetails_Applicant(BuildContext context, String id,
+      CallBackApplicantDetails callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_DETAILS,
       "LoadLookupValues": true,
@@ -4231,32 +5170,47 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            String ApplicantID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String ApplicantID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            bool IsSmoking = myobject['IsSmoking'] != null ? myobject['IsSmoking'] : false;
+            bool IsSmoking =
+                myobject['IsSmoking'] != null ? myobject['IsSmoking'] : false;
 
             bool IsPet = myobject['IsPet'] != null ? myobject['IsPet'] : false;
 
-            bool IsVehicle = myobject['IsVehicle'] != null ? myobject['IsVehicle'] : false;
+            bool IsVehicle =
+                myobject['IsVehicle'] != null ? myobject['IsVehicle'] : false;
 
-            String SmokingDesc = myobject['SmokingDesc'] != null ? myobject['SmokingDesc'].toString() : "";
+            String SmokingDesc = myobject['SmokingDesc'] != null
+                ? myobject['SmokingDesc'].toString()
+                : "";
 
-            String YourStory = myobject['YourStory'] != null ? myobject['YourStory'].toString() : "";
+            String YourStory = myobject['YourStory'] != null
+                ? myobject['YourStory'].toString()
+                : "";
 
-            String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+            String Note =
+                myobject['Note'] != null ? myobject['Note'].toString() : "";
 
             double Rating = myobject['Rating'] != null ? myobject['Rating'] : 0;
 
             String IntendedTenancyStartDate =
-                myobject['IntendedTenancyStartDate'] != null ? myobject['IntendedTenancyStartDate'].toString() : "";
+                myobject['IntendedTenancyStartDate'] != null
+                    ? myobject['IntendedTenancyStartDate'].toString()
+                    : "";
 
-            SystemEnumDetails? IntendedLenth =
-                myobject['IntendedLenth'] != null ? SystemEnumDetails.fromJson(myobject['IntendedLenth']) : null;
+            SystemEnumDetails? IntendedLenth = myobject['IntendedLenth'] != null
+                ? SystemEnumDetails.fromJson(myobject['IntendedLenth'])
+                : null;
 
             SystemEnumDetails? IntendedPeriod =
-                myobject['IntendedPeriod'] != null ? SystemEnumDetails.fromJson(myobject['IntendedPeriod']) : null;
+                myobject['IntendedPeriod'] != null
+                    ? SystemEnumDetails.fromJson(myobject['IntendedPeriod'])
+                    : null;
 
-            String IntendedPeriodNo = myobject['IntendedPeriodNo'] != null ? myobject['IntendedPeriodNo'].toString() : "";
+            String IntendedPeriodNo = myobject['IntendedPeriodNo'] != null
+                ? myobject['IntendedPeriodNo'].toString()
+                : "";
 
             ApplicantPersonId personID = new ApplicantPersonId();
 
@@ -4267,21 +5221,37 @@ class ApiManager {
             if (myobject["Person_ID"] != null) {
               var PersonalInfo = myobject["Person_ID"];
 
-              String PersonID = PersonalInfo['ID'] != null ? PersonalInfo['ID'].toString() : "";
+              String PersonID = PersonalInfo['ID'] != null
+                  ? PersonalInfo['ID'].toString()
+                  : "";
 
-              String FirstName = PersonalInfo['FirstName'] != null ? PersonalInfo['FirstName'].toString() : "";
+              String FirstName = PersonalInfo['FirstName'] != null
+                  ? PersonalInfo['FirstName'].toString()
+                  : "";
 
-              String LastName = PersonalInfo['LastName'] != null ? PersonalInfo['LastName'].toString() : "";
+              String LastName = PersonalInfo['LastName'] != null
+                  ? PersonalInfo['LastName'].toString()
+                  : "";
 
-              String Email = PersonalInfo['Email'] != null ? PersonalInfo['Email'].toString() : "";
+              String Email = PersonalInfo['Email'] != null
+                  ? PersonalInfo['Email'].toString()
+                  : "";
 
-              String MobileNumber = PersonalInfo['MobileNumber'] != null ? PersonalInfo['MobileNumber'].toString() : "";
+              String MobileNumber = PersonalInfo['MobileNumber'] != null
+                  ? PersonalInfo['MobileNumber'].toString()
+                  : "";
 
-              String Country_Code = PersonalInfo['Country_Code'] != null ? PersonalInfo['Country_Code'].toString() : "CA";
+              String Country_Code = PersonalInfo['Country_Code'] != null
+                  ? PersonalInfo['Country_Code'].toString()
+                  : "CA";
 
-              String Dial_Code = PersonalInfo['Dial_Code'] != null ? PersonalInfo['Dial_Code'].toString() : "+1";
+              String Dial_Code = PersonalInfo['Dial_Code'] != null
+                  ? PersonalInfo['Dial_Code'].toString()
+                  : "+1";
 
-              String DOB = PersonalInfo['DOB'] != null ? PersonalInfo['DOB'].toString() : "";
+              String DOB = PersonalInfo['DOB'] != null
+                  ? PersonalInfo['DOB'].toString()
+                  : "";
 
               personID.id = PersonID;
               personID.firstName = FirstName;
@@ -4302,7 +5272,8 @@ class ApiManager {
             applicantDetails.intendedLenth = IntendedLenth;
             applicantDetails.intendedPeriod = IntendedPeriod;
             applicantDetails.intendedPeriodNo = IntendedPeriodNo;
-            applicantDetails.intendedTenancyStartDate = IntendedTenancyStartDate;
+            applicantDetails.intendedTenancyStartDate =
+                IntendedTenancyStartDate;
             applicantDetails.yourStory = YourStory;
             applicantDetails.note = Note;
             applicantDetails.personId = personID;
@@ -4317,7 +5288,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_Application(BuildContext context, String id, CallBackApplicationDetails callBackQuesy) async {
+  getTenancyDetails_Application(BuildContext context, String id,
+      CallBackApplicationDetails callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_Application,
       "LoadLookupValues": true,
@@ -4340,32 +5312,58 @@ class ApiManager {
 
             String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'] : "";
+            String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+                ? myobject['ApplicationSentDate']
+                : "";
 
-            String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'] : "";
+            String AgreementSentDate = myobject['AgreementSentDate'] != null
+                ? myobject['AgreementSentDate']
+                : "";
 
-            String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'] : "";
+            String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+                ? myobject['DocRequestSentDate']
+                : "";
 
-            String ApplicationReceivedDate = myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'] : "";
+            String ApplicationReceivedDate =
+                myobject['ApplicationReceivedDate'] != null
+                    ? myobject['ApplicationReceivedDate']
+                    : "";
 
-            String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'] : "";
+            String AgreementReceivedDate =
+                myobject['AgreementReceivedDate'] != null
+                    ? myobject['AgreementReceivedDate']
+                    : "";
 
-            String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'] : "";
+            String DocReceivedDate = myobject['DocReceivedDate'] != null
+                ? myobject['DocReceivedDate']
+                : "";
 
-            bool IsAgreedTerms = myobject['IsAgreedTerms'] != null ? myobject['IsAgreedTerms'] : false;
+            bool IsAgreedTerms = myobject['IsAgreedTerms'] != null
+                ? myobject['IsAgreedTerms']
+                : false;
 
-            bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+            bool IsAuthorized = myobject['IsAuthorized'] != null
+                ? myobject['IsAuthorized']
+                : false;
 
             SystemEnumDetails? ApplicationStatus =
-                myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+                myobject['ApplicationStatus'] != null
+                    ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                    : null;
 
             SystemEnumDetails? DocReviewStatus =
-                myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+                myobject['DocReviewStatus'] != null
+                    ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                    : null;
 
-            SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+            SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+                ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+                : null;
 
             bool IsNotApplicableAddOccupant =
-                myobject['IsNotApplicableAddOccupant'] != null ? myobject['IsNotApplicableAddOccupant'] : false;
+                myobject['IsNotApplicableAddOccupant'] != null
+                    ? myobject['IsNotApplicableAddOccupant']
+                    : false;
 
             applicationDetails.id = ID;
             applicationDetails.applicationSentDate = ApplicationSentDate;
@@ -4374,89 +5372,156 @@ class ApiManager {
             applicationDetails.applicationStatus = ApplicationStatus;
             applicationDetails.docReviewStatus = DocReviewStatus;
             applicationDetails.docRequestSentDate = DocRequestSentDate;
-            applicationDetails.applicationReceivedDate = ApplicationReceivedDate;
+            applicationDetails.applicationReceivedDate =
+                ApplicationReceivedDate;
             applicationDetails.isAgreedTerms = IsAgreedTerms;
             applicationDetails.leaseStatus = LeaseStatus;
             applicationDetails.agreementReceivedDate = AgreementReceivedDate;
             applicationDetails.docReceivedDate = DocReceivedDate;
-            applicationDetails.IsNotApplicableAddOccupant = IsNotApplicableAddOccupant;
+            applicationDetails.IsNotApplicableAddOccupant =
+                IsNotApplicableAddOccupant;
 
             if (myobject['Prop_ID'] != null) {
               var myobject1 = myobject['Prop_ID'];
 
-              String ID = myobject1['ID'] != null ? myobject1['ID'].toString() : "";
+              String ID =
+                  myobject1['ID'] != null ? myobject1['ID'].toString() : "";
 
-              String PropertyName = myobject1['PropertyName'] != null ? myobject1['PropertyName'].toString() : "";
+              String PropertyName = myobject1['PropertyName'] != null
+                  ? myobject1['PropertyName'].toString()
+                  : "";
 
-              String Other_Property_Type = myobject1['Other_Property_Type'] != null ? myobject1['Other_Property_Type'].toString() : "";
+              String Other_Property_Type =
+                  myobject1['Other_Property_Type'] != null
+                      ? myobject1['Other_Property_Type'].toString()
+                      : "";
 
-              String Building_Name = myobject1['Building_Name'] != null ? myobject1['Building_Name'].toString() : "";
+              String Building_Name = myobject1['Building_Name'] != null
+                  ? myobject1['Building_Name'].toString()
+                  : "";
 
-              String Property_Address = myobject1['Property_Address'] != null ? myobject1['Property_Address'].toString() : "";
+              String Property_Address = myobject1['Property_Address'] != null
+                  ? myobject1['Property_Address'].toString()
+                  : "";
 
-              bool IsActive = myobject1['IsActive'] != null ? myobject1['IsActive'] : false;
+              bool IsActive =
+                  myobject1['IsActive'] != null ? myobject1['IsActive'] : false;
 
-              String Postal_Code = myobject1['Postal_Code'] != null ? myobject1['Postal_Code'].toString() : "";
+              String Postal_Code = myobject1['Postal_Code'] != null
+                  ? myobject1['Postal_Code'].toString()
+                  : "";
 
-              String Country_Code = myobject1['Country_Code'] != null ? myobject1['Country_Code'].toString() : "";
+              String Country_Code = myobject1['Country_Code'] != null
+                  ? myobject1['Country_Code'].toString()
+                  : "";
 
               int Size = myobject1['Size'] != null ? myobject1['Size'] : 0;
 
               String Other_Partial_Furniture =
-                  myobject1['Other_Partial_Furniture'] != null ? myobject1['Other_Partial_Furniture'].toString() : "";
+                  myobject1['Other_Partial_Furniture'] != null
+                      ? myobject1['Other_Partial_Furniture'].toString()
+                      : "";
 
-              String Max_Occupancy = myobject1['Max_Occupancy'] != null ? myobject1['Max_Occupancy'].toString() : "";
+              String Max_Occupancy = myobject1['Max_Occupancy'] != null
+                  ? myobject1['Max_Occupancy'].toString()
+                  : "";
 
-              String Date_Available = myobject1['Date_Available'] != null ? myobject1['Date_Available'].toString() : "";
+              String Date_Available = myobject1['Date_Available'] != null
+                  ? myobject1['Date_Available'].toString()
+                  : "";
 
-              bool IsAgreed_TandC = myobject1['IsAgreed_TandC'] != null ? myobject1['IsAgreed_TandC'] : false;
+              bool IsAgreed_TandC = myobject1['IsAgreed_TandC'] != null
+                  ? myobject1['IsAgreed_TandC']
+                  : false;
 
-              String City = myobject1['City'] != null ? myobject1['City'].toString() : "";
+              String City =
+                  myobject1['City'] != null ? myobject1['City'].toString() : "";
 
-              String Rent_Amount = myobject1['Rent_Amount'] != null ? myobject1['Rent_Amount'].toString() : "";
+              String Rent_Amount = myobject1['Rent_Amount'] != null
+                  ? myobject1['Rent_Amount'].toString()
+                  : "";
 
-              int Min_Lease_Number = myobject1['Min_Lease_Number'] != null ? myobject1['Min_Lease_Number'] : "";
+              int Min_Lease_Number = myobject1['Min_Lease_Number'] != null
+                  ? myobject1['Min_Lease_Number']
+                  : "";
 
-              String Parking_Stalls = myobject1['Parking_Stalls'] != null ? myobject1['Parking_Stalls'].toString() : "";
+              String Parking_Stalls = myobject1['Parking_Stalls'] != null
+                  ? myobject1['Parking_Stalls'].toString()
+                  : "";
 
-              String Country = myobject1['Country'] != null ? myobject1['Country'].toString() : "";
+              String Country = myobject1['Country'] != null
+                  ? myobject1['Country'].toString()
+                  : "";
 
-              int Bedrooms = myobject1['Bedrooms'] != null ? myobject1['Bedrooms'] : 0;
+              int Bedrooms =
+                  myobject1['Bedrooms'] != null ? myobject1['Bedrooms'] : 0;
 
-              String Suite_Unit = myobject1['Suite_Unit'] != null ? myobject1['Suite_Unit'].toString() : "";
+              String Suite_Unit = myobject1['Suite_Unit'] != null
+                  ? myobject1['Suite_Unit'].toString()
+                  : "";
 
-              String Province = myobject1['Province'] != null ? myobject1['Province'].toString() : "";
+              String Province = myobject1['Province'] != null
+                  ? myobject1['Province'].toString()
+                  : "";
 
-              String Property_Description = myobject1['Property_Description'] != null ? myobject1['Property_Description'].toString() : "";
+              String Property_Description =
+                  myobject1['Property_Description'] != null
+                      ? myobject1['Property_Description'].toString()
+                      : "";
 
-              int Bathrooms = myobject1['Bathrooms'] != null ? myobject1['Bathrooms'] : 0;
+              int Bathrooms =
+                  myobject1['Bathrooms'] != null ? myobject1['Bathrooms'] : 0;
 
-              int PropDrafting = myobject1['PropDrafting'] != null ? myobject1['PropDrafting'] : 0;
+              int PropDrafting = myobject1['PropDrafting'] != null
+                  ? myobject1['PropDrafting']
+                  : 0;
 
-              bool Vacancy = myobject1['Vacancy'] != null ? myobject1['Vacancy'] : false;
+              bool Vacancy =
+                  myobject1['Vacancy'] != null ? myobject1['Vacancy'] : false;
 
-              bool IsPublished = myobject1['IsPublished'] != null ? myobject1['IsPublished'] : false;
+              bool IsPublished = myobject1['IsPublished'] != null
+                  ? myobject1['IsPublished']
+                  : false;
 
-              MediaInfo? Property_Image = myobject1['Property_Image'] != null ? MediaInfo.fromJson(myobject1['Property_Image']) : null;
+              MediaInfo? Property_Image = myobject1['Property_Image'] != null
+                  ? MediaInfo.fromJson(myobject1['Property_Image'])
+                  : null;
 
               SystemEnumDetails? Property_Type =
-                  myobject1['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject1['Property_Type']) : null;
+                  myobject1['Property_Type'] != null
+                      ? SystemEnumDetails.fromJson(myobject1['Property_Type'])
+                      : null;
 
               SystemEnumDetails? Min_Lease_Duration =
-                  myobject1['Min_Lease_Duration'] != null ? SystemEnumDetails.fromJson(myobject1['Min_Lease_Duration']) : null;
+                  myobject1['Min_Lease_Duration'] != null
+                      ? SystemEnumDetails.fromJson(
+                          myobject1['Min_Lease_Duration'])
+                      : null;
 
-              SystemEnumDetails? Lease_Type = myobject1['Lease_Type'] != null ? SystemEnumDetails.fromJson(myobject1['Lease_Type']) : null;
+              SystemEnumDetails? Lease_Type = myobject1['Lease_Type'] != null
+                  ? SystemEnumDetails.fromJson(myobject1['Lease_Type'])
+                  : null;
 
-              SystemEnumDetails? Furnishing = myobject1['Furnishing'] != null ? SystemEnumDetails.fromJson(myobject1['Furnishing']) : null;
+              SystemEnumDetails? Furnishing = myobject1['Furnishing'] != null
+                  ? SystemEnumDetails.fromJson(myobject1['Furnishing'])
+                  : null;
 
               SystemEnumDetails? Rent_Payment_Frequency =
-                  myobject1['Rent_Payment_Frequency'] != null ? SystemEnumDetails.fromJson(myobject1['Rent_Payment_Frequency']) : null;
+                  myobject1['Rent_Payment_Frequency'] != null
+                      ? SystemEnumDetails.fromJson(
+                          myobject1['Rent_Payment_Frequency'])
+                      : null;
 
               SystemEnumDetails? StorageAvailable =
-                  myobject1['StorageAvailable'] != null ? SystemEnumDetails.fromJson(myobject1['StorageAvailable']) : null;
+                  myobject1['StorageAvailable'] != null
+                      ? SystemEnumDetails.fromJson(
+                          myobject1['StorageAvailable'])
+                      : null;
 
               SystemEnumDetails? Rental_Space =
-                  myobject1['Rental_Space'] != null ? SystemEnumDetails.fromJson(myobject1['Rental_Space']) : null;
+                  myobject1['Rental_Space'] != null
+                      ? SystemEnumDetails.fromJson(myobject1['Rental_Space'])
+                      : null;
 
               propertyData.ID = ID;
               propertyData.propertyName = PropertyName;
@@ -4496,16 +5561,26 @@ class ApiManager {
               if (myobject1["Owner_ID"] != null) {
                 var Owner_IDInfo = myobject1["Owner_ID"];
 
-                String OwnerID = Owner_IDInfo['ID'] != null ? Owner_IDInfo['ID'].toString() : "";
+                String OwnerID = Owner_IDInfo['ID'] != null
+                    ? Owner_IDInfo['ID'].toString()
+                    : "";
 
-                String CompanyName = Owner_IDInfo['CompanyName'] != null ? Owner_IDInfo['CompanyName'].toString() : "";
+                String CompanyName = Owner_IDInfo['CompanyName'] != null
+                    ? Owner_IDInfo['CompanyName'].toString()
+                    : "";
 
-                String HomePageLink = Owner_IDInfo['HomePageLink'] != null ? Owner_IDInfo['HomePageLink'].toString() : "";
+                String HomePageLink = Owner_IDInfo['HomePageLink'] != null
+                    ? Owner_IDInfo['HomePageLink'].toString()
+                    : "";
 
                 String CustomerFeatureListingURL =
-                    Owner_IDInfo['CustomerFeatureListingURL'] != null ? Owner_IDInfo['CustomerFeatureListingURL'].toString() : "";
+                    Owner_IDInfo['CustomerFeatureListingURL'] != null
+                        ? Owner_IDInfo['CustomerFeatureListingURL'].toString()
+                        : "";
 
-                MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null ? MediaInfo.fromJson(Owner_IDInfo['Company_logo']) : null;
+                MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null
+                    ? MediaInfo.fromJson(Owner_IDInfo['Company_logo'])
+                    : null;
 
                 ownerdata.id = OwnerID;
                 ownerdata.CompanyName = CompanyName;
@@ -4525,7 +5600,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_AdditionalOccupant(BuildContext context, String id, CallBackAdditionalOccupant callBackQuesy) async {
+  getTenancyDetails_AdditionalOccupant(BuildContext context, String id,
+      CallBackAdditionalOccupant callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_AdditionalOccupant,
       "LoadLookupValues": true,
@@ -4539,30 +5615,47 @@ class ApiManager {
         var data = jsonDecode(respoce);
 
         if (data['Result'] != null && data['Result'].length > 0) {
-          List<TenancyAdditionalOccupant> occupantlist = <TenancyAdditionalOccupant>[];
+          List<TenancyAdditionalOccupant> occupantlist =
+              <TenancyAdditionalOccupant>[];
 
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            String AOID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String AOID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            String AORelationWithApplicant = myobject['RelationWithApplicant'] != null ? myobject['RelationWithApplicant'].toString() : "";
+            String AORelationWithApplicant =
+                myobject['RelationWithApplicant'] != null
+                    ? myobject['RelationWithApplicant'].toString()
+                    : "";
 
             /*===============*/
             /*  Occupant */
             /*===============*/
             var Occupant = myobject["Occupant"];
 
-            String Occupant_ID = Occupant['ID'] != null ? Occupant['ID'].toString() : "";
+            String Occupant_ID =
+                Occupant['ID'] != null ? Occupant['ID'].toString() : "";
 
-            String Occupant_FirstName = Occupant['FirstName'] != null ? Occupant['FirstName'].toString() : "";
-            String SuspendedReason = Occupant['SuspendedReason'] != null ? Occupant['SuspendedReason'].toString() : "";
-            String Occupant_LastName = Occupant['LastName'] != null ? Occupant['LastName'].toString() : "";
-            String Occupant_Email = Occupant['Email'] != null ? Occupant['Email'].toString() : "";
-            String Occupant_MobileNumber = Occupant['MobileNumber'] != null ? Occupant['MobileNumber'].toString() : "";
-            TenancyAdditionalOccupant tenancyAdditionalOccupant = new TenancyAdditionalOccupant();
+            String Occupant_FirstName = Occupant['FirstName'] != null
+                ? Occupant['FirstName'].toString()
+                : "";
+            String SuspendedReason = Occupant['SuspendedReason'] != null
+                ? Occupant['SuspendedReason'].toString()
+                : "";
+            String Occupant_LastName = Occupant['LastName'] != null
+                ? Occupant['LastName'].toString()
+                : "";
+            String Occupant_Email =
+                Occupant['Email'] != null ? Occupant['Email'].toString() : "";
+            String Occupant_MobileNumber = Occupant['MobileNumber'] != null
+                ? Occupant['MobileNumber'].toString()
+                : "";
+            TenancyAdditionalOccupant tenancyAdditionalOccupant =
+                new TenancyAdditionalOccupant();
             tenancyAdditionalOccupant.id = AOID;
-            tenancyAdditionalOccupant.primaryApplicant = AORelationWithApplicant;
+            tenancyAdditionalOccupant.primaryApplicant =
+                AORelationWithApplicant;
             tenancyAdditionalOccupant.firstname = Occupant_FirstName;
             tenancyAdditionalOccupant.lastname = Occupant_LastName;
             tenancyAdditionalOccupant.OccupantID = Occupant_ID;
@@ -4588,7 +5681,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_AdditionalReference(BuildContext context, String id, CallBackAdditionalReference callBackQuesy) async {
+  getTenancyDetails_AdditionalReference(BuildContext context, String id,
+      CallBackAdditionalReference callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_AdditionalReference,
       "LoadLookupValues": true,
@@ -4602,42 +5696,66 @@ class ApiManager {
         var data = jsonDecode(respoce);
 
         if (data['Result'] != null && data['Result'].length > 0) {
-          List<TenancyAdditionalReference> referencelist = <TenancyAdditionalReference>[];
+          List<TenancyAdditionalReference> referencelist =
+              <TenancyAdditionalReference>[];
 
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            String ARID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String ARID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            String ARRelationWithApplicant = myobject['RelationWithApplicant'] != null ? myobject['RelationWithApplicant'].toString() : "";
+            String ARRelationWithApplicant =
+                myobject['RelationWithApplicant'] != null
+                    ? myobject['RelationWithApplicant'].toString()
+                    : "";
 
             String QuestionnaireReceivedDate =
-                myobject['QuestionnaireReceivedDate'] != null ? myobject['QuestionnaireReceivedDate'].toString() : "";
+                myobject['QuestionnaireReceivedDate'] != null
+                    ? myobject['QuestionnaireReceivedDate'].toString()
+                    : "";
 
-            String QuestionnaireSentDate = myobject['QuestionnaireSentDate'] != null ? myobject['QuestionnaireSentDate'].toString() : "";
+            String QuestionnaireSentDate =
+                myobject['QuestionnaireSentDate'] != null
+                    ? myobject['QuestionnaireSentDate'].toString()
+                    : "";
 
             /*===============*/
             /*  Reference */
             /*===============*/
             var Reference = myobject["ReferenceID"];
 
-            String Reference_ID = Reference['ID'] != null ? Reference['ID'].toString() : "";
+            String Reference_ID =
+                Reference['ID'] != null ? Reference['ID'].toString() : "";
 
-            String Reference_FirstName = Reference['FirstName'] != null ? Reference['FirstName'].toString() : "";
+            String Reference_FirstName = Reference['FirstName'] != null
+                ? Reference['FirstName'].toString()
+                : "";
 
-            String Reference_LastName = Reference['LastName'] != null ? Reference['LastName'].toString() : "";
+            String Reference_LastName = Reference['LastName'] != null
+                ? Reference['LastName'].toString()
+                : "";
 
-            String Reference_Country_Code = Reference['Country_Code'] != null ? Reference['Country_Code'].toString() : "CA";
+            String Reference_Country_Code = Reference['Country_Code'] != null
+                ? Reference['Country_Code'].toString()
+                : "CA";
 
-            String Reference_Dial_Code = Reference['Dial_Code'] != null ? Reference['Dial_Code'].toString() : "+1";
+            String Reference_Dial_Code = Reference['Dial_Code'] != null
+                ? Reference['Dial_Code'].toString()
+                : "+1";
 
-            String Reference_MobileNumber = Reference['MobileNumber'] != null ? Reference['MobileNumber'].toString() : "";
+            String Reference_MobileNumber = Reference['MobileNumber'] != null
+                ? Reference['MobileNumber'].toString()
+                : "";
 
-            String Reference_Email = Reference['Email'] != null ? Reference['Email'].toString() : "";
+            String Reference_Email =
+                Reference['Email'] != null ? Reference['Email'].toString() : "";
 
-            TenancyAdditionalReference tenancyAdditionalReference = new TenancyAdditionalReference();
+            TenancyAdditionalReference tenancyAdditionalReference =
+                new TenancyAdditionalReference();
             tenancyAdditionalReference.id = ARID;
-            tenancyAdditionalReference.reletionshipprimaryApplicant = ARRelationWithApplicant;
+            tenancyAdditionalReference.reletionshipprimaryApplicant =
+                ARRelationWithApplicant;
             tenancyAdditionalReference.firstname = Reference_FirstName;
             tenancyAdditionalReference.lastname = Reference_LastName;
             tenancyAdditionalReference.countrycode = Reference_Country_Code;
@@ -4645,12 +5763,15 @@ class ApiManager {
             tenancyAdditionalReference.phonenumber = Reference_MobileNumber;
             tenancyAdditionalReference.email = Reference_Email;
             tenancyAdditionalReference.ReferenceID = Reference_ID;
-            tenancyAdditionalReference.QuestionnaireSentDate = QuestionnaireSentDate;
-            tenancyAdditionalReference.QuestionnaireReceivedDate = QuestionnaireReceivedDate;
+            tenancyAdditionalReference.QuestionnaireSentDate =
+                QuestionnaireSentDate;
+            tenancyAdditionalReference.QuestionnaireReceivedDate =
+                QuestionnaireReceivedDate;
 
             tenancyAdditionalReference.error_firstname = false;
             tenancyAdditionalReference.error_lastname = false;
-            tenancyAdditionalReference.error_reletionshipprimaryApplicant = false;
+            tenancyAdditionalReference.error_reletionshipprimaryApplicant =
+                false;
             tenancyAdditionalReference.error_phonenumber = false;
             tenancyAdditionalReference.error_email = false;
 
@@ -4666,7 +5787,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_CurrentTenancy(BuildContext context, String id, CallBackApplicatCurrentTenancy callBackQuesy) async {
+  getTenancyDetails_CurrentTenancy(BuildContext context, String id,
+      CallBackApplicatCurrentTenancy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_CurrentTenancy,
       "LoadLookupValues": true,
@@ -4680,30 +5802,52 @@ class ApiManager {
         var data = jsonDecode(respoce);
 
         if (data['Result'] != null && data['Result'].length > 0) {
-          ApplicatCurrentTenancy applicatCurrentTenancy = new ApplicatCurrentTenancy();
+          ApplicatCurrentTenancy applicatCurrentTenancy =
+              new ApplicatCurrentTenancy();
 
           for (int i = 0; i < data['Result'].length; i++) {
             var objectCurrentTenancy = data['Result'][i];
 
-            String CurrentTenancy_ID = objectCurrentTenancy['ID'] != null ? objectCurrentTenancy['ID'].toString() : "";
+            String CurrentTenancy_ID = objectCurrentTenancy['ID'] != null
+                ? objectCurrentTenancy['ID'].toString()
+                : "";
 
             String CurrentTenancy_Start_Date =
-                objectCurrentTenancy['Start_Date'] != null ? objectCurrentTenancy['Start_Date'].toString() : "";
+                objectCurrentTenancy['Start_Date'] != null
+                    ? objectCurrentTenancy['Start_Date'].toString()
+                    : "";
 
-            String CurrentTenancy_End_Date = objectCurrentTenancy['End_Date'] != null ? objectCurrentTenancy['End_Date'].toString() : "";
+            String CurrentTenancy_End_Date =
+                objectCurrentTenancy['End_Date'] != null
+                    ? objectCurrentTenancy['End_Date'].toString()
+                    : "";
 
-            String CurrentTenancy_Suite = objectCurrentTenancy['Suite'] != null ? objectCurrentTenancy['Suite'].toString() : "";
+            String CurrentTenancy_Suite = objectCurrentTenancy['Suite'] != null
+                ? objectCurrentTenancy['Suite'].toString()
+                : "";
 
-            String CurrentTenancy_Address = objectCurrentTenancy['Address'] != null ? objectCurrentTenancy['Address'].toString() : "";
+            String CurrentTenancy_Address =
+                objectCurrentTenancy['Address'] != null
+                    ? objectCurrentTenancy['Address'].toString()
+                    : "";
 
-            String CurrentTenancy_City = objectCurrentTenancy['City'] != null ? objectCurrentTenancy['City'].toString() : "";
+            String CurrentTenancy_City = objectCurrentTenancy['City'] != null
+                ? objectCurrentTenancy['City'].toString()
+                : "";
 
-            String CurrentTenancy_Province = objectCurrentTenancy['Province'] != null ? objectCurrentTenancy['Province'].toString() : "";
+            String CurrentTenancy_Province =
+                objectCurrentTenancy['Province'] != null
+                    ? objectCurrentTenancy['Province'].toString()
+                    : "";
 
             String CurrentTenancy_PostalCode =
-                objectCurrentTenancy['PostalCode'] != null ? objectCurrentTenancy['PostalCode'].toString() : "";
+                objectCurrentTenancy['PostalCode'] != null
+                    ? objectCurrentTenancy['PostalCode'].toString()
+                    : "";
 
-            bool CurrentTenancy_As_Reference = objectCurrentTenancy['CurrentLandLordIschecked_As_Reference'] != null
+            bool CurrentTenancy_As_Reference = objectCurrentTenancy[
+                        'CurrentLandLordIschecked_As_Reference'] !=
+                    null
                 ? objectCurrentTenancy['CurrentLandLordIschecked_As_Reference']
                 : false;
 
@@ -4712,22 +5856,38 @@ class ApiManager {
             /*===============*/
             var CurrentLandLordInfo = objectCurrentTenancy["CurrentLandLord"];
 
-            String CurrentLandLord_ID = CurrentLandLordInfo['ID'] != null ? CurrentLandLordInfo['ID'].toString() : "";
+            String CurrentLandLord_ID = CurrentLandLordInfo['ID'] != null
+                ? CurrentLandLordInfo['ID'].toString()
+                : "";
 
-            String CurrentLandLord_FirstName = CurrentLandLordInfo['FirstName'] != null ? CurrentLandLordInfo['FirstName'].toString() : "";
+            String CurrentLandLord_FirstName =
+                CurrentLandLordInfo['FirstName'] != null
+                    ? CurrentLandLordInfo['FirstName'].toString()
+                    : "";
 
-            String CurrentLandLord_LastName = CurrentLandLordInfo['LastName'] != null ? CurrentLandLordInfo['LastName'].toString() : "";
+            String CurrentLandLord_LastName =
+                CurrentLandLordInfo['LastName'] != null
+                    ? CurrentLandLordInfo['LastName'].toString()
+                    : "";
 
-            String CurrentLandLord_Email = CurrentLandLordInfo['Email'] != null ? CurrentLandLordInfo['Email'].toString() : "";
+            String CurrentLandLord_Email = CurrentLandLordInfo['Email'] != null
+                ? CurrentLandLordInfo['Email'].toString()
+                : "";
 
             String CurrentLandLord_MobileNumber =
-                CurrentLandLordInfo['MobileNumber'] != null ? CurrentLandLordInfo['MobileNumber'].toString() : "";
+                CurrentLandLordInfo['MobileNumber'] != null
+                    ? CurrentLandLordInfo['MobileNumber'].toString()
+                    : "";
 
             String CurrentLandLord_Country_Code =
-                CurrentLandLordInfo['Country_Code'] != null ? CurrentLandLordInfo['Country_Code'].toString() : "CA";
+                CurrentLandLordInfo['Country_Code'] != null
+                    ? CurrentLandLordInfo['Country_Code'].toString()
+                    : "CA";
 
             String CurrentLandLord_Dial_Code =
-                CurrentLandLordInfo['Dial_Code'] != null ? CurrentLandLordInfo['Dial_Code'].toString() : "+1";
+                CurrentLandLordInfo['Dial_Code'] != null
+                    ? CurrentLandLordInfo['Dial_Code'].toString()
+                    : "+1";
 
             applicatCurrentTenancy.id = CurrentTenancy_ID;
             applicatCurrentTenancy.startDate = CurrentTenancy_Start_Date;
@@ -4737,14 +5897,21 @@ class ApiManager {
             applicatCurrentTenancy.province = CurrentTenancy_Province;
             applicatCurrentTenancy.suite = CurrentTenancy_Suite;
             applicatCurrentTenancy.address = CurrentTenancy_Address;
-            applicatCurrentTenancy.currentLandLordIscheckedAsReference = CurrentTenancy_As_Reference;
+            applicatCurrentTenancy.currentLandLordIscheckedAsReference =
+                CurrentTenancy_As_Reference;
             applicatCurrentTenancy.CurrentLandLord_ID = CurrentLandLord_ID;
-            applicatCurrentTenancy.CurrentLandLord_FirstName = CurrentLandLord_FirstName;
-            applicatCurrentTenancy.CurrentLandLord_LastName = CurrentLandLord_LastName;
-            applicatCurrentTenancy.CurrentLandLord_Email = CurrentLandLord_Email;
-            applicatCurrentTenancy.CurrentLandLord_MobileNumber = CurrentLandLord_MobileNumber;
-            applicatCurrentTenancy.CurrentLandLord_Country_Code = CurrentLandLord_Country_Code;
-            applicatCurrentTenancy.CurrentLandLord_Dial_Code = CurrentLandLord_Dial_Code;
+            applicatCurrentTenancy.CurrentLandLord_FirstName =
+                CurrentLandLord_FirstName;
+            applicatCurrentTenancy.CurrentLandLord_LastName =
+                CurrentLandLord_LastName;
+            applicatCurrentTenancy.CurrentLandLord_Email =
+                CurrentLandLord_Email;
+            applicatCurrentTenancy.CurrentLandLord_MobileNumber =
+                CurrentLandLord_MobileNumber;
+            applicatCurrentTenancy.CurrentLandLord_Country_Code =
+                CurrentLandLord_Country_Code;
+            applicatCurrentTenancy.CurrentLandLord_Dial_Code =
+                CurrentLandLord_Dial_Code;
           }
           callBackQuesy(true, "", applicatCurrentTenancy);
         } else {
@@ -4756,7 +5923,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_Employemant(BuildContext context, String id, CallBackEmployemantDetails callBackQuesy) async {
+  getTenancyDetails_Employemant(BuildContext context, String id,
+      CallBackEmployemantDetails callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_Employemant,
       "LoadLookupValues": true,
@@ -4776,57 +5944,88 @@ class ApiManager {
           for (int a = 0; a < data['Result'].length; a++) {
             var objectEmployment = data['Result'][a];
 
-            String Employment_ID = objectEmployment['ID'] != null ? objectEmployment['ID'].toString() : "";
+            String Employment_ID = objectEmployment['ID'] != null
+                ? objectEmployment['ID'].toString()
+                : "";
 
-            String Employment_LinkedIn = objectEmployment['LinkedIn'] != null ? objectEmployment['LinkedIn'].toString() : "";
+            String Employment_LinkedIn = objectEmployment['LinkedIn'] != null
+                ? objectEmployment['LinkedIn'].toString()
+                : "";
 
             String Employment_OtherSourceIncome =
-                objectEmployment['OtherSourceIncome'] != null ? objectEmployment['OtherSourceIncome'].toString() : "";
+                objectEmployment['OtherSourceIncome'] != null
+                    ? objectEmployment['OtherSourceIncome'].toString()
+                    : "";
 
-            SystemEnumDetails? Employment_Annual_Income_Status = objectEmployment['Annual_Income_Status'] != null
-                ? SystemEnumDetails.fromJson(objectEmployment['Annual_Income_Status'])
-                : null;
+            SystemEnumDetails? Employment_Annual_Income_Status =
+                objectEmployment['Annual_Income_Status'] != null
+                    ? SystemEnumDetails.fromJson(
+                        objectEmployment['Annual_Income_Status'])
+                    : null;
 
             SystemEnumDetails? Employment_Emp_Status_ID =
-                objectEmployment['Emp_Status_ID'] != null ? SystemEnumDetails.fromJson(objectEmployment['Emp_Status_ID']) : null;
+                objectEmployment['Emp_Status_ID'] != null
+                    ? SystemEnumDetails.fromJson(
+                        objectEmployment['Emp_Status_ID'])
+                    : null;
 
             /*===============*/
             /* Occupation Info */
             /*===============*/
 
-            List<TenancyEmploymentInformation> listoccupation = <TenancyEmploymentInformation>[];
+            List<TenancyEmploymentInformation> listoccupation =
+                <TenancyEmploymentInformation>[];
 
             if (objectEmployment['Occupation'] != null) {
               for (int b = 0; b < objectEmployment['Occupation'].length; b++) {
                 var OccupationInfo = objectEmployment['Occupation'][b];
 
-                String Occupation_ID = OccupationInfo['ID'] != null ? OccupationInfo['ID'].toString() : "";
+                String Occupation_ID = OccupationInfo['ID'] != null
+                    ? OccupationInfo['ID'].toString()
+                    : "";
 
-                String Occupation = OccupationInfo['Occupation'] != null ? OccupationInfo['Occupation'].toString() : "";
+                String Occupation = OccupationInfo['Occupation'] != null
+                    ? OccupationInfo['Occupation'].toString()
+                    : "";
 
-                String Occupation_Organization = OccupationInfo['Organization'] != null ? OccupationInfo['Organization'].toString() : "";
+                String Occupation_Organization =
+                    OccupationInfo['Organization'] != null
+                        ? OccupationInfo['Organization'].toString()
+                        : "";
 
-                String Occupation_LegthofEmpoyment = OccupationInfo['Duration'] != null ? OccupationInfo['Duration'].toString() : "";
+                String Occupation_LegthofEmpoyment =
+                    OccupationInfo['Duration'] != null
+                        ? OccupationInfo['Duration'].toString()
+                        : "";
 
                 bool Occupation_IsCurrentOccupation =
-                    OccupationInfo['IsCurrentOccupation'] != null ? OccupationInfo['IsCurrentOccupation'] : false;
+                    OccupationInfo['IsCurrentOccupation'] != null
+                        ? OccupationInfo['IsCurrentOccupation']
+                        : false;
 
-                SystemEnumDetails? Occupation_Annual_Income_Status = OccupationInfo['Annual_Income_Status'] != null
-                    ? SystemEnumDetails.fromJson(OccupationInfo['Annual_Income_Status'])
-                    : null;
+                SystemEnumDetails? Occupation_Annual_Income_Status =
+                    OccupationInfo['Annual_Income_Status'] != null
+                        ? SystemEnumDetails.fromJson(
+                            OccupationInfo['Annual_Income_Status'])
+                        : null;
 
                 /* if (Occupation_IsCurrentOccupation) {
                   _store.dispatch(UpdateTADetailAnualincomestatus(
                       Occupation_Annual_Income_Status));
                 }
 */
-                TenancyEmploymentInformation tenancyEmploymentInformation = new TenancyEmploymentInformation();
+                TenancyEmploymentInformation tenancyEmploymentInformation =
+                    new TenancyEmploymentInformation();
                 tenancyEmploymentInformation.id = Occupation_ID;
                 tenancyEmploymentInformation.occupation = Occupation;
-                tenancyEmploymentInformation.organization = Occupation_Organization;
-                tenancyEmploymentInformation.lenthofemp = Occupation_LegthofEmpoyment;
-                tenancyEmploymentInformation.IsCurrentOccupation = Occupation_IsCurrentOccupation;
-                tenancyEmploymentInformation.anualIncome = Occupation_Annual_Income_Status;
+                tenancyEmploymentInformation.organization =
+                    Occupation_Organization;
+                tenancyEmploymentInformation.lenthofemp =
+                    Occupation_LegthofEmpoyment;
+                tenancyEmploymentInformation.IsCurrentOccupation =
+                    Occupation_IsCurrentOccupation;
+                tenancyEmploymentInformation.anualIncome =
+                    Occupation_Annual_Income_Status;
                 tenancyEmploymentInformation.error_occupation = false;
                 tenancyEmploymentInformation.error_organization = false;
                 tenancyEmploymentInformation.error_lenthofemp = false;
@@ -4839,7 +6038,8 @@ class ApiManager {
             employemantDetails.LinkedIn = Employment_LinkedIn;
             employemantDetails.otherSourceIncome = Employment_OtherSourceIncome;
             employemantDetails.empStatusId = Employment_Emp_Status_ID;
-            employemantDetails.annualIncomeStatus = Employment_Annual_Income_Status;
+            employemantDetails.annualIncomeStatus =
+                Employment_Annual_Income_Status;
             employemantDetails.occupation = listoccupation;
           }
 
@@ -4853,7 +6053,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_PetInfo(BuildContext context, String id, CallBackPetslist callBackQuesy) async {
+  getTenancyDetails_PetInfo(
+      BuildContext context, String id, CallBackPetslist callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_PetInfo,
       "LoadLookupValues": true,
@@ -4872,13 +6073,21 @@ class ApiManager {
           for (int c = 0; c < data['Result'].length; c++) {
             var objectPetInfo = data['Result'][c];
 
-            String PetInfo_ID = objectPetInfo['ID'] != null ? objectPetInfo['ID'].toString() : "";
+            String PetInfo_ID = objectPetInfo['ID'] != null
+                ? objectPetInfo['ID'].toString()
+                : "";
 
-            String PetInfo_TypeOfPet = objectPetInfo['TypeOfPet'] != null ? objectPetInfo['TypeOfPet'].toString() : "";
+            String PetInfo_TypeOfPet = objectPetInfo['TypeOfPet'] != null
+                ? objectPetInfo['TypeOfPet'].toString()
+                : "";
 
-            String PetInfo_Size = objectPetInfo['Size'] != null ? objectPetInfo['Size'].toString() : "";
+            String PetInfo_Size = objectPetInfo['Size'] != null
+                ? objectPetInfo['Size'].toString()
+                : "";
 
-            String PetInfo_Age = objectPetInfo['Age'] != null ? objectPetInfo['Age'].toString() : "";
+            String PetInfo_Age = objectPetInfo['Age'] != null
+                ? objectPetInfo['Age'].toString()
+                : "";
 
             Pets pets = new Pets();
             pets.id = PetInfo_ID;
@@ -4902,7 +6111,8 @@ class ApiManager {
     });
   }
 
-  getTenancyDetails_Vehicallist(BuildContext context, String id, CallBackVehicallist callBackQuesy) async {
+  getTenancyDetails_Vehicallist(BuildContext context, String id,
+      CallBackVehicallist callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_APPLICANT_VehicleInfo,
       "LoadLookupValues": true,
@@ -4921,13 +6131,21 @@ class ApiManager {
           for (int d = 0; d < data['Result'].length; d++) {
             var objectVehicleInfo = data['Result'][d];
 
-            String VehicleInfo_ID = objectVehicleInfo['ID'] != null ? objectVehicleInfo['ID'].toString() : "";
+            String VehicleInfo_ID = objectVehicleInfo['ID'] != null
+                ? objectVehicleInfo['ID'].toString()
+                : "";
 
-            String VehicleInfo_Model = objectVehicleInfo['Model'] != null ? objectVehicleInfo['Model'].toString() : "";
+            String VehicleInfo_Model = objectVehicleInfo['Model'] != null
+                ? objectVehicleInfo['Model'].toString()
+                : "";
 
-            String VehicleInfo_Make = objectVehicleInfo['Make'] != null ? objectVehicleInfo['Make'].toString() : "";
+            String VehicleInfo_Make = objectVehicleInfo['Make'] != null
+                ? objectVehicleInfo['Make'].toString()
+                : "";
 
-            String VehicleInfo_Year = objectVehicleInfo['Year'] != null ? objectVehicleInfo['Year'].toString() : "";
+            String VehicleInfo_Year = objectVehicleInfo['Year'] != null
+                ? objectVehicleInfo['Year'].toString()
+                : "";
 
             Vehical vehical = new Vehical();
             vehical.id = VehicleInfo_ID;
@@ -4951,11 +6169,17 @@ class ApiManager {
     });
   }
 
-  UpdateTenancyApplicationScore(BuildContext context, Object CPOJO, Object UpPOJO) {
+  UpdateTenancyApplicationScore(
+      BuildContext context, Object CPOJO, Object UpPOJO) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -5001,104 +6225,174 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -5126,12 +6420,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -5149,10 +6446,12 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
-        _store.dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+        _store.dispatch(
+            UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
         _store.dispatch(UpdateLLVDvarificationdoclist(tenancyleadlist));
         _store.dispatch(UpdateLLVDfiltervarificationdoclist(tenancyleadlist));
         _store.dispatch(UpdateLLVDapplicationisloding(false));
@@ -5162,11 +6461,17 @@ class ApiManager {
     });
   }
 
-  UpdateReviewstatusVarificationDocumentList(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
+  UpdateReviewstatusVarificationDocumentList(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy callBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -5197,7 +6502,8 @@ class ApiManager {
     });
   }
 
-  getPriviewDocumentData(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getPriviewDocumentData(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -5223,27 +6529,39 @@ class ApiManager {
 
           String PropID = Prop_ID['ID'] != null ? Prop_ID['ID'].toString() : "";
 
-          String ApplicantID = myobject['ApplicantID'] != null ? myobject['ApplicantID'].toString() : "";
+          String ApplicantID = myobject['ApplicantID'] != null
+              ? myobject['ApplicantID'].toString()
+              : "";
 
           String ID = IDobj['ID'] != null ? IDobj['ID'].toString() : "";
 
           SystemEnumDetails? ApplicationStatus =
-              IDobj['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(IDobj['ApplicationStatus']) : null;
+              IDobj['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(IDobj['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? DocReviewStatus =
-              IDobj['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(IDobj['DocReviewStatus']) : null;
+          SystemEnumDetails? DocReviewStatus = IDobj['DocReviewStatus'] != null
+              ? SystemEnumDetails.fromJson(IDobj['DocReviewStatus'])
+              : null;
 
           var Applicant_IDobj = IDobj["Applicant_ID"];
 
-          double Rating = Applicant_IDobj['Rating'] != null ? Applicant_IDobj['Rating'] : 0;
+          double Rating =
+              Applicant_IDobj['Rating'] != null ? Applicant_IDobj['Rating'] : 0;
 
-          String Note = Applicant_IDobj['Note'] != null ? Applicant_IDobj['Note'].toString() : "";
+          String Note = Applicant_IDobj['Note'] != null
+              ? Applicant_IDobj['Note'].toString()
+              : "";
 
           var Person_IDObj = Applicant_IDobj["Person_ID"];
 
-          String FirstName = Person_IDObj['FirstName'] != null ? Person_IDObj['FirstName'].toString() : "";
+          String FirstName = Person_IDObj['FirstName'] != null
+              ? Person_IDObj['FirstName'].toString()
+              : "";
 
-          String LastName = Person_IDObj['LastName'] != null ? Person_IDObj['LastName'].toString() : "";
+          String LastName = Person_IDObj['LastName'] != null
+              ? Person_IDObj['LastName'].toString()
+              : "";
 
           _store.dispatch(UpdatePDProp_ID(PropID));
           _store.dispatch(UpdatePDApplicantID(ApplicantID));
@@ -5264,7 +6582,8 @@ class ApiManager {
     });
   }
 
-  getPriviewDocumentList(BuildContext context, String id, CallBackDocList callBackQuesy) async {
+  getPriviewDocumentList(
+      BuildContext context, String id, CallBackDocList callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -5285,7 +6604,9 @@ class ApiManager {
           for (int j = 0; j < data['Result'].length; j++) {
             var objectApplicationDocument = data['Result'][j];
 
-            String ID = objectApplicationDocument['ID'] != null ? objectApplicationDocument['ID'].toString() : "";
+            String ID = objectApplicationDocument['ID'] != null
+                ? objectApplicationDocument['ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
@@ -5295,9 +6616,11 @@ class ApiManager {
             int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
             String Field = Media_ID['Field'] != null ? Media_ID['Field'] : "";
 
-            MediaInfo? mediaInfo =
-                objectApplicationDocument['Media_ID'] != null ? MediaInfo.fromJson(objectApplicationDocument['Media_ID']) : null;
-            GetListDocument objdoc = GetListDocument(id: ID, mediaInfo: mediaInfo, type: Type, field: Field);
+            MediaInfo? mediaInfo = objectApplicationDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectApplicationDocument['Media_ID'])
+                : null;
+            GetListDocument objdoc = GetListDocument(
+                id: ID, mediaInfo: mediaInfo, type: Type, field: Field);
 
             listadoc.add(objdoc);
             // if (Type == eMediaType().CopyofID) {
@@ -5325,7 +6648,8 @@ class ApiManager {
     });
   }
 
-  getPriviewDocumentListBack(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getPriviewDocumentListBack(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -5346,7 +6670,9 @@ class ApiManager {
           for (int j = 0; j < data['Result'].length; j++) {
             var objectApplicationDocument = data['Result'][j];
 
-            String ID = objectApplicationDocument['ID'] != null ? objectApplicationDocument['ID'].toString() : "";
+            String ID = objectApplicationDocument['ID'] != null
+                ? objectApplicationDocument['ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
@@ -5355,8 +6681,9 @@ class ApiManager {
 
             int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
 
-            MediaInfo? mediaInfo =
-                objectApplicationDocument['Media_ID'] != null ? MediaInfo.fromJson(objectApplicationDocument['Media_ID']) : null;
+            MediaInfo? mediaInfo = objectApplicationDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectApplicationDocument['Media_ID'])
+                : null;
 
             if (Type == eMediaType().CopyofID) {
               _store.dispatch(UpdatePDMIDDoc1(ID));
@@ -5383,11 +6710,17 @@ class ApiManager {
     });
   }
 
-  UpdateTenancyVarificationDoc(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
+  UpdateTenancyVarificationDoc(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy callBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -5405,7 +6738,8 @@ class ApiManager {
 /*========================  Tenant Varification Document  ======================*/
 /*==============================================================================*/
 
-  getTenancyVarificationDocumentData(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getTenancyVarificationDocumentData(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_VARIFICATION_DOCUMENTData,
       "LoadLookupValues": true,
@@ -5431,42 +6765,70 @@ class ApiManager {
           /*===============*/
           var PropertyInfo = ApplicantionIDobj["Prop_ID"];
 
-          String Property_ID = PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
+          String Property_ID =
+              PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
 
-          IsActive = PropertyInfo['IsActive'] != null ? PropertyInfo['IsActive'] : "false";
+          IsActive = PropertyInfo['IsActive'] != null
+              ? PropertyInfo['IsActive']
+              : "false";
 
-          String Property_name = PropertyInfo['PropertyName'] != null ? PropertyInfo['PropertyName'].toString() : "";
+          String Property_name = PropertyInfo['PropertyName'] != null
+              ? PropertyInfo['PropertyName'].toString()
+              : "";
 
-          String Property_Suite_Unit = PropertyInfo['Suite_Unit'] != null ? PropertyInfo['Suite_Unit'].toString() : "";
+          String Property_Suite_Unit = PropertyInfo['Suite_Unit'] != null
+              ? PropertyInfo['Suite_Unit'].toString()
+              : "";
 
-          String Property_Address = PropertyInfo['Property_Address'] != null ? PropertyInfo['Property_Address'].toString() : "";
+          String Property_Address = PropertyInfo['Property_Address'] != null
+              ? PropertyInfo['Property_Address'].toString()
+              : "";
 
-          String Property_Postal_Code = PropertyInfo['Postal_Code'] != null ? PropertyInfo['Postal_Code'].toString() : "";
+          String Property_Postal_Code = PropertyInfo['Postal_Code'] != null
+              ? PropertyInfo['Postal_Code'].toString()
+              : "";
 
-          String Property_City = PropertyInfo['City'] != null ? PropertyInfo['City'].toString() : "";
+          String Property_City = PropertyInfo['City'] != null
+              ? PropertyInfo['City'].toString()
+              : "";
 
-          String Property_Province = PropertyInfo['Province'] != null ? PropertyInfo['Province'].toString() : "";
+          String Property_Province = PropertyInfo['Province'] != null
+              ? PropertyInfo['Province'].toString()
+              : "";
 
-          String Property_Country = PropertyInfo['Country'] != null ? PropertyInfo['Country'].toString() : "";
+          String Property_Country = PropertyInfo['Country'] != null
+              ? PropertyInfo['Country'].toString()
+              : "";
 
           var Owner_IDInfo = PropertyInfo["Owner_ID"];
 
-          String CompanyName = Owner_IDInfo['CompanyName'] != null ? Owner_IDInfo['CompanyName'].toString() : "";
+          String CompanyName = Owner_IDInfo['CompanyName'] != null
+              ? Owner_IDInfo['CompanyName'].toString()
+              : "";
 
-          String HomePageLink = Owner_IDInfo['HomePageLink'] != null ? Owner_IDInfo['HomePageLink'].toString() : "";
+          String HomePageLink = Owner_IDInfo['HomePageLink'] != null
+              ? Owner_IDInfo['HomePageLink'].toString()
+              : "";
 
           String CustomerFeatureListingURL =
-              Owner_IDInfo['CustomerFeatureListingURL'] != null ? Owner_IDInfo['CustomerFeatureListingURL'].toString() : "";
+              Owner_IDInfo['CustomerFeatureListingURL'] != null
+                  ? Owner_IDInfo['CustomerFeatureListingURL'].toString()
+                  : "";
 
-          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null ? MediaInfo.fromJson(Owner_IDInfo['Company_logo']) : null;
+          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null
+              ? MediaInfo.fromJson(Owner_IDInfo['Company_logo'])
+              : null;
 
           _store.dispatch(UpdateTVDCompanyName(CompanyName));
           _store.dispatch(UpdateTVDHomePagelink(HomePageLink));
-          _store.dispatch(UpdateTVDCustomerFeatureListingURL(CustomerFeatureListingURL));
+          _store.dispatch(
+              UpdateTVDCustomerFeatureListingURL(CustomerFeatureListingURL));
           _store.dispatch(UpdateTVDCompanyLogo(Company_logo));
 
           String Address = Property_name +
-              (Property_Suite_Unit.isNotEmpty ? " - " + Property_Suite_Unit : "") +
+              (Property_Suite_Unit.isNotEmpty
+                  ? " - " + Property_Suite_Unit
+                  : "") +
               " - " +
               Property_Address +
               ", " +
@@ -5481,7 +6843,9 @@ class ApiManager {
           _store.dispatch(UpdateTVDPropertyAddress(Address));
           _store.dispatch(UpdateTVDApplicantID(id));
 
-          String ID = ApplicantionIDobj['ID'] != null ? ApplicantionIDobj['ID'].toString() : "";
+          String ID = ApplicantionIDobj['ID'] != null
+              ? ApplicantionIDobj['ID'].toString()
+              : "";
 
           await Prefs.setString(PrefsName.TCF_ApplicationID, ID);
 
@@ -5538,7 +6902,8 @@ class ApiManager {
     });
   }
 
-  getTenancyVarificationDocumentList(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getTenancyVarificationDocumentList(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_VARIFICATION_DOCUMENTData,
       "LoadLookupValues": true,
@@ -5558,7 +6923,9 @@ class ApiManager {
           for (int j = 0; j < data['Result'].length; j++) {
             var objectApplicationDocument = data['Result'][j];
 
-            String ID = objectApplicationDocument['ID'] != null ? objectApplicationDocument['ID'].toString() : "";
+            String ID = objectApplicationDocument['ID'] != null
+                ? objectApplicationDocument['ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
@@ -5567,8 +6934,9 @@ class ApiManager {
 
             int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
 
-            MediaInfo? mediaInfo =
-                objectApplicationDocument['Media_ID'] != null ? MediaInfo.fromJson(objectApplicationDocument['Media_ID']) : null;
+            MediaInfo? mediaInfo = objectApplicationDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectApplicationDocument['Media_ID'])
+                : null;
 
             if (Type == eMediaType().CopyofID) {
               _store.dispatch(UpdateTVDMIDDoc1(ID));
@@ -5597,40 +6965,53 @@ class ApiManager {
   }
 
   TVDMediaInfoDelete(
-      BuildContext context, Object? M1POJO, Object? M2POJO, Object? M3POJO, Object? M4POJO, Object OPOJO, CallBackQuesy CallBackQuesy) {
+      BuildContext context,
+      Object? M1POJO,
+      Object? M2POJO,
+      Object? M3POJO,
+      Object? M4POJO,
+      Object OPOJO,
+      CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     /*ApplicationDocument table*/
-    String Occ_query =
-        QueryFilter().DeleteQuery(OPOJO, etableName.ApplicationDocument, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Occ_query = QueryFilter().DeleteQuery(
+        OPOJO,
+        etableName.ApplicationDocument,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
     var Occ_querydecode = jsonDecode(Occ_query);
     QueryObject Occ_deletequery = QueryObject.fromJson(Occ_querydecode);
     query_list.add(Occ_deletequery);
 
     /*MediaInfo table*/
     if (M1POJO != null) {
-      String Empquery = QueryFilter().DeleteQuery(M1POJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String Empquery = QueryFilter().DeleteQuery(M1POJO, etableName.MediaInfo,
+          eConjuctionClause().AND, eRelationalOperator().EqualTo);
       var Emp_querydecode = jsonDecode(Empquery);
       QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
       query_list.add(Emp_deletequery);
     }
 
     if (M2POJO != null) {
-      String Empquery = QueryFilter().DeleteQuery(M2POJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String Empquery = QueryFilter().DeleteQuery(M2POJO, etableName.MediaInfo,
+          eConjuctionClause().AND, eRelationalOperator().EqualTo);
       var Emp_querydecode = jsonDecode(Empquery);
       QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
       query_list.add(Emp_deletequery);
     }
 
     if (M3POJO != null) {
-      String Empquery = QueryFilter().DeleteQuery(M3POJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String Empquery = QueryFilter().DeleteQuery(M3POJO, etableName.MediaInfo,
+          eConjuctionClause().AND, eRelationalOperator().EqualTo);
       var Emp_querydecode = jsonDecode(Empquery);
       QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
       query_list.add(Emp_deletequery);
     }
 
     if (M4POJO != null) {
-      String Empquery = QueryFilter().DeleteQuery(M4POJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String Empquery = QueryFilter().DeleteQuery(M4POJO, etableName.MediaInfo,
+          eConjuctionClause().AND, eRelationalOperator().EqualTo);
       var Emp_querydecode = jsonDecode(Empquery);
       QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
       query_list.add(Emp_deletequery);
@@ -5648,7 +7029,9 @@ class ApiManager {
           for (int i = 0; i < data.length; i++) {
             var myobject = data[i];
 
-            String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+            String StatusCode = myobject['StatusCode'] != null
+                ? myobject['StatusCode'].toString()
+                : "";
 
             if (StatusCode.isEmpty || StatusCode != "200") {
               issuccess = true;
@@ -5692,7 +7075,8 @@ class ApiManager {
       'ApplicationCode': Weburl.API_CODE,
     };
 
-    var multipartRequest = new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
+    var multipartRequest =
+        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
     multipartRequest.headers.addAll(headers);
 
     if (mdata1 != null) {
@@ -5718,10 +7102,18 @@ class ApiManager {
         filepath = mfilename1;
       }
 
-      String name = eMediaType().CopyofID.toString() + ";" + applicantid + ";" + "0" + ";" + filetype.toString();
+      String name = eMediaType().CopyofID.toString() +
+          ";" +
+          applicantid +
+          ";" +
+          "0" +
+          ";" +
+          filetype.toString();
 
-      multipartRequest.files.add(
-          await http.MultipartFile.fromBytes(name, _selectedFile, contentType: new MediaType('application', extenson), filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes(
+          name, _selectedFile,
+          contentType: new MediaType('application', extenson),
+          filename: filepath));
     }
 
     if (mdata2 != null) {
@@ -5745,10 +7137,18 @@ class ApiManager {
         filepath = mfilename2;
       }
 
-      String name = eMediaType().Proofoffunds.toString() + ";" + applicantid + ";" + "0" + ";" + filetype.toString();
+      String name = eMediaType().Proofoffunds.toString() +
+          ";" +
+          applicantid +
+          ";" +
+          "0" +
+          ";" +
+          filetype.toString();
 
-      multipartRequest.files.add(
-          await http.MultipartFile.fromBytes(name, _selectedFile, contentType: new MediaType('application', extenson), filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes(
+          name, _selectedFile,
+          contentType: new MediaType('application', extenson),
+          filename: filepath));
     }
 
     if (mdata3 != null) {
@@ -5772,10 +7172,18 @@ class ApiManager {
         filepath = mfilename3;
       }
 
-      String name = eMediaType().Employmentverification.toString() + ";" + applicantid + ";" + "0" + ";" + filetype.toString();
+      String name = eMediaType().Employmentverification.toString() +
+          ";" +
+          applicantid +
+          ";" +
+          "0" +
+          ";" +
+          filetype.toString();
 
-      multipartRequest.files.add(
-          await http.MultipartFile.fromBytes(name, _selectedFile, contentType: new MediaType('application', extenson), filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes(
+          name, _selectedFile,
+          contentType: new MediaType('application', extenson),
+          filename: filepath));
     }
 
     if (mdata4 != null) {
@@ -5799,10 +7207,18 @@ class ApiManager {
         filepath = mfilename4;
       }
 
-      String name = eMediaType().Creditrecord.toString() + ";" + applicantid + ";" + "0" + ";" + filetype.toString();
+      String name = eMediaType().Creditrecord.toString() +
+          ";" +
+          applicantid +
+          ";" +
+          "0" +
+          ";" +
+          filetype.toString();
 
-      multipartRequest.files.add(
-          await http.MultipartFile.fromBytes(name, _selectedFile, contentType: new MediaType('application', extenson), filename: filepath));
+      multipartRequest.files.add(await http.MultipartFile.fromBytes(
+          name, _selectedFile,
+          contentType: new MediaType('application', extenson),
+          filename: filepath));
     }
 
     await multipartRequest.send().then((result) {
@@ -5817,9 +7233,13 @@ class ApiManager {
                 for (int i = 0; i < data['Result'].length; i++) {
                   var myobject = data['Result'][i];
 
-                  String MediaID = myobject['MediaID'] != null ? "" + myobject['MediaID'].toString() : "";
+                  String MediaID = myobject['MediaID'] != null
+                      ? "" + myobject['MediaID'].toString()
+                      : "";
 
-                  String url = myobject['url'] != null ? "" + myobject['url'].toString() : "";
+                  String url = myobject['url'] != null
+                      ? "" + myobject['url'].toString()
+                      : "";
 
                   mediaString.add(MediaID);
 
@@ -5847,9 +7267,13 @@ class ApiManager {
     });
   }
 
-  InsetApplicantDocument(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String json =
-        QueryFilter().InsertQueryArray(POJO, etableName.ApplicationDocument, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetApplicantDocument(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQueryArray(
+        POJO,
+        etableName.ApplicationDocument,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -5860,7 +7284,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -5878,8 +7304,14 @@ class ApiManager {
     });
   }
 
-  UapdateApplicantDocumentReceiveDate(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UapdateApplicantDocumentReceiveDate(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -5906,103 +7338,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -6030,12 +7532,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -6054,7 +7559,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLRCReferenceCheckslist(tenancyleadlist));
         _store.dispatch(UpdateLLRCfilterReferenceCheckslist(tenancyleadlist));
@@ -6065,7 +7571,8 @@ class ApiManager {
     });
   }
 
-  getReferenceListApplicantWise(BuildContext context, String applicationd, CallBackReferenceQuery callBackReferenceQuery) async {
+  getReferenceListApplicantWise(BuildContext context, String applicationd,
+      CallBackReferenceQuery callBackReferenceQuery) async {
     var myjson = {
       "DSQID": Weburl.DSQ_REFERENCE_LIST_APPLICANT_WISE,
       "LoadLookupValues": true,
@@ -6085,42 +7592,78 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String ID = myobject['ID'] != null ? "" + myobject['ID'].toString() : "";
+          String ID =
+              myobject['ID'] != null ? "" + myobject['ID'].toString() : "";
 
-          String ReferenceFirstName = myobject['ReferenceFirstName'] != null ? "" + myobject['ReferenceFirstName'].toString() : "";
+          String ReferenceFirstName = myobject['ReferenceFirstName'] != null
+              ? "" + myobject['ReferenceFirstName'].toString()
+              : "";
 
-          String ReferenceLastName = myobject['ReferenceLastName'] != null ? "" + myobject['ReferenceLastName'].toString() : "";
+          String ReferenceLastName = myobject['ReferenceLastName'] != null
+              ? "" + myobject['ReferenceLastName'].toString()
+              : "";
 
           String QuestionnaireReceivedDate =
-              myobject['QuestionnaireReceivedDate'] != null ? "" + myobject['QuestionnaireReceivedDate'].toString() : "";
+              myobject['QuestionnaireReceivedDate'] != null
+                  ? "" + myobject['QuestionnaireReceivedDate'].toString()
+                  : "";
 
-          String QuestionnaireSentDate = myobject['QuestionnaireSentDate'] != null ? "" + myobject['QuestionnaireSentDate'].toString() : "";
+          String QuestionnaireSentDate =
+              myobject['QuestionnaireSentDate'] != null
+                  ? "" + myobject['QuestionnaireSentDate'].toString()
+                  : "";
 
-          String ReferenceID = myobject['ReferenceID'] != null ? "" + myobject['ReferenceID'].toString() : "";
+          String ReferenceID = myobject['ReferenceID'] != null
+              ? "" + myobject['ReferenceID'].toString()
+              : "";
 
-          String Relationship = myobject['Relationship'] != null ? "" + myobject['Relationship'].toString() : "";
+          String Relationship = myobject['Relationship'] != null
+              ? "" + myobject['Relationship'].toString()
+              : "";
 
-          String ToEmail = myobject['ToEmail'] != null ? "" + myobject['ToEmail'].toString() : "";
+          String ToEmail = myobject['ToEmail'] != null
+              ? "" + myobject['ToEmail'].toString()
+              : "";
 
-          String PhoneNumber = myobject['PhoneNumber'] != null ? "" + myobject['PhoneNumber'].toString() : "";
+          String PhoneNumber = myobject['PhoneNumber'] != null
+              ? "" + myobject['PhoneNumber'].toString()
+              : "";
 
-          String LandlordFirstName = myobject['LandlordFirstName'] != null ? "" + myobject['LandlordFirstName'].toString() : "";
+          String LandlordFirstName = myobject['LandlordFirstName'] != null
+              ? "" + myobject['LandlordFirstName'].toString()
+              : "";
 
-          String LandlordLastName = myobject['LandlordLastName'] != null ? "" + myobject['LandlordLastName'].toString() : "";
+          String LandlordLastName = myobject['LandlordLastName'] != null
+              ? "" + myobject['LandlordLastName'].toString()
+              : "";
 
-          String PersonID = myobject['PersonID'] != null ? "" + myobject['PersonID'].toString() : "";
+          String PersonID = myobject['PersonID'] != null
+              ? "" + myobject['PersonID'].toString()
+              : "";
 
-          String Applicant_ID = myobject['Applicant_ID'] != null ? "" + myobject['Applicant_ID'].toString() : "";
+          String Applicant_ID = myobject['Applicant_ID'] != null
+              ? "" + myobject['Applicant_ID'].toString()
+              : "";
 
-          String ApplicantFirstName = myobject['ApplicantFirstName'] != null ? "" + myobject['ApplicantFirstName'].toString() : "";
+          String ApplicantFirstName = myobject['ApplicantFirstName'] != null
+              ? "" + myobject['ApplicantFirstName'].toString()
+              : "";
 
-          String ApplicantLastName = myobject['ApplicantLastName'] != null ? "" + myobject['ApplicantLastName'].toString() : "";
+          String ApplicantLastName = myobject['ApplicantLastName'] != null
+              ? "" + myobject['ApplicantLastName'].toString()
+              : "";
 
-          String PropertyID = myobject['PropertyID'] != null ? "" + myobject['PropertyID'].toString() : "";
+          String PropertyID = myobject['PropertyID'] != null
+              ? "" + myobject['PropertyID'].toString()
+              : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? "" + myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? "" + myobject['PropertyName'].toString()
+              : "";
 
-          String Property_Address = myobject['Property_Address'] != null ? "" + myobject['Property_Address'].toString() : "";
+          String Property_Address = myobject['Property_Address'] != null
+              ? "" + myobject['Property_Address'].toString()
+              : "";
 
           LeadReference doclead = new LeadReference();
           doclead.id = ID;
@@ -6132,13 +7675,18 @@ class ApiManager {
           doclead.propertyName = PropertyName;
           doclead.propertyAddress = Property_Address;
           doclead.referenceId = ReferenceID;
-          doclead.referenceName = ReferenceFirstName.toString() + " " + ReferenceLastName.toString();
+          doclead.referenceName = ReferenceFirstName.toString() +
+              " " +
+              ReferenceLastName.toString();
           doclead.questionnaireSentDate = QuestionnaireSentDate;
           doclead.questionnaireReceivedDate = QuestionnaireReceivedDate;
           doclead.relationship = Relationship;
-          doclead.landlordName = LandlordFirstName.toString() + " " + LandlordLastName.toString();
+          doclead.landlordName =
+              LandlordFirstName.toString() + " " + LandlordLastName.toString();
           doclead.applicantId = Applicant_ID;
-          doclead.applicantName = ApplicantFirstName.toString() + " " + ApplicantLastName.toString();
+          doclead.applicantName = ApplicantFirstName.toString() +
+              " " +
+              ApplicantLastName.toString();
           doclead.check = false;
 
           referencelist.add(doclead);
@@ -6152,8 +7700,10 @@ class ApiManager {
     });
   }
 
-  InsertReferenceAnswere(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.ReferenceAnswers, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsertReferenceAnswere(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.ReferenceAnswers,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -6167,9 +7717,14 @@ class ApiManager {
     });
   }
 
-  UpdateReferenceAnswere(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.ReferenceAnswers, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateReferenceAnswere(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.ReferenceAnswers,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -6183,8 +7738,8 @@ class ApiManager {
     });
   }
 
-  UpdateReferenceReceiveDate(
-      BuildContext context, String applicationid, String referenceid, String date, CallBackQuesy callBackQuesy) async {
+  UpdateReferenceReceiveDate(BuildContext context, String applicationid,
+      String referenceid, String date, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_ReferenceRequestReceivedDate,
       "Reqtokens": {
@@ -6206,7 +7761,6 @@ class ApiManager {
     });
   }
 
-<<<<<<< HEAD
   SaveDocument(
       BuildContext context,
       String extension,
@@ -6243,9 +7797,6 @@ class ApiManager {
 
   getReferenceDetailsAPi(
       BuildContext context, String id, CallBackQuesy callBackQuesy) async {
-=======
-  getReferenceDetailsAPi(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
->>>>>>> cd2e10c4e9bd9407f5b3a083142af2361d50c83c
     var myjson = {
       "DSQID": Weburl.DSQ_REFERENCE_Details,
       "LoadLookUpValues": true,
@@ -6267,42 +7818,73 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String RelationWithApplicant = myobject['RelationWithApplicant'] != null ? "" + myobject['RelationWithApplicant'].toString() : "";
+          String RelationWithApplicant =
+              myobject['RelationWithApplicant'] != null
+                  ? "" + myobject['RelationWithApplicant'].toString()
+                  : "";
 
-          bool? IsRecommendedTenant = myobject['IsRecommendedTenant'] != null ? myobject['IsRecommendedTenant'] : null;
+          bool? IsRecommendedTenant = myobject['IsRecommendedTenant'] != null
+              ? myobject['IsRecommendedTenant']
+              : null;
 
-          double Communication = myobject['Communication'] != null ? myobject['Communication'] : 0;
+          double Communication =
+              myobject['Communication'] != null ? myobject['Communication'] : 0;
 
-          String OtherComments = myobject['OtherComments'] != null ? myobject['OtherComments'].toString() : "";
+          String OtherComments = myobject['OtherComments'] != null
+              ? myobject['OtherComments'].toString()
+              : "";
 
-          double PaymentPunctuality = myobject['PaymentPunctuality'] != null ? myobject['PaymentPunctuality'] : 0;
+          double PaymentPunctuality = myobject['PaymentPunctuality'] != null
+              ? myobject['PaymentPunctuality']
+              : 0;
 
-          double Cleanliness = myobject['Cleanliness'] != null ? myobject['Cleanliness'] : 0;
+          double Cleanliness =
+              myobject['Cleanliness'] != null ? myobject['Cleanliness'] : 0;
 
-          String Reason_For_Departure = myobject['Reason_For_Departure'] != null ? myobject['Reason_For_Departure'].toString() : "";
+          String Reason_For_Departure = myobject['Reason_For_Departure'] != null
+              ? myobject['Reason_For_Departure'].toString()
+              : "";
 
-          int Length_Of_Tenancy = myobject['Length_Of_Tenancy'] != null ? myobject['Length_Of_Tenancy'] : 0;
+          int Length_Of_Tenancy = myobject['Length_Of_Tenancy'] != null
+              ? myobject['Length_Of_Tenancy']
+              : 0;
 
-          double Respectfulness = myobject['Respectfulness'] != null ? myobject['Respectfulness'] : 0;
+          double Respectfulness = myobject['Respectfulness'] != null
+              ? myobject['Respectfulness']
+              : 0;
 
-          String QuestionnaireSentDate = myobject['QuestionnaireSentDate'] != null ? myobject['QuestionnaireSentDate'].toString() : "";
+          String QuestionnaireSentDate =
+              myobject['QuestionnaireSentDate'] != null
+                  ? myobject['QuestionnaireSentDate'].toString()
+                  : "";
 
           String QuestionnaireReceivedDate =
-              myobject['QuestionnaireReceivedDate'] != null ? myobject['QuestionnaireReceivedDate'].toString() : "";
+              myobject['QuestionnaireReceivedDate'] != null
+                  ? myobject['QuestionnaireReceivedDate'].toString()
+                  : "";
 
-          String AdditionalReferencesID = myobject['AdditionalReferencesID'] != null ? myobject['AdditionalReferencesID'].toString() : "";
+          String AdditionalReferencesID =
+              myobject['AdditionalReferencesID'] != null
+                  ? myobject['AdditionalReferencesID'].toString()
+                  : "";
 
           /*ReferenceID*/
           var objReferenceID = myobject["ReferenceID"];
 
-          String RefFirstName = objReferenceID['FirstName'] != null ? objReferenceID['FirstName'].toString() : "";
+          String RefFirstName = objReferenceID['FirstName'] != null
+              ? objReferenceID['FirstName'].toString()
+              : "";
 
-          String RefLastName = objReferenceID['LastName'] != null ? objReferenceID['LastName'].toString() : "";
+          String RefLastName = objReferenceID['LastName'] != null
+              ? objReferenceID['LastName'].toString()
+              : "";
 
           /*ApplicationID*/
           var objApplicationID = myobject["ID"];
 
-          String ApplicationID = objApplicationID['ID'] != null ? objApplicationID['ID'].toString() : "";
+          String ApplicationID = objApplicationID['ID'] != null
+              ? objApplicationID['ID'].toString()
+              : "";
 
           /*Property Id*/
           /*====================================================*/
@@ -6310,33 +7892,49 @@ class ApiManager {
 
           var Owner_IDInfo = Prop_ID['Owner_ID'];
 
-          String CompanyName = Owner_IDInfo['CompanyName'] != null ? Owner_IDInfo['CompanyName'].toString() : "";
+          String CompanyName = Owner_IDInfo['CompanyName'] != null
+              ? Owner_IDInfo['CompanyName'].toString()
+              : "";
 
-          String HomePageLink = Owner_IDInfo['HomePageLink'] != null ? Owner_IDInfo['HomePageLink'].toString() : "";
+          String HomePageLink = Owner_IDInfo['HomePageLink'] != null
+              ? Owner_IDInfo['HomePageLink'].toString()
+              : "";
 
           String CustomerFeatureListingURL =
-              Owner_IDInfo['CustomerFeatureListingURL'] != null ? Owner_IDInfo['CustomerFeatureListingURL'].toString() : "";
+              Owner_IDInfo['CustomerFeatureListingURL'] != null
+                  ? Owner_IDInfo['CustomerFeatureListingURL'].toString()
+                  : "";
 
-          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null ? MediaInfo.fromJson(Owner_IDInfo['Company_logo']) : null;
+          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null
+              ? MediaInfo.fromJson(Owner_IDInfo['Company_logo'])
+              : null;
 
           _store.dispatch(UpdateRQCompanyName(CompanyName));
           _store.dispatch(UpdateRQHomePagelink(HomePageLink));
-          _store.dispatch(UpdateRQCustomerFeatureListingURL(CustomerFeatureListingURL));
+          _store.dispatch(
+              UpdateRQCustomerFeatureListingURL(CustomerFeatureListingURL));
           _store.dispatch(UpdateRQCompanyLogo(Company_logo));
 
           /*====================================================*/
           var objApplicant_ID = myobject["Applicant_ID"];
 
-          String ApplicantID = objApplicant_ID['ID'] != null ? objApplicant_ID['ID'].toString() : "";
+          String ApplicantID = objApplicant_ID['ID'] != null
+              ? objApplicant_ID['ID'].toString()
+              : "";
 
           /*------------------------------------------------*/
 
           var objPerson_ID = objApplicant_ID['Person_ID'];
 
-          String PersonID = objPerson_ID['ID'] != null ? objPerson_ID['ID'].toString() : "";
+          String PersonID =
+              objPerson_ID['ID'] != null ? objPerson_ID['ID'].toString() : "";
 
-          String AppFirstName = objPerson_ID['FirstName'] != null ? objPerson_ID['FirstName'].toString() : "";
-          String AppLastName = objPerson_ID['LastName'] != null ? objPerson_ID['LastName'].toString() : "";
+          String AppFirstName = objPerson_ID['FirstName'] != null
+              ? objPerson_ID['FirstName'].toString()
+              : "";
+          String AppLastName = objPerson_ID['LastName'] != null
+              ? objPerson_ID['LastName'].toString()
+              : "";
 
           /*====================================================*/
 
@@ -6345,9 +7943,12 @@ class ApiManager {
           /*===============*/
           var PropertyInfo = myobject["Prop_ID"];
 
-          String Property_ID = PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
+          String Property_ID =
+              PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
 
-          IsActive = PropertyInfo['IsActive'] != null ? PropertyInfo['IsActive'] : "false";
+          IsActive = PropertyInfo['IsActive'] != null
+              ? PropertyInfo['IsActive']
+              : "false";
 
           if (Cleanliness == 0 &&
               Communication == 0 &&
@@ -6368,9 +7969,11 @@ class ApiManager {
           _store.dispatch(UpdateRQYesNo(IsRecommendedTenant));
           _store.dispatch(UpdateRQReasonDeparture(Reason_For_Departure));
           _store.dispatch(UpdateRQOtherComments(OtherComments));
-          _store.dispatch(UpdateRQApplicantName(AppFirstName + " " + AppLastName));
+          _store.dispatch(
+              UpdateRQApplicantName(AppFirstName + " " + AppLastName));
           _store.dispatch(UpdateRQApplicantId(ApplicantID));
-          _store.dispatch(UpdateRQReferenceName(RefFirstName + " " + RefLastName));
+          _store.dispatch(
+              UpdateRQReferenceName(RefFirstName + " " + RefLastName));
           _store.dispatch(UpdateRQReferenceId(AdditionalReferencesID));
           _store.dispatch(UpdateRQApplicationId(ApplicationID));
 
@@ -6387,7 +7990,8 @@ class ApiManager {
     });
   }
 
-  getReferenceDetailsAPISingle(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getReferenceDetailsAPISingle(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_REFERENCE_Details,
       "LoadLookUpValues": true,
@@ -6405,84 +8009,135 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String RelationWithApplicant = myobject['RelationWithApplicant'] != null ? "" + myobject['RelationWithApplicant'].toString() : "";
+          String RelationWithApplicant =
+              myobject['RelationWithApplicant'] != null
+                  ? "" + myobject['RelationWithApplicant'].toString()
+                  : "";
 
-          bool IsRecommendedTenant = myobject['IsRecommendedTenant'] != null ? myobject['IsRecommendedTenant'] : false;
+          bool IsRecommendedTenant = myobject['IsRecommendedTenant'] != null
+              ? myobject['IsRecommendedTenant']
+              : false;
 
-          double Communication = myobject['Communication'] != null ? myobject['Communication'] : 0;
+          double Communication =
+              myobject['Communication'] != null ? myobject['Communication'] : 0;
 
-          String OtherComments = myobject['OtherComments'] != null ? myobject['OtherComments'].toString() : "";
+          String OtherComments = myobject['OtherComments'] != null
+              ? myobject['OtherComments'].toString()
+              : "";
 
-          double PaymentPunctuality = myobject['PaymentPunctuality'] != null ? myobject['PaymentPunctuality'] : 0;
+          double PaymentPunctuality = myobject['PaymentPunctuality'] != null
+              ? myobject['PaymentPunctuality']
+              : 0;
 
-          double Cleanliness = myobject['Cleanliness'] != null ? myobject['Cleanliness'] : 0;
+          double Cleanliness =
+              myobject['Cleanliness'] != null ? myobject['Cleanliness'] : 0;
 
-          String Reason_For_Departure = myobject['Reason_For_Departure'] != null ? myobject['Reason_For_Departure'].toString() : "";
+          String Reason_For_Departure = myobject['Reason_For_Departure'] != null
+              ? myobject['Reason_For_Departure'].toString()
+              : "";
 
-          int Length_Of_Tenancy = myobject['Length_Of_Tenancy'] != null ? myobject['Length_Of_Tenancy'] : 1;
+          int Length_Of_Tenancy = myobject['Length_Of_Tenancy'] != null
+              ? myobject['Length_Of_Tenancy']
+              : 1;
 
-          double Respectfulness = myobject['Respectfulness'] != null ? myobject['Respectfulness'] : 0;
+          double Respectfulness = myobject['Respectfulness'] != null
+              ? myobject['Respectfulness']
+              : 0;
 
-          String QuestionnaireSentDate = myobject['QuestionnaireSentDate'] != null ? myobject['QuestionnaireSentDate'].toString() : "";
+          String QuestionnaireSentDate =
+              myobject['QuestionnaireSentDate'] != null
+                  ? myobject['QuestionnaireSentDate'].toString()
+                  : "";
 
           String QuestionnaireReceivedDate =
-              myobject['QuestionnaireReceivedDate'] != null ? myobject['QuestionnaireReceivedDate'].toString() : "";
+              myobject['QuestionnaireReceivedDate'] != null
+                  ? myobject['QuestionnaireReceivedDate'].toString()
+                  : "";
 
-          String AdditionalReferencesID = myobject['AdditionalReferencesID'] != null ? myobject['AdditionalReferencesID'].toString() : "";
+          String AdditionalReferencesID =
+              myobject['AdditionalReferencesID'] != null
+                  ? myobject['AdditionalReferencesID'].toString()
+                  : "";
 
           /*ReferenceID*/
           var objReferenceID = myobject["ReferenceID"];
 
-          String RefFirstName = objReferenceID['FirstName'] != null ? objReferenceID['FirstName'].toString() : "";
+          String RefFirstName = objReferenceID['FirstName'] != null
+              ? objReferenceID['FirstName'].toString()
+              : "";
 
-          String RefLastName = objReferenceID['LastName'] != null ? objReferenceID['LastName'].toString() : "";
+          String RefLastName = objReferenceID['LastName'] != null
+              ? objReferenceID['LastName'].toString()
+              : "";
 
-          String RefEmail = objReferenceID['Email'] != null ? objReferenceID['Email'].toString() : "";
+          String RefEmail = objReferenceID['Email'] != null
+              ? objReferenceID['Email'].toString()
+              : "";
 
-          String RefMobileNumber = objReferenceID['MobileNumber'] != null ? objReferenceID['MobileNumber'].toString() : "";
+          String RefMobileNumber = objReferenceID['MobileNumber'] != null
+              ? objReferenceID['MobileNumber'].toString()
+              : "";
 
           /*ApplicationID*/
           var objApplicationID = myobject["ID"];
 
-          String ApplicationID = objApplicationID['ID'] != null ? objApplicationID['ID'].toString() : "";
+          String ApplicationID = objApplicationID['ID'] != null
+              ? objApplicationID['ID'].toString()
+              : "";
 
           /*====================================================*/
           var objApplicant_ID = myobject["Applicant_ID"];
 
-          String ApplicantID = objApplicant_ID['ID'] != null ? objApplicant_ID['ID'].toString() : "";
+          String ApplicantID = objApplicant_ID['ID'] != null
+              ? objApplicant_ID['ID'].toString()
+              : "";
 
           /*------------------------------------------------*/
 
           var objPerson_ID = objApplicant_ID['Person_ID'];
 
-          String PersonID = objPerson_ID['ID'] != null ? objPerson_ID['ID'].toString() : "";
+          String PersonID =
+              objPerson_ID['ID'] != null ? objPerson_ID['ID'].toString() : "";
 
-          String AppFirstName = objPerson_ID['FirstName'] != null ? objPerson_ID['FirstName'].toString() : "";
-          String AppLastName = objPerson_ID['LastName'] != null ? objPerson_ID['LastName'].toString() : "";
+          String AppFirstName = objPerson_ID['FirstName'] != null
+              ? objPerson_ID['FirstName'].toString()
+              : "";
+          String AppLastName = objPerson_ID['LastName'] != null
+              ? objPerson_ID['LastName'].toString()
+              : "";
 
           /*====================================================*/
 
           /*====================================================*/
           var objProp_ID = myobject["Prop_ID"];
 
-          String PropertyName = objProp_ID['PropertyName'] != null ? objProp_ID['PropertyName'].toString() : "";
+          String PropertyName = objProp_ID['PropertyName'] != null
+              ? objProp_ID['PropertyName'].toString()
+              : "";
 
-          String Suite_Unit = objProp_ID['Suite_Unit'] != null ? objProp_ID['Suite_Unit'].toString() : "";
+          String Suite_Unit = objProp_ID['Suite_Unit'] != null
+              ? objProp_ID['Suite_Unit'].toString()
+              : "";
 
           _store.dispatch(UpdateRQDetailsLenthTenancy(Length_Of_Tenancy));
           _store.dispatch(UpdateRQDetailsCleanlinessRating(Cleanliness));
           _store.dispatch(UpdateRQDetailsCommunicationRating(Communication));
           _store.dispatch(UpdateRQDetailsRespectfulnessRating(Respectfulness));
-          _store.dispatch(UpdateRQDetailsPaymentPunctualityRating(PaymentPunctuality));
+          _store.dispatch(
+              UpdateRQDetailsPaymentPunctualityRating(PaymentPunctuality));
           _store.dispatch(UpdateRQDetailsYesNo(IsRecommendedTenant));
           _store.dispatch(UpdateRQDetailsReasonDeparture(Reason_For_Departure));
           _store.dispatch(UpdateRQDetailsOtherComments(OtherComments));
-          _store.dispatch(UpdateRQDetailsApplicantName(AppFirstName + " " + AppLastName));
-          _store.dispatch(UpdateRQDetailsPropertyName(PropertyName + " Unit - " + Suite_Unit));
-          _store.dispatch(UpdateRQDetailsReferenceName(RefFirstName + " " + RefLastName));
+          _store.dispatch(
+              UpdateRQDetailsApplicantName(AppFirstName + " " + AppLastName));
+          _store.dispatch(UpdateRQDetailsPropertyName(
+              PropertyName + " Unit - " + Suite_Unit));
+          _store.dispatch(
+              UpdateRQDetailsReferenceName(RefFirstName + " " + RefLastName));
           _store.dispatch(UpdateRQDetailsReferenceEmail(RefEmail));
           _store.dispatch(UpdateRQDetailsReferencePhone(RefMobileNumber));
-          _store.dispatch(UpdateRQDetailsReferenceRelationShip(RelationWithApplicant));
+          _store.dispatch(
+              UpdateRQDetailsReferenceRelationShip(RelationWithApplicant));
 
           callBackQuesy(true, "");
         }
@@ -6508,104 +8163,174 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -6633,12 +8358,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -6657,7 +8385,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLTLleaseleadlist(tenancyleadlist));
         _store.dispatch(UpdateLLTLfilterleaseleadlist(tenancyleadlist));
@@ -6668,11 +8397,17 @@ class ApiManager {
     });
   }
 
-  UpdateReviewstatusLeaseList(BuildContext context, Object CPOJO, Object UpPOJO) {
+  UpdateReviewstatusLeaseList(
+      BuildContext context, Object CPOJO, Object UpPOJO) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -6704,7 +8439,8 @@ class ApiManager {
   }
 
   //Multifile
-  AddLeaseDocument(BuildContext context, Uint8List data, String filename, CallBackQuesy CallBackQuesy) async {
+  AddLeaseDocument(BuildContext context, Uint8List data, String filename,
+      CallBackQuesy CallBackQuesy) async {
     List<int> _selectedFile = data;
 
     String filepath;
@@ -6728,7 +8464,8 @@ class ApiManager {
     String S3content = urlS3[0]["presigned_url"];
     //var multipartRequest =
     // new http.MultipartRequest("PUT", Uri.parse(S3content));
-    var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+    var multipartRequest =
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
     multipartRequest.headers["Content-Type"] = "binary/octet-stream";
     // multipartRequest.headers.addAll(headers);
     multipartRequest.sink.add(_selectedFile);
@@ -6746,12 +8483,16 @@ class ApiManager {
     }
   }
 
-  TLAMediaInfoDelete(BuildContext context, Object? M1POJO, Object OPOJO, CallBackQuesy CallBackQuesy) {
+  TLAMediaInfoDelete(BuildContext context, Object? M1POJO, Object OPOJO,
+      CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     /*ApplicationDocument table*/
-    String Occ_query =
-        QueryFilter().DeleteQuery(OPOJO, etableName.PropertyDocument, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Occ_query = QueryFilter().DeleteQuery(
+        OPOJO,
+        etableName.PropertyDocument,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var Occ_querydecode = jsonDecode(Occ_query);
     QueryObject Occ_deletequery = QueryObject.fromJson(Occ_querydecode);
@@ -6759,7 +8500,8 @@ class ApiManager {
 
     /*MediaInfo table*/
     if (M1POJO != null) {
-      String Empquery = QueryFilter().DeleteQuery(M1POJO, etableName.MediaInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String Empquery = QueryFilter().DeleteQuery(M1POJO, etableName.MediaInfo,
+          eConjuctionClause().AND, eRelationalOperator().EqualTo);
       var Emp_querydecode = jsonDecode(Empquery);
       QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
       query_list.add(Emp_deletequery);
@@ -6777,7 +8519,9 @@ class ApiManager {
           for (int i = 0; i < data.length; i++) {
             var myobject = data[i];
 
-            String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+            String StatusCode = myobject['StatusCode'] != null
+                ? myobject['StatusCode'].toString()
+                : "";
 
             if (StatusCode.isEmpty || StatusCode != "200") {
               issuccess = true;
@@ -6799,7 +8543,8 @@ class ApiManager {
   }
 
   //Multifile
-  TenantLeaseAgreementUpload(BuildContext context, Uint8List? mdata1, String filename1, CallBackQuesy callBackQuesy) async {
+  TenantLeaseAgreementUpload(BuildContext context, Uint8List? mdata1,
+      String filename1, CallBackQuesy callBackQuesy) async {
     List<int> _selectedFile = mdata1!;
     List urlS3 = await getUrlS3One(filename1, "TenantLeaseAgreement");
 
@@ -6814,7 +8559,8 @@ class ApiManager {
     String S3content = urlS3[0]["presigned_url"];
     //var multipartRequest =
     // new http.MultipartRequest("PUT", Uri.parse(S3content));
-    var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+    var multipartRequest =
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
     multipartRequest.headers["Content-Type"] = "binary/octet-stream";
     // multipartRequest.headers.addAll(headers);
     multipartRequest.sink.add(_selectedFile);
@@ -6832,7 +8578,6 @@ class ApiManager {
     }
   }
 
-<<<<<<< HEAD
   DocumentModule(BuildContext context, Uint8List? mdata1, String filename1,
       CallBackQuesy callBackQuesy) async {
     List<int> _selectedFile = mdata1!;
@@ -6872,10 +8617,6 @@ class ApiManager {
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     String json = QueryFilter().InsertQuery(POJO, etableName.PropertyDocument,
         eConjuctionClause().AND, eRelationalOperator().EqualTo);
-=======
-  InsetPropertyDocument(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String json = QueryFilter().InsertQuery(POJO, etableName.PropertyDocument, eConjuctionClause().AND, eRelationalOperator().EqualTo);
->>>>>>> cd2e10c4e9bd9407f5b3a083142af2361d50c83c
 
     HttpClientCall().insertAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -6887,8 +8628,14 @@ class ApiManager {
     });
   }
 
-  UpdateApplicantAggreementReceiveDate(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateApplicantAggreementReceiveDate(BuildContext context, Object CPOJO,
+      Object UpPOJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -6901,7 +8648,8 @@ class ApiManager {
     });
   }
 
-  getLeaseDetailsView(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  getLeaseDetailsView(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_LEASE_DETAILS,
       "LoadLookupValues": true,
@@ -6925,42 +8673,70 @@ class ApiManager {
           /*===============*/
           var PropertyInfo = myobject["Prop_ID"];
 
-          String Property_ID = PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
+          String Property_ID =
+              PropertyInfo['ID'] != null ? PropertyInfo['ID'].toString() : "";
 
-          String PropertyName = PropertyInfo['PropertyName'] != null ? PropertyInfo['PropertyName'].toString() : "";
+          String PropertyName = PropertyInfo['PropertyName'] != null
+              ? PropertyInfo['PropertyName'].toString()
+              : "";
 
-          IsActive = PropertyInfo['IsActive'] != null ? PropertyInfo['IsActive'] : "false";
+          IsActive = PropertyInfo['IsActive'] != null
+              ? PropertyInfo['IsActive']
+              : "false";
 
-          String Property_Suite_Unit = PropertyInfo['Suite_Unit'] != null ? PropertyInfo['Suite_Unit'].toString() : "";
+          String Property_Suite_Unit = PropertyInfo['Suite_Unit'] != null
+              ? PropertyInfo['Suite_Unit'].toString()
+              : "";
 
-          String Property_Address = PropertyInfo['Property_Address'] != null ? PropertyInfo['Property_Address'].toString() : "";
+          String Property_Address = PropertyInfo['Property_Address'] != null
+              ? PropertyInfo['Property_Address'].toString()
+              : "";
 
-          String Property_Postal_Code = PropertyInfo['Postal_Code'] != null ? PropertyInfo['Postal_Code'].toString() : "";
+          String Property_Postal_Code = PropertyInfo['Postal_Code'] != null
+              ? PropertyInfo['Postal_Code'].toString()
+              : "";
 
-          String Property_City = PropertyInfo['City'] != null ? PropertyInfo['City'].toString() : "";
+          String Property_City = PropertyInfo['City'] != null
+              ? PropertyInfo['City'].toString()
+              : "";
 
-          String Property_Province = PropertyInfo['Province'] != null ? PropertyInfo['Province'].toString() : "";
+          String Property_Province = PropertyInfo['Province'] != null
+              ? PropertyInfo['Province'].toString()
+              : "";
 
-          String Property_Country = PropertyInfo['Country'] != null ? PropertyInfo['Country'].toString() : "";
+          String Property_Country = PropertyInfo['Country'] != null
+              ? PropertyInfo['Country'].toString()
+              : "";
 
           var Owner_IDInfo = PropertyInfo["Owner_ID"];
 
-          String CompanyName = Owner_IDInfo['CompanyName'] != null ? Owner_IDInfo['CompanyName'].toString() : "";
+          String CompanyName = Owner_IDInfo['CompanyName'] != null
+              ? Owner_IDInfo['CompanyName'].toString()
+              : "";
 
-          String HomePageLink = Owner_IDInfo['HomePageLink'] != null ? Owner_IDInfo['HomePageLink'].toString() : "";
+          String HomePageLink = Owner_IDInfo['HomePageLink'] != null
+              ? Owner_IDInfo['HomePageLink'].toString()
+              : "";
 
           String CustomerFeatureListingURL =
-              Owner_IDInfo['CustomerFeatureListingURL'] != null ? Owner_IDInfo['CustomerFeatureListingURL'].toString() : "";
+              Owner_IDInfo['CustomerFeatureListingURL'] != null
+                  ? Owner_IDInfo['CustomerFeatureListingURL'].toString()
+                  : "";
 
-          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null ? MediaInfo.fromJson(Owner_IDInfo['Company_logo']) : null;
+          MediaInfo? Company_logo = Owner_IDInfo['Company_logo'] != null
+              ? MediaInfo.fromJson(Owner_IDInfo['Company_logo'])
+              : null;
 
           _store.dispatch(UpdateTLACompanyName(CompanyName));
           _store.dispatch(UpdateTLAHomePagelink(HomePageLink));
-          _store.dispatch(UpdateTLACustomerFeatureListingURL(CustomerFeatureListingURL));
+          _store.dispatch(
+              UpdateTLACustomerFeatureListingURL(CustomerFeatureListingURL));
           _store.dispatch(UpdateTLACompanyLogo(Company_logo));
 
           String Address = PropertyName +
-              (Property_Suite_Unit != null && Property_Suite_Unit.isNotEmpty ? " - " + Property_Suite_Unit : "") +
+              (Property_Suite_Unit != null && Property_Suite_Unit.isNotEmpty
+                  ? " - " + Property_Suite_Unit
+                  : "") +
               " - " +
               Property_Address +
               ", " +
@@ -6976,7 +8752,9 @@ class ApiManager {
           _store.dispatch(UpdateTLAProp_ID(Property_ID));
           _store.dispatch(UpdateTLAApplication_ID(id));
 
-          String ApplicantID = myobject['ApplicantID'] != null ? myobject['ApplicantID'].toString() : "";
+          String ApplicantID = myobject['ApplicantID'] != null
+              ? myobject['ApplicantID'].toString()
+              : "";
 
           await Prefs.setString(PrefsName.TCF_ApplicantID, ApplicantID);
 
@@ -7035,7 +8813,8 @@ class ApiManager {
     });
   }
 
-  LeaseAgreementDoc(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  LeaseAgreementDoc(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_LEASE_Document,
       "LoadLookupValues": true,
@@ -7053,18 +8832,26 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var objectPropertyDocument = data['Result'][i];
 
-            String ID = objectPropertyDocument['ID'] != null ? objectPropertyDocument['ID'].toString() : "";
+            String ID = objectPropertyDocument['ID'] != null
+                ? objectPropertyDocument['ID'].toString()
+                : "";
 
-            bool IsOwneruploaded = objectPropertyDocument['IsOwneruploaded'] != null ? objectPropertyDocument['IsOwneruploaded'] : false;
+            bool IsOwneruploaded =
+                objectPropertyDocument['IsOwneruploaded'] != null
+                    ? objectPropertyDocument['IsOwneruploaded']
+                    : false;
 
-            String Owner_ID = objectPropertyDocument['Owner_ID'] != null ? objectPropertyDocument['Owner_ID'].toString() : "";
+            String Owner_ID = objectPropertyDocument['Owner_ID'] != null
+                ? objectPropertyDocument['Owner_ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
             /*===============*/
 
-            MediaInfo? mediaInfo =
-                objectPropertyDocument['Media_ID'] != null ? MediaInfo.fromJson(objectPropertyDocument['Media_ID']) : null;
+            MediaInfo? mediaInfo = objectPropertyDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectPropertyDocument['Media_ID'])
+                : null;
 
             if (IsOwneruploaded) {
               _store.dispatch(UpdateTLAIsDocAvailable(false));
@@ -7088,7 +8875,8 @@ class ApiManager {
     });
   }
 
-  PreviewLeaseAgreement(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  PreviewLeaseAgreement(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_LEASE_DETAILS,
       "LoadLookupValues": true,
@@ -7110,24 +8898,34 @@ class ApiManager {
           /*===============*/
           var ApplicantionObj = myobject["ID"];
 
-          String Applicantion_ID = ApplicantionObj['ID'] != null ? ApplicantionObj['ID'].toString() : "";
+          String Applicantion_ID = ApplicantionObj['ID'] != null
+              ? ApplicantionObj['ID'].toString()
+              : "";
 
           String AgreementReceivedDate =
-              ApplicantionObj['AgreementReceivedDate'] != null ? ApplicantionObj['AgreementReceivedDate'].toString() : "";
+              ApplicantionObj['AgreementReceivedDate'] != null
+                  ? ApplicantionObj['AgreementReceivedDate'].toString()
+                  : "";
 
           var Applicant_IDobj = ApplicantionObj["Applicant_ID"];
 
           var Person_IDobj = Applicant_IDobj["Person_ID"];
 
-          String FirstName = Person_IDobj['FirstName'] != null ? Person_IDobj['FirstName'].toString() : "";
+          String FirstName = Person_IDobj['FirstName'] != null
+              ? Person_IDobj['FirstName'].toString()
+              : "";
 
-          String LastName = Person_IDobj['LastName'] != null ? Person_IDobj['LastName'].toString() : "";
+          String LastName = Person_IDobj['LastName'] != null
+              ? Person_IDobj['LastName'].toString()
+              : "";
 
           _store.dispatch(UpdatePLApplicantionID(Applicantion_ID));
           _store.dispatch(UpdatePLApplicationName(FirstName + " " + LastName));
           _store.dispatch(UpdatePLAgreementReceiveDate(AgreementReceivedDate));
 
-          String ApplicantID = myobject['ApplicantID'] != null ? myobject['ApplicantID'].toString() : "";
+          String ApplicantID = myobject['ApplicantID'] != null
+              ? myobject['ApplicantID'].toString()
+              : "";
 
           _store.dispatch(UpdatePLApplicantID(ApplicantID));
 
@@ -7171,7 +8969,8 @@ class ApiManager {
     });
   }
 
-  PreviewLeaseAgreementDoc(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  PreviewLeaseAgreementDoc(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_LEASE_Document,
       "LoadLookupValues": true,
@@ -7189,18 +8988,26 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var objectPropertyDocument = data['Result'][i];
 
-            String ID = objectPropertyDocument['ID'] != null ? objectPropertyDocument['ID'].toString() : "";
+            String ID = objectPropertyDocument['ID'] != null
+                ? objectPropertyDocument['ID'].toString()
+                : "";
 
-            bool IsOwneruploaded = objectPropertyDocument['IsOwneruploaded'] != null ? objectPropertyDocument['IsOwneruploaded'] : false;
+            bool IsOwneruploaded =
+                objectPropertyDocument['IsOwneruploaded'] != null
+                    ? objectPropertyDocument['IsOwneruploaded']
+                    : false;
 
-            String Owner_ID = objectPropertyDocument['Owner_ID'] != null ? objectPropertyDocument['Owner_ID'].toString() : "";
+            String Owner_ID = objectPropertyDocument['Owner_ID'] != null
+                ? objectPropertyDocument['Owner_ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
             /*===============*/
 
-            MediaInfo? mediaInfo =
-                objectPropertyDocument['Media_ID'] != null ? MediaInfo.fromJson(objectPropertyDocument['Media_ID']) : null;
+            MediaInfo? mediaInfo = objectPropertyDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectPropertyDocument['Media_ID'])
+                : null;
 
             if (!IsOwneruploaded) {
               _store.dispatch(UpdatePLMIDDoc1(ID));
@@ -7229,103 +9036,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -7353,12 +9230,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -7377,7 +9257,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateLLActiveTenantleadlist(tenancyleadlist));
         _store.dispatch(UpdateLLActiveTenantfilterleadlist(tenancyleadlist));
@@ -7402,103 +9283,173 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String MobileNumber = myobject['MobileNumber'] != null ? myobject['MobileNumber'].toString() : "";
+          String MobileNumber = myobject['MobileNumber'] != null
+              ? myobject['MobileNumber'].toString()
+              : "";
 
-          String Dial_Code = myobject['Dial_Code'] != null ? myobject['Dial_Code'].toString() : "+1";
+          String Dial_Code = myobject['Dial_Code'] != null
+              ? myobject['Dial_Code'].toString()
+              : "+1";
 
-          int QuestionnairesSentCount = myobject['Questionnaires Sent Count'] != null ? myobject['Questionnaires Sent Count'] : 0;
+          int QuestionnairesSentCount =
+              myobject['Questionnaires Sent Count'] != null
+                  ? myobject['Questionnaires Sent Count']
+                  : 0;
 
           int QuestionnairesReceivedCount =
-              myobject['Questionnaires Received Count'] != null ? myobject['Questionnaires Received Count'] : 0;
+              myobject['Questionnaires Received Count'] != null
+                  ? myobject['Questionnaires Received Count']
+                  : 0;
 
-          bool IsAuthorized = myobject['IsAuthorized'] != null ? myobject['IsAuthorized'] : false;
+          bool IsAuthorized = myobject['IsAuthorized'] != null
+              ? myobject['IsAuthorized']
+              : false;
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          int AnnualIncome = myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
+          int AnnualIncome =
+              myobject['Annual Income'] != null ? myobject['Annual Income'] : 0;
 
-          int ReferenceStatus = myobject['ReferenceStatus'] != null ? myobject['ReferenceStatus'] : 0;
+          int ReferenceStatus = myobject['ReferenceStatus'] != null
+              ? myobject['ReferenceStatus']
+              : 0;
 
-          int NumberofOccupants = myobject['Number of Occupants'] != null ? myobject['Number of Occupants'] : 0;
+          int NumberofOccupants = myobject['Number of Occupants'] != null
+              ? myobject['Number of Occupants']
+              : 0;
 
-          int IsArchived = myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
+          int IsArchived =
+              myobject['IsArchived'] != null ? myobject['IsArchived'] : 0;
 
           bool Pets = myobject['Pets'] != null ? myobject['Pets'] : false;
 
-          int ReferencesCount = myobject['References Count'] != null ? myobject['References Count'] : 0;
+          int ReferencesCount = myobject['References Count'] != null
+              ? myobject['References Count']
+              : 0;
 
-          String PropertyName = myobject['Property Name'] != null ? myobject['Property Name'].toString() : "";
+          String PropertyName = myobject['Property Name'] != null
+              ? myobject['Property Name'].toString()
+              : "";
 
-          String Prop_ID = myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
+          String Prop_ID =
+              myobject['Prop_ID'] != null ? myobject['Prop_ID'].toString() : "";
 
-          bool Smoking = myobject['Smoking'] != null ? myobject['Smoking'] : false;
+          bool Smoking =
+              myobject['Smoking'] != null ? myobject['Smoking'] : false;
 
-          bool Vehicle = myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
+          bool Vehicle =
+              myobject['Vehicle'] != null ? myobject['Vehicle'] : false;
 
-          String Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          String Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          bool IsAgreedTerms = myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
+          bool IsAgreedTerms =
+              myobject['Note'] != null ? myobject['IsAgreedTerms'] : false;
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          int Owner_ID = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+          int Owner_ID =
+              myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
-          String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "CA";
+          String Country_Code = myobject['Country_Code'] != null
+              ? myobject['Country_Code'].toString()
+              : "CA";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String ApplicantName = myobject['Applicant Name'] != null ? myobject['Applicant Name'].toString() : "";
+          String ApplicantName = myobject['Applicant Name'] != null
+              ? myobject['Applicant Name'].toString()
+              : "";
 
-          int EmploymentStatus = myobject['Employment Status'] != null ? myobject['Employment Status'] : 0;
+          int EmploymentStatus = myobject['Employment Status'] != null
+              ? myobject['Employment Status']
+              : 0;
 
-          String Email = myobject['Email'] != null ? myobject['Email'].toString() : "";
+          String Email =
+              myobject['Email'] != null ? myobject['Email'].toString() : "";
 
-          int ApplicationReceived = myobject['Application Received'] != null ? myobject['Application Received'] : 0;
+          int ApplicationReceived = myobject['Application Received'] != null
+              ? myobject['Application Received']
+              : 0;
 
-          int Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+          int Applicant_ID =
+              myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
 
-          double Rating = myobject['Rating'] != null ? double.parse(myobject['Rating'].toString()) : 0;
+          double Rating = myobject['Rating'] != null
+              ? double.parse(myobject['Rating'].toString())
+              : 0;
 
-          String RatingReview = myobject['RatingReview'] != null ? myobject['RatingReview'].toString() : "";
+          String RatingReview = myobject['RatingReview'] != null
+              ? myobject['RatingReview'].toString()
+              : "";
 
           /*====================================================*/
 
-          String ApplicationSentDate = myobject['ApplicationSentDate'] != null ? myobject['ApplicationSentDate'].toString() : "";
+          String ApplicationSentDate = myobject['ApplicationSentDate'] != null
+              ? myobject['ApplicationSentDate'].toString()
+              : "";
 
           String ApplicationReceivedDate =
-              myobject['ApplicationReceivedDate'] != null ? myobject['ApplicationReceivedDate'].toString() : "";
+              myobject['ApplicationReceivedDate'] != null
+                  ? myobject['ApplicationReceivedDate'].toString()
+                  : "";
 
-          String DocRequestSentDate = myobject['DocRequestSentDate'] != null ? myobject['DocRequestSentDate'].toString() : "";
+          String DocRequestSentDate = myobject['DocRequestSentDate'] != null
+              ? myobject['DocRequestSentDate'].toString()
+              : "";
 
-          String DocReceivedDate = myobject['DocReceivedDate'] != null ? myobject['DocReceivedDate'].toString() : "";
+          String DocReceivedDate = myobject['DocReceivedDate'] != null
+              ? myobject['DocReceivedDate'].toString()
+              : "";
 
           String ReferenceRequestSentDate =
-              myobject['ReferenceRequestSentDate'] != null ? myobject['ReferenceRequestSentDate'].toString() : "";
+              myobject['ReferenceRequestSentDate'] != null
+                  ? myobject['ReferenceRequestSentDate'].toString()
+                  : "";
 
           String ReferenceRequestReceivedDate =
-              myobject['ReferenceRequestReceivedDate'] != null ? myobject['ReferenceRequestReceivedDate'].toString() : "";
+              myobject['ReferenceRequestReceivedDate'] != null
+                  ? myobject['ReferenceRequestReceivedDate'].toString()
+                  : "";
 
-          String AgreementSentDate = myobject['AgreementSentDate'] != null ? myobject['AgreementSentDate'].toString() : "";
+          String AgreementSentDate = myobject['AgreementSentDate'] != null
+              ? myobject['AgreementSentDate'].toString()
+              : "";
 
-          String AgreementReceivedDate = myobject['AgreementReceivedDate'] != null ? myobject['AgreementReceivedDate'].toString() : "";
+          String AgreementReceivedDate =
+              myobject['AgreementReceivedDate'] != null
+                  ? myobject['AgreementReceivedDate'].toString()
+                  : "";
 
           /*=======================================================================*/
 
           SystemEnumDetails? ApplicationStatus =
-              myobject['ApplicationStatus'] != null ? SystemEnumDetails.fromJson(myobject['ApplicationStatus']) : null;
+              myobject['ApplicationStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
+                  : null;
 
-          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null ? SystemEnumDetails.fromJson(myobject['LeaseStatus']) : null;
+          SystemEnumDetails? LeaseStatus = myobject['LeaseStatus'] != null
+              ? SystemEnumDetails.fromJson(myobject['LeaseStatus'])
+              : null;
 
           SystemEnumDetails? DocReviewStatus =
-              myobject['DocReviewStatus'] != null ? SystemEnumDetails.fromJson(myobject['DocReviewStatus']) : null;
+              myobject['DocReviewStatus'] != null
+                  ? SystemEnumDetails.fromJson(myobject['DocReviewStatus'])
+                  : null;
 
           /*RecordInfo*/
 
           var objRecordInfo = myobject["RecordInfo"];
 
-          String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+          String CreatedOn = objRecordInfo['CreatedOn'] != null
+              ? objRecordInfo['CreatedOn'].toString()
+              : "0";
 
-          String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+          String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+              ? objRecordInfo['UpdatedOn'].toString()
+              : "0";
 
           TenancyApplication tenancyApplication = new TenancyApplication();
           tenancyApplication.id = ID;
@@ -7526,12 +9477,15 @@ class ApiManager {
           tenancyApplication.agreementReceivedDate = AgreementReceivedDate;
           tenancyApplication.docRequestSentDate = DocRequestSentDate;
           tenancyApplication.docReceivedDate = DocReceivedDate;
-          tenancyApplication.referenceRequestSentDate = ReferenceRequestSentDate;
-          tenancyApplication.referenceRequestReceivedDate = ReferenceRequestReceivedDate;
+          tenancyApplication.referenceRequestSentDate =
+              ReferenceRequestSentDate;
+          tenancyApplication.referenceRequestReceivedDate =
+              ReferenceRequestReceivedDate;
           tenancyApplication.CreatedOn = CreatedOn;
           tenancyApplication.UpdatedOn = UpdatedOn;
           tenancyApplication.questionnairesSentCount = QuestionnairesSentCount;
-          tenancyApplication.questionnairesReceivedCount = QuestionnairesReceivedCount;
+          tenancyApplication.questionnairesReceivedCount =
+              QuestionnairesReceivedCount;
           tenancyApplication.referencesCount = ReferencesCount;
           tenancyApplication.isAuthorized = IsAuthorized;
           tenancyApplication.annualIncome = AnnualIncome;
@@ -7549,7 +9503,8 @@ class ApiManager {
           tenancyleadlist.add(tenancyApplication);
         }
 
-        tenancyleadlist.sort((a, b) => b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
+        tenancyleadlist.sort((a, b) =>
+            b.CreatedOn!.toLowerCase().compareTo(a.CreatedOn!.toLowerCase()));
 
         _store.dispatch(UpdateArchiveleadList(tenancyleadlist));
         _store.dispatch(UpdateArchiveFilterArchiveleadlist(tenancyleadlist));
@@ -7572,7 +9527,8 @@ class ApiManager {
     _store.dispatch(UpdateLandlordApplication_leases_count(0));
     _store.dispatch(UpdateLandlordApplication_Active_Tenants_Count(0));
 
-    await ApiManager().getTenancyStatusCount(context, Prefs.getString(PrefsName.OwnerID));
+    await ApiManager()
+        .getTenancyStatusCount(context, Prefs.getString(PrefsName.OwnerID));
   }
 
   updatePropertyStatusCount(BuildContext context) async {
@@ -7580,22 +9536,32 @@ class ApiManager {
     _store.dispatch(UpdatePropertyStatus_UnitsRented(0));
     _store.dispatch(UpdatePropertyStatus_VacantUnits(0));
 
-    await ApiManager().getPropertyStatusCount(context, Prefs.getString(PrefsName.OwnerID));
+    await ApiManager()
+        .getPropertyStatusCount(context, Prefs.getString(PrefsName.OwnerID));
   }
 
-  RemoveActiveTenant(
-      BuildContext context, Object CPOJO1, Object UpPOJO1, Object CPOJO2, Object UpPOJO2, CallBackQuesy callBackQuesy) async {
+  RemoveActiveTenant(BuildContext context, Object CPOJO1, Object UpPOJO1,
+      Object CPOJO2, Object UpPOJO2, CallBackQuesy callBackQuesy) async {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
     List<QueryObject> queryList = <QueryObject>[];
 
-    String query1 = QueryFilter().UpdateQuery(CPOJO1, UpPOJO1, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query1 = QueryFilter().UpdateQuery(
+        CPOJO1,
+        UpPOJO1,
+        etableName.Property,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
     var querydecode1 = jsonDecode(query1);
     QueryObject updatequery1 = QueryObject.fromJson(querydecode1);
 
-    String query2 =
-        QueryFilter().UpdateQuery(CPOJO2, UpPOJO2, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query2 = QueryFilter().UpdateQuery(
+        CPOJO2,
+        UpPOJO2,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
     var querydecode2 = jsonDecode(query2);
     QueryObject updatequery2 = QueryObject.fromJson(querydecode2);
 
@@ -7639,17 +9605,22 @@ class ApiManager {
     });
   }
 
-  CheckTenantActiveOrNot(BuildContext context, String Prop_ID, String ApplicantID, CallBackQuesy callBackQuesy) async {
+  CheckTenantActiveOrNot(BuildContext context, String Prop_ID,
+      String ApplicantID, CallBackQuesy callBackQuesy) async {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    CheckPropertyActiveTenant checkPropertyActiveTenant = new CheckPropertyActiveTenant();
-    checkPropertyActiveTenant.ApplicationStatus = eApplicationStatus().ActiveTenent.toString();
+    CheckPropertyActiveTenant checkPropertyActiveTenant =
+        new CheckPropertyActiveTenant();
+    checkPropertyActiveTenant.ApplicationStatus =
+        eApplicationStatus().ActiveTenent.toString();
     checkPropertyActiveTenant.Prop_ID = Prop_ID;
 
-    ApiManager().CheckActiveTenant(context, checkPropertyActiveTenant, (status1, responce1) async {
+    ApiManager().CheckActiveTenant(context, checkPropertyActiveTenant,
+        (status1, responce1) async {
       if (status1) {
-        ApiManager().ActiveTenant(context, Prop_ID, ApplicantID, (status, responce) async {
+        ApiManager().ActiveTenant(context, Prop_ID, ApplicantID,
+            (status, responce) async {
           if (status) {
             loader.remove();
             callBackQuesy(true, "");
@@ -7673,9 +9644,10 @@ class ApiManager {
     });
   }
 
-  CheckActiveTenant(BuildContext context, Object POJO, CallBackQuesy callbackquery) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
+  CheckActiveTenant(
+      BuildContext context, Object POJO, CallBackQuesy callbackquery) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Application,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, true);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -7693,7 +9665,8 @@ class ApiManager {
     });
   }
 
-  ActiveTenant(BuildContext context, String PropID, String ApplicantID, CallBackQuesy callBackQuesy) async {
+  ActiveTenant(BuildContext context, String PropID, String ApplicantID,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_ActiveTenant,
       "Reqtokens": {"Prop_ID": PropID, "Applicant_ID": ApplicantID}
@@ -7716,8 +9689,14 @@ class ApiManager {
 /*==============================================================================*/
 
 /*Personal Info*/
-  UpdateTFPersonalInfo(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Applicant, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateTFPersonalInfo(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -7730,17 +9709,20 @@ class ApiManager {
 
 /*Employement*/
 
-  TFEmployementDelete(BuildContext context, Object EPOJO, Object OPOJO, CallBackQuesy CallBackQuesy) {
+  TFEmployementDelete(BuildContext context, Object EPOJO, Object OPOJO,
+      CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     /*Occupation table*/
-    String Occ_query = QueryFilter().DeleteQuery(OPOJO, etableName.Occupation, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Occ_query = QueryFilter().DeleteQuery(OPOJO, etableName.Occupation,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var Occ_querydecode = jsonDecode(Occ_query);
     QueryObject Occ_deletequery = QueryObject.fromJson(Occ_querydecode);
     query_list.add(Occ_deletequery);
 
     /*Employment table*/
-    String Empquery = QueryFilter().DeleteQuery(EPOJO, etableName.Employment, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Empquery = QueryFilter().DeleteQuery(EPOJO, etableName.Employment,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     var Emp_querydecode = jsonDecode(Empquery);
     QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
     query_list.add(Emp_deletequery);
@@ -7756,7 +9738,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -7774,8 +9758,10 @@ class ApiManager {
     });
   }
 
-  TFEmployementOnly(BuildContext context, Object iPOJO, CallBackQuesy CallBackQuesy) {
-    String json = QueryFilter().InsertQuery(iPOJO, etableName.Employment, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  TFEmployementOnly(
+      BuildContext context, Object iPOJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQuery(iPOJO, etableName.Employment,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -7788,8 +9774,10 @@ class ApiManager {
     });
   }
 
-  TFEmployementOccuapation(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String json = QueryFilter().InsertQueryArray(POJO, etableName.Occupation, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  TFEmployementOccuapation(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQueryArray(POJO, etableName.Occupation,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -7800,7 +9788,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -7819,11 +9809,13 @@ class ApiManager {
   }
 
 /*Current Tenancy Info*/
-  InsetTFCurrentTenancy(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+  InsetTFCurrentTenancy(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = QueryFilter().InsertQuery(POJO, etableName.CurrentTenancy, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().InsertQuery(POJO, etableName.CurrentTenancy,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -7838,12 +9830,17 @@ class ApiManager {
     });
   }
 
-  UpdateTFCurrentTenancy(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
+  UpdateTFCurrentTenancy(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query =
-        QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.CurrentTenancy, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.CurrentTenancy,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -7858,11 +9855,15 @@ class ApiManager {
 
 /*Additional OCcupant Info*/
 
-  TFAdditionalOCcupantDelete(BuildContext context, List<Object> OccuPOJOlist, Object OPOJO, CallBackQuesy CallBackQuesy) {
+  TFAdditionalOCcupantDelete(BuildContext context, List<Object> OccuPOJOlist,
+      Object OPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
-    String Empquery =
-        QueryFilter().DeleteQuery(OPOJO, etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Empquery = QueryFilter().DeleteQuery(
+        OPOJO,
+        etableName.AdditionalOccupants,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var Emp_querydecode = jsonDecode(Empquery);
     QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
@@ -7870,8 +9871,11 @@ class ApiManager {
     query_list.add(Emp_deletequery);
 
     for (int i = 0; i < OccuPOJOlist.length; i++) {
-      String queryinsert =
-          QueryFilter().DeleteQuery(OccuPOJOlist[i], etableName.Person, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().DeleteQuery(
+          OccuPOJOlist[i],
+          etableName.Person,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -7889,7 +9893,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -7907,20 +9913,28 @@ class ApiManager {
     });
   }
 
-  InsetTFAdditionalOCcupant(BuildContext context, List<Object> POJO, Object CPOJO, Object UPOJO, CallBackQuesy CallBackQuesy) {
+  InsetTFAdditionalOCcupant(BuildContext context, List<Object> POJO,
+      Object CPOJO, Object UPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.AdditionalOccupants, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.AdditionalOccupants,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
       query_list.add(insetquery);
     }
 
-    String Empquery =
-        QueryFilter().UpdateQuery(CPOJO, UPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Empquery = QueryFilter().UpdateQuery(
+        CPOJO,
+        UPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var Emp_querydecode = jsonDecode(Empquery);
     QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
@@ -7942,16 +9956,21 @@ class ApiManager {
 
 /*Additional Info */
 
-  TFAdditionalInfoDelete(BuildContext context, Object petPOJO, Object vehicalPOJO, CallBackQuesy CallBackQuesy) {
+  TFAdditionalInfoDelete(BuildContext context, Object petPOJO,
+      Object vehicalPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
-    String petquery = QueryFilter().DeleteQuery(petPOJO, etableName.PetInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String petquery = QueryFilter().DeleteQuery(petPOJO, etableName.PetInfo,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     var pet_querydecode = jsonDecode(petquery);
     QueryObject pet_deletequery = QueryObject.fromJson(pet_querydecode);
 
-    String vehiquery =
-        QueryFilter().DeleteQuery(vehicalPOJO, etableName.VehicleInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String vehiquery = QueryFilter().DeleteQuery(
+        vehicalPOJO,
+        etableName.VehicleInfo,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var vehi_querydecode = jsonDecode(vehiquery);
     QueryObject vehi_deletequery = QueryObject.fromJson(vehi_querydecode);
@@ -7970,7 +9989,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -7989,13 +10010,21 @@ class ApiManager {
   }
 
   InsetTFAdditionalInfo(
-      BuildContext context, List<Object> PetPOJO, List<Object> VehiPOJO, Object CPOJO, Object UPOJO, CallBackQuesy CallBackQuesy) {
+      BuildContext context,
+      List<Object> PetPOJO,
+      List<Object> VehiPOJO,
+      Object CPOJO,
+      Object UPOJO,
+      CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     if (PetPOJO.length > 0) {
       for (int i = 0; i < PetPOJO.length; i++) {
-        String queryinsert =
-            QueryFilter().InsertQuery(PetPOJO[i], etableName.PetInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+        String queryinsert = QueryFilter().InsertQuery(
+            PetPOJO[i],
+            etableName.PetInfo,
+            eConjuctionClause().AND,
+            eRelationalOperator().EqualTo);
 
         var queryinsetdecode = jsonDecode(queryinsert);
         QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -8004,8 +10033,11 @@ class ApiManager {
     }
     if (VehiPOJO.length > 0) {
       for (int j = 0; j < VehiPOJO.length; j++) {
-        String queryinsert =
-            QueryFilter().InsertQuery(VehiPOJO[j], etableName.VehicleInfo, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+        String queryinsert = QueryFilter().InsertQuery(
+            VehiPOJO[j],
+            etableName.VehicleInfo,
+            eConjuctionClause().AND,
+            eRelationalOperator().EqualTo);
 
         var queryinsetdecode = jsonDecode(queryinsert);
         QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -8013,7 +10045,12 @@ class ApiManager {
       }
     }
 
-    String Empquery = QueryFilter().UpdateQuery(CPOJO, UPOJO, etableName.Applicant, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Empquery = QueryFilter().UpdateQuery(
+        CPOJO,
+        UPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var Emp_querydecode = jsonDecode(Empquery);
     QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
@@ -8035,10 +10072,15 @@ class ApiManager {
   }
 
 /*Additional Reference Info*/
-  TFAdditionalReferenceDelete(BuildContext context, List<Object> OccuPOJOlist, Object deleteAddreference, CallBackQuesy CallBackQuesy) {
+  TFAdditionalReferenceDelete(BuildContext context, List<Object> OccuPOJOlist,
+      Object deleteAddreference, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
-    List<int> relational = [eRelationalOperator().EqualTo, eRelationalOperator().ISNULL, eRelationalOperator().ISNULL];
+    List<int> relational = [
+      eRelationalOperator().EqualTo,
+      eRelationalOperator().ISNULL,
+      eRelationalOperator().ISNULL
+    ];
 
     String Empquery = QueryFilter().DeleteQueryFilterArray(
       deleteAddreference,
@@ -8053,8 +10095,11 @@ class ApiManager {
     query_list.add(Emp_deletequery);
 
     for (int i = 0; i < OccuPOJOlist.length; i++) {
-      String queryinsert =
-          QueryFilter().DeleteQuery(OccuPOJOlist[i], etableName.Person, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().DeleteQuery(
+          OccuPOJOlist[i],
+          etableName.Person,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -8072,7 +10117,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -8090,20 +10137,28 @@ class ApiManager {
     });
   }
 
-  InsetTFAdditionalReference(BuildContext context, List<Object> POJO, Object CPOJO, Object UPOJO, CallBackQuesy CallBackQuesy) {
+  InsetTFAdditionalReference(BuildContext context, List<Object> POJO,
+      Object CPOJO, Object UPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> query_list = <QueryObject>[];
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.AdditionalReferences, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.AdditionalReferences,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
       query_list.add(insetquery);
     }
 
-    String Empquery =
-        QueryFilter().UpdateQuery(CPOJO, UPOJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+    String Empquery = QueryFilter().UpdateQuery(
+        CPOJO,
+        UPOJO,
+        etableName.Application,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     var Emp_querydecode = jsonDecode(Empquery);
     QueryObject Emp_deletequery = QueryObject.fromJson(Emp_querydecode);
@@ -8124,9 +10179,10 @@ class ApiManager {
     });
   }
 
-  getCurrentLandLordIDinTenancy(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().SelectQuery(POJO, etableName.CurrentTenancy, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getCurrentLandLordIDinTenancy(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().SelectQuery(POJO, etableName.CurrentTenancy,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8137,7 +10193,9 @@ class ApiManager {
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          String CurrentLandLord = myobject['CurrentLandLord'] != null ? myobject['CurrentLandLord'].toString() : "";
+          String CurrentLandLord = myobject['CurrentLandLord'] != null
+              ? myobject['CurrentLandLord'].toString()
+              : "";
 
           callBackQuesy(true, CurrentLandLord);
         }
@@ -8148,8 +10206,13 @@ class ApiManager {
     });
   }
 
-  InsertCurrentLandLordAsReference(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.AdditionalReferences, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsertCurrentLandLordAsReference(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().InsertQuery(
+        POJO,
+        etableName.AdditionalReferences,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8163,9 +10226,14 @@ class ApiManager {
     });
   }
 
-  CheckReferenceCurrentLandLord(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().SelectQuery(POJO, etableName.AdditionalReferences, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  CheckReferenceCurrentLandLord(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().SelectQuery(
+        POJO,
+        etableName.AdditionalReferences,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8177,7 +10245,9 @@ class ApiManager {
 
             int ID = myobject['ID'] != null ? myobject['ID'] : 0;
 
-            String ReferenceID = myobject['ReferenceID'] != null ? myobject['ReferenceID'].toString() : "";
+            String ReferenceID = myobject['ReferenceID'] != null
+                ? myobject['ReferenceID'].toString()
+                : "";
 
             callBackQuesy(true, ReferenceID);
           }
@@ -8191,8 +10261,13 @@ class ApiManager {
     });
   }
 
-  DeleteReferenceCurrentLandLord(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.AdditionalReferences, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteReferenceCurrentLandLord(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AdditionalReferences,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8204,8 +10279,10 @@ class ApiManager {
     });
   }
 
-  Deleteavailability(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.Availability, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  Deleteavailability(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Availability,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8217,8 +10294,10 @@ class ApiManager {
     });
   }
 
-  DeleteavailabilityTime(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTime, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteavailabilityTime(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTime,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8230,9 +10309,13 @@ class ApiManager {
     });
   }
 
-  DeleteOverider(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.availability_overrides, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteOverider(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.availability_overrides,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8245,8 +10328,13 @@ class ApiManager {
   }
 
 //templates
-  DeleteavailabilityTemplate(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteavailabilityTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AvailabilityTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8258,9 +10346,13 @@ class ApiManager {
     });
   }
 
-  DeleteavailabilityTimeTemplate(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.AvailabilityTimeTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteavailabilityTimeTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.AvailabilityTimeTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8272,9 +10364,13 @@ class ApiManager {
     });
   }
 
-  DeleteOveriderTemplate(BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.availability_overridesTemplate, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  DeleteOveriderTemplate(
+      BuildContext context, Object POJO, CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.availability_overridesTemplate,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8290,8 +10386,10 @@ class ApiManager {
 /*========================  Forgot / Reset Passowrd  =============================*/
 /*==============================================================================*/
 
-  checkEmailalreadyExit(BuildContext context, Object CPOJO, CallBackUserInfo CallBackQuesy) async {
-    String query = await QueryFilter().SelectQuery(CPOJO, etableName.Users, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  checkEmailalreadyExit(BuildContext context, Object CPOJO,
+      CallBackUserInfo CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(CPOJO, etableName.Users,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8302,17 +10400,27 @@ class ApiManager {
         for (int i = 0; i < data['Result'].length; i++) {
           var myobject = data['Result'][i];
 
-          String Roles = myobject['Roles'] != null ? myobject['Roles'].toString() : "";
+          String Roles =
+              myobject['Roles'] != null ? myobject['Roles'].toString() : "";
 
           int ID = myobject['ID'] != null ? myobject['ID'] : "";
 
-          String UserID = myobject['UserID'] != null ? myobject['UserID'].toString() : "";
+          String UserID =
+              myobject['UserID'] != null ? myobject['UserID'].toString() : "";
 
-          String UserName = myobject['UserName'] != null ? myobject['UserName'].toString() : "";
+          String UserName = myobject['UserName'] != null
+              ? myobject['UserName'].toString()
+              : "";
 
-          int PersonID = myobject['PersonID'] != null ? myobject['PersonID'] : 0;
+          int PersonID =
+              myobject['PersonID'] != null ? myobject['PersonID'] : 0;
 
-          userInfo = new UserInfo(id: ID, personId: PersonID, roles: Roles, userId: UserID, userName: UserName);
+          userInfo = new UserInfo(
+              id: ID,
+              personId: PersonID,
+              roles: Roles,
+              userId: UserID,
+              userName: UserName);
         }
 
         CallBackQuesy(true, userInfo);
@@ -8323,7 +10431,8 @@ class ApiManager {
     });
   }
 
-  ResetPasswordAPI(BuildContext context, String email, String password, CallBackQuesy CallBackQuesy) async {
+  ResetPasswordAPI(BuildContext context, String email, String password,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "Email": email,
       "CurrentPassword": "",
@@ -8346,9 +10455,10 @@ class ApiManager {
 /*========================  Filter Property Data  =============================*/
 /*==============================================================================*/
 
-  getActivePropertyData(BuildContext context, Object POJO, CallBackFilterProperty CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getActivePropertyData(BuildContext context, Object POJO,
+      CallBackFilterProperty CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8362,7 +10472,9 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
 
           FilterPropertyItem filterPropertyItem = new FilterPropertyItem();
           filterPropertyItem.propertyId = ID;
@@ -8378,9 +10490,10 @@ class ApiManager {
     });
   }
 
-  getCityinProperty(BuildContext context, Object POJO, CallBackFilterCity CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.Property, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getCityinProperty(BuildContext context, Object POJO,
+      CallBackFilterCity CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Property,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8394,7 +10507,8 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
           FilterCityItem filterCityItem = new FilterCityItem();
           filterCityItem.cityName = City;
@@ -8408,9 +10522,12 @@ class ApiManager {
         final uniqueJsonList = jsonList.toSet().toList();
 
         // convert each item back to the original form using JSON decoding
-        final resultdata = uniqueJsonList.map((item) => jsonDecode(item)).toList();
+        final resultdata =
+            uniqueJsonList.map((item) => jsonDecode(item)).toList();
 
-        List<FilterCityItem> listDistinct = uniqueJsonList.map((item) => FilterCityItem.fromJson(jsonDecode(item))).toList();
+        List<FilterCityItem> listDistinct = uniqueJsonList
+            .map((item) => FilterCityItem.fromJson(jsonDecode(item)))
+            .toList();
 
         CallBackQuesy(true, "", listDistinct);
       } else {
@@ -8423,7 +10540,8 @@ class ApiManager {
 /*========================  WorkFlow Execute Api  =============================*/
 /*==============================================================================*/
 
-  DuplicatPropertyGenerate(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  DuplicatPropertyGenerate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -8446,7 +10564,8 @@ class ApiManager {
     });
   }
 
-  DuplicatEventTypesGenerate(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  DuplicatEventTypesGenerate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -8469,9 +10588,10 @@ class ApiManager {
     });
   }
 
-  DuplicatTemplateHtml(BuildContext context, String id, String appid, CallBackQuesy callBackQuesy) async {
+  DuplicatTemplateHtml(BuildContext context, String id, String appid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
-      //"WorkFlowID": Weburl.WorkFlow_DuplicatTemplateHtml,
+      "WorkFlowID": Weburl.WorkFlow_DuplicatTemplateHtml,
       "Reqtokens": {"ID": id, "APPID": appid}
     };
 
@@ -8488,7 +10608,8 @@ class ApiManager {
     });
   }
 
-  DuplicatEventTypesGenerateTemplate(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  DuplicatEventTypesGenerateTemplate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -8511,7 +10632,8 @@ class ApiManager {
     });
   }
 
-  SaveAsTemplate(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  SaveAsTemplate(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -8534,7 +10656,8 @@ class ApiManager {
     });
   }
 
-  Emailworkflow(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
+  Emailworkflow(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -8553,7 +10676,8 @@ class ApiManager {
     });
   }
 
-  ResetPassWordAPIworkflow(BuildContext context, String userid, CallBackQuesy callBackQuesy) async {
+  ResetPassWordAPIworkflow(
+      BuildContext context, String userid, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_ResetPassWordMain,
       "Reqtokens": {
@@ -8578,7 +10702,8 @@ class ApiManager {
   }
 
 /*Archive lead in Property*/
-  ArchiveLeadInProperty(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  ArchiveLeadInProperty(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Property_Archive,
       "Reqtokens": {"Prop_ID": propertyid}
@@ -8597,7 +10722,8 @@ class ApiManager {
   }
 
 /*Copiada de la de arriba*/
-  ArchiveLeadInEventTypes(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  ArchiveLeadInEventTypes(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Property_Archive,
       "Reqtokens": {"Prop_ID": propertyid}
@@ -8616,7 +10742,8 @@ class ApiManager {
   }
 
 /*Archive lead restore in Property*/
-  ArchiveLeadRestoreInProperty(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  ArchiveLeadRestoreInProperty(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Property_Archive_Restore,
       "Reqtokens": {"Prop_ID": propertyid}
@@ -8635,7 +10762,8 @@ class ApiManager {
   }
 
 /*copiada de la anterior*/
-  ArchiveLeadRestoreInEventTypes(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  ArchiveLeadRestoreInEventTypes(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Property_Archive_Restore,
       "Reqtokens": {"Prop_ID": propertyid}
@@ -8654,7 +10782,8 @@ class ApiManager {
   }
 
 /*All Archive*/
-  AllArchivePropertyWise(BuildContext context, String propertyid, CallBackQuesy callBackQuesy) async {
+  AllArchivePropertyWise(BuildContext context, String propertyid,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_All_Archive_Property,
       "Reqtokens": {"Prop_ID": propertyid}
@@ -8673,7 +10802,8 @@ class ApiManager {
   }
 
 /*Restore All Archive*/
-  AllArchiveRestore(BuildContext context, String OwnerID, CallBackQuesy callBackQuesy) async {
+  AllArchiveRestore(
+      BuildContext context, String OwnerID, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_RestoreAllArchive,
       "Reqtokens": {"Owner_ID": OwnerID}
@@ -8695,10 +10825,16 @@ class ApiManager {
 /*========================  Notification Execute Api  =============================*/
 /*==============================================================================*/
 
-  NotificationAppReceive(BuildContext context, String applicationID, CallBackQuesy callBackQuesy) async {
+  NotificationAppReceive(BuildContext context, String applicationID,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Notifi_Application,
-      "Reqtokens": {"ID": applicationID, "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString()}
+      "Reqtokens": {
+        "ID": applicationID,
+        "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss")
+            .format(DateTime.now())
+            .toString()
+      }
     };
 
     String json = jsonEncode(myjson);
@@ -8713,10 +10849,16 @@ class ApiManager {
     });
   }
 
-  NotificationDocReceive(BuildContext context, String applicationID, CallBackQuesy callBackQuesy) async {
+  NotificationDocReceive(BuildContext context, String applicationID,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Notifi_Document,
-      "Reqtokens": {"ID": applicationID, "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString()}
+      "Reqtokens": {
+        "ID": applicationID,
+        "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss")
+            .format(DateTime.now())
+            .toString()
+      }
     };
 
     String json = jsonEncode(myjson);
@@ -8731,8 +10873,8 @@ class ApiManager {
     });
   }
 
-  NotificationReferenceReceive(
-      BuildContext context, String applicationid, String referenceid, String date, CallBackQuesy callBackQuesy) async {
+  NotificationReferenceReceive(BuildContext context, String applicationid,
+      String referenceid, String date, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Notifi_Reference,
       "Reqtokens": {
@@ -8754,10 +10896,16 @@ class ApiManager {
     });
   }
 
-  NotificationLeaseReceive(BuildContext context, String applicationID, CallBackQuesy callBackQuesy) async {
+  NotificationLeaseReceive(BuildContext context, String applicationID,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_Notifi_lease,
-      "Reqtokens": {"ID": applicationID, "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now()).toString()}
+      "Reqtokens": {
+        "ID": applicationID,
+        "ReceivedDate": new DateFormat("yyyy-MM-dd HH:mm:ss")
+            .format(DateTime.now())
+            .toString()
+      }
     };
 
     String json = jsonEncode(myjson);
@@ -8772,7 +10920,8 @@ class ApiManager {
     });
   }
 
-  getNotificationList(BuildContext context, String id, int pageno, CallBackNotificationQuery callBackQuesy) async {
+  getNotificationList(BuildContext context, String id, int pageno,
+      CallBackNotificationQuery callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -8804,21 +10953,41 @@ class ApiManager {
             NotificationData notification = new NotificationData();
 
             notification.id = myobject['ID'] != null ? myobject['ID'] : 0;
-            notification.applicantName = myobject['ApplicantName'] != null ? myobject['ApplicantName'].toString() : "";
-            notification.ownerId = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
-            notification.applicantId = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
-            notification.notificationDate = myobject['NotificationDate'] != null ? myobject['NotificationDate'].toString() : "";
-            notification.isRead = myobject['IsRead'] != null ? myobject['IsRead'] : false;
-            notification.typeOfNotification = myobject['TypeOfNotification'] != null ? myobject['TypeOfNotification'] : 0;
-            notification.MaintenanceID = myobject['MaintenanceID'] != null ? myobject['MaintenanceID'] : 0;
-            notification.applicationId = myobject['Application_ID'] != null ? myobject['Application_ID'] : 0;
+            notification.applicantName = myobject['ApplicantName'] != null
+                ? myobject['ApplicantName'].toString()
+                : "";
+            notification.ownerId =
+                myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+            notification.applicantId =
+                myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+            notification.notificationDate = myobject['NotificationDate'] != null
+                ? myobject['NotificationDate'].toString()
+                : "";
+            notification.isRead =
+                myobject['IsRead'] != null ? myobject['IsRead'] : false;
+            notification.typeOfNotification =
+                myobject['TypeOfNotification'] != null
+                    ? myobject['TypeOfNotification']
+                    : 0;
+            notification.MaintenanceID = myobject['MaintenanceID'] != null
+                ? myobject['MaintenanceID']
+                : 0;
+            notification.applicationId = myobject['Application_ID'] != null
+                ? myobject['Application_ID']
+                : 0;
 
             if (myobject['Prop_ID'] != null) {
               var Prop_IDobject = myobject['Prop_ID'];
 
-              notification.PropID = Prop_IDobject['ID'] != null ? Prop_IDobject['ID'].toString() : "";
-              notification.propertyName = Prop_IDobject['PropertyName'] != null ? Prop_IDobject['PropertyName'].toString() : "";
-              notification.suiteUnit = Prop_IDobject['Suite_Unit'] != null ? Prop_IDobject['Suite_Unit'].toString() : "";
+              notification.PropID = Prop_IDobject['ID'] != null
+                  ? Prop_IDobject['ID'].toString()
+                  : "";
+              notification.propertyName = Prop_IDobject['PropertyName'] != null
+                  ? Prop_IDobject['PropertyName'].toString()
+                  : "";
+              notification.suiteUnit = Prop_IDobject['Suite_Unit'] != null
+                  ? Prop_IDobject['Suite_Unit'].toString()
+                  : "";
             }
             notificationlist.add(notification);
           }
@@ -8836,7 +11005,11 @@ class ApiManager {
     var myjson = {
       "DSQID": Weburl.DSQ_Notification,
       "LoadLookUpValues": true,
-      "Reqtokens": {"TypeOfNotification": "1,2,3,4,5,7,8,11", "Owner_ID": Prefs.getString(PrefsName.OwnerID), "IsRead": false},
+      "Reqtokens": {
+        "TypeOfNotification": "1,2,3,4,5,7,8,11",
+        "Owner_ID": Prefs.getString(PrefsName.OwnerID),
+        "IsRead": false
+      },
     };
 
     String json = jsonEncode(myjson);
@@ -8845,7 +11018,8 @@ class ApiManager {
       if (error) {
         var data = jsonDecode(respoce);
 
-        int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+        int TotalRecords =
+            data['TotalRecords'] != null ? data['TotalRecords'] : 0;
         _store.dispatch(UpdateNotificationCount(TotalRecords));
       } else {
         _store.dispatch(UpdateNotificationCount(0));
@@ -8853,9 +11027,14 @@ class ApiManager {
     });
   }
 
-  UpdateNotificationRead(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query =
-        QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Notification, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateNotificationRead(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Notification,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -8877,12 +11056,14 @@ class ApiManager {
 
     _store.dispatch(UpdateCPDPropID(propertyData.ID!));
     _store.dispatch(UpdateCPDProperTytypeValue(propertyData.propertyType));
-    _store.dispatch(UpdateCPDPropertyTypeOtherValue(propertyData.otherPropertyType!));
+    _store.dispatch(
+        UpdateCPDPropertyTypeOtherValue(propertyData.otherPropertyType!));
     _store.dispatch(UpdateCPDDateofavailable(propertyData.dateAvailable!));
     _store.dispatch(UpdateCPDRentalSpaceValue(propertyData.rentalSpace));
     _store.dispatch(UpdateCPDPropertyName(propertyData.propertyName!));
     _store.dispatch(UpdateCPDPropertyAddress(propertyData.propertyAddress!));
-    _store.dispatch(UpdateCPDPropertyDescription(propertyData.propertyDescription!));
+    _store.dispatch(
+        UpdateCPDPropertyDescription(propertyData.propertyDescription!));
     _store.dispatch(UpdateCPDSuiteunit(propertyData.suiteUnit!));
     _store.dispatch(UpdateCPDBuildingname(propertyData.buildingName!));
     _store.dispatch(UpdateCPDPropertyCity(propertyData.city!));
@@ -8891,20 +11072,28 @@ class ApiManager {
     _store.dispatch(UpdateCPDPropertyProvince(propertyData.province!));
     _store.dispatch(UpdateCPDPropertyPostalcode(propertyData.postalCode!));
     _store.dispatch(UpdateCPDPropertyRentAmount(propertyData.rentAmount!));
-    _store.dispatch(UpdateCPDRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
+    _store.dispatch(
+        UpdateCPDRentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
     _store.dispatch(UpdateCPDLeaseTypeValue(propertyData.leaseType));
-    _store.dispatch(UpdateCPDMinimumLeasedurationValue(propertyData.minLeaseDuration));
-    _store.dispatch(UpdateCPDMinimumleasedurationNumber(propertyData.minLeaseNumber.toString()));
+    _store.dispatch(
+        UpdateCPDMinimumLeasedurationValue(propertyData.minLeaseDuration));
+    _store.dispatch(UpdateCPDMinimumleasedurationNumber(
+        propertyData.minLeaseNumber.toString()));
     _store.dispatch(UpdateCPDPropertyImage(propertyData.propertyImage));
     _store.dispatch(UpdateCPDPropertyUint8List(null));
-    _store.dispatch(UpdateCPDPropertyBedrooms(propertyData.bedrooms.toString()));
-    _store.dispatch(UpdateCPDPropertyBathrooms(propertyData.bathrooms.toString()));
-    _store.dispatch(UpdateCPDPropertySizeinsquarefeet(propertyData.size.toString()));
+    _store
+        .dispatch(UpdateCPDPropertyBedrooms(propertyData.bedrooms.toString()));
+    _store.dispatch(
+        UpdateCPDPropertyBathrooms(propertyData.bathrooms.toString()));
+    _store.dispatch(
+        UpdateCPDPropertySizeinsquarefeet(propertyData.size.toString()));
     _store.dispatch(UpdateCPDPropertyMaxoccupancy(propertyData.maxOccupancy!));
     _store.dispatch(UpdateCPDFurnishingValue(propertyData.furnishing));
-    _store.dispatch(UpdateCPDOtherPartialFurniture(propertyData.otherPartialFurniture.toString()));
+    _store.dispatch(UpdateCPDOtherPartialFurniture(
+        propertyData.otherPartialFurniture.toString()));
     _store.dispatch(UpdateCPDParkingstalls(propertyData.parkingStalls!));
-    _store.dispatch(UpdateCPDStorageAvailableValue(propertyData.storageAvailable));
+    _store.dispatch(
+        UpdateCPDStorageAvailableValue(propertyData.storageAvailable));
     _store.dispatch(UpdateCPDAgreeTCPP(propertyData.isAgreedTandC!));
     _store.dispatch(UpdateCPDPropertyDrafting(propertyData.PropDrafting!));
     _store.dispatch(UpdateCPDPropertyVacancy(propertyData.Vacancy!));
@@ -8918,7 +11107,8 @@ class ApiManager {
     _store.dispatch(UpdateCPDLead_additionalInfo(""));
   }
 
-  userDetailsDSQCall(BuildContext context, String CustomerFeatureListingURL, CallBackQuesy CallBackQuesy) async {
+  userDetailsDSQCall(BuildContext context, String CustomerFeatureListingURL,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_UserLogin.toString(),
       "LoadLookupValues": true,
@@ -8935,9 +11125,12 @@ class ApiManager {
         if (data["Result"].length > 0) {
           var myobject = data["Result"][0];
 
-          bool IsActive = myobject["IsActive"] != null ? myobject["IsActive"] : false;
+          bool IsActive =
+              myobject["IsActive"] != null ? myobject["IsActive"] : false;
 
-          bool adminsideIsActive = myobject["AdminsideIsActive"] != null ? myobject["AdminsideIsActive"] : false;
+          bool adminsideIsActive = myobject["AdminsideIsActive"] != null
+              ? myobject["AdminsideIsActive"]
+              : false;
 
           if (IsActive) {
             if (adminsideIsActive) {
@@ -8945,18 +11138,27 @@ class ApiManager {
 
               await Prefs.setString(PrefsName.Customer_OwnerID, ID);
 
-              String CompanyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
+              String CompanyName = myobject['CompanyName'] != null
+                  ? myobject['CompanyName'].toString()
+                  : "";
 
-              String HomePageLink = myobject['HomePageLink'] != null ? myobject['HomePageLink'].toString() : "";
+              String HomePageLink = myobject['HomePageLink'] != null
+                  ? myobject['HomePageLink'].toString()
+                  : "";
 
-              String UserName = myobject['UserName'] != null ? myobject['UserName'].toString() : "";
+              String UserName = myobject['UserName'] != null
+                  ? myobject['UserName'].toString()
+                  : "";
 
-              MediaInfo? Company_logo = myobject['Company_logo'] != null ? MediaInfo.fromJson(myobject['Company_logo']) : null;
+              MediaInfo? Company_logo = myobject['Company_logo'] != null
+                  ? MediaInfo.fromJson(myobject['Company_logo'])
+                  : null;
 
               _store.dispatch(UpdateCustomerPortal_landlordemail(UserName));
               _store.dispatch(UpdateCustomerPortal_Companyname(CompanyName));
               _store.dispatch(UpdateCustomerPortal_Homepagelink(HomePageLink));
-              _store.dispatch(UpdateCustomerPortal_Companynamelogo(Company_logo));
+              _store
+                  .dispatch(UpdateCustomerPortal_Companynamelogo(Company_logo));
 
               CallBackQuesy(true, ID);
             } else {
@@ -8974,7 +11176,8 @@ class ApiManager {
     });
   }
 
-  getFeatuePropertyList(BuildContext context, String Ownerid, CallBackQuesy callBackQuesy) async {
+  getFeatuePropertyList(
+      BuildContext context, String Ownerid, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Featue_propertylist,
       "LoadLookupValues": true,
@@ -8998,85 +11201,147 @@ class ApiManager {
 
             String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+            String PropertyName = myobject['PropertyName'] != null
+                ? myobject['PropertyName'].toString()
+                : "";
 
-            String Other_Property_Type = myobject['Other_Property_Type'] != null ? myobject['Other_Property_Type'].toString() : "";
+            String Other_Property_Type = myobject['Other_Property_Type'] != null
+                ? myobject['Other_Property_Type'].toString()
+                : "";
 
-            String Building_Name = myobject['Building_Name'] != null ? myobject['Building_Name'].toString() : "";
+            String Building_Name = myobject['Building_Name'] != null
+                ? myobject['Building_Name'].toString()
+                : "";
 
-            String Property_Address = myobject['Property_Address'] != null ? myobject['Property_Address'].toString() : "";
+            String Property_Address = myobject['Property_Address'] != null
+                ? myobject['Property_Address'].toString()
+                : "";
 
-            bool IsActive = myobject['IsActive'] != null ? myobject['IsActive'] : false;
+            bool IsActive =
+                myobject['IsActive'] != null ? myobject['IsActive'] : false;
 
-            String Postal_Code = myobject['Postal_Code'] != null ? myobject['Postal_Code'].toString() : "";
+            String Postal_Code = myobject['Postal_Code'] != null
+                ? myobject['Postal_Code'].toString()
+                : "";
 
-            String Country_Code = myobject['Country_Code'] != null ? myobject['Country_Code'].toString() : "";
+            String Country_Code = myobject['Country_Code'] != null
+                ? myobject['Country_Code'].toString()
+                : "";
 
             int Size = myobject['Size'] != null ? myobject['Size'] : 0;
 
             String Other_Partial_Furniture =
-                myobject['Other_Partial_Furniture'] != null ? myobject['Other_Partial_Furniture'].toString() : "";
+                myobject['Other_Partial_Furniture'] != null
+                    ? myobject['Other_Partial_Furniture'].toString()
+                    : "";
 
-            String Max_Occupancy = myobject['Max_Occupancy'] != null ? myobject['Max_Occupancy'].toString() : "";
+            String Max_Occupancy = myobject['Max_Occupancy'] != null
+                ? myobject['Max_Occupancy'].toString()
+                : "";
 
-            String Date_Available = myobject['Date_Available'] != null ? myobject['Date_Available'].toString() : "";
+            String Date_Available = myobject['Date_Available'] != null
+                ? myobject['Date_Available'].toString()
+                : "";
 
-            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null ? myobject['IsAgreed_TandC'] : false;
+            bool IsAgreed_TandC = myobject['IsAgreed_TandC'] != null
+                ? myobject['IsAgreed_TandC']
+                : false;
 
-            String City = myobject['City'] != null ? myobject['City'].toString() : "";
+            String City =
+                myobject['City'] != null ? myobject['City'].toString() : "";
 
-            String Rent_Amount = myobject['Rent_Amount'] != null ? myobject['Rent_Amount'].toString() : "0";
+            String Rent_Amount = myobject['Rent_Amount'] != null
+                ? myobject['Rent_Amount'].toString()
+                : "0";
 
-            int Min_Lease_Number = myobject['Min_Lease_Number'] != null ? myobject['Min_Lease_Number'] : "";
+            int Min_Lease_Number = myobject['Min_Lease_Number'] != null
+                ? myobject['Min_Lease_Number']
+                : "";
 
-            String Parking_Stalls = myobject['Parking_Stalls'] != null ? myobject['Parking_Stalls'].toString() : "";
+            String Parking_Stalls = myobject['Parking_Stalls'] != null
+                ? myobject['Parking_Stalls'].toString()
+                : "";
 
-            String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+            String Country = myobject['Country'] != null
+                ? myobject['Country'].toString()
+                : "";
 
-            int Bedrooms = myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
+            int Bedrooms =
+                myobject['Bedrooms'] != null ? myobject['Bedrooms'] : 0;
 
-            String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+            String Suite_Unit = myobject['Suite_Unit'] != null
+                ? myobject['Suite_Unit'].toString()
+                : "";
 
-            String Province = myobject['Province'] != null ? myobject['Province'].toString() : "";
+            String Province = myobject['Province'] != null
+                ? myobject['Province'].toString()
+                : "";
 
-            String Property_Description = myobject['Property_Description'] != null ? myobject['Property_Description'].toString() : "";
+            String Property_Description =
+                myobject['Property_Description'] != null
+                    ? myobject['Property_Description'].toString()
+                    : "";
 
-            int Bathrooms = myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
+            int Bathrooms =
+                myobject['Bathrooms'] != null ? myobject['Bathrooms'] : 0;
 
-            int PropDrafting = myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
+            int PropDrafting =
+                myobject['PropDrafting'] != null ? myobject['PropDrafting'] : 0;
 
-            bool Vacancy = myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
+            bool Vacancy =
+                myobject['Vacancy'] != null ? myobject['Vacancy'] : false;
 
-            String Media_ID = myobject['Media_ID'] != null ? myobject['Media_ID'].toString() : "";
+            String Media_ID = myobject['Media_ID'] != null
+                ? myobject['Media_ID'].toString()
+                : "";
 
-            MediaInfo? Property_Image = myobject['Property_Image'] != null ? MediaInfo.fromJson(myobject['Property_Image']) : null;
+            MediaInfo? Property_Image = myobject['Property_Image'] != null
+                ? MediaInfo.fromJson(myobject['Property_Image'])
+                : null;
 
-            SystemEnumDetails? Property_Type =
-                myobject['Property_Type'] != null ? SystemEnumDetails.fromJson(myobject['Property_Type']) : null;
+            SystemEnumDetails? Property_Type = myobject['Property_Type'] != null
+                ? SystemEnumDetails.fromJson(myobject['Property_Type'])
+                : null;
 
             SystemEnumDetails? Min_Lease_Duration =
-                myobject['Min_Lease_Duration'] != null ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration']) : null;
+                myobject['Min_Lease_Duration'] != null
+                    ? SystemEnumDetails.fromJson(myobject['Min_Lease_Duration'])
+                    : null;
 
-            SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null ? SystemEnumDetails.fromJson(myobject['Lease_Type']) : null;
+            SystemEnumDetails? Lease_Type = myobject['Lease_Type'] != null
+                ? SystemEnumDetails.fromJson(myobject['Lease_Type'])
+                : null;
 
-            SystemEnumDetails? Furnishing = myobject['Furnishing'] != null ? SystemEnumDetails.fromJson(myobject['Furnishing']) : null;
+            SystemEnumDetails? Furnishing = myobject['Furnishing'] != null
+                ? SystemEnumDetails.fromJson(myobject['Furnishing'])
+                : null;
 
             SystemEnumDetails? Rent_Payment_Frequency =
-                myobject['Rent_Payment_Frequency'] != null ? SystemEnumDetails.fromJson(myobject['Rent_Payment_Frequency']) : null;
+                myobject['Rent_Payment_Frequency'] != null
+                    ? SystemEnumDetails.fromJson(
+                        myobject['Rent_Payment_Frequency'])
+                    : null;
 
             SystemEnumDetails? StorageAvailable =
-                myobject['StorageAvailable'] != null ? SystemEnumDetails.fromJson(myobject['StorageAvailable']) : null;
+                myobject['StorageAvailable'] != null
+                    ? SystemEnumDetails.fromJson(myobject['StorageAvailable'])
+                    : null;
 
-            SystemEnumDetails? Rental_Space =
-                myobject['Rental_Space'] != null ? SystemEnumDetails.fromJson(myobject['Rental_Space']) : null;
+            SystemEnumDetails? Rental_Space = myobject['Rental_Space'] != null
+                ? SystemEnumDetails.fromJson(myobject['Rental_Space'])
+                : null;
 
             /*RecordInfo*/
 
             var objRecordInfo = myobject["RecordInfo"];
 
-            String CreatedOn = objRecordInfo['CreatedOn'] != null ? objRecordInfo['CreatedOn'].toString() : "0";
+            String CreatedOn = objRecordInfo['CreatedOn'] != null
+                ? objRecordInfo['CreatedOn'].toString()
+                : "0";
 
-            String UpdatedOn = objRecordInfo['UpdatedOn'] != null ? objRecordInfo['UpdatedOn'].toString() : "0";
+            String UpdatedOn = objRecordInfo['UpdatedOn'] != null
+                ? objRecordInfo['UpdatedOn'].toString()
+                : "0";
 
             PropertyData propertyData = new PropertyData();
             propertyData.ID = ID;
@@ -9124,18 +11389,27 @@ class ApiManager {
             if (i == 0) {
               var OwnerIDData = myobject["Owner_ID"];
 
-              String CompanyName = OwnerIDData['CompanyName'] != null ? OwnerIDData['CompanyName'].toString() : "";
+              String CompanyName = OwnerIDData['CompanyName'] != null
+                  ? OwnerIDData['CompanyName'].toString()
+                  : "";
 
-              String HomePageLink = OwnerIDData['HomePageLink'] != null ? OwnerIDData['HomePageLink'].toString() : "";
+              String HomePageLink = OwnerIDData['HomePageLink'] != null
+                  ? OwnerIDData['HomePageLink'].toString()
+                  : "";
 
-              String UserName = myobject['UserName'] != null ? myobject['UserName'].toString() : "";
+              String UserName = myobject['UserName'] != null
+                  ? myobject['UserName'].toString()
+                  : "";
 
-              MediaInfo? Company_logo = OwnerIDData['Company_logo'] != null ? MediaInfo.fromJson(OwnerIDData['Company_logo']) : null;
+              MediaInfo? Company_logo = OwnerIDData['Company_logo'] != null
+                  ? MediaInfo.fromJson(OwnerIDData['Company_logo'])
+                  : null;
 
               _store.dispatch(UpdateCustomerPortal_landlordemail(UserName));
               _store.dispatch(UpdateCustomerPortal_Companyname(CompanyName));
               _store.dispatch(UpdateCustomerPortal_Homepagelink(HomePageLink));
-              _store.dispatch(UpdateCustomerPortal_Companynamelogo(Company_logo));
+              _store
+                  .dispatch(UpdateCustomerPortal_Companynamelogo(Company_logo));
             }
           }
 
@@ -9155,8 +11429,10 @@ class ApiManager {
     });
   }
 
-  insetCustomerLead(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.Application, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  insetCustomerLead(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.Application,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -9169,7 +11445,8 @@ class ApiManager {
     });
   }
 
-  checkEmailAddressCustomer(BuildContext context, String Propertyid, String Email, CallBackQuesy callBackQuesy) async {
+  checkEmailAddressCustomer(BuildContext context, String Propertyid,
+      String Email, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_TenantEmail_already_Property,
       "LoadLookupValues": true,
@@ -9226,16 +11503,27 @@ class ApiManager {
         var data = jsonDecode(respoce);
 
         if (data['Result'].length > 0) {
-          int news = 0, approv = 0, workprogress = 0, resolve = 0, paid = 0, cancle = 0;
+          int news = 0,
+              approv = 0,
+              workprogress = 0,
+              resolve = 0,
+              paid = 0,
+              cancle = 0;
 
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            String DisplayValue = myobject['DisplayValue'] != null ? myobject['DisplayValue'].toString() : "";
+            String DisplayValue = myobject['DisplayValue'] != null
+                ? myobject['DisplayValue'].toString()
+                : "";
 
-            int EnumDetailId = myobject['EnumDetailId'] != null ? myobject['EnumDetailId'] : 0;
+            int EnumDetailId =
+                myobject['EnumDetailId'] != null ? myobject['EnumDetailId'] : 0;
 
-            int MaintenenceRequestCount = myobject['MaintenenceRequestCount'] != null ? myobject['MaintenenceRequestCount'] : 0;
+            int MaintenenceRequestCount =
+                myobject['MaintenenceRequestCount'] != null
+                    ? myobject['MaintenenceRequestCount']
+                    : 0;
 
             if (EnumDetailId == 1) {
               news = MaintenenceRequestCount;
@@ -9254,7 +11542,8 @@ class ApiManager {
 
           _store.dispatch(UpdateLLMaintenance_status_New(news));
           _store.dispatch(UpdateLLMaintenance_status_Approved(approv));
-          _store.dispatch(UpdateLLMaintenance_status_WorkinProgress(workprogress));
+          _store.dispatch(
+              UpdateLLMaintenance_status_WorkinProgress(workprogress));
           _store.dispatch(UpdateLLMaintenance_status_Resolved(resolve));
           _store.dispatch(UpdateLLMaintenance_status_Paid(paid));
         }
@@ -9286,24 +11575,41 @@ class ApiManager {
 
           MaintenanceData maintenanceData = new MaintenanceData();
 
-          maintenanceData.ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+          maintenanceData.ID =
+              myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          maintenanceData.RequestName = myobject['RequestName'] != null ? myobject['RequestName'].toString() : "";
-          maintenanceData.Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
+          maintenanceData.RequestName = myobject['RequestName'] != null
+              ? myobject['RequestName'].toString()
+              : "";
+          maintenanceData.Date_Created = myobject['Date_Created'] != null
+              ? myobject['Date_Created'].toString()
+              : "";
 
-          maintenanceData.CreatedBy = myobject['CreatedBy'] != null ? myobject['CreatedBy'].toString() : "";
-          maintenanceData.IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-          maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'].toString() : "";
-          maintenanceData.Type_User = myobject['Type_User'] != null ? myobject['Type_User'].toString() : "1";
+          maintenanceData.CreatedBy = myobject['CreatedBy'] != null
+              ? myobject['CreatedBy'].toString()
+              : "";
+          maintenanceData.IsLock =
+              myobject['IsLock'] != null ? myobject['IsLock'] : false;
+          maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null
+              ? myobject['Describe_Issue'].toString()
+              : "";
+          maintenanceData.Type_User = myobject['Type_User'] != null
+              ? myobject['Type_User'].toString()
+              : "1";
 
           if (myobject['Owner_ID'] != null) {
             var Owner_IDobj = myobject['Owner_ID'];
 
             var OPersonID = Owner_IDobj['PersonID'];
 
-            maintenanceData.Owner_ID = Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
-            String FirstName = OPersonID['FirstName'] != null ? OPersonID['FirstName'].toString() : "";
-            String LastName = OPersonID['LastName'] != null ? OPersonID['LastName'].toString() : "";
+            maintenanceData.Owner_ID =
+                Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
+            String FirstName = OPersonID['FirstName'] != null
+                ? OPersonID['FirstName'].toString()
+                : "";
+            String LastName = OPersonID['LastName'] != null
+                ? OPersonID['LastName'].toString()
+                : "";
 
             maintenanceData.OwnerName = FirstName + " " + LastName;
           }
@@ -9313,9 +11619,15 @@ class ApiManager {
 
             var APersonID = Applicant_IDobj['Person_ID'];
 
-            maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null ? Applicant_IDobj['ID'].toString() : "";
-            String FirstName = APersonID['FirstName'] != null ? APersonID['FirstName'].toString() : "";
-            String LastName = APersonID['LastName'] != null ? APersonID['LastName'].toString() : "";
+            maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null
+                ? Applicant_IDobj['ID'].toString()
+                : "";
+            String FirstName = APersonID['FirstName'] != null
+                ? APersonID['FirstName'].toString()
+                : "";
+            String LastName = APersonID['LastName'] != null
+                ? APersonID['LastName'].toString()
+                : "";
 
             maintenanceData.ApplicantName = FirstName + " " + LastName;
           }
@@ -9323,15 +11635,24 @@ class ApiManager {
           if (myobject['Prop_ID'] != null) {
             var Prop_IDobj = myobject['Prop_ID'];
 
-            maintenanceData.Prop_ID = Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
-            maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null ? Prop_IDobj['PropertyName'].toString() : "";
+            maintenanceData.Prop_ID =
+                Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
+            maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null
+                ? Prop_IDobj['PropertyName'].toString()
+                : "";
           }
 
-          maintenanceData.Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+          maintenanceData.Category = myobject['Category'] != null
+              ? SystemEnumDetails.fromJson(myobject['Category'])
+              : null;
 
-          maintenanceData.Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+          maintenanceData.Status = myobject['Status'] != null
+              ? SystemEnumDetails.fromJson(myobject['Status'])
+              : null;
 
-          maintenanceData.Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+          maintenanceData.Priority = myobject['Priority'] != null
+              ? SystemEnumDetails.fromJson(myobject['Priority'])
+              : null;
 
           maintenanceDatalist.add(maintenanceData);
         }
@@ -9341,7 +11662,8 @@ class ApiManager {
 
         if (ftime == 0) {
           if (maintenanceDatalist.length > 0) {
-            int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
             _store.dispatch(UpdateLLMaintenance_totalRecord(TotalRecords));
 
@@ -9416,25 +11738,42 @@ class ApiManager {
 
             MaintenanceData maintenanceData = new MaintenanceData();
 
-            maintenanceData.ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            maintenanceData.ID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            maintenanceData.RequestName = myobject['RequestName'] != null ? myobject['RequestName'].toString() : "";
-            maintenanceData.Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
+            maintenanceData.RequestName = myobject['RequestName'] != null
+                ? myobject['RequestName'].toString()
+                : "";
+            maintenanceData.Date_Created = myobject['Date_Created'] != null
+                ? myobject['Date_Created'].toString()
+                : "";
 
-            maintenanceData.CreatedBy = myobject['CreatedBy'] != null ? myobject['CreatedBy'].toString() : "";
+            maintenanceData.CreatedBy = myobject['CreatedBy'] != null
+                ? myobject['CreatedBy'].toString()
+                : "";
 
-            maintenanceData.IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-            maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'].toString() : "";
-            maintenanceData.Type_User = myobject['Type_User'] != null ? myobject['Type_User'].toString() : "1";
+            maintenanceData.IsLock =
+                myobject['IsLock'] != null ? myobject['IsLock'] : false;
+            maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null
+                ? myobject['Describe_Issue'].toString()
+                : "";
+            maintenanceData.Type_User = myobject['Type_User'] != null
+                ? myobject['Type_User'].toString()
+                : "1";
 
             if (myobject['Owner_ID'] != null) {
               var Owner_IDobj = myobject['Owner_ID'];
 
               var OPersonID = Owner_IDobj['PersonID'];
 
-              maintenanceData.Owner_ID = Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
-              String FirstName = OPersonID['FirstName'] != null ? OPersonID['FirstName'].toString() : "";
-              String LastName = OPersonID['LastName'] != null ? OPersonID['LastName'].toString() : "";
+              maintenanceData.Owner_ID =
+                  Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
+              String FirstName = OPersonID['FirstName'] != null
+                  ? OPersonID['FirstName'].toString()
+                  : "";
+              String LastName = OPersonID['LastName'] != null
+                  ? OPersonID['LastName'].toString()
+                  : "";
 
               maintenanceData.OwnerName = FirstName + " " + LastName;
             }
@@ -9444,9 +11783,15 @@ class ApiManager {
 
               var APersonID = Applicant_IDobj['Person_ID'];
 
-              maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null ? Applicant_IDobj['ID'].toString() : "";
-              String FirstName = APersonID['FirstName'] != null ? APersonID['FirstName'].toString() : "";
-              String LastName = APersonID['LastName'] != null ? APersonID['LastName'].toString() : "";
+              maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null
+                  ? Applicant_IDobj['ID'].toString()
+                  : "";
+              String FirstName = APersonID['FirstName'] != null
+                  ? APersonID['FirstName'].toString()
+                  : "";
+              String LastName = APersonID['LastName'] != null
+                  ? APersonID['LastName'].toString()
+                  : "";
 
               maintenanceData.ApplicantName = FirstName + " " + LastName;
             }
@@ -9454,36 +11799,59 @@ class ApiManager {
             if (myobject['Prop_ID'] != null) {
               var Prop_IDobj = myobject['Prop_ID'];
 
-              maintenanceData.Prop_ID = Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
-              maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null ? Prop_IDobj['PropertyName'].toString() : "";
+              maintenanceData.Prop_ID =
+                  Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
+              maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null
+                  ? Prop_IDobj['PropertyName'].toString()
+                  : "";
             }
 
-            maintenanceData.Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+            maintenanceData.Category = myobject['Category'] != null
+                ? SystemEnumDetails.fromJson(myobject['Category'])
+                : null;
 
-            maintenanceData.Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+            maintenanceData.Status = myobject['Status'] != null
+                ? SystemEnumDetails.fromJson(myobject['Status'])
+                : null;
 
-            maintenanceData.Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+            maintenanceData.Priority = myobject['Priority'] != null
+                ? SystemEnumDetails.fromJson(myobject['Priority'])
+                : null;
 
             List row = [];
 
             row.add(maintenanceData.ID);
             row.add(maintenanceData.PropertyName);
             row.add(maintenanceData.RequestName);
-            row.add(maintenanceData.Category != null ? maintenanceData.Category!.displayValue : "");
-            row.add(maintenanceData.Priority != null ? maintenanceData.Priority!.displayValue : "");
-            row.add(maintenanceData.Date_Created != null && maintenanceData.Date_Created != "0" && maintenanceData.Date_Created != ""
-                ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(maintenanceData.Date_Created!)).toString()
+            row.add(maintenanceData.Category != null
+                ? maintenanceData.Category!.displayValue
+                : "");
+            row.add(maintenanceData.Priority != null
+                ? maintenanceData.Priority!.displayValue
+                : "");
+            row.add(maintenanceData.Date_Created != null &&
+                    maintenanceData.Date_Created != "0" &&
+                    maintenanceData.Date_Created != ""
+                ? new DateFormat("dd-MMM-yyyy")
+                    .format(DateTime.parse(maintenanceData.Date_Created!))
+                    .toString()
                 : "");
             row.add(maintenanceData.CreatedBy);
-            row.add(maintenanceData.Status != null ? maintenanceData.Status!.displayValue : "");
-            row.add(maintenanceData.IsLock != null ? maintenanceData.IsLock : false);
+            row.add(maintenanceData.Status != null
+                ? maintenanceData.Status!.displayValue
+                : "");
+            row.add(maintenanceData.IsLock != null
+                ? maintenanceData.IsLock
+                : false);
 
             csvList.add(row);
           }
 
           csv = const ListToCsvConverter().convert(csvList);
 
-          String filename = "Maintenance_Request_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
+          String filename = "Maintenance_Request_" +
+              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+              ".csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -9497,7 +11865,8 @@ class ApiManager {
           html.document.body!.children.add(anchor);
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
 
         loader.remove();
@@ -9508,7 +11877,8 @@ class ApiManager {
     });
   }
 
-  duplicateMaintenaceworkflow(BuildContext context, String id, String typeuser, CallBackQuesy callBackQuesy) async {
+  duplicateMaintenaceworkflow(BuildContext context, String id, String typeuser,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.workflow_landlord_Maintenance_Duplicate,
       "Reqtokens": {"MaintenanceID": id, "Type_User": typeuser}
@@ -9532,11 +11902,14 @@ class ApiManager {
     });
   }
 
-  deleteMaintenace(BuildContext context, String id, CallBackQuesy CallBackQuesy) {
+  deleteMaintenace(
+      BuildContext context, String id, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    String query = Weburl.RawSQL_Api + "query=DeleteMaintenanceAllData&Maintenance_ID=" + id;
+    String query = Weburl.RawSQL_Api +
+        "query=DeleteMaintenanceAllData&Maintenance_ID=" +
+        id;
 
     HttpClientCall().RawSQLAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -9551,8 +11924,14 @@ class ApiManager {
     });
   }
 
-  updateMaintenanceStatus(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Maintenance, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  updateMaintenanceStatus(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Maintenance,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -9563,9 +11942,10 @@ class ApiManager {
     });
   }
 
-  checkMaintenanceExit(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.Maintenance, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  checkMaintenanceExit(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(POJO, etableName.Maintenance,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -9583,7 +11963,8 @@ class ApiManager {
     });
   }
 
-  maintenanceDetailsApi(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  maintenanceDetailsApi(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -9605,18 +11986,32 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            SystemEnumDetails? Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+            SystemEnumDetails? Category = myobject['Category'] != null
+                ? SystemEnumDetails.fromJson(myobject['Category'])
+                : null;
 
-            SystemEnumDetails? Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+            SystemEnumDetails? Status = myobject['Status'] != null
+                ? SystemEnumDetails.fromJson(myobject['Status'])
+                : null;
 
-            SystemEnumDetails? Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+            SystemEnumDetails? Priority = myobject['Priority'] != null
+                ? SystemEnumDetails.fromJson(myobject['Priority'])
+                : null;
 
-            String mID = myobject['ID'] != null ? myobject['ID'].toString() : "";
-            String Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
-            bool IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-            String Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'] : "";
-            int Type_User = myobject['Type_User'] != null ? myobject['Type_User'] : 0;
-            String RequestName = myobject['RequestName'] != null ? myobject['RequestName'] : "";
+            String mID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String Date_Created = myobject['Date_Created'] != null
+                ? myobject['Date_Created'].toString()
+                : "";
+            bool IsLock =
+                myobject['IsLock'] != null ? myobject['IsLock'] : false;
+            String Describe_Issue = myobject['Describe_Issue'] != null
+                ? myobject['Describe_Issue']
+                : "";
+            int Type_User =
+                myobject['Type_User'] != null ? myobject['Type_User'] : 0;
+            String RequestName =
+                myobject['RequestName'] != null ? myobject['RequestName'] : "";
 
             _store.dispatch(UpdateMDA_mID(mID));
             _store.dispatch(UpdateMDA_Date_Created(Date_Created));
@@ -9633,15 +12028,31 @@ class ApiManager {
 
               String ID = Prop_ID['ID'] != null ? Prop_ID['ID'] : "";
 
-              String PropertyName = Prop_ID['PropertyName'] != null ? Prop_ID['PropertyName'] : "";
-              String Suite_Unit = Prop_ID['Suite_Unit'] != null ? Prop_ID['Suite_Unit'] : "";
-              String Property_Address = Prop_ID['Property_Address'] != null ? Prop_ID['Property_Address'] : "";
+              String PropertyName = Prop_ID['PropertyName'] != null
+                  ? Prop_ID['PropertyName']
+                  : "";
+              String Suite_Unit =
+                  Prop_ID['Suite_Unit'] != null ? Prop_ID['Suite_Unit'] : "";
+              String Property_Address = Prop_ID['Property_Address'] != null
+                  ? Prop_ID['Property_Address']
+                  : "";
               String City = Prop_ID['City'] != null ? Prop_ID['City'] : "";
-              String Province = Prop_ID['Province'] != null ? Prop_ID['Province'] : "";
-              String Country = Prop_ID['Country'] != null ? Prop_ID['Country'] : "";
-              String Postal_Code = Prop_ID['Postal_Code'] != null ? Prop_ID['Postal_Code'] : "";
+              String Province =
+                  Prop_ID['Province'] != null ? Prop_ID['Province'] : "";
+              String Country =
+                  Prop_ID['Country'] != null ? Prop_ID['Country'] : "";
+              String Postal_Code =
+                  Prop_ID['Postal_Code'] != null ? Prop_ID['Postal_Code'] : "";
 
-              String addrsss = Property_Address + ", " + City + ", " + Province + ", " + Postal_Code + ", " + Country;
+              String addrsss = Property_Address +
+                  ", " +
+                  City +
+                  ", " +
+                  Province +
+                  ", " +
+                  Postal_Code +
+                  ", " +
+                  Country;
 
               _store.dispatch(UpdateMDA_Prop_ID(ID));
               _store.dispatch(UpdateMDA_PropertyName(PropertyName));
@@ -9652,17 +12063,31 @@ class ApiManager {
             if (myobject["Applicant_ID"] != null) {
               var Applicant_ID = myobject["Applicant_ID"];
 
-              String ID = Applicant_ID['ID'] != null ? Applicant_ID['ID'].toString() : "";
+              String ID = Applicant_ID['ID'] != null
+                  ? Applicant_ID['ID'].toString()
+                  : "";
 
-              String UserID = Applicant_ID['UserID'] != null ? Applicant_ID['UserID'].toString() : "";
+              String UserID = Applicant_ID['UserID'] != null
+                  ? Applicant_ID['UserID'].toString()
+                  : "";
 
               var Person_ID = Applicant_ID["Person_ID"];
 
-              String Email = Person_ID['Email'] != null ? Person_ID['Email'].toString() : "";
-              String FirstName = Person_ID['FirstName'] != null ? Person_ID['FirstName'].toString() : "";
-              String LastName = Person_ID['LastName'] != null ? Person_ID['LastName'].toString() : "";
-              String MobileNumber = Person_ID['MobileNumber'] != null ? Person_ID['MobileNumber'].toString() : "";
-              String Dial_Code = Person_ID['Dial_Code'] != null ? Person_ID['Dial_Code'].toString() : "";
+              String Email = Person_ID['Email'] != null
+                  ? Person_ID['Email'].toString()
+                  : "";
+              String FirstName = Person_ID['FirstName'] != null
+                  ? Person_ID['FirstName'].toString()
+                  : "";
+              String LastName = Person_ID['LastName'] != null
+                  ? Person_ID['LastName'].toString()
+                  : "";
+              String MobileNumber = Person_ID['MobileNumber'] != null
+                  ? Person_ID['MobileNumber'].toString()
+                  : "";
+              String Dial_Code = Person_ID['Dial_Code'] != null
+                  ? Person_ID['Dial_Code'].toString()
+                  : "";
 
               _store.dispatch(UpdateMDA_Applicant_ID(ID));
               _store.dispatch(UpdateMDA_Applicant_UserID(UserID));
@@ -9676,19 +12101,36 @@ class ApiManager {
             if (myobject["Owner_ID"] != null) {
               var OwnerIDobj = myobject["Owner_ID"];
 
-              String Owner_ID = OwnerIDobj['ID'] != null ? OwnerIDobj['ID'].toString() : "";
-              String HomePageLink = OwnerIDobj['HomePageLink'] != null ? OwnerIDobj['HomePageLink'].toString() : "";
-              String CompanyName = OwnerIDobj['CompanyName'] != null ? OwnerIDobj['CompanyName'].toString() : "";
+              String Owner_ID =
+                  OwnerIDobj['ID'] != null ? OwnerIDobj['ID'].toString() : "";
+              String HomePageLink = OwnerIDobj['HomePageLink'] != null
+                  ? OwnerIDobj['HomePageLink'].toString()
+                  : "";
+              String CompanyName = OwnerIDobj['CompanyName'] != null
+                  ? OwnerIDobj['CompanyName'].toString()
+                  : "";
 
-              MediaInfo? Company_logo = OwnerIDobj['Company_logo'] != null ? MediaInfo.fromJson(OwnerIDobj['Company_logo']) : null;
+              MediaInfo? Company_logo = OwnerIDobj['Company_logo'] != null
+                  ? MediaInfo.fromJson(OwnerIDobj['Company_logo'])
+                  : null;
 
               var PersonIDobj = OwnerIDobj["PersonID"];
 
-              String Email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-              String FirstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-              String LastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-              String MobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
-              String Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "";
+              String Email = PersonIDobj['Email'] != null
+                  ? PersonIDobj['Email'].toString()
+                  : "";
+              String FirstName = PersonIDobj['FirstName'] != null
+                  ? PersonIDobj['FirstName'].toString()
+                  : "";
+              String LastName = PersonIDobj['LastName'] != null
+                  ? PersonIDobj['LastName'].toString()
+                  : "";
+              String MobileNumber = PersonIDobj['MobileNumber'] != null
+                  ? PersonIDobj['MobileNumber'].toString()
+                  : "";
+              String Dial_Code = PersonIDobj['Dial_Code'] != null
+                  ? PersonIDobj['Dial_Code'].toString()
+                  : "";
 
               _store.dispatch(UpdateMDA_Owner_ID(Owner_ID));
               _store.dispatch(UpdateMDA_HomePageLink(HomePageLink));
@@ -9714,7 +12156,8 @@ class ApiManager {
     });
   }
 
-  MaintenanceImagesApi(BuildContext context, String id, CallBackMaintenanceImageslist callBackQuesy) async {
+  MaintenanceImagesApi(BuildContext context, String id,
+      CallBackMaintenanceImageslist callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -9732,7 +12175,8 @@ class ApiManager {
       if (error) {
         var data = jsonDecode(respoce);
 
-        List<PropertyMaintenanceImages> maintenanceImageslist = <PropertyMaintenanceImages>[];
+        List<PropertyMaintenanceImages> maintenanceImageslist =
+            <PropertyMaintenanceImages>[];
 
         if (data['Result'].length > 0) {
           for (int j = 0; j < data['Result'].length; j++) {
@@ -9742,7 +12186,9 @@ class ApiManager {
 
             image.id = objectPMImages['ID'] != null ? objectPMImages['ID'] : 0;
 
-            image.mediaId = objectPMImages['Media_ID'] != null ? MediaInfo.fromJson(objectPMImages['Media_ID']) : null;
+            image.mediaId = objectPMImages['Media_ID'] != null
+                ? MediaInfo.fromJson(objectPMImages['Media_ID'])
+                : null;
             maintenanceImageslist.add(image);
           }
 
@@ -9759,7 +12205,8 @@ class ApiManager {
     });
   }
 
-  MaintenanceVendorDetailsApi(BuildContext context, String id, CallBackMaintenanceVendorlist callBackQuesy) async {
+  MaintenanceVendorDetailsApi(BuildContext context, String id,
+      CallBackMaintenanceVendorlist callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -9785,45 +12232,74 @@ class ApiManager {
 
             MaintenanceVendor maintenanceVendor = new MaintenanceVendor();
 
-            maintenanceVendor.ID = objectMaintenanceVendor['ID'] != null ? objectMaintenanceVendor['ID'].toString() : "";
+            maintenanceVendor.ID = objectMaintenanceVendor['ID'] != null
+                ? objectMaintenanceVendor['ID'].toString()
+                : "";
 
             maintenanceVendor.Instruction =
-                objectMaintenanceVendor['Instruction'] != null ? objectMaintenanceVendor['Instruction'].toString() : "";
+                objectMaintenanceVendor['Instruction'] != null
+                    ? objectMaintenanceVendor['Instruction'].toString()
+                    : "";
 
             var VendorID = objectMaintenanceVendor["VendorID"];
 
-            maintenanceVendor.province = VendorID['Province'] != null ? StateData.fromJson(VendorID['Province']) : null;
+            maintenanceVendor.province = VendorID['Province'] != null
+                ? StateData.fromJson(VendorID['Province'])
+                : null;
 
-            maintenanceVendor.companyName = VendorID['CompanyName'] != null ? VendorID['CompanyName'].toString() : "";
+            maintenanceVendor.companyName = VendorID['CompanyName'] != null
+                ? VendorID['CompanyName'].toString()
+                : "";
 
-            maintenanceVendor.rating = VendorID['Rating'] != null ? VendorID['Rating'] : "";
+            maintenanceVendor.rating =
+                VendorID['Rating'] != null ? VendorID['Rating'] : "";
 
-            maintenanceVendor.address = VendorID['Address'] != null ? VendorID['Address'].toString() : "";
+            maintenanceVendor.address = VendorID['Address'] != null
+                ? VendorID['Address'].toString()
+                : "";
 
             maintenanceVendor.vid = VendorID['ID'] != null ? VendorID['ID'] : 0;
 
-            maintenanceVendor.suite = VendorID['Suite'] != null ? VendorID['Suite'].toString() : "";
+            maintenanceVendor.suite =
+                VendorID['Suite'] != null ? VendorID['Suite'].toString() : "";
 
-            maintenanceVendor.city = VendorID['City'] != null ? CityData.fromJson(VendorID['City']) : null;
+            maintenanceVendor.city = VendorID['City'] != null
+                ? CityData.fromJson(VendorID['City'])
+                : null;
 
-            maintenanceVendor.country = VendorID['Country'] != null ? CountryData.fromJson(VendorID['Country']) : null;
+            maintenanceVendor.country = VendorID['Country'] != null
+                ? CountryData.fromJson(VendorID['Country'])
+                : null;
 
-            maintenanceVendor.category = VendorID['Category'] != null ? SystemEnumDetails.fromJson(VendorID['Category']) : null;
+            maintenanceVendor.category = VendorID['Category'] != null
+                ? SystemEnumDetails.fromJson(VendorID['Category'])
+                : null;
 
             //maintenanceVendor.category = null;
 
             var PersonIDobj = VendorID["PersonID"];
 
-            maintenanceVendor.PersonID = PersonIDobj['ID'] != null ? PersonIDobj['ID'].toString() : "";
+            maintenanceVendor.PersonID =
+                PersonIDobj['ID'] != null ? PersonIDobj['ID'].toString() : "";
 
-            maintenanceVendor.email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
+            maintenanceVendor.email = PersonIDobj['Email'] != null
+                ? PersonIDobj['Email'].toString()
+                : "";
 
-            maintenanceVendor.firstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
+            maintenanceVendor.firstName = PersonIDobj['FirstName'] != null
+                ? PersonIDobj['FirstName'].toString()
+                : "";
 
-            maintenanceVendor.lastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
+            maintenanceVendor.lastName = PersonIDobj['LastName'] != null
+                ? PersonIDobj['LastName'].toString()
+                : "";
 
-            maintenanceVendor.mobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
-            String Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "";
+            maintenanceVendor.mobileNumber = PersonIDobj['MobileNumber'] != null
+                ? PersonIDobj['MobileNumber'].toString()
+                : "";
+            String Dial_Code = PersonIDobj['Dial_Code'] != null
+                ? PersonIDobj['Dial_Code'].toString()
+                : "";
 
             maintenanceVendor.showInstruction = false;
 
@@ -9842,7 +12318,8 @@ class ApiManager {
     });
   }
 
-  maintenanceDetailsApiCallback(BuildContext context, String maintenanceid, int flag, CallBackMaintenanceDetails callBackQuesy) async {
+  maintenanceDetailsApiCallback(BuildContext context, String maintenanceid,
+      int flag, CallBackMaintenanceDetails callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -9867,22 +12344,40 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            SystemEnumDetails? Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+            SystemEnumDetails? Category = myobject['Category'] != null
+                ? SystemEnumDetails.fromJson(myobject['Category'])
+                : null;
 
-            SystemEnumDetails? Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+            SystemEnumDetails? Status = myobject['Status'] != null
+                ? SystemEnumDetails.fromJson(myobject['Status'])
+                : null;
 
-            SystemEnumDetails? Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+            SystemEnumDetails? Priority = myobject['Priority'] != null
+                ? SystemEnumDetails.fromJson(myobject['Priority'])
+                : null;
 
-            String mID = myobject['ID'] != null ? myobject['ID'].toString() : "";
-            String Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
-            bool IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-            String Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'] : "";
-            int Type_User = myobject['Type_User'] != null ? myobject['Type_User'] : 0;
-            String RequestName = myobject['RequestName'] != null ? myobject['RequestName'] : "";
+            String mID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String Date_Created = myobject['Date_Created'] != null
+                ? myobject['Date_Created'].toString()
+                : "";
+            bool IsLock =
+                myobject['IsLock'] != null ? myobject['IsLock'] : false;
+            String Describe_Issue = myobject['Describe_Issue'] != null
+                ? myobject['Describe_Issue']
+                : "";
+            int Type_User =
+                myobject['Type_User'] != null ? myobject['Type_User'] : 0;
+            String RequestName =
+                myobject['RequestName'] != null ? myobject['RequestName'] : "";
 
-            CountryData? Country = myobject['Country'] != null ? CountryData.fromJson(myobject['Country']) : null;
+            CountryData? Country = myobject['Country'] != null
+                ? CountryData.fromJson(myobject['Country'])
+                : null;
 
-            StateData? State = myobject['State'] != null ? StateData.fromJson(myobject['State']) : null;
+            StateData? State = myobject['State'] != null
+                ? StateData.fromJson(myobject['State'])
+                : null;
 
             String City = myobject['City'] != null ? myobject['City'] : "";
 
@@ -9904,15 +12399,31 @@ class ApiManager {
 
               String ID = Prop_ID['ID'] != null ? Prop_ID['ID'] : "";
 
-              String PropertyName = Prop_ID['PropertyName'] != null ? Prop_ID['PropertyName'] : "";
-              String Suite_Unit = Prop_ID['Suite_Unit'] != null ? Prop_ID['Suite_Unit'] : "";
-              String Property_Address = Prop_ID['Property_Address'] != null ? Prop_ID['Property_Address'] : "";
+              String PropertyName = Prop_ID['PropertyName'] != null
+                  ? Prop_ID['PropertyName']
+                  : "";
+              String Suite_Unit =
+                  Prop_ID['Suite_Unit'] != null ? Prop_ID['Suite_Unit'] : "";
+              String Property_Address = Prop_ID['Property_Address'] != null
+                  ? Prop_ID['Property_Address']
+                  : "";
               String City = Prop_ID['City'] != null ? Prop_ID['City'] : "";
-              String Province = Prop_ID['Province'] != null ? Prop_ID['Province'] : "";
-              String Country = Prop_ID['Country'] != null ? Prop_ID['Country'] : "";
-              String Postal_Code = Prop_ID['Postal_Code'] != null ? Prop_ID['Postal_Code'] : "";
+              String Province =
+                  Prop_ID['Province'] != null ? Prop_ID['Province'] : "";
+              String Country =
+                  Prop_ID['Country'] != null ? Prop_ID['Country'] : "";
+              String Postal_Code =
+                  Prop_ID['Postal_Code'] != null ? Prop_ID['Postal_Code'] : "";
 
-              String addrsss = Property_Address + ", " + City + ", " + Province + ", " + Postal_Code + ", " + Country;
+              String addrsss = Property_Address +
+                  ", " +
+                  City +
+                  ", " +
+                  Province +
+                  ", " +
+                  Postal_Code +
+                  ", " +
+                  Country;
 
               maintenanceDetails.Prop_ID = ID;
               maintenanceDetails.PropertyName = PropertyName;
@@ -9923,17 +12434,31 @@ class ApiManager {
             if (myobject["Applicant_ID"] != null) {
               var Applicant_ID = myobject["Applicant_ID"];
 
-              String ID = Applicant_ID['ID'] != null ? Applicant_ID['ID'].toString() : "";
+              String ID = Applicant_ID['ID'] != null
+                  ? Applicant_ID['ID'].toString()
+                  : "";
 
-              String UserID = Applicant_ID['UserID'] != null ? Applicant_ID['UserID'].toString() : "";
+              String UserID = Applicant_ID['UserID'] != null
+                  ? Applicant_ID['UserID'].toString()
+                  : "";
 
               var Person_ID = Applicant_ID["Person_ID"];
 
-              String Email = Person_ID['Email'] != null ? Person_ID['Email'].toString() : "";
-              String FirstName = Person_ID['FirstName'] != null ? Person_ID['FirstName'].toString() : "";
-              String LastName = Person_ID['LastName'] != null ? Person_ID['LastName'].toString() : "";
-              String MobileNumber = Person_ID['MobileNumber'] != null ? Person_ID['MobileNumber'].toString() : "";
-              String Dial_Code = Person_ID['Dial_Code'] != null ? Person_ID['Dial_Code'].toString() : "";
+              String Email = Person_ID['Email'] != null
+                  ? Person_ID['Email'].toString()
+                  : "";
+              String FirstName = Person_ID['FirstName'] != null
+                  ? Person_ID['FirstName'].toString()
+                  : "";
+              String LastName = Person_ID['LastName'] != null
+                  ? Person_ID['LastName'].toString()
+                  : "";
+              String MobileNumber = Person_ID['MobileNumber'] != null
+                  ? Person_ID['MobileNumber'].toString()
+                  : "";
+              String Dial_Code = Person_ID['Dial_Code'] != null
+                  ? Person_ID['Dial_Code'].toString()
+                  : "";
 
               maintenanceDetails.Applicant_ID = ID;
               maintenanceDetails.Applicant_UserID = UserID;
@@ -9949,19 +12474,36 @@ class ApiManager {
             if (myobject["Owner_ID"] != null) {
               var OwnerIDobj = myobject["Owner_ID"];
 
-              String Owner_ID = OwnerIDobj['ID'] != null ? OwnerIDobj['ID'].toString() : "";
-              String HomePageLink = OwnerIDobj['HomePageLink'] != null ? OwnerIDobj['HomePageLink'].toString() : "";
-              String CompanyName = OwnerIDobj['CompanyName'] != null ? OwnerIDobj['CompanyName'].toString() : "";
+              String Owner_ID =
+                  OwnerIDobj['ID'] != null ? OwnerIDobj['ID'].toString() : "";
+              String HomePageLink = OwnerIDobj['HomePageLink'] != null
+                  ? OwnerIDobj['HomePageLink'].toString()
+                  : "";
+              String CompanyName = OwnerIDobj['CompanyName'] != null
+                  ? OwnerIDobj['CompanyName'].toString()
+                  : "";
 
-              MediaInfo? Company_logo = OwnerIDobj['Company_logo'] != null ? MediaInfo.fromJson(OwnerIDobj['Company_logo']) : null;
+              MediaInfo? Company_logo = OwnerIDobj['Company_logo'] != null
+                  ? MediaInfo.fromJson(OwnerIDobj['Company_logo'])
+                  : null;
 
               var PersonIDobj = OwnerIDobj["PersonID"];
 
-              String Email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-              String FirstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-              String LastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-              String MobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
-              String Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "";
+              String Email = PersonIDobj['Email'] != null
+                  ? PersonIDobj['Email'].toString()
+                  : "";
+              String FirstName = PersonIDobj['FirstName'] != null
+                  ? PersonIDobj['FirstName'].toString()
+                  : "";
+              String LastName = PersonIDobj['LastName'] != null
+                  ? PersonIDobj['LastName'].toString()
+                  : "";
+              String MobileNumber = PersonIDobj['MobileNumber'] != null
+                  ? PersonIDobj['MobileNumber'].toString()
+                  : "";
+              String Dial_Code = PersonIDobj['Dial_Code'] != null
+                  ? PersonIDobj['Dial_Code'].toString()
+                  : "";
 
               maintenanceDetails.Owner_ID = Owner_ID;
               maintenanceDetails.HomePageLink = HomePageLink;
@@ -9974,24 +12516,31 @@ class ApiManager {
               maintenanceDetails.Company_logo = Company_logo;
             }
 
-            await ApiManager().MaintenanceImagesApi(context, maintenanceid, (status, responce, maintenanceImageslist) async {
+            await ApiManager().MaintenanceImagesApi(context, maintenanceid,
+                (status, responce, maintenanceImageslist) async {
               if (status) {
-                maintenanceDetails.maintenanceImageslist = maintenanceImageslist;
+                maintenanceDetails.maintenanceImageslist =
+                    maintenanceImageslist;
               } else {
                 maintenanceDetails.maintenanceImageslist = [];
               }
 
-              await ApiManager().MaintenanceVendorDetailsApi(context, maintenanceid, (status, responce, maintenanceVendorlist) {
+              await ApiManager()
+                  .MaintenanceVendorDetailsApi(context, maintenanceid,
+                      (status, responce, maintenanceVendorlist) {
                 if (status) {
-                  maintenanceDetails.maintenanceVendorlist = maintenanceVendorlist;
+                  maintenanceDetails.maintenanceVendorlist =
+                      maintenanceVendorlist;
                 } else {
                   maintenanceDetails.maintenanceVendorlist = [];
                 }
 
                 if (flag == 1) {
-                  updateMaintenanceData(context, maintenanceDetails, callBackQuesy);
+                  updateMaintenanceData(
+                      context, maintenanceDetails, callBackQuesy);
                 } else if (flag == 2) {
-                  updateTenantMaintenanceData(context, maintenanceDetails, callBackQuesy);
+                  updateTenantMaintenanceData(
+                      context, maintenanceDetails, callBackQuesy);
                 } else {
                   callBackQuesy(true, "", maintenanceDetails);
                 }
@@ -10009,9 +12558,14 @@ class ApiManager {
     });
   }
 
-  updateMaintenanceData(BuildContext context, MaintenanceDetails maintenanceDetails, CallBackMaintenanceDetails callBackQuesy) async {
-    List<SystemEnumDetails> MaintenanceStatuslist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
-    List<SystemEnumDetails> MaintenanceCategorylist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
+  updateMaintenanceData(
+      BuildContext context,
+      MaintenanceDetails maintenanceDetails,
+      CallBackMaintenanceDetails callBackQuesy) async {
+    List<SystemEnumDetails> MaintenanceStatuslist =
+        QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
+    List<SystemEnumDetails> MaintenanceCategorylist =
+        QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
 
     _store.dispatch(UpdateMER_MaintenanceStatuslist(MaintenanceStatuslist));
     _store.dispatch(UpdateMER_MaintenanceCategorylist(MaintenanceCategorylist));
@@ -10019,10 +12573,12 @@ class ApiManager {
     _store.dispatch(UpdateMER_selectCategory(maintenanceDetails.Category));
 
     if (maintenanceDetails.Priority != null) {
-      _store.dispatch(UpdateMER_priority(maintenanceDetails.Priority!.EnumDetailID));
+      _store.dispatch(
+          UpdateMER_priority(maintenanceDetails.Priority!.EnumDetailID));
     }
 
-    ApiManager().getLogActivityList(context, maintenanceDetails.mID.toString(), (error, respoce) async {
+    ApiManager().getLogActivityList(context, maintenanceDetails.mID.toString(),
+        (error, respoce) async {
       if (error) {
       } else {
         Helper.Log("respoce", respoce);
@@ -10030,18 +12586,25 @@ class ApiManager {
     });
 
     _store.dispatch(UpdateMER_mid(maintenanceDetails.mID!));
-    _store.dispatch(UpdateMER_Applicant_ID(maintenanceDetails.Applicant_ID != null ? maintenanceDetails.Applicant_ID! : ""));
+    _store.dispatch(UpdateMER_Applicant_ID(
+        maintenanceDetails.Applicant_ID != null
+            ? maintenanceDetails.Applicant_ID!
+            : ""));
     _store.dispatch(UpdateMER_Type_User(maintenanceDetails.Type_User!));
     _store.dispatch(UpdateMER_IsLock(maintenanceDetails.IsLock!));
     _store.dispatch(UpdateMER_requestName(maintenanceDetails.RequestName!));
     _store.dispatch(UpdateMER_description(maintenanceDetails.Describe_Issue!));
     _store.dispatch(UpdateMER_description(maintenanceDetails.Describe_Issue!));
 
-    if (maintenanceDetails.maintenanceImageslist != null && maintenanceDetails.maintenanceImageslist!.length > 0) {
+    if (maintenanceDetails.maintenanceImageslist != null &&
+        maintenanceDetails.maintenanceImageslist!.length > 0) {
       List<FileObject> fileobjectlist = [];
 
-      for (int i = 0; i < maintenanceDetails.maintenanceImageslist!.length; i++) {
-        PropertyMaintenanceImages pim = maintenanceDetails.maintenanceImageslist![i];
+      for (int i = 0;
+          i < maintenanceDetails.maintenanceImageslist!.length;
+          i++) {
+        PropertyMaintenanceImages pim =
+            maintenanceDetails.maintenanceImageslist![i];
 
         FileObject fileObject = new FileObject();
         fileObject.appImage = null;
@@ -10057,7 +12620,9 @@ class ApiManager {
 
     String address = maintenanceDetails.PropertyName! +
         " - " +
-        (maintenanceDetails.Suite_Unit!.isNotEmpty ? maintenanceDetails.Suite_Unit! + " - " : "") +
+        (maintenanceDetails.Suite_Unit!.isNotEmpty
+            ? maintenanceDetails.Suite_Unit! + " - "
+            : "") +
         maintenanceDetails.Property_Address!;
 
     PropertyDropData propertyDropData = new PropertyDropData();
@@ -10067,7 +12632,9 @@ class ApiManager {
     _store.dispatch(UpdateMER_selectproperty(propertyDropData));
 
     _store.dispatch(UpdateMER_PropertyDropDatalist([]));
-    await ApiManager().getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID), (status, responce, errorlist) {
+    await ApiManager()
+        .getPropertyMaintenanceList(context, Prefs.getString(PrefsName.OwnerID),
+            (status, responce, errorlist) {
       if (status) {
         _store.dispatch(UpdateMER_PropertyDropDatalist(errorlist));
       } else {
@@ -10085,18 +12652,23 @@ class ApiManager {
     _store.dispatch(UpdateMER_selectedState(maintenanceDetails.State));
 
     if (maintenanceDetails.Country != null) {
-      await ApiManager().getStateList(context, maintenanceDetails.Country!.ID.toString(), (status, responce, errorlist) {
+      await ApiManager()
+          .getStateList(context, maintenanceDetails.Country!.ID.toString(),
+              (status, responce, errorlist) {
         if (status) {
           _store.dispatch(UpdateMER_statedatalist(errorlist));
         }
       });
 
       if (maintenanceDetails.State != null) {
-        await ApiManager().getCityList(context, maintenanceDetails.State!.ID.toString(), (status, responce, errorlist) async {
+        await ApiManager()
+            .getCityList(context, maintenanceDetails.State!.ID.toString(),
+                (status, responce, errorlist) async {
           if (status) {
             _store.dispatch(UpdateMER_citydatalist(errorlist));
 
-            if (maintenanceDetails.City != null && maintenanceDetails.City!.isNotEmpty) {
+            if (maintenanceDetails.City != null &&
+                maintenanceDetails.City!.isNotEmpty) {
               List<CityData>? selectedCity = [];
               for (int i = 0; i < errorlist.length; i++) {
                 CityData cityData = errorlist[i];
@@ -10108,19 +12680,27 @@ class ApiManager {
 
               _store.dispatch(UpdateMER_selectedCity(selectedCity));
 
-              await ApiManager().getCityWiseVendorList(context, maintenanceDetails.City!, (status, responce, errorlist) async {
+              await ApiManager()
+                  .getCityWiseVendorList(context, maintenanceDetails.City!,
+                      (status, responce, errorlist) async {
                 if (status) {
                   _store.dispatch(UpdateMER_mainvendordatalist(errorlist));
-                  List<SystemEnumDetails> categorylist = await Helper.removeDuplicates(errorlist);
+                  List<SystemEnumDetails> categorylist =
+                      await Helper.removeDuplicates(errorlist);
                   _store.dispatch(UpdateMER_filterCategorylist(categorylist));
 
-                  Helper.Log("getCityWiseVendorList categorylist", categorylist.toString());
+                  Helper.Log("getCityWiseVendorList categorylist",
+                      categorylist.toString());
 
-                  if (maintenanceDetails.maintenanceVendorlist != null && maintenanceDetails.maintenanceVendorlist!.length > 0) {
+                  if (maintenanceDetails.maintenanceVendorlist != null &&
+                      maintenanceDetails.maintenanceVendorlist!.length > 0) {
                     List<AddVendorData> addvendordatalist = [];
 
-                    for (int i = 0; i < maintenanceDetails.maintenanceVendorlist!.length; i++) {
-                      MaintenanceVendor avd = maintenanceDetails.maintenanceVendorlist![i];
+                    for (int i = 0;
+                        i < maintenanceDetails.maintenanceVendorlist!.length;
+                        i++) {
+                      MaintenanceVendor avd =
+                          maintenanceDetails.maintenanceVendorlist![i];
 
                       AddVendorData addVendorData = new AddVendorData();
                       addVendorData.id = avd.ID;
@@ -10129,16 +12709,19 @@ class ApiManager {
 
                       List<VendorData> vendordatalist = [];
                       if (avd.category != null) {
-                        vendordatalist = await Helper.filtervendor(errorlist, avd.category!);
+                        vendordatalist =
+                            await Helper.filtervendor(errorlist, avd.category!);
                       }
 
                       addVendorData.filtervendordatalist = vendordatalist;
-                      addVendorData.selectvendor = await Helper.filtervendorByID(errorlist, avd.vid!);
+                      addVendorData.selectvendor =
+                          await Helper.filtervendorByID(errorlist, avd.vid!);
 
                       addvendordatalist.add(addVendorData);
                     }
 
-                    _store.dispatch(UpdateMER_vendordatalist(addvendordatalist));
+                    _store
+                        .dispatch(UpdateMER_vendordatalist(addvendordatalist));
                   } else {
                     _store.dispatch(UpdateMER_vendordatalist([]));
                   }
@@ -10163,16 +12746,21 @@ class ApiManager {
     callBackQuesy(true, "", maintenanceDetails);
   }
 
-  updateTenantMaintenanceData(BuildContext context, MaintenanceDetails maintenanceDetails, CallBackMaintenanceDetails callBackQuesy) async {
+  updateTenantMaintenanceData(
+      BuildContext context,
+      MaintenanceDetails maintenanceDetails,
+      CallBackMaintenanceDetails callBackQuesy) async {
     // List<SystemEnumDetails> MaintenanceStatuslist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Status);
-    List<SystemEnumDetails> MaintenanceCategorylist = QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
+    List<SystemEnumDetails> MaintenanceCategorylist =
+        QueryFilter().PlainValues(eSystemEnums().Maintenance_Category);
 
     _store.dispatch(UpdateTMR_MaintenanceCategorylist(MaintenanceCategorylist));
     _store.dispatch(UpdateTMR_selectStatus(maintenanceDetails.Status));
     _store.dispatch(UpdateTMR_selectCategory(maintenanceDetails.Category));
 
     if (maintenanceDetails.Priority != null) {
-      _store.dispatch(UpdateTMR_priority(maintenanceDetails.Priority!.EnumDetailID));
+      _store.dispatch(
+          UpdateTMR_priority(maintenanceDetails.Priority!.EnumDetailID));
     }
 
     _store.dispatch(UpdateTMR_mid(maintenanceDetails.mID!));
@@ -10181,11 +12769,15 @@ class ApiManager {
     _store.dispatch(UpdateTMR_requestName(maintenanceDetails.RequestName!));
     _store.dispatch(UpdateTMR_description(maintenanceDetails.Describe_Issue!));
 
-    if (maintenanceDetails.maintenanceImageslist != null && maintenanceDetails.maintenanceImageslist!.length > 0) {
+    if (maintenanceDetails.maintenanceImageslist != null &&
+        maintenanceDetails.maintenanceImageslist!.length > 0) {
       List<FileObject> fileobjectlist = [];
 
-      for (int i = 0; i < maintenanceDetails.maintenanceImageslist!.length; i++) {
-        PropertyMaintenanceImages pim = maintenanceDetails.maintenanceImageslist![i];
+      for (int i = 0;
+          i < maintenanceDetails.maintenanceImageslist!.length;
+          i++) {
+        PropertyMaintenanceImages pim =
+            maintenanceDetails.maintenanceImageslist![i];
 
         FileObject fileObject = new FileObject();
         fileObject.appImage = null;
@@ -10224,7 +12816,9 @@ class ApiManager {
         List<CountryData> countrylist = <CountryData>[];
 
         if (data['Result'].length > 0) {
-          countrylist = (data['Result'] as List).map((p) => CountryData.fromJson(p)).toList();
+          countrylist = (data['Result'] as List)
+              .map((p) => CountryData.fromJson(p))
+              .toList();
         }
         callback(true, "", countrylist);
       } else {
@@ -10257,7 +12851,9 @@ class ApiManager {
         List<StateData> statelist = <StateData>[];
 
         if (data['Result'].length > 0) {
-          statelist = (data['Result'] as List).map((p) => StateData.fromJson(p)).toList();
+          statelist = (data['Result'] as List)
+              .map((p) => StateData.fromJson(p))
+              .toList();
         }
         callback(true, "", statelist);
       } else {
@@ -10290,7 +12886,9 @@ class ApiManager {
         List<CityData> citylist = <CityData>[];
 
         if (data['Result'].length > 0) {
-          citylist = (data['Result'] as List).map((p) => CityData.fromJson(p)).toList();
+          citylist = (data['Result'] as List)
+              .map((p) => CityData.fromJson(p))
+              .toList();
         }
         callback(true, "", citylist);
       } else {
@@ -10300,7 +12898,8 @@ class ApiManager {
     });
   }
 
-  getPropertyMaintenanceList(BuildContext context, String ownerid, CallBackMaintenancePro callback) async {
+  getPropertyMaintenanceList(BuildContext context, String ownerid,
+      CallBackMaintenancePro callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -10329,17 +12928,27 @@ class ApiManager {
 
           String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          String PropertyName = myobject['PropertyName'] != null ? myobject['PropertyName'].toString() : "";
+          String PropertyName = myobject['PropertyName'] != null
+              ? myobject['PropertyName'].toString()
+              : "";
 
-          String Suite_Unit = myobject['Suite_Unit'] != null ? myobject['Suite_Unit'].toString() : "";
+          String Suite_Unit = myobject['Suite_Unit'] != null
+              ? myobject['Suite_Unit'].toString()
+              : "";
 
-          String Property_Address = myobject['Property_Address'] != null ? myobject['Property_Address'].toString() : "";
+          String Property_Address = myobject['Property_Address'] != null
+              ? myobject['Property_Address'].toString()
+              : "";
 
-          String City = myobject['City'] != null ? myobject['City'].toString() : "";
+          String City =
+              myobject['City'] != null ? myobject['City'].toString() : "";
 
-          String Country = myobject['Country'] != null ? myobject['Country'].toString() : "";
+          String Country =
+              myobject['Country'] != null ? myobject['Country'].toString() : "";
 
-          String Province = myobject['Province'] != null ? myobject['Province'].toString() : "";
+          String Province = myobject['Province'] != null
+              ? myobject['Province'].toString()
+              : "";
 
           String address = PropertyName +
               " - " +
@@ -10355,7 +12964,14 @@ class ApiManager {
           propertyDropData.id = ID;
           propertyDropData.propertyName = address;
           propertyDropData.adress =
-              (Suite_Unit.isNotEmpty ? Suite_Unit + " - " : "") + Property_Address + ", " + City + ", " + Province + ", " + Country;
+              (Suite_Unit.isNotEmpty ? Suite_Unit + " - " : "") +
+                  Property_Address +
+                  ", " +
+                  City +
+                  ", " +
+                  Province +
+                  ", " +
+                  Country;
           ;
 
           propertylist.add(propertyDropData);
@@ -10368,7 +12984,8 @@ class ApiManager {
     });
   }
 
-  getTemplates(BuildContext context, String ownerid, CallBackTemplate callback) async {
+  getTemplates(
+      BuildContext context, String ownerid, CallBackTemplate callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -10397,7 +13014,8 @@ class ApiManager {
 
           int ID = myobject['id'] != null ? myobject['id'] : 0;
 
-          String name = myobject['name'] != null ? myobject['name'].toString() : "";
+          String name =
+              myobject['name'] != null ? myobject['name'].toString() : "";
 
           templatesDropData.id = ID;
           templatesDropData.name = name;
@@ -10412,7 +13030,8 @@ class ApiManager {
     });
   }
 
-  getNamesEvent(BuildContext context, String ownerid, CallBackLink callback) async {
+  getNamesEvent(
+      BuildContext context, String ownerid, CallBackLink callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -10445,7 +13064,8 @@ class ApiManager {
     });
   }
 
-  getPropertyWiseApplicantID(BuildContext context, String propid, CallBackApplicant callback) async {
+  getPropertyWiseApplicantID(
+      BuildContext context, String propid, CallBackApplicant callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -10472,9 +13092,12 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var myobject = data['Result'][i];
 
-            Applicant_ID = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'].toString() : "";
+            Applicant_ID = myobject['Applicant_ID'] != null
+                ? myobject['Applicant_ID'].toString()
+                : "";
 
-            ApplicantionID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            ApplicantionID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
           }
         }
         callback(true, "", Applicant_ID, ApplicantionID);
@@ -10485,7 +13108,8 @@ class ApiManager {
     });
   }
 
-  MaintenanceImagesUpload(BuildContext context, List<FileObject> fileobjectlist, CallBackListQuesy CallBackQuesy) async {
+  MaintenanceImagesUpload(BuildContext context, List<FileObject> fileobjectlist,
+      CallBackListQuesy CallBackQuesy) async {
     //get s3 links
     List urlS3 = await getUrlS3File(fileobjectlist, "MaintenanceImages");
 
@@ -10500,7 +13124,8 @@ class ApiManager {
       String S3content = urlS3[i]["presigned_url"];
       //var multipartRequest =
       // new http.MultipartRequest("PUT", Uri.parse(S3content));
-      var multipartRequest = new http.StreamedRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
       multipartRequest.headers["Content-Type"] = "binary/octet-stream";
       // multipartRequest.headers.addAll(headers);
       List<int> _selectedFile = fileobjectlist[i].appImage!;
@@ -10520,14 +13145,16 @@ class ApiManager {
   }
 
   //Multifile
-  MaintenanceImagesUploadBack(BuildContext context, List<FileObject> fileobjectlist, CallBackListQuesy CallBackQuesy) async {
+  MaintenanceImagesUploadBack(BuildContext context,
+      List<FileObject> fileobjectlist, CallBackListQuesy CallBackQuesy) async {
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
       'ApplicationCode': Weburl.API_CODE,
     };
 
-    var multipartRequest = new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
+    var multipartRequest =
+        new http.MultipartRequest("POST", Uri.parse(Weburl.FileUpload_Api));
     multipartRequest.headers.addAll(headers);
 
     for (int i = 0; i < fileobjectlist.length; i++) {
@@ -10538,7 +13165,8 @@ class ApiManager {
         String filepath = "";
         String extenson = "";
 
-        if ((file.filename!.split('.').last).contains("jpg") || (file.filename!.split('.').last).contains("JPG")) {
+        if ((file.filename!.split('.').last).contains("jpg") ||
+            (file.filename!.split('.').last).contains("JPG")) {
           /*String name = file.filename!
               .replaceAll("." + file.filename!.split('.').last, "");
           String name2 = '${DateTime
@@ -10546,19 +13174,24 @@ class ApiManager {
               .millisecondsSinceEpoch}.jpg';*/
           filepath = file.filename!;
           extenson = "jpg";
-        } else if ((file.filename!.split('.').last).contains("png") || (file.filename!.split('.').last).contains("PNG")) {
+        } else if ((file.filename!.split('.').last).contains("png") ||
+            (file.filename!.split('.').last).contains("PNG")) {
           filepath = file.filename!;
           extenson = "png";
-        } else if ((file.filename!.split('.').last).contains("jpeg") || (file.filename!.split('.').last).contains("jpeg")) {
+        } else if ((file.filename!.split('.').last).contains("jpeg") ||
+            (file.filename!.split('.').last).contains("jpeg")) {
           filepath = file.filename!;
           extenson = "jpeg";
-        } else if ((file.filename!.split('.').last).contains("heif") || (file.filename!.split('.').last).contains("HEIF")) {
+        } else if ((file.filename!.split('.').last).contains("heif") ||
+            (file.filename!.split('.').last).contains("HEIF")) {
           filepath = file.filename!;
           extenson = "png";
-        } else if ((file.filename!.split('.').last).contains("pdf") || (file.filename!.split('.').last).contains("PDF")) {
+        } else if ((file.filename!.split('.').last).contains("pdf") ||
+            (file.filename!.split('.').last).contains("PDF")) {
           filepath = file.filename!;
           extenson = "pdf";
-        } else if ((file.filename!.split('.').last).contains("mp4") || (file.filename!.split('.').last).contains("MP4")) {
+        } else if ((file.filename!.split('.').last).contains("mp4") ||
+            (file.filename!.split('.').last).contains("MP4")) {
           filepath = file.filename!;
           extenson = "mp4";
         } else {
@@ -10566,8 +13199,10 @@ class ApiManager {
           extenson = "png";
         }
 
-        multipartRequest.files.add(await http.MultipartFile.fromBytes('file[]', _selectedFile,
-            contentType: new MediaType('application', extenson), filename: filepath));
+        multipartRequest.files.add(await http.MultipartFile.fromBytes(
+            'file[]', _selectedFile,
+            contentType: new MediaType('application', extenson),
+            filename: filepath));
       }
     }
 
@@ -10583,9 +13218,13 @@ class ApiManager {
                 for (int i = 0; i < data['Result'].length; i++) {
                   var myobject = data['Result'][i];
 
-                  String MediaID = myobject['MediaID'] != null ? "" + myobject['MediaID'].toString() : "";
+                  String MediaID = myobject['MediaID'] != null
+                      ? "" + myobject['MediaID'].toString()
+                      : "";
 
-                  String url = myobject['url'] != null ? "" + myobject['url'].toString() : "";
+                  String url = myobject['url'] != null
+                      ? "" + myobject['url'].toString()
+                      : "";
 
                   mediaString.add(MediaID);
 
@@ -10613,9 +13252,13 @@ class ApiManager {
     });
   }
 
-  InsetMaintenanceImages(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String json =
-        QueryFilter().InsertQueryArray(POJO, etableName.PropertyMaintenanceImages, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetMaintenanceImages(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQueryArray(
+        POJO,
+        etableName.PropertyMaintenanceImages,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
       if (error) {
@@ -10625,7 +13268,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -10643,8 +13288,10 @@ class ApiManager {
     });
   }
 
-  InsetNewRequest(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.Maintenance, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetNewRequest(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.Maintenance,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10657,8 +13304,14 @@ class ApiManager {
     });
   }
 
-  UpdateMaintenanceRequest(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Maintenance, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateMaintenanceRequest(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Maintenance,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10671,13 +13324,17 @@ class ApiManager {
     });
   }
 
-  getLogActivityList(BuildContext context, String mid, CallBackQuesy callback) async {
+  getLogActivityList(
+      BuildContext context, String mid, CallBackQuesy callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
     var myjson = {
       "DSQID": Weburl.DSQ_LogActivity_list,
-      "Reqtokens": {"Owner_ID": Prefs.getString(PrefsName.OwnerID), "Maintenance_ID": mid},
+      "Reqtokens": {
+        "Owner_ID": Prefs.getString(PrefsName.OwnerID),
+        "Maintenance_ID": mid
+      },
       "LoadLookUpValues": false,
     };
 
@@ -10694,7 +13351,9 @@ class ApiManager {
         List<LogActivity> logactivitylist = <LogActivity>[];
 
         if (data['Result'].length > 0) {
-          logactivitylist = (data['Result'] as List).map((p) => LogActivity.fromJson(p)).toList();
+          logactivitylist = (data['Result'] as List)
+              .map((p) => LogActivity.fromJson(p))
+              .toList();
         }
 
         _store.dispatch(UpdateMER_logActivitylist(logactivitylist));
@@ -10708,8 +13367,10 @@ class ApiManager {
     });
   }
 
-  InsetLogActivity(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.LogActivities, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetLogActivity(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.LogActivities,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10722,8 +13383,10 @@ class ApiManager {
     });
   }
 
-  deleteLogActivity(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.LogActivities, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteLogActivity(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.LogActivities,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10735,8 +13398,10 @@ class ApiManager {
     });
   }
 
-  deleteMaintenanceVendor(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.MaintenanceVendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteMaintenanceVendor(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.MaintenanceVendor,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10748,11 +13413,16 @@ class ApiManager {
     });
   }
 
-  InsetAssigneVendorRequest(BuildContext context, List<Object> POJO, Object? dPOJO, CallBackQuesy CallBackQuesy) {
+  InsetAssigneVendorRequest(BuildContext context, List<Object> POJO,
+      Object? dPOJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> queryList = <QueryObject>[];
 
     if (dPOJO != null) {
-      String query = QueryFilter().DeleteQuery(dPOJO, etableName.MaintenanceVendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String query = QueryFilter().DeleteQuery(
+          dPOJO,
+          etableName.MaintenanceVendor,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var querydecode = jsonDecode(query);
       QueryObject updatequery = QueryObject.fromJson(querydecode);
@@ -10760,8 +13430,11 @@ class ApiManager {
     }
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.MaintenanceVendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.MaintenanceVendor,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -10779,7 +13452,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -10797,9 +13472,13 @@ class ApiManager {
     });
   }
 
-  deleteMaintenanceImage(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.PropertyMaintenanceImages, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteMaintenanceImage(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.PropertyMaintenanceImages,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -10863,35 +13542,64 @@ class ApiManager {
 
           vendorData.id = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          vendorData.province = myobject['Province'] != null ? StateData.fromJson(myobject['Province']) : null;
+          vendorData.province = myobject['Province'] != null
+              ? StateData.fromJson(myobject['Province'])
+              : null;
 
-          vendorData.country = myobject['Country'] != null ? CountryData.fromJson(myobject['Country']) : null;
+          vendorData.country = myobject['Country'] != null
+              ? CountryData.fromJson(myobject['Country'])
+              : null;
 
-          vendorData.companyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
-          vendorData.address = myobject['Address'] != null ? myobject['Address'].toString() : "";
-          vendorData.rating = myobject['Rating'] != null ? myobject['Rating'] : 0;
-          vendorData.suite = myobject['Suite'] != null ? myobject['Suite'].toString() : "";
-          vendorData.PostalCode = myobject['PostalCode'] != null ? myobject['PostalCode'].toString() : "";
-          vendorData.Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          vendorData.companyName = myobject['CompanyName'] != null
+              ? myobject['CompanyName'].toString()
+              : "";
+          vendorData.address =
+              myobject['Address'] != null ? myobject['Address'].toString() : "";
+          vendorData.rating =
+              myobject['Rating'] != null ? myobject['Rating'] : 0;
+          vendorData.suite =
+              myobject['Suite'] != null ? myobject['Suite'].toString() : "";
+          vendorData.PostalCode = myobject['PostalCode'] != null
+              ? myobject['PostalCode'].toString()
+              : "";
+          vendorData.Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          vendorData.city = myobject['City'] != null ? CityData.fromJson(myobject['City']) : null;
+          vendorData.city = myobject['City'] != null
+              ? CityData.fromJson(myobject['City'])
+              : null;
 
           if (myobject['PersonID'] != null) {
             var PersonIDobj = myobject['PersonID'];
 
-            vendorData.PersonID = PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
+            vendorData.PersonID =
+                PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
 
-            vendorData.firstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-            vendorData.lastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-            vendorData.email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
+            vendorData.firstName = PersonIDobj['FirstName'] != null
+                ? PersonIDobj['FirstName'].toString()
+                : "";
+            vendorData.lastName = PersonIDobj['LastName'] != null
+                ? PersonIDobj['LastName'].toString()
+                : "";
+            vendorData.email = PersonIDobj['Email'] != null
+                ? PersonIDobj['Email'].toString()
+                : "";
+            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null
+                ? PersonIDobj['MobileNumber'].toString()
+                : "";
 
-            vendorData.Country_Code = PersonIDobj['Country_Code'] != null ? PersonIDobj['Country_Code'].toString() : "CA";
+            vendorData.Country_Code = PersonIDobj['Country_Code'] != null
+                ? PersonIDobj['Country_Code'].toString()
+                : "CA";
 
-            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "+91";
+            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null
+                ? PersonIDobj['Dial_Code'].toString()
+                : "+91";
           }
 
-          vendorData.category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+          vendorData.category = myobject['Category'] != null
+              ? SystemEnumDetails.fromJson(myobject['Category'])
+              : null;
 
           //vendorData.category = null;
 
@@ -10902,7 +13610,8 @@ class ApiManager {
 
         if (ftime == 0) {
           if (vendorDatalist.length > 0) {
-            int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
             _store.dispatch(UpdateLLVendor_totalRecord(TotalRecords));
 
@@ -10984,35 +13693,65 @@ class ApiManager {
 
             vendorData.id = myobject['ID'] != null ? myobject['ID'] : 0;
 
-            vendorData.province = myobject['Province'] != null ? StateData.fromJson(myobject['Province']) : null;
+            vendorData.province = myobject['Province'] != null
+                ? StateData.fromJson(myobject['Province'])
+                : null;
 
-            vendorData.country = myobject['Country'] != null ? CountryData.fromJson(myobject['Country']) : null;
+            vendorData.country = myobject['Country'] != null
+                ? CountryData.fromJson(myobject['Country'])
+                : null;
 
-            vendorData.companyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
-            vendorData.address = myobject['Address'] != null ? myobject['Address'].toString() : "";
-            vendorData.rating = myobject['Rating'] != null ? myobject['Rating'] : 0;
-            vendorData.suite = myobject['Suite'] != null ? myobject['Suite'].toString() : "";
-            vendorData.PostalCode = myobject['PostalCode'] != null ? myobject['PostalCode'].toString() : "";
-            vendorData.Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+            vendorData.companyName = myobject['CompanyName'] != null
+                ? myobject['CompanyName'].toString()
+                : "";
+            vendorData.address = myobject['Address'] != null
+                ? myobject['Address'].toString()
+                : "";
+            vendorData.rating =
+                myobject['Rating'] != null ? myobject['Rating'] : 0;
+            vendorData.suite =
+                myobject['Suite'] != null ? myobject['Suite'].toString() : "";
+            vendorData.PostalCode = myobject['PostalCode'] != null
+                ? myobject['PostalCode'].toString()
+                : "";
+            vendorData.Note =
+                myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-            vendorData.city = myobject['City'] != null ? CityData.fromJson(myobject['City']) : null;
+            vendorData.city = myobject['City'] != null
+                ? CityData.fromJson(myobject['City'])
+                : null;
 
             if (myobject['PersonID'] != null) {
               var PersonIDobj = myobject['PersonID'];
 
-              vendorData.PersonID = PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
+              vendorData.PersonID =
+                  PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
 
-              vendorData.firstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-              vendorData.lastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-              vendorData.email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-              vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
+              vendorData.firstName = PersonIDobj['FirstName'] != null
+                  ? PersonIDobj['FirstName'].toString()
+                  : "";
+              vendorData.lastName = PersonIDobj['LastName'] != null
+                  ? PersonIDobj['LastName'].toString()
+                  : "";
+              vendorData.email = PersonIDobj['Email'] != null
+                  ? PersonIDobj['Email'].toString()
+                  : "";
+              vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null
+                  ? PersonIDobj['MobileNumber'].toString()
+                  : "";
 
-              vendorData.Country_Code = PersonIDobj['Country_Code'] != null ? PersonIDobj['Country_Code'].toString() : "CA";
+              vendorData.Country_Code = PersonIDobj['Country_Code'] != null
+                  ? PersonIDobj['Country_Code'].toString()
+                  : "CA";
 
-              vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "+91";
+              vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null
+                  ? PersonIDobj['Dial_Code'].toString()
+                  : "+91";
             }
 
-            vendorData.category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+            vendorData.category = myobject['Category'] != null
+                ? SystemEnumDetails.fromJson(myobject['Category'])
+                : null;
 
             vendorData.showInstruction = false;
 
@@ -11022,21 +13761,29 @@ class ApiManager {
             row.add(vendorData.firstName! + " " + vendorData.lastName!);
             row.add(vendorData.email);
             row.add(vendorData.mobileNumber);
-            row.add(vendorData.category != null ? vendorData.category!.displayValue : "");
+            row.add(vendorData.category != null
+                ? vendorData.category!.displayValue
+                : "");
             row.add(vendorData.rating);
             row.add(vendorData.address);
             row.add(vendorData.suite);
             row.add(vendorData.PostalCode);
             row.add(vendorData.city != null ? vendorData.city!.CityName : "");
-            row.add(vendorData.province != null ? vendorData.province!.StateName : "");
-            row.add(vendorData.country != null ? vendorData.country!.CountryName : "");
+            row.add(vendorData.province != null
+                ? vendorData.province!.StateName
+                : "");
+            row.add(vendorData.country != null
+                ? vendorData.country!.CountryName
+                : "");
             row.add(vendorData.Note);
             csvList.add(row);
           }
 
           csv = const ListToCsvConverter().convert(csvList);
 
-          String filename = "Vendor" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
+          String filename = "Vendor" +
+              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+              ".csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -11050,7 +13797,8 @@ class ApiManager {
           html.document.body!.children.add(anchor);
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
 
         loader.remove();
@@ -11061,7 +13809,8 @@ class ApiManager {
     });
   }
 
-  getVendorDetails(BuildContext context, String vid, CallBackVendorData callBack) {
+  getVendorDetails(
+      BuildContext context, String vid, CallBackVendorData callBack) {
     var myjson = {
       "DSQID": Weburl.DSQ_Vendor_Details,
       "Reqtokens": {"ID": vid},
@@ -11084,35 +13833,64 @@ class ApiManager {
 
           vendorData.id = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          vendorData.province = myobject['Province'] != null ? StateData.fromJson(myobject['Province']) : null;
+          vendorData.province = myobject['Province'] != null
+              ? StateData.fromJson(myobject['Province'])
+              : null;
 
-          vendorData.country = myobject['Country'] != null ? CountryData.fromJson(myobject['Country']) : null;
+          vendorData.country = myobject['Country'] != null
+              ? CountryData.fromJson(myobject['Country'])
+              : null;
 
-          vendorData.companyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
-          vendorData.address = myobject['Address'] != null ? myobject['Address'].toString() : "";
-          vendorData.rating = myobject['Rating'] != null ? myobject['Rating'] : 0;
-          vendorData.suite = myobject['Suite'] != null ? myobject['Suite'].toString() : "";
-          vendorData.PostalCode = myobject['PostalCode'] != null ? myobject['PostalCode'].toString() : "";
-          vendorData.Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          vendorData.companyName = myobject['CompanyName'] != null
+              ? myobject['CompanyName'].toString()
+              : "";
+          vendorData.address =
+              myobject['Address'] != null ? myobject['Address'].toString() : "";
+          vendorData.rating =
+              myobject['Rating'] != null ? myobject['Rating'] : 0;
+          vendorData.suite =
+              myobject['Suite'] != null ? myobject['Suite'].toString() : "";
+          vendorData.PostalCode = myobject['PostalCode'] != null
+              ? myobject['PostalCode'].toString()
+              : "";
+          vendorData.Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          vendorData.city = myobject['City'] != null ? CityData.fromJson(myobject['City']) : null;
+          vendorData.city = myobject['City'] != null
+              ? CityData.fromJson(myobject['City'])
+              : null;
 
           if (myobject['PersonID'] != null) {
             var PersonIDobj = myobject['PersonID'];
 
-            vendorData.PersonID = PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
+            vendorData.PersonID =
+                PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
 
-            vendorData.firstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-            vendorData.lastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-            vendorData.email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
+            vendorData.firstName = PersonIDobj['FirstName'] != null
+                ? PersonIDobj['FirstName'].toString()
+                : "";
+            vendorData.lastName = PersonIDobj['LastName'] != null
+                ? PersonIDobj['LastName'].toString()
+                : "";
+            vendorData.email = PersonIDobj['Email'] != null
+                ? PersonIDobj['Email'].toString()
+                : "";
+            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null
+                ? PersonIDobj['MobileNumber'].toString()
+                : "";
 
-            vendorData.Country_Code = PersonIDobj['Country_Code'] != null ? PersonIDobj['Country_Code'].toString() : "CA";
+            vendorData.Country_Code = PersonIDobj['Country_Code'] != null
+                ? PersonIDobj['Country_Code'].toString()
+                : "CA";
 
-            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "+91";
+            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null
+                ? PersonIDobj['Dial_Code'].toString()
+                : "+91";
           }
 
-          vendorData.category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+          vendorData.category = myobject['Category'] != null
+              ? SystemEnumDetails.fromJson(myobject['Category'])
+              : null;
 
           //vendorData.category = null;
 
@@ -11126,7 +13904,8 @@ class ApiManager {
     });
   }
 
-  duplicateVendorworkflow(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  duplicateVendorworkflow(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.workflow_landlord_Vendor_Duplicate,
       "Reqtokens": {
@@ -11153,7 +13932,8 @@ class ApiManager {
     });
   }
 
-  getCityWiseVendorList(BuildContext context, String id, CallBackVendorDatalist callback) async {
+  getCityWiseVendorList(
+      BuildContext context, String id, CallBackVendorDatalist callback) async {
     /*loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -11182,35 +13962,64 @@ class ApiManager {
 
           vendorData.id = myobject['ID'] != null ? myobject['ID'] : 0;
 
-          vendorData.province = myobject['Province'] != null ? StateData.fromJson(myobject['Province']) : null;
+          vendorData.province = myobject['Province'] != null
+              ? StateData.fromJson(myobject['Province'])
+              : null;
 
-          vendorData.country = myobject['Country'] != null ? CountryData.fromJson(myobject['Country']) : null;
+          vendorData.country = myobject['Country'] != null
+              ? CountryData.fromJson(myobject['Country'])
+              : null;
 
-          vendorData.companyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
-          vendorData.address = myobject['Address'] != null ? myobject['Address'].toString() : "";
-          vendorData.rating = myobject['Rating'] != null ? myobject['Rating'] : 0;
-          vendorData.suite = myobject['Suite'] != null ? myobject['Suite'].toString() : "";
-          vendorData.PostalCode = myobject['PostalCode'] != null ? myobject['PostalCode'].toString() : "";
-          vendorData.Note = myobject['Note'] != null ? myobject['Note'].toString() : "";
+          vendorData.companyName = myobject['CompanyName'] != null
+              ? myobject['CompanyName'].toString()
+              : "";
+          vendorData.address =
+              myobject['Address'] != null ? myobject['Address'].toString() : "";
+          vendorData.rating =
+              myobject['Rating'] != null ? myobject['Rating'] : 0;
+          vendorData.suite =
+              myobject['Suite'] != null ? myobject['Suite'].toString() : "";
+          vendorData.PostalCode = myobject['PostalCode'] != null
+              ? myobject['PostalCode'].toString()
+              : "";
+          vendorData.Note =
+              myobject['Note'] != null ? myobject['Note'].toString() : "";
 
-          vendorData.city = myobject['City'] != null ? CityData.fromJson(myobject['City']) : null;
+          vendorData.city = myobject['City'] != null
+              ? CityData.fromJson(myobject['City'])
+              : null;
 
           if (myobject['PersonID'] != null) {
             var PersonIDobj = myobject['PersonID'];
 
-            vendorData.PersonID = PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
+            vendorData.PersonID =
+                PersonIDobj['ID'] != null ? PersonIDobj['ID'] : 0;
 
-            vendorData.firstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-            vendorData.lastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-            vendorData.email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
+            vendorData.firstName = PersonIDobj['FirstName'] != null
+                ? PersonIDobj['FirstName'].toString()
+                : "";
+            vendorData.lastName = PersonIDobj['LastName'] != null
+                ? PersonIDobj['LastName'].toString()
+                : "";
+            vendorData.email = PersonIDobj['Email'] != null
+                ? PersonIDobj['Email'].toString()
+                : "";
+            vendorData.mobileNumber = PersonIDobj['MobileNumber'] != null
+                ? PersonIDobj['MobileNumber'].toString()
+                : "";
 
-            vendorData.Country_Code = PersonIDobj['Country_Code'] != null ? PersonIDobj['Country_Code'].toString() : "CA";
+            vendorData.Country_Code = PersonIDobj['Country_Code'] != null
+                ? PersonIDobj['Country_Code'].toString()
+                : "CA";
 
-            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "+91";
+            vendorData.Dial_Code = PersonIDobj['Dial_Code'] != null
+                ? PersonIDobj['Dial_Code'].toString()
+                : "+91";
           }
 
-          vendorData.category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+          vendorData.category = myobject['Category'] != null
+              ? SystemEnumDetails.fromJson(myobject['Category'])
+              : null;
 
           //vendorData.category = null;
 
@@ -11227,8 +14036,10 @@ class ApiManager {
     });
   }
 
-  InsetNewVendor(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.Vendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetNewVendor(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.Vendor,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -11240,8 +14051,10 @@ class ApiManager {
     });
   }
 
-  EditVendor(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Vendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  EditVendor(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Vendor,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -11254,8 +14067,10 @@ class ApiManager {
     });
   }
 
-  deleteVendorAPI(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.Vendor, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteVendorAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Vendor,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -11267,8 +14082,10 @@ class ApiManager {
     });
   }
 
-  deleteEventTpeAPI(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteEventTpeAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Events_type,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
@@ -11279,9 +14096,13 @@ class ApiManager {
     });
   }
 
-  deleteEventTpeTemplateAPI(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query =
-        QueryFilter().DeleteQuery(POJO, etableName.Events_type_templates, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteEventTpeTemplateAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(
+        POJO,
+        etableName.Events_type_templates,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
@@ -11292,8 +14113,10 @@ class ApiManager {
     });
   }
 
-  deleteSlotAPI(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().DeleteQuery(POJO, etableName.Slots, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  deleteSlotAPI(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.Slots,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
     HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
       if (error) {
         var data = jsonDecode(respoce);
@@ -11308,7 +14131,8 @@ class ApiManager {
 /*======================== Basic Tenant Module ==========================*/
 /*==========================================================================*/
 
-  landlord_ProfileDSQCall(BuildContext context, String UserID, CallBackLandlordProfile CallBackQuesy) async {
+  landlord_ProfileDSQCall(BuildContext context, String UserID,
+      CallBackLandlordProfile CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_User_ProfileDetails.toString(),
       "LoadLookupValues": true,
@@ -11328,24 +14152,44 @@ class ApiManager {
 
         String ID = rest[0]["ID"] != null ? rest[0]["ID"].toString() : "";
 
-        String CompanyName = rest[0]["CompanyName"] != null ? rest[0]["CompanyName"].toString() : "";
+        String CompanyName = rest[0]["CompanyName"] != null
+            ? rest[0]["CompanyName"].toString()
+            : "";
 
-        String HomePageLink = rest[0]["HomePageLink"] != null ? rest[0]["HomePageLink"].toString() : "";
+        String HomePageLink = rest[0]["HomePageLink"] != null
+            ? rest[0]["HomePageLink"].toString()
+            : "";
 
-        String CustomerFeatureListingURL = rest[0]['CustomerFeatureListingURL'] != null ? rest[0]['CustomerFeatureListingURL'] : "";
+        String CustomerFeatureListingURL =
+            rest[0]['CustomerFeatureListingURL'] != null
+                ? rest[0]['CustomerFeatureListingURL']
+                : "";
 
-        MediaInfo? Company_logo = rest[0]['Company_logo'] != null ? MediaInfo.fromJson(rest[0]['Company_logo']) : null;
+        MediaInfo? Company_logo = rest[0]['Company_logo'] != null
+            ? MediaInfo.fromJson(rest[0]['Company_logo'])
+            : null;
 
         var PersonID = rest[0]["PersonID"];
 
         String pID = PersonID['ID'] != null ? PersonID['ID'].toString() : "";
-        String Email = PersonID['Email'] != null ? PersonID['Email'].toString() : "";
-        String FirstName = PersonID['FirstName'] != null ? PersonID['FirstName'].toString() : "";
-        String LastName = PersonID['LastName'] != null ? PersonID['LastName'].toString() : "";
+        String Email =
+            PersonID['Email'] != null ? PersonID['Email'].toString() : "";
+        String FirstName = PersonID['FirstName'] != null
+            ? PersonID['FirstName'].toString()
+            : "";
+        String LastName =
+            PersonID['LastName'] != null ? PersonID['LastName'].toString() : "";
         String Country_Code =
-            PersonID['Country_Code'] != null && PersonID['Country_Code'] != "" ? PersonID['Country_Code'].toString() : "CA";
-        String Dial_Code = PersonID['Dial_Code'] != null && PersonID['Dial_Code'] != "" ? PersonID['Dial_Code'].toString() : "+1";
-        String MobileNumber = PersonID['MobileNumber'] != null ? PersonID['MobileNumber'].toString() : "";
+            PersonID['Country_Code'] != null && PersonID['Country_Code'] != ""
+                ? PersonID['Country_Code'].toString()
+                : "CA";
+        String Dial_Code =
+            PersonID['Dial_Code'] != null && PersonID['Dial_Code'] != ""
+                ? PersonID['Dial_Code'].toString()
+                : "+1";
+        String MobileNumber = PersonID['MobileNumber'] != null
+            ? PersonID['MobileNumber'].toString()
+            : "";
 
         landlordProfile.id = ID;
         landlordProfile.companyname = CompanyName;
@@ -11367,7 +14211,8 @@ class ApiManager {
     });
   }
 
-  TenantLoginApi(BuildContext context, String email, String password, CallBackQuesy CallBackQuesy) async {
+  TenantLoginApi(BuildContext context, String email, String password,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "Email": email,
       "Password": password,
@@ -11399,8 +14244,17 @@ class ApiManager {
     });
   }
 
-  tenantRegisterWorkflow(BuildContext context, String email, String id, String Company_logo, String Link, String Tenant_FirstName,
-      String Lan_FirstName, String Lan_LastName, String CompanyName, CallBackQuesy callBackQuesy) async {
+  tenantRegisterWorkflow(
+      BuildContext context,
+      String email,
+      String id,
+      String Company_logo,
+      String Link,
+      String Tenant_FirstName,
+      String Lan_FirstName,
+      String Lan_LastName,
+      String CompanyName,
+      CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.workflow_tenant_register,
       "Reqtokens": {
@@ -11431,8 +14285,14 @@ class ApiManager {
     });
   }
 
-  UpdateUserIdApplicant(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy callBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Applicant, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateUserIdApplicant(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy callBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -11445,7 +14305,8 @@ class ApiManager {
     });
   }
 
-  CompanyDetailsDSQCall(BuildContext context, String CustomerFeatureListingURL, CallBackQuesy CallBackQuesy) async {
+  CompanyDetailsDSQCall(BuildContext context, String CustomerFeatureListingURL,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_UserLogin.toString(),
       "LoadLookupValues": true,
@@ -11462,31 +14323,47 @@ class ApiManager {
         if (data["Result"].length > 0) {
           var myobject = data["Result"][0];
 
-          bool IsActive = myobject["IsActive"] != null ? myobject["IsActive"] : false;
+          bool IsActive =
+              myobject["IsActive"] != null ? myobject["IsActive"] : false;
 
-          bool adminsideIsActive = myobject["AdminsideIsActive"] != null ? myobject["AdminsideIsActive"] : false;
+          bool adminsideIsActive = myobject["AdminsideIsActive"] != null
+              ? myobject["AdminsideIsActive"]
+              : false;
 
           if (IsActive) {
             if (adminsideIsActive) {
               var ID = myobject["ID"].toString();
 
               String CustomerFeatureListingURL =
-                  myobject['CustomerFeatureListingURL'] != null ? myobject['CustomerFeatureListingURL'].toString() : "";
+                  myobject['CustomerFeatureListingURL'] != null
+                      ? myobject['CustomerFeatureListingURL'].toString()
+                      : "";
 
-              String CompanyName = myobject['CompanyName'] != null ? myobject['CompanyName'].toString() : "";
+              String CompanyName = myobject['CompanyName'] != null
+                  ? myobject['CompanyName'].toString()
+                  : "";
 
-              String HomePageLink = myobject['HomePageLink'] != null ? myobject['HomePageLink'].toString() : "";
+              String HomePageLink = myobject['HomePageLink'] != null
+                  ? myobject['HomePageLink'].toString()
+                  : "";
 
-              String UserName = myobject['UserName'] != null ? myobject['UserName'].toString() : "";
+              String UserName = myobject['UserName'] != null
+                  ? myobject['UserName'].toString()
+                  : "";
 
-              MediaInfo? Company_logo = myobject['Company_logo'] != null ? MediaInfo.fromJson(myobject['Company_logo']) : null;
+              MediaInfo? Company_logo = myobject['Company_logo'] != null
+                  ? MediaInfo.fromJson(myobject['Company_logo'])
+                  : null;
 
               if (Company_logo != null && Company_logo.id != null) {
-                await Prefs.setString(PrefsName.BT_CompanyLogoid, Company_logo.id.toString());
-                await Prefs.setString(PrefsName.BT_CompanyLogoURL, Company_logo.url.toString());
+                await Prefs.setString(
+                    PrefsName.BT_CompanyLogoid, Company_logo.id.toString());
+                await Prefs.setString(
+                    PrefsName.BT_CompanyLogoURL, Company_logo.url.toString());
               }
 
-              await Prefs.setString(PrefsName.BT_CustomerFeatureListingURL, CustomerFeatureListingURL);
+              await Prefs.setString(PrefsName.BT_CustomerFeatureListingURL,
+                  CustomerFeatureListingURL);
               await Prefs.setString(PrefsName.BT_CompanyName, CompanyName);
               await Prefs.setString(PrefsName.BT_CompanyLink, HomePageLink);
 
@@ -11506,7 +14383,8 @@ class ApiManager {
     });
   }
 
-  tenant_Details_DSQCall(BuildContext context, String json, CallBackQuesy CallBackQuesy) async {
+  tenant_Details_DSQCall(
+      BuildContext context, String json, CallBackQuesy CallBackQuesy) async {
     HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
       if (error) {
         Helper.Log("tenant_Details_DSQCall", respoce);
@@ -11516,15 +14394,28 @@ class ApiManager {
 
         if (data["Result"].length > 0) {
           int ID = rest[0]["ID"] != null ? rest[0]["ID"] : 0;
-          int Person_ID = rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
+          int Person_ID =
+              rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
 
           String UserID = rest[0]["UserID"] != null ? rest[0]["UserID"] : "0";
-          String FirstName = rest[0]["Person_ID_FirstName"] != null ? rest[0]["Person_ID_FirstName"] : "";
-          String Email = rest[0]["Person_ID_Email"] != null ? rest[0]["Person_ID_Email"] : "";
-          String LastName = rest[0]["Person_ID_LastName"] != null ? rest[0]["Person_ID_LastName"] : "";
-          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null ? rest[0]["Person_ID_MobileNumber"] : "";
-          String Country_Code = rest[0]["Person_ID_Country_Code"] != null ? rest[0]["Person_ID_Country_Code"] : "CA";
-          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null ? rest[0]["Person_ID_Dial_Code"] : "+1";
+          String FirstName = rest[0]["Person_ID_FirstName"] != null
+              ? rest[0]["Person_ID_FirstName"]
+              : "";
+          String Email = rest[0]["Person_ID_Email"] != null
+              ? rest[0]["Person_ID_Email"]
+              : "";
+          String LastName = rest[0]["Person_ID_LastName"] != null
+              ? rest[0]["Person_ID_LastName"]
+              : "";
+          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null
+              ? rest[0]["Person_ID_MobileNumber"]
+              : "";
+          String Country_Code = rest[0]["Person_ID_Country_Code"] != null
+              ? rest[0]["Person_ID_Country_Code"]
+              : "CA";
+          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null
+              ? rest[0]["Person_ID_Dial_Code"]
+              : "+1";
 
           await Prefs.setString(PrefsName.BT_UserID, UserID);
           await Prefs.setString(PrefsName.BT_ApplicantID, ID.toString());
@@ -11546,7 +14437,8 @@ class ApiManager {
     });
   }
 
-  getApplicationByApplicant(BuildContext context, String ApplicantID, CallBackQuesy CallBackQuesy) async {
+  getApplicationByApplicant(BuildContext context, String ApplicantID,
+      CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_Application_by_Applicant.toString(),
       "LoadLookupValues": true,
@@ -11566,60 +14458,96 @@ class ApiManager {
           int ID = rest[0]["ID"] != null ? rest[0]["ID"] : 0;
 
           //int ApplicationStatus = rest[0]["ApplicationStatus"] != null ? rest[0]["ApplicationStatus"] : 0;
-          int IsArchived = rest[0]["IsArchived"] != null ? rest[0]["IsArchived"] : 0;
+          int IsArchived =
+              rest[0]["IsArchived"] != null ? rest[0]["IsArchived"] : 0;
 
           SystemEnumDetails? ApplicationStatus =
-              rest[0]["ApplicationStatus"] != null ? SystemEnumDetails.fromJson(rest[0]["ApplicationStatus"]) : null;
+              rest[0]["ApplicationStatus"] != null
+                  ? SystemEnumDetails.fromJson(rest[0]["ApplicationStatus"])
+                  : null;
 
-          if ((ApplicationStatus != null && ApplicationStatus.EnumDetailID == 6) && IsArchived == 0) {
+          if ((ApplicationStatus != null &&
+                  ApplicationStatus.EnumDetailID == 6) &&
+              IsArchived == 0) {
             await Prefs.setBool(PrefsName.BT_Is_login, true);
 
             if (rest[0]['Prop_ID'] != null) {
               var Prop_IDobj = rest[0]['Prop_ID'];
 
               String ID = Prop_IDobj["ID"] != null ? Prop_IDobj["ID"] : "";
-              String PropertyName = Prop_IDobj["PropertyName"] != null ? Prop_IDobj["PropertyName"] : "";
-              String Property_Address = Prop_IDobj["Property_Address"] != null ? Prop_IDobj["Property_Address"] : "";
-              String Postal_Code = Prop_IDobj["Postal_Code"] != null ? Prop_IDobj["Postal_Code"] : "";
-              String City = Prop_IDobj["City"] != null ? Prop_IDobj["City"] : "";
-              String Country = Prop_IDobj["Country"] != null ? Prop_IDobj["Country"] : "";
-              String Suite_Unit = Prop_IDobj["Suite_Unit"] != null ? Prop_IDobj["Suite_Unit"] : "";
-              String Province = Prop_IDobj["Province"] != null ? Prop_IDobj["Province"] : "";
+              String PropertyName = Prop_IDobj["PropertyName"] != null
+                  ? Prop_IDobj["PropertyName"]
+                  : "";
+              String Property_Address = Prop_IDobj["Property_Address"] != null
+                  ? Prop_IDobj["Property_Address"]
+                  : "";
+              String Postal_Code = Prop_IDobj["Postal_Code"] != null
+                  ? Prop_IDobj["Postal_Code"]
+                  : "";
+              String City =
+                  Prop_IDobj["City"] != null ? Prop_IDobj["City"] : "";
+              String Country =
+                  Prop_IDobj["Country"] != null ? Prop_IDobj["Country"] : "";
+              String Suite_Unit = Prop_IDobj["Suite_Unit"] != null
+                  ? Prop_IDobj["Suite_Unit"]
+                  : "";
+              String Province =
+                  Prop_IDobj["Province"] != null ? Prop_IDobj["Province"] : "";
 
-              String address = (Suite_Unit.isNotEmpty ? Suite_Unit + " - " : "") +
-                  Property_Address +
-                  ", " +
-                  City +
-                  ", " +
-                  Province +
-                  ", " +
-                  Country +
-                  ", " +
-                  Postal_Code;
+              String address =
+                  (Suite_Unit.isNotEmpty ? Suite_Unit + " - " : "") +
+                      Property_Address +
+                      ", " +
+                      City +
+                      ", " +
+                      Province +
+                      ", " +
+                      Country +
+                      ", " +
+                      Postal_Code;
 
               await Prefs.setString(PrefsName.BT_PropID, ID.toString());
-              await Prefs.setString(PrefsName.BT_PropName, PropertyName.toString());
-              await Prefs.setString(PrefsName.BT_PropAddress, address.toString());
+              await Prefs.setString(
+                  PrefsName.BT_PropName, PropertyName.toString());
+              await Prefs.setString(
+                  PrefsName.BT_PropAddress, address.toString());
 
               if (Prop_IDobj["Owner_ID"] != null) {
                 var Owner_IDobj = Prop_IDobj["Owner_ID"];
 
-                String OwID = Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
-                String CompanyName = Owner_IDobj['CompanyName'] != null ? Owner_IDobj['CompanyName'].toString() : "";
+                String OwID = Owner_IDobj['ID'] != null
+                    ? Owner_IDobj['ID'].toString()
+                    : "";
+                String CompanyName = Owner_IDobj['CompanyName'] != null
+                    ? Owner_IDobj['CompanyName'].toString()
+                    : "";
 
                 var PersonIDobj = Owner_IDobj["PersonID"];
 
-                String Email = PersonIDobj['Email'] != null ? PersonIDobj['Email'].toString() : "";
-                String FirstName = PersonIDobj['FirstName'] != null ? PersonIDobj['FirstName'].toString() : "";
-                String LastName = PersonIDobj['LastName'] != null ? PersonIDobj['LastName'].toString() : "";
-                String MobileNumber = PersonIDobj['MobileNumber'] != null ? PersonIDobj['MobileNumber'].toString() : "";
-                String Dial_Code = PersonIDobj['Dial_Code'] != null ? PersonIDobj['Dial_Code'].toString() : "";
+                String Email = PersonIDobj['Email'] != null
+                    ? PersonIDobj['Email'].toString()
+                    : "";
+                String FirstName = PersonIDobj['FirstName'] != null
+                    ? PersonIDobj['FirstName'].toString()
+                    : "";
+                String LastName = PersonIDobj['LastName'] != null
+                    ? PersonIDobj['LastName'].toString()
+                    : "";
+                String MobileNumber = PersonIDobj['MobileNumber'] != null
+                    ? PersonIDobj['MobileNumber'].toString()
+                    : "";
+                String Dial_Code = PersonIDobj['Dial_Code'] != null
+                    ? PersonIDobj['Dial_Code'].toString()
+                    : "";
 
                 await Prefs.setString(PrefsName.BT_OwnerID, OwID);
-                await Prefs.setString(PrefsName.BT_Owner_name, (FirstName + " " + LastName));
+                await Prefs.setString(
+                    PrefsName.BT_Owner_name, (FirstName + " " + LastName));
                 await Prefs.setString(PrefsName.BT_Owner_email, Email);
-                await Prefs.setString(PrefsName.BT_Owner_phoneno, (Dial_Code + MobileNumber));
-                await Prefs.setString(PrefsName.BT_Owner_Companyname, CompanyName);
+                await Prefs.setString(
+                    PrefsName.BT_Owner_phoneno, (Dial_Code + MobileNumber));
+                await Prefs.setString(
+                    PrefsName.BT_Owner_Companyname, CompanyName);
               }
             } else {
               await Prefs.setString(PrefsName.BT_PropID, "");
@@ -11661,25 +14589,42 @@ class ApiManager {
 
           MaintenanceData maintenanceData = new MaintenanceData();
 
-          maintenanceData.ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+          maintenanceData.ID =
+              myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-          maintenanceData.RequestName = myobject['RequestName'] != null ? myobject['RequestName'].toString() : "";
-          maintenanceData.Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
+          maintenanceData.RequestName = myobject['RequestName'] != null
+              ? myobject['RequestName'].toString()
+              : "";
+          maintenanceData.Date_Created = myobject['Date_Created'] != null
+              ? myobject['Date_Created'].toString()
+              : "";
 
-          maintenanceData.CreatedBy = myobject['CreatedBy'] != null ? myobject['CreatedBy'].toString() : "";
+          maintenanceData.CreatedBy = myobject['CreatedBy'] != null
+              ? myobject['CreatedBy'].toString()
+              : "";
 
-          maintenanceData.IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-          maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'].toString() : "";
-          maintenanceData.Type_User = myobject['Type_User'] != null ? myobject['Type_User'].toString() : "1";
+          maintenanceData.IsLock =
+              myobject['IsLock'] != null ? myobject['IsLock'] : false;
+          maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null
+              ? myobject['Describe_Issue'].toString()
+              : "";
+          maintenanceData.Type_User = myobject['Type_User'] != null
+              ? myobject['Type_User'].toString()
+              : "1";
 
           if (myobject['Owner_ID'] != null) {
             var Owner_IDobj = myobject['Owner_ID'];
 
             var OPersonID = Owner_IDobj['PersonID'];
 
-            maintenanceData.Owner_ID = Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
-            String FirstName = OPersonID['FirstName'] != null ? OPersonID['FirstName'].toString() : "";
-            String LastName = OPersonID['LastName'] != null ? OPersonID['LastName'].toString() : "";
+            maintenanceData.Owner_ID =
+                Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
+            String FirstName = OPersonID['FirstName'] != null
+                ? OPersonID['FirstName'].toString()
+                : "";
+            String LastName = OPersonID['LastName'] != null
+                ? OPersonID['LastName'].toString()
+                : "";
 
             maintenanceData.OwnerName = FirstName + " " + LastName;
           }
@@ -11689,9 +14634,15 @@ class ApiManager {
 
             var APersonID = Applicant_IDobj['Person_ID'];
 
-            maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null ? Applicant_IDobj['ID'].toString() : "";
-            String FirstName = APersonID['FirstName'] != null ? APersonID['FirstName'].toString() : "";
-            String LastName = APersonID['LastName'] != null ? APersonID['LastName'].toString() : "";
+            maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null
+                ? Applicant_IDobj['ID'].toString()
+                : "";
+            String FirstName = APersonID['FirstName'] != null
+                ? APersonID['FirstName'].toString()
+                : "";
+            String LastName = APersonID['LastName'] != null
+                ? APersonID['LastName'].toString()
+                : "";
 
             maintenanceData.ApplicantName = FirstName + " " + LastName;
           }
@@ -11699,15 +14650,24 @@ class ApiManager {
           if (myobject['Prop_ID'] != null) {
             var Prop_IDobj = myobject['Prop_ID'];
 
-            maintenanceData.Prop_ID = Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
-            maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null ? Prop_IDobj['PropertyName'].toString() : "";
+            maintenanceData.Prop_ID =
+                Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
+            maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null
+                ? Prop_IDobj['PropertyName'].toString()
+                : "";
           }
 
-          maintenanceData.Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+          maintenanceData.Category = myobject['Category'] != null
+              ? SystemEnumDetails.fromJson(myobject['Category'])
+              : null;
 
-          maintenanceData.Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+          maintenanceData.Status = myobject['Status'] != null
+              ? SystemEnumDetails.fromJson(myobject['Status'])
+              : null;
 
-          maintenanceData.Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+          maintenanceData.Priority = myobject['Priority'] != null
+              ? SystemEnumDetails.fromJson(myobject['Priority'])
+              : null;
 
           maintenanceDatalist.add(maintenanceData);
         }
@@ -11717,17 +14677,20 @@ class ApiManager {
 
         if (ftime == 0) {
           if (maintenanceDatalist.length > 0) {
-            int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+            int TotalRecords =
+                data['TotalRecords'] != null ? data['TotalRecords'] : 0;
 
             _store.dispatch(UpdateTenantMaintenance_totalRecord(TotalRecords));
 
             if (TotalRecords % 15 == 0) {
               int dept_totalpage = int.parse((TotalRecords / 15).toString());
-              _store.dispatch(UpdateTenantMaintenance_totalpage(dept_totalpage));
+              _store
+                  .dispatch(UpdateTenantMaintenance_totalpage(dept_totalpage));
             } else {
               double page = (TotalRecords / 15);
               int dept_totalpage = (page + 1).toInt();
-              _store.dispatch(UpdateTenantMaintenance_totalpage(dept_totalpage));
+              _store
+                  .dispatch(UpdateTenantMaintenance_totalpage(dept_totalpage));
             }
           } else {
             _store.dispatch(UpdateTenantMaintenance_totalpage(1));
@@ -11775,25 +14738,42 @@ class ApiManager {
 
             MaintenanceData maintenanceData = new MaintenanceData();
 
-            maintenanceData.ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            maintenanceData.ID =
+                myobject['ID'] != null ? myobject['ID'].toString() : "";
 
-            maintenanceData.RequestName = myobject['RequestName'] != null ? myobject['RequestName'].toString() : "";
-            maintenanceData.Date_Created = myobject['Date_Created'] != null ? myobject['Date_Created'].toString() : "";
+            maintenanceData.RequestName = myobject['RequestName'] != null
+                ? myobject['RequestName'].toString()
+                : "";
+            maintenanceData.Date_Created = myobject['Date_Created'] != null
+                ? myobject['Date_Created'].toString()
+                : "";
 
-            maintenanceData.CreatedBy = myobject['CreatedBy'] != null ? myobject['CreatedBy'].toString() : "";
+            maintenanceData.CreatedBy = myobject['CreatedBy'] != null
+                ? myobject['CreatedBy'].toString()
+                : "";
 
-            maintenanceData.IsLock = myobject['IsLock'] != null ? myobject['IsLock'] : false;
-            maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null ? myobject['Describe_Issue'].toString() : "";
-            maintenanceData.Type_User = myobject['Type_User'] != null ? myobject['Type_User'].toString() : "1";
+            maintenanceData.IsLock =
+                myobject['IsLock'] != null ? myobject['IsLock'] : false;
+            maintenanceData.Describe_Issue = myobject['Describe_Issue'] != null
+                ? myobject['Describe_Issue'].toString()
+                : "";
+            maintenanceData.Type_User = myobject['Type_User'] != null
+                ? myobject['Type_User'].toString()
+                : "1";
 
             if (myobject['Owner_ID'] != null) {
               var Owner_IDobj = myobject['Owner_ID'];
 
               var OPersonID = Owner_IDobj['PersonID'];
 
-              maintenanceData.Owner_ID = Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
-              String FirstName = OPersonID['FirstName'] != null ? OPersonID['FirstName'].toString() : "";
-              String LastName = OPersonID['LastName'] != null ? OPersonID['LastName'].toString() : "";
+              maintenanceData.Owner_ID =
+                  Owner_IDobj['ID'] != null ? Owner_IDobj['ID'].toString() : "";
+              String FirstName = OPersonID['FirstName'] != null
+                  ? OPersonID['FirstName'].toString()
+                  : "";
+              String LastName = OPersonID['LastName'] != null
+                  ? OPersonID['LastName'].toString()
+                  : "";
 
               maintenanceData.OwnerName = FirstName + " " + LastName;
             }
@@ -11803,9 +14783,15 @@ class ApiManager {
 
               var APersonID = Applicant_IDobj['Person_ID'];
 
-              maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null ? Applicant_IDobj['ID'].toString() : "";
-              String FirstName = APersonID['FirstName'] != null ? APersonID['FirstName'].toString() : "";
-              String LastName = APersonID['LastName'] != null ? APersonID['LastName'].toString() : "";
+              maintenanceData.Applicant_ID = Applicant_IDobj['ID'] != null
+                  ? Applicant_IDobj['ID'].toString()
+                  : "";
+              String FirstName = APersonID['FirstName'] != null
+                  ? APersonID['FirstName'].toString()
+                  : "";
+              String LastName = APersonID['LastName'] != null
+                  ? APersonID['LastName'].toString()
+                  : "";
 
               maintenanceData.ApplicantName = FirstName + " " + LastName;
             }
@@ -11813,35 +14799,58 @@ class ApiManager {
             if (myobject['Prop_ID'] != null) {
               var Prop_IDobj = myobject['Prop_ID'];
 
-              maintenanceData.Prop_ID = Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
-              maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null ? Prop_IDobj['PropertyName'].toString() : "";
+              maintenanceData.Prop_ID =
+                  Prop_IDobj['ID'] != null ? Prop_IDobj['ID'].toString() : "";
+              maintenanceData.PropertyName = Prop_IDobj['PropertyName'] != null
+                  ? Prop_IDobj['PropertyName'].toString()
+                  : "";
             }
 
-            maintenanceData.Category = myobject['Category'] != null ? SystemEnumDetails.fromJson(myobject['Category']) : null;
+            maintenanceData.Category = myobject['Category'] != null
+                ? SystemEnumDetails.fromJson(myobject['Category'])
+                : null;
 
-            maintenanceData.Status = myobject['Status'] != null ? SystemEnumDetails.fromJson(myobject['Status']) : null;
+            maintenanceData.Status = myobject['Status'] != null
+                ? SystemEnumDetails.fromJson(myobject['Status'])
+                : null;
 
-            maintenanceData.Priority = myobject['Priority'] != null ? SystemEnumDetails.fromJson(myobject['Priority']) : null;
+            maintenanceData.Priority = myobject['Priority'] != null
+                ? SystemEnumDetails.fromJson(myobject['Priority'])
+                : null;
 
             List row = [];
 
             row.add(maintenanceData.ID);
             row.add(maintenanceData.RequestName);
-            row.add(maintenanceData.Category != null ? maintenanceData.Category!.displayValue : "");
-            row.add(maintenanceData.Priority != null ? maintenanceData.Priority!.displayValue : "");
-            row.add(maintenanceData.Date_Created != null && maintenanceData.Date_Created != "0" && maintenanceData.Date_Created != ""
-                ? new DateFormat("dd-MMM-yyyy").format(DateTime.parse(maintenanceData.Date_Created!)).toString()
+            row.add(maintenanceData.Category != null
+                ? maintenanceData.Category!.displayValue
+                : "");
+            row.add(maintenanceData.Priority != null
+                ? maintenanceData.Priority!.displayValue
+                : "");
+            row.add(maintenanceData.Date_Created != null &&
+                    maintenanceData.Date_Created != "0" &&
+                    maintenanceData.Date_Created != ""
+                ? new DateFormat("dd-MMM-yyyy")
+                    .format(DateTime.parse(maintenanceData.Date_Created!))
+                    .toString()
                 : "");
             row.add(maintenanceData.CreatedBy);
-            row.add(maintenanceData.Status != null ? maintenanceData.Status!.displayValue : "");
-            row.add(maintenanceData.IsLock != null ? maintenanceData.IsLock : false);
+            row.add(maintenanceData.Status != null
+                ? maintenanceData.Status!.displayValue
+                : "");
+            row.add(maintenanceData.IsLock != null
+                ? maintenanceData.IsLock
+                : false);
 
             csvList.add(row);
           }
 
           csv = const ListToCsvConverter().convert(csvList);
 
-          String filename = "Tenant_Maintenance_Request" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
+          String filename = "Tenant_Maintenance_Request" +
+              DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+              ".csv";
 
           // prepare
           final bytes = utf8.encode(csv);
@@ -11855,7 +14864,8 @@ class ApiManager {
           html.document.body!.children.add(anchor);
           anchor.click();
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.Blank_Landloadview, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.Blank_Landloadview, false);
         }
         loader.remove();
       } else {
@@ -11866,7 +14876,8 @@ class ApiManager {
     });
   }
 
-  getTenantDetailsDSQCall(BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
+  getTenantDetailsDSQCall(
+      BuildContext context, String UserID, CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_tenant_Details.toString(),
       "LoadLookupValues": true,
@@ -11883,17 +14894,32 @@ class ApiManager {
 
         if (data["Result"].length > 0) {
           int ID = rest[0]["ID"] != null ? rest[0]["ID"] : 0;
-          int Person_ID = rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
+          int Person_ID =
+              rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
 
           String UserID = rest[0]["UserID"] != null ? rest[0]["UserID"] : "0";
-          String FirstName = rest[0]["Person_ID_FirstName"] != null ? rest[0]["Person_ID_FirstName"] : "";
-          String Email = rest[0]["Person_ID_Email"] != null ? rest[0]["Person_ID_Email"] : "";
-          String LastName = rest[0]["Person_ID_LastName"] != null ? rest[0]["Person_ID_LastName"] : "";
-          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null ? rest[0]["Person_ID_MobileNumber"] : "";
-          String Country_Code = rest[0]["Person_ID_Country_Code"] != null ? rest[0]["Person_ID_Country_Code"] : "CA";
-          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null ? rest[0]["Person_ID_Dial_Code"] : "+1";
+          String FirstName = rest[0]["Person_ID_FirstName"] != null
+              ? rest[0]["Person_ID_FirstName"]
+              : "";
+          String Email = rest[0]["Person_ID_Email"] != null
+              ? rest[0]["Person_ID_Email"]
+              : "";
+          String LastName = rest[0]["Person_ID_LastName"] != null
+              ? rest[0]["Person_ID_LastName"]
+              : "";
+          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null
+              ? rest[0]["Person_ID_MobileNumber"]
+              : "";
+          String Country_Code = rest[0]["Person_ID_Country_Code"] != null
+              ? rest[0]["Person_ID_Country_Code"]
+              : "CA";
+          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null
+              ? rest[0]["Person_ID_Dial_Code"]
+              : "+1";
 
-          MediaInfo? profile = rest[0]['profile'] != null ? MediaInfo.fromJson(rest[0]['profile']) : null;
+          MediaInfo? profile = rest[0]['profile'] != null
+              ? MediaInfo.fromJson(rest[0]['profile'])
+              : null;
 
           await Prefs.setString(PrefsName.BT_Email, Email);
           await Prefs.setString(PrefsName.BT_fname, FirstName);
@@ -11921,8 +14947,14 @@ class ApiManager {
     });
   }
 
-  UpdateTenantProfileData(BuildContext context, Object CPOJO, Object UpPOJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().UpdateQuery(CPOJO, UpPOJO, etableName.Applicant, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  UpdateTenantProfileData(BuildContext context, Object CPOJO, Object UpPOJO,
+      CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().UpdateQuery(
+        CPOJO,
+        UpPOJO,
+        etableName.Applicant,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
 
     HttpClientCall().updateAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -11935,7 +14967,8 @@ class ApiManager {
     });
   }
 
-  ChangePasswordAPI(BuildContext context, String email, String curpassword, String newpassword, CallBackQuesy CallBackQuesy) async {
+  ChangePasswordAPI(BuildContext context, String email, String curpassword,
+      String newpassword, CallBackQuesy CallBackQuesy) async {
     var myjson = {
       "Email": email,
       "CurrentPassword": curpassword,
@@ -12000,43 +15033,61 @@ class ApiManager {
   }
 
   bindTenantPropertyData(PropertyData propertyData) {
-    _store.dispatch(Update_BtLease_ProperTytypeValue(propertyData.propertyType));
-    _store.dispatch(Update_BtLease_PropertyTypeOtherValue(propertyData.otherPropertyType!));
+    _store
+        .dispatch(Update_BtLease_ProperTytypeValue(propertyData.propertyType));
+    _store.dispatch(
+        Update_BtLease_PropertyTypeOtherValue(propertyData.otherPropertyType!));
 
     DateTime tempDate = DateTime.parse(propertyData.dateAvailable!);
 
     _store.dispatch(Update_BtLease_Dateofavailable(tempDate));
     _store.dispatch(Update_BtLease_RentalSpaceValue(propertyData.rentalSpace));
     _store.dispatch(Update_BtLease_PropertyName(propertyData.propertyName!));
-    _store.dispatch(Update_BtLease_PropertyAddress(propertyData.propertyAddress!));
-    _store.dispatch(Update_BtLease_PropertyDescription(propertyData.propertyDescription!));
+    _store.dispatch(
+        Update_BtLease_PropertyAddress(propertyData.propertyAddress!));
+    _store.dispatch(
+        Update_BtLease_PropertyDescription(propertyData.propertyDescription!));
     _store.dispatch(Update_BtLease_Suiteunit(propertyData.suiteUnit!));
     _store.dispatch(Update_BtLease_Buildingname(propertyData.buildingName!));
     _store.dispatch(Update_BtLease_PropertyCity(propertyData.city!));
-    _store.dispatch(Update_BtLease_PropertyCountryCode(propertyData.countryCode!));
+    _store.dispatch(
+        Update_BtLease_PropertyCountryCode(propertyData.countryCode!));
     _store.dispatch(Update_BtLease_PropertyCountryName(propertyData.country!));
     _store.dispatch(Update_BtLease_PropertyProvince(propertyData.province!));
-    _store.dispatch(Update_BtLease_PropertyPostalcode(propertyData.postalCode!));
-    _store.dispatch(Update_BtLease_PropertyRentAmount(propertyData.rentAmount!));
-    _store.dispatch(Update_BtLease_RentPaymentFrequencyValue(propertyData.rentPaymentFrequency));
+    _store
+        .dispatch(Update_BtLease_PropertyPostalcode(propertyData.postalCode!));
+    _store
+        .dispatch(Update_BtLease_PropertyRentAmount(propertyData.rentAmount!));
+    _store.dispatch(Update_BtLease_RentPaymentFrequencyValue(
+        propertyData.rentPaymentFrequency));
     _store.dispatch(Update_BtLease_LeaseTypeValue(propertyData.leaseType));
-    _store.dispatch(Update_BtLease_MinimumLeasedurationValue(propertyData.minLeaseDuration));
-    _store.dispatch(Update_BtLease_MinimumleasedurationNumber(propertyData.minLeaseNumber.toString()));
+    _store.dispatch(Update_BtLease_MinimumLeasedurationValue(
+        propertyData.minLeaseDuration));
+    _store.dispatch(Update_BtLease_MinimumleasedurationNumber(
+        propertyData.minLeaseNumber.toString()));
 
-    _store.dispatch(Update_BtLease_PropertyBedrooms(propertyData.bedrooms.toString()));
-    _store.dispatch(Update_BtLease_PropertyBathrooms(propertyData.bathrooms.toString()));
-    _store.dispatch(Update_BtLease_PropertySizeinsquarefeet(propertyData.size.toString()));
-    _store.dispatch(Update_BtLease_PropertyMaxoccupancy(propertyData.maxOccupancy!));
+    _store.dispatch(
+        Update_BtLease_PropertyBedrooms(propertyData.bedrooms.toString()));
+    _store.dispatch(
+        Update_BtLease_PropertyBathrooms(propertyData.bathrooms.toString()));
+    _store.dispatch(
+        Update_BtLease_PropertySizeinsquarefeet(propertyData.size.toString()));
+    _store.dispatch(
+        Update_BtLease_PropertyMaxoccupancy(propertyData.maxOccupancy!));
     _store.dispatch(Update_BtLease_FurnishingValue(propertyData.furnishing));
-    _store.dispatch(Update_BtLease_OtherPartialFurniture(propertyData.otherPartialFurniture.toString()));
+    _store.dispatch(Update_BtLease_OtherPartialFurniture(
+        propertyData.otherPartialFurniture.toString()));
     _store.dispatch(Update_BtLease_Parkingstalls(propertyData.parkingStalls!));
-    _store.dispatch(Update_BtLease_StorageAvailableValue(propertyData.storageAvailable));
+    _store.dispatch(
+        Update_BtLease_StorageAvailableValue(propertyData.storageAvailable));
     _store.dispatch(Update_BtLease_AgreeTCPP(propertyData.isAgreedTandC!));
-    _store.dispatch(Update_BtLease_PropertyDrafting(propertyData.PropDrafting!));
+    _store
+        .dispatch(Update_BtLease_PropertyDrafting(propertyData.PropDrafting!));
     _store.dispatch(Update_BtLease_PropertyVacancy(propertyData.Vacancy!));
   }
 
-  TenantLeaseAgreement(BuildContext context, String id, CallBackQuesy callBackQuesy) async {
+  TenantLeaseAgreement(
+      BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "DSQID": Weburl.DSQ_VIEW_LEASE_Document,
       "LoadLookupValues": true,
@@ -12054,18 +15105,26 @@ class ApiManager {
           for (int i = 0; i < data['Result'].length; i++) {
             var objectPropertyDocument = data['Result'][i];
 
-            String ID = objectPropertyDocument['ID'] != null ? objectPropertyDocument['ID'].toString() : "";
+            String ID = objectPropertyDocument['ID'] != null
+                ? objectPropertyDocument['ID'].toString()
+                : "";
 
-            bool IsOwneruploaded = objectPropertyDocument['IsOwneruploaded'] != null ? objectPropertyDocument['IsOwneruploaded'] : false;
+            bool IsOwneruploaded =
+                objectPropertyDocument['IsOwneruploaded'] != null
+                    ? objectPropertyDocument['IsOwneruploaded']
+                    : false;
 
-            String Owner_ID = objectPropertyDocument['Owner_ID'] != null ? objectPropertyDocument['Owner_ID'].toString() : "";
+            String Owner_ID = objectPropertyDocument['Owner_ID'] != null
+                ? objectPropertyDocument['Owner_ID'].toString()
+                : "";
 
             /*===============*/
             /*  Media Info */
             /*===============*/
 
-            MediaInfo? mediaInfo =
-                objectPropertyDocument['Media_ID'] != null ? MediaInfo.fromJson(objectPropertyDocument['Media_ID']) : null;
+            MediaInfo? mediaInfo = objectPropertyDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectPropertyDocument['Media_ID'])
+                : null;
 
             if (!IsOwneruploaded) {
               _store.dispatch(Update_BtLease_MID(ID));
@@ -12083,14 +15142,18 @@ class ApiManager {
     });
   }
 
-  AddMaintenaceNotification(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+  AddMaintenaceNotification(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
     List<QueryObject> queryList = <QueryObject>[];
 
     Helper.Log("POJO", jsonEncode(POJO));
 
     for (int i = 0; i < POJO.length; i++) {
-      String queryinsert =
-          QueryFilter().InsertQuery(POJO[i], etableName.Notification, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+      String queryinsert = QueryFilter().InsertQuery(
+          POJO[i],
+          etableName.Notification,
+          eConjuctionClause().AND,
+          eRelationalOperator().EqualTo);
 
       var queryinsetdecode = jsonDecode(queryinsert);
       QueryObject insetquery = QueryObject.fromJson(queryinsetdecode);
@@ -12110,7 +15173,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             issuccess = true;
@@ -12128,7 +15193,8 @@ class ApiManager {
     });
   }
 
-  getTenantNotificationList(BuildContext context, String id, int pageno, CallBackNotificationQuery callBackQuesy) async {
+  getTenantNotificationList(BuildContext context, String id, int pageno,
+      CallBackNotificationQuery callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);*/
 
@@ -12162,21 +15228,41 @@ class ApiManager {
             NotificationData notification = new NotificationData();
 
             notification.id = myobject['ID'] != null ? myobject['ID'] : 0;
-            notification.applicantName = myobject['ApplicantName'] != null ? myobject['ApplicantName'].toString() : "";
-            notification.ownerId = myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
-            notification.applicantId = myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
-            notification.notificationDate = myobject['NotificationDate'] != null ? myobject['NotificationDate'].toString() : "";
-            notification.isRead = myobject['IsRead'] != null ? myobject['IsRead'] : false;
-            notification.typeOfNotification = myobject['TypeOfNotification'] != null ? myobject['TypeOfNotification'] : 0;
-            notification.MaintenanceID = myobject['MaintenanceID'] != null ? myobject['MaintenanceID'] : 0;
-            notification.applicationId = myobject['Application_ID'] != null ? myobject['Application_ID'] : 0;
+            notification.applicantName = myobject['ApplicantName'] != null
+                ? myobject['ApplicantName'].toString()
+                : "";
+            notification.ownerId =
+                myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
+            notification.applicantId =
+                myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
+            notification.notificationDate = myobject['NotificationDate'] != null
+                ? myobject['NotificationDate'].toString()
+                : "";
+            notification.isRead =
+                myobject['IsRead'] != null ? myobject['IsRead'] : false;
+            notification.typeOfNotification =
+                myobject['TypeOfNotification'] != null
+                    ? myobject['TypeOfNotification']
+                    : 0;
+            notification.MaintenanceID = myobject['MaintenanceID'] != null
+                ? myobject['MaintenanceID']
+                : 0;
+            notification.applicationId = myobject['Application_ID'] != null
+                ? myobject['Application_ID']
+                : 0;
 
             if (myobject['Prop_ID'] != null) {
               var Prop_IDobject = myobject['Prop_ID'];
 
-              notification.PropID = Prop_IDobject['ID'] != null ? Prop_IDobject['ID'].toString() : "";
-              notification.propertyName = Prop_IDobject['PropertyName'] != null ? Prop_IDobject['PropertyName'].toString() : "";
-              notification.suiteUnit = Prop_IDobject['Suite_Unit'] != null ? Prop_IDobject['Suite_Unit'].toString() : "";
+              notification.PropID = Prop_IDobject['ID'] != null
+                  ? Prop_IDobject['ID'].toString()
+                  : "";
+              notification.propertyName = Prop_IDobject['PropertyName'] != null
+                  ? Prop_IDobject['PropertyName'].toString()
+                  : "";
+              notification.suiteUnit = Prop_IDobject['Suite_Unit'] != null
+                  ? Prop_IDobject['Suite_Unit'].toString()
+                  : "";
             }
             notificationlist.add(notification);
           }
@@ -12194,7 +15280,11 @@ class ApiManager {
     var myjson = {
       "DSQID": Weburl.DSQ_Notification,
       "LoadLookUpValues": true,
-      "Reqtokens": {"TypeOfNotification": "6,9,10", "Applicant_ID": Prefs.getString(PrefsName.BT_ApplicantID), "IsRead": false},
+      "Reqtokens": {
+        "TypeOfNotification": "6,9,10",
+        "Applicant_ID": Prefs.getString(PrefsName.BT_ApplicantID),
+        "IsRead": false
+      },
     };
 
     String json = jsonEncode(myjson);
@@ -12203,7 +15293,8 @@ class ApiManager {
       if (error) {
         var data = jsonDecode(respoce);
 
-        int TotalRecords = data['TotalRecords'] != null ? data['TotalRecords'] : 0;
+        int TotalRecords =
+            data['TotalRecords'] != null ? data['TotalRecords'] : 0;
         _store.dispatch(UpdateTenantPortalPage_notificationCount(TotalRecords));
       } else {
         _store.dispatch(UpdateTenantPortalPage_notificationCount(0));
@@ -12211,11 +15302,16 @@ class ApiManager {
     });
   }
 
-  Tenant_forgotpassWorkflow(
-      BuildContext context, String email, String url, String DbAppCode, String CompanyLogo, CallBackQuesy callBackQuesy) async {
+  Tenant_forgotpassWorkflow(BuildContext context, String email, String url,
+      String DbAppCode, String CompanyLogo, CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_tenant_forgotpass,
-      "Reqtokens": {"ToEmail": email, "HostURL": url, "DbAppCode": DbAppCode, "Company_logo": CompanyLogo}
+      "Reqtokens": {
+        "ToEmail": email,
+        "HostURL": url,
+        "DbAppCode": DbAppCode,
+        "Company_logo": CompanyLogo
+      }
       //"Reqtokens": {"UserID": "0D31C3A7-3934-43C2-B4AC-D445A067F561", "HostURL":url}
     };
 
@@ -12238,7 +15334,8 @@ class ApiManager {
     });
   }
 
-  getTenantEmail_DSQCall(BuildContext context, String json, CallBackQuesy CallBackQuesy) async {
+  getTenantEmail_DSQCall(
+      BuildContext context, String json, CallBackQuesy CallBackQuesy) async {
     HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
       if (error) {
         Helper.Log("tenant_Details_DSQCall", respoce);
@@ -12248,15 +15345,28 @@ class ApiManager {
 
         if (data["Result"].length > 0) {
           int ID = rest[0]["ID"] != null ? rest[0]["ID"] : 0;
-          int Person_ID = rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
+          int Person_ID =
+              rest[0]["Person_ID_ID"] != null ? rest[0]["Person_ID_ID"] : 0;
 
           String UserID = rest[0]["UserID"] != null ? rest[0]["UserID"] : "0";
-          String FirstName = rest[0]["Person_ID_FirstName"] != null ? rest[0]["Person_ID_FirstName"] : "";
-          String Email = rest[0]["Person_ID_Email"] != null ? rest[0]["Person_ID_Email"] : "";
-          String LastName = rest[0]["Person_ID_LastName"] != null ? rest[0]["Person_ID_LastName"] : "";
-          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null ? rest[0]["Person_ID_MobileNumber"] : "";
-          String Country_Code = rest[0]["Person_ID_Country_Code"] != null ? rest[0]["Person_ID_Country_Code"] : "CA";
-          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null ? rest[0]["Person_ID_Dial_Code"] : "+1";
+          String FirstName = rest[0]["Person_ID_FirstName"] != null
+              ? rest[0]["Person_ID_FirstName"]
+              : "";
+          String Email = rest[0]["Person_ID_Email"] != null
+              ? rest[0]["Person_ID_Email"]
+              : "";
+          String LastName = rest[0]["Person_ID_LastName"] != null
+              ? rest[0]["Person_ID_LastName"]
+              : "";
+          String MobileNumber = rest[0]["Person_ID_MobileNumber"] != null
+              ? rest[0]["Person_ID_MobileNumber"]
+              : "";
+          String Country_Code = rest[0]["Person_ID_Country_Code"] != null
+              ? rest[0]["Person_ID_Country_Code"]
+              : "CA";
+          String Dial_Code = rest[0]["Person_ID_Dial_Code"] != null
+              ? rest[0]["Person_ID_Dial_Code"]
+              : "+1";
 
           CallBackQuesy(true, Email);
         } else {
@@ -12269,8 +15379,10 @@ class ApiManager {
   }
   //nuevos modulos
 
-  InsetEventType(BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetEventType(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQuery(POJO, etableName.Events_type,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().insertAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -12286,8 +15398,10 @@ class ApiManager {
 /*==============================  CALENDAR  ================================*/
 /*==============================================================================*/
 
-  InsetNewEventAPI(BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
-    String query = QueryFilter().InsertQueryArray(POJO, etableName.Slots, eConjuctionClause().AND, eRelationalOperator().EqualTo);
+  InsetNewEventAPI(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().InsertQueryArray(POJO, etableName.Slots,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
 
     HttpClientCall().QueryAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -12297,7 +15411,9 @@ class ApiManager {
         for (int i = 0; i < data.length; i++) {
           var myobject = data[i];
 
-          String StatusCode = myobject['StatusCode'] != null ? myobject['StatusCode'].toString() : "";
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
 
           if (StatusCode.isEmpty || StatusCode != "200") {
             //loader.remove();
@@ -12317,9 +15433,14 @@ class ApiManager {
   }
 
 //getdocumentsList
-  getDocumentList(BuildContext context, Object POJO, CallBackListDocuments CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.list_documents, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getDocumentList(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.list_documents,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -12335,9 +15456,14 @@ class ApiManager {
   }
 
   //getfieldsList
-  getDocumentListFields(BuildContext context, Object POJO, CallBackListDocuments CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.documentsfields, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getDocumentListFields(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.documentsfields,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
@@ -12353,9 +15479,14 @@ class ApiManager {
   }
 
   //getfieldsList
-  getDocumentRequest(BuildContext context, Object POJO, CallBackListDocuments CallBackQuesy) async {
-    String query =
-        await QueryFilter().SelectQuery(POJO, etableName.request_documents, eConjuctionClause().AND, eRelationalOperator().EqualTo, false);
+  getDocumentRequest(BuildContext context, Object POJO,
+      CallBackListDocuments CallBackQuesy) async {
+    String query = await QueryFilter().SelectQuery(
+        POJO,
+        etableName.request_documents,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo,
+        false);
 
     HttpClientCall().selectAPICall(context, query, (error, respoce) async {
       if (error) {
