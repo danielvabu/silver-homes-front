@@ -1084,6 +1084,7 @@ class GlobleString {
   static const String TAF_Documents_Info = "Documents";
   static const String TAF_References = "References";
   static const String TAF_Primary_Applicant = "Primary Applicant -";
+  static const String TAF_New_Applicant = "New Applicant -";
   static const String TAF__ApplicantNum = "Applicant #";
   static const String TAF_Back_to_Tenants = "< Back to Tenants";
 

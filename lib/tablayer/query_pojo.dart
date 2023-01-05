@@ -2576,6 +2576,23 @@ class CheckReferenceExit {
       };
 }
 
+class Requestdocumentid {
+  String? application_id;
+
+  Requestdocumentid({
+    this.application_id,
+  });
+
+  factory Requestdocumentid.fromJson(Map<String, dynamic> json) =>
+      Requestdocumentid(
+        application_id: json["application_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "application_id": application_id,
+      };
+}
+
 class Aviabilitydel {
   int? event_type_id;
 

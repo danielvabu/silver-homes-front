@@ -1062,6 +1062,36 @@ class ApiManager {
     });
   }
 
+  deleteAllRequestDocument(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.request_documents,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        CallBackQuesy(true, respoce);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  deleteAllTemplateHtml(
+      BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
+    String query = QueryFilter().DeleteQuery(POJO, etableName.htmlRequest,
+        eConjuctionClause().AND, eRelationalOperator().EqualTo);
+
+    HttpClientCall().deleteAPICall(context, query, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        CallBackQuesy(true, respoce);
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
   AddRequestDocumentList(
       BuildContext context, Object POJO, CallBackQuesy CallBackQuesy) {
     loader = Helper.overlayLoader(context);
@@ -5311,6 +5341,8 @@ class ApiManager {
             var myobject = data['Result'][i];
 
             String ID = myobject['ID'] != null ? myobject['ID'].toString() : "";
+            String group1 =
+                myobject['group1'] != null ? myobject['group1'].toString() : "";
 
             String ApplicationSentDate = myobject['ApplicationSentDate'] != null
                 ? myobject['ApplicationSentDate']
@@ -5366,6 +5398,7 @@ class ApiManager {
                     : false;
 
             applicationDetails.id = ID;
+            applicationDetails.group1 = group1;
             applicationDetails.applicationSentDate = ApplicationSentDate;
             applicationDetails.agreementSentDate = AgreementSentDate;
             applicationDetails.isAuthorized = IsAuthorized;

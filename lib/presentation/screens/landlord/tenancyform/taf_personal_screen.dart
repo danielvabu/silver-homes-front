@@ -65,7 +65,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   bool change = false;
   int forms = 0;
   late TFAdditionalOccupantState tfAdditionalOccupantState1;
-  late TFPersonalState tenancyFormState1;
 
   @override
   void initState() {
@@ -203,7 +202,6 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
           map: (state) => state.tfPersonalState,
           where: notIdentical,
           builder: (tfPersonalState) {
-            tenancyFormState1 = tfPersonalState!;
             return FocusScope(
                 node: _focusScopeNode,
                 autofocus: true,
@@ -216,11 +214,19 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            GlobleString.TAF_Primary_Applicant,
-                            style: MyStyles.Medium(20, myColor.text_color),
-                            textAlign: TextAlign.center,
-                          ),
+                          (Prefs.getString(PrefsName.group1) == "")
+                              ? Text(
+                                  GlobleString.TAF_Primary_Applicant,
+                                  style:
+                                      MyStyles.Medium(20, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                )
+                              : Text(
+                                  GlobleString.TAF_New_Applicant,
+                                  style:
+                                      MyStyles.Medium(20, myColor.text_color),
+                                  textAlign: TextAlign.center,
+                                ),
                           SizedBox(
                             width: 5,
                           ),
@@ -686,11 +692,12 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            GlobleString.TAF_Additional_Applicants,
-                            style: MyStyles.SemiBold(20, myColor.text_color),
-                            textAlign: TextAlign.center,
-                          ),
+                          if (Prefs.getString(PrefsName.group1) == "")
+                            Text(
+                              GlobleString.TAF_Additional_Applicants,
+                              style: MyStyles.SemiBold(20, myColor.text_color),
+                              textAlign: TextAlign.center,
+                            ),
                         ],
                       ),
                     ),
@@ -1170,53 +1177,91 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      TextFormField(
-                                        initialValue: oocupinfo.mobilenumber,
-                                        textAlign: TextAlign.start,
-                                        readOnly: tfAdditionalOccupantState
-                                            .notapplicable,
-                                        style: MyStyles.Medium(
-                                            13,
-                                            tfAdditionalOccupantState
-                                                    .notapplicable
-                                                ? myColor.disablecolor
-                                                : myColor.text_color),
-                                        decoration: InputDecoration(
-                                            //border: InputBorder.none,
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color:
-                                                      tfAdditionalOccupantState
-                                                              .notapplicable
-                                                          ? myColor.disablecolor
-                                                          : myColor.blue,
-                                                  width: 1.0),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: tfAdditionalOccupantState
-                                                          .notapplicable
-                                                      ? myColor.disablecolor
-                                                      : oocupinfo
-                                                              .errro_mobilenumber!
-                                                          ? myColor.errorcolor
-                                                          : myColor.gray,
-                                                  width: 1.0),
-                                            ),
-                                            isDense: true,
-                                            contentPadding: EdgeInsets.all(10),
-                                            fillColor: myColor.white,
-                                            filled: true),
-                                        onChanged: (value) {
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .mobilenumber = value.toString();
+                                      Container(
+                                        width: 250,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: oocupinfo.errro_mobilenumber!
+                                                ? myColor.errorcolor
+                                                : myColor.gray,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CountryCodePicker(
+                                              onChanged: (value) {
+                                                // _store.dispatch(
+                                                //     UpdateTFPersonCountryCode(
+                                                //         value.code.toString()));
 
-                                          tfAdditionalOccupantState
-                                              .occupantlist[Index]
-                                              .errro_mobilenumber = false;
-                                          _changeData();
-                                        },
+                                                // _store.dispatch(UpdateTFPersonDialCode(
+                                                //     value.dialCode.toString()));
+
+                                                // setState(() {});
+                                                // _changeData();
+                                              },
+                                              // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                                              initialSelection: _store
+                                                  .state!
+                                                  .tfPersonalState
+                                                  .perCountryCode,
+                                              showFlag: true,
+                                              textStyle: MyStyles.Medium(
+                                                  13, myColor.text_color),
+                                              dialogTextStyle: MyStyles.Medium(
+                                                  13, myColor.text_color),
+                                              //showDropDownButton: true,
+                                            ),
+                                            Expanded(
+                                              child: TextFormField(
+                                                initialValue:
+                                                    oocupinfo.mobilenumber,
+                                                keyboardType:
+                                                    TextInputType.phone,
+                                                inputFormatters: [
+                                                  MaskedInputFormatter(
+                                                      "(000) 000 0000")
+                                                ],
+                                                textAlign: TextAlign.start,
+                                                readOnly:
+                                                    tfAdditionalOccupantState
+                                                        .notapplicable,
+                                                style: MyStyles.Medium(
+                                                    13,
+                                                    tfAdditionalOccupantState
+                                                            .notapplicable
+                                                        ? myColor.disablecolor
+                                                        : myColor.text_color),
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey),
+                                                  contentPadding:
+                                                      EdgeInsets.all(10),
+                                                  isDense: true,
+                                                ),
+                                                onChanged: (value) {
+                                                  tfAdditionalOccupantState
+                                                          .occupantlist[Index]
+                                                          .mobilenumber =
+                                                      value.toString();
+
+                                                  tfAdditionalOccupantState
+                                                          .occupantlist[Index]
+                                                          .errro_mobilenumber =
+                                                      false;
+                                                  _changeData();
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -1336,10 +1381,11 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                     SizedBox(
                       height: 25,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [AddNewOccupation(tfAdditionalOccupantState)],
-                    ),
+                    if (Prefs.getString(PrefsName.group1) == "")
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [AddNewOccupation(tfAdditionalOccupantState)],
+                      ),
                     SizedBox(
                       height: 30,
                     ),
@@ -1350,7 +1396,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            saveandnext(tenancyFormState1),
+                            saveandnext(_store.state!.tfPersonalState),
                             // Checkbox(
                             //   activeColor: myColor.Circle_main,
                             //   checkColor: myColor.white,
@@ -1512,7 +1558,7 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
 
   Widget saveandnext(TFPersonalState tfPersonalState) {
     return InkWell(
-      onTap: () => _saveDataAndNext(tfPersonalState),
+      onTap: () => _saveDataAndNext(_store.state!.tfPersonalState),
       child: CustomeWidget.SaveAndNext(GlobleString.Save_and_next),
     );
   }
