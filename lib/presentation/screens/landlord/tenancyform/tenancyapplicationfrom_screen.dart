@@ -249,6 +249,15 @@ class TenancyApplicationFormScreenState
       }
     });
 
+    ApiManager().getPriviewDocumentList(context, applicantid,
+        (status, responce, arrres) {
+      if (status) {
+        if (arrres.length > 0) {
+          Prefs.setBool(PrefsName.TCF_Step7, true);
+        }
+      }
+    });
+
     ApiManager().getTenancyDetails_Employemant(context, applicantid,
         (status, responce, employemantDetails) {
       if (status) {
@@ -312,7 +321,6 @@ class TenancyApplicationFormScreenState
           if (applicationDetails.isAuthorized! &&
               applicationDetails.isAgreedTerms!) {
             Prefs.setBool(PrefsName.TCF_Step6, true);
-            Prefs.setBool(PrefsName.TCF_Step7, true);
           } else {
             Prefs.setBool(PrefsName.TCF_Step6, false);
           }
