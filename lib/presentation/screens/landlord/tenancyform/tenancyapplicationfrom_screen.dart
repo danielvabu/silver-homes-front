@@ -333,6 +333,9 @@ class TenancyApplicationFormScreenState
               propdata.country!;
           await Prefs.setString(PrefsName.PropertyID, propdata.ID!);
           await Prefs.setString(PrefsName.OwnerID, ownerdata!.id.toString());
+          await Prefs.setString(
+              PrefsName.group1, applicationDetails!.group1.toString());
+          // await Prefs.setString(PrefsName.OwnerID, applicationDetails.);
           _store.dispatch(UpdateTenacyFormAddress(Address));
 
           _store.dispatch(UpdateTenacyFormCompanyName(ownerdata.CompanyName!));
@@ -358,6 +361,8 @@ class TenancyApplicationFormScreenState
 
               _store.dispatch(FNLUpdateTFAddOccupantlist(secondList));
               _store.dispatch(FNLUpdateTFAddLiveServerOccupantlist(secondList));
+            } else {
+              _store.dispatch(UpdateTFAddOccupantlist([]));
             }
 
             if (applicationDetails.IsNotApplicableAddOccupant!) {

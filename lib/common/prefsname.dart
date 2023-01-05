@@ -10,7 +10,7 @@ class PrefsName {
   static const String user_CompanyName = "user_CompanyName";
 
   static const String OwnerID = "OwnerID";
-
+  static const String group1 = "group1";
   static const String PropertyEdit = "PropertyEdit";
   static const String PropertyID = "PropertyID";
   static const String PropertyEditMode = "PropertyEditMode";

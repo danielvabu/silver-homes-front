@@ -13,6 +13,7 @@ class ApplicationDetails {
     this.leaseStatus,
     this.agreementReceivedDate,
     this.id,
+    this.group1,
     this.docReceivedDate,
     this.IsNotApplicableAddOccupant,
   });
@@ -28,6 +29,7 @@ class ApplicationDetails {
   SystemEnumDetails? leaseStatus;
   String? agreementReceivedDate;
   String? id;
+  String? group1;
   String? docReceivedDate;
   bool? IsNotApplicableAddOccupant;
 
@@ -45,6 +47,7 @@ class ApplicationDetails {
         leaseStatus: SystemEnumDetails.fromJson(json["LeaseStatus"]),
         agreementReceivedDate: json["AgreementReceivedDate"],
         id: json["ID"],
+        group1: json["group1"],
         docReceivedDate: json["DocReceivedDate"],
         IsNotApplicableAddOccupant: json["IsNotApplicableAddOccupant"],
       );
@@ -61,6 +64,7 @@ class ApplicationDetails {
         "LeaseStatus": leaseStatus!.toJson(),
         "AgreementReceivedDate": agreementReceivedDate,
         "ID": id,
+        "group1": group1,
         "DocReceivedDate": docReceivedDate,
         "IsNotApplicableAddOccupant": IsNotApplicableAddOccupant,
       };

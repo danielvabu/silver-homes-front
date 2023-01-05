@@ -932,35 +932,51 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
         }
       });
     }
-    //guardamos los campos de documentos a solicitar
-    for (int i = 0; i < widget.fields.length; i++) {
-      ApiManager().AddRequestDocument(context, widget.fields[i],
-          (error, responce) async {
+
+    //borramos documentos previos guardados para esta aplicacion:
+    Requestdocumentid appiddel = new Requestdocumentid();
+    appiddel.application_id = widget._tenancyleadlist[0].id.toString();
+
+    ApiManager().deleteAllRequestDocument(context, appiddel,
+        (status, responce) {
+      //guardamos los campos de documentos a solicitar
+      for (int i = 0; i < widget.fields.length; i++) {
+        ApiManager().AddRequestDocument(context, widget.fields[i],
+            (error, responce) async {
+          if (error) {
+          } else {
+            // loader.remove();
+            ToastUtils.showCustomToast(context, responce, false);
+          }
+        });
+      }
+    });
+
+    String templatehtml = await GenerateTemplate();
+    var content = '''$templatehtml''';
+    String encoded = base64Url.encode(utf8.encode(content));
+    //borramos los templates anteriores:
+    Requestdocumentid apphtmltemp = new Requestdocumentid();
+    apphtmltemp.application_id = widget._tenancyleadlist[0].id.toString();
+
+    ApiManager().deleteAllTemplateHtml(context, apphtmltemp,
+        (status, responce) {
+      //guardamos los campos de documentos a solicitar
+      RequestHtml reqhtml = RequestHtml(
+          htmltemplate: encoded,
+          application_id: widget._tenancyleadlist[0].id.toString());
+      ApiManager().AddRequestHtml(context, reqhtml, (error, responce) async {
         if (error) {
+          ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
+            if (error) {
+              widget._callbackSave();
+            } else {}
+          });
         } else {
           // loader.remove();
           ToastUtils.showCustomToast(context, responce, false);
         }
       });
-    }
-
-    String templatehtml = await GenerateTemplate();
-    var content = '''$templatehtml''';
-    String encoded = base64Url.encode(utf8.encode(content));
-    RequestHtml reqhtml = RequestHtml(
-        htmltemplate: encoded,
-        application_id: widget._tenancyleadlist[0].id.toString());
-    ApiManager().AddRequestHtml(context, reqhtml, (error, responce) async {
-      if (error) {
-        ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
-          if (error) {
-            widget._callbackSave();
-          } else {}
-        });
-      } else {
-        // loader.remove();
-        ToastUtils.showCustomToast(context, responce, false);
-      }
     });
   }
 
