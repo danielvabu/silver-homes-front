@@ -411,9 +411,7 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
         _store.dispatch(UpdateAddEditProperty());*/
         //showAlertDialog(context);
         convertJson();
-        CheckUserData check = new CheckUserData();
-
-        print("prueba1008: " + Prefs.getString(PrefsName.WelcomeUserid.toString()) + "  : " + check.UserID.toString());
+        print("prueba1008: " + Prefs.getString(PrefsName.OwnerID.toString()));
         /*  Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RoleTable()),
@@ -681,7 +679,8 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FutureBuilder(
-            future: TeamMemberService().getTeamMembers(context, "13", searchTeamMember), // function where you call your api
+            future: TeamMemberService().getTeamMembers(
+                context, Prefs.getString(PrefsName.OwnerID.toString()), searchTeamMember), // function where you call your api
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               // AsyncSnapshot<Your object type>
               if (snapshot.connectionState == ConnectionState.waiting) {
