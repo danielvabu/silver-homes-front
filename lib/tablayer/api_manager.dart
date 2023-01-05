@@ -7761,6 +7761,40 @@ class ApiManager {
     });
   }
 
+  SaveDocument(
+      BuildContext context,
+      String extension,
+      String type,
+      String propertyId,
+      String fatherId,
+      String name,
+      String url,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_Documents,
+      "Reqtokens": {
+        "property_id": propertyId,
+        "father_id": fatherId,
+        "type": type,
+        "owner_id": Prefs.getString(PrefsName.OwnerID),
+        "name": name,
+        "extension": extension,
+        "url": url,
+      }
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+        callBackQuesy(true, respoce);
+      } else {
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
   getReferenceDetailsAPi(
       BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     var myjson = {
@@ -8513,6 +8547,41 @@ class ApiManager {
       String filename1, CallBackQuesy callBackQuesy) async {
     List<int> _selectedFile = mdata1!;
     List urlS3 = await getUrlS3One(filename1, "TenantLeaseAgreement");
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+      'ApplicationCode': Weburl.API_CODE,
+    };
+    List<String> mediaString = [];
+    int send = 0;
+
+    String S3content = urlS3[0]["presigned_url"];
+    //var multipartRequest =
+    // new http.MultipartRequest("PUT", Uri.parse(S3content));
+    var multipartRequest =
+        new http.StreamedRequest("PUT", Uri.parse(S3content));
+    multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+    // multipartRequest.headers.addAll(headers);
+    multipartRequest.sink.add(_selectedFile);
+    multipartRequest.sink.close();
+    var response = await multipartRequest.send();
+    if (response.statusCode == 200) {
+      send = send + 1;
+    }
+
+    if (send > 0) {
+      mediaString = await insertMediaData(urlS3);
+      callBackQuesy(true, mediaString[0]);
+    } else {
+      callBackQuesy(false, GlobleString.Error);
+    }
+  }
+
+  DocumentModule(BuildContext context, Uint8List? mdata1, String filename1,
+      CallBackQuesy callBackQuesy) async {
+    List<int> _selectedFile = mdata1!;
+    List urlS3 = await getUrlS3One(filename1, "Documents");
 
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',

@@ -222,6 +222,7 @@ class Weburl {
       "A92FF41C-3874-4F6D-AA1F-433B9054B509";
   static var WorkFlow_ReferenceRequestReceivedDate =
       "DED13ACC-FE21-4090-AB2C-08A8ACB28620";
+  static var WorkFlow_Documents = "1DF5CC24-A44B-45DE-B9E4-289D65EACDOCU";
   static var WorkFlow_RestoreAllArchive =
       "ECC4B79A-77D6-431A-83F8-F58BE84FA562";
   static var WorkFlow_ActiveTenant = "34F4BE34-7F77-4C58-B600-1EF90B0292AD";
