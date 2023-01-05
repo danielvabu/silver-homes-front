@@ -184,7 +184,7 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
   Widget _datavalueCountry(DatumTeamUser model) {
     return Container(
       height: 40,
-      width: width / 6,
+      width: width / 10,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
@@ -199,12 +199,13 @@ class _TeamMembersItemState extends State<TeamMembersItem> {
   Widget _datavaluePropertyType(DatumTeamUser model) {
     return Container(
       height: 40,
-      width: width / 11,
+      width: width / 13,
+      //width: width / 20,
       margin: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         model.lastLoggedIn == null ? "No result" : model.lastLoggedIn.toString(),
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.start,
         style: MyStyles.Medium(12, myColor.Circle_main),
       ),
     );

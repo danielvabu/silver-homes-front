@@ -169,6 +169,8 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
     );
   }
 
+  String searchTeamMember = "";
+
   Widget _centerView(PropertyListState propertyListState) {
     return Container(
       width: sswidth,
@@ -242,9 +244,13 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
                                         _timer!.cancel();
                                       }
                                       _timer = new Timer.periodic(Duration(milliseconds: 400), (timer) {
-                                        _store.dispatch(UpdatePropertyListIsloding(true));
+                                        /* _store.dispatch(UpdatePropertyListIsloding(true));
                                         _store.dispatch(UpdatePropertyList(<PropertyDataList>[]));
-                                        apimanager(value, 1, "PropertyName", 1, 0);
+                                        apimanager(value, 1, "PropertyName", 1, 0);*/
+
+                                        searchTeamMember = value.toString();
+                                        setState(() {});
+
                                         _timer!.cancel();
                                       });
                                       //  apimanager(value, 1, "PropertyName", propertyListState.NameSortAcsDes, 1);
@@ -405,6 +411,9 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
         _store.dispatch(UpdateAddEditProperty());*/
         //showAlertDialog(context);
         convertJson();
+        CheckUserData check = new CheckUserData();
+
+        print("prueba1008: " + Prefs.getString(PrefsName.WelcomeUserid.toString()) + "  : " + check.UserID.toString());
         /*  Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RoleTable()),
@@ -661,433 +670,18 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
     );
   }
 
-  convertJson() {
-    Map<String, dynamic> result = jsonDecode("""{
-   "team_members":[
-      {
-         "id":1,
-         "first_name":"Etta",
-         "last_name":"Cowdrey",
-         "email":"ecowdrey0@sphinn.com",
-         "role":"Property-manager",
-         "activated_at":"2/17/2022",
-         "last_logged_in":"11/23/2022",
-         "is_enabled":false
-      },
-      {
-         "id":2,
-         "first_name":"Eldredge",
-         "last_name":"McDonald",
-         "email":"emcdonald1@purevolume.com",
-         "role":"Subcontractor",
-         "activated_at":"6/2/2022",
-         "last_logged_in":"8/4/2022",
-         "is_enabled":false
-      },
-      {
-         "id":3,
-         "first_name":"Shea",
-         "last_name":"Rickeard",
-         "email":"srickeard2@google.com.au",
-         "role":"Construction Foreman",
-         "activated_at":"10/21/2022",
-         "last_logged_in":"11/18/2022",
-         "is_enabled":true
-      },
-      {
-         "id":4,
-         "first_name":"Erick",
-         "last_name":"Isaksson",
-         "email":"eisaksson3@typepad.com",
-         "role":"Construction Expeditor",
-         "activated_at":"6/4/2022",
-         "last_logged_in":"11/16/2022",
-         "is_enabled":true
-      },
-      {
-         "id":5,
-         "first_name":"Konstantine",
-         "last_name":"Rraundl",
-         "email":"krraundl4@cyberchimps.com",
-         "role":"Construction Worker",
-         "activated_at":"4/8/2022",
-         "last_logged_in":"9/20/2022",
-         "is_enabled":false
-      },
-      {
-         "id":6,
-         "first_name":"Kermie",
-         "last_name":"Tarquinio",
-         "email":"ktarquinio5@hp.com",
-         "role":"Project Manager",
-         "activated_at":"3/17/2022",
-         "last_logged_in":"4/11/2022",
-         "is_enabled":false
-      },
-      {
-         "id":7,
-         "first_name":"Trista",
-         "last_name":"Tooke",
-         "email":"ttooke6@com.com",
-         "role":"Construction Foreman",
-         "activated_at":"1/4/2022",
-         "last_logged_in":"3/30/2022",
-         "is_enabled":true
-      },
-      {
-         "id":8,
-         "first_name":"Jordon",
-         "last_name":"Fishly",
-         "email":"jfishly7@boston.com",
-         "role":"Estimator",
-         "activated_at":"5/21/2022",
-         "last_logged_in":"3/9/2022",
-         "is_enabled":true
-      },
-      {
-         "id":9,
-         "first_name":"Callida",
-         "last_name":"Winley",
-         "email":"cwinley8@nasa.gov",
-         "role":"Construction Foreman",
-         "activated_at":"1/23/2022",
-         "last_logged_in":"4/2/2022",
-         "is_enabled":true
-      },
-      {
-         "id":10,
-         "first_name":"Jimmy",
-         "last_name":"French",
-         "email":"jfrench9@cmu.edu",
-         "role":"Supervisor",
-         "activated_at":"6/4/2022",
-         "last_logged_in":"3/31/2022",
-         "is_enabled":true
-      },
-      {
-         "id":11,
-         "first_name":"Sherman",
-         "last_name":"Burden",
-         "email":"sburdena@uiuc.edu",
-         "role":"Construction Worker",
-         "activated_at":"4/12/2022",
-         "last_logged_in":"12/4/2022",
-         "is_enabled":true
-      },
-      {
-         "id":12,
-         "first_name":"Marcel",
-         "last_name":"Lancett",
-         "email":"mlancettb@imageshack.us",
-         "role":"Project Manager",
-         "activated_at":"11/17/2022",
-         "last_logged_in":"7/19/2022",
-         "is_enabled":true
-      },
-      {
-         "id":13,
-         "first_name":"Bibbie",
-         "last_name":"Mcimmie",
-         "email":"bmcimmiec@hostgator.com",
-         "role":"Estimator",
-         "activated_at":"10/16/2022",
-         "last_logged_in":"8/21/2022",
-         "is_enabled":false
-      },
-      {
-         "id":14,
-         "first_name":"Venus",
-         "last_name":"Stronack",
-         "email":"vstronackd@ucsd.edu",
-         "role":"Surveyor",
-         "activated_at":"3/6/2022",
-         "last_logged_in":"3/18/2022",
-         "is_enabled":true
-      },
-      {
-         "id":15,
-         "first_name":"Fonsie",
-         "last_name":"Wesgate",
-         "email":"fwesgatee@telegraph.co.uk",
-         "role":"Construction Foreman",
-         "activated_at":"7/18/2022",
-         "last_logged_in":"8/6/2022",
-         "is_enabled":true
-      },
-      {
-         "id":16,
-         "first_name":"Madel",
-         "last_name":"Raybould",
-         "email":"mraybouldf@unicef.org",
-         "role":"Construction Foreman",
-         "activated_at":"2/20/2022",
-         "last_logged_in":"3/26/2022",
-         "is_enabled":false
-      },
-      {
-         "id":17,
-         "first_name":"Marion",
-         "last_name":"Ferfulle",
-         "email":"mferfulleg@nhs.uk",
-         "role":"Construction Worker",
-         "activated_at":"1/13/2022",
-         "last_logged_in":"5/12/2022",
-         "is_enabled":true
-      },
-      {
-         "id":18,
-         "first_name":"Ethel",
-         "last_name":"Bettles",
-         "email":"ebettlesh@wix.com",
-         "role":"Supervisor",
-         "activated_at":"7/24/2022",
-         "last_logged_in":"9/5/2022",
-         "is_enabled":false
-      },
-      {
-         "id":19,
-         "first_name":"Lianna",
-         "last_name":"Emson",
-         "email":"lemsoni@army.mil",
-         "role":"Electrician",
-         "activated_at":"6/28/2022",
-         "last_logged_in":"10/24/2022",
-         "is_enabled":true
-      },
-      {
-         "id":20,
-         "first_name":"Giraud",
-         "last_name":"Gallone",
-         "email":"ggallonej@paginegialle.it",
-         "role":"Subcontractor",
-         "activated_at":"5/17/2022",
-         "last_logged_in":"12/2/2022",
-         "is_enabled":true
-      }
-   ]
-}""");
-// Notice how you have to call body from the response if you are using http to retrieve json
-    //  final body = json.decode(response.toString());
-    TeamMembersModel dataJson = teamMembersModelFromJson(result);
-
-    print("prueba1006: " + dataJson.teamMembers!.length.toString());
-  }
+  convertJson() {}
 
   Widget tableItem(PropertyListState propertyListState) {
-    Map<String, dynamic> result = jsonDecode("""{
-   "team_members":[
-      {
-         "id":1,
-         "first_name":"Etta",
-         "last_name":"Cowdrey",
-         "email":"ecowdrey0@sphinn.com",
-         "role":"Property-manager",
-         "activated_at":"2/17/2022",
-         "last_logged_in":"11/23/2022",
-         "is_enabled":false
-      },
-      {
-         "id":2,
-         "first_name":"Eldredge",
-         "last_name":"McDonald",
-         "email":"emcdonald1@purevolume.com",
-         "role":"Subcontractor",
-         "activated_at":"6/2/2022",
-         "last_logged_in":"8/4/2022",
-         "is_enabled":false
-      },
-      {
-         "id":3,
-         "first_name":"Shea",
-         "last_name":"Rickeard",
-         "email":"srickeard2@google.com.au",
-         "role":"Construction Foreman",
-         "activated_at":"10/21/2022",
-         "last_logged_in":"11/18/2022",
-         "is_enabled":true
-      },
-      {
-         "id":4,
-         "first_name":"Erick",
-         "last_name":"Isaksson",
-         "email":"eisaksson3@typepad.com",
-         "role":"Construction Expeditor",
-         "activated_at":"6/4/2022",
-         "last_logged_in":"11/16/2022",
-         "is_enabled":true
-      },
-      {
-         "id":5,
-         "first_name":"Konstantine",
-         "last_name":"Rraundl",
-         "email":"krraundl4@cyberchimps.com",
-         "role":"Construction Worker",
-         "activated_at":"4/8/2022",
-         "last_logged_in":"9/20/2022",
-         "is_enabled":false
-      },
-      {
-         "id":6,
-         "first_name":"Kermie",
-         "last_name":"Tarquinio",
-         "email":"ktarquinio5@hp.com",
-         "role":"Project Manager",
-         "activated_at":"3/17/2022",
-         "last_logged_in":"4/11/2022",
-         "is_enabled":false
-      },
-      {
-         "id":7,
-         "first_name":"Trista",
-         "last_name":"Tooke",
-         "email":"ttooke6@com.com",
-         "role":"Construction Foreman",
-         "activated_at":"1/4/2022",
-         "last_logged_in":"3/30/2022",
-         "is_enabled":true
-      },
-      {
-         "id":8,
-         "first_name":"Jordon",
-         "last_name":"Fishly",
-         "email":"jfishly7@boston.com",
-         "role":"Estimator",
-         "activated_at":"5/21/2022",
-         "last_logged_in":"3/9/2022",
-         "is_enabled":true
-      },
-      {
-         "id":9,
-         "first_name":"Callida",
-         "last_name":"Winley",
-         "email":"cwinley8@nasa.gov",
-         "role":"Construction Foreman",
-         "activated_at":"1/23/2022",
-         "last_logged_in":"4/2/2022",
-         "is_enabled":true
-      },
-      {
-         "id":10,
-         "first_name":"Jimmy",
-         "last_name":"French",
-         "email":"jfrench9@cmu.edu",
-         "role":"Supervisor",
-         "activated_at":"6/4/2022",
-         "last_logged_in":"3/31/2022",
-         "is_enabled":true
-      },
-      {
-         "id":11,
-         "first_name":"Sherman",
-         "last_name":"Burden",
-         "email":"sburdena@uiuc.edu",
-         "role":"Construction Worker",
-         "activated_at":"4/12/2022",
-         "last_logged_in":"12/4/2022",
-         "is_enabled":true
-      },
-      {
-         "id":12,
-         "first_name":"Marcel",
-         "last_name":"Lancett",
-         "email":"mlancettb@imageshack.us",
-         "role":"Project Manager",
-         "activated_at":"11/17/2022",
-         "last_logged_in":"7/19/2022",
-         "is_enabled":true
-      },
-      {
-         "id":13,
-         "first_name":"Bibbie",
-         "last_name":"Mcimmie",
-         "email":"bmcimmiec@hostgator.com",
-         "role":"Estimator",
-         "activated_at":"10/16/2022",
-         "last_logged_in":"8/21/2022",
-         "is_enabled":false
-      },
-      {
-         "id":14,
-         "first_name":"Venus",
-         "last_name":"Stronack",
-         "email":"vstronackd@ucsd.edu",
-         "role":"Surveyor",
-         "activated_at":"3/6/2022",
-         "last_logged_in":"3/18/2022",
-         "is_enabled":true
-      },
-      {
-         "id":15,
-         "first_name":"Fonsie",
-         "last_name":"Wesgate",
-         "email":"fwesgatee@telegraph.co.uk",
-         "role":"Construction Foreman",
-         "activated_at":"7/18/2022",
-         "last_logged_in":"8/6/2022",
-         "is_enabled":true
-      },
-      {
-         "id":16,
-         "first_name":"Madel",
-         "last_name":"Raybould",
-         "email":"mraybouldf@unicef.org",
-         "role":"Construction Foreman",
-         "activated_at":"2/20/2022",
-         "last_logged_in":"3/26/2022",
-         "is_enabled":false
-      },
-      {
-         "id":17,
-         "first_name":"Marion",
-         "last_name":"Ferfulle",
-         "email":"mferfulleg@nhs.uk",
-         "role":"Construction Worker",
-         "activated_at":"1/13/2022",
-         "last_logged_in":"5/12/2022",
-         "is_enabled":true
-      },
-      {
-         "id":18,
-         "first_name":"Ethel",
-         "last_name":"Bettles",
-         "email":"ebettlesh@wix.com",
-         "role":"Supervisor",
-         "activated_at":"7/24/2022",
-         "last_logged_in":"9/5/2022",
-         "is_enabled":false
-      },
-      {
-         "id":19,
-         "first_name":"Lianna",
-         "last_name":"Emson",
-         "email":"lemsoni@army.mil",
-         "role":"Electrician",
-         "activated_at":"6/28/2022",
-         "last_logged_in":"10/24/2022",
-         "is_enabled":true
-      },
-      {
-         "id":20,
-         "first_name":"Giraud",
-         "last_name":"Gallone",
-         "email":"ggallonej@paginegialle.it",
-         "role":"Subcontractor",
-         "activated_at":"5/17/2022",
-         "last_logged_in":"12/2/2022",
-         "is_enabled":true
-      }
-   ]
-}""");
 // Notice how you have to call body from the response if you are using http to retrieve json
     //  final body = json.decode(response.toString());
-    TeamMembersModel dataJson = teamMembersModelFromJson(result);
 
-    print("prueba1006: " + dataJson.teamMembers!.length.toString());
+    //print("prueba1006: " + dataJson.teamMembers!.length.toString());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FutureBuilder(
-            future: TeamMemberService().getTeamMembers(context, "13"), // function where you call your api
+            future: TeamMemberService().getTeamMembers(context, "13", searchTeamMember), // function where you call your api
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               // AsyncSnapshot<Your object type>
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -1205,9 +799,9 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
                 }
               }
             }),
-        propertyListState.isloding
+        /*  propertyListState.isloding
             ? SizedBox()
-            /* Expanded(
+             Expanded(
                 child: Container(
                   width: sswidth,
                   height: ssheight - 310,
@@ -1314,7 +908,7 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
                         }
                       },
                     ),
-                  )*/
+                  )
 
             : Expanded(
                 child: Container(
@@ -1329,7 +923,7 @@ class _TeamMemberPageState extends State<TeamMemberPage> {
                     style: MyStyles.Medium(18, myColor.tabel_msg),
                   ),
                 ),
-              )
+              )*/
       ],
     );
   }

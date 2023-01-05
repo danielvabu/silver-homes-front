@@ -77,8 +77,8 @@ class TeamMemberService {
     }
   }
 
-  Future<TeamMemberUserListModel?> getTeamMembers(BuildContext context, String id) async {
-    Map data = {"created_by": id, "first_name": ""};
+  Future<TeamMemberUserListModel?> getTeamMembers(BuildContext context, String id, String search) async {
+    Map data = {"created_by": id, "first_name": search};
     //encode Map to JSON
     var body = json.encode(data);
     //try {
