@@ -18,6 +18,7 @@ import 'package:silverhome/presentation/screens/landlord/documents/model/request
 import 'package:silverhome/presentation/screens/landlord/documents/model/request_move_document_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/request_rename_document_model.dart';
 import 'package:silverhome/presentation/screens/landlord/documents/model/request_restore_document_model.dart';
+import 'package:silverhome/tablayer/api_manager.dart';
 import 'package:silverhome/tablayer/httpclient.dart';
 import 'package:silverhome/tablayer/weburl.dart';
 import 'package:http_parser/src/media_type.dart';
@@ -259,6 +260,26 @@ class DocumentsService {
 
   /*  static var Upload_File_Api = base_url + "documents/upload"; */
 
+  Future<List> getUrlS3One(String link1, String module) async {
+    List<String> names = [];
+    List datares = [];
+    names.add(link1);
+
+    var myjson = {"object_names": names, "path": module};
+
+    String json = jsonEncode(myjson);
+    await HttpClientCall().LinkS3APICall(json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        datares = data["response"] as List;
+      } else {
+        // Helper.Log("getS3Links", respoce);
+        datares = [];
+      }
+    });
+    return datares;
+  }
+
   Future<DocumentModel?> uploadDocument(
       BuildContext context,
       Uint8List data,
@@ -272,61 +293,105 @@ class DocumentsService {
 
       String filepath = '$name.$extension';
 
-      var multipartRequest = new http.MultipartRequest(
-          "POST",
-          Uri.parse(
-              /* Weburl.Upload_Document_Api */ "https://www.ren-hogar.com/documentupload/"));
+      // var multipartRequest = new http.MultipartRequest(
+      //     "POST",
+      //     Uri.parse(
+      //         /* Weburl.Upload_Document_Api */ "https://www.ren-hogar.com/documentupload/"));
 
-      multipartRequest.headers.addAll(getHeadersMultipart());
-      multipartRequest.fields["property_id"] = propertyId;
-      multipartRequest.fields["father_id"] = fatherId;
-      multipartRequest.fields["type"] = type;
-      multipartRequest.fields["owner_id"] = Prefs.getString(PrefsName.OwnerID);
-      multipartRequest.fields["name"] = name;
-      multipartRequest.files.add(await http.MultipartFile.fromBytes(
-          'file', _selectedFile,
-          contentType: new MediaType('application', extension),
-          filename: filepath));
+      // multipartRequest.headers.addAll(getHeadersMultipart());
+      // multipartRequest.fields["property_id"] = propertyId;
+      // multipartRequest.fields["father_id"] = fatherId;
+      // multipartRequest.fields["type"] = type;
+      // multipartRequest.fields["owner_id"] = Prefs.getString(PrefsName.OwnerID);
+      // multipartRequest.fields["name"] = name;
+      // multipartRequest.files.add(await http.MultipartFile.fromBytes(
+      //     'file', _selectedFile,
+      //     contentType: new MediaType('application', extension),
+      //     filename: filepath));
 
-      await multipartRequest.send().then((result) {
-        //print('admin');
-        if (result.statusCode == 200) {
-          print(result);
-          http.Response.fromStream(result).then((response) async {
-            if (response.statusCode == 200) {
-              print(jsonDecode(response.body));
-              print("result");
-              if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
-                var data = jsonDecode(response.body);
+//carga s3 nuevo
+      String filename1 = name + "." + extension;
+      List urlS3 = await getUrlS3One(filename1, "Documents");
 
-                if (data != null && data['Result'] != null) {
-                  return DocumentModel.fromJson(data['Result'][0]);
-                } else {
-                  ToastUtils.showCustomToast(
-                      context, GlobleString.Error, false);
-                  return null;
-                }
-              } else {
-                ToastUtils.showCustomToast(context, GlobleString.Error, false);
-                return null;
-              }
-            } else if (response.statusCode == 401) {
-              ToastUtils.showCustomToast(
-                  context, GlobleString.Error_401, false);
-              return null;
-            } else {
-              ToastUtils.showCustomToast(context, GlobleString.Error, false);
-              return null;
-            }
-          });
-        } else if (result.statusCode == 401) {
-          ToastUtils.showCustomToast(context, GlobleString.Error_401, false);
-          return null;
-        } else {
-          ToastUtils.showCustomToast(context, GlobleString.Error, false);
-          return null;
+      Map<String, String> headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'bearer ' + Prefs.getString(PrefsName.userTokan),
+        'ApplicationCode': Weburl.API_CODE,
+      };
+      List<String> mediaString = [];
+      int send = 0;
+      var datosr = null;
+      String S3content = urlS3[0]["presigned_url"];
+      String url = urlS3[0]["file_url"];
+      //var multipartRequest =
+      // new http.MultipartRequest("PUT", Uri.parse(S3content));
+      var multipartRequest =
+          new http.StreamedRequest("PUT", Uri.parse(S3content));
+      multipartRequest.headers["Content-Type"] = "binary/octet-stream";
+      // multipartRequest.headers.addAll(headers);
+      multipartRequest.sink.add(_selectedFile);
+      multipartRequest.sink.close();
+      var response = await multipartRequest.send();
+      if (response.statusCode == 200) {
+        ApiManager().SaveDocument(
+            context, extension, type, propertyId, fatherId, name, url,
+            (error, respoce2) async {
+          if (error) {
+            datosr = jsonDecode(respoce2);
+          } else {
+            ToastUtils.showCustomToast(context, respoce2, false);
+          }
+        });
+        if (datosr != null) {
+          return DocumentModel.fromJson(datosr['Result'][0]);
         }
-      });
+      } else if (response.statusCode == 401) {
+        ToastUtils.showCustomToast(context, GlobleString.Error_401, false);
+        return null;
+      } else {
+        ToastUtils.showCustomToast(context, GlobleString.Error, false);
+        return null;
+      }
+
+      // await multipartRequest.send().then((result) {
+      //   //print('admin');
+      //   if (result.statusCode == 200) {
+      //     print(result);
+      //     http.Response.fromStream(result).then((response) async {
+      //       if (response.statusCode == 200) {
+      //         print(jsonDecode(response.body));
+      //         print("result");
+      //         if (jsonDecode(response.body)['StatusCode'].toString() == "200") {
+      //           var data = jsonDecode(response.body);
+
+      //           if (data != null && data['Result'] != null) {
+      //             return DocumentModel.fromJson(data['Result'][0]);
+      //           } else {
+      //             ToastUtils.showCustomToast(
+      //                 context, GlobleString.Error, false);
+      //             return null;
+      //           }
+      //         } else {
+      //           ToastUtils.showCustomToast(context, GlobleString.Error, false);
+      //           return null;
+      //         }
+      //       } else if (response.statusCode == 401) {
+      //         ToastUtils.showCustomToast(
+      //             context, GlobleString.Error_401, false);
+      //         return null;
+      //       } else {
+      //         ToastUtils.showCustomToast(context, GlobleString.Error, false);
+      //         return null;
+      //       }
+      //     });
+      //   } else if (result.statusCode == 401) {
+      //     ToastUtils.showCustomToast(context, GlobleString.Error_401, false);
+      //     return null;
+      //   } else {
+      //     ToastUtils.showCustomToast(context, GlobleString.Error, false);
+      //     return null;
+      //   }
+      // });
     } catch (e) {
       print(e);
       ToastUtils.showCustomToast(context, GlobleString.Error_server, false);

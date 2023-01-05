@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -1573,9 +1575,10 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
       Overlay.of(context)!.insert(loader);
 
       ApiManager().UpdateTFPersonalInfo(context, commonID, upersonInfo,
-          (status, responce) {
+          (status, responce) async {
         if (status) {
           _saveDataAndNext2(tfAdditionalOccupantState1);
+          await Future.delayed(Duration(seconds: 2));
           //_saveDataAndNext2(occupantlist);
           loader.remove();
           if (!isGotoback) {
@@ -1798,14 +1801,13 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
   }
 
   leadcall(List<AddLead2> applicantIdlist, List<String> emails) {
-    ApiManager().InsetNewLeadAPI(context, applicantIdlist,
-        (error, respoce) async {
+    ApiManager().InsetNewLeadAPI(context, applicantIdlist, (error, respoce) {
       if (error) {
         InviteWorkFlowReqtokens reqtokens = new InviteWorkFlowReqtokens();
         List<String> ids = respoce.split(",");
         ids.removeLast();
         for (int i = 0; i < ids.length; i++) {
-          await ApiManager().DuplicatTemplateHtml(
+          ApiManager().DuplicatTemplateHtml(
               context, Prefs.getString(PrefsName.TCF_ApplicationID), ids[i],
               (status, responce) async {
             if (status) {
