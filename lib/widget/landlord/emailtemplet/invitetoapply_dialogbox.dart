@@ -368,6 +368,32 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                             onTap: () {
                                               setState(() {
                                                 widget.fields.removeAt(i);
+
+                                                _controller.clear();
+                                                for (int h = 0;
+                                                    h < widget.fields.length;
+                                                    h++) {
+                                                  RequestDocuments doc1 =
+                                                      RequestDocuments(
+                                                          name: widget
+                                                              .fields[h].name,
+                                                          required: widget
+                                                              .fields[h]
+                                                              .required,
+                                                          application_id: widget
+                                                              ._tenancyleadlist[
+                                                                  0]
+                                                              .id
+                                                              .toString(),
+                                                          owner_id:
+                                                              Prefs.getString(
+                                                                  PrefsName
+                                                                      .OwnerID));
+                                                  _controller.add(
+                                                      TextEditingController());
+                                                  _controller[h].text =
+                                                      widget.fields[h].name;
+                                                }
                                               });
 
                                               // eventtypesState.overrrides
