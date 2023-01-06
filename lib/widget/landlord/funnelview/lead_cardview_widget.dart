@@ -81,12 +81,20 @@ class _LeadCardViewWidgetState extends State<LeadCardViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    String grupo = widget.dmodel.group1.toString();
-    String id = widget.dmodel.id.toString();
-    if (grupo == '0') {
-      grupo = "Group $id - primary";
+    int group = widget.dmodel.group1!;
+    int numero = widget.dmodel.numgroup!;
+    int id = widget.dmodel.id!;
+    String grupo = "";
+    if (group == 0) {
+      if (numero == 0) {
+        grupo = "Single Applicant";
+      } else {
+        numero++;
+        grupo = "Group $id - primary (" + numero.toString() + " applicants)";
+      }
     } else {
-      grupo = "Group $grupo";
+      numero++;
+      grupo = "Group $group (" + numero.toString() + " applicants)";
     }
     // TODO: implement build
     return Container(
@@ -165,7 +173,10 @@ class _LeadCardViewWidgetState extends State<LeadCardViewWidget> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(grupo),
+                        Text(
+                          grupo,
+                          style: MyStyles.Medium(14, myColor.text_color),
+                        ),
                         InkWell(
                           onTap: () {
                             if (widget.dmodel.isexpand!) {

@@ -4735,6 +4735,8 @@ class ApiManager {
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
+          int numgroup =
+              myobject['numgroup'] != null ? myobject['numgroup'] : 0;
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
@@ -4886,7 +4888,7 @@ class ApiManager {
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
           tenancyApplication.group1 = group1;
-
+          tenancyApplication.numgroup = numgroup;
           allListData.add(tenancyApplication);
 
           if (ApplicationStatus!.EnumDetailID == 1) {
@@ -6352,6 +6354,8 @@ class ApiManager {
           int Applicant_ID =
               myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
+          int numgroup =
+              myobject['numgroup'] != null ? myobject['numgroup'] : 0;
 
           double Rating = myobject['Rating'] != null
               ? double.parse(myobject['Rating'].toString())
@@ -6476,6 +6480,7 @@ class ApiManager {
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
           tenancyApplication.group1 = group1;
+          tenancyApplication.numgroup = numgroup;
           tenancyleadlist.add(tenancyApplication);
         }
 
@@ -7437,6 +7442,8 @@ class ApiManager {
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
+          int numgroup =
+              myobject['numgroup'] != null ? myobject['numgroup'] : 0;
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
 
@@ -7588,6 +7595,7 @@ class ApiManager {
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
           tenancyApplication.group1 = group1;
+          tenancyApplication.numgroup = numgroup;
 
           tenancyleadlist.add(tenancyApplication);
         }
@@ -8262,6 +8270,8 @@ class ApiManager {
 
           int ID = myobject['ID'] != null ? myobject['ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
+          int numgroup =
+              myobject['numgroup'] != null ? myobject['numgroup'] : 0;
 
           int Owner_ID =
               myobject['Owner_ID'] != null ? myobject['Owner_ID'] : 0;
@@ -8414,6 +8424,7 @@ class ApiManager {
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
           tenancyApplication.group1 = group1;
+          tenancyApplication.numgroup = numgroup;
 
           tenancyleadlist.add(tenancyApplication);
         }
@@ -9163,6 +9174,8 @@ class ApiManager {
           int Applicant_ID =
               myobject['Applicant_ID'] != null ? myobject['Applicant_ID'] : 0;
           int group1 = myobject['group1'] != null ? myobject['group1'] : 0;
+          int numgroup =
+              myobject['numgroup'] != null ? myobject['numgroup'] : 0;
           double Rating = myobject['Rating'] != null
               ? double.parse(myobject['Rating'].toString())
               : 0;
@@ -9286,6 +9299,7 @@ class ApiManager {
           tenancyApplication.employmentStatus = EmploymentStatus;
           tenancyApplication.applicationReceived = ApplicationReceived;
           tenancyApplication.group1 = group1;
+          tenancyApplication.numgroup = numgroup;
 
           tenancyleadlist.add(tenancyApplication);
         }

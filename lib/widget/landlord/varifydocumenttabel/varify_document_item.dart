@@ -194,8 +194,9 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
 
   List<Widget> _tableData(TenancyApplication model, int index) {
     var result = <Widget>[];
+
     result.add(_datavalueTitle(model.applicantName!, index));
-    result.add(_datavalueGroup(model.group1!, model.id!));
+    result.add(_datavalueGroup(model.group1!, model.id!, model.numgroup!));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueDatesent(model.applicationSentDate!));
@@ -239,12 +240,18 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     );
   }
 
-  Widget _datavalueGroup(int group, int id) {
+  Widget _datavalueGroup(int group, int id, int numero) {
     String grupo = "";
     if (group == 0) {
-      grupo = "Group $id - primary";
+      if (numero == 0) {
+        grupo = "Single Applicant";
+      } else {
+        numero++;
+        grupo = "Group $id - primary (" + numero.toString() + " applicants)";
+      }
     } else {
-      grupo = "Group $group";
+      numero++;
+      grupo = "Group $group (" + numero.toString() + " applicants)";
     }
     return InkWell(
       onTap: () {
@@ -256,7 +263,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
-          message: "grupo",
+          message: grupo,
           child: Text(
             grupo,
             textAlign: TextAlign.start,
