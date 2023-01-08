@@ -41,6 +41,7 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
   List<ApplicationDocumentUploads> fields = [];
+  List<int> idsmedia = [];
   late OverlayEntry loader;
   @override
   void initState() {
@@ -52,26 +53,49 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
     GetRequestDocuments querylist = GetRequestDocuments(
         application_id: Prefs.getString(PrefsName.TCF_ApplicationID));
     // _store.dispatch(UpdateProperTytypeValue1([]));
-    await ApiManager().getDocumentRequest(context, querylist,
-        (status, errorlist) {
-      if (status) {
-        setState(() {
-          for (int i = 0; i < errorlist.length; i++) {
-            ApplicationDocumentUploads objdoc = ApplicationDocumentUploads(
-                appImage: null,
-                isbuttonActive: false,
-                fieldname: errorlist[i]["name"],
-                fileName: "",
-                notaplicable: false,
-                required: errorlist[i]["required"],
-                nuevo: false);
-            fields.add(objdoc);
-          }
-        });
-      } else {
-        //  _store.dispatch(UpdateProperTytypeValue1([]));
-      }
-    });
+    if (Prefs.getBool(PrefsName.TCF_Step7) == true) {
+      await ApiManager().getPriviewDocumentList(
+          context, Prefs.getString(PrefsName.TCF_ApplicationID),
+          (status, responce, arrres) {
+        if (status) {
+          setState(() {
+            for (int i = 0; i < arrres.length; i++) {
+              ApplicationDocumentUploads objdoc = ApplicationDocumentUploads(
+                  appImage: null,
+                  isbuttonActive: false,
+                  fieldname: arrres[i].field,
+                  fileName: arrres[i].mediaInfo!.url,
+                  notaplicable: false,
+                  required: true,
+                  nuevo: false);
+              fields.add(objdoc);
+              idsmedia.add(arrres[i].mediaInfo!.id!);
+            }
+          });
+        }
+      });
+    } else {
+      await ApiManager().getDocumentRequest(context, querylist,
+          (status, errorlist) {
+        if (status) {
+          setState(() {
+            for (int i = 0; i < errorlist.length; i++) {
+              ApplicationDocumentUploads objdoc = ApplicationDocumentUploads(
+                  appImage: null,
+                  isbuttonActive: false,
+                  fieldname: errorlist[i]["name"],
+                  fileName: "",
+                  notaplicable: false,
+                  required: errorlist[i]["required"],
+                  nuevo: false);
+              fields.add(objdoc);
+            }
+          });
+        } else {
+          //  _store.dispatch(UpdateProperTytypeValue1([]));
+        }
+      });
+    }
   }
 
   @override
@@ -200,8 +224,48 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
                             SizedBox(
                               width: 30,
                             ),
-                            CustomeWidget.AttechDocFileView(
-                                fields[i].fileName!),
+                            (Prefs.getBool(PrefsName.TCF_Step7) == true)
+                                ? InkWell(
+                                    onTap: () async {
+                                      if (fields[i].fileName != null &&
+                                          fields[i].fileName != null &&
+                                          fields[i].fileName != "") {
+                                        // String filename = Helper.fileextension(
+                                        //     "copy_of_id",
+                                        //     previewDocumentState.MediaDoc1!.fileType,
+                                        //     previewDocumentState.MediaDoc1!.url.toString());
+
+                                        await Helper.download(
+                                            context,
+                                            fields[i].fileName.toString(),
+                                            idsmedia[i].toString(),
+                                            Helper.FileNameWithTime(
+                                                fields[i].fileName!),
+                                            1);
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 30,
+                                      width: 100,
+                                      padding:
+                                          EdgeInsets.only(left: 15, right: 15),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                        border: Border.all(
+                                            color: myColor.Circle_main,
+                                            width: 1.5),
+                                      ),
+                                      child: Text(
+                                        GlobleString.PD_Download,
+                                        style: MyStyles.Medium(
+                                            12, myColor.text_color),
+                                      ),
+                                    ),
+                                  )
+                                : CustomeWidget.AttechDocFileView(
+                                    fields[i].fileName!),
                             SizedBox(
                               width: 10,
                             ),
