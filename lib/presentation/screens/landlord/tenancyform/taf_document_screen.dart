@@ -128,7 +128,7 @@ class _TAFDocumentScreenState extends State<TAFDocumentScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 120,
+                  height: 20,
                 ),
                 VarificationDocumentView2(
                   onPressedSave: () {

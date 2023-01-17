@@ -121,6 +121,8 @@ typedef CallBackAdditionalOccupant = void Function(
     bool status, String responce, List<TenancyAdditionalOccupant> occupantlist);
 typedef CallBackAdditionalReference = void Function(bool status,
     String responce, List<TenancyAdditionalReference> referencelist);
+typedef CallBackGroupList = void Function(
+    bool status, String responce, List<GetListGroup> referencelist);
 typedef CallBackApplicatCurrentTenancy = void Function(bool status,
     String responce, ApplicatCurrentTenancy? applicatCurrentTenancy);
 typedef CallBackEmployemantDetails = void Function(

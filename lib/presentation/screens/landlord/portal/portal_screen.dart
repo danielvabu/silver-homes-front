@@ -45,6 +45,7 @@ import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_t
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_type_templates/event_type_templates_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/add_edit_eventtypes.dart';
 import 'package:silverhome/presentation/screens/landlord/scheduling/event_types/event_types_screen.dart';
+import 'package:silverhome/presentation/screens/landlord/tenancy_application_details/tenancy_application_multiple_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancy_application_details/tenancy_application_screen.dart';
 import 'package:silverhome/presentation/screens/teams/teamMembersPage.dart';
 import 'package:silverhome/presentation/screens/teams/teamsPage.dart';
@@ -141,7 +142,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       width: drawer_width,
                       height: MediaQuery.of(context).size.height,
                     ),
-                    ContentCenterView(context, drawer_width, portalState!, bloc),
+                    ContentCenterView(
+                        context, drawer_width, portalState!, bloc),
                   ],
                 ),
                 DrawerMenu(context, portalState, bloc),
@@ -234,18 +236,23 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                         _store.dispatch(UpdatePropertyStatus_VacantUnits(0));
                         _store.dispatch(UpdateMantenaceExpand(false));
                         _store.dispatch(UpdateSchedulingExpand(false));
-                        _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+                        _store.dispatch(
+                            UpdatePortalPage(1, GlobleString.NAV_Properties));
                       },
                       child: StreamBuilder(
-                          stream: bloc.documentBloc.getDocumentSubMenuTransformer,
+                          stream:
+                              bloc.documentBloc.getDocumentSubMenuTransformer,
                           initialData: -1,
-                          builder: (BuildContext context, AsyncSnapshot snapshotDocumentSubMenu) {
+                          builder: (BuildContext context,
+                              AsyncSnapshot snapshotDocumentSubMenu) {
                             return Container(
                               height: 60,
                               padding: EdgeInsets.only(left: 15),
                               color: portalState.index == 1 &&
                                       (!snapshotDocumentSubMenu.hasData ||
-                                          (snapshotDocumentSubMenu.hasData && snapshotDocumentSubMenu.data == -1))
+                                          (snapshotDocumentSubMenu.hasData &&
+                                              snapshotDocumentSubMenu.data ==
+                                                  -1))
                                   ? myColor.drawselectcolor
                                   : myColor.white,
                               child: Row(
@@ -266,10 +273,17 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       child: Text(
                                         GlobleString.NAV_Properties,
                                         style: portalState.index == 1 &&
-                                                (!snapshotDocumentSubMenu.hasData ||
-                                                    (snapshotDocumentSubMenu.hasData && snapshotDocumentSubMenu.data == -1))
-                                            ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                            : MyStyles.Regular(16, myColor.Circle_main),
+                                                (!snapshotDocumentSubMenu
+                                                        .hasData ||
+                                                    (snapshotDocumentSubMenu
+                                                            .hasData &&
+                                                        snapshotDocumentSubMenu
+                                                                .data ==
+                                                            -1))
+                                            ? MyStyles.SemiBold(
+                                                16, myColor.Circle_main)
+                                            : MyStyles.Regular(
+                                                16, myColor.Circle_main),
                                       ),
                                     ),
                                   )
@@ -361,7 +375,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     },
                     child: Container(
                       height: 60,
-                      color: portalState.index == 4 ? myColor.drawselectcolor : myColor.white,
+                      color: portalState.index == 4
+                          ? myColor.drawselectcolor
+                          : myColor.white,
                       padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -397,11 +413,14 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       // _store.dispatch(
                       //     UpdatePortalPage(5, GlobleString.NAV_Maintenance));
                       // _store.dispatch(UpdateMantenaceRequest());
-                      _store.dispatch(UpdateMantenaceExpand(!portalState.isMaintenanceExpand));
+                      _store.dispatch(UpdateMantenaceExpand(
+                          !portalState.isMaintenanceExpand));
                     },
                     child: Container(
                       height: 60,
-                      color: portalState.index == 5 ? myColor.drawselectcolor : myColor.white,
+                      color: portalState.index == 5
+                          ? myColor.drawselectcolor
+                          : myColor.white,
                       padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -424,14 +443,18 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                     child: Text(
                                       GlobleString.NAV_Maintenance,
                                       style: portalState.index == 5
-                                          ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                          : MyStyles.Regular(16, myColor.Circle_main),
+                                          ? MyStyles.SemiBold(
+                                              16, myColor.Circle_main)
+                                          : MyStyles.Regular(
+                                              16, myColor.Circle_main),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
-                                      portalState.isMaintenanceExpand ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down_sharp,
+                                      portalState.isMaintenanceExpand
+                                          ? Icons.keyboard_arrow_up
+                                          : Icons.keyboard_arrow_down_sharp,
                                       size: 25,
                                     ),
                                   )
@@ -446,7 +469,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   portalState.isMaintenanceExpand == true
                       ? Container(
                           height: 70,
-                          color: portalState.index == 5 ? myColor.drawselectcolor2 : myColor.white,
+                          color: portalState.index == 5
+                              ? myColor.drawselectcolor2
+                              : myColor.white,
                           padding: EdgeInsets.only(left: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -460,17 +485,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       SizedBox(height: 10),
                                       InkWell(
                                         onTap: () {
-                                          _store.dispatch(UpdateSchedulingExpand(false));
-                                          _store.dispatch(UpdateMantenaceRequest());
+                                          _store.dispatch(
+                                              UpdateSchedulingExpand(false));
+                                          _store.dispatch(
+                                              UpdateMantenaceRequest());
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                GlobleString.NAV_Maintenance_requests,
-                                                style: portalState.index == 5 && portalState.subindex == 1
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                GlobleString
+                                                    .NAV_Maintenance_requests,
+                                                style: portalState.index == 5 &&
+                                                        portalState.subindex ==
+                                                            1
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -479,17 +511,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       SizedBox(height: 10),
                                       InkWell(
                                         onTap: () {
-                                          _store.dispatch(UpdateSchedulingExpand(false));
-                                          _store.dispatch(UpdateMantenaceVendor());
+                                          _store.dispatch(
+                                              UpdateSchedulingExpand(false));
+                                          _store.dispatch(
+                                              UpdateMantenaceVendor());
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                GlobleString.NAV_Maintenance_vendors,
-                                                style: portalState.index == 5 && portalState.subindex == 2
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                GlobleString
+                                                    .NAV_Maintenance_vendors,
+                                                style: portalState.index == 5 &&
+                                                        portalState.subindex ==
+                                                            2
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -509,27 +548,35 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   StreamBuilder(
                       stream: bloc.documentBloc.getDocumentMenuTransformer,
                       initialData: false,
-                      builder: (BuildContext context, AsyncSnapshot snapshotDocument) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot snapshotDocument) {
                         return StreamBuilder(
-                            stream: bloc.documentBloc.getDocumentSubMenuTransformer,
+                            stream:
+                                bloc.documentBloc.getDocumentSubMenuTransformer,
                             initialData: -1,
-                            builder: (BuildContext context, AsyncSnapshot snapshotDocumentSubMenu) {
+                            builder: (BuildContext context,
+                                AsyncSnapshot snapshotDocumentSubMenu) {
                               return InkWell(
                                   onTap: () {
                                     if (snapshotDocument.hasData) {
-                                      bloc.documentBloc.changeDocumentMenuDrawer(!snapshotDocument.data);
+                                      bloc.documentBloc
+                                          .changeDocumentMenuDrawer(
+                                              !snapshotDocument.data);
                                     }
                                   },
                                   child: Container(
                                       height: 60,
-                                      color: snapshotDocumentSubMenu.data == 0 ||
-                                              snapshotDocumentSubMenu.data == 1 ||
+                                      color: snapshotDocumentSubMenu.data ==
+                                                  0 ||
+                                              snapshotDocumentSubMenu.data ==
+                                                  1 ||
                                               snapshotDocumentSubMenu.data == 2
                                           ? myColor.drawselectcolor
                                           : myColor.white,
                                       padding: EdgeInsets.only(left: 15),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Container(
                                             width: 35,
@@ -547,18 +594,32 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                                 children: [
                                                   Expanded(
                                                     child: Text(
-                                                      GlobleString.NAV_Documents,
-                                                      style: snapshotDocument.data == true
-                                                          ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                                          : MyStyles.Regular(16, myColor.Circle_main),
+                                                      GlobleString
+                                                          .NAV_Documents,
+                                                      style: snapshotDocument
+                                                                  .data ==
+                                                              true
+                                                          ? MyStyles.SemiBold(
+                                                              16,
+                                                              myColor
+                                                                  .Circle_main)
+                                                          : MyStyles.Regular(
+                                                              16,
+                                                              myColor
+                                                                  .Circle_main),
                                                     ),
                                                   ),
                                                   Padding(
-                                                      padding: const EdgeInsets.all(8.0),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Icon(
-                                                        snapshotDocument.data == true
-                                                            ? Icons.keyboard_arrow_up
-                                                            : Icons.keyboard_arrow_down_sharp,
+                                                        snapshotDocument.data ==
+                                                                true
+                                                            ? Icons
+                                                                .keyboard_arrow_up
+                                                            : Icons
+                                                                .keyboard_arrow_down_sharp,
                                                         size: 25,
                                                       ))
                                                 ],
@@ -573,12 +634,15 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   StreamBuilder(
                     stream: bloc.documentBloc.getDocumentMenuTransformer,
                     initialData: false,
-                    builder: (BuildContext context, AsyncSnapshot snapshotDocument) {
+                    builder:
+                        (BuildContext context, AsyncSnapshot snapshotDocument) {
                       return snapshotDocument.data == true
                           ? StreamBuilder(
-                              stream: bloc.documentBloc.getDocumentSubMenuTransformer,
+                              stream: bloc
+                                  .documentBloc.getDocumentSubMenuTransformer,
                               initialData: -1,
-                              builder: (BuildContext context, AsyncSnapshot snapshotDocumentSubMenu) {
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshotDocumentSubMenu) {
                                 return Container(
                                   height: 100,
                                   color: snapshotDocumentSubMenu.data == 0 ||
@@ -598,23 +662,48 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                               const SizedBox(height: 10.0),
                                               InkWell(
                                                 onTap: () {
-                                                  _store.dispatch(UpdatePropertyStatus_UnitsHeld(-1));
-                                                  _store.dispatch(UpdatePropertyStatus_UnitsRented(-1));
-                                                  _store.dispatch(UpdatePropertyStatus_VacantUnits(-1));
-                                                  _store.dispatch(UpdateMantenaceExpand(false));
-                                                  _store.dispatch(UpdateSchedulingExpand(false));
+                                                  _store.dispatch(
+                                                      UpdatePropertyStatus_UnitsHeld(
+                                                          -1));
+                                                  _store.dispatch(
+                                                      UpdatePropertyStatus_UnitsRented(
+                                                          -1));
+                                                  _store.dispatch(
+                                                      UpdatePropertyStatus_VacantUnits(
+                                                          -1));
+                                                  _store.dispatch(
+                                                      UpdateMantenaceExpand(
+                                                          false));
+                                                  _store.dispatch(
+                                                      UpdateSchedulingExpand(
+                                                          false));
 
-                                                  _store.dispatch(UpdatePortalPage(1, GlobleString.Title_documents));
-                                                  bloc.documentBloc.changeDocumentSubMenuDrawer(0);
+                                                  _store.dispatch(
+                                                      UpdatePortalPage(
+                                                          1,
+                                                          GlobleString
+                                                              .Title_documents));
+                                                  bloc.documentBloc
+                                                      .changeDocumentSubMenuDrawer(
+                                                          0);
                                                 },
                                                 child: Row(
                                                   children: [
                                                     Expanded(
                                                       child: Text(
-                                                        GlobleString.NAV_Files_string,
-                                                        style: snapshotDocumentSubMenu.data == 0
-                                                            ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                            : MyStyles.Regular(14, myColor.Circle_main),
+                                                        GlobleString
+                                                            .NAV_Files_string,
+                                                        style: snapshotDocumentSubMenu
+                                                                    .data ==
+                                                                0
+                                                            ? MyStyles.SemiBold(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main)
+                                                            : MyStyles.Regular(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main),
                                                       ),
                                                     ),
                                                   ],
@@ -623,17 +712,30 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                               const SizedBox(height: 10.0),
                                               InkWell(
                                                 onTap: () {
-                                                  _store.dispatch(UpdateSchedulingExpand(false));
-                                                  bloc.documentBloc.changeDocumentSubMenuDrawer(1);
+                                                  _store.dispatch(
+                                                      UpdateSchedulingExpand(
+                                                          false));
+                                                  bloc.documentBloc
+                                                      .changeDocumentSubMenuDrawer(
+                                                          1);
                                                 },
                                                 child: Row(
                                                   children: [
                                                     Expanded(
                                                       child: Text(
-                                                        GlobleString.NAV_Document_builder,
-                                                        style: snapshotDocumentSubMenu.data == 1
-                                                            ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                            : MyStyles.Regular(14, myColor.Circle_main),
+                                                        GlobleString
+                                                            .NAV_Document_builder,
+                                                        style: snapshotDocumentSubMenu
+                                                                    .data ==
+                                                                1
+                                                            ? MyStyles.SemiBold(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main)
+                                                            : MyStyles.Regular(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main),
                                                       ),
                                                     ),
                                                   ],
@@ -642,16 +744,27 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                               const SizedBox(height: 10.0),
                                               InkWell(
                                                 onTap: () {
-                                                  bloc.documentBloc.changeDocumentSubMenuDrawer(2);
+                                                  bloc.documentBloc
+                                                      .changeDocumentSubMenuDrawer(
+                                                          2);
                                                 },
                                                 child: Row(
                                                   children: [
                                                     Expanded(
                                                       child: Text(
-                                                        GlobleString.NAV_Document_templates,
-                                                        style: snapshotDocumentSubMenu.data == 2
-                                                            ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                            : MyStyles.Regular(14, myColor.Circle_main),
+                                                        GlobleString
+                                                            .NAV_Document_templates,
+                                                        style: snapshotDocumentSubMenu
+                                                                    .data ==
+                                                                2
+                                                            ? MyStyles.SemiBold(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main)
+                                                            : MyStyles.Regular(
+                                                                14,
+                                                                myColor
+                                                                    .Circle_main),
                                                       ),
                                                     ),
                                                   ],
@@ -675,7 +788,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       _store.dispatch(UpdatePortalPage(9, "Team member"));
                       bloc.documentBloc.changeDocumentMenuDrawer(false);
                       bloc.documentBloc.changeDocumentSubMenuDrawer(-1);
-                      _store.dispatch(UpdateSchedulingExpand(!portalState.isSchedulingExpand));
+                      _store.dispatch(UpdateSchedulingExpand(
+                          !portalState.isSchedulingExpand));
                       //bloc.documentBloc.changeDocumentMenuDrawer(false);
 
                       // bloc.documentBloc.changeDocumentSubMenuDrawer(-1);
@@ -683,7 +797,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     },
                     child: Container(
                       height: 60,
-                      color: portalState.index == 8 ? myColor.drawselectcolor : myColor.white,
+                      color: portalState.index == 8
+                          ? myColor.drawselectcolor
+                          : myColor.white,
                       padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -706,14 +822,18 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                     child: Text(
                                       "Team management",
                                       style: portalState.index == 9
-                                          ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                          : MyStyles.Regular(16, myColor.Circle_main),
+                                          ? MyStyles.SemiBold(
+                                              16, myColor.Circle_main)
+                                          : MyStyles.Regular(
+                                              16, myColor.Circle_main),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
-                                      portalState.isSchedulingExpand ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down_sharp,
+                                      portalState.isSchedulingExpand
+                                          ? Icons.keyboard_arrow_up
+                                          : Icons.keyboard_arrow_down_sharp,
                                       size: 25,
                                     ),
                                   )
@@ -729,7 +849,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   portalState.isSchedulingExpand == true
                       ? Container(
                           height: 100,
-                          color: portalState.index == 8 ? myColor.drawselectcolor2 : myColor.white,
+                          color: portalState.index == 8
+                              ? myColor.drawselectcolor2
+                              : myColor.white,
                           padding: EdgeInsets.only(left: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -744,16 +866,21 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                         onTap: () {
                                           //  _store.dispatch(UpdateMantenaceExpand(false));
                                           //_store.dispatch(UpdateSchedulingCalendar());
-                                          _store.dispatch(UpdatePortalPage(9, "Role"));
+                                          _store.dispatch(
+                                              UpdatePortalPage(9, "Role"));
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
                                                 "Roles",
-                                                style: portalState.index == 8 && portalState.subindex == 1
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            1
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -764,16 +891,21 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                         onTap: () {
                                           //     _store.dispatch(UpdateMantenaceExpand(false));
                                           //   _store.dispatch(UpdateSchedulingEventTypes());
-                                          _store.dispatch(UpdatePortalPage(10, "Team member"));
+                                          _store.dispatch(UpdatePortalPage(
+                                              10, "Team member"));
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
                                                 "Team members",
-                                                style: portalState.index == 8 && portalState.subindex == 2
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            2
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -784,16 +916,21 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                         onTap: () {
                                           //   _store.dispatch(UpdateMantenaceExpand(false));
                                           // _store.dispatch(UpdateSchedulingEventTypeTemplates());
-                                          _store.dispatch(UpdatePortalPage(9, "Team member"));
+                                          _store.dispatch(UpdatePortalPage(
+                                              9, "Team member"));
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
                                                 "Property Allocation",
-                                                style: portalState.index == 8 && portalState.subindex == 3
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            3
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -814,11 +951,14 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                       bloc.documentBloc.changeDocumentMenuDrawer(false);
                       bloc.documentBloc.changeDocumentSubMenuDrawer(-1);
 
-                      _store.dispatch(UpdateSchedulingExpand(!portalState.isSchedulingExpand));
+                      _store.dispatch(UpdateSchedulingExpand(
+                          !portalState.isSchedulingExpand));
                     },
                     child: Container(
                       height: 60,
-                      color: portalState.index == 8 ? myColor.drawselectcolor : myColor.white,
+                      color: portalState.index == 8
+                          ? myColor.drawselectcolor
+                          : myColor.white,
                       padding: EdgeInsets.only(left: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -841,14 +981,18 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                     child: Text(
                                       GlobleString.NAV_Scheduling,
                                       style: portalState.index == 8
-                                          ? MyStyles.SemiBold(16, myColor.Circle_main)
-                                          : MyStyles.Regular(16, myColor.Circle_main),
+                                          ? MyStyles.SemiBold(
+                                              16, myColor.Circle_main)
+                                          : MyStyles.Regular(
+                                              16, myColor.Circle_main),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
-                                      portalState.isSchedulingExpand ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down_sharp,
+                                      portalState.isSchedulingExpand
+                                          ? Icons.keyboard_arrow_up
+                                          : Icons.keyboard_arrow_down_sharp,
                                       size: 25,
                                     ),
                                   )
@@ -863,7 +1007,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   portalState.isSchedulingExpand == true
                       ? Container(
                           height: 100,
-                          color: portalState.index == 8 ? myColor.drawselectcolor2 : myColor.white,
+                          color: portalState.index == 8
+                              ? myColor.drawselectcolor2
+                              : myColor.white,
                           padding: EdgeInsets.only(left: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -876,17 +1022,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
-                                          _store.dispatch(UpdateMantenaceExpand(false));
-                                          _store.dispatch(UpdateSchedulingCalendar());
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingCalendar());
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                GlobleString.NAV_Scheduling_calendar,
-                                                style: portalState.index == 8 && portalState.subindex == 1
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                GlobleString
+                                                    .NAV_Scheduling_calendar,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            1
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -895,17 +1048,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
-                                          _store.dispatch(UpdateMantenaceExpand(false));
-                                          _store.dispatch(UpdateSchedulingEventTypes());
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingEventTypes());
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                GlobleString.NAV_Scheduling_event_types,
-                                                style: portalState.index == 8 && portalState.subindex == 2
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                GlobleString
+                                                    .NAV_Scheduling_event_types,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            2
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -914,17 +1074,24 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                       const SizedBox(height: 10.0),
                                       InkWell(
                                         onTap: () {
-                                          _store.dispatch(UpdateMantenaceExpand(false));
-                                          _store.dispatch(UpdateSchedulingEventTypeTemplates());
+                                          _store.dispatch(
+                                              UpdateMantenaceExpand(false));
+                                          _store.dispatch(
+                                              UpdateSchedulingEventTypeTemplates());
                                         },
                                         child: Row(
                                           children: [
                                             Expanded(
                                               child: Text(
-                                                GlobleString.NAV_Scheduling_event_type_templates,
-                                                style: portalState.index == 8 && portalState.subindex == 3
-                                                    ? MyStyles.SemiBold(14, myColor.Circle_main)
-                                                    : MyStyles.Regular(14, myColor.Circle_main),
+                                                GlobleString
+                                                    .NAV_Scheduling_event_type_templates,
+                                                style: portalState.index == 8 &&
+                                                        portalState.subindex ==
+                                                            3
+                                                    ? MyStyles.SemiBold(
+                                                        14, myColor.Circle_main)
+                                                    : MyStyles.Regular(14,
+                                                        myColor.Circle_main),
                                               ),
                                             ),
                                           ],
@@ -985,12 +1152,15 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
           Container(
             width: drawer_width,
             padding: EdgeInsets.only(left: 10, right: 10),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
-                'Powered by Silver Homes',
-                style: MyStyles.Regular(12, Colors.black12),
-              ),
-            ]),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Powered by Silver Homes',
+                    style: MyStyles.Regular(12, Colors.black12),
+                  ),
+                ]),
           ),
           SizedBox(height: 10),
         ],
@@ -1032,7 +1202,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdatePortalPage(4, GlobleString.NAV_Tenants));
   }
 
-  Widget ContentCenterView(BuildContext context, double val, PortalState portalState, Bloc bloc) {
+  Widget ContentCenterView(
+      BuildContext context, double val, PortalState portalState, Bloc bloc) {
     return Container(
       width: MediaQuery.of(context).size.width - val,
       height: height,
@@ -1054,9 +1225,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
               : StreamBuilder(
                   stream: bloc.documentBloc.getDocumentSubMenuTransformer,
                   initialData: -1,
-                  builder: (BuildContext context, AsyncSnapshot snapshotSubMenu) {
-                    if (!snapshotSubMenu.hasData || snapshotSubMenu.data == -1) {
-                      return CenterView(context, portalState.index, portalState);
+                  builder:
+                      (BuildContext context, AsyncSnapshot snapshotSubMenu) {
+                    if (!snapshotSubMenu.hasData ||
+                        snapshotSubMenu.data == -1) {
+                      return CenterView(
+                          context, portalState.index, portalState);
                     } else if (snapshotSubMenu.data == 0) {
                       return FileDocuments();
                     } else if (snapshotSubMenu.data == 1) {
@@ -1064,7 +1238,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     } else if (snapshotSubMenu.data == 3) {
                       return ChatPage();
                     } else {
-                      return CenterView(context, portalState.index, portalState);
+                      return CenterView(
+                          context, portalState.index, portalState);
                     }
                   },
                 ),
@@ -1087,7 +1262,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   width: 5,
                   //height: 40,
                   color: myColor.headertitle,
-                  margin: EdgeInsets.only(top: 15, bottom: 15, left: 30, right: 20),
+                  margin:
+                      EdgeInsets.only(top: 15, bottom: 15, left: 30, right: 20),
                 ),
                 Container(
                     child: Text(
@@ -1150,16 +1326,22 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     _store.dispatch(UpdatePropertyStatus_UnitsRented(0));
                     _store.dispatch(UpdatePropertyStatus_VacantUnits(0));
 
-                    _store.dispatch(UpdatePortalPage(1, GlobleString.NAV_Properties));
+                    _store.dispatch(
+                        UpdatePortalPage(1, GlobleString.NAV_Properties));
                   } else if (portalState.index == 4) {
                     _store.dispatch(UpdateLandlordApplication_Lead_Count(0));
                     _store.dispatch(UpdateLandlordApplications_count(0));
-                    _store.dispatch(UpdateLandlordApplication_verification_documents_count(0));
-                    _store.dispatch(UpdateLandlordApplication_references_check_count(0));
+                    _store.dispatch(
+                        UpdateLandlordApplication_verification_documents_count(
+                            0));
+                    _store.dispatch(
+                        UpdateLandlordApplication_references_check_count(0));
                     _store.dispatch(UpdateLandlordApplication_leases_count(0));
-                    _store.dispatch(UpdateLandlordApplication_Active_Tenants_Count(0));
+                    _store.dispatch(
+                        UpdateLandlordApplication_Active_Tenants_Count(0));
 
-                    _store.dispatch(UpdatePortalPage(4, GlobleString.NAV_Tenants));
+                    _store.dispatch(
+                        UpdatePortalPage(4, GlobleString.NAV_Tenants));
                   } else if (portalState.index == 5) {
                     if (portalState.subindex == 1) {
                       _store.dispatch(UpdateMantenaceRequest());
@@ -1188,7 +1370,9 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                   OverlayEntry loader = Helper.overlayLoader(context);
                   Overlay.of(context)!.insert(loader);
 
-                  ApiManager().getNotificationList(context, Prefs.getString(PrefsName.OwnerID), 1, (status, notificationlist, message) {
+                  ApiManager().getNotificationList(
+                      context, Prefs.getString(PrefsName.OwnerID), 1,
+                      (status, notificationlist, message) {
                     if (status) {
                       loader.remove();
 
@@ -1220,9 +1404,11 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     if (portalState.notificationCount > 0)
                       Container(
                         margin: EdgeInsets.only(left: 15),
-                        padding: EdgeInsets.only(left: 3, right: 3, top: 1, bottom: 1),
+                        padding: EdgeInsets.only(
+                            left: 3, right: 3, top: 1, bottom: 1),
                         decoration: BoxDecoration(
-                          border: Border.all(color: myColor.noti_count_border, width: 0.5),
+                          border: Border.all(
+                              color: myColor.noti_count_border, width: 0.5),
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                           color: myColor.noti_count_fill,
                         ),
@@ -1405,6 +1591,18 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
           return TeamMemberPage();
         }
         break;
+      case 11:
+        {
+          // Tenancy Screening
+          if (portalState.subindex == 1 && portalState.index == 11) {
+            return TenancyApplicationMultipleScreen(
+              listdata1: portalState.listdataviewlist,
+              index: 0,
+            );
+          }
+          return LandlordApplicationScreen();
+        }
+        break;
       default:
         {
           //return DashboardScreen();
@@ -1419,7 +1617,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     }
   }
 
-  void showDialogNotification(List<NotificationData> notificationlist, PortalState portalState) {
+  void showDialogNotification(
+      List<NotificationData> notificationlist, PortalState portalState) {
     double mheight;
 
     if (notificationlist.length > 0 && notificationlist.length < 4) {
@@ -1476,23 +1675,30 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                         return Column(
                           children: [
                             Container(
-                              height: notificationState!.IsLoadmore ? (mheight - 51) : (mheight - 10),
+                              height: notificationState!.IsLoadmore
+                                  ? (mheight - 51)
+                                  : (mheight - 10),
                               width: 250,
                               child: ListView.builder(
                                 key: UniqueKey(),
-                                itemCount: notificationState.notificationlist.length,
+                                itemCount:
+                                    notificationState.notificationlist.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  NotificationData notification = notificationState.notificationlist[index];
+                                  NotificationData notification =
+                                      notificationState.notificationlist[index];
 
                                   if (notification.typeOfNotification !=
-                                      NotificationType().getNotificationType(NotificationName.Tenant_Maintenance_Requests))
+                                      NotificationType().getNotificationType(
+                                          NotificationName
+                                              .Tenant_Maintenance_Requests))
                                     return NotificationItem(
                                       itemdata: notification,
                                       onPressNotification: (notification1) {
                                         Navigator.of(context).pop();
                                         isNotifiDialogshow = false;
 
-                                        _tapNotificationItem(notification1, portalState);
+                                        _tapNotificationItem(
+                                            notification1, portalState);
                                       },
                                     );
                                   else
@@ -1517,7 +1723,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                   alignment: Alignment.center,
                                   child: Text(
                                     "Load more data",
-                                    style: MyStyles.Medium(15, myColor.text_color),
+                                    style:
+                                        MyStyles.Medium(15, myColor.text_color),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -1595,7 +1802,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                   ),
                                   Text(
                                     GlobleString.Menu_Profile,
-                                    style: MyStyles.Medium(16, myColor.text_color),
+                                    style:
+                                        MyStyles.Medium(16, myColor.text_color),
                                   ),
                                 ],
                               ),
@@ -1627,7 +1835,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                                   ),
                                   Text(
                                     GlobleString.Menu_Logout,
-                                    style: MyStyles.Medium(16, myColor.text_color),
+                                    style:
+                                        MyStyles.Medium(16, myColor.text_color),
                                   ),
                                 ],
                               ),
@@ -1644,22 +1853,36 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     }
   }
 
-  void _tapNotificationItem(NotificationData notification, PortalState portalState) {
-    if (notification.typeOfNotification == NotificationType().getNotificationType(NotificationName.Application_Received)) {
+  void _tapNotificationItem(
+      NotificationData notification, PortalState portalState) {
+    if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Application_Received)) {
       openTenancyApplicationDetails(notification);
-    } else if (notification.typeOfNotification == NotificationType().getNotificationType(NotificationName.Documents_Received)) {
+    } else if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Documents_Received)) {
       _dailogPreviewDoc(notification, portalState);
-    } else if (notification.typeOfNotification == NotificationType().getNotificationType(NotificationName.Reference_Received)) {
-      CustomeWidget.ReferencePreview(context, notification.applicationId.toString());
-    } else if (notification.typeOfNotification == NotificationType().getNotificationType(NotificationName.Lease_Received)) {
+    } else if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Reference_Received)) {
+      CustomeWidget.ReferencePreview(
+          context, notification.applicationId.toString());
+    } else if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Lease_Received)) {
       _dailogPreviewLease(notification, portalState);
-    } else if (notification.typeOfNotification == NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Requests)) {
+    } else if (notification.typeOfNotification ==
+        NotificationType()
+            .getNotificationType(NotificationName.Owner_Maintenance_Requests)) {
       _dailogMaintenance(notification);
     } else if (notification.typeOfNotification ==
-        NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Change_Status)) {
+        NotificationType().getNotificationType(
+            NotificationName.Owner_Maintenance_Change_Status)) {
       _dailogMaintenance(notification);
     } else if (notification.typeOfNotification ==
-        NotificationType().getNotificationType(NotificationName.Owner_Maintenance_Change_Priority)) {
+        NotificationType().getNotificationType(
+            NotificationName.Owner_Maintenance_Change_Priority)) {
       _dailogMaintenance(notification);
     }
 
@@ -1667,11 +1890,13 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
   }
 
   _dailogMaintenance(NotificationData notification) {
-    CheckMaintenanceExitOrNotOwner_ID checkMaintenanceExitOrNot = new CheckMaintenanceExitOrNotOwner_ID();
+    CheckMaintenanceExitOrNotOwner_ID checkMaintenanceExitOrNot =
+        new CheckMaintenanceExitOrNotOwner_ID();
     checkMaintenanceExitOrNot.ID = notification.MaintenanceID.toString();
     checkMaintenanceExitOrNot.Owner_ID = Prefs.getString(PrefsName.OwnerID);
 
-    ApiManager().checkMaintenanceExit(context, checkMaintenanceExitOrNot, (status, responce) {
+    ApiManager().checkMaintenanceExit(context, checkMaintenanceExitOrNot,
+        (status, responce) {
       if (status) {
         showDialog(
           context: context,
@@ -1711,16 +1936,19 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     });
   }
 
-  void _updateReadNotification(NotificationData notification, PortalState portalState) {
+  void _updateReadNotification(
+      NotificationData notification, PortalState portalState) {
     CommonID commonID = new CommonID();
     commonID.ID = notification.id.toString();
 
     NotificationIsRead notificationIsRead = new NotificationIsRead();
     notificationIsRead.IsRead = "1";
 
-    ApiManager().UpdateNotificationRead(context, commonID, notificationIsRead, (status, responce) {
+    ApiManager().UpdateNotificationRead(context, commonID, notificationIsRead,
+        (status, responce) {
       if (status) {
-        _store.dispatch(UpdateNotificationCount(portalState.notificationCount - 1));
+        _store.dispatch(
+            UpdateNotificationCount(portalState.notificationCount - 1));
       } else {
         ToastUtils.showCustomToast(context, responce, false);
       }
@@ -1730,8 +1958,10 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
   void _taptoLoadMoreData(NotificationState notificationState) {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
-    ApiManager().getNotificationList(context, Prefs.getString(PrefsName.OwnerID), (notificationState.PageNo + 1),
-        (status, notificationlist, message) {
+    ApiManager().getNotificationList(
+        context,
+        Prefs.getString(PrefsName.OwnerID),
+        (notificationState.PageNo + 1), (status, notificationlist, message) {
       if (status) {
         loader.remove();
 
@@ -1740,7 +1970,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
         } else {
           _store.dispatch(UpdateNotificationisIsLoadmore(false));
         }
-        _store.dispatch(UpdateNotificationPageNo((notificationState.PageNo + 1)));
+        _store
+            .dispatch(UpdateNotificationPageNo((notificationState.PageNo + 1)));
 
         List<NotificationData> dalalist = notificationState.notificationlist;
         dalalist.addAll(notificationlist);
@@ -1764,7 +1995,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     _store.dispatch(UpdateTenancyDetails(listdataviewlist));
   }
 
-  void _dailogPreviewDoc(NotificationData notification, PortalState portalState) {
+  void _dailogPreviewDoc(
+      NotificationData notification, PortalState portalState) {
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -1859,7 +2091,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
 
     _store.dispatch(UpdateLLVDvarificationdoclist(<TenancyApplication>[]));
-    _store.dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
+    _store
+        .dispatch(UpdateLLVDfiltervarificationdoclist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -1881,7 +2114,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     await Prefs.setBool(PrefsName.IsApplyFilterList, false);
 
     _store.dispatch(UpdateLLRCReferenceCheckslist(<TenancyApplication>[]));
-    _store.dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
+    _store
+        .dispatch(UpdateLLRCfilterReferenceCheckslist(<TenancyApplication>[]));
 
     FilterReqtokens reqtokens = new FilterReqtokens();
     reqtokens.Owner_ID = Prefs.getString(PrefsName.OwnerID);
@@ -1943,7 +2177,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     await ApiManager().getActiveTenantLeadList(context, filterjson);
   }
 
-  void _dailogPreviewLease(NotificationData notification, PortalState portalState) {
+  void _dailogPreviewLease(
+      NotificationData notification, PortalState portalState) {
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -1964,7 +2199,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
     );
   }
 
-  _dailogSetActiveTenant(NotificationData notification, PortalState portalState) async {
+  _dailogSetActiveTenant(
+      NotificationData notification, PortalState portalState) async {
     showDialog(
       barrierColor: Colors.black45,
       context: context,
@@ -1980,9 +2216,12 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
             CommonID commonID = new CommonID();
             commonID.ID = notification.applicationId.toString();
 
-            ApiManager().getPropertyIdForApplication(context, commonID, (status, responce) async {
+            ApiManager().getPropertyIdForApplication(context, commonID,
+                (status, responce) async {
               if (status) {
-                await ApiManager().CheckTenantActiveOrNot(context, responce, notification.applicantId.toString(), (status, responce) async {
+                await ApiManager().CheckTenantActiveOrNot(
+                    context, responce, notification.applicantId.toString(),
+                    (status, responce) async {
                   if (status) {
                     ApiManager().updateTenancyStatusCount(context);
 
@@ -2011,7 +2250,8 @@ class _PortalScreenState extends BaseState<PortalScreen> with BasicPage {
                     }
                   } else {
                     if (responce == "1") {
-                      ToastUtils.showCustomToast(context, GlobleString.already_active_tenant, false);
+                      ToastUtils.showCustomToast(
+                          context, GlobleString.already_active_tenant, false);
                     } else {
                       ToastUtils.showCustomToast(context, responce, false);
                     }

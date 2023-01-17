@@ -1,13 +1,17 @@
 import 'dart:convert';
-
+import 'dart:html' as html;
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:html_editor_enhanced/utils/shims/dart_ui.dart';
 import 'package:intl/intl.dart';
 import 'package:silverhome/common/fontname.dart';
+import 'package:silverhome/common/helper.dart';
 import 'package:silverhome/domain/entities/LandlordProfile.dart';
 import 'package:silverhome/domain/entities/propertydata.dart';
+import 'package:silverhome/tablayer/tablePOJO.dart';
+import 'package:silverhome/widget/alert/alert_dialogbox.dart';
 import 'package:webviewx/webviewx.dart';
 import 'package:silverhome/common/globlestring.dart';
 import 'package:silverhome/common/mycolor.dart';
@@ -54,6 +58,14 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
   List<TextEditingController> _controller = [];
   LandlordProfile? landlordProfile1;
   PropertyData? propertyData1;
+  ApplicationDocumentUploads objdoc = ApplicationDocumentUploads(
+      appImage: null,
+      isbuttonActive: false,
+      fieldname: "",
+      fileName: "",
+      notaplicable: false,
+      required: false,
+      nuevo: false);
   var selectvalue;
   late WebViewXController webviewController;
   HtmlEditorController controller = HtmlEditorController();
@@ -505,11 +517,21 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                               ),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text(
-                                  GlobleString.DIA_Invite_to_Apply_title,
-                                  style:
-                                      MyStyles.Medium(14, myColor.text_color),
-                                  textAlign: TextAlign.center,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      GlobleString.DIA_Invite_to_Apply_title,
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      GlobleString.DIA_SmartFieldstext,
+                                      style: MyStyles.Medium(
+                                          14, myColor.text_color),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -636,6 +658,59 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
                                         height: 400,
                                       ),
                                     ),
+                                    SizedBox(height: 40),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 120,
+                                          child: InkWell(
+                                            onTap: () {
+                                              pickImage(1, objdoc);
+                                            },
+                                            child:
+                                                CustomeWidget.AttechDocMail(),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 30,
+                                        ),
+                                        SizedBox(
+                                          width: 200,
+                                          child:
+                                              CustomeWidget.AttechDocFileView(
+                                                  objdoc.fileName!),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        objdoc.fileName == ""
+                                            ? Container()
+                                            : SizedBox(
+                                                width: 30,
+                                                child: InkWell(
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () {
+                                                    deleteAttechment();
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    child: Image.asset(
+                                                      "assets/images/ic_delete.png",
+                                                      height: 25,
+                                                      alignment:
+                                                          Alignment.center,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+
                                     // Column(
                                     //   mainAxisAlignment:
                                     //       MainAxisAlignment.start,
@@ -995,7 +1070,36 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
         if (error) {
           ApiManager().Emailworkflow(context, inviteWorkFlow, (error, respoce) {
             if (error) {
-              widget._callbackSave();
+              if (objdoc.fileName != "") {
+                List<ApplicationDocumentUploads> listdoc = [];
+                listdoc.add(objdoc);
+                ApiManager().DocumentsUpload(context, listdoc,
+                    (status, listString, responce) {
+                  if (status) {
+                    if (listString.length > 0) {
+                      List<InsertApplicationDocument> appdoclist =
+                          <InsertApplicationDocument>[];
+
+                      for (int i = 0; i < listString.length; i++) {
+                        appdoclist.add(new InsertApplicationDocument(
+                            Media_ID: listString[i],
+                            field: listdoc[i].fieldname,
+                            Application_ID:
+                                widget._tenancyleadlist[0].id.toString()));
+                      }
+
+                      ApiManager().InsetApplicantDocumentAttach(
+                          context, appdoclist, (status, responce) {
+                        if (status) {
+                          widget._callbackSave();
+                        } else {}
+                      });
+                    }
+                  } else {}
+                });
+              } else {
+                widget._callbackSave();
+              }
             } else {}
           });
         } else {
@@ -1144,5 +1248,68 @@ class _InviteToApplyDialogboxState extends State<InviteToApplyDialogbox> {
     String html0 =
         '<p><img src="https://danivargas.co/silverhome.png" width="277" border="0" /></p>';
     return html0 + html1 + html2;
+  }
+
+  pickImage(int docs, ApplicationDocumentUploads? TVDState) async {
+    /* FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'png', 'pdf'],
+      allowMultiple: false,
+      withData: true,
+    );*/
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowedExtensions: ['jpg', 'png', 'pdf', "doc", "jpeg"],
+      type: FileType.custom,
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first as PlatformFile;
+
+      Helper.Log("file size", file.size.toString());
+
+      if ((file.size / 1024) < 0) {
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_Size_0_error, false);
+      } else if ((file.size / 1024) > 10240) {
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_Size_error, false);
+      } else if ((file.name.split('.').last).contains("jpg") ||
+          (file.name.split('.').last).contains("JPG") ||
+          (file.name.split('.').last).contains("png") ||
+          (file.name.split('.').last).contains("PNG") ||
+          (file.name.split('.').last).contains("pdf") ||
+          (file.name.split('.').last).contains("PDF") ||
+          (file.name.split('.').last).contains("jpeg") ||
+          (file.name.split('.').last).contains("JPEG") ||
+          (file.name.split('.').last).contains("doc") ||
+          (file.name.split('.').last).contains("DOC")) {
+        setState(() {
+          TVDState!.fileName = file.name.toString();
+          TVDState.appImage = file.bytes;
+          TVDState.fieldname = file.name.toString();
+          if (file.name.toString() != "" && TVDState.fileName != "") {
+            TVDState.isbuttonActive = true;
+          } else {
+            TVDState.isbuttonActive = false;
+          }
+        });
+      } else {
+        ToastUtils.showCustomToast(
+            context, GlobleString.TVD_Document_Image_error, false);
+      }
+    }
+
+    final String id = '__file_picker_web-file-input';
+    var element = html.document.getElementById(id);
+    if (element != null) {
+      element.remove();
+    }
+  }
+
+  deleteAttechment() {
+    setState(() {
+      objdoc.appImage = null;
+      objdoc.fileName = "";
+    });
   }
 }

@@ -1853,27 +1853,36 @@ class _TAFPersonalScreenState extends State<TAFPersonalScreen> {
         List<String> ids = respoce.split(",");
         ids.removeLast();
         for (int i = 0; i < ids.length; i++) {
-          ApiManager().DuplicatTemplateHtml(
+          ApiManager().DuplicatReqDoc(
               context, Prefs.getString(PrefsName.TCF_ApplicationID), ids[i],
               (status, responce) async {
             if (status) {
-              reqtokens.id = ids[i];
-              reqtokens.ToEmail = emails[i];
-              reqtokens.applicationSentDate =
-                  new DateFormat("yyyy-MM-dd HH:mm:ss")
-                      .format(DateTime.now())
-                      .toString();
-              reqtokens.HostURL = Weburl.Email_URL;
-              reqtokens.DbAppCode = Weburl.API_CODE;
-              InviteWorkFlow inviteWorkFlow = new InviteWorkFlow();
-              inviteWorkFlow.workFlowId =
-                  Weburl.Lead_Invitation_workflow.toString();
-              inviteWorkFlow.reqtokens = reqtokens;
-              await ApiManager().Emailworkflow(context, inviteWorkFlow,
-                  (error, respoce) {
-                if (error) {
-                  // widget._callbackSave();
-                } else {}
+              ApiManager().DuplicatTemplateHtml(
+                  context, Prefs.getString(PrefsName.TCF_ApplicationID), ids[i],
+                  (status, responce) async {
+                if (status) {
+                  reqtokens.id = ids[i];
+                  reqtokens.ToEmail = emails[i];
+                  reqtokens.applicationSentDate =
+                      new DateFormat("yyyy-MM-dd HH:mm:ss")
+                          .format(DateTime.now())
+                          .toString();
+                  reqtokens.HostURL = Weburl.Email_URL;
+                  reqtokens.DbAppCode = Weburl.API_CODE;
+                  InviteWorkFlow inviteWorkFlow = new InviteWorkFlow();
+                  inviteWorkFlow.workFlowId =
+                      Weburl.Lead_Invitation_workflow.toString();
+                  inviteWorkFlow.reqtokens = reqtokens;
+                  await ApiManager().Emailworkflow(context, inviteWorkFlow,
+                      (error, respoce) {
+                    if (error) {
+                      // widget._callbackSave();
+                    } else {}
+                  });
+                } else {
+                  ToastUtils.showCustomToast(
+                      context, GlobleString.Error1, false);
+                }
               });
             } else {
               ToastUtils.showCustomToast(context, GlobleString.Error1, false);

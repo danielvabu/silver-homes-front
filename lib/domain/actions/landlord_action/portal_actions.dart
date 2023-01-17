@@ -72,6 +72,21 @@ class UpdateTenancyDetails implements Action {
   }
 }
 
+class UpdateTenancyDetailsMultiple implements Action {
+  final List<TenancyApplication> listdataviewlist;
+
+  UpdateTenancyDetailsMultiple(this.listdataviewlist);
+
+  @override
+  AppState updateState(AppState appState) {
+    return appState.copyWith.portalState(
+        index: 11,
+        title: GlobleString.NAV_Tenants,
+        subindex: 1,
+        listdataviewlist: listdataviewlist);
+  }
+}
+
 class UpdateisMenuDialogshow implements Action {
   final bool isMenuDialogshow;
 

@@ -5,6 +5,7 @@ class ApplicationDetails {
     this.applicationSentDate,
     this.agreementSentDate,
     this.isAuthorized,
+    this.disclaimer,
     this.applicationStatus,
     this.docReviewStatus,
     this.docRequestSentDate,
@@ -21,6 +22,7 @@ class ApplicationDetails {
   String? applicationSentDate;
   String? agreementSentDate;
   bool? isAuthorized;
+  bool? disclaimer;
   SystemEnumDetails? applicationStatus;
   SystemEnumDetails? docReviewStatus;
   String? docRequestSentDate;
@@ -38,6 +40,7 @@ class ApplicationDetails {
         applicationSentDate: json["ApplicationSentDate"],
         agreementSentDate: json["AgreementSentDate"],
         isAuthorized: json["IsAuthorized"],
+        disclaimer: json["disclaimer"],
         applicationStatus:
             SystemEnumDetails.fromJson(json["ApplicationStatus"]),
         docReviewStatus: SystemEnumDetails.fromJson(json["DocReviewStatus"]),
@@ -56,6 +59,7 @@ class ApplicationDetails {
         "ApplicationSentDate": applicationSentDate,
         "AgreementSentDate": agreementSentDate,
         "IsAuthorized": isAuthorized,
+        "disclaimer": disclaimer,
         "ApplicationStatus": applicationStatus!.toJson(),
         "DocReviewStatus": docReviewStatus!.toJson(),
         "DocRequestSentDate": docRequestSentDate,

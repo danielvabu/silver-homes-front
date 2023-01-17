@@ -36,6 +36,7 @@ class PrefsName {
   static const String TCF_CurrentlandlordID = "TCF_CurrentlandlordID";
   static const String TCF_Current_isReference_Receive =
       "TCF_Current_isReference_Receive";
+  static const String TCF_Step0 = "TCF_Step0";
   static const String TCF_Step1 = "TCF_Step1";
   static const String TCF_Step2 = "TCF_Step2";
   static const String TCF_Step3 = "TCF_Step3";

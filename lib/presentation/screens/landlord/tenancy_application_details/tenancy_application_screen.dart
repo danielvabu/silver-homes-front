@@ -48,7 +48,8 @@ class TenancyApplicationScreen extends StatefulWidget {
         pos = index;
 
   @override
-  _TenancyApplicationScreenState createState() => _TenancyApplicationScreenState();
+  _TenancyApplicationScreenState createState() =>
+      _TenancyApplicationScreenState();
 }
 
 class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
@@ -82,38 +83,54 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
   ApiCallForTenantDetails(String applicantId) async {
     await ClearState();
 
-    ApiManager().getTenancyDetails_Applicant(context, applicantId, (status, responce, applicantDetails) {
+    ApiManager().getTenancyDetails_Applicant(context, applicantId,
+        (status, responce, applicantDetails) {
       if (status) {
         if (applicantDetails!.intendedTenancyStartDate != "") {
-          DateTime tempDate = DateTime.parse(applicantDetails.intendedTenancyStartDate!);
-          _store.dispatch(UpdateTADetailAdditionalInfoTenancyStartDate(tempDate));
+          DateTime tempDate =
+              DateTime.parse(applicantDetails.intendedTenancyStartDate!);
+          _store
+              .dispatch(UpdateTADetailAdditionalInfoTenancyStartDate(tempDate));
         } else {
           _store.dispatch(UpdateTADetailAdditionalInfoTenancyStartDate(null));
         }
 
         _store.dispatch(UpdateTADetailApplicantID(applicantDetails.id!));
-        _store.dispatch(UpdateTADetailAdditionalInfoisSmoking(applicantDetails.isSmoking!));
-        _store.dispatch(UpdateTADetailAdditionalInfoIspets(applicantDetails.isPet!));
-        _store.dispatch(UpdateTADetailAdditionalInfoisVehical(applicantDetails.isVehicle!));
-        _store.dispatch(UpdateTADetailAdditionalInfoComment(applicantDetails.smokingDesc!));
-        _store.dispatch(UpdateTADetailAdditionalInfoLenthOfTenancy(applicantDetails.intendedLenth));
-        _store.dispatch(UpdateTADetailAdditionalInfoIntendedPeriod(applicantDetails.intendedPeriod));
-        _store.dispatch(UpdateTADetailAdditionalInfoIntendedPeriodNo(applicantDetails.intendedPeriodNo!));
+        _store.dispatch(
+            UpdateTADetailAdditionalInfoisSmoking(applicantDetails.isSmoking!));
+        _store.dispatch(
+            UpdateTADetailAdditionalInfoIspets(applicantDetails.isPet!));
+        _store.dispatch(
+            UpdateTADetailAdditionalInfoisVehical(applicantDetails.isVehicle!));
+        _store.dispatch(
+            UpdateTADetailAdditionalInfoComment(applicantDetails.smokingDesc!));
+        _store.dispatch(UpdateTADetailAdditionalInfoLenthOfTenancy(
+            applicantDetails.intendedLenth));
+        _store.dispatch(UpdateTADetailAdditionalInfoIntendedPeriod(
+            applicantDetails.intendedPeriod));
+        _store.dispatch(UpdateTADetailAdditionalInfoIntendedPeriodNo(
+            applicantDetails.intendedPeriodNo!));
 
         _store.dispatch(UpdateTADetailPersonID(applicantDetails.personId!.id!));
-        _store.dispatch(UpdateTADetailFirstname(applicantDetails.personId!.firstName!));
-        _store.dispatch(UpdateTADetailLastname(applicantDetails.personId!.lastName!));
+        _store.dispatch(
+            UpdateTADetailFirstname(applicantDetails.personId!.firstName!));
+        _store.dispatch(
+            UpdateTADetailLastname(applicantDetails.personId!.lastName!));
         _store.dispatch(UpdateTADetailEmail(applicantDetails.personId!.email!));
-        _store.dispatch(UpdateTADetailPhoneNumber(applicantDetails.personId!.mobileNumber!));
-        _store.dispatch(UpdateTADetailCountryCode(applicantDetails.personId!.countryCode!));
-        _store.dispatch(UpdateTADetailDialCode(applicantDetails.personId!.dialCode!));
+        _store.dispatch(UpdateTADetailPhoneNumber(
+            applicantDetails.personId!.mobileNumber!));
+        _store.dispatch(
+            UpdateTADetailCountryCode(applicantDetails.personId!.countryCode!));
+        _store.dispatch(
+            UpdateTADetailDialCode(applicantDetails.personId!.dialCode!));
         _store.dispatch(UpdateTADetailStory(applicantDetails.yourStory!));
         _store.dispatch(UpdateTADetailNote(applicantDetails.note!));
 
         if (applicantDetails.personId!.DOB != "") {
           DateTime tempDate = DateTime.parse(applicantDetails.personId!.DOB!);
           _store.dispatch(UpdateTADetailDateofBirth(tempDate));
-          _store.dispatch(UpdateTADetailAge(Helper.calculateAge(tempDate).toString()));
+          _store.dispatch(
+              UpdateTADetailAge(Helper.calculateAge(tempDate).toString()));
         } else {
           _store.dispatch(UpdateTADetailDateofBirth(null));
           _store.dispatch(UpdateTADetailAge("0"));
@@ -124,22 +141,28 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
       }
     });
 
-    ApiManager().getTenancyDetails_Application(context, applicantId, (status, responce, applicationDetails, propdata, ownerdata) {
+    ApiManager().getTenancyDetails_Application(context, applicantId,
+        (status, responce, applicationDetails, propdata, ownerdata) {
       if (status) {
         _store.dispatch(UpdateTADetailApplicationID(applicationDetails!.id!));
-        _store.dispatch(UpdateTADetailApplicationStatus(applicationDetails.applicationStatus));
+        _store.dispatch(UpdateTADetailApplicationStatus(
+            applicationDetails.applicationStatus));
 
-        _store.dispatch(UpdateTADetailAddOccupantNotApplicable(applicationDetails.IsNotApplicableAddOccupant!));
+        _store.dispatch(UpdateTADetailAddOccupantNotApplicable(
+            applicationDetails.IsNotApplicableAddOccupant!));
 
-        ApiManager().getTenancyDetails_AdditionalOccupant(context, applicationDetails.id!, (status, responce, occupantlist) {
+        ApiManager().getTenancyDetails_AdditionalOccupant(
+            context, applicationDetails.id!, (status, responce, occupantlist) {
           if (status) {
             _store.dispatch(UpdateTADetailAddOccupantlist(occupantlist));
           }
         });
 
-        ApiManager().getTenancyDetails_AdditionalReference(context, applicationDetails.id!, (status, responce, referencelist) {
+        ApiManager().getTenancyDetails_AdditionalReference(
+            context, applicationDetails.id!, (status, responce, referencelist) {
           if (status) {
-            _store.dispatch(UpdateTADetailAdditionalReferencelist(referencelist));
+            _store
+                .dispatch(UpdateTADetailAdditionalReferencelist(referencelist));
           }
         });
 
@@ -147,7 +170,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
       }
     });
 
-    ApiManager().getTenancyDetails_CurrentTenancy(context, applicantId, (status, responce, applicatCurrentTenancy) {
+    ApiManager().getTenancyDetails_CurrentTenancy(context, applicantId,
+        (status, responce, applicatCurrentTenancy) {
       if (status) {
         if (applicatCurrentTenancy!.startDate != "") {
           DateTime tempDate = DateTime.parse(applicatCurrentTenancy.startDate!);
@@ -163,50 +187,74 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
           _store.dispatch(UpdateTADetailCurrenttenantEndDate(null));
         }
 
-        _store.dispatch(UpdateTADetailCurrenttenantCurrentTenancyID(applicatCurrentTenancy.id!));
-        _store.dispatch(UpdateTADetailCurrenttenantCurrentLandLordID(applicatCurrentTenancy.CurrentLandLord_ID!));
-        _store.dispatch(UpdateTADetailCurrenttenantSuiteUnit(applicatCurrentTenancy.suite!));
-        _store.dispatch(UpdateTADetailCurrenttenantAddress(applicatCurrentTenancy.address!));
-        _store.dispatch(UpdateTADetailCurrenttenantCity(applicatCurrentTenancy.city!));
-        _store.dispatch(UpdateTADetailCurrenttenantProvince(applicatCurrentTenancy.province!));
-        _store.dispatch(UpdateTADetailCurrenttenantPostalcode(applicatCurrentTenancy.postalCode!));
-        _store.dispatch(UpdateTADetailCurrenttenantisReference(applicatCurrentTenancy.currentLandLordIscheckedAsReference!));
-        _store.dispatch(UpdateTADetailCurrenttenantFirstname(applicatCurrentTenancy.CurrentLandLord_FirstName!));
-        _store.dispatch(UpdateTADetailCurrenttenantLastname(applicatCurrentTenancy.CurrentLandLord_LastName!));
-        _store.dispatch(UpdateTADetailCurrenttenantEmail(applicatCurrentTenancy.CurrentLandLord_Email!));
-        _store.dispatch(UpdateTADetailCurrenttenantPhonenumber(applicatCurrentTenancy.CurrentLandLord_MobileNumber!));
-        _store.dispatch(UpdateTADetailCurrenttenantCode(applicatCurrentTenancy.CurrentLandLord_Country_Code!));
-        _store.dispatch(UpdateTADetailCurrenttenantDailCode(applicatCurrentTenancy.CurrentLandLord_Dial_Code!));
+        _store.dispatch(UpdateTADetailCurrenttenantCurrentTenancyID(
+            applicatCurrentTenancy.id!));
+        _store.dispatch(UpdateTADetailCurrenttenantCurrentLandLordID(
+            applicatCurrentTenancy.CurrentLandLord_ID!));
+        _store.dispatch(UpdateTADetailCurrenttenantSuiteUnit(
+            applicatCurrentTenancy.suite!));
+        _store.dispatch(UpdateTADetailCurrenttenantAddress(
+            applicatCurrentTenancy.address!));
+        _store.dispatch(
+            UpdateTADetailCurrenttenantCity(applicatCurrentTenancy.city!));
+        _store.dispatch(UpdateTADetailCurrenttenantProvince(
+            applicatCurrentTenancy.province!));
+        _store.dispatch(UpdateTADetailCurrenttenantPostalcode(
+            applicatCurrentTenancy.postalCode!));
+        _store.dispatch(UpdateTADetailCurrenttenantisReference(
+            applicatCurrentTenancy.currentLandLordIscheckedAsReference!));
+        _store.dispatch(UpdateTADetailCurrenttenantFirstname(
+            applicatCurrentTenancy.CurrentLandLord_FirstName!));
+        _store.dispatch(UpdateTADetailCurrenttenantLastname(
+            applicatCurrentTenancy.CurrentLandLord_LastName!));
+        _store.dispatch(UpdateTADetailCurrenttenantEmail(
+            applicatCurrentTenancy.CurrentLandLord_Email!));
+        _store.dispatch(UpdateTADetailCurrenttenantPhonenumber(
+            applicatCurrentTenancy.CurrentLandLord_MobileNumber!));
+        _store.dispatch(UpdateTADetailCurrenttenantCode(
+            applicatCurrentTenancy.CurrentLandLord_Country_Code!));
+        _store.dispatch(UpdateTADetailCurrenttenantDailCode(
+            applicatCurrentTenancy.CurrentLandLord_Dial_Code!));
       }
     });
 
-    ApiManager().getTenancyDetails_Employemant(context, applicantId, (status, responce, employemantDetails) {
+    ApiManager().getTenancyDetails_Employemant(context, applicantId,
+        (status, responce, employemantDetails) {
       if (status) {
-        _store.dispatch(UpdateTADetailothersourceincome(employemantDetails!.otherSourceIncome!));
-        _store.dispatch(UpdateTADetaillinkedprofile(employemantDetails.LinkedIn!));
-        _store.dispatch(UpdateTADetailAnualincomestatus(employemantDetails.annualIncomeStatus));
-        _store.dispatch(UpdateTADetailempstatus(employemantDetails.empStatusId));
+        _store.dispatch(UpdateTADetailothersourceincome(
+            employemantDetails!.otherSourceIncome!));
+        _store.dispatch(
+            UpdateTADetaillinkedprofile(employemantDetails.LinkedIn!));
+        _store.dispatch(UpdateTADetailAnualincomestatus(
+            employemantDetails.annualIncomeStatus));
+        _store
+            .dispatch(UpdateTADetailempstatus(employemantDetails.empStatusId));
         _store.dispatch(UpdateTADetailEmploymentID(employemantDetails.id!));
-        _store.dispatch(UpdateTADetaillistoccupation(employemantDetails.occupation!));
+        _store.dispatch(
+            UpdateTADetaillistoccupation(employemantDetails.occupation!));
 
         for (int b = 0; b < employemantDetails.occupation!.length; b++) {
-          TenancyEmploymentInformation tenancyEmploymentInformation = employemantDetails.occupation![b];
+          TenancyEmploymentInformation tenancyEmploymentInformation =
+              employemantDetails.occupation![b];
 
           if (tenancyEmploymentInformation.IsCurrentOccupation!) {
-            _store.dispatch(UpdateTADetailAnualincomestatus(tenancyEmploymentInformation.anualIncome!));
+            _store.dispatch(UpdateTADetailAnualincomestatus(
+                tenancyEmploymentInformation.anualIncome!));
             break;
           }
         }
       }
     });
 
-    ApiManager().getTenancyDetails_PetInfo(context, applicantId, (status, responce, petslist) {
+    ApiManager().getTenancyDetails_PetInfo(context, applicantId,
+        (status, responce, petslist) {
       if (status) {
         _store.dispatch(UpdateTADetailAdditionalInfoPetslist(petslist));
       }
     });
 
-    ApiManager().getTenancyDetails_Vehicallist(context, applicantId, (status, responce, vehicallist) {
+    ApiManager().getTenancyDetails_Vehicallist(context, applicantId,
+        (status, responce, vehicallist) {
       if (status) {
         _store.dispatch(UpdateTADetailAdditionalInfoVehicallist(vehicallist));
       }
@@ -329,13 +377,15 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         children: [
                           Container(
                             height: 30,
-                            margin: EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 10),
+                            margin: EdgeInsets.only(
+                                top: 10, right: 10, left: 10, bottom: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    _store.dispatch(UpdatePortalPage(4, GlobleString.NAV_Tenants));
+                                    _store.dispatch(UpdatePortalPage(
+                                        4, GlobleString.NAV_Tenants));
                                   },
                                   child: Container(
                                     child: Text(
@@ -355,7 +405,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                       child: Container(
                                         child: Text(
                                           GlobleString.TA_exportpdf,
-                                          style: MyStyles.Bold(14, myColor.blue),
+                                          style:
+                                              MyStyles.Bold(14, myColor.blue),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -363,11 +414,13 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     SizedBox(
                                       width: 50,
                                     ),
-                                    (widget.listdata.length - 1) > indexpos && widget.listdata.length > 1
+                                    (widget.listdata.length - 1) > indexpos &&
+                                            widget.listdata.length > 1
                                         ? InkWell(
                                             onTap: () {
                                               indexpos++;
-                                              if (widget.listdata.length > indexpos) {
+                                              if (widget.listdata.length >
+                                                  indexpos) {
                                                 setState(() {
                                                   isloading = true;
                                                 });
@@ -377,7 +430,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                             child: Container(
                                               child: Text(
                                                 GlobleString.TA_NEXT,
-                                                style: MyStyles.Bold(14, myColor.blue),
+                                                style: MyStyles.Bold(
+                                                    14, myColor.blue),
                                                 textAlign: TextAlign.center,
                                               ),
                                             ),
@@ -399,8 +453,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     width: width,
                                     color: myColor.white,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Container(
                                           width: width,
@@ -409,26 +465,42 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                           alignment: Alignment.centerLeft,
                                           padding: EdgeInsets.only(left: 30),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  TAppDetailsState!.perFirstname + " " + TAppDetailsState.perLastname,
-                                                  style: MyStyles.Medium(25, myColor.white),
+                                                  TAppDetailsState!
+                                                          .perFirstname +
+                                                      " " +
+                                                      TAppDetailsState
+                                                          .perLastname,
+                                                  style: MyStyles.Medium(
+                                                      25, myColor.white),
                                                   textAlign: TextAlign.start,
                                                 ),
                                               ),
                                               InkWell(
                                                 onTap: () {
-                                                  _store.dispatch(UpdatePortalPage(4, GlobleString.NAV_Tenants));
-                                                  CustomeWidget.EditApplicant(context, TAppDetailsState.ApplicantID.toString());
+                                                  _store.dispatch(
+                                                      UpdatePortalPage(
+                                                          4,
+                                                          GlobleString
+                                                              .NAV_Tenants));
+                                                  CustomeWidget.EditApplicant(
+                                                      context,
+                                                      TAppDetailsState
+                                                              .ApplicantID
+                                                          .toString());
                                                 },
                                                 child: Tooltip(
                                                   message: "Edit",
                                                   child: Container(
                                                     width: 30,
-                                                    alignment: Alignment.centerLeft,
-                                                    margin: EdgeInsets.only(right: 20),
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    margin: EdgeInsets.only(
+                                                        right: 20),
                                                     child: Image.asset(
                                                       "assets/images/ic_edit.png",
                                                       width: 30,
@@ -449,31 +521,49 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                           children: [
                                             Expanded(
                                               child: Card(
-                                                margin: EdgeInsets.only(right: 10),
+                                                margin:
+                                                    EdgeInsets.only(right: 10),
                                                 elevation: 4,
                                                 shadowColor: myColor.black,
                                                 shape: RoundedRectangleBorder(
-                                                    side: BorderSide(color: myColor.TA_Border, width: 0.5),
-                                                    borderRadius: BorderRadius.circular(0)),
+                                                    side: BorderSide(
+                                                        color:
+                                                            myColor.TA_Border,
+                                                        width: 0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
                                                 child: Container(
                                                   height: 80,
                                                   child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
-                                                        GlobleString.TA_box_Annual_income,
-                                                        style: MyStyles.Medium(16, myColor.text_color),
-                                                        textAlign: TextAlign.center,
+                                                        GlobleString
+                                                            .TA_box_Annual_income,
+                                                        style: MyStyles.Medium(
+                                                            16,
+                                                            myColor.text_color),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                       SizedBox(
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        TAppDetailsState.anualincomestatus != null
-                                                            ? TAppDetailsState.anualincomestatus!.displayValue
+                                                        TAppDetailsState
+                                                                    .anualincomestatus !=
+                                                                null
+                                                            ? TAppDetailsState
+                                                                .anualincomestatus!
+                                                                .displayValue
                                                             : "None",
-                                                        style: MyStyles.Bold(18, myColor.blue),
-                                                        textAlign: TextAlign.center,
+                                                        style: MyStyles.Bold(
+                                                            18, myColor.blue),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                     ],
                                                   ),
@@ -482,31 +572,49 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                             ),
                                             Expanded(
                                               child: Card(
-                                                margin: EdgeInsets.only(right: 5, left: 5),
+                                                margin: EdgeInsets.only(
+                                                    right: 5, left: 5),
                                                 elevation: 4,
                                                 shadowColor: myColor.black,
                                                 shape: RoundedRectangleBorder(
-                                                    side: BorderSide(color: myColor.TA_Border, width: 0.5),
-                                                    borderRadius: BorderRadius.circular(0)),
+                                                    side: BorderSide(
+                                                        color:
+                                                            myColor.TA_Border,
+                                                        width: 0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
                                                 child: Container(
                                                   height: 80,
                                                   child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
-                                                        GlobleString.TA_box_employment_status,
-                                                        style: MyStyles.Medium(16, myColor.text_color),
-                                                        textAlign: TextAlign.center,
+                                                        GlobleString
+                                                            .TA_box_employment_status,
+                                                        style: MyStyles.Medium(
+                                                            16,
+                                                            myColor.text_color),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                       SizedBox(
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        TAppDetailsState.empstatus != null
-                                                            ? TAppDetailsState.empstatus!.displayValue
+                                                        TAppDetailsState
+                                                                    .empstatus !=
+                                                                null
+                                                            ? TAppDetailsState
+                                                                .empstatus!
+                                                                .displayValue
                                                             : "None",
-                                                        style: MyStyles.Bold(18, myColor.blue),
-                                                        textAlign: TextAlign.center,
+                                                        style: MyStyles.Bold(
+                                                            18, myColor.blue),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                     ],
                                                   ),
@@ -515,29 +623,42 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                             ),
                                             Expanded(
                                               child: Card(
-                                                margin: EdgeInsets.only(left: 10),
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
                                                 elevation: 4,
                                                 shadowColor: myColor.black,
                                                 shape: RoundedRectangleBorder(
-                                                    side: BorderSide(color: myColor.TA_Border, width: 0.5),
-                                                    borderRadius: BorderRadius.circular(0)),
+                                                    side: BorderSide(
+                                                        color:
+                                                            myColor.TA_Border,
+                                                        width: 0.5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0)),
                                                 child: Container(
                                                   height: 80,
                                                   child: Column(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
                                                     children: [
                                                       Text(
                                                         GlobleString.TA_box_AGE,
-                                                        style: MyStyles.Medium(16, myColor.text_color),
-                                                        textAlign: TextAlign.center,
+                                                        style: MyStyles.Medium(
+                                                            16,
+                                                            myColor.text_color),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                       SizedBox(
                                                         height: 5,
                                                       ),
                                                       Text(
                                                         TAppDetailsState.perAge,
-                                                        style: MyStyles.Bold(18, myColor.blue),
-                                                        textAlign: TextAlign.center,
+                                                        style: MyStyles.Bold(
+                                                            18, myColor.blue),
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
                                                     ],
                                                   ),
@@ -565,15 +686,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        AdditionalOccupantsInfo(TAppDetailsState),
+                                        AdditionalOccupantsInfo(
+                                            TAppDetailsState),
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        AdditionalInformatiInfo(TAppDetailsState),
+                                        AdditionalInformatiInfo(
+                                            TAppDetailsState),
                                         SizedBox(
                                           height: 30,
                                         ),
-                                        ReferencesInformatiInfo(TAppDetailsState),
+                                        ReferencesInformatiInfo(
+                                            TAppDetailsState),
                                         SizedBox(
                                           height: 30,
                                         ),
@@ -629,7 +753,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     child: Text(
                       TAppDetailsState.dateofbirth == null
                           ? ""
-                          : Helper.DateForMMM(TAppDetailsState.dateofbirth!) + " (age:" + TAppDetailsState.perAge + ")",
+                          : Helper.DateForMMM(TAppDetailsState.dateofbirth!) +
+                              " (age:" +
+                              TAppDetailsState.perAge +
+                              ")",
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -675,7 +802,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.perDialCode + " " + TAppDetailsState.perPhoneNumber,
+                      TAppDetailsState.perDialCode +
+                          " " +
+                          TAppDetailsState.perPhoneNumber,
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -765,7 +894,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               Expanded(
                 flex: 3,
                 child: Text(
-                  TAppDetailsState.empstatus != null ? TAppDetailsState.empstatus!.displayValue : "None",
+                  TAppDetailsState.empstatus != null
+                      ? TAppDetailsState.empstatus!.displayValue
+                      : "None",
                   style: MyStyles.Regular(14, myColor.text_color),
                 ),
               )
@@ -784,12 +915,14 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     key: UniqueKey(),
                     itemCount: TAppDetailsState.listoccupation.length,
                     itemBuilder: (BuildContext ctxt, int index) {
-                      TenancyEmploymentInformation tempinfo = TAppDetailsState.listoccupation[index];
+                      TenancyEmploymentInformation tempinfo =
+                          TAppDetailsState.listoccupation[index];
                       return Column(
                         children: [
                           if (TAppDetailsState.listoccupation.length > 1)
                             Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 10),
                               color: myColor.TA_dark,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -797,7 +930,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                      GlobleString.TA_Occupation_title + " " + (index + 1).toString(),
+                                      GlobleString.TA_Occupation_title +
+                                          " " +
+                                          (index + 1).toString(),
                                       style: MyStyles.Bold(14, myColor.black),
                                     ),
                                   ),
@@ -805,7 +940,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               ),
                             ),
                           Container(
-                            padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: myColor.TA_light,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -813,22 +949,27 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: Text(
-                                    index == 0 ? GlobleString.TA_Current_Occupation : GlobleString.TA_Occupation,
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    index == 0
+                                        ? GlobleString.TA_Current_Occupation
+                                        : GlobleString.TA_Occupation,
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 3,
                                   child: Text(
                                     tempinfo.occupation.toString(),
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: myColor.TA_dark,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -837,21 +978,24 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   flex: 2,
                                   child: Text(
                                     GlobleString.TA_Organization,
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 3,
                                   child: Text(
                                     tempinfo.organization.toString(),
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: myColor.TA_light,
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -860,21 +1004,24 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   flex: 2,
                                   child: Text(
                                     GlobleString.TA_Length_of_Employment,
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 3,
                                   child: Text(
                                     tempinfo.lenthofemp.toString(),
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 )
                               ],
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: myColor.TA_dark,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -884,14 +1031,19 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   flex: 2,
                                   child: Text(
                                     GlobleString.TA_Annual_Income,
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 ),
                                 Expanded(
                                   flex: 3,
                                   child: Text(
-                                    tempinfo.anualIncome != null ? tempinfo.anualIncome!.displayValue.toString() : "",
-                                    style: MyStyles.Regular(14, myColor.text_color),
+                                    tempinfo.anualIncome != null
+                                        ? tempinfo.anualIncome!.displayValue
+                                            .toString()
+                                        : "",
+                                    style: MyStyles.Regular(
+                                        14, myColor.text_color),
                                   ),
                                 )
                               ],
@@ -899,7 +1051,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                           ),
                           if (TAppDetailsState.listoccupation.length > 1)
                             Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 10),
                               color: myColor.white,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -908,7 +1061,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     flex: 2,
                                     child: Text(
                                       "",
-                                      style: MyStyles.Regular(14, myColor.text_color),
+                                      style: MyStyles.Regular(
+                                          14, myColor.text_color),
                                     ),
                                   ),
                                 ],
@@ -919,7 +1073,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                     color: myColor.TA_dark,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -935,7 +1090,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         Expanded(
                           flex: 3,
                           child: Text(
-                            TAppDetailsState.anualincomestatus != null ? TAppDetailsState.anualincomestatus!.displayValue : "",
+                            TAppDetailsState.anualincomestatus != null
+                                ? TAppDetailsState
+                                    .anualincomestatus!.displayValue
+                                : "",
                             style: MyStyles.Regular(14, myColor.text_color),
                           ),
                         )
@@ -1026,7 +1184,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.ct_startdate != null ? Helper.DateForMMM(TAppDetailsState.ct_startdate!) : "",
+                      TAppDetailsState.ct_startdate != null
+                          ? Helper.DateForMMM(TAppDetailsState.ct_startdate!)
+                          : "",
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1049,7 +1209,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.ct_enddate != null ? Helper.DateForMMM(TAppDetailsState.ct_enddate!) : "",
+                      TAppDetailsState.ct_enddate != null
+                          ? Helper.DateForMMM(TAppDetailsState.ct_enddate!)
+                          : "",
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1126,7 +1288,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.cl_firstname + " " + TAppDetailsState.cl_lastname,
+                      TAppDetailsState.cl_firstname +
+                          " " +
+                          TAppDetailsState.cl_lastname,
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1172,7 +1336,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.cl_dailcode + " " + TAppDetailsState.cl_phonenumber,
+                      TAppDetailsState.cl_dailcode +
+                          " " +
+                          TAppDetailsState.cl_phonenumber,
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1185,7 +1351,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
     );
   }
 
-  Widget AdditionalOccupantsInfo(TenantsApplicationDetailsState TAppDetailsState) {
+  Widget AdditionalOccupantsInfo(
+      TenantsApplicationDetailsState TAppDetailsState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1208,28 +1375,35 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         key: UniqueKey(),
                         itemCount: TAppDetailsState.occupantlist.length,
                         itemBuilder: (BuildContext ctxt, int index) {
-                          TenancyAdditionalOccupant taoccupant = TAppDetailsState.occupantlist[index];
+                          TenancyAdditionalOccupant taoccupant =
+                              TAppDetailsState.occupantlist[index];
                           return Column(
                             children: [
                               if (TAppDetailsState.occupantlist.length > 1)
                                 Container(
-                                  padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 5, bottom: 5, left: 10, right: 10),
                                   color: myColor.TA_dark,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                          GlobleString.TA_Occupants + " " + (index + 1).toString(),
-                                          style: MyStyles.Bold(14, myColor.black),
+                                          GlobleString.TA_Occupants +
+                                              " " +
+                                              (index + 1).toString(),
+                                          style:
+                                              MyStyles.Bold(14, myColor.black),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                               Container(
-                                padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: myColor.TA_light,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1237,22 +1411,26 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     Expanded(
                                       flex: 2,
                                       child: Text(
-                                        GlobleString.TA_Additional_Occupants_first_name,
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        GlobleString
+                                            .TA_Additional_Occupants_first_name,
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 3,
                                       child: Text(
                                         taoccupant.firstname.toString(),
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     )
                                   ],
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: myColor.TA_dark,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1260,22 +1438,26 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     Expanded(
                                       flex: 2,
                                       child: Text(
-                                        GlobleString.TA_Additional_Occupants_Last_name,
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        GlobleString
+                                            .TA_Additional_Occupants_Last_name,
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 3,
                                       child: Text(
                                         taoccupant.lastname.toString(),
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     )
                                   ],
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: myColor.TA_light,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1283,15 +1465,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                     Expanded(
                                       flex: 2,
                                       child: Text(
-                                        GlobleString.TA_Additional_Occupants_Relationship_applicant,
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        GlobleString
+                                            .TA_Additional_Occupants_Relationship_applicant,
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     ),
                                     Expanded(
                                       flex: 3,
                                       child: Text(
                                         taoccupant.primaryApplicant.toString(),
-                                        style: MyStyles.Regular(14, myColor.text_color),
+                                        style: MyStyles.Regular(
+                                            14, myColor.text_color),
                                       ),
                                     )
                                   ],
@@ -1299,16 +1484,19 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               ),
                               if (TAppDetailsState.occupantlist.length > 1)
                                 Container(
-                                  padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                  padding: EdgeInsets.only(
+                                      top: 5, bottom: 5, left: 10, right: 10),
                                   color: myColor.white,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         flex: 2,
                                         child: Text(
                                           "",
-                                          style: MyStyles.Regular(14, myColor.text_color),
+                                          style: MyStyles.Regular(
+                                              14, myColor.text_color),
                                         ),
                                       ),
                                     ],
@@ -1319,7 +1507,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         },
                       )
                     : Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: myColor.TA_light,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1342,7 +1531,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       )
                 : Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                     color: myColor.TA_light,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1370,7 +1560,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
     );
   }
 
-  Widget AdditionalInformatiInfo(TenantsApplicationDetailsState TAppDetailsState) {
+  Widget AdditionalInformatiInfo(
+      TenantsApplicationDetailsState TAppDetailsState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1385,7 +1576,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
         ),
         Column(
           children: [
-            (TAppDetailsState.isPets && TAppDetailsState.petslist != null && TAppDetailsState.petslist.length > 0)
+            (TAppDetailsState.isPets &&
+                    TAppDetailsState.petslist != null &&
+                    TAppDetailsState.petslist.length > 0)
                 ? ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -1394,22 +1587,32 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     itemBuilder: (BuildContext ctxt, int index) {
                       Pets pets = TAppDetailsState.petslist[index];
                       return Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-                        color: index % 2 == 0 ? myColor.TA_light : myColor.TA_dark,
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        color:
+                            index % 2 == 0 ? myColor.TA_light : myColor.TA_dark,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               flex: 2,
                               child: Text(
-                                GlobleString.TA_Pet + " #" + (index + 1).toString() + " " + GlobleString.TA_Pet_Type_Size_Age,
+                                GlobleString.TA_Pet +
+                                    " #" +
+                                    (index + 1).toString() +
+                                    " " +
+                                    GlobleString.TA_Pet_Type_Size_Age,
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             ),
                             Expanded(
                               flex: 3,
                               child: Text(
-                                pets.typeofpets.toString() + ", " + pets.size.toString() + ", " + pets.age.toString(),
+                                pets.typeofpets.toString() +
+                                    ", " +
+                                    pets.size.toString() +
+                                    ", " +
+                                    pets.age.toString(),
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             )
@@ -1419,7 +1622,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                     color: myColor.TA_light,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1457,14 +1661,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.isSmoking ? GlobleString.TA_Yes : GlobleString.TA_No,
+                      TAppDetailsState.isSmoking
+                          ? GlobleString.TA_Yes
+                          : GlobleString.TA_No,
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
                 ],
               ),
             ),
-            (TAppDetailsState.isVehical && TAppDetailsState.vehicallist != null && TAppDetailsState.vehicallist.length > 0)
+            (TAppDetailsState.isVehical &&
+                    TAppDetailsState.vehicallist != null &&
+                    TAppDetailsState.vehicallist.length > 0)
                 ? ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -1473,22 +1681,32 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     itemBuilder: (BuildContext ctxt, int index) {
                       Vehical vehical = TAppDetailsState.vehicallist[index];
                       return Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-                        color: index % 2 == 0 ? myColor.TA_light : myColor.TA_dark,
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        color:
+                            index % 2 == 0 ? myColor.TA_light : myColor.TA_dark,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               flex: 2,
                               child: Text(
-                                GlobleString.TA_Vehicle + " #" + (index + 1).toString() + " " + GlobleString.TA_Vehicle_Make_Model_Year,
+                                GlobleString.TA_Vehicle +
+                                    " #" +
+                                    (index + 1).toString() +
+                                    " " +
+                                    GlobleString.TA_Vehicle_Make_Model_Year,
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             ),
                             Expanded(
                               flex: 3,
                               child: Text(
-                                vehical.make.toString() + ", " + vehical.model.toString() + ", " + vehical.year.toString(),
+                                vehical.make.toString() +
+                                    ", " +
+                                    vehical.model.toString() +
+                                    ", " +
+                                    vehical.year.toString(),
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             )
@@ -1498,7 +1716,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : Container(
-                    padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding:
+                        EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                     color: myColor.TA_light,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1538,7 +1757,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     child: Text(
                       TAppDetailsState.tenancystartdate == null
                           ? ""
-                          : new DateFormat("dd-MMM-yyyy").format(TAppDetailsState.tenancystartdate!).toString(),
+                          : new DateFormat("dd-MMM-yyyy")
+                              .format(TAppDetailsState.tenancystartdate!)
+                              .toString(),
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1607,7 +1828,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      TAppDetailsState.IntendedPeriod != null ? TAppDetailsState.IntendedPeriod!.displayValue : "",
+                      TAppDetailsState.IntendedPeriod != null
+                          ? TAppDetailsState.IntendedPeriod!.displayValue
+                          : "",
                       style: MyStyles.Regular(14, myColor.text_color),
                     ),
                   )
@@ -1620,7 +1843,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
     );
   }
 
-  Widget ReferencesInformatiInfo(TenantsApplicationDetailsState TAppDetailsState) {
+  Widget ReferencesInformatiInfo(
+      TenantsApplicationDetailsState TAppDetailsState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1640,12 +1864,14 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 key: UniqueKey(),
                 itemCount: TAppDetailsState.referencelist.length,
                 itemBuilder: (BuildContext ctxt, int index) {
-                  TenancyAdditionalReference reference = TAppDetailsState.referencelist[index];
+                  TenancyAdditionalReference reference =
+                      TAppDetailsState.referencelist[index];
                   return Column(
                     children: [
                       if (TAppDetailsState.referencelist.length > 1)
                         Container(
-                          padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                          padding: EdgeInsets.only(
+                              top: 5, bottom: 5, left: 10, right: 10),
                           color: myColor.TA_dark,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1653,7 +1879,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  GlobleString.TA_Reference + " " + (index + 1).toString(),
+                                  GlobleString.TA_Reference +
+                                      " " +
+                                      (index + 1).toString(),
                                   style: MyStyles.Bold(14, myColor.black),
                                 ),
                               ),
@@ -1661,7 +1889,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                           ),
                         ),
                       Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: myColor.TA_light,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1676,7 +1905,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                reference.firstname.toString() + " " + reference.lastname.toString(),
+                                reference.firstname.toString() +
+                                    " " +
+                                    reference.lastname.toString(),
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             )
@@ -1684,7 +1915,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: myColor.TA_dark,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1692,14 +1924,16 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             Expanded(
                               flex: 2,
                               child: Text(
-                                GlobleString.TA_Relationship_to_primary_applicant,
+                                GlobleString
+                                    .TA_Relationship_to_primary_applicant,
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             ),
                             Expanded(
                               flex: 3,
                               child: Text(
-                                reference.reletionshipprimaryApplicant.toString(),
+                                reference.reletionshipprimaryApplicant
+                                    .toString(),
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             )
@@ -1707,7 +1941,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: myColor.TA_light,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1730,7 +1965,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: myColor.TA_dark,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1745,7 +1981,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                reference.dailcode.toString() + " " + reference.phonenumber.toString(),
+                                reference.dailcode.toString() +
+                                    " " +
+                                    reference.phonenumber.toString(),
                                 style: MyStyles.Regular(14, myColor.text_color),
                               ),
                             )
@@ -1754,7 +1992,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                       ),
                       if (TAppDetailsState.referencelist.length > 1)
                         Container(
-                          padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                          padding: EdgeInsets.only(
+                              top: 5, bottom: 5, left: 10, right: 10),
                           color: myColor.white,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1763,7 +2002,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                 flex: 2,
                                 child: Text(
                                   "",
-                                  style: MyStyles.Regular(14, myColor.text_color),
+                                  style:
+                                      MyStyles.Regular(14, myColor.text_color),
                                 ),
                               ),
                             ],
@@ -1774,7 +2014,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 },
               )
             : Container(
-                padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                padding:
+                    EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                 color: myColor.TA_light,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1862,11 +2103,16 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   mode: Mode.MENU,
                   items: statuslist,
                   textstyle: MyStyles.Medium(12, myColor.text_color),
-                  itemAsString: (SystemEnumDetails? u) => u != null ? u.displayValue : "",
+                  itemAsString: (SystemEnumDetails? u) =>
+                      u != null ? u.displayValue : "",
                   hint: "Select Status",
-                  defultHeight: statuslist.length * 35 > 250 ? 250 : statuslist.length * 35,
+                  defultHeight: statuslist.length * 35 > 250
+                      ? 250
+                      : statuslist.length * 35,
                   showSearchBox: false,
-                  selectedItem: TAppDetailsState.ApplicationStatus != null ? TAppDetailsState.ApplicationStatus : null,
+                  selectedItem: TAppDetailsState.ApplicationStatus != null
+                      ? TAppDetailsState.ApplicationStatus
+                      : null,
                   isFilteredOnline: true,
                   onChanged: (data) {
                     _store.dispatch(UpdateTADetailApplicationStatus(data));
@@ -1891,10 +2137,12 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 decoration: InputDecoration(
                     //border: InputBorder.none,
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
+                      borderSide:
+                          BorderSide(color: myColor.TA_Border, width: 1.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: myColor.TA_Border, width: 1.0),
+                      borderSide:
+                          BorderSide(color: myColor.TA_Border, width: 1.0),
                     ),
                     isDense: true,
                     contentPadding: EdgeInsets.all(10),
@@ -1912,20 +2160,28 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      TenancyApplicationID updateid = new TenancyApplicationID();
+                      TenancyApplicationID updateid =
+                          new TenancyApplicationID();
                       updateid.ID = TAppDetailsState.ApplicationID;
 
-                      UpdateScoreRatingReview ratingreview = new UpdateScoreRatingReview();
+                      UpdateScoreRatingReview ratingreview =
+                          new UpdateScoreRatingReview();
                       ratingreview.ID = TAppDetailsState.ApplicantID;
                       ratingreview.Rating = TAppDetailsState.Rating;
-                      ratingreview.Note = TAppDetailsState.RatingReview.toString();
-                      ratingreview.RatingReview = TAppDetailsState.RatingReview.toString();
+                      ratingreview.Note =
+                          TAppDetailsState.RatingReview.toString();
+                      ratingreview.RatingReview =
+                          TAppDetailsState.RatingReview.toString();
 
-                      TenancyApplicationUpdateScore updatestatus = new TenancyApplicationUpdateScore();
-                      updatestatus.ApplicationStatus = TAppDetailsState.ApplicationStatus!.EnumDetailID.toString();
+                      TenancyApplicationUpdateScore updatestatus =
+                          new TenancyApplicationUpdateScore();
+                      updatestatus.ApplicationStatus = TAppDetailsState
+                          .ApplicationStatus!.EnumDetailID
+                          .toString();
                       updatestatus.applicantID = ratingreview;
 
-                      ApiManager().UpdateTenancyApplicationScore(context, updateid, updatestatus);
+                      ApiManager().UpdateTenancyApplicationScore(
+                          context, updateid, updatestatus);
                     },
                     child: Container(
                       height: 35,
@@ -1959,7 +2215,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
   /*======================== PDF For TENANT DETAILS===========================*/
   /*==========================================================================*/
 
-  Future<void> Pdfgenerate(TenantsApplicationDetailsState TAppDetailsState) async {
+  Future<void> Pdfgenerate(
+      TenantsApplicationDetailsState TAppDetailsState) async {
     final pdf = pw.Document(
       author: "Silver Home",
       pageMode: PdfPageMode.fullscreen,
@@ -2039,7 +2296,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
       ),
     );
 
-    String filename = "Tenant_details_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".pdf";
+    String filename = "Tenant_details_" +
+        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+        ".pdf";
 
     Uint8List pdfInBytes = await pdf.save();
     final blob = html.Blob([pdfInBytes], 'application/pdf');
@@ -2081,7 +2340,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
             decoration: pw.BoxDecoration(
               borderRadius: pw.BorderRadius.circular(1),
               color: PdfColors.white,
-              border: pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
+              border:
+                  pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
             ),
             child: pw.Column(
               mainAxisAlignment: pw.MainAxisAlignment.center,
@@ -2099,7 +2359,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   height: 10,
                 ),
                 pw.Text(
-                  TAppDetailsState.anualincomestatus != null ? TAppDetailsState.anualincomestatus!.displayValue : "None",
+                  TAppDetailsState.anualincomestatus != null
+                      ? TAppDetailsState.anualincomestatus!.displayValue
+                      : "None",
                   style: pw.TextStyle(
                     color: PdfColor.fromHex("#4B74FF"),
                     font: pw.Font.ttf(font_demi),
@@ -2117,7 +2379,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
             decoration: pw.BoxDecoration(
               borderRadius: pw.BorderRadius.circular(1),
               color: PdfColors.white,
-              border: pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
+              border:
+                  pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
             ),
             margin: pw.EdgeInsets.only(right: 5, left: 5),
             child: pw.Column(
@@ -2136,7 +2399,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   height: 10,
                 ),
                 pw.Text(
-                  TAppDetailsState.empstatus != null ? TAppDetailsState.empstatus!.displayValue : "None",
+                  TAppDetailsState.empstatus != null
+                      ? TAppDetailsState.empstatus!.displayValue
+                      : "None",
                   style: pw.TextStyle(
                     color: PdfColor.fromHex("#4B74FF"),
                     font: pw.Font.ttf(font_demi),
@@ -2155,7 +2420,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
             decoration: pw.BoxDecoration(
               borderRadius: pw.BorderRadius.circular(1),
               color: PdfColors.white,
-              border: pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
+              border:
+                  pw.Border.all(color: PdfColor.fromHex("#979797"), width: 1),
             ),
             child: pw.Column(
               mainAxisAlignment: pw.MainAxisAlignment.center,
@@ -2209,7 +2475,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
         pw.Column(
           children: [
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2230,7 +2497,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     child: pw.Text(
                       TAppDetailsState.dateofbirth == null
                           ? ""
-                          : Helper.DateForMMM(TAppDetailsState.dateofbirth!) + " (age:" + TAppDetailsState.perAge + ")",
+                          : Helper.DateForMMM(TAppDetailsState.dateofbirth!) +
+                              " (age:" +
+                              TAppDetailsState.perAge +
+                              ")",
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2242,7 +2512,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2273,7 +2544,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2292,7 +2564,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.perDialCode + " " + TAppDetailsState.perPhoneNumber,
+                      TAppDetailsState.perDialCode +
+                          " " +
+                          TAppDetailsState.perPhoneNumber,
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2304,7 +2578,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2367,12 +2642,14 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 ? pw.ListView.builder(
                     itemCount: TAppDetailsState.listoccupation.length,
                     itemBuilder: (pw.Context ctxt, int index) {
-                      TenancyEmploymentInformation tempinfo = TAppDetailsState.listoccupation[index];
+                      TenancyEmploymentInformation tempinfo =
+                          TAppDetailsState.listoccupation[index];
                       return pw.Column(
                         children: [
                           if (TAppDetailsState.listoccupation.length > 1)
                             pw.Container(
-                              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                              padding: pw.EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 10),
                               color: PdfColor.fromHex("#FBFBFB"),
                               child: pw.Row(
                                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2380,7 +2657,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   pw.Expanded(
                                     flex: 2,
                                     child: pw.Text(
-                                      GlobleString.TA_Occupation_title + " " + (index + 1).toString(),
+                                      GlobleString.TA_Occupation_title +
+                                          " " +
+                                          (index + 1).toString(),
                                       style: pw.TextStyle(
                                         color: PdfColor.fromHex("#000000"),
                                         font: pw.Font.ttf(font_demi),
@@ -2392,7 +2671,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               ),
                             ),
                           pw.Container(
-                            padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: pw.EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: PdfColor.fromHex("#F2F2F2"),
                             child: pw.Row(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2423,7 +2703,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             ),
                           ),
                           pw.Container(
-                            padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: pw.EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: PdfColor.fromHex("#FBFBFB"),
                             child: pw.Row(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2454,7 +2735,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             ),
                           ),
                           pw.Container(
-                            padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: pw.EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: PdfColor.fromHex("#F2F2F2"),
                             child: pw.Row(
                               crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2485,7 +2767,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             ),
                           ),
                           pw.Container(
-                            padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                            padding: pw.EdgeInsets.only(
+                                top: 5, bottom: 5, left: 10, right: 10),
                             color: PdfColor.fromHex("#FBFBFB"),
                             child: pw.Row(
                               mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2505,7 +2788,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                 pw.Expanded(
                                   flex: 3,
                                   child: pw.Text(
-                                    tempinfo.anualIncome != null ? tempinfo.anualIncome!.displayValue.toString() : "",
+                                    tempinfo.anualIncome != null
+                                        ? tempinfo.anualIncome!.displayValue
+                                            .toString()
+                                        : "",
                                     style: pw.TextStyle(
                                       color: PdfColor.fromHex("#010B32"),
                                       font: pw.Font.ttf(font_regular),
@@ -2518,7 +2804,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                           ),
                           if (TAppDetailsState.listoccupation.length > 1)
                             pw.Container(
-                              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                              padding: pw.EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 10),
                               color: PdfColor.fromHex("#FFFFFF"),
                               child: pw.Row(
                                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2542,7 +2829,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : pw.Container(
-                    padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding: pw.EdgeInsets.only(
+                        top: 5, bottom: 5, left: 10, right: 10),
                     color: PdfColor.fromHex("#FBFBFB"),
                     child: pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2562,7 +2850,10 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         pw.Expanded(
                           flex: 3,
                           child: pw.Text(
-                            TAppDetailsState.anualincomestatus != null ? TAppDetailsState.anualincomestatus!.displayValue : "",
+                            TAppDetailsState.anualincomestatus != null
+                                ? TAppDetailsState
+                                    .anualincomestatus!.displayValue
+                                : "",
                             style: pw.TextStyle(
                               color: PdfColor.fromHex("#010B32"),
                               font: pw.Font.ttf(font_regular),
@@ -2574,7 +2865,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     ),
                   ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2605,7 +2897,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
@@ -2662,7 +2955,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
         pw.Column(
           children: [
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2681,7 +2975,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.ct_startdate != null ? Helper.DateForMMM(TAppDetailsState.ct_startdate!) : "",
+                      TAppDetailsState.ct_startdate != null
+                          ? Helper.DateForMMM(TAppDetailsState.ct_startdate!)
+                          : "",
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2693,7 +2989,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2712,7 +3009,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.ct_enddate != null ? Helper.DateForMMM(TAppDetailsState.ct_enddate!) : "",
+                      TAppDetailsState.ct_enddate != null
+                          ? Helper.DateForMMM(TAppDetailsState.ct_enddate!)
+                          : "",
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2724,7 +3023,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2790,7 +3090,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
         pw.Column(
           children: [
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2809,7 +3110,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.cl_firstname + " " + TAppDetailsState.cl_lastname,
+                      TAppDetailsState.cl_firstname +
+                          " " +
+                          TAppDetailsState.cl_lastname,
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2821,7 +3124,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2852,7 +3156,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -2871,7 +3176,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.cl_dailcode + " " + TAppDetailsState.cl_phonenumber,
+                      TAppDetailsState.cl_dailcode +
+                          " " +
+                          TAppDetailsState.cl_phonenumber,
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -2912,20 +3219,25 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     ? pw.ListView.builder(
                         itemCount: TAppDetailsState.occupantlist.length,
                         itemBuilder: (pw.Context ctxt, int index) {
-                          TenancyAdditionalOccupant taoccupant = TAppDetailsState.occupantlist[index];
+                          TenancyAdditionalOccupant taoccupant =
+                              TAppDetailsState.occupantlist[index];
                           return pw.Column(
                             children: [
                               if (TAppDetailsState.occupantlist.length > 1)
                                 pw.Container(
-                                  padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                  padding: pw.EdgeInsets.only(
+                                      top: 5, bottom: 5, left: 10, right: 10),
                                   color: PdfColor.fromHex("#FBFBFB"),
                                   child: pw.Row(
-                                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.start,
                                     children: [
                                       pw.Expanded(
                                         flex: 2,
                                         child: pw.Text(
-                                          GlobleString.TA_Occupants + " " + (index + 1).toString(),
+                                          GlobleString.TA_Occupants +
+                                              " " +
+                                              (index + 1).toString(),
                                           style: pw.TextStyle(
                                             color: PdfColor.fromHex("#000000"),
                                             font: pw.Font.ttf(font_demi),
@@ -2937,15 +3249,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                   ),
                                 ),
                               pw.Container(
-                                padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: pw.EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: PdfColor.fromHex("#F2F2F2"),
                                 child: pw.Row(
-                                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
                                   children: [
                                     pw.Expanded(
                                       flex: 2,
                                       child: pw.Text(
-                                        GlobleString.TA_Additional_Occupants_first_name,
+                                        GlobleString
+                                            .TA_Additional_Occupants_first_name,
                                         style: pw.TextStyle(
                                           color: PdfColor.fromHex("#010B32"),
                                           font: pw.Font.ttf(font_regular),
@@ -2968,15 +3283,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                 ),
                               ),
                               pw.Container(
-                                padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: pw.EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: PdfColor.fromHex("#FBFBFB"),
                                 child: pw.Row(
-                                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
                                   children: [
                                     pw.Expanded(
                                       flex: 2,
                                       child: pw.Text(
-                                        GlobleString.TA_Additional_Occupants_Last_name,
+                                        GlobleString
+                                            .TA_Additional_Occupants_Last_name,
                                         style: pw.TextStyle(
                                           color: PdfColor.fromHex("#010B32"),
                                           font: pw.Font.ttf(font_regular),
@@ -2999,15 +3317,18 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                                 ),
                               ),
                               pw.Container(
-                                padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                padding: pw.EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 10, right: 10),
                                 color: PdfColor.fromHex("#FBFBFB"),
                                 child: pw.Row(
-                                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      pw.CrossAxisAlignment.start,
                                   children: [
                                     pw.Expanded(
                                       flex: 2,
                                       child: pw.Text(
-                                        GlobleString.TA_Additional_Occupants_Relationship_applicant,
+                                        GlobleString
+                                            .TA_Additional_Occupants_Relationship_applicant,
                                         style: pw.TextStyle(
                                           color: PdfColor.fromHex("#010B32"),
                                           font: pw.Font.ttf(font_regular),
@@ -3031,10 +3352,12 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               ),
                               if (TAppDetailsState.occupantlist.length > 1)
                                 pw.Container(
-                                  padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                                  padding: pw.EdgeInsets.only(
+                                      top: 5, bottom: 5, left: 10, right: 10),
                                   color: PdfColor.fromHex("#FFFFFF"),
                                   child: pw.Row(
-                                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.start,
                                     children: [
                                       pw.Expanded(
                                         flex: 2,
@@ -3055,7 +3378,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         },
                       )
                     : pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: PdfColor.fromHex("#FBFBFB"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3086,7 +3410,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       )
                 : pw.Container(
-                    padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding: pw.EdgeInsets.only(
+                        top: 5, bottom: 5, left: 10, right: 10),
                     color: PdfColor.fromHex("#FBFBFB"),
                     child: pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3141,21 +3466,30 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
         ),
         pw.Column(
           children: [
-            (TAppDetailsState.isPets && TAppDetailsState.petslist != null && TAppDetailsState.petslist.length > 0)
+            (TAppDetailsState.isPets &&
+                    TAppDetailsState.petslist != null &&
+                    TAppDetailsState.petslist.length > 0)
                 ? pw.ListView.builder(
                     itemCount: TAppDetailsState.petslist.length,
                     itemBuilder: (pw.Context ctxt, int index) {
                       Pets pets = TAppDetailsState.petslist[index];
                       return pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-                        color: index % 2 == 0 ? PdfColor.fromHex("#FBFBFB") : PdfColor.fromHex("#F2F2F2"),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        color: index % 2 == 0
+                            ? PdfColor.fromHex("#FBFBFB")
+                            : PdfColor.fromHex("#F2F2F2"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
                           children: [
                             pw.Expanded(
                               flex: 2,
                               child: pw.Text(
-                                GlobleString.TA_Pet + " #" + (index + 1).toString() + " " + GlobleString.TA_Pet_Type_Size_Age,
+                                GlobleString.TA_Pet +
+                                    " #" +
+                                    (index + 1).toString() +
+                                    " " +
+                                    GlobleString.TA_Pet_Type_Size_Age,
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3166,7 +3500,11 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 3,
                               child: pw.Text(
-                                pets.typeofpets.toString() + ", " + pets.size.toString() + ", " + pets.age.toString(),
+                                pets.typeofpets.toString() +
+                                    ", " +
+                                    pets.size.toString() +
+                                    ", " +
+                                    pets.age.toString(),
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3180,7 +3518,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : pw.Container(
-                    padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding: pw.EdgeInsets.only(
+                        top: 5, bottom: 5, left: 10, right: 10),
                     color: PdfColor.fromHex("#FBFBFB"),
                     child: pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3211,7 +3550,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     ),
                   ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3230,7 +3570,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.isSmoking ? GlobleString.TA_Yes : GlobleString.TA_No,
+                      TAppDetailsState.isSmoking
+                          ? GlobleString.TA_Yes
+                          : GlobleString.TA_No,
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -3241,21 +3583,30 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 ],
               ),
             ),
-            (TAppDetailsState.isVehical && TAppDetailsState.vehicallist != null && TAppDetailsState.vehicallist.length > 0)
+            (TAppDetailsState.isVehical &&
+                    TAppDetailsState.vehicallist != null &&
+                    TAppDetailsState.vehicallist.length > 0)
                 ? pw.ListView.builder(
                     itemCount: TAppDetailsState.vehicallist.length,
                     itemBuilder: (pw.Context ctxt, int index) {
                       Vehical vehical = TAppDetailsState.vehicallist[index];
                       return pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
-                        color: index % 2 == 0 ? PdfColor.fromHex("#FBFBFB") : PdfColor.fromHex("#F2F2F2"),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        color: index % 2 == 0
+                            ? PdfColor.fromHex("#FBFBFB")
+                            : PdfColor.fromHex("#F2F2F2"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
                           children: [
                             pw.Expanded(
                               flex: 2,
                               child: pw.Text(
-                                GlobleString.TA_Vehicle + " #" + (index + 1).toString() + " " + GlobleString.TA_Vehicle_Make_Model_Year,
+                                GlobleString.TA_Vehicle +
+                                    " #" +
+                                    (index + 1).toString() +
+                                    " " +
+                                    GlobleString.TA_Vehicle_Make_Model_Year,
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3266,7 +3617,11 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 3,
                               child: pw.Text(
-                                vehical.make.toString() + ", " + vehical.model.toString() + ", " + vehical.year.toString(),
+                                vehical.make.toString() +
+                                    ", " +
+                                    vehical.model.toString() +
+                                    ", " +
+                                    vehical.year.toString(),
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3280,7 +3635,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     },
                   )
                 : pw.Container(
-                    padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                    padding: pw.EdgeInsets.only(
+                        top: 5, bottom: 5, left: 10, right: 10),
                     color: PdfColor.fromHex("#FBFBFB"),
                     child: pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3311,7 +3667,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     ),
                   ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3332,7 +3689,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                     child: pw.Text(
                       TAppDetailsState.tenancystartdate == null
                           ? ""
-                          : new DateFormat("dd-MMM-yyyy").format(TAppDetailsState.tenancystartdate!).toString(),
+                          : new DateFormat("dd-MMM-yyyy")
+                              .format(TAppDetailsState.tenancystartdate!)
+                              .toString(),
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -3344,7 +3703,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3375,7 +3735,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#F2F2F2"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3406,7 +3767,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
               ),
             ),
             pw.Container(
-              padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+              padding:
+                  pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
               color: PdfColor.fromHex("#FBFBFB"),
               child: pw.Row(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3425,7 +3787,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                   pw.Expanded(
                     flex: 3,
                     child: pw.Text(
-                      TAppDetailsState.IntendedPeriod != null ? TAppDetailsState.IntendedPeriod!.displayValue : "",
+                      TAppDetailsState.IntendedPeriod != null
+                          ? TAppDetailsState.IntendedPeriod!.displayValue
+                          : "",
                       style: pw.TextStyle(
                         color: PdfColor.fromHex("#010B32"),
                         font: pw.Font.ttf(font_regular),
@@ -3463,12 +3827,14 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
             ? pw.ListView.builder(
                 itemCount: TAppDetailsState.referencelist.length,
                 itemBuilder: (pw.Context ctxt, int index) {
-                  TenancyAdditionalReference reference = TAppDetailsState.referencelist[index];
+                  TenancyAdditionalReference reference =
+                      TAppDetailsState.referencelist[index];
                   return pw.Column(
                     children: [
                       if (TAppDetailsState.referencelist.length > 1)
                         pw.Container(
-                          padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                          padding: pw.EdgeInsets.only(
+                              top: 5, bottom: 5, left: 10, right: 10),
                           color: PdfColor.fromHex("#F2F2F2"),
                           child: pw.Row(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3476,7 +3842,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                               pw.Expanded(
                                 flex: 2,
                                 child: pw.Text(
-                                  GlobleString.TA_Reference + " " + (index + 1).toString(),
+                                  GlobleString.TA_Reference +
+                                      " " +
+                                      (index + 1).toString(),
                                   style: pw.TextStyle(
                                     color: PdfColor.fromHex("#000000"),
                                     font: pw.Font.ttf(font_demi),
@@ -3488,7 +3856,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                           ),
                         ),
                       pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: PdfColor.fromHex("#FBFBFB"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3507,7 +3876,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 3,
                               child: pw.Text(
-                                reference.firstname.toString() + " " + reference.lastname.toString(),
+                                reference.firstname.toString() +
+                                    " " +
+                                    reference.lastname.toString(),
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3519,7 +3890,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: PdfColor.fromHex("#F2F2F2"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3527,7 +3899,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 2,
                               child: pw.Text(
-                                GlobleString.TA_Relationship_to_primary_applicant,
+                                GlobleString
+                                    .TA_Relationship_to_primary_applicant,
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3538,7 +3911,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 3,
                               child: pw.Text(
-                                reference.reletionshipprimaryApplicant.toString(),
+                                reference.reletionshipprimaryApplicant
+                                    .toString(),
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3550,7 +3924,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: PdfColor.fromHex("#FBFBFB"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3581,7 +3956,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                         ),
                       ),
                       pw.Container(
-                        padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        padding: pw.EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         color: PdfColor.fromHex("#F2F2F2"),
                         child: pw.Row(
                           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3600,7 +3976,9 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                             pw.Expanded(
                               flex: 3,
                               child: pw.Text(
-                                reference.dailcode.toString() + " " + reference.phonenumber.toString(),
+                                reference.dailcode.toString() +
+                                    " " +
+                                    reference.phonenumber.toString(),
                                 style: pw.TextStyle(
                                   color: PdfColor.fromHex("#010B32"),
                                   font: pw.Font.ttf(font_regular),
@@ -3613,7 +3991,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                       ),
                       if (TAppDetailsState.referencelist.length > 1)
                         pw.Container(
-                          padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                          padding: pw.EdgeInsets.only(
+                              top: 5, bottom: 5, left: 10, right: 10),
                           color: PdfColor.fromHex("#FFFFFF"),
                           child: pw.Row(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -3637,7 +4016,8 @@ class _TenancyApplicationScreenState extends State<TenancyApplicationScreen> {
                 },
               )
             : pw.Container(
-                padding: pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                padding:
+                    pw.EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
                 color: PdfColor.fromHex("#FBFBFB"),
                 child: pw.Row(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,

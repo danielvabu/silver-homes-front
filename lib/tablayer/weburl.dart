@@ -173,6 +173,7 @@ class Weburl {
   static var DSQ_APPLICATIONLIST_OWNERWISE =
       "CB8345B3-BA21-4FB7-8B38-BBF7EF074AA7";
   static var DSQ_APPLICANT_DETAILS = "0FE8C355-75AA-453E-881D-E3D91D3B4D11";
+  static var DSQ_APPLICANT_GROUP = "0FE8C355-75AA-453E-881D-E3D91D3BGROUP";
   static var DSQ_APPLICANT_Application = "0d35722e-5560-4e0a-a44a-34130dfb15b2";
   static var DSQ_APPLICANT_AdditionalOccupant =
       "64cfba80-7ccb-4ea0-aa07-d5b8ef0e8919";
@@ -188,6 +189,8 @@ class Weburl {
       "B9027858-8D51-485F-BFDB-00ED6D5207A2";
   static var DSQ_VIEW_VARIFICATION_DOCUMENTLIST =
       "c9034517-1c57-4910-b93c-b0822974cb48";
+  static var DSQ_VIEW_VARIFICATION_DOCUMENTLISTATACH =
+      "c9034517-1c57-4910-b93c-b0822974atach";
   static var DSQ_APPLICANT_REFERENCE_CHECK_LIST =
       "192C8D29-A42B-45AA-B77D-4D4DFB3F1D8A";
   static var DSQ_REFERENCE_LIST_APPLICANT_WISE =
@@ -213,6 +216,8 @@ class Weburl {
   static var WorkFlow_Documents = "1DF5CC24-A44B-45DE-B9E4-289D65EACDOCU";
   static var WorkFlow_DuplicatTemplateHtml =
       "1DF5CC24-A44B-45DE-B9E4-289D65EACTEMP";
+  static var WorkFlow_DuplicatRequestDocuments =
+      "1DF5CC24-A44B-45DE-B9E4-289D65EACRDOC";
   static var WorkFlow_CreateTemplateEventype =
       "1DF5CC24-A44B-45DE-B9E4-289D65EAC333";
   static var WorkFlow_Featured_image = "17D6D091-6A4D-49E9-84AD-8A0C675DDC8B";

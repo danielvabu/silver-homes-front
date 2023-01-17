@@ -17,6 +17,7 @@ import 'package:silverhome/domain/actions/landlord_action/reference_check_dialog
 import 'package:silverhome/domain/actions/landlord_action/varification_document_actions.dart';
 import 'package:silverhome/domain/entities/filter_item.dart';
 import 'package:silverhome/domain/entities/tenancy_application.dart';
+import 'package:silverhome/navigation/route_names.dart';
 import 'package:silverhome/store/app_store.dart';
 import 'package:silverhome/store/service_locator.dart';
 import 'package:silverhome/tablayer/api_manager.dart';
@@ -196,7 +197,8 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     var result = <Widget>[];
 
     result.add(_datavalueTitle(model.applicantName!, index));
-    result.add(_datavalueGroup(model.group1!, model.id!, model.numgroup!));
+    result
+        .add(_datavalueGroup(model.group1!, model.id!, model.numgroup!, index));
     result.add(_datavalueTitlePrimecolor(model));
     result.add(_datavalueRating(model));
     result.add(_datavalueDatesent(model.applicationSentDate!));
@@ -240,22 +242,28 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
     );
   }
 
-  Widget _datavalueGroup(int group, int id, int numero) {
+  Widget _datavalueGroup(int group, int id, int numero, int index) {
     String grupo = "";
+    String grupotool = "";
     if (group == 0) {
       if (numero == 0) {
         grupo = "Single Applicant";
+        grupotool = "Single Applicant";
       } else {
         numero++;
-        grupo = "Group $id - primary (" + numero.toString() + " applicants)";
+        grupo = "Group $id - primary (" + numero.toString() + ")";
+        grupotool =
+            "Group $id - primary (" + numero.toString() + " Applicants)";
       }
     } else {
       numero++;
-      grupo = "Group $group (" + numero.toString() + " applicants)";
+      grupo = "Group $group (" + numero.toString() + ")";
+      grupotool = "Group $id - primary (" + numero.toString() + " Applicants)";
     }
     return InkWell(
       onTap: () {
-        //  openApplicationDetailsView(Index);
+        // Navigator.of(context).pushNamed(RouteNames.TenantProfiel);
+        openApplicationDetailsView2(index);
       },
       child: Container(
         height: 40,
@@ -263,7 +271,7 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
-          message: grupo,
+          message: grupotool,
           child: Text(
             grupo,
             textAlign: TextAlign.start,
@@ -620,6 +628,23 @@ class _VarifyDocumentItemState extends State<VarifyDocumentItem> {
         listdataviewlist.insert(0, tal);
 
         _store.dispatch(UpdateTenancyDetails(listdataviewlist));
+      }
+    }
+  }
+
+  openApplicationDetailsView2(int index) {
+    List<TenancyApplication> listdataviewlist = <TenancyApplication>[];
+
+    for (int i = 0; i < widget.listdata.length; i++) {
+      TenancyApplication tal = widget.listdata[i];
+      listdataviewlist.add(tal);
+
+      if (widget.listdata.length - 1 == i) {
+        TenancyApplication tal = widget.listdata[index];
+        listdataviewlist.remove(tal);
+        listdataviewlist.insert(0, tal);
+
+        _store.dispatch(UpdateTenancyDetailsMultiple(listdataviewlist));
       }
     }
   }

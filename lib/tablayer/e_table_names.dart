@@ -10,6 +10,7 @@ enum etableName {
   Applicant,
   Application,
   ApplicationDocument,
+  ApplicationDocumentAttach,
   Attachments,
   Occupation,
   CurrentTenancy,
@@ -81,6 +82,9 @@ class TableNames {
         break;
       case etableName.ApplicationDocument:
         name = "ApplicationDocument";
+        break;
+      case etableName.ApplicationDocumentAttach:
+        name = "applicationdocument_attach";
         break;
       case etableName.Attachments:
         name = "Attachments";

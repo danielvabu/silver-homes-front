@@ -163,6 +163,21 @@ class EditLead {
       };
 }
 
+class EditLeadDisclaimer {
+  EditLeadDisclaimer({
+    this.disclaimer,
+  });
+
+  bool? disclaimer;
+
+  factory EditLeadDisclaimer.fromJson(Map<String, dynamic> json) =>
+      EditLeadDisclaimer(
+        disclaimer: json["disclaimer"],
+      );
+
+  Map<String, dynamic> toJson() => {"disclaimer": disclaimer};
+}
+
 class EditLeadApplicantId {
   EditLeadApplicantId({
     this.ID,
@@ -263,6 +278,25 @@ class TenancyApplicationUpdateScore {
       {"ApplicationStatus": ApplicationStatus, "Applicant_ID": applicantID};
 }
 
+class TenancyApplicationUpdateScore2 {
+  String? ApplicationStatus;
+  UpdateScoreRating? applicantID;
+
+  TenancyApplicationUpdateScore2({
+    this.ApplicationStatus,
+    this.applicantID,
+  });
+
+  factory TenancyApplicationUpdateScore2.fromJson(Map<String, dynamic> json) =>
+      TenancyApplicationUpdateScore2(
+        ApplicationStatus: json["ApplicationStatus"],
+        applicantID: UpdateScoreRating.fromJson(json["Applicant_ID"]),
+      );
+
+  Map<String, dynamic> toJson() =>
+      {"ApplicationStatus": ApplicationStatus, "Applicant_ID": applicantID};
+}
+
 class UpdateScoreRatingReview {
   String? ID;
   double? Rating;
@@ -289,6 +323,27 @@ class UpdateScoreRatingReview {
         "Rating": Rating,
         "Note": Note,
         "RatingReview": RatingReview,
+      };
+}
+
+class UpdateScoreRating {
+  String? ID;
+  double? Rating;
+
+  UpdateScoreRating({
+    this.ID,
+    this.Rating,
+  });
+
+  factory UpdateScoreRating.fromJson(Map<String, dynamic> json) =>
+      UpdateScoreRating(
+        ID: json["ID"],
+        Rating: json["Rating"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ID": ID,
+        "Rating": Rating,
       };
 }
 

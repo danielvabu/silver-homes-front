@@ -41,12 +41,38 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
   double height = 0, width = 0;
   final _store = getIt<AppStore>();
   List<ApplicationDocumentUploads> fields = [];
+  List<ApplicationDocumentUploads> fields2 = [];
   List<int> idsmedia = [];
+  List<int> idsmedia2 = [];
   late OverlayEntry loader;
   @override
   void initState() {
     traerfields();
+    traeratach();
     super.initState();
+  }
+
+  traeratach() async {
+    await ApiManager().getPriviewDocumentListAtach(
+        context, Prefs.getString(PrefsName.TCF_ApplicationID),
+        (status, responce, arrres) {
+      if (status) {
+        setState(() {
+          for (int i = 0; i < arrres.length; i++) {
+            ApplicationDocumentUploads objdoc = ApplicationDocumentUploads(
+                appImage: null,
+                isbuttonActive: false,
+                fieldname: arrres[i].field,
+                fileName: arrres[i].mediaInfo!.url,
+                notaplicable: false,
+                required: true,
+                nuevo: false);
+            fields2.add(objdoc);
+            idsmedia2.add(arrres[i].mediaInfo!.id!);
+          }
+        });
+      }
+    });
   }
 
   traerfields() async {
@@ -107,6 +133,52 @@ class _VarificationDocumentView2State extends State<VarificationDocumentView2> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (fields2.length > 0)
+              Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  GlobleString.TVD_title0,
+                  style: MyStyles.Medium(20, myColor.text_color),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            if (fields2.length > 0)
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      await Helper.download(
+                          context,
+                          fields2[0].fileName.toString(),
+                          idsmedia2[0].toString(),
+                          Helper.FileNameWithTime(fields2[0].fileName!),
+                          1);
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 100,
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        border:
+                            Border.all(color: myColor.Circle_main, width: 1.5),
+                      ),
+                      child: Text(
+                        GlobleString.PD_Download,
+                        style: MyStyles.Medium(12, myColor.text_color),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CustomeWidget.AttechDocFileView(fields2[0].fieldname!),
+                ],
+              ),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               alignment: Alignment.topLeft,
               child: Text(

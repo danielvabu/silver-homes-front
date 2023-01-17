@@ -70,7 +70,9 @@ class CustomeWidget {
           ),
           const SizedBox(width: 20.0),
           Container(
-            decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: myColor.FV_Count),
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                color: myColor.FV_Count),
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.all(5),
@@ -108,7 +110,9 @@ class CustomeWidget {
                           'assets/images/tab_arrow.png',
                           width: 15,
                           height: 34,
-                          color: selecttab == (tabindex - 1) ? myColor.blue : myColor.TA_tab_devide,
+                          color: selecttab == (tabindex - 1)
+                              ? myColor.blue
+                              : myColor.TA_tab_devide,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -117,7 +121,9 @@ class CustomeWidget {
                     padding: const EdgeInsets.all(8),
                     child: Text(
                       title,
-                      style: selecttab == tabindex ? MyStyles.SemiBold(12, myColor.blue) : MyStyles.Medium(12, myColor.text_color),
+                      style: selecttab == tabindex
+                          ? MyStyles.SemiBold(12, myColor.blue)
+                          : MyStyles.Medium(12, myColor.text_color),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       textAlign: TextAlign.center,
@@ -133,7 +139,9 @@ class CustomeWidget {
                           'assets/images/tab_arrow.png',
                           width: 15,
                           height: 34,
-                          color: selecttab == 7 ? myColor.blue : myColor.TA_tab_devide,
+                          color: selecttab == 7
+                              ? myColor.blue
+                              : myColor.TA_tab_devide,
                           fit: BoxFit.contain,
                         ),
                       )
@@ -174,7 +182,9 @@ class CustomeWidget {
           padding: const EdgeInsets.all(6),
           child: Text(
             title,
-            style: selecttab == tabindex ? MyStyles.SemiBold(12, myColor.blue) : MyStyles.Medium(12, myColor.text_color),
+            style: selecttab == tabindex
+                ? MyStyles.SemiBold(12, myColor.blue)
+                : MyStyles.Medium(12, myColor.text_color),
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             textAlign: TextAlign.center,
@@ -200,7 +210,9 @@ class CustomeWidget {
         margin: const EdgeInsets.only(right: 10),
         elevation: 0,
         shadowColor: myColor.application_boreder,
-        shape: RoundedRectangleBorder(side: const BorderSide(color: myColor.TA_Border, width: 0.5), borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(color: myColor.TA_Border, width: 0.5),
+            borderRadius: BorderRadius.circular(5)),
         child: Container(
           height: 50,
           child: Row(
@@ -233,7 +245,9 @@ class CustomeWidget {
         margin: const EdgeInsets.only(right: 10),
         elevation: 0,
         shadowColor: myColor.application_boreder,
-        shape: RoundedRectangleBorder(side: const BorderSide(color: myColor.TA_Border, width: 0.5), borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(color: myColor.TA_Border, width: 0.5),
+            borderRadius: BorderRadius.circular(5)),
         child: Container(
           height: 50,
           child: Row(
@@ -360,6 +374,33 @@ class CustomeWidget {
     );
   }
 
+  static Widget AttechDocMail() {
+    return Container(
+      height: 30,
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        border: Border.all(color: myColor.Circle_main, width: 1.5),
+      ),
+      child: Row(
+        children: [
+          SizedBox(width: 7),
+          Icon(
+            Icons.attach_file,
+            color: myColor.Circle_main,
+            size: 24.0,
+            semanticLabel: 'Attach',
+          ),
+          Text(
+            GlobleString.TVD_Attach,
+            style: MyStyles.Medium(14, myColor.text_color),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget DesebleAttechDoc() {
     return Container(
       height: 30,
@@ -426,7 +467,8 @@ class CustomeWidget {
       ),
       child: Text(
         name,
-        style: MyStyles.Medium(13, selected == index ? myColor.white : myColor.text_color),
+        style: MyStyles.Medium(
+            13, selected == index ? myColor.white : myColor.text_color),
       ),
     );
   }
@@ -1298,13 +1340,15 @@ class CustomeWidget {
     );
   }
 
-  static getPropertyDetailsByPropertyID(BuildContext context, String propId) async {
+  static getPropertyDetailsByPropertyID(
+      BuildContext context, String propId) async {
     final _store = getIt<AppStore>();
 
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getPropertyRestriction(context, propId, (status, responce, restrictionlist) {
+    ApiManager().getPropertyRestriction(context, propId,
+        (status, responce, restrictionlist) {
       if (status) {
         _store.dispatch(UpdateRestrictionlist(restrictionlist));
         _store.dispatch(UpdateSummeryRestrictionlist(restrictionlist));
@@ -1314,17 +1358,20 @@ class CustomeWidget {
       }
     });
 
-    ApiManager().getPropertyImagesDSQ(context, propId, (status, responce, PropertyImageMediaInfolist) {
+    ApiManager().getPropertyImagesDSQ(context, propId,
+        (status, responce, PropertyImageMediaInfolist) {
       if (status) {
         _store.dispatch(UpdatePropertyImageList(PropertyImageMediaInfolist));
-        _store.dispatch(UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
+        _store.dispatch(
+            UpdateSummeryPropertyImageList(PropertyImageMediaInfolist));
       } else {
         _store.dispatch(UpdatePropertyImageList([]));
         _store.dispatch(UpdateSummeryPropertyImageList([]));
       }
     });
 
-    ApiManager().getPropertyAmanityUtility(context, propId, (status, responce, amenitieslist, utilitylist) async {
+    ApiManager().getPropertyAmanityUtility(context, propId,
+        (status, responce, amenitieslist, utilitylist) async {
       if (status) {
         amenitieslist.sort((a, b) => a.id!.compareTo(b.id!));
         utilitylist.sort((a, b) => a.id!.compareTo(b.id!));
@@ -1342,7 +1389,8 @@ class CustomeWidget {
       }
     });
 
-    await ApiManager().getPropertyDetails(context, propId, (status, responce, propertyData) async {
+    await ApiManager().getPropertyDetails(context, propId,
+        (status, responce, propertyData) async {
       if (status) {
         await ApiManager().bindPropertyData(propertyData!);
 
@@ -1370,7 +1418,9 @@ class CustomeWidget {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    ApiManager().getPropertyWiseLead(context, Prefs.getString(PrefsName.OwnerID), propertyid, (status, message, allListData) {
+    ApiManager().getPropertyWiseLead(
+        context, Prefs.getString(PrefsName.OwnerID), propertyid,
+        (status, message, allListData) {
       if (status) {
         loader.remove();
         createFunnelDataCSVFile(allListData);
@@ -1416,14 +1466,18 @@ class CustomeWidget {
       row.add(data.referenceRequestReceivedDate);
       row.add(data.agreementSentDate);
       row.add(data.agreementReceivedDate);
-      row.add(data.applicationStatus != null ? data.applicationStatus!.displayValue.toString() : "");
+      row.add(data.applicationStatus != null
+          ? data.applicationStatus!.displayValue.toString()
+          : "");
 
       csvList.add(row);
     }
 
     csv = const ListToCsvConverter().convert(csvList);
 
-    String filename = "FunnelLeads_" + DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() + ".csv";
+    String filename = "FunnelLeads_" +
+        DateFormat("ddMMyyyy_hhmmss").format(DateTime.now()).toString() +
+        ".csv";
 
     // prepare
     final bytes = utf8.encode(csv);
@@ -1472,11 +1526,14 @@ class CustomeWidget {
     _store.dispatch(UpdateTenacyFormIndex(1));
 
     _store.dispatch(UpdateTFAddOccupantlist(<TenancyAdditionalOccupant>[]));
-    _store.dispatch(UpdateTFAddLiveServerOccupantlist(<TenancyAdditionalOccupant>[]));
+    _store.dispatch(
+        UpdateTFAddLiveServerOccupantlist(<TenancyAdditionalOccupant>[]));
     _store.dispatch(UpdateTFAddOccupantNotApplicable(false));
 
-    _store.dispatch(UpdateTFAdditionalReferencelist(<TenancyAdditionalReference>[]));
-    _store.dispatch(UpdateTFAdditionalLiveServerReferencelist(<TenancyAdditionalReference>[]));
+    _store.dispatch(
+        UpdateTFAdditionalReferencelist(<TenancyAdditionalReference>[]));
+    _store.dispatch(UpdateTFAdditionalLiveServerReferencelist(
+        <TenancyAdditionalReference>[]));
     _store.dispatch(UpdateTFAdditionalReferenceisAutherize(false));
     _store.dispatch(UpdateTFAdditionalReferenceisTermsCondition(false));
 
@@ -1503,7 +1560,8 @@ class CustomeWidget {
     _store.dispatch(UpdateTFEmploymentanualincomestatus(null));
     _store.dispatch(UpdateTFEmploymentempstatus(null));
     _store.dispatch(UpdateTFEmploymentEmploymentID(""));
-    _store.dispatch(UpdateTFEmploymentlistoccupation(<TenancyEmploymentInformation>[]));
+    _store.dispatch(
+        UpdateTFEmploymentlistoccupation(<TenancyEmploymentInformation>[]));
 
     _store.dispatch(UpdateTFAdditionalInfoPetslist(<Pets>[]));
     _store.dispatch(UpdateTFAdditionalInfoVehicallist(<Vehical>[]));
@@ -1521,7 +1579,8 @@ class CustomeWidget {
     OverlayEntry loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
-    await ApiManager().getReferenceListApplicantWise(context, id, (status, responce, messege) async {
+    await ApiManager().getReferenceListApplicantWise(context, id,
+        (status, responce, messege) async {
       if (status) {
         loader.remove();
         if (responce.length > 0) {
@@ -1529,7 +1588,8 @@ class CustomeWidget {
           //leadlist.addAll(responce);
 
           for (var data in responce.toSet()) {
-            if (data.questionnaireReceivedDate != null && data.questionnaireReceivedDate != "") {
+            if (data.questionnaireReceivedDate != null &&
+                data.questionnaireReceivedDate != "") {
               leaditemlist.add(data);
             }
           }
@@ -1551,16 +1611,19 @@ class CustomeWidget {
             );
           }
         } else {
-          ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+          ToastUtils.showCustomToast(
+              context, GlobleString.DCR_No_reference, false);
         }
       } else {
         loader.remove();
-        ToastUtils.showCustomToast(context, GlobleString.DCR_No_reference, false);
+        ToastUtils.showCustomToast(
+            context, GlobleString.DCR_No_reference, false);
       }
     });
   }
 
-  static PropertySummaryImageZip(BuildContext context, List<PropertyImageMediaInfo> images) async {
+  static PropertySummaryImageZip(
+      BuildContext context, List<PropertyImageMediaInfo> images) async {
     loader = Helper.overlayLoader(context);
     Overlay.of(context)!.insert(loader);
 
@@ -1569,10 +1632,12 @@ class CustomeWidget {
     try {
       for (PropertyImageMediaInfo img in images) {
         try {
-          var res = await get(Uri.parse(Weburl.image_API + img.id.toString()), headers: {
-            'Authorization': 'bearer ${Prefs.getString(PrefsName.userTokan)}',
-            'ApplicationCode': Weburl.API_CODE,
-          });
+          var res = await get(Uri.parse(Weburl.image_API + img.id.toString()),
+              headers: {
+                'Authorization':
+                    'bearer ${Prefs.getString(PrefsName.userTokan)}',
+                'ApplicationCode': Weburl.API_CODE,
+              });
 
           String filename = Helper.FileName(img.url!);
 
@@ -1580,7 +1645,8 @@ class CustomeWidget {
 
           namestring.add(newfilename);
 
-          var file = webarc.ArchiveFile.string(newfilename, String.fromCharCodes(res.bodyBytes));
+          var file = webarc.ArchiveFile.string(
+              newfilename, String.fromCharCodes(res.bodyBytes));
 
           archive.addFile(file);
 
@@ -1591,12 +1657,15 @@ class CustomeWidget {
       print("fileerror: $e");
     }
 
-    webarc.OutputStream stream = webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
+    webarc.OutputStream stream =
+        webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
 
     var bytes;
-    String zipname = "properties_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
+    String zipname =
+        "properties_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
 
-    if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.linux) {
+    if (defaultTargetPlatform == TargetPlatform.macOS ||
+        defaultTargetPlatform == TargetPlatform.linux) {
       webarc.TarEncoder tarEncoder = webarc.TarEncoder();
       bytes = tarEncoder.encode(archive, output: stream);
       zipname += ".tar";
@@ -1611,13 +1680,16 @@ class CustomeWidget {
       zipname += ".zip";
     }
 
-    html.AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
+    html.AnchorElement(
+        href:
+            "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
       ..setAttribute("download", zipname)
       ..click();
     loader.remove();
   }
 
-  static MaintenancePdfgenerate(BuildContext context, MaintenanceDetails maintenanceDetails) async {
+  static MaintenancePdfgenerate(
+      BuildContext context, MaintenanceDetails maintenanceDetails) async {
     final pdf = pw.Document(
       author: "Silver Homes",
       pageMode: PdfPageMode.fullscreen,
@@ -1631,14 +1703,20 @@ class CustomeWidget {
 
     pw.MemoryImage companyImage;
     try {
-      var res = await get(Uri.parse(Weburl.image_API + maintenanceDetails.Company_logo!.id.toString()), headers: {
-        'Authorization': 'bearer ${Prefs.getString(PrefsName.userTokan)}',
-        'ApplicationCode': Weburl.API_CODE,
-      });
+      var res = await get(
+          Uri.parse(Weburl.image_API +
+              maintenanceDetails.Company_logo!.id.toString()),
+          headers: {
+            'Authorization': 'bearer ${Prefs.getString(PrefsName.userTokan)}',
+            'ApplicationCode': Weburl.API_CODE,
+          });
       companyImage = pw.MemoryImage(res.bodyBytes);
     } catch (e) {
       print("ImageException: $e");
-      companyImage = pw.MemoryImage((await rootBundle.load('assets/images/silverhome.png')).buffer.asUint8List());
+      companyImage = pw.MemoryImage(
+          (await rootBundle.load('assets/images/silverhome.png'))
+              .buffer
+              .asUint8List());
     }
 
     ssheight = MediaQuery.of(context).size.height;
@@ -1659,54 +1737,68 @@ class CustomeWidget {
           margin: const pw.EdgeInsets.all(10),
           build: (pw.Context context) {
             return <pw.Widget>[
-              pw.Container(color: PdfColor.fromHex("#FBFBFB"), child: header(maintenanceDetails, companyImage)),
+              pw.Container(
+                  color: PdfColor.fromHex("#FBFBFB"),
+                  child: header(maintenanceDetails, companyImage)),
               pw.Padding(
                 padding: const pw.EdgeInsets.all(15),
-                child: pw.Column(crossAxisAlignment: pw.CrossAxisAlignment.start, mainAxisAlignment: pw.MainAxisAlignment.start, children: [
-                  propertyDetails(maintenanceDetails),
-                  pw.SizedBox(height: 15),
-                  maintenaceRequest(maintenanceDetails),
-                  pw.SizedBox(height: 15),
-                  contactDetails(maintenanceDetails),
-                  pw.SizedBox(height: 15),
-                  // vendorDetails(maintenanceDetails),
-                  if (maintenanceDetails.maintenanceVendorlist!.length > 0)
-                    pw.Container(
-                      alignment: pw.Alignment.centerLeft,
-                      child: pw.Text(
-                        GlobleString.Mant_view_VendorDetails,
-                        style: pw.TextStyle(
-                          color: PdfColors.black,
-                          font: pw.Font.ttf(font_demi),
-                          fontSize: 14,
+                child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    children: [
+                      propertyDetails(maintenanceDetails),
+                      pw.SizedBox(height: 15),
+                      maintenaceRequest(maintenanceDetails),
+                      pw.SizedBox(height: 15),
+                      contactDetails(maintenanceDetails),
+                      pw.SizedBox(height: 15),
+                      // vendorDetails(maintenanceDetails),
+                      if (maintenanceDetails.maintenanceVendorlist!.length > 0)
+                        pw.Container(
+                          alignment: pw.Alignment.centerLeft,
+                          child: pw.Text(
+                            GlobleString.Mant_view_VendorDetails,
+                            style: pw.TextStyle(
+                              color: PdfColors.black,
+                              font: pw.Font.ttf(font_demi),
+                              fontSize: 14,
+                            ),
+                            textAlign: pw.TextAlign.left,
+                          ),
                         ),
-                        textAlign: pw.TextAlign.left,
-                      ),
-                    ),
-                  pw.SizedBox(height: 10),
-                  for (int i = 0; i < maintenanceDetails.maintenanceVendorlist!.length; i++) vendorDetailsView(i, maintenanceDetails)
-                ]),
+                      pw.SizedBox(height: 10),
+                      for (int i = 0;
+                          i < maintenanceDetails.maintenanceVendorlist!.length;
+                          i++)
+                        vendorDetailsView(i, maintenanceDetails)
+                    ]),
               ),
             ];
           }),
     );
 
-    String filename = "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.pdf";
+    String filename =
+        "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}.pdf";
 
     Uint8List pdfInBytes = await pdf.save();
     webarc.Archive archive = webarc.Archive();
-    var pdffile = webarc.ArchiveFile.string(filename, String.fromCharCodes(pdfInBytes));
+    var pdffile =
+        webarc.ArchiveFile.string(filename, String.fromCharCodes(pdfInBytes));
     archive.addFile(pdffile);
 
     List<String> namestring = [];
 
     try {
-      for (PropertyMaintenanceImages img in maintenanceDetails.maintenanceImageslist!) {
+      for (PropertyMaintenanceImages img
+          in maintenanceDetails.maintenanceImageslist!) {
         try {
-          var res = await get(Uri.parse(Weburl.image_API + img.mediaId!.id.toString()), headers: {
-            'Authorization': 'bearer ${Prefs.getString(PrefsName.userTokan)}',
-            'ApplicationCode': Weburl.API_CODE,
-          });
+          var res = await get(
+              Uri.parse(Weburl.image_API + img.mediaId!.id.toString()),
+              headers: {
+                'Authorization':
+                    'bearer ${Prefs.getString(PrefsName.userTokan)}',
+                'ApplicationCode': Weburl.API_CODE,
+              });
 
           String filename = Helper.FileName(img.mediaId!.url!);
 
@@ -1714,7 +1806,8 @@ class CustomeWidget {
 
           namestring.add(newfilename);
 
-          var file = webarc.ArchiveFile.string(newfilename, String.fromCharCodes(res.bodyBytes));
+          var file = webarc.ArchiveFile.string(
+              newfilename, String.fromCharCodes(res.bodyBytes));
           archive.addFile(file);
         } catch (e) {}
       }
@@ -1722,11 +1815,14 @@ class CustomeWidget {
       print("fileerror: $e");
     }
 
-    webarc.OutputStream stream = webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
+    webarc.OutputStream stream =
+        webarc.OutputStream(byteOrder: webarc.LITTLE_ENDIAN);
 
-    String zipname = "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
+    String zipname =
+        "maintenance_${DateFormat("ddMMyyyy_hhmmss").format(DateTime.now())}";
     var bytes;
-    if (defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.linux) {
+    if (defaultTargetPlatform == TargetPlatform.macOS ||
+        defaultTargetPlatform == TargetPlatform.linux) {
       webarc.TarEncoder tarEncoder = webarc.TarEncoder();
       bytes = tarEncoder.encode(archive, output: stream);
       zipname += ".tar";
@@ -1741,12 +1837,15 @@ class CustomeWidget {
       zipname += ".zip";
     }
 
-    html.AnchorElement(href: "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
+    html.AnchorElement(
+        href:
+            "data:application/octet-stream;charset=utf-16le;base64,${base64Encode(bytes!)}")
       ..setAttribute("download", zipname)
       ..click();
   }
 
-  static pw.Widget header(MaintenanceDetails maintenanceDetails, pw.MemoryImage img) {
+  static pw.Widget header(
+      MaintenanceDetails maintenanceDetails, pw.MemoryImage img) {
     // maintenanceDetails.Company_logo.url
     return pw.Container(
       height: 80,
@@ -1836,11 +1935,15 @@ class CustomeWidget {
                             alignment: pw.Alignment.center,
                             decoration: pw.BoxDecoration(
                               borderRadius: pw.BorderRadius.circular(5),
-                              border: pw.Border.all(color: const PdfColor.fromInt(0xFF979797), width: 1),
+                              border: pw.Border.all(
+                                  color: const PdfColor.fromInt(0xFF979797),
+                                  width: 1),
                               color: PdfColor.fromHex("#FFFFFF"),
                             ),
                             child: pw.Text(
-                              maintenanceDetails.Status != null ? maintenanceDetails.Status!.displayValue : "",
+                              maintenanceDetails.Status != null
+                                  ? maintenanceDetails.Status!.displayValue
+                                  : "",
                               style: pw.TextStyle(
                                 color: PdfColors.black,
                                 font: pw.Font.ttf(font_medium),
@@ -1879,11 +1982,15 @@ class CustomeWidget {
                             alignment: pw.Alignment.center,
                             decoration: pw.BoxDecoration(
                               borderRadius: pw.BorderRadius.circular(5),
-                              border: pw.Border.all(color: const PdfColor.fromInt(0xff25AFBF), width: 1),
+                              border: pw.Border.all(
+                                  color: const PdfColor.fromInt(0xff25AFBF),
+                                  width: 1),
                               color: const PdfColor.fromInt(0xffD5EDEF),
                             ),
                             child: pw.Text(
-                              maintenanceDetails.Priority != null ? maintenanceDetails.Priority!.displayValue : "",
+                              maintenanceDetails.Priority != null
+                                  ? maintenanceDetails.Priority!.displayValue
+                                  : "",
                               style: pw.TextStyle(
                                 color: const PdfColor.fromInt(0xff25AFBF),
                                 font: pw.Font.ttf(font_medium),
@@ -1964,7 +2071,8 @@ class CustomeWidget {
     return pw.Container(
       width: double.infinity,
       decoration: pw.BoxDecoration(
-        border: pw.Border.all(color: const PdfColor.fromInt(0xFF979797), width: 1.0),
+        border: pw.Border.all(
+            color: const PdfColor.fromInt(0xFF979797), width: 1.0),
         borderRadius: pw.BorderRadius.circular(0.0),
         color: PdfColors.white,
       ),
@@ -2045,14 +2153,18 @@ class CustomeWidget {
           pw.ListView.builder(
             itemCount: mDetailsState.maintenanceImageslist!.length,
             itemBuilder: (pw.Context ctxt, int index) {
-              PropertyMaintenanceImages maintenanceimage = mDetailsState.maintenanceImageslist![index];
+              PropertyMaintenanceImages maintenanceimage =
+                  mDetailsState.maintenanceImageslist![index];
               return pw.Container(
                 margin: const pw.EdgeInsets.only(top: 5, bottom: 5),
                 child: pw.Row(
                   crossAxisAlignment: pw.CrossAxisAlignment.center,
                   children: [
                     pw.Text(
-                      maintenanceimage.mediaId != null ? Helper.FileNameWithTime(maintenanceimage.mediaId!.url!) : "",
+                      maintenanceimage.mediaId != null
+                          ? Helper.FileNameWithTime(
+                              maintenanceimage.mediaId!.url!)
+                          : "",
                       style: pw.TextStyle(
                         color: PdfColors.blue,
                         font: pw.Font.ttf(font_regular),
@@ -2221,7 +2333,8 @@ class CustomeWidget {
     );
   }
 
-  static pw.Widget vendorDetailsView(int index, MaintenanceDetails mDetailsState) {
+  static pw.Widget vendorDetailsView(
+      int index, MaintenanceDetails mDetailsState) {
     MaintenanceVendor vendordata = mDetailsState.maintenanceVendorlist![index];
     return pw.Container(
       alignment: pw.Alignment.centerLeft,
@@ -2265,7 +2378,9 @@ class CustomeWidget {
                     padding: const pw.EdgeInsets.only(left: 10),
                     alignment: pw.Alignment.centerLeft,
                     child: pw.Text(
-                      vendordata.category != null ? vendordata.category!.displayValue : "",
+                      vendordata.category != null
+                          ? vendordata.category!.displayValue
+                          : "",
                       textAlign: pw.TextAlign.center,
                       style: pw.TextStyle(
                         color: const PdfColor.fromInt(0xFF010B32),
@@ -2385,7 +2500,8 @@ class CustomeWidget {
         pw.ListView.builder(
           itemCount: mDetailsState.maintenanceVendorlist!.length,
           itemBuilder: (pw.Context ctxt, int index) {
-            MaintenanceVendor vendordata = mDetailsState.maintenanceVendorlist![index];
+            MaintenanceVendor vendordata =
+                mDetailsState.maintenanceVendorlist![index];
             return pw.Container(
               alignment: pw.Alignment.centerLeft,
               child: pw.Column(
@@ -2428,7 +2544,9 @@ class CustomeWidget {
                             padding: const pw.EdgeInsets.only(left: 10),
                             alignment: pw.Alignment.centerLeft,
                             child: pw.Text(
-                              vendordata.category != null ? vendordata.category!.displayValue : "",
+                              vendordata.category != null
+                                  ? vendordata.category!.displayValue
+                                  : "",
                               textAlign: pw.TextAlign.center,
                               style: pw.TextStyle(
                                 color: const PdfColor.fromInt(0xFF010B32),

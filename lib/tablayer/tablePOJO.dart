@@ -206,6 +206,28 @@ class GetListDocument {
   }
 }
 
+class GetListGroup {
+  String? id;
+  String? name;
+  int? rating;
+
+  GetListGroup({this.id, this.name, this.rating});
+
+  factory GetListGroup.fromJson(Map<String, dynamic> json) =>
+      GetListGroup(id: json["id"], name: json["name"], rating: json["rating"]);
+
+  Map toJson() => {"id": id, "name": name, "rating": rating};
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["name"] = name;
+    map["rating"] = rating;
+
+    return map;
+  }
+}
+
 class Applicant {
   int id;
   int? personid;

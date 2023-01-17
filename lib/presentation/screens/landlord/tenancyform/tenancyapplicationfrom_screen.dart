@@ -26,6 +26,7 @@ import 'package:silverhome/domain/entities/tenancy_additionaloccupants.dart';
 import 'package:silverhome/domain/entities/tenancy_employment_information.dart';
 import 'package:silverhome/navigation/route_names.dart';
 import 'package:silverhome/presentation/models/landlord_models/tenancyform_state.dart';
+import 'package:silverhome/presentation/screens/landlord/tenancyform/taf_disclaimer_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancyform/taf_document_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancyform/taf_personal_screen.dart';
 import 'package:silverhome/store/store.dart';
@@ -74,6 +75,7 @@ class TenancyApplicationFormScreenState
     await Prefs.init();
 
     await RemoveHighLight();
+    await Prefs.setBool(PrefsName.TCF_Step0, false);
     await Prefs.setBool(PrefsName.TCF_Step1, false);
     await Prefs.setBool(PrefsName.TCF_Step2, false);
     await Prefs.setBool(PrefsName.TCF_Step3, false);
@@ -323,6 +325,12 @@ class TenancyApplicationFormScreenState
             Prefs.setBool(PrefsName.TCF_Step6, true);
           } else {
             Prefs.setBool(PrefsName.TCF_Step6, false);
+          }
+
+          if (applicationDetails.disclaimer!) {
+            Prefs.setBool(PrefsName.TCF_Step0, true);
+          } else {
+            Prefs.setBool(PrefsName.TCF_Step0, false);
           }
 
           String Address = propdata.propertyName! +
@@ -889,7 +897,7 @@ class TenancyApplicationFormScreenState
             )),
         Container(
           alignment: Alignment.topCenter,
-          width: 1000,
+          width: 888,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -909,14 +917,14 @@ class TenancyApplicationFormScreenState
 
   Widget _indicator(TenancyFormState tenancyFormState) {
     return Container(
-      width: 1000,
+      width: 888,
       margin: EdgeInsets.only(top: 25),
       alignment: Alignment.center,
       child: Row(
         children: [
           InkWell(
             onTap: () {
-              if (Prefs.getBool(PrefsName.TCF_Step1)) {
+              if (Prefs.getBool(PrefsName.TCF_Step0)) {
                 RemoveHighLight();
                 showBackDialog(tenancyFormState, false, stepper: 1);
                 // _store.dispatch(UpdateTenacyFormIndex(1));
@@ -929,9 +937,49 @@ class TenancyApplicationFormScreenState
               children: [
                 Container(
                   child: Image.asset(
-                    Prefs.getBool(PrefsName.TCF_Step1)
+                    Prefs.getBool(PrefsName.TCF_Step0)
                         ? "assets/images/ic_circle_check.png"
                         : "assets/images/ic_circle_fill.png",
+                    width: 35,
+                    height: 35,
+                    alignment: Alignment.topLeft,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  GlobleString.TAF_DISCLAIMER,
+                  style: MyStyles.SemiBold(13, myColor.text_color),
+                  textAlign: TextAlign.center,
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 60,
+          ),
+          InkWell(
+            onTap: () {
+              if (Prefs.getBool(PrefsName.TCF_Step1)) {
+                RemoveHighLight();
+                showBackDialog(tenancyFormState, false, stepper: 11);
+                // _store.dispatch(UpdateTenacyFormIndex(1));
+              }
+            },
+            splashColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: Column(
+              children: [
+                Container(
+                  child: Image.asset(
+                    Prefs.getBool(PrefsName.TCF_Step1)
+                        ? "assets/images/ic_circle_check.png"
+                        : tenancyFormState.selectView > 1 &&
+                                tenancyFormState.selectView != 11
+                            ? "assets/images/ic_circle_fill.png"
+                            : "assets/images/ic_circle_border.png",
                     width: 35,
                     height: 35,
                     alignment: Alignment.topLeft,
@@ -969,7 +1017,8 @@ class TenancyApplicationFormScreenState
                   child: Image.asset(
                     Prefs.getBool(PrefsName.TCF_Step2)
                         ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 2
+                        : tenancyFormState.selectView > 2 &&
+                                tenancyFormState.selectView != 11
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
                     width: 35,
@@ -1013,7 +1062,8 @@ class TenancyApplicationFormScreenState
                   child: Image.asset(
                     Prefs.getBool(PrefsName.TCF_Step3)
                         ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 3
+                        : tenancyFormState.selectView > 3 &&
+                                tenancyFormState.selectView != 11
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
                     width: 35,
@@ -1088,8 +1138,7 @@ class TenancyApplicationFormScreenState
                 // _store.dispatch(UpdateTenacyFormIndex(5));
               } else if (Prefs.getBool(PrefsName.TCF_Step1) &&
                   Prefs.getBool(PrefsName.TCF_Step2) &&
-                  Prefs.getBool(PrefsName.TCF_Step3) &&
-                  Prefs.getBool(PrefsName.TCF_Step4)) {
+                  Prefs.getBool(PrefsName.TCF_Step3)) {
                 RemoveHighLight();
                 showBackDialog(tenancyFormState, false, stepper: 5);
                 // _store.dispatch(UpdateTenacyFormIndex(5));
@@ -1104,7 +1153,8 @@ class TenancyApplicationFormScreenState
                   child: Image.asset(
                     Prefs.getBool(PrefsName.TCF_Step5)
                         ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 5
+                        : tenancyFormState.selectView > 5 &&
+                                tenancyFormState.selectView != 11
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
                     width: 35,
@@ -1133,7 +1183,6 @@ class TenancyApplicationFormScreenState
               } else if (Prefs.getBool(PrefsName.TCF_Step1) &&
                   Prefs.getBool(PrefsName.TCF_Step2) &&
                   Prefs.getBool(PrefsName.TCF_Step3) &&
-                  Prefs.getBool(PrefsName.TCF_Step4) &&
                   Prefs.getBool(PrefsName.TCF_Step5)) {
                 RemoveHighLight();
                 showBackDialog(tenancyFormState, false, stepper: 6);
@@ -1149,7 +1198,8 @@ class TenancyApplicationFormScreenState
                   child: Image.asset(
                     Prefs.getBool(PrefsName.TCF_Step6)
                         ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 6
+                        : tenancyFormState.selectView > 6 &&
+                                tenancyFormState.selectView != 11
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
                     width: 35,
@@ -1181,7 +1231,6 @@ class TenancyApplicationFormScreenState
               if (Prefs.getBool(PrefsName.TCF_Step1) &&
                   Prefs.getBool(PrefsName.TCF_Step2) &&
                   Prefs.getBool(PrefsName.TCF_Step3) &&
-                  Prefs.getBool(PrefsName.TCF_Step4) &&
                   Prefs.getBool(PrefsName.TCF_Step5) &&
                   Prefs.getBool(PrefsName.TCF_Step6)) {
                 RemoveHighLight();
@@ -1198,7 +1247,8 @@ class TenancyApplicationFormScreenState
                   child: Image.asset(
                     Prefs.getBool(PrefsName.TCF_Step7)
                         ? "assets/images/ic_circle_check.png"
-                        : tenancyFormState.selectView > 7
+                        : tenancyFormState.selectView > 7 &&
+                                tenancyFormState.selectView != 11
                             ? "assets/images/ic_circle_fill.png"
                             : "assets/images/ic_circle_border.png",
                     width: 35,
@@ -1225,6 +1275,19 @@ class TenancyApplicationFormScreenState
   Widget _centerView(TenancyFormState tenancyFormState) {
     switch (tenancyFormState.selectView) {
       case 1:
+        {
+          return TAFDisclaimerScreen(
+            onPressedSave: () {
+              Prefs.setBool(PrefsName.TCF_Step0, true);
+              UpdateViewAPI(11);
+            },
+            onPressGotoBack: () => gotoBack(),
+            onPressedRecordStep: (int stepper) {
+              UpdateViewAPI(stepper);
+            },
+          );
+        }
+      case 11:
         {
           return TAFPersonalScreen(
             onPressedSave: () {
@@ -1405,11 +1468,11 @@ class TenancyApplicationFormScreenState
 
       default:
         {
-          return TAFPersonalScreen(
+          return TAFDisclaimerScreen(
             onPressedSave: () {
-              _store.dispatch(UpdateTenacyFormIndex(2));
+              _store.dispatch(UpdateTenacyFormIndex(11));
             },
-            onPressGotoback: () => gotoBack(),
+            onPressGotoBack: () => gotoBack(),
             onPressedRecordStep: (int stepper) {
               UpdateViewAPI(stepper);
             },

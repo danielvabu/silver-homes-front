@@ -138,6 +138,15 @@ class GlobleString {
   static const String NAV_Scheduling_event_type_templates =
       "Event Type Templates";
 
+  /*Tewnant Profile*/
+
+  static const String NAV_AppFormp = "Application Form";
+  static const String NAV_Documentsp = "Application Documents";
+  static const String NAV_Referencesp = "References";
+  static const String NAV_onboardingDocumentsp = "Onboarding Documents";
+  static const String NAV_Disclamerp = "Disclamer";
+  static const String ALERT_Disclamer =
+      "you must accept our terms and add your signature before continue";
   /*Admin Drawer*/
   static const String NAV_admin_Overview = "Overview";
   static const String NAV_admin_Landlords = "Landlords";
@@ -835,6 +844,8 @@ class GlobleString {
   static const String DIA_R_Documents = "Request Documents";
   static const String DIA_Invite_to_Apply_title =
       "Below is a preview of the message that will be sent to the applicants including the application link. ";
+  static const String DIA_SmartFieldstext =
+      "To customize your email using smart fields enter '@' and select the fields from the dropdown. Click on 'Preview Email' to preview the content before sending it.";
   static const String DIA_Invite_to_Apply_List =
       "List the documents that the applicant should upload. ";
   static const String DIA_Invite_to_Apply_ListDco =
@@ -1077,6 +1088,8 @@ class GlobleString {
   static const String TAF_TENANCY_APPLICATION = "TENANCY APPLICATION";
   static const String TAF_PROPERT_ADDRESS = "Property Address:";
   static const String TAF_PERSONAL = "Personal";
+  static const String TAF_DISCLAIMER = "Disclaimer";
+
   static const String TAF_Employment = "Employment";
   static const String TAF_Current_tenancy = "Current Tenancy";
   static const String TAF_Other_applicants = "Other Applicants";
@@ -1090,6 +1103,10 @@ class GlobleString {
 
   static const String Optional = "- optional";
 
+  /*disclaimer info*/
+  static const String TAF_Disclaimers = "Disclaimers";
+  static const String TAF_addSignature =
+      "Please add your signature on the line below";
   /*Personl_info*/
   static const String TAF_Personal_Information = "Personal Information";
   static const String TAF_Personal_firstname = "First name";
@@ -1218,6 +1235,7 @@ class GlobleString {
   static const String TA_box_employment_status = "EMPLOYMENT STATUS";
   static const String TA_box_AGE = "AGE";
   static const String TA_General_Rating = "General Rating";
+    static const String TA_Group_Rating = "Group Rating";
   static const String TA_Status = "Status";
   static const String TA_Additional_Notes = "Additional Notes";
   static const String TA_Save = "Save";
@@ -1282,6 +1300,7 @@ class GlobleString {
   static const String TA_Reference_Phone_Number = "Phone number";
 
   /*Tenancy Verification Document*/
+  static const String TVD_title0 = "Documents attached from the sender:";
   static const String TVD_title =
       "Please attach the following verification documents:";
   static const String TVD_doc1 =

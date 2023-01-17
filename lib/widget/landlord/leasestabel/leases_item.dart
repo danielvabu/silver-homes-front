@@ -234,16 +234,21 @@ class _LeasesItemState extends State<LeasesItem> {
 
   Widget _datavalueGroup(int group, int id, int numero) {
     String grupo = "";
+    String grupotool = "";
     if (group == 0) {
       if (numero == 0) {
         grupo = "Single Applicant";
+        grupotool = "Single Applicant";
       } else {
         numero++;
-        grupo = "Group $id - primary (" + numero.toString() + " applicants)";
+        grupo = "Group $id - primary (" + numero.toString() + ")";
+        grupotool =
+            "Group $id - primary (" + numero.toString() + " Applicants)";
       }
     } else {
       numero++;
-      grupo = "Group $group (" + numero.toString() + " applicants)";
+      grupo = "Group $group (" + numero.toString() + ")";
+      grupotool = "Group $id - primary (" + numero.toString() + " Applicants)";
     }
     return InkWell(
       onTap: () {
@@ -255,7 +260,7 @@ class _LeasesItemState extends State<LeasesItem> {
         padding: EdgeInsets.only(left: 10),
         alignment: Alignment.centerLeft,
         child: Tooltip(
-          message: grupo,
+          message: grupotool,
           child: Text(
             grupo,
             textAlign: TextAlign.start,

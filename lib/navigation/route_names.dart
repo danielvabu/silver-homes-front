@@ -19,6 +19,7 @@ import 'package:silverhome/presentation/screens/landlord/leaseAgreement/tenancy_
 import 'package:silverhome/presentation/screens/landlord/portal/portal_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/reference_questionnaire/reference_questionnaire_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/tenancyform/tenancyapplicationfrom_screen.dart';
+import 'package:silverhome/presentation/screens/landlord/tenantProfile/tenant_profile_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/varificationDocument/tenancy_varification_document_screen.dart';
 import 'package:silverhome/presentation/screens/landlord/welcome_screen/welcome_screen.dart';
 import 'package:silverhome/presentation/screens/login/login_screen.dart';
@@ -46,7 +47,9 @@ class RouteNames {
   static const String Register = '/register';
   static const String Portal = '/portal';
   static const String TenancyApplicationform = '/tenancy_application_form';
-  static const String TenancyVerificationDocument = '/tenancy_verification_document';
+  static const String TenancyVerificationDocument =
+      '/tenancy_verification_document';
+  static const String TenantProfiel = '/tennancy_profile';
   static const String TenancyLeaseAgreement = '/tenancy_lease_agreement';
   static const String ReferenceQuestionnaire = '/reference_questionnaire';
   static const String CustomerPropertyPage = '/customerfeaturedpage';
@@ -89,9 +92,12 @@ class RouteNames {
     underMaintenanceScreen: (context) => UnderMaintenanceScreen(),
     ForgotPassword: (context) => ForgotPasswordScreen(),
     Register: (context) => RegistrationScreen(),
-    Portal: (context) => !Prefs.getBool(PrefsName.Is_login) ? LoginScreen() : PortalScreen(),
-    Admin_Portal: (context) =>
-        !Prefs.getBool(PrefsName.Is_login) || !Prefs.getBool(PrefsName.Is_adminlogin) ? LoginScreen() : AdminPortalScreen(),
+    Portal: (context) =>
+        !Prefs.getBool(PrefsName.Is_login) ? LoginScreen() : PortalScreen(),
+    Admin_Portal: (context) => !Prefs.getBool(PrefsName.Is_login) ||
+            !Prefs.getBool(PrefsName.Is_adminlogin)
+        ? LoginScreen()
+        : AdminPortalScreen(),
   };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -105,14 +111,24 @@ class RouteNames {
       // List<String> pathComponentsPoint = pathComponents[1].split('.');
       print("got to24: " + "/" + pathComponentsPoint.toString());
 
-      print("got to35: " + "/" + pathComponentsPoint[0] + "/" + pathComponentsPoint[1] + "/" + pathComponentsPoint[2]);
+      print("got to35: " +
+          "/" +
+          pathComponentsPoint[0] +
+          "/" +
+          pathComponentsPoint[1] +
+          "/" +
+          pathComponentsPoint[2]);
       return MaterialPageRoute(
         builder: (_) => CustomerFeaturedlistPageTest(
           LID: pathComponentsPoint[1].toString(),
           idProperties: pathComponentsPoint[2].toString(),
         ),
-        settings:
-            RouteSettings(name: "/sharedproperties" + "." + pathComponentsPoint[1].toString() + "." + pathComponentsPoint[2].toString()),
+        settings: RouteSettings(
+            name: "/sharedproperties" +
+                "." +
+                pathComponentsPoint[1].toString() +
+                "." +
+                pathComponentsPoint[2].toString()),
       );
     } else {
       route = false;
@@ -142,7 +158,8 @@ class RouteNames {
         Helper.Log("Got to pathComponents", "2");
 
         String url = window.location.href.toString();
-        List<String> components = url.substring(url.indexOf("#") + 1).split("/");
+        List<String> components =
+            url.substring(url.indexOf("#") + 1).split("/");
         if (pathComponents.length != components.length && isFresh) {
           pathComponents = components;
           isFresh = false;
@@ -161,6 +178,12 @@ class RouteNames {
               builder: (_) => ReferenceQuestionnaireScreen(),
               settings: RouteSettings(name: "/" + pathComponents[1]),
             );
+
+          case TenantProfiel:
+            return MaterialPageRoute(
+              builder: (_) => TenantProfileScreen(),
+              settings: RouteSettings(name: "/" + pathComponents[1]),
+            );
           default:
             {
               String url = window.location.href;
@@ -170,6 +193,7 @@ class RouteNames {
               if (!url.contains(ResetPassword) ||
                   !url.contains(TenancyApplicationform) ||
                   !url.contains(TenancyVerificationDocument) ||
+                  !url.contains(TenantProfiel) ||
                   !url.contains(ReferenceQuestionnaire) ||
                   !url.contains(TenancyLeaseAgreement) ||
                   !url.contains(Welcome) ||
@@ -177,7 +201,8 @@ class RouteNames {
                   !url.contains(TenantResetpassword) ||
                   !url.contains(Basic_Tenant_Register)) {
                 return MaterialPageRoute(
-                  builder: (_) => CustomerFeaturedlistPage(LID: pathComponents[1]),
+                  builder: (_) =>
+                      CustomerFeaturedlistPage(LID: pathComponents[1]),
                   settings: RouteSettings(name: "/${pathComponents[1]}"),
                 );
               }
@@ -200,36 +225,55 @@ class RouteNames {
             Helper.Log("Got to TenancyApplicationform", "3");
 
             return MaterialPageRoute(
-              builder: (_) => TenancyApplicationFormScreen(ApplicantID: pathComponents[2]),
-              settings: RouteSettings(name: "/" + pathComponents[1] + "/" + pathComponents[2]),
+              builder: (_) =>
+                  TenancyApplicationFormScreen(ApplicantID: pathComponents[2]),
+              settings: RouteSettings(
+                  name: "/" + pathComponents[1] + "/" + pathComponents[2]),
             );
           case TenancyVerificationDocument:
             return MaterialPageRoute(
-              builder: (_) => TenancyVerificationDocumentScreen(applicantID: pathComponents[2]),
-              settings: RouteSettings(name: "/" + pathComponents[1] + "/" + pathComponents[2]),
+              builder: (_) => TenancyVerificationDocumentScreen(
+                  applicantID: pathComponents[2]),
+              settings: RouteSettings(
+                  name: "/" + pathComponents[1] + "/" + pathComponents[2]),
             );
+          case TenantProfiel:
+            return MaterialPageRoute(
+              builder: (_) =>
+                  TenantProfileScreen(applicationid: pathComponents[2]),
+              settings: RouteSettings(
+                  name: "/" + pathComponents[1] + "/" + pathComponents[2]),
+            );
+
           case TenancyLeaseAgreement:
             return MaterialPageRoute(
-              builder: (_) => TenancyLeaseAgreementScreen(ApplicationID: pathComponents[2]),
-              settings: RouteSettings(name: "/" + pathComponents[1] + "/" + pathComponents[2]),
+              builder: (_) =>
+                  TenancyLeaseAgreementScreen(ApplicationID: pathComponents[2]),
+              settings: RouteSettings(
+                  name: "/" + pathComponents[1] + "/" + pathComponents[2]),
             );
           case ReferenceQuestionnaire:
             return MaterialPageRoute(
-              builder: (_) => ReferenceQuestionnaireScreen(RID: pathComponents[2]),
-              settings: RouteSettings(name: "/" + pathComponents[1] + "/" + pathComponents[2]),
+              builder: (_) =>
+                  ReferenceQuestionnaireScreen(RID: pathComponents[2]),
+              settings: RouteSettings(
+                  name: "/" + pathComponents[1] + "/" + pathComponents[2]),
             );
           default:
             {
               switch (pathComponents[2]) {
                 case Basic_Tenant_Login:
                   return MaterialPageRoute(
-                    builder: (_) => TenantLoginScreen(Companyname: pathComponents[1].toString()),
-                    settings: RouteSettings(name: "/${pathComponents[1]}/${pathComponents[2]}"),
+                    builder: (_) => TenantLoginScreen(
+                        Companyname: pathComponents[1].toString()),
+                    settings: RouteSettings(
+                        name: "/${pathComponents[1]}/${pathComponents[2]}"),
                   );
                 case Basic_Tenant_Portal:
                   return MaterialPageRoute(
                     builder: (_) => TenantPortalScreen(),
-                    settings: RouteSettings(name: "/${pathComponents[1]}/${pathComponents[2]}"),
+                    settings: RouteSettings(
+                        name: "/${pathComponents[1]}/${pathComponents[2]}"),
                   );
                 default:
                   return _errorRoute();
@@ -242,18 +286,28 @@ class RouteNames {
         switch (pathComponents[2]) {
           case Basic_Tenant_Register:
             return MaterialPageRoute(
-              builder: (_) => TenantSignupScreen(Companyname: "${pathComponents[1]}", ID: "${pathComponents[3]}"),
-              settings: RouteSettings(name: "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
+              builder: (_) => TenantSignupScreen(
+                  Companyname: "${pathComponents[1]}",
+                  ID: "${pathComponents[3]}"),
+              settings: RouteSettings(
+                  name:
+                      "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
             );
           case maintenanceRequest:
             return MaterialPageRoute(
               builder: (_) => MaintenanceRequest(mID: "${pathComponents[3]}"),
-              settings: RouteSettings(name: "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
+              settings: RouteSettings(
+                  name:
+                      "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
             );
           case TenantResetpassword:
             return MaterialPageRoute(
-              builder: (_) => TenantResetPWScreen(Companyname: "${pathComponents[1]}", ID: "${pathComponents[3]}"),
-              settings: RouteSettings(name: "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
+              builder: (_) => TenantResetPWScreen(
+                  Companyname: "${pathComponents[1]}",
+                  ID: "${pathComponents[3]}"),
+              settings: RouteSettings(
+                  name:
+                      "/${pathComponents[1]}/${pathComponents[2]}/${pathComponents[3]}"),
             );
           default:
             return _errorRoute();

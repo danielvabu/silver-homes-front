@@ -5380,6 +5380,8 @@ class ApiManager {
                 ? myobject['IsAuthorized']
                 : false;
 
+            bool disclaimer =
+                myobject['disclaimer'] != null ? myobject['disclaimer'] : false;
             SystemEnumDetails? ApplicationStatus =
                 myobject['ApplicationStatus'] != null
                     ? SystemEnumDetails.fromJson(myobject['ApplicationStatus'])
@@ -5403,6 +5405,8 @@ class ApiManager {
             applicationDetails.group1 = group1;
             applicationDetails.applicationSentDate = ApplicationSentDate;
             applicationDetails.agreementSentDate = AgreementSentDate;
+            applicationDetails.isAuthorized = IsAuthorized;
+            applicationDetails.disclaimer = disclaimer;
             applicationDetails.isAuthorized = IsAuthorized;
             applicationDetails.applicationStatus = ApplicationStatus;
             applicationDetails.docReviewStatus = DocReviewStatus;
@@ -5809,6 +5813,50 @@ class ApiManager {
                 false;
             tenancyAdditionalReference.error_phonenumber = false;
             tenancyAdditionalReference.error_email = false;
+
+            referencelist.add(tenancyAdditionalReference);
+          }
+          callBackQuesy(true, "", referencelist);
+        } else {
+          callBackQuesy(false, respoce, []);
+        }
+      } else {
+        callBackQuesy(false, respoce, []);
+      }
+    });
+  }
+
+  getGroupList(
+      BuildContext context, String id, CallBackGroupList callBackQuesy) async {
+    var myjson = {
+      "DSQID": Weburl.DSQ_APPLICANT_GROUP,
+      "LoadLookupValues": true,
+      "Reqtokens": {"ID": id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        if (data['Result'] != null && data['Result'].length > 0) {
+          List<GetListGroup> referencelist = <GetListGroup>[];
+
+          for (int i = 0; i < data['Result'].length; i++) {
+            var myobject = data['Result'][i];
+
+            String id = myobject['id'] != null ? myobject['id'].toString() : "";
+
+            String nombre =
+                myobject['name'] != null ? myobject['name'].toString() : "";
+
+            int rating = myobject['rating'] != null ? myobject['rating'] : 0;
+
+            GetListGroup tenancyAdditionalReference = new GetListGroup();
+            tenancyAdditionalReference.id = id;
+            tenancyAdditionalReference.name = nombre;
+            tenancyAdditionalReference.rating = rating;
 
             referencelist.add(tenancyAdditionalReference);
           }
@@ -6686,6 +6734,72 @@ class ApiManager {
     });
   }
 
+  getPriviewDocumentListAtach(
+      BuildContext context, String id, CallBackDocList callBackQuesy) async {
+    /* loader = Helper.overlayLoader(context);
+    Overlay.of(context)!.insert(loader);*/
+
+    var myjson = {
+      "DSQID": Weburl.DSQ_VIEW_VARIFICATION_DOCUMENTLISTATACH,
+      "LoadLookupValues": true,
+      "LoadChildren": false,
+      "Reqtokens": {"ApplicantID": id}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().DSQAPICall(context, json, (error, respoce) async {
+      if (error) {
+        var data = jsonDecode(respoce);
+        List<GetListDocument> listadoc = [];
+        if (data['Result'].length > 0) {
+          for (int j = 0; j < data['Result'].length; j++) {
+            var objectApplicationDocument = data['Result'][j];
+
+            String ID = objectApplicationDocument['ID'] != null
+                ? objectApplicationDocument['ID'].toString()
+                : "";
+
+            /*===============*/
+            /*  Media Info */
+            /*===============*/
+            var Media_ID = objectApplicationDocument["Media_ID"];
+
+            int Type = Media_ID['Type'] != null ? Media_ID['Type'] : 0;
+            String Field = Media_ID['Field'] != null ? Media_ID['Field'] : "";
+
+            MediaInfo? mediaInfo = objectApplicationDocument['Media_ID'] != null
+                ? MediaInfo.fromJson(objectApplicationDocument['Media_ID'])
+                : null;
+            GetListDocument objdoc = GetListDocument(
+                id: ID, mediaInfo: mediaInfo, type: Type, field: Field);
+
+            listadoc.add(objdoc);
+            // if (Type == eMediaType().CopyofID) {
+            //   _store.dispatch(UpdatePDMIDDoc1(ID));
+            //   _store.dispatch(UpdatePDMediaInfo1(mediaInfo));
+            // } else if (Type == eMediaType().Proofoffunds) {
+            //   _store.dispatch(UpdatePDMIDDoc2(ID));
+            //   _store.dispatch(UpdatePDMediaInfo2(mediaInfo));
+            // } else if (Type == eMediaType().Employmentverification) {
+            //   _store.dispatch(UpdatePDMIDDoc3(ID));
+            //   _store.dispatch(UpdatePDMediaInfo3(mediaInfo));
+            // } else if (Type == eMediaType().Creditrecord) {
+            //   _store.dispatch(UpdatePDMIDDoc4(ID));
+            //   _store.dispatch(UpdatePDMediaInfo4(mediaInfo));
+            // }
+          }
+        } else {}
+        //loader.remove();
+        callBackQuesy(true, "", listadoc);
+      } else {
+        //loader.remove();
+        Helper.Log("respoce", respoce);
+        callBackQuesy(false, respoce, []);
+      }
+    });
+  }
+
   getPriviewDocumentListBack(
       BuildContext context, String id, CallBackQuesy callBackQuesy) async {
     /* loader = Helper.overlayLoader(context);
@@ -7310,6 +7424,43 @@ class ApiManager {
     String json = QueryFilter().InsertQueryArray(
         POJO,
         etableName.ApplicationDocument,
+        eConjuctionClause().AND,
+        eRelationalOperator().EqualTo);
+
+    HttpClientCall().QueryAPICall(context, json, (error, respoce) async {
+      if (error) {
+        List data = jsonDecode(respoce) as List;
+
+        bool issuccess = false;
+
+        for (int i = 0; i < data.length; i++) {
+          var myobject = data[i];
+
+          String StatusCode = myobject['StatusCode'] != null
+              ? myobject['StatusCode'].toString()
+              : "";
+
+          if (StatusCode.isEmpty || StatusCode != "200") {
+            issuccess = true;
+            CallBackQuesy(false, respoce);
+            break;
+          }
+
+          if ((data.length - 1) == i && !issuccess) {
+            CallBackQuesy(true, "");
+          }
+        }
+      } else {
+        CallBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  InsetApplicantDocumentAttach(
+      BuildContext context, List<Object> POJO, CallBackQuesy CallBackQuesy) {
+    String json = QueryFilter().InsertQueryArray(
+        POJO,
+        etableName.ApplicationDocumentAttach,
         eConjuctionClause().AND,
         eRelationalOperator().EqualTo);
 
@@ -10639,6 +10790,26 @@ class ApiManager {
       CallBackQuesy callBackQuesy) async {
     var myjson = {
       "WorkFlowID": Weburl.WorkFlow_DuplicatTemplateHtml,
+      "Reqtokens": {"ID": id, "APPID": appid}
+    };
+
+    String json = jsonEncode(myjson);
+
+    HttpClientCall().WorkFlowExecuteAPICall(context, json, (error, respoce) {
+      if (error) {
+        var data = jsonDecode(respoce);
+
+        callBackQuesy(true, respoce);
+      } else {
+        callBackQuesy(false, respoce);
+      }
+    });
+  }
+
+  DuplicatReqDoc(BuildContext context, String id, String appid,
+      CallBackQuesy callBackQuesy) async {
+    var myjson = {
+      "WorkFlowID": Weburl.WorkFlow_DuplicatRequestDocuments,
       "Reqtokens": {"ID": id, "APPID": appid}
     };
 

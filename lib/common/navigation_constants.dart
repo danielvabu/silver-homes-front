@@ -15,4 +15,5 @@ class NavigationConstant {
   static const String tenancyotherApplicant = "tenancyotherApplicant";
   static const String tenancyAdditionalInfo = "tenancyAdditionalInfo";
   static const String tenancyReference = "tenancyReference";
+  static const String tenancyDocuments = "tenancyDocuments";
 }

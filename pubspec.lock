@@ -723,6 +723,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  signature:
+    dependency: "direct main"
+    description:
+      name: signature
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.3.0"
   simple_animations:
     dependency: "direct main"
     description:

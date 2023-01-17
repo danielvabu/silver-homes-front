@@ -16,7 +16,7 @@ abstract class TenancyFormState with _$TenancyFormState {
 
   factory TenancyFormState.initial() => TenancyFormState(
         property_address: "",
-        selectView: 1,
+        selectView: 11,
         CompanyName: "",
         HomePagelink: "",
         CustomerFeatureListingURL: "",

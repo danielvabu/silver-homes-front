@@ -626,6 +626,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "signature",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/signature-5.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "simple_animations",
       "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/simple_animations-4.2.0",
       "packageUri": "lib/",
@@ -866,7 +872,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-01-06T15:17:57.336823Z",
+  "generated": "2023-01-17T21:54:31.252793Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
